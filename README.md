@@ -18,12 +18,14 @@ founders ask "can I use that," that is the signal to spin it out (the Basecamp m
 
 ## Three ways to use it
 
-**1. Any project (static, PHP, anything), zero install:**
+**1. Any project (static, React, Next, anything), one line:**
 ```
-npx company-os ./path-to-your-repo
-# or copy the company-os/ folder in by hand
+npx github:adamtpang/company-os
 ```
-Then open `company-os/index.html`, or serve the folder. Edit `company-os/company-os.data.js`.
+Run it from inside the project (or pass a target path). It vendors the dashboard into
+`company-os/` and drops a starter `company-os.data.js`. Then open `company-os/index.html`,
+or serve the folder. In a Claude Code session you can just say "add the company OS to this
+project" and Claude runs that one line, then "interview me" to populate it.
 
 **2. React or Next project (import as a component):**
 ```jsx
