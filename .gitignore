@@ -1,0 +1,3 @@
+node_modules/
+.DS_Store
+# Consumers: gitignore your own company-os.data.js if its finance numbers are real.

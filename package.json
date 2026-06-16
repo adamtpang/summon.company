@@ -1,0 +1,27 @@
+{
+  "name": "company-os",
+  "version": "1.0.0",
+  "description": "A portable, founder-fillable company operating dashboard. One JSON-style config plus one zero-dependency renderer, importable into any repo (static, React, or Next). Claude is the agent that keeps it in sync with the codebase.",
+  "main": "company-os.core.js",
+  "bin": {
+    "company-os": "bin/init.mjs"
+  },
+  "exports": {
+    ".": "./company-os.core.js",
+    "./react": "./react/CompanyOS.jsx",
+    "./style.css": "./company-os.css"
+  },
+  "files": [
+    "company-os.core.js",
+    "company-os.css",
+    "index.html",
+    "company-os.data.example.js",
+    "react/",
+    "bin/",
+    "schema.md",
+    "SKILL.md",
+    "README.md"
+  ],
+  "keywords": ["company-os", "dashboard", "founder", "operating-system", "kpi"],
+  "license": "MIT"
+}
