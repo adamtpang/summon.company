@@ -1,6 +1,6 @@
-# Company OS data schema
+# Vitals data schema
 
-`window.COMPANY_OS` is one object. Every field is optional; the renderer degrades
+`window.VITALS` is one object. Every field is optional; the renderer degrades
 gracefully, so old and new data files both work. Universal fundamentals are the
 same for every company; the founder fills in the specifics.
 

@@ -1,27 +1,28 @@
 {
-  "name": "company-os",
+  "name": "vitals",
   "version": "1.0.0",
-  "description": "A portable, founder-fillable company operating dashboard. One JSON-style config plus one zero-dependency renderer, importable into any repo (static, React, or Next). Claude is the agent that keeps it in sync with the codebase.",
-  "main": "company-os.core.js",
+  "description": "Vitals: a portable, founder-fillable company operating dashboard. Your company's vital stats and decisions live next to your knowledge base, and your AI agent measures them. One config, one renderer, importable into any repo.",
+  "main": "vitals.core.js",
   "bin": {
-    "company-os": "bin/init.mjs"
+    "vitals": "bin/init.mjs"
   },
   "exports": {
-    ".": "./company-os.core.js",
-    "./react": "./react/CompanyOS.jsx",
-    "./style.css": "./company-os.css"
+    ".": "./vitals.core.js",
+    "./react": "./react/Vitals.jsx",
+    "./style.css": "./vitals.css"
   },
   "files": [
-    "company-os.core.js",
-    "company-os.css",
+    "vitals.core.js",
+    "vitals.css",
     "index.html",
-    "company-os.data.example.js",
+    "vitals.data.example.js",
     "react/",
     "bin/",
     "schema.md",
     "SKILL.md",
     "README.md"
   ],
-  "keywords": ["company-os", "dashboard", "founder", "operating-system", "kpi"],
+  "keywords": ["vitals", "company-os", "dashboard", "founder", "operating-system", "kpi", "ai-agents"],
+  "homepage": "https://vitals.run",
   "license": "MIT"
 }

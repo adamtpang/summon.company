@@ -1,11 +1,11 @@
-// company-os.data.example.js — the starter template.
-// Copy to `company-os.data.js` and fill in, or drop this folder into a repo and
+// vitals.data.example.js — the starter template.
+// Copy to `vitals.data.js` and fill in, or drop this folder into a repo and
 // ask Claude "interview me" to populate it from the repo's context files.
 //
 // Every field is optional; the dashboard degrades gracefully. Full schema: schema.md.
-// PRIVACY: if your finance numbers are real, gitignore company-os.data.js.
+// PRIVACY: if your finance numbers are real, gitignore vitals.data.js.
 
-window.COMPANY_OS = {
+window.VITALS = {
   company: "Your Company",
   tagline: "One line on what you do.",
   mission: "The 25-year why.",

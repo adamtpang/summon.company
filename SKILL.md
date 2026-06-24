@@ -1,4 +1,4 @@
-# Company OS (skill)
+# Vitals (skill)
 
 A portable, JSON-config company operating system. The fundamentals are universal
 (every company has a mission, a problem, money, metrics, a roadmap, an org). The
@@ -7,8 +7,8 @@ Lutke's JSON-config company OS and by Bridgewater's "principles encoded as softw
 
 ## The model
 - The **codebase is the knowledge base** (the context files).
-- `company-os.data.js` is the **single JSON-style config and state file** (the source of truth).
-- `index.html` + `company-os.core.js` + `company-os.css` are the renderer (zero dependencies, no build).
+- `vitals.data.js` is the **single JSON-style config and state file** (the source of truth).
+- `index.html` + `vitals.core.js` + `vitals.css` are the renderer (zero dependencies, no build).
 - **Claude is the runtime:** the founder talks, Claude updates the config and the knowledge base.
 
 ## The schema
@@ -17,8 +17,8 @@ See `schema.md`. The load-bearing fields: `metrics` (with `value`, `target`, and
 why behind choices), and `knowledgeBase` (the context files this OS is tied to).
 
 ## Commands Claude follows (plain language)
-- **"set up the company OS here" / "init"**: vendor the dashboard files into the repo, then run the interview.
-- **"interview me" / "onboard me"**: run the interview below, then write `company-os.data.js` and create or update the knowledge-base context files.
+- **"set up vitals here" / "init"**: vendor the dashboard files into the repo, then run the interview.
+- **"interview me" / "onboard me"**: run the interview below, then write `vitals.data.js` and create or update the knowledge-base context files.
 - **"log this week"**: append a snapshot to `history` using today's real date, pulling current metric and finance numbers.
 - **"check off X" / "mark X done"**: set that roadmap item or goal `done: true` (reverse on "uncheck").
 - **"set <metric> to N" / "set the target for <metric> to N"**: update `value` or `target`.
@@ -26,8 +26,8 @@ why behind choices), and `knowledgeBase` (the context files this OS is tied to).
 - **"sync from context"**: re-read the context files and update the config to match reality.
 - After any change, remind the user to refresh `index.html`.
 
-## The interview (to populate a new company's OS and seed its knowledge base)
-Ask a few at a time, conversationally. Use answers to fill `company-os.data.js` and seed context files.
+## The interview (to populate a new company's Vitals and seed its knowledge base)
+Ask a few at a time, conversationally. Use answers to fill `vitals.data.js` and seed context files.
 1. Company name and a one-line tagline.
 2. Mission: the 25-year why.
 3. The problem, and exactly who has it.
@@ -42,9 +42,9 @@ Ask a few at a time, conversationally. Use answers to fill `company-os.data.js` 
 12. Competitors and the graveyard: who tried this and failed, and why.
 
 ## Porting to any company
-This is a vendored library. Copy the `company-os/` folder into any repo (or run
-`npx company-os <repo>`), then "interview me" to populate it. One renderer, many
-companies, each with its own data file.
+This is a vendored library. Copy the `vitals/` folder into any repo (or run
+`npx github:adamtpang/vitals.run`), then "interview me" to populate it. One renderer,
+many companies, each with its own data file.
 
 ## Principle
 The founder fills the blanks; the fundamentals are universal; Claude keeps the config

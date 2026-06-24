@@ -1,17 +1,17 @@
-/* company-os.core.js — the framework-agnostic Company OS renderer.
+/* vitals.core.js — the framework-agnostic Vitals renderer.
  *
- * UMD: loads as a plain <script> (sets window.CompanyOS), and imports as a
+ * UMD: loads as a plain <script> (sets window.Vitals), and imports as a
  * module in bundlers (Vite/Next/etc).
  *
- *   CompanyOS.render(data)        -> HTML string (inner content for a .cos element)
- *   CompanyOS.mount(el, data)     -> sets el.innerHTML and adds the .cos class
+ *   Vitals.render(data)        -> HTML string (inner content for a .vitals element)
+ *   Vitals.mount(el, data)     -> sets el.innerHTML and adds the .vitals class
  *
  * The data shape is documented in schema.md. Every field is optional; the
  * renderer degrades gracefully, so old and new data files both work.
  */
 (function (root, factory) {
   if (typeof module === "object" && module.exports) module.exports = factory();
-  else root.CompanyOS = factory();
+  else root.Vitals = factory();
 })(typeof self !== "undefined" ? self : this, function () {
   "use strict";
 
@@ -159,14 +159,14 @@
     // knowledge base
     if (d.knowledgeBase && d.knowledgeBase.length) {
       html += '<div class="h">Knowledge base (this codebase)</div><div class="card">';
-      html += '<div class="muted small" style="margin-bottom:10px">The company OS is tied to the repo. These context files are the source of truth that Claude reads and updates.</div>';
+      html += '<div class="muted small" style="margin-bottom:10px">Vitals is tied to the repo. These context files are the source of truth that Claude reads and updates.</div>';
       d.knowledgeBase.forEach(function (k) {
         html += '<a class="kb" href="../' + esc(k.file) + '"><span class="mono" style="color:var(--amber)">' + esc(k.file) + '</span> <span class="muted small">' + esc(k.desc || "") + "</span></a>";
       });
       html += "</div>";
     }
 
-    html += '<div class="muted small" style="margin-top:20px;padding-top:16px;border-top:1px solid var(--line)">Read-only view. Source of truth is <span class="mono">company-os.data.js</span>, kept in sync with the context files. To update, edit that file or ask Claude (log a week, check off a milestone, update a metric, add a decision), then refresh.</div>';
+    html += '<div class="muted small" style="margin-top:20px;padding-top:16px;border-top:1px solid var(--line)">Read-only view. Source of truth is <span class="mono">vitals.data.js</span>, kept in sync with the context files. To update, edit that file or ask Claude (log a week, check off a milestone, update a metric, add a decision), then refresh.</div>';
 
     html += "</div>"; // .wrap
     return html;
@@ -174,7 +174,7 @@
 
   function mount(el, data) {
     if (!el) return;
-    if (el.classList) el.classList.add("cos");
+    if (el.classList) el.classList.add("vitals");
     el.innerHTML = render(data || {});
   }
 

@@ -3,18 +3,18 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Company OS</title>
-<link rel="stylesheet" href="company-os.css" />
-<script src="company-os.core.js"></script>
-<script src="company-os.data.js"></script>
+<title>Vitals</title>
+<link rel="stylesheet" href="vitals.css" />
+<script src="vitals.core.js"></script>
+<script src="vitals.data.js"></script>
 </head>
 <body>
-<div id="app" class="cos"></div>
+<div id="app" class="vitals"></div>
 <script>
   (function () {
     var el = document.getElementById("app");
-    if (!window.COMPANY_OS) { el.innerHTML = '<p style="color:#d64545;padding:24px">company-os.data.js not found.</p>'; return; }
-    el.innerHTML = window.CompanyOS.render(window.COMPANY_OS);
+    if (!window.VITALS) { el.innerHTML = '<p style="color:#d64545;padding:24px">vitals.data.js not found.</p>'; return; }
+    el.innerHTML = window.Vitals.render(window.VITALS);
   })();
 </script>
 </body>
