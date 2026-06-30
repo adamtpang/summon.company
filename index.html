@@ -3,18 +3,355 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Vitals</title>
-<link rel="stylesheet" href="vitals.css" />
-<script src="vitals.core.js"></script>
-<script src="vitals.data.js"></script>
+<title>vitals.run — the operating system for every company you run</title>
+<meta name="description" content="A company operating dashboard. Vital signs, real numbers, and the single next action for each — to save time, save money, and grow revenue. One config file, kept in sync by your AI. Install in one line." />
+
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://vitals.run" />
+<meta property="og:title" content="vitals.run — the OS for every company you run" />
+<meta property="og:description" content="Vital signs and the one next action per metric — to save time, save money, grow revenue. From first principles. One-line install." />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="vitals.run — the OS for every company you run" />
+<meta name="twitter:description" content="Vital signs + the one next action, to save time, save money, grow revenue. One-line install." />
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230a0b0d'/%3E%3Cpath d='M3 17h6l3-8 4 14 3-9 2 3h5' fill='none' stroke='%2336c08a' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,500;0,6..96,600;1,6..96,500&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+<style>
+  :root{
+    --bg:#0a0b0d; --panel:#121419; --panel2:#0e1014; --line:#23262d;
+    --ink:#e7eaed; --mut:#8a909a; --green:#36c08a; --amber:#e7b24a; --danger:#d64545;
+    --mono:'IBM Plex Mono',ui-monospace,Menlo,monospace;
+    --disp:'Bodoni Moda',Georgia,serif;
+    --sans:'Hanken Grotesk',-apple-system,Segoe UI,Roboto,sans-serif;
+    --max:1040px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);
+    -webkit-font-smoothing:antialiased;line-height:1.55;
+    background-image:radial-gradient(900px 480px at 78% -8%, rgba(231,178,74,.10), transparent 60%),
+                     radial-gradient(760px 460px at 8% 0%, rgba(54,192,138,.07), transparent 55%);
+  }
+  a{color:inherit}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 22px}
+  .mono{font-family:var(--mono)}
+  .disp{font-family:var(--disp)}
+  .mut{color:var(--mut)}
+  .tnum{font-variant-numeric:tabular-nums}
+
+  nav{position:sticky;top:0;z-index:20;backdrop-filter:blur(10px);
+    background:rgba(10,11,13,.72);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
+  .brand{display:flex;align-items:center;gap:9px;font-family:var(--mono);font-weight:600;letter-spacing:-.01em;font-size:15px;text-decoration:none}
+  .navlinks{display:flex;align-items:center;gap:22px;font-size:14px}
+  .navlinks a{text-decoration:none;color:var(--mut)}
+  .navlinks a:hover{color:var(--ink)}
+  .navcta{padding:7px 14px;border:1px solid var(--line);border-radius:99px;color:var(--ink)!important}
+  .navcta:hover{border-color:var(--mut)}
+  @media(max-width:680px){.navlinks a.hide-sm{display:none}}
+
+  .hero{padding:74px 0 30px}
+  .hero-grid{display:grid;gap:46px;align-items:center}
+  @media(min-width:900px){.hero-grid{grid-template-columns:1.05fr .95fr;gap:54px}}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--amber);margin:0 0 20px}
+  h1{font-family:var(--disp);font-weight:600;font-size:clamp(38px,6vw,64px);line-height:1.03;letter-spacing:-.01em;margin:0 0 22px}
+  h1 em{font-style:italic;color:var(--amber)}
+  .lede{font-size:clamp(16.5px,2vw,19px);color:#c4c9d0;max-width:40ch;margin:0 0 26px}
+  .lede b{color:var(--ink);font-weight:600}
+  .cta-row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:99px;text-decoration:none;font-weight:600;font-size:15px;border:1px solid transparent}
+  .btn-primary{background:var(--ink);color:#0a0b0d}
+  .btn-primary:hover{background:#fff}
+  .btn-ghost{border-color:var(--line);color:var(--ink)}
+  .btn-ghost:hover{border-color:var(--mut)}
+
+  .install{margin-top:24px;max-width:470px}
+  .install .il{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);margin-bottom:8px}
+  .install .ib{display:flex;align-items:center;gap:10px;
+    background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:12px 12px 12px 15px}
+  .install code{font-family:var(--mono);font-size:14px;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .install .dollar{color:var(--green)}
+  .copy{margin-left:auto;flex:0 0 auto;border:1px solid var(--line);background:transparent;color:var(--mut);
+    font-family:var(--mono);font-size:12px;padding:6px 11px;border-radius:7px;cursor:pointer}
+  .copy:hover{color:var(--ink);border-color:var(--mut)}
+
+  .preview{background:linear-gradient(180deg,var(--panel),#0f1116);border:1px solid var(--line);
+    border-radius:18px;padding:18px;box-shadow:0 30px 80px -40px rgba(0,0,0,.9)}
+  .pv-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+  .pv-co{font-family:var(--mono);font-weight:600;font-size:14px}
+  .pv-streak{font-size:11px;color:var(--amber);border:1px solid rgba(231,178,74,.35);border-radius:99px;padding:3px 9px;font-weight:700}
+  .pv-label{font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--mut);margin:0 0 6px}
+  .pv-ns{display:flex;align-items:baseline;gap:8px;margin-bottom:8px}
+  .pv-ns b{font-size:30px;font-variant-numeric:tabular-nums;font-weight:600}
+  .pv-ns span{font-size:13px;color:var(--mut)}
+  .bar{height:7px;border-radius:99px;background:var(--line);overflow:hidden}
+  .bar > i{display:block;height:100%;background:var(--amber);border-radius:99px}
+  .pv-next{color:var(--amber);font-size:12.5px;margin-top:9px}
+  .pv-spark{margin:14px 0 14px}
+  .pv-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .pv-stat{background:var(--panel2);border:1px solid var(--line);border-radius:11px;padding:11px 12px}
+  .pv-stat b{font-size:19px;font-variant-numeric:tabular-nums;font-weight:600}
+  .pv-stat p{margin:2px 0 0;font-size:11px;color:var(--mut)}
+
+  .pulse{display:block;width:100%;height:42px;margin:30px 0 8px;opacity:.55}
+  .pulse path{stroke-dasharray:900;stroke-dashoffset:900;animation:draw 3.4s ease-out forwards}
+  @keyframes draw{to{stroke-dashoffset:0}}
+
+  section{padding:54px 0}
+  .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);margin:0 0 14px}
+  h2{font-family:var(--disp);font-weight:600;font-size:clamp(28px,3.6vw,40px);line-height:1.08;margin:0 0 14px;letter-spacing:-.01em}
+  .sec-lede{color:var(--mut);max-width:62ch;font-size:16.5px;margin:0 0 34px}
+
+  .cards{display:grid;gap:16px}
+  @media(min-width:760px){.cards.c3{grid-template-columns:repeat(3,1fr)}}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px}
+  .card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:12px}
+  .card.amber .tag{color:var(--amber)}
+  .card h3{margin:0 0 7px;font-size:17px;font-weight:600}
+  .card p{margin:0;color:var(--mut);font-size:14.5px}
+
+  .vitals{display:grid;gap:12px;grid-template-columns:repeat(2,1fr)}
+  @media(min-width:720px){.vitals{grid-template-columns:repeat(4,1fr)}}
+  .vital{border:1px solid var(--line);border-radius:13px;padding:15px;background:var(--panel2)}
+  .vital .t{font-family:var(--mono);font-size:12px;color:var(--amber);margin:0 0 6px}
+  .vital p{margin:0;font-size:13.5px;color:#c4c9d0}
+
+  .drops{display:grid;gap:16px}
+  @media(min-width:880px){.drops{grid-template-columns:repeat(3,1fr)}}
+  .drop{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
+  .drop .dh{padding:14px 18px;border-bottom:1px solid var(--line);font-weight:600;font-size:14px;display:flex;align-items:center;gap:9px}
+  .drop .dh span{font-family:var(--mono);font-size:11px;color:var(--mut);margin-left:auto}
+  .drop pre{margin:0;padding:16px 18px;overflow:auto;background:var(--panel2);flex:1}
+  .drop code{font-family:var(--mono);font-size:12.5px;line-height:1.7;color:#cfd4db;white-space:pre}
+  .tok-c{color:var(--mut)}
+  .tok-k{color:var(--amber)}
+  .tok-s{color:var(--green)}
+
+  .loop{display:grid;gap:14px}
+  @media(min-width:760px){.loop{grid-template-columns:repeat(3,1fr)}}
+  .step{border:1px solid var(--line);border-radius:14px;padding:20px;background:var(--panel)}
+  .step .n{font-family:var(--mono);color:var(--amber);font-size:13px;margin-bottom:9px}
+  .step h4{margin:0 0 6px;font-size:16px}
+  .step p{margin:0;color:var(--mut);font-size:14px}
+  .step code{font-family:var(--mono);font-size:12.5px;color:var(--green);background:var(--panel2);padding:1px 6px;border-radius:5px}
+
+  .cta-final{text-align:center;border:1px solid var(--line);border-radius:20px;padding:46px 24px;background:linear-gradient(180deg,var(--panel),var(--panel2))}
+  .cta-final h2{margin-bottom:10px}
+  .cta-final p{color:var(--mut);max-width:48ch;margin:0 auto 24px}
+
+  footer{border-top:1px solid var(--line);padding:36px 0 48px;margin-top:36px}
+  footer .wrap{display:flex;flex-wrap:wrap;align-items:center;gap:8px 22px;color:var(--mut);font-size:13.5px}
+  footer a{color:var(--mut);text-decoration:none}
+  footer a:hover{color:var(--ink)}
+  footer .sep{opacity:.4}
+  footer .right{margin-left:auto;font-family:var(--mono);font-size:12px}
+</style>
 </head>
 <body>
-<div id="app" class="vitals"></div>
+
+<nav>
+  <div class="wrap">
+    <a class="brand" href="/">
+      <svg width="22" height="22" viewBox="0 0 32 32"><rect width="32" height="32" rx="8" fill="#121419" stroke="#23262d"/><path d="M4 17h5.5l2.6-7 3.8 13 2.8-8.5 1.8 2.5H28" fill="none" stroke="#36c08a" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      vitals.run
+    </a>
+    <div class="navlinks">
+      <a href="#how" class="hide-sm">How it works</a>
+      <a href="#install" class="hide-sm">Install</a>
+      <a href="https://github.com/adamtpang/vitals.run" class="hide-sm">GitHub</a>
+      <a href="dashboard.html" class="navcta">Live demo →</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="eyebrow">The company operating system</p>
+      <h1>One screen per company. The <em>next move</em> on each.</h1>
+      <p class="lede">Every company you start or partner on gets its own operating dashboard: the vital signs, the real numbers, and the <b>single next action</b> per metric — to save time, save money, and grow revenue. Built from first principles, kept in sync by your AI.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="dashboard.html">See it live →</a>
+        <a class="btn btn-ghost" href="https://github.com/adamtpang/vitals.run">View source</a>
+      </div>
+      <div class="install">
+        <div class="il">Install into any repo — one line</div>
+        <div class="ib">
+          <span class="dollar mono">$</span>
+          <code id="cmd">npx github:adamtpang/vitals.run</code>
+          <button class="copy" id="copyBtn" aria-label="Copy install command">copy</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="preview" aria-hidden="true">
+      <div class="pv-top">
+        <div class="pv-co">vitals.run</div>
+        <div class="pv-streak">🔥 6-week streak</div>
+      </div>
+      <p class="pv-label">North star · weekly active founders</p>
+      <div class="pv-ns"><b class="tnum">17</b><span>/ 50 target</span></div>
+      <div class="bar"><i style="width:34%"></i></div>
+      <div class="pv-next">→ next: ship the landing page, post the demo in 3 communities</div>
+
+      <svg class="pv-spark" width="100%" height="52" viewBox="0 0 320 52" preserveAspectRatio="none">
+        <polyline points="0,44 64,40 128,34 192,26 256,16 320,6" fill="none" stroke="#e7b24a" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+        <polyline points="0,48 64,43 128,37 192,29 256,19 320,12" fill="none" stroke="#36c08a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity=".7"/>
+      </svg>
+
+      <div class="pv-grid">
+        <div class="pv-stat"><b class="tnum">$1,850</b><p>runway · cash on hand</p></div>
+        <div class="pv-stat"><b class="tnum">41</b><p>repos installed</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <svg class="pulse" viewBox="0 0 1000 42" preserveAspectRatio="none">
+      <path d="M0 21 H360 l18 -16 22 32 16 -26 14 18 H560 l16 -10 18 12 H1000" fill="none" stroke="#36c08a" stroke-width="2"/>
+    </svg>
+  </div>
+</header>
+
+<main>
+  <section id="why" class="wrap">
+    <p class="kicker">Why it's different</p>
+    <h2>A dashboard tells you the number. This tells you the move.</h2>
+    <p class="sec-lede">Reporting is everywhere. Decisions are the scarce thing. Every metric in vitals.run carries the one next action attached to it — so the dashboard isn't a rear-view mirror, it's a to-do list ranked by impact on three outcomes:</p>
+    <div class="cards c3">
+      <div class="card">
+        <div class="tag">Outcome 01</div>
+        <h3>Save time</h3>
+        <p>The constraint is named and the next action is the one that moves it. No dashboards to interpret, no meetings to decide what's already obvious.</p>
+      </div>
+      <div class="card">
+        <div class="tag">Outcome 02</div>
+        <h3>Save money</h3>
+        <p>Burn, runway, and expenses are first-class. You see the number that ends the company long before it does — and what to cut.</p>
+      </div>
+      <div class="card">
+        <div class="tag">Outcome 03</div>
+        <h3>Grow revenue</h3>
+        <p>One north star, the weekly inputs that drive it, and the trend. What's working compounds; what isn't gets killed.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <p class="kicker">One OS, every company</p>
+    <h2>Run a portfolio from first principles.</h2>
+    <p class="sec-lede">Start a company or partner on one — it gets a vitals dashboard that lives in its own repo. Same renderer, same shape, so every venture reads the same way. The codebase is the knowledge base; the data file is the state; your AI is the runtime that keeps them honest.</p>
+    <div class="vitals">
+      <div class="vital"><p class="t">North star</p><p>The one output number that means you're winning.</p></div>
+      <div class="vital"><p class="t">Next action</p><p>The single move that closes the gap, per metric.</p></div>
+      <div class="vital"><p class="t">Money</p><p>Income, burn, runway — the survival math.</p></div>
+      <div class="vital"><p class="t">Streak</p><p>Weeks logged in a row. Don't break the chain.</p></div>
+      <div class="vital"><p class="t">Roadmap</p><p>Gated milestones. Check them off to level up.</p></div>
+      <div class="vital"><p class="t">Goals</p><p>The quarter's handful, done or not.</p></div>
+      <div class="vital"><p class="t">Org</p><p>Who owns each function, who hires next.</p></div>
+      <div class="vital"><p class="t">Decisions</p><p>What you decided, why, and what would change it.</p></div>
+    </div>
+  </section>
+
+  <section id="install" class="wrap">
+    <p class="kicker">Drop it in</p>
+    <h2>One line. No build step. No lock-in.</h2>
+    <p class="sec-lede">It's a library, not a SaaS — vendor it into any repo and you own every byte. Static page, React, or Next, the core is the same.</p>
+    <div class="drops">
+      <div class="drop">
+        <div class="dh">Any project <span>one line</span></div>
+        <pre><code><span class="tok-c"># from inside your repo</span>
+<span class="tok-s">npx</span> github:adamtpang/vitals.run
+
+<span class="tok-c"># then open</span>
+vitals/index.html</code></pre>
+      </div>
+      <div class="drop">
+        <div class="dh">React / Next <span>component</span></div>
+        <pre><code><span class="tok-k">import</span> Vitals <span class="tok-k">from</span> <span class="tok-s">"vitals/react"</span>;
+<span class="tok-k">import</span> <span class="tok-s">"vitals/style.css"</span>;
+<span class="tok-k">import</span> { data } <span class="tok-k">from</span> <span class="tok-s">"./vitals.data"</span>;
+
+&lt;Vitals data={data} /&gt;</code></pre>
+      </div>
+      <div class="drop">
+        <div class="dh">Vanilla JS <span>core</span></div>
+        <pre><code><span class="tok-k">import</span> Vitals <span class="tok-k">from</span> <span class="tok-s">"vitals"</span>;
+
+el.classList.add(<span class="tok-s">"vitals"</span>);
+el.innerHTML =
+  Vitals.render(data);</code></pre>
+      </div>
+    </div>
+  </section>
+
+  <section id="how" class="wrap">
+    <p class="kicker">The loop</p>
+    <h2>Talk to it. It stays true.</h2>
+    <div class="loop">
+      <div class="step">
+        <div class="n">01</div>
+        <h4>Interview</h4>
+        <p>Open a Claude session in the repo and say <code>interview me</code>. It fills the config from your context files — no blank page.</p>
+      </div>
+      <div class="step">
+        <div class="n">02</div>
+        <h4>Log weekly</h4>
+        <p><code>log this week</code>, <code>set MRR to 12k</code>, <code>check off launch</code>. Claude appends history and updates state from the code.</p>
+      </div>
+      <div class="step">
+        <div class="n">03</div>
+        <h4>Act on the next move</h4>
+        <p>Every metric shows its next action. Do that one thing. Streaks build, the roadmap unlocks, trends chart themselves.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <div class="cta-final">
+      <h2>See your company's vitals.</h2>
+      <p>Open the live demo — vitals.run running its own vital signs on itself — then drop it into your repo in one line.</p>
+      <div class="cta-row" style="justify-content:center">
+        <a class="btn btn-primary" href="dashboard.html">Open the live demo →</a>
+        <a class="btn btn-ghost" href="https://github.com/adamtpang/vitals.run">View source</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <a class="brand" href="/" style="font-size:14px">
+      <svg width="18" height="18" viewBox="0 0 32 32"><rect width="32" height="32" rx="8" fill="#121419" stroke="#23262d"/><path d="M4 17h5.5l2.6-7 3.8 13 2.8-8.5 1.8 2.5H28" fill="none" stroke="#36c08a" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      vitals.run
+    </a>
+    <span class="sep">·</span>
+    <a href="https://github.com/adamtpang/vitals.run">GitHub</a>
+    <span class="sep">·</span>
+    <a href="dashboard.html">Live demo</a>
+    <span class="sep">·</span>
+    <span>MIT</span>
+    <span class="right">measure what matters. do the next thing.</span>
+  </div>
+</footer>
+
 <script>
   (function () {
-    var el = document.getElementById("app");
-    if (!window.VITALS) { el.innerHTML = '<p style="color:#d64545;padding:24px">vitals.data.js not found.</p>'; return; }
-    el.innerHTML = window.Vitals.render(window.VITALS);
+    var btn = document.getElementById("copyBtn");
+    var cmd = document.getElementById("cmd");
+    if (btn && cmd && navigator.clipboard) {
+      btn.addEventListener("click", function () {
+        navigator.clipboard.writeText(cmd.textContent.trim()).then(function () {
+          var old = btn.textContent; btn.textContent = "copied ✓";
+          setTimeout(function () { btn.textContent = old; }, 1600);
+        });
+      });
+    }
   })();
 </script>
 </body>

@@ -1,8 +1,8 @@
-// company-os.data.js — the live demo dataset for vitals.run.
-// This is vitals.run running its own vitals on itself. It powers /dashboard.html.
+// vitals.data.js — the live demo dataset for vitals.run.
+// This is vitals.run running its own vitals on itself. It powers index.html and /dashboard.html.
 // Want your own? `npx github:adamtpang/vitals.run`, then ask Claude "interview me".
 
-window.COMPANY_OS = {
+window.VITALS = {
   company: "vitals.run",
   tagline: "The operating dashboard for founders.",
   mission: "Give every founder one screen that tells the truth about their company.",
