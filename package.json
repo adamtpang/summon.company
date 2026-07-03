@@ -14,7 +14,7 @@
   "files": [
     "vitals.core.js",
     "vitals.css",
-    "index.html",
+    "dashboard.html",
     "vitals.data.example.js",
     "react/",
     "bin/",
