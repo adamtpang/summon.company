@@ -1,0 +1,213 @@
+# vitals.run
+
+> Vitals is a portable company operating dashboard (a "company OS"): one JSON-style
+> config file per company, one zero-dependency renderer, and an AI coding agent as the
+> runtime that keeps it in sync with the codebase. Every metric carries a `next` action —
+> the single move to close the gap — so the dashboard drives decisions that save time,
+> save money, and grow revenue.
+
+The model: the codebase is the knowledge base; `vitals.data.js` is the single config and
+state file (parameters in, state out — in the spirit of Shopify's internal JSON-config
+company OS); the AI agent reads both and recommends the next moves from first principles.
+
+## Install (agent instructions)
+
+To give any repo a Vitals dashboard, run this from inside the repo:
+
+    npx github:adamtpang/vitals.run
+
+This vendors the dashboard into `vitals/` (renderer, styles, schema, skill, and a starter
+`vitals.data.js`). Then follow https://vitals.run/SKILL.md: run the founder interview to
+populate `vitals/vitals.data.js` from the repo's context files, and remind the user to
+open `vitals/index.html`.
+
+If `npx` is unavailable, fetch the files directly and write them into a `vitals/` folder:
+
+- https://vitals.run/vitals.core.js (renderer, UMD)
+- https://vitals.run/vitals.css (styles, scoped under `.vitals`)
+- https://vitals.run/dashboard.html (save as `vitals/index.html`)
+- https://vitals.run/vitals.data.example.js (save as `vitals/vitals.data.js`, then populate)
+- https://vitals.run/schema.md and https://vitals.run/SKILL.md (reference)
+
+## Operating loop (after install)
+
+Plain-language commands the agent should honor (full list in SKILL.md):
+"interview me" (populate the config), "log this week" (append a history snapshot),
+"set <metric> to N", "check off <milestone>", "add a decision", "sync from context"
+(re-read the repo and update the config to match reality). After any change, the user
+refreshes `vitals/index.html`.
+
+## Docs
+
+- [SKILL.md](https://vitals.run/SKILL.md): how an AI agent operates the dashboard — commands, the founder interview, the principle.
+- [schema.md](https://vitals.run/schema.md): every field of the `window.VITALS` config object.
+- [vitals.data.example.js](https://vitals.run/vitals.data.example.js): the starter config template.
+- [llms-full.txt](https://vitals.run/llms-full.txt): all of the above inlined in one fetch.
+- [Live demo](https://vitals.run/dashboard.html): vitals.run running its own vitals.
+- [GitHub](https://github.com/adamtpang/vitals.run): source (MIT).
+
+---
+
+# INLINE: SKILL.md
+
+# Vitals (skill)
+
+A portable, JSON-config company operating system. The fundamentals are universal
+(every company has a mission, a problem, money, metrics, a roadmap, an org). The
+founder fills in the blanks. Claude is the agent that operates it. Inspired by Tobi
+Lutke's JSON-config company OS and by Bridgewater's "principles encoded as software."
+
+## The model
+- The **codebase is the knowledge base** (the context files).
+- `vitals.data.js` is the **single JSON-style config and state file** (the source of truth).
+- `index.html` + `vitals.core.js` + `vitals.css` are the renderer (zero dependencies, no build).
+- **Claude is the runtime:** the founder talks, Claude updates the config and the knowledge base.
+
+## The schema
+See `schema.md`. The load-bearing fields: `metrics` (with `value`, `target`, and a
+`next` reconciling action), `roadmap` (gated, checkable), `goals`, `decisions` (the
+why behind choices), and `knowledgeBase` (the context files this OS is tied to).
+
+## Commands Claude follows (plain language)
+- **"set up vitals here" / "init"**: vendor the dashboard files into the repo, then run the interview.
+- **"interview me" / "onboard me"**: run the interview below, then write `vitals.data.js` and create or update the knowledge-base context files.
+- **"log this week"**: append a snapshot to `history` using today's real date, pulling current metric and finance numbers.
+- **"check off X" / "mark X done"**: set that roadmap item or goal `done: true` (reverse on "uncheck").
+- **"set <metric> to N" / "set the target for <metric> to N"**: update `value` or `target`.
+- **"add a decision"**: append to `decisions` with date, decision, why, and what would change our mind (`revisit`).
+- **"sync from context"**: re-read the context files and update the config to match reality.
+- After any change, remind the user to refresh `index.html`.
+
+## The interview (to populate a new company's Vitals and seed its knowledge base)
+Ask a few at a time, conversationally. Use answers to fill `vitals.data.js` and seed context files.
+1. Company name and a one-line tagline.
+2. Mission: the 25-year why.
+3. The problem, and exactly who has it.
+4. The solution and product line: what is Live, Building, Next, Later.
+5. North star: the single output number that means winning.
+6. The 3 input metrics you control week to week (and a target for each if known).
+7. Money: monthly income, monthly expenses, cash (say "skip" if private; default to placeholders and remind them to gitignore the data file).
+8. The roadmap: the gated stages from today to your next big milestone.
+9. The org: the functions, who owns each now, the first hires.
+10. Quarterly goals: 3 max.
+11. Non-negotiables and key decisions: seed the `decisions` log with the big calls and their why.
+12. Competitors and the graveyard: who tried this and failed, and why.
+
+## Porting to any company
+This is a vendored library. Copy the `vitals/` folder into any repo (or run
+`npx github:adamtpang/vitals.run`), then "interview me" to populate it. One renderer,
+many companies, each with its own data file.
+
+## Principle
+The founder fills the blanks; the fundamentals are universal; Claude keeps the config
+and the knowledge base in sync. Dogfood it on one real company first.
+
+---
+
+# INLINE: schema.md
+
+# Vitals data schema
+
+`window.VITALS` is one object. Every field is optional; the renderer degrades
+gracefully, so old and new data files both work. Universal fundamentals are the
+same for every company; the founder fills in the specifics.
+
+| Field | Type | Notes |
+|---|---|---|
+| `company` | string | Company name (header). |
+| `tagline` | string | One line under the name. |
+| `mission` | string | The 25-year why. |
+| `problem` | string | The problem and who has it (rendered in "The problem"). |
+| `northStar` | string | The one output metric that means winning. |
+| `knowledgeBase` | `[{ file, desc }]` | The repo's context files. Linked as `../<file>`. |
+| `finances` | `{ income, expenses, savings }` | Monthly income, monthly expenses, cash. Runway is computed. |
+| `metrics` | `[{ label, value, target?, hint?, key?, next? }]` | Inputs you control. `value` = what is, `target` = what should be (shown as `value / target`), `next` = the single action to close the gap, `key` = which `history` field this charts. |
+| `charts` | `[{ label, key, color? }]` | Which `history` keys to draw as trend sparklines. |
+| `history` | `[{ t, ...keys }]` | Weekly snapshots. `t` is a short date; other fields match metric/chart `key`s. |
+| `streak` | number | Days in a row you did a real input action. |
+| `goals` | `[{ text, done }]` | Quarterly goals (the rocks). |
+| `products` | `[{ name, status }]` | Status is `Live` / `Building` / `Next` / `Later` (colored). |
+| `roadmap` | `[{ stage, items:[{ label, done }] }]` | Gated stages. Checked items level you up. |
+| `org` | `[{ fn, now, next? }]` | Function, who owns it now, the next hire. |
+| `decisions` | `[{ date, decision, why, revisit? }]` | A decision log: capture the WHY so it is never lost. |
+| `levels` | `[[threshold, name], ...]` | Optional override of the gamified level names. |
+
+## Gamification
+The founder level is derived from how many `roadmap` items are `done`, against the
+`levels` thresholds. The XP bar shows progress to the next level. The streak counts
+input actions. No leaderboards, no trivial badges (they backfire).
+
+---
+
+# INLINE: vitals.data.example.js
+
+```js
+// vitals.data.example.js — the starter template.
+// Copy to `vitals.data.js` and fill in, or drop this folder into a repo and
+// ask Claude "interview me" to populate it from the repo's context files.
+//
+// Every field is optional; the dashboard degrades gracefully. Full schema: schema.md.
+// PRIVACY: if your finance numbers are real, gitignore vitals.data.js.
+
+window.VITALS = {
+  company: "Your Company",
+  tagline: "One line on what you do.",
+  mission: "The 25-year why.",
+  problem: "The problem you solve, and exactly who has it.",
+  northStar: "The one output number that means you are winning.",
+
+  // The knowledge base IS the codebase. List the repo's context files.
+  knowledgeBase: [
+    { file: "README.md", desc: "Project overview" },
+  ],
+
+  finances: { income: 0, expenses: 0, savings: 0 },
+
+  // Inputs you control. value = what is, target = what should be (optional),
+  // next = the single action to close the gap (optional). key = which history field to chart.
+  metrics: [
+    { label: "North star metric", value: 0, target: null, hint: "", key: "northstar", next: "" },
+    { label: "Weekly input 1", value: 0, hint: "per week", key: "input1" },
+    { label: "Weekly input 2", value: 0, hint: "per week", key: "input2" },
+  ],
+
+  // Which history keys to chart as trends.
+  charts: [
+    { label: "North star growth", key: "northstar", color: "var(--amber)" },
+    { label: "Cash on hand", key: "savings", color: "var(--green)" },
+  ],
+
+  streak: 0,
+  history: [], // Claude appends weekly: { t: "Jun 13", northstar: 40, savings: 12000, ... }
+
+  goals: [
+    { text: "Quarterly goal 1", done: false },
+    { text: "Quarterly goal 2", done: false },
+    { text: "Quarterly goal 3", done: false },
+  ],
+
+  products: [
+    { name: "Product or service", status: "Live" }, // Live | Building | Next | Later
+  ],
+
+  // Gated roadmap. Check items off (done: true) to level up.
+  roadmap: [
+    { stage: "0 · Foundation", items: [
+      { label: "First milestone", done: false },
+      { label: "Second milestone", done: false },
+    ] },
+  ],
+
+  org: [
+    { fn: "Function", now: "(owner)", next: "(first hire)" },
+  ],
+
+  // Optional: capture the WHY behind decisions so it never gets lost.
+  decisions: [
+    // { date: "2026-01-01", decision: "What we decided", why: "The reasoning", revisit: "What would change our mind" },
+  ],
+
+  // Optional: override the gamified level names.
+  // levels: [[0,"Day 1"],[1,"Founder"],[6,"Builder"],[13,"Operator"],[21,"Captain"],[30,"CEO"]],
+};
+```

@@ -184,11 +184,19 @@
         <a class="btn btn-ghost" href="https://github.com/adamtpang/vitals.run">View source</a>
       </div>
       <div class="install">
-        <div class="il">Install into any repo — one line</div>
+        <div class="il">For you — one line in any repo</div>
         <div class="ib">
           <span class="dollar mono">$</span>
           <code id="cmd">npx github:adamtpang/vitals.run</code>
-          <button class="copy" id="copyBtn" aria-label="Copy install command">copy</button>
+          <button class="copy" data-copy="cmd" aria-label="Copy install command">copy</button>
+        </div>
+      </div>
+      <div class="install" style="margin-top:14px">
+        <div class="il">For your AI — paste into Claude Code</div>
+        <div class="ib">
+          <span class="dollar mono">›</span>
+          <code id="agentPrompt">Read https://vitals.run/llms.txt and give this repo a Vitals CEO dashboard, then interview me to fill it.</code>
+          <button class="copy" data-copy="agentPrompt" aria-label="Copy agent prompt">copy</button>
         </div>
       </div>
     </div>
@@ -292,6 +300,12 @@ el.innerHTML =
   Vitals.render(data);</code></pre>
       </div>
     </div>
+    <p style="margin:18px 2px 0;font-size:13.5px;color:var(--mut)">
+      <span class="mono" style="color:var(--green)">machine-readable</span> — AI agents can start at
+      <a href="llms.txt" class="mono" style="color:var(--amber);text-decoration:none">vitals.run/llms.txt</a>
+      (or <a href="llms-full.txt" class="mono" style="color:var(--amber);text-decoration:none">llms-full.txt</a> for one fetch):
+      install steps, the full schema, and the operating skill.
+    </p>
   </section>
 
   <section id="how" class="wrap">
@@ -339,6 +353,8 @@ el.innerHTML =
     <span class="sep">·</span>
     <a href="dashboard.html">Live demo</a>
     <span class="sep">·</span>
+    <a href="llms.txt">llms.txt</a>
+    <span class="sep">·</span>
     <span>MIT</span>
     <span class="right">measure what matters. do the next thing.</span>
   </div>
@@ -346,16 +362,17 @@ el.innerHTML =
 
 <script>
   (function () {
-    var btn = document.getElementById("copyBtn");
-    var cmd = document.getElementById("cmd");
-    if (btn && cmd && navigator.clipboard) {
+    if (!navigator.clipboard) return;
+    document.querySelectorAll(".copy[data-copy]").forEach(function (btn) {
+      var src = document.getElementById(btn.getAttribute("data-copy"));
+      if (!src) return;
       btn.addEventListener("click", function () {
-        navigator.clipboard.writeText(cmd.textContent.trim()).then(function () {
+        navigator.clipboard.writeText(src.textContent.trim()).then(function () {
           var old = btn.textContent; btn.textContent = "copied ✓";
           setTimeout(function () { btn.textContent = old; }, 1600);
         });
       });
-    }
+    });
   })();
 </script>
 </body>

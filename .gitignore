@@ -1,3 +1,5 @@
 node_modules/
 .DS_Store
 # Consumers: gitignore your own vitals.data.js if its finance numbers are real.
+.vercel
+.claude/

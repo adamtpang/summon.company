@@ -1,0 +1,47 @@
+# vitals.run
+
+> Vitals is a portable company operating dashboard (a "company OS"): one JSON-style
+> config file per company, one zero-dependency renderer, and an AI coding agent as the
+> runtime that keeps it in sync with the codebase. Every metric carries a `next` action —
+> the single move to close the gap — so the dashboard drives decisions that save time,
+> save money, and grow revenue.
+
+The model: the codebase is the knowledge base; `vitals.data.js` is the single config and
+state file (parameters in, state out — in the spirit of Shopify's internal JSON-config
+company OS); the AI agent reads both and recommends the next moves from first principles.
+
+## Install (agent instructions)
+
+To give any repo a Vitals dashboard, run this from inside the repo:
+
+    npx github:adamtpang/vitals.run
+
+This vendors the dashboard into `vitals/` (renderer, styles, schema, skill, and a starter
+`vitals.data.js`). Then follow https://vitals.run/SKILL.md: run the founder interview to
+populate `vitals/vitals.data.js` from the repo's context files, and remind the user to
+open `vitals/index.html`.
+
+If `npx` is unavailable, fetch the files directly and write them into a `vitals/` folder:
+
+- https://vitals.run/vitals.core.js (renderer, UMD)
+- https://vitals.run/vitals.css (styles, scoped under `.vitals`)
+- https://vitals.run/dashboard.html (save as `vitals/index.html`)
+- https://vitals.run/vitals.data.example.js (save as `vitals/vitals.data.js`, then populate)
+- https://vitals.run/schema.md and https://vitals.run/SKILL.md (reference)
+
+## Operating loop (after install)
+
+Plain-language commands the agent should honor (full list in SKILL.md):
+"interview me" (populate the config), "log this week" (append a history snapshot),
+"set <metric> to N", "check off <milestone>", "add a decision", "sync from context"
+(re-read the repo and update the config to match reality). After any change, the user
+refreshes `vitals/index.html`.
+
+## Docs
+
+- [SKILL.md](https://vitals.run/SKILL.md): how an AI agent operates the dashboard — commands, the founder interview, the principle.
+- [schema.md](https://vitals.run/schema.md): every field of the `window.VITALS` config object.
+- [vitals.data.example.js](https://vitals.run/vitals.data.example.js): the starter config template.
+- [llms-full.txt](https://vitals.run/llms-full.txt): all of the above inlined in one fetch.
+- [Live demo](https://vitals.run/dashboard.html): vitals.run running its own vitals.
+- [GitHub](https://github.com/adamtpang/vitals.run): source (MIT).
