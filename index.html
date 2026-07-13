@@ -3,20 +3,20 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>vitals.run — the operating system for every company you run</title>
-<meta name="description" content="A company operating dashboard. Vital signs, real numbers, and the single next action for each — to save time, save money, and grow revenue. One config file, kept in sync by your AI. Install in one line." />
+<title>vitals.run — hire AI employees. you're the board.</title>
+<meta name="description" content="Hire AI employees for your business — $99/mo each. Marketing, sales, ops, support, engineering: they do the work 24/7, governed by you. Budget-capped, so you never get a surprise bill. Add the ones you need." />
 
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://vitals.run" />
 <meta property="og:image" content="https://vitals.run/og.png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
-<meta property="og:title" content="vitals.run — the OS for every company you run" />
-<meta property="og:description" content="Vital signs and the one next action per metric — to save time, save money, grow revenue. From first principles. One-line install." />
+<meta property="og:title" content="vitals.run — hire AI employees. you're the board." />
+<meta property="og:description" content="Hire AI employees for $99/mo each. They do the work; you approve. Budget-capped so you never get a surprise bill." />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://vitals.run/og.png" />
-<meta name="twitter:title" content="vitals.run — the OS for every company you run" />
-<meta name="twitter:description" content="Vital signs + the one next action, to save time, save money, grow revenue. One-line install." />
+<meta name="twitter:title" content="vitals.run — hire AI employees. you're the board." />
+<meta name="twitter:description" content="An AI-agent company you command. $99/mo per employee. They do the work; you approve." />
 
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230a0b0d'/%3E%3Cpath d='M3 17h6l3-8 4 14 3-9 2 3h5' fill='none' stroke='%2336c08a' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
 
@@ -27,24 +27,23 @@
 <style>
   :root{
     --bg:#0a0b0d; --panel:#121419; --panel2:#0e1014; --line:#23262d;
-    --ink:#e7eaed; --mut:#8a909a; --green:#36c08a; --amber:#e7b24a; --danger:#d64545;
+    --ink:#e7eaed; --mut:#8a909a; --green:#36c08a; --amber:#e7b24a; --purple:#9a86f0; --danger:#d64545;
     --mono:'IBM Plex Mono',ui-monospace,Menlo,monospace;
     --disp:'Bodoni Moda',Georgia,serif;
     --sans:'Hanken Grotesk',-apple-system,Segoe UI,Roboto,sans-serif;
-    --max:1040px;
+    --max:1060px;
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
   body{
     margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);
     -webkit-font-smoothing:antialiased;line-height:1.55;
-    background-image:radial-gradient(900px 480px at 78% -8%, rgba(231,178,74,.10), transparent 60%),
-                     radial-gradient(760px 460px at 8% 0%, rgba(54,192,138,.07), transparent 55%);
+    background-image:radial-gradient(900px 480px at 80% -8%, rgba(154,134,240,.12), transparent 60%),
+                     radial-gradient(760px 460px at 6% 0%, rgba(54,192,138,.07), transparent 55%);
   }
   a{color:inherit}
   .wrap{max-width:var(--max);margin:0 auto;padding:0 22px}
   .mono{font-family:var(--mono)}
-  .disp{font-family:var(--disp)}
   .mut{color:var(--mut)}
   .tnum{font-variant-numeric:tabular-nums}
 
@@ -55,98 +54,94 @@
   .navlinks{display:flex;align-items:center;gap:22px;font-size:14px}
   .navlinks a{text-decoration:none;color:var(--mut)}
   .navlinks a:hover{color:var(--ink)}
-  .navcta{padding:7px 14px;border:1px solid var(--line);border-radius:99px;color:var(--ink)!important}
-  .navcta:hover{border-color:var(--mut)}
-  @media(max-width:680px){.navlinks a.hide-sm{display:none}}
+  .navcta{padding:8px 15px;border-radius:99px;background:var(--ink);color:#0a0b0d!important;font-weight:600}
+  .navcta:hover{background:#fff}
+  @media(max-width:720px){.navlinks a.hide-sm{display:none}}
 
-  .hero{padding:74px 0 30px}
+  .hero{padding:74px 0 26px}
   .hero-grid{display:grid;gap:46px;align-items:center}
-  @media(min-width:900px){.hero-grid{grid-template-columns:1.05fr .95fr;gap:54px}}
-  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--amber);margin:0 0 20px}
-  h1{font-family:var(--disp);font-weight:600;font-size:clamp(38px,6vw,64px);line-height:1.03;letter-spacing:-.01em;margin:0 0 22px}
+  @media(min-width:900px){.hero-grid{grid-template-columns:1.02fr .98fr;gap:54px}}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--purple);margin:0 0 20px}
+  h1{font-family:var(--disp);font-weight:600;font-size:clamp(40px,6.2vw,66px);line-height:1.02;letter-spacing:-.01em;margin:0 0 22px}
   h1 em{font-style:italic;color:var(--amber)}
-  .lede{font-size:clamp(16.5px,2vw,19px);color:#c4c9d0;max-width:40ch;margin:0 0 26px}
+  .lede{font-size:clamp(16.5px,2vw,19px);color:#c4c9d0;max-width:44ch;margin:0 0 26px}
   .lede b{color:var(--ink);font-weight:600}
   .cta-row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
-  .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:99px;text-decoration:none;font-weight:600;font-size:15px;border:1px solid transparent}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:13px 22px;border-radius:99px;text-decoration:none;font-weight:600;font-size:15px;border:1px solid transparent;cursor:pointer}
   .btn-primary{background:var(--ink);color:#0a0b0d}
   .btn-primary:hover{background:#fff}
   .btn-ghost{border-color:var(--line);color:var(--ink)}
   .btn-ghost:hover{border-color:var(--mut)}
-
-  .install{margin-top:24px;max-width:470px}
-  .install .il{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);margin-bottom:8px}
-  .install .ib{display:flex;align-items:center;gap:10px;
-    background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:12px 12px 12px 15px}
-  .install code{font-family:var(--mono);font-size:14px;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .install .dollar{color:var(--green)}
-  .copy{margin-left:auto;flex:0 0 auto;border:1px solid var(--line);background:transparent;color:var(--mut);
-    font-family:var(--mono);font-size:12px;padding:6px 11px;border-radius:7px;cursor:pointer}
-  .copy:hover{color:var(--ink);border-color:var(--mut)}
+  .microcta{margin-top:15px;font-size:13.5px;color:var(--mut)}
+  .microcta a{color:var(--green);text-decoration:none;border-bottom:1px solid rgba(54,192,138,.35)}
+  .microcta a:hover{color:var(--ink)}
 
   .preview{background:linear-gradient(180deg,var(--panel),#0f1116);border:1px solid var(--line);
-    border-radius:18px;padding:18px;box-shadow:0 30px 80px -40px rgba(0,0,0,.9)}
+    border-radius:18px;padding:18px 18px 16px;box-shadow:0 30px 80px -40px rgba(0,0,0,.9)}
   .pv-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
   .pv-co{font-family:var(--mono);font-weight:600;font-size:14px}
-  .pv-streak{font-size:11px;color:var(--amber);border:1px solid rgba(231,178,74,.35);border-radius:99px;padding:3px 9px;font-weight:700}
-  .pv-label{font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--mut);margin:0 0 6px}
-  .pv-ns{display:flex;align-items:baseline;gap:8px;margin-bottom:8px}
-  .pv-ns b{font-size:30px;font-variant-numeric:tabular-nums;font-weight:600}
-  .pv-ns span{font-size:13px;color:var(--mut)}
-  .bar{height:7px;border-radius:99px;background:var(--line);overflow:hidden}
-  .bar > i{display:block;height:100%;background:var(--amber);border-radius:99px}
-  .pv-next{color:var(--amber);font-size:12.5px;margin-top:9px}
-  .pv-spark{margin:14px 0 14px}
-  .pv-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-  .pv-stat{background:var(--panel2);border:1px solid var(--line);border-radius:11px;padding:11px 12px}
-  .pv-stat b{font-size:19px;font-variant-numeric:tabular-nums;font-weight:600}
-  .pv-stat p{margin:2px 0 0;font-size:11px;color:var(--mut)}
+  .pv-live{font-size:11px;color:var(--green);border:1px solid rgba(54,192,138,.35);border-radius:99px;padding:3px 10px;font-weight:700;display:flex;align-items:center;gap:6px}
+  .pv-live i{width:7px;height:7px;border-radius:99px;background:var(--green);display:inline-block;animation:blink 1.6s ease-in-out infinite}
+  @keyframes blink{50%{opacity:.35}}
+  .org{display:grid;gap:9px}
+  .emp{display:flex;align-items:center;gap:11px;background:var(--panel2);border:1px solid var(--line);border-radius:11px;padding:10px 12px}
+  .emp.ind{margin-left:22px}
+  .emp .av{width:30px;height:30px;border-radius:8px;flex:0 0 auto;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:12px;font-weight:600}
+  .av.ceo{background:rgba(154,134,240,.16);color:#c9bdf7}
+  .av.dept{background:rgba(54,192,138,.14);color:#7ad9b3}
+  .av.eng{background:rgba(231,178,74,.14);color:#f0c874}
+  .emp .who{flex:1;min-width:0}
+  .emp .who b{font-size:13.5px;font-weight:600;display:block}
+  .emp .who p{margin:1px 0 0;font-size:11.5px;color:var(--mut);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .emp .st{font-family:var(--mono);font-size:10.5px;color:var(--green);flex:0 0 auto}
+  .emp .st.idle{color:var(--mut)}
+  .pv-foot{margin-top:13px;font-size:12px;color:var(--mut);display:flex;justify-content:space-between}
+  .pv-foot b{color:var(--amber);font-weight:600}
 
-  .pulse{display:block;width:100%;height:42px;margin:30px 0 8px;opacity:.55}
-  .pulse path{stroke-dasharray:900;stroke-dashoffset:900;animation:draw 3.4s ease-out forwards}
-  @keyframes draw{to{stroke-dashoffset:0}}
-
-  section{padding:54px 0}
+  section{padding:56px 0}
   .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);margin:0 0 14px}
-  h2{font-family:var(--disp);font-weight:600;font-size:clamp(28px,3.6vw,40px);line-height:1.08;margin:0 0 14px;letter-spacing:-.01em}
-  .sec-lede{color:var(--mut);max-width:62ch;font-size:16.5px;margin:0 0 34px}
+  h2{font-family:var(--disp);font-weight:600;font-size:clamp(28px,3.8vw,42px);line-height:1.08;margin:0 0 14px;letter-spacing:-.01em}
+  h2 em{font-style:italic;color:var(--amber)}
+  .sec-lede{color:var(--mut);max-width:64ch;font-size:16.5px;margin:0 0 34px}
 
   .cards{display:grid;gap:16px}
   @media(min-width:760px){.cards.c3{grid-template-columns:repeat(3,1fr)}}
   .card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px}
   .card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:12px}
-  .card.amber .tag{color:var(--amber)}
+  .card.amber .tag{color:var(--amber)} .card.purple .tag{color:var(--purple)}
   .card h3{margin:0 0 7px;font-size:17px;font-weight:600}
   .card p{margin:0;color:var(--mut);font-size:14.5px}
 
-  .vitals{display:grid;gap:12px;grid-template-columns:repeat(2,1fr)}
-  @media(min-width:720px){.vitals{grid-template-columns:repeat(4,1fr)}}
-  .vital{border:1px solid var(--line);border-radius:13px;padding:15px;background:var(--panel2)}
-  .vital .t{font-family:var(--mono);font-size:12px;color:var(--amber);margin:0 0 6px}
-  .vital p{margin:0;font-size:13.5px;color:#c4c9d0}
-
-  .drops{display:grid;gap:16px}
-  @media(min-width:880px){.drops{grid-template-columns:repeat(3,1fr)}}
-  .drop{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
-  .drop .dh{padding:14px 18px;border-bottom:1px solid var(--line);font-weight:600;font-size:14px;display:flex;align-items:center;gap:9px}
-  .drop .dh span{font-family:var(--mono);font-size:11px;color:var(--mut);margin-left:auto}
-  .drop pre{margin:0;padding:16px 18px;overflow:auto;background:var(--panel2);flex:1}
-  .drop code{font-family:var(--mono);font-size:12.5px;line-height:1.7;color:#cfd4db;white-space:pre}
-  .tok-c{color:var(--mut)}
-  .tok-k{color:var(--amber)}
-  .tok-s{color:var(--green)}
-
   .loop{display:grid;gap:14px}
   @media(min-width:760px){.loop{grid-template-columns:repeat(3,1fr)}}
-  .step{border:1px solid var(--line);border-radius:14px;padding:20px;background:var(--panel)}
-  .step .n{font-family:var(--mono);color:var(--amber);font-size:13px;margin-bottom:9px}
-  .step h4{margin:0 0 6px;font-size:16px}
+  .step{border:1px solid var(--line);border-radius:14px;padding:22px;background:var(--panel)}
+  .step .n{font-family:var(--mono);color:var(--amber);font-size:13px;margin-bottom:10px}
+  .step h4{margin:0 0 7px;font-size:17px}
   .step p{margin:0;color:var(--mut);font-size:14px}
-  .step code{font-family:var(--mono);font-size:12.5px;color:var(--green);background:var(--panel2);padding:1px 6px;border-radius:5px}
 
-  .cta-final{text-align:center;border:1px solid var(--line);border-radius:20px;padding:46px 24px;background:linear-gradient(180deg,var(--panel),var(--panel2))}
+  .band{border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,var(--panel),var(--panel2));padding:30px 26px}
+  .band .kicker{color:var(--purple)}
+  .band h2{margin-bottom:10px}
+  .band p{color:var(--mut);max-width:60ch;margin:0}
+  .quote{font-family:var(--disp);font-size:clamp(20px,2.4vw,26px);line-height:1.35;margin:0 0 14px;color:var(--ink)}
+
+  .team{display:grid;gap:14px;grid-template-columns:repeat(2,1fr)}
+  @media(min-width:820px){.team{grid-template-columns:repeat(3,1fr)}}
+  .ecard{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px;display:flex;flex-direction:column}
+  .ecard .er{display:flex;align-items:center;gap:10px;margin-bottom:9px}
+  .ecard .eav{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:12px;font-weight:600;background:rgba(154,134,240,.14);color:#c9bdf7;flex:0 0 auto}
+  .ecard h3{margin:0;font-size:16px;font-weight:600}
+  .ecard .ework{margin:0;color:var(--mut);font-size:13.5px;flex:1}
+  .ecard .ep{font-family:var(--disp);font-size:24px;font-weight:600;margin:14px 0 12px}
+  .ecard .ep span{font-family:var(--sans);font-size:13px;color:var(--mut);font-weight:400}
+  .ecard .btn{width:100%;justify-content:center;padding:10px}
+  .price-foot{margin-top:24px;text-align:center;color:var(--mut);font-size:14.5px}
+  .price-foot a{color:var(--green);text-decoration:none;border-bottom:1px solid rgba(54,192,138,.3)}
+  .price-foot a:hover{color:var(--ink)}
+
+  .cta-final{text-align:center;border:1px solid var(--line);border-radius:20px;padding:50px 24px;background:linear-gradient(180deg,var(--panel),var(--panel2))}
   .cta-final h2{margin-bottom:10px}
-  .cta-final p{color:var(--mut);max-width:48ch;margin:0 auto 24px}
+  .cta-final p{color:var(--mut);max-width:50ch;margin:0 auto 24px}
 
   footer{border-top:1px solid var(--line);padding:36px 0 48px;margin-top:36px}
   footer .wrap{display:flex;flex-wrap:wrap;align-items:center;gap:8px 22px;color:var(--mut);font-size:13.5px}
@@ -166,9 +161,9 @@
     </a>
     <div class="navlinks">
       <a href="#how" class="hide-sm">How it works</a>
-      <a href="#install" class="hide-sm">Install</a>
-      <a href="https://github.com/adamtpang/vitals.run" class="hide-sm">GitHub</a>
-      <a href="dashboard.html" class="navcta">Live demo →</a>
+      <a href="#team" class="hide-sm">The employees</a>
+      <a href="#pricing" class="hide-sm">Pricing</a>
+      <a href="#pricing" class="navcta">Hire an employee →</a>
     </div>
   </div>
 </nav>
@@ -176,167 +171,140 @@
 <header class="hero">
   <div class="wrap hero-grid">
     <div>
-      <p class="eyebrow">The company operating system</p>
-      <h1>One screen per company. The <em>next move</em> on each.</h1>
-      <p class="lede">Every company you start or partner on gets its own operating dashboard: the vital signs, the real numbers, and the <b>single next action</b> per metric — to save time, save money, and grow revenue. Built from first principles, kept in sync by your AI.</p>
+      <p class="eyebrow">The AI-agent company you command</p>
+      <h1>Hire AI employees. <em>You're the board.</em></h1>
+      <p class="lede">Add <b>AI employees</b> to your company — $99/mo each. Marketing, sales, ops, support, engineering: they do the work 24/7. They ship; <b>you approve.</b> Budget-capped, so you never get a surprise bill.</p>
       <div class="cta-row">
-        <a class="btn btn-primary" href="dashboard.html">See it live →</a>
-        <a class="btn btn-ghost" href="https://github.com/adamtpang/vitals.run">View source</a>
+        <a class="btn btn-primary" href="#pricing">Hire your first employee →</a>
+        <a class="btn btn-ghost" href="#how">See how it runs</a>
       </div>
-      <div class="install">
-        <div class="il">For you — one line in any repo</div>
-        <div class="ib">
-          <span class="dollar mono">$</span>
-          <code id="cmd">npx github:adamtpang/vitals.run</code>
-          <button class="copy" data-copy="cmd" aria-label="Copy install command">copy</button>
-        </div>
-      </div>
-      <div class="install" style="margin-top:14px">
-        <div class="il">For your AI — paste into Claude Code</div>
-        <div class="ib">
-          <span class="dollar mono">›</span>
-          <code id="agentPrompt">Read https://vitals.run/llms.txt and give this repo a Vitals CEO dashboard, then interview me to fill it.</code>
-          <button class="copy" data-copy="agentPrompt" aria-label="Copy agent prompt">copy</button>
-        </div>
-      </div>
+      <p class="microcta">Not sure which to hire? <a href="https://cal.com/adamtpang">Get a free AI-employee diagnosis of your business →</a></p>
     </div>
 
     <div class="preview" aria-hidden="true">
       <div class="pv-top">
-        <div class="pv-co">vitals.run</div>
-        <div class="pv-streak">🔥 6-week streak</div>
+        <div class="pv-co">your company · today</div>
+        <div class="pv-live"><i></i>live</div>
       </div>
-      <p class="pv-label">North star · weekly active founders</p>
-      <div class="pv-ns"><b class="tnum">17</b><span>/ 50 target</span></div>
-      <div class="bar"><i style="width:34%"></i></div>
-      <div class="pv-next">→ next: ship the landing page, post the demo in 3 communities</div>
-
-      <svg class="pv-spark" width="100%" height="52" viewBox="0 0 320 52" preserveAspectRatio="none">
-        <polyline points="0,44 64,40 128,34 192,26 256,16 320,6" fill="none" stroke="#e7b24a" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
-        <polyline points="0,48 64,43 128,37 192,29 256,19 320,12" fill="none" stroke="#36c08a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity=".7"/>
-      </svg>
-
-      <div class="pv-grid">
-        <div class="pv-stat"><b class="tnum">$1,850</b><p>runway · cash on hand</p></div>
-        <div class="pv-stat"><b class="tnum">41</b><p>repos installed</p></div>
+      <div class="org">
+        <div class="emp"><div class="av ceo">CEO</div><div class="who"><b>Chief Executive</b><p>set the plan, delegate, report to you</p></div><div class="st">working</div></div>
+        <div class="emp ind"><div class="av dept">CMO</div><div class="who"><b>Marketing</b><p>drafted 3 posts + a lead magnet</p></div><div class="st">working</div></div>
+        <div class="emp ind"><div class="av dept">SAL</div><div class="who"><b>Sales</b><p>sourced 40 leads, 12 replies</p></div><div class="st">working</div></div>
+        <div class="emp ind"><div class="av eng">ENG</div><div class="who"><b>Engineer</b><p>shipped the pricing page</p></div><div class="st">review</div></div>
       </div>
+      <div class="pv-foot"><span>overnight: <b>18 tasks done</b></span><span>spend: $6.40 / $50 cap</span></div>
     </div>
-  </div>
-
-  <div class="wrap">
-    <svg class="pulse" viewBox="0 0 1000 42" preserveAspectRatio="none">
-      <path d="M0 21 H360 l18 -16 22 32 16 -26 14 18 H560 l16 -10 18 12 H1000" fill="none" stroke="#36c08a" stroke-width="2"/>
-    </svg>
   </div>
 </header>
 
 <main>
   <section id="why" class="wrap">
     <p class="kicker">Why it's different</p>
-    <h2>A dashboard tells you the number. This tells you the move.</h2>
-    <p class="sec-lede">Reporting is everywhere. Decisions are the scarce thing. Every metric in vitals.run carries the one next action attached to it — so the dashboard isn't a rear-view mirror, it's a to-do list ranked by impact on three outcomes:</p>
+    <h2>You don't need another tool. You need <em>people.</em></h2>
+    <p class="sec-lede">AI tools hand you a draft and stop. Employees own the outcome. vitals.run staffs your company with AI workers who take a job end-to-end — and it's dogfooded: we run vitals.run itself on its own AI employees, in public, with a real human CEO. The whole field hides behind pseudonyms. We don't.</p>
     <div class="cards c3">
-      <div class="card">
-        <div class="tag">Outcome 01</div>
-        <h3>Save time</h3>
-        <p>The constraint is named and the next action is the one that moves it. No dashboards to interpret, no meetings to decide what's already obvious.</p>
+      <div class="card purple">
+        <div class="tag">They do the work</div>
+        <h3>Real employees</h3>
+        <p>Each AI employee owns a real function — marketing, sales, ops, support, engineering — and works around the clock on your business, not just a chat window.</p>
+      </div>
+      <div class="card amber">
+        <div class="tag">You stay in charge</div>
+        <h3>You're the board</h3>
+        <p>Nothing consequential ships without your yes. Every employee has a budget cap and an approval gate. You direct; they execute.</p>
       </div>
       <div class="card">
-        <div class="tag">Outcome 02</div>
-        <h3>Save money</h3>
-        <p>Burn, runway, and expenses are first-class. You see the number that ends the company long before it does — and what to cut.</p>
+        <div class="tag">Priced like a hire</div>
+        <h3>$99/mo per employee</h3>
+        <p>Add the employees you need, drop the ones you don't. Each is a fraction of the salary it replaces — and outcome add-ons let a sales employee earn on the sales it closes.</p>
       </div>
-      <div class="card">
-        <div class="tag">Outcome 03</div>
-        <h3>Grow revenue</h3>
-        <p>One north star, the weekly inputs that drive it, and the trend. What's working compounds; what isn't gets killed.</p>
+    </div>
+  </section>
+
+  <section id="how" class="wrap">
+    <p class="kicker">How it runs</p>
+    <h2>Hire. They work. You approve.</h2>
+    <div class="loop">
+      <div class="step">
+        <div class="n">01 · hire</div>
+        <h4>Add employees</h4>
+        <p>Pick the roles you need. Each AI employee is stood up with a title and a place in your org chart — a real team, in minutes.</p>
+      </div>
+      <div class="step">
+        <div class="n">02 · work</div>
+        <h4>They run 24/7</h4>
+        <p>They pull the tasks, do the work, and hand back finished deliverables — drafts sent, leads sourced, code shipped, tickets closed — on a heartbeat.</p>
+      </div>
+      <div class="step">
+        <div class="n">03 · approve</div>
+        <h4>You're the board</h4>
+        <p>Review what they shipped, approve the sends and spends. Budgets hard-stop at your cap — <b style="color:var(--ink)">spend hits the cap, not the bill.</b></p>
       </div>
     </div>
   </section>
 
   <section class="wrap">
-    <p class="kicker">One OS, every company</p>
-    <h2>Run a portfolio from first principles.</h2>
-    <p class="sec-lede">Start a company or partner on one — it gets a vitals dashboard that lives in its own repo. Same renderer, same shape, so every venture reads the same way. The codebase is the knowledge base; the data file is the state; your AI is the runtime that keeps them honest.</p>
-    <div class="vitals">
-      <div class="vital"><p class="t">North star</p><p>The one output number that means you're winning.</p></div>
-      <div class="vital"><p class="t">Next action</p><p>The single move that closes the gap, per metric.</p></div>
-      <div class="vital"><p class="t">Money</p><p>Income, burn, runway — the survival math.</p></div>
-      <div class="vital"><p class="t">Streak</p><p>Weeks logged in a row. Don't break the chain.</p></div>
-      <div class="vital"><p class="t">Roadmap</p><p>Gated milestones. Check them off to level up.</p></div>
-      <div class="vital"><p class="t">Goals</p><p>The quarter's handful, done or not.</p></div>
-      <div class="vital"><p class="t">Org</p><p>Who owns each function, who hires next.</p></div>
-      <div class="vital"><p class="t">Decisions</p><p>What you decided, why, and what would change it.</p></div>
+    <div class="band">
+      <p class="kicker">Governed, not autonomous</p>
+      <p class="quote">"Spend hits the cap, not the bill."</p>
+      <p>Every AI employee runs under a hard monthly budget. When it hits the cap, the employee pauses — it never keeps charging. No runaway invoices, no bill shock. You always know your exact maximum, and every action worth money, law, or your name waits for your approval. That's why it's safe to let them run.</p>
     </div>
   </section>
 
-  <section id="install" class="wrap">
-    <p class="kicker">Drop it in</p>
-    <h2>One line. No build step. No lock-in.</h2>
-    <p class="sec-lede">It's a library, not a SaaS — vendor it into any repo and you own every byte. Static page, React, or Next, the core is the same.</p>
-    <div class="drops">
-      <div class="drop">
-        <div class="dh">Any project <span>one line</span></div>
-        <pre><code><span class="tok-c"># from inside your repo</span>
-<span class="tok-s">npx</span> github:adamtpang/vitals.run
-
-<span class="tok-c"># then open</span>
-vitals/index.html</code></pre>
+  <section id="team" class="wrap">
+    <p class="kicker">Build your team</p>
+    <h2>Hire the employees you need. <em>$99/mo each.</em></h2>
+    <p class="sec-lede">Add as many as you want — each does its job 24/7, budget-capped, and waits for your approval. Cancel any of them anytime. You're always the board.</p>
+    <div class="team">
+      <div class="ecard">
+        <div class="er"><div class="eav">MKT</div><h3>Marketing</h3></div>
+        <p class="ework">Content, social, SEO, and campaigns — drafted, scheduled, and ready for your yes.</p>
+        <div class="ep">$99<span> /mo</span></div>
+        <a class="btn btn-primary" href="https://buy.stripe.com/bJe28r1AC0OhbIA0m5aMU11">Hire Marketing →</a>
       </div>
-      <div class="drop">
-        <div class="dh">React / Next <span>component</span></div>
-        <pre><code><span class="tok-k">import</span> Vitals <span class="tok-k">from</span> <span class="tok-s">"vitals/react"</span>;
-<span class="tok-k">import</span> <span class="tok-s">"vitals/style.css"</span>;
-<span class="tok-k">import</span> { data } <span class="tok-k">from</span> <span class="tok-s">"./vitals.data"</span>;
-
-&lt;Vitals data={data} /&gt;</code></pre>
+      <div class="ecard">
+        <div class="er"><div class="eav">SAL</div><h3>Sales</h3></div>
+        <p class="ework">Lead sourcing, outreach, and pipeline — filled and worked while you sleep.</p>
+        <div class="ep">$99<span> /mo</span></div>
+        <a class="btn btn-primary" href="https://buy.stripe.com/aFa00j2EGaoRh2U5GpaMU12">Hire Sales →</a>
       </div>
-      <div class="drop">
-        <div class="dh">Vanilla JS <span>core</span></div>
-        <pre><code><span class="tok-k">import</span> Vitals <span class="tok-k">from</span> <span class="tok-s">"vitals"</span>;
-
-el.classList.add(<span class="tok-s">"vitals"</span>);
-el.innerHTML =
-  Vitals.render(data);</code></pre>
+      <div class="ecard">
+        <div class="er"><div class="eav">OPS</div><h3>Operations</h3></div>
+        <p class="ework">Admin, process, and coordination — the busywork off your plate, done right.</p>
+        <div class="ep">$99<span> /mo</span></div>
+        <a class="btn btn-primary" href="https://buy.stripe.com/28E9AT6UW54x7sk2udaMU13">Hire Operations →</a>
+      </div>
+      <div class="ecard">
+        <div class="er"><div class="eav">SUP</div><h3>Support</h3></div>
+        <p class="ework">Customer questions and ticket resolution — answered fast, on brand, all day.</p>
+        <div class="ep">$99<span> /mo</span></div>
+        <a class="btn btn-primary" href="https://buy.stripe.com/00w5kD7Z01Sl2801q9aMU14">Hire Support →</a>
+      </div>
+      <div class="ecard">
+        <div class="er"><div class="eav">ENG</div><h3>Engineering</h3></div>
+        <p class="ework">Ships code, fixes, and features — pulls the ticket and hands back working software.</p>
+        <div class="ep">$99<span> /mo</span></div>
+        <a class="btn btn-primary" href="https://buy.stripe.com/14AeVd0wy40tcME3yhaMU15">Hire Engineering →</a>
+      </div>
+      <div class="ecard">
+        <div class="er"><div class="eav">RES</div><h3>Research</h3></div>
+        <p class="ework">Market, competitor, and data analysis — the answer, sourced and summarized.</p>
+        <div class="ep">$99<span> /mo</span></div>
+        <a class="btn btn-primary" href="https://buy.stripe.com/8x214n3IK40tbIAgl3aMU16">Hire Research →</a>
       </div>
     </div>
-    <p style="margin:18px 2px 0;font-size:13.5px;color:var(--mut)">
-      <span class="mono" style="color:var(--green)">machine-readable</span> — AI agents can start at
-      <a href="llms.txt" class="mono" style="color:var(--amber);text-decoration:none">vitals.run/llms.txt</a>
-      (or <a href="llms-full.txt" class="mono" style="color:var(--amber);text-decoration:none">llms-full.txt</a> for one fetch):
-      install steps, the full schema, and the operating skill.
+    <p class="price-foot">
+      Want to see them work first? <a href="https://cal.com/adamtpang">Start a free 7-day trial</a> · Or have us set the whole team up on your business — <a href="https://cal.com/adamtpang">book a call</a>.
     </p>
-  </section>
-
-  <section id="how" class="wrap">
-    <p class="kicker">The loop</p>
-    <h2>Talk to it. It stays true.</h2>
-    <div class="loop">
-      <div class="step">
-        <div class="n">01</div>
-        <h4>Interview</h4>
-        <p>Open a Claude session in the repo and say <code>interview me</code>. It fills the config from your context files — no blank page.</p>
-      </div>
-      <div class="step">
-        <div class="n">02</div>
-        <h4>Log weekly</h4>
-        <p><code>log this week</code>, <code>set MRR to 12k</code>, <code>check off launch</code>. Claude appends history and updates state from the code.</p>
-      </div>
-      <div class="step">
-        <div class="n">03</div>
-        <h4>Act on the next move</h4>
-        <p>Every metric shows its next action. Do that one thing. Streaks build, the roadmap unlocks, trends chart themselves.</p>
-      </div>
-    </div>
   </section>
 
   <section class="wrap">
     <div class="cta-final">
-      <h2>See your company's vitals.</h2>
-      <p>Open the live demo — vitals.run running its own vital signs on itself — then drop it into your repo in one line.</p>
+      <h2>Stop hiring slow. Start summoning.</h2>
+      <p>Add your first AI employee tonight — running your business, with you as the board. $99/mo, cancel anytime.</p>
       <div class="cta-row" style="justify-content:center">
-        <a class="btn btn-primary" href="dashboard.html">Open the live demo →</a>
-        <a class="btn btn-ghost" href="https://github.com/adamtpang/vitals.run">View source</a>
+        <a class="btn btn-primary" href="#pricing">Hire your first employee →</a>
+        <a class="btn btn-ghost" href="https://cal.com/adamtpang">Get a free diagnosis</a>
       </div>
     </div>
   </section>
@@ -349,34 +317,17 @@ el.innerHTML =
       vitals.run
     </a>
     <span class="sep">·</span>
-    <a href="https://github.com/adamtpang/vitals.run">GitHub</a>
+    <a href="#how">How it works</a>
     <span class="sep">·</span>
-    <a href="dashboard.html">Live demo</a>
+    <a href="#team">The employees</a>
     <span class="sep">·</span>
-    <a href="llms.txt">llms.txt</a>
+    <a href="https://cal.com/adamtpang">Book a call</a>
     <span class="sep">·</span>
-    <span>MIT</span>
-    <span class="sep">·</span>
-    <a href="https://adampang.com">built by Adam Pangelinan</a>
-    <span class="right">measure what matters. do the next thing.</span>
+    <a href="https://adampang.com">built in public by Adam Pangelinan</a>
+    <span class="right">hire AI employees. you're the board.</span>
   </div>
 </footer>
 
-<script>
-  (function () {
-    if (!navigator.clipboard) return;
-    document.querySelectorAll(".copy[data-copy]").forEach(function (btn) {
-      var src = document.getElementById(btn.getAttribute("data-copy"));
-      if (!src) return;
-      btn.addEventListener("click", function () {
-        navigator.clipboard.writeText(src.textContent.trim()).then(function () {
-          var old = btn.textContent; btn.textContent = "copied ✓";
-          setTimeout(function () { btn.textContent = old; }, 1600);
-        });
-      });
-    });
-  })();
-</script>
 <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
