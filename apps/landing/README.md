@@ -21,12 +21,15 @@ founders ask "can I use that," that is the signal to spin it out (the Basecamp m
 
 **1. Any project (static, React, Next, anything), one line:**
 ```
-npx github:adamtpang/vitals.run
+npx github:adamtpang/vitals.run#installer
 ```
 Run it from inside the project (or pass a target path). It vendors the dashboard into
 `vitals/` and drops a starter `vitals.data.js`. Then open `vitals/index.html`, or serve
 the folder. In a Claude Code session you can just say "add vitals to this project" and
 Claude runs that one line, then "interview me" to populate it.
+
+The `installer` branch keeps this small vendorable package at the repository root while
+`master` contains the full vitals.run engine monorepo. Both live in the same GitHub repo.
 
 **2. React or Next project (import as a component):**
 ```jsx
