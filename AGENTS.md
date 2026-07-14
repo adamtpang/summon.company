@@ -1,5 +1,14 @@
 # AGENTS.md
 
+<!-- BEGIN:claude-chat-continuation -->
+Cross-agent continuation: read `CLAUDE.md` and `CODEX_CONTINUE_FROM_CLAUDE.md`
+before changing vitals.run. The engine and landing are consolidated in
+`adamtpang/vitals.run`; `apps/landing/` is the public face and the `installer`
+branch preserves the one-line portable dashboard. VIT-12 Formation is complete;
+VIT-13 Roadmap / Critical Path is next. Keep all Vitals product work additive and
+preserve Paperclip package, environment, API, database, and protocol names.
+<!-- END:claude-chat-continuation -->
+
 Guidance for human and AI contributors working in this repository.
 
 ## 1. Purpose
@@ -179,7 +188,14 @@ A change is done when all are true:
 4. Docs updated when behavior or commands change
 5. PR description follows the [PR template](.github/PULL_REQUEST_TEMPLATE.md) with all sections filled in (including Model Used)
 
-## 11. Fork-Specific: HenkDz/paperclip
+## 12. vitals.run fork
+
+Read `VITALS.md`, `CLAUDE.md`, and `VITALS_FORMATION_ROADMAP.md` before product
+work. The public product repository is `adamtpang/vitals.run`; `upstream` remains
+`paperclipai/paperclip`. Customer-facing behavior belongs in additive Vitals
+routes and components. Do not rename or fork shared Paperclip protocol surfaces.
+
+## 13. Fork-Specific: HenkDz/paperclip
 
 This is a fork of `paperclipai/paperclip` with QoL patches and a **built-in** Hermes adapter story on branch `feat/externalize-hermes-adapter` ([tree](https://github.com/HenkDz/paperclip/tree/feat/externalize-hermes-adapter)).
 

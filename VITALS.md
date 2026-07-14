@@ -25,6 +25,14 @@ pnpm dev
 Serve `apps/landing/` with any static server, or open `apps/landing/index.html` directly.
 Production is deployed from `apps/landing/` to the existing Vercel project `vitals.run`.
 
+## Product routes
+
+- `/:companyPrefix/formation`: eight-department operating formation and current constraint.
+- `/:companyPrefix/org`: underlying Paperclip organizational hierarchy.
+
+The canonical department and company-stage definitions live in
+`VITALS_FORMATION_ROADMAP.md`.
+
 ## Install the portable CEO dashboard
 
 Run this inside any company repository:
