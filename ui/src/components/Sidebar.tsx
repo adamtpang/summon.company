@@ -21,6 +21,7 @@ import {
   Pin,
   MessagesSquare,
   GanttChartSquare,
+  UsersRound,
 } from "lucide-react";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
@@ -268,6 +269,7 @@ export function Sidebar() {
         <SidebarAgents streamlined={streamlined} />
 
         <SidebarSection label="Company" collapsible={{ open: companyOpen, onOpenChange: setCompanyOpen }}>
+          <SidebarNavItem to="/formation" label="Formation" icon={UsersRound} />
           <SidebarNavItem to="/org" label="Org" icon={Network} />
           <SidebarNavItem to="/timeline" label="Timeline" icon={GanttChartSquare} />
           <SidebarNavItem to="/costs" label="Costs" icon={DollarSign} />
