@@ -1,0 +1,34 @@
+/* vitals.css — styles for the Vitals dashboard.
+   Everything is scoped under .vitals so importing this into a host app never
+   touches the host's own body or elements. */
+.vitals {
+  --bg:#0a0b0d; --panel:#121419; --panel2:#0e1014; --line:#23262d;
+  --ink:#e7eaed; --mut:#8a909a; --accent:#e7eaed; --accentSoft:#1a1d23;
+  --green:#36c08a; --amber:#e7b24a; --danger:#d64545;
+  --mono:'IBM Plex Mono',ui-monospace,Menlo,monospace;
+  --disp:'Bodoni Moda',Georgia,serif;
+  background:var(--bg); color:var(--ink);
+  font-family:'Hanken Grotesk',-apple-system,Segoe UI,Roboto,sans-serif;
+  -webkit-font-smoothing:antialiased; min-height:100%;
+}
+.vitals *{box-sizing:border-box}
+.vitals a{color:inherit}
+.vitals .wrap{max-width:1000px;margin:0 auto;padding:24px 20px 64px}
+.vitals .tnum{font-variant-numeric:tabular-nums}
+.vitals .mono{font-family:var(--mono)}
+.vitals .disp{font-family:var(--disp)}
+.vitals .card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px}
+.vitals .row{display:grid;gap:12px}
+@media(min-width:760px){.vitals .c3{grid-template-columns:repeat(3,1fr)}.vitals .c2{grid-template-columns:1fr 1fr}}
+.vitals .h{font-size:12.5px;color:var(--mut);text-transform:uppercase;letter-spacing:.1em;margin:26px 0 12px}
+.vitals .flex{display:flex;align-items:center}
+.vitals .between{justify-content:space-between}
+.vitals .bar{height:8px;border-radius:99px;background:var(--line);overflow:hidden}
+.vitals .barfill{height:100%}
+.vitals .chip{font-size:11px;font-weight:700;padding:3px 9px;border-radius:99px;border:1px solid}
+.vitals .ck{width:18px;height:18px;border-radius:6px;border:1px solid var(--line);display:grid;place-items:center;flex:0 0 auto}
+.vitals .muted{color:var(--mut)}
+.vitals .small{font-size:12px}
+.vitals .kb{display:block;padding:11px 14px;border:1px solid var(--line);border-radius:12px;text-decoration:none;margin-bottom:8px;background:var(--panel2)}
+.vitals .kb:hover{border-color:var(--mut)}
+.vitals .next{color:var(--amber);font-size:12px;margin-top:6px}

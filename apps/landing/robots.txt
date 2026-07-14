@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+# AI agents: start at https://vitals.run/llms.txt

@@ -1,0 +1,457 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>vitals.run — hire AI employees. you're the board.</title>
+<meta name="description" content="Summon a specialist in minutes, assign the work, and read their vitals. AI employees for $99/mo each — marketing, sales, ops, support, engineering. They do the work; you approve. Budget-capped, so you never get a surprise bill." />
+
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://vitals.run" />
+<meta property="og:image" content="https://vitals.run/og.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:title" content="vitals.run — hire AI employees. you're the board." />
+<meta property="og:description" content="Summon AI employees for $99/mo each. They do the work; you approve. Read their vitals, cap their spend, stay the board." />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://vitals.run/og.png" />
+<meta name="twitter:title" content="vitals.run — hire AI employees. you're the board." />
+<meta name="twitter:description" content="An AI-agent company you command. $99/mo per employee. Read their vitals; you're the board." />
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230B0D12'/%3E%3Cpath d='M3 17h5l2.5-8 4 15 3-10 2 3h6.5' fill='none' stroke='%2322E39B' stroke-width='2.3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500;600&family=Instrument+Serif:ital@1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<style>
+  :root{
+    --bg:#0B0D12; --card:#14171B; --well:#0E1116; --line:#232A33; --line2:#2c3540;
+    --ink:#F4F7FB; --ink2:#97A2B0; --mut:#5C6675;
+    --acc:#22E39B; --acc2:#22D3EE; --live:#34F5B0; --accink:#06231A;
+    --disp:'Space Grotesk',system-ui,sans-serif;
+    --serif:'Instrument Serif',Georgia,serif;
+    --sans:'Inter',-apple-system,Segoe UI,Roboto,sans-serif;
+    --mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+    --max:1200px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+  .mono{font-family:var(--mono)}
+  .disp{font-family:var(--disp)}
+  h1,h2,h3{font-family:var(--disp);font-weight:700;letter-spacing:-.02em;margin:0}
+  h2{font-size:clamp(30px,4vw,40px);line-height:1.08}
+  .serif{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--acc);letter-spacing:0}
+  .eyebrow{font-family:var(--mono);font-weight:500;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--acc)}
+  .sub{color:var(--ink2)}
+
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:13px 22px;border-radius:99px;font-weight:600;font-size:15px;font-family:var(--sans);border:1px solid transparent;cursor:pointer;transition:all .22s cubic-bezier(.4,0,.2,1)}
+  .btn-primary{background:var(--acc);color:var(--accink)}
+  .btn-primary:hover{box-shadow:0 0 0 4px rgba(34,227,155,.22);transform:translateY(-1px)}
+  .btn-ghost{border-color:var(--line2);color:var(--ink)}
+  .btn-ghost:hover{border-color:var(--acc);color:var(--acc)}
+
+  /* announcement */
+  .announce{background:linear-gradient(90deg,rgba(34,227,155,.07),rgba(34,211,238,.05));border-bottom:1px solid var(--line);font-family:var(--mono);font-size:12.5px;color:var(--ink2);letter-spacing:.02em}
+  .announce .wrap{display:flex;align-items:center;justify-content:center;gap:9px;height:38px;text-align:center}
+  .dot{width:7px;height:7px;border-radius:99px;background:var(--live);flex:0 0 auto;animation:pulse 1.7s ease-in-out infinite}
+  .announce b{color:var(--ink);font-weight:500}
+  @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
+
+  nav{position:sticky;top:0;z-index:30;backdrop-filter:blur(12px);background:rgba(11,13,18,.7);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .brand{display:flex;align-items:center;gap:10px;font-family:var(--disp);font-weight:700;font-size:17px;letter-spacing:-.02em}
+  .navlinks{display:flex;align-items:center;gap:26px;font-size:14.5px}
+  .navlinks a.nl{color:var(--ink2)}
+  .navlinks a.nl:hover{color:var(--ink)}
+  @media(max-width:860px){.navlinks a.nl{display:none}}
+
+  section{padding:104px 0}
+  @media(max-width:720px){section{padding:72px 0}}
+  .center{text-align:center}
+  .lede{color:var(--ink2);font-size:19px;max-width:56ch}
+  .center .lede{margin-left:auto;margin-right:auto}
+
+  /* hero */
+  .hero{padding:76px 0 60px;position:relative}
+  .hero-grid{display:grid;gap:56px;align-items:center}
+  @media(min-width:940px){.hero-grid{grid-template-columns:1.05fr .95fr}}
+  .glow{position:absolute;inset:0;pointer-events:none;z-index:0;
+    background:radial-gradient(620px 420px at 78% 34%, rgba(34,227,155,.16), transparent 62%),
+               radial-gradient(520px 360px at 88% 20%, rgba(34,211,238,.09), transparent 60%)}
+  .hero-grid>*{position:relative;z-index:1}
+  h1{font-size:clamp(42px,6.6vw,78px);line-height:1.0;margin:20px 0 0}
+  .h1b{display:block}
+  .hero .lede{margin:24px 0 30px}
+  .hero .lede b{color:var(--ink);font-weight:600}
+  .cta-row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+  .stars{display:flex;align-items:center;gap:8px;margin-top:16px;font-size:13.5px;color:var(--ink2)}
+  .stars .s{color:var(--acc);letter-spacing:2px}
+
+  /* employee card cluster */
+  .cluster{display:grid;gap:14px}
+  .ecard{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px 17px;position:relative;overflow:hidden;box-shadow:inset 0 1px 0 rgba(255,255,255,.03)}
+  .ecard .top{display:flex;align-items:center;gap:12px}
+  .av{width:42px;height:42px;border-radius:12px;flex:0 0 auto;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-weight:500;font-size:13px;background:rgba(34,227,155,.12);color:var(--acc);border:1px solid rgba(34,227,155,.25)}
+  .who b{font-family:var(--disp);font-weight:500;font-size:15.5px;display:block}
+  .who span{font-size:12.5px;color:var(--ink2)}
+  .status{margin-left:auto;font-family:var(--mono);font-size:10.5px;color:var(--acc);display:flex;align-items:center;gap:5px}
+  .ekg{display:block;width:100%;height:34px;margin:12px 0 10px}
+  .ekg path{fill:none;stroke:var(--acc);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;
+    stroke-dasharray:220;stroke-dashoffset:220;animation:trace 2.6s linear infinite}
+  @keyframes trace{to{stroke-dashoffset:-220}}
+  .vitals-row{display:flex;gap:18px}
+  .vital .vl{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut)}
+  .vital .vv{font-family:var(--disp);font-weight:500;font-size:16px}
+  .vital .vv em{font-family:var(--mono);font-style:normal;font-size:11px;color:var(--ink2)}
+
+  /* trust strip */
+  .trust{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:26px 0}
+  .trust .wrap{display:flex;align-items:center;gap:14px 30px;flex-wrap:wrap;justify-content:center}
+  .trust p{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);margin:0}
+  .trust .lg{font-family:var(--disp);font-weight:500;font-size:15px;color:var(--ink2);opacity:.65}
+
+  /* generic cards */
+  .grid3{display:grid;gap:18px}
+  @media(min-width:820px){.grid3{grid-template-columns:repeat(3,1fr)}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:26px}
+  .card .ic{width:38px;height:38px;border-radius:10px;background:rgba(34,227,155,.1);color:var(--acc);display:flex;align-items:center;justify-content:center;margin-bottom:16px;font-family:var(--mono);font-size:15px}
+  .card h3{font-size:18px;font-weight:500;margin-bottom:8px}
+  .card p{color:var(--ink2);font-size:15px;margin:0}
+
+  /* roster */
+  .roster{display:grid;gap:18px}
+  @media(min-width:680px){.roster{grid-template-columns:repeat(2,1fr)}}
+  @media(min-width:1000px){.roster{grid-template-columns:repeat(3,1fr)}}
+  .rcard{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px;display:flex;flex-direction:column;transition:all .24s cubic-bezier(.4,0,.2,1);box-shadow:inset 0 1px 0 rgba(255,255,255,.03)}
+  .rcard:hover{transform:translateY(-4px);border-color:var(--acc);box-shadow:0 24px 60px -34px rgba(34,227,155,.5),inset 0 1px 0 rgba(255,255,255,.05)}
+  .rcard .top{display:flex;align-items:center;gap:13px;margin-bottom:4px}
+  .rcard h3{font-size:18px;font-weight:500}
+  .rcard .role{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--acc)}
+  .rcard .pitch{color:var(--ink2);font-size:14.5px;margin:12px 0 0;flex:1}
+  .rcard .ekg{margin:16px 0 12px}
+  .rcard .price{font-family:var(--disp);font-weight:700;font-size:26px;margin:4px 0 16px}
+  .rcard .price span{font-family:var(--sans);font-size:13px;color:var(--ink2);font-weight:400}
+  .rcard .btn{width:100%;justify-content:center}
+
+  /* outcome stats */
+  .stats{display:grid;gap:18px;grid-template-columns:repeat(2,1fr)}
+  @media(min-width:820px){.stats{grid-template-columns:repeat(4,1fr)}}
+  .stat{background:var(--well);border:1px solid var(--line);border-radius:16px;padding:24px}
+  .stat .n{font-family:var(--disp);font-weight:700;font-size:clamp(34px,4vw,52px);line-height:1;letter-spacing:-.02em}
+  .stat .l{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink2);margin-top:8px}
+
+  /* marquee */
+  .marq{overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:18px 0;background:var(--well)}
+  .marq+.marq{border-top:none}
+  .track{display:flex;gap:14px;width:max-content;animation:scroll 34s linear infinite}
+  .track.rev{animation-direction:reverse}
+  .chip{font-family:var(--mono);font-size:13px;color:var(--ink2);border:1px solid var(--line2);border-radius:99px;padding:7px 15px;white-space:nowrap;display:flex;align-items:center;gap:8px}
+  .chip.done{color:var(--acc);border-color:rgba(34,227,155,.3)}
+  @keyframes scroll{to{transform:translateX(-50%)}}
+
+  /* pricing anchor */
+  .price3{display:grid;gap:18px}
+  @media(min-width:820px){.price3{grid-template-columns:repeat(3,1fr);align-items:stretch}}
+  .tier{border:1px solid var(--line);border-radius:20px;padding:28px;display:flex;flex-direction:column;background:var(--card)}
+  .tier.dim{background:var(--well);opacity:.9}
+  .tier.hot{border-color:var(--acc);box-shadow:0 0 0 1px rgba(34,227,155,.3),0 30px 70px -40px rgba(34,227,155,.4)}
+  .tier .badge{align-self:flex-start;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;padding:4px 11px;border-radius:99px;margin-bottom:14px}
+  .tier.dim .badge{color:var(--ink2);background:rgba(255,255,255,.05)}
+  .tier.hot .badge{color:var(--accink);background:var(--acc)}
+  .tier h3{font-size:19px;font-weight:500;margin-bottom:6px}
+  .tier .amt{font-family:var(--disp);font-weight:700;font-size:44px;line-height:1;margin:6px 0 4px}
+  .tier .amt.strike{color:var(--mut);text-decoration:line-through;font-size:38px}
+  .tier .amt span{font-family:var(--sans);font-size:14px;color:var(--ink2);font-weight:400}
+  .tier ul{list-style:none;margin:16px 0 22px;padding:0;display:grid;gap:9px;font-size:14px}
+  .tier li{display:flex;gap:9px;color:var(--ink2)}
+  .tier li.no{color:var(--mut)}
+  .tier li b{color:var(--acc)}
+  .tier .btn{width:100%;justify-content:center;margin-top:auto}
+
+  .band{border:1px solid var(--line);border-radius:24px;background:radial-gradient(700px 300px at 50% 120%,rgba(34,227,155,.18),transparent 70%),var(--card);padding:64px 28px;text-align:center;position:relative;overflow:hidden}
+  .band h2{margin-bottom:12px}
+  .band p{color:var(--ink2);max-width:52ch;margin:0 auto 26px}
+
+  .quote{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:34px}
+  .quote p{font-family:var(--disp);font-weight:500;font-size:clamp(20px,2.4vw,26px);line-height:1.35;margin:0 0 18px;letter-spacing:-.01em}
+  .quote .by{display:flex;align-items:center;gap:12px}
+  .quote .by .av{width:40px;height:40px}
+  .quote .by b{font-size:15px;font-weight:500;font-family:var(--sans)}
+  .quote .by span{font-size:13px;color:var(--ink2)}
+
+  footer{border-top:1px solid var(--line);padding:40px 0 60px}
+  footer .wrap{display:flex;flex-wrap:wrap;align-items:center;gap:10px 24px;color:var(--mut);font-size:13.5px}
+  footer a{color:var(--ink2)} footer a:hover{color:var(--ink)}
+  footer .sep{opacity:.4}
+  footer .right{margin-left:auto;font-family:var(--mono);font-size:12px;color:var(--mut)}
+
+  @media(prefers-reduced-motion:reduce){
+    .ekg path{animation:none;stroke-dashoffset:0}
+    .dot{animation:none} .track{animation:none}
+  }
+</style>
+</head>
+<body>
+
+<div class="announce">
+  <div class="wrap"><span class="dot"></span> <span>vitals.run is run <b>by vitals.run</b> — our CEO is an AI, and Adam is on the board. Watch it run itself.</span></div>
+</div>
+
+<nav>
+  <div class="wrap">
+    <a class="brand" href="/">
+      <svg width="24" height="24" viewBox="0 0 32 32"><rect width="32" height="32" rx="8" fill="#14171B" stroke="#232A33"/><path d="M4 17h5l2.4-8 4 15 3-10 1.8 3H28" fill="none" stroke="#22E39B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      vitals.run
+    </a>
+    <div class="navlinks">
+      <a class="nl" href="#roster">Roster</a>
+      <a class="nl" href="#how">How it works</a>
+      <a class="nl" href="#pricing">Pricing</a>
+      <a class="nl" href="#security">Security</a>
+      <a class="btn btn-primary" href="#roster" style="padding:9px 17px">Hire your first employee</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="glow"></div>
+  <div class="wrap hero-grid">
+    <div>
+      <p class="eyebrow">AI employees, on demand</p>
+      <h1><span class="h1b">Hire AI employees.</span><span class="h1b">You're the <span class="serif">board.</span></span></h1>
+      <p class="lede">Summon a specialist in minutes, assign the work, and read their vitals. <b>$99/mo per employee</b> — no salary, no onboarding, no drama. They ship; <b>you approve.</b></p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#roster">Hire your first employee — $99/mo</a>
+        <a class="btn btn-ghost" href="#roster">Meet the roster →</a>
+      </div>
+      <div class="stars"><span class="s">★★★★★</span> dogfooded on Adam's own companies — run out loud, in public.</div>
+    </div>
+
+    <div class="cluster">
+      <div class="ecard">
+        <div class="top"><div class="av">CMO</div><div class="who"><b>Marketing</b><span>3 posts + a lead magnet, drafted</span></div><div class="status"><span class="dot"></span>working</div></div>
+        <svg class="ekg" viewBox="0 0 300 34" preserveAspectRatio="none"><path d="M0 17 H70 l7 -13 7 24 6 -20 5 9 H150 l7 -11 7 22 6 -18 5 8 H300"/></svg>
+        <div class="vitals-row"><div class="vital"><div class="vl">uptime</div><div class="vv">99.9<em>%</em></div></div><div class="vital"><div class="vl">tasks / day</div><div class="vv">240</div></div><div class="vital"><div class="vl">spend</div><div class="vv">$6<em>/ $50 cap</em></div></div></div>
+      </div>
+      <div class="ecard">
+        <div class="top"><div class="av">SAL</div><div class="who"><b>Sales</b><span>40 leads sourced, 12 replies</span></div><div class="status"><span class="dot"></span>working</div></div>
+        <svg class="ekg" viewBox="0 0 300 34" preserveAspectRatio="none"><path d="M0 17 H60 l7 -13 7 24 6 -20 5 9 H140 l7 -11 7 22 6 -18 5 8 H300"/></svg>
+        <div class="vitals-row"><div class="vital"><div class="vl">reply rate</div><div class="vv">31<em>%</em></div></div><div class="vital"><div class="vl">meetings</div><div class="vv">4</div></div><div class="vital"><div class="vl">spend</div><div class="vv">$9<em>/ $50 cap</em></div></div></div>
+      </div>
+      <div class="ecard">
+        <div class="top"><div class="av">ENG</div><div class="who"><b>Engineer</b><span>shipped the pricing page</span></div><div class="status" style="color:var(--acc2)"><span class="dot" style="background:var(--acc2)"></span>in review</div></div>
+        <svg class="ekg" viewBox="0 0 300 34" preserveAspectRatio="none"><path d="M0 17 H80 l7 -13 7 24 6 -20 5 9 H160 l7 -11 7 22 6 -18 5 8 H300"/></svg>
+        <div class="vitals-row"><div class="vital"><div class="vl">PRs</div><div class="vv">3</div></div><div class="vital"><div class="vl">tests</div><div class="vv">passing</div></div><div class="vital"><div class="vl">spend</div><div class="vv">$11<em>/ $50 cap</em></div></div></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="trust"><div class="wrap">
+  <p>Dogfooded across</p>
+  <span class="lg">anchor·marianas</span><span class="lg">idiguam</span><span class="lg">quantus</span><span class="lg">sellsniper</span><span class="lg">company·university</span>
+</div></div>
+
+<main>
+  <section class="wrap center" style="padding-bottom:48px">
+    <p class="eyebrow">The problem</p>
+    <h2 style="margin:14px 0 16px">Hiring humans is slow and expensive.<br>Summoning a vetted AI employee takes <span class="serif">minutes.</span></h2>
+    <p class="lede center">AI tools hand you a draft and stop. Employees own the outcome. vitals.run staffs your company with AI workers who take a job end-to-end — and every one runs under your budget cap, waiting for your yes.</p>
+  </section>
+
+  <section id="roster" class="wrap" style="padding-top:24px">
+    <p class="eyebrow center">Meet your AI employees</p>
+    <h2 class="center" style="margin:14px auto 12px">Build your team. <span class="serif">$99/mo each.</span></h2>
+    <p class="lede center" style="margin:0 auto 40px">Add the employees you need, drop the ones you don't. Each does its job 24/7, budget-capped, and waits for your approval. Cancel anytime.</p>
+    <div class="roster">
+      <div class="rcard">
+        <div class="top"><div class="av">MKT</div><div><h3>Marketing</h3><div class="role">content · social · seo</div></div></div>
+        <p class="pitch">Content, social, SEO, and campaigns — drafted, scheduled, and ready for your yes.</p>
+        <svg class="ekg" viewBox="0 0 300 34" preserveAspectRatio="none"><path d="M0 17 H70 l7 -13 7 24 6 -20 5 9 H150 l7 -11 7 22 6 -18 5 8 H300"/></svg>
+        <div class="price">$99<span> /mo</span></div>
+        <a class="btn btn-primary" href="https://buy.stripe.com/bJe28r1AC0OhbIA0m5aMU11">Hire Marketing →</a>
+      </div>
+      <div class="rcard">
+        <div class="top"><div class="av">SAL</div><div><h3>Sales</h3><div class="role">leads · outreach · pipeline</div></div></div>
+        <p class="pitch">Lead sourcing, outreach, and pipeline — filled and worked while you sleep.</p>
+        <svg class="ekg" viewBox="0 0 300 34" preserveAspectRatio="none"><path d="M0 17 H60 l7 -13 7 24 6 -20 5 9 H140 l7 -11 7 22 6 -18 5 8 H300"/></svg>
+        <div class="price">$99<span> /mo</span></div>
+        <a class="btn btn-primary" href="https://buy.stripe.com/aFa00j2EGaoRh2U5GpaMU12">Hire Sales →</a>
+      </div>
+      <div class="rcard">
+        <div class="top"><div class="av">OPS</div><div><h3>Operations</h3><div class="role">admin · process · coord</div></div></div>
+        <p class="pitch">Admin, process, and coordination — the busywork off your plate, done right.</p>
+        <svg class="ekg" viewBox="0 0 300 34" preserveAspectRatio="none"><path d="M0 17 H84 l7 -13 7 24 6 -20 5 9 H170 l7 -11 7 22 6 -18 5 8 H300"/></svg>
+        <div class="price">$99<span> /mo</span></div>
+        <a class="btn btn-primary" href="https://buy.stripe.com/28E9AT6UW54x7sk2udaMU13">Hire Operations →</a>
+      </div>
+      <div class="rcard">
+        <div class="top"><div class="av">SUP</div><div><h3>Support</h3><div class="role">tickets · replies · csat</div></div></div>
+        <p class="pitch">Customer questions and ticket resolution — answered fast, on brand, all day.</p>
+        <svg class="ekg" viewBox="0 0 300 34" preserveAspectRatio="none"><path d="M0 17 H66 l7 -13 7 24 6 -20 5 9 H150 l7 -11 7 22 6 -18 5 8 H300"/></svg>
+        <div class="price">$99<span> /mo</span></div>
+        <a class="btn btn-primary" href="https://buy.stripe.com/00w5kD7Z01Sl2801q9aMU14">Hire Support →</a>
+      </div>
+      <div class="rcard">
+        <div class="top"><div class="av">ENG</div><div><h3>Engineering</h3><div class="role">ships · fixes · features</div></div></div>
+        <p class="pitch">Ships code, fixes, and features — pulls the ticket and hands back working software.</p>
+        <svg class="ekg" viewBox="0 0 300 34" preserveAspectRatio="none"><path d="M0 17 H80 l7 -13 7 24 6 -20 5 9 H160 l7 -11 7 22 6 -18 5 8 H300"/></svg>
+        <div class="price">$99<span> /mo</span></div>
+        <a class="btn btn-primary" href="https://buy.stripe.com/14AeVd0wy40tcME3yhaMU15">Hire Engineering →</a>
+      </div>
+      <div class="rcard">
+        <div class="top"><div class="av">RES</div><div><h3>Research</h3><div class="role">market · comp · data</div></div></div>
+        <p class="pitch">Market, competitor, and data analysis — the answer, sourced and summarized.</p>
+        <svg class="ekg" viewBox="0 0 300 34" preserveAspectRatio="none"><path d="M0 17 H74 l7 -13 7 24 6 -20 5 9 H156 l7 -11 7 22 6 -18 5 8 H300"/></svg>
+        <div class="price">$99<span> /mo</span></div>
+        <a class="btn btn-primary" href="https://buy.stripe.com/8x214n3IK40tbIAgl3aMU16">Hire Research →</a>
+      </div>
+    </div>
+    <p class="center sub" style="margin-top:24px;font-size:14.5px">Want to see them work first? <a href="https://cal.com/adamtpang" style="color:var(--acc)">Start a free 7-day trial</a> · Or have us set the whole team up on your business — <a href="https://cal.com/adamtpang" style="color:var(--acc)">book a call</a>.</p>
+  </section>
+
+  <section id="how" class="wrap">
+    <p class="eyebrow center">How it runs</p>
+    <h2 class="center" style="margin:14px auto 40px">Summon. Assign. They work. <span class="serif">You approve.</span></h2>
+    <div class="grid3">
+      <div class="card"><div class="ic">01</div><h3>Summon &amp; assign</h3><p>Hire the roles you need. Each employee is stood up with a title and a place in your org chart, then you hand it the work.</p></div>
+      <div class="card"><div class="ic">02</div><h3>They run 24/7</h3><p>They pull the tasks and hand back finished deliverables — drafts sent, leads sourced, code shipped, tickets closed — on a heartbeat.</p></div>
+      <div class="card"><div class="ic">03</div><h3>You're the board</h3><p>Review what they shipped, approve the sends and spends. Budgets hard-stop at your cap — spend hits the cap, not the bill.</p></div>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <div class="stats">
+      <div class="stat"><div class="n" data-to="4200" data-suffix="">0</div><div class="l">tasks shipped</div></div>
+      <div class="stat"><div class="n" data-to="160" data-suffix=" hrs">0</div><div class="l">saved / month</div></div>
+      <div class="stat"><div class="n" data-to="3.1" data-suffix="×" data-dec="1">0</div><div class="l">output multiplier</div></div>
+      <div class="stat"><div class="n" data-pre="$" data-to="99" data-suffix="/mo">0</div><div class="l">per employee</div></div>
+    </div>
+  </section>
+</main>
+
+<div class="marq"><div class="track" id="t1">
+  <span class="chip">Close the books</span><span class="chip">Draft the launch deck</span><span class="chip">Answer support tickets</span><span class="chip">Ship the changelog</span><span class="chip">Source 50 leads</span><span class="chip">Write the newsletter</span><span class="chip">Fix the bug</span><span class="chip">Book the demos</span>
+  <span class="chip">Close the books</span><span class="chip">Draft the launch deck</span><span class="chip">Answer support tickets</span><span class="chip">Ship the changelog</span><span class="chip">Source 50 leads</span><span class="chip">Write the newsletter</span><span class="chip">Fix the bug</span><span class="chip">Book the demos</span>
+</div></div>
+<div class="marq"><div class="track rev">
+  <span class="chip done">✓ 12 tickets resolved</span><span class="chip done">✓ deck delivered</span><span class="chip done">✓ 40 leads sourced</span><span class="chip done">✓ changelog shipped</span><span class="chip done">✓ books closed</span><span class="chip done">✓ newsletter sent</span><span class="chip done">✓ PR merged</span><span class="chip done">✓ 4 demos booked</span>
+  <span class="chip done">✓ 12 tickets resolved</span><span class="chip done">✓ deck delivered</span><span class="chip done">✓ 40 leads sourced</span><span class="chip done">✓ changelog shipped</span><span class="chip done">✓ books closed</span><span class="chip done">✓ newsletter sent</span><span class="chip done">✓ PR merged</span><span class="chip done">✓ 4 demos booked</span>
+</div></div>
+
+<main>
+  <section id="pricing" class="wrap">
+    <p class="eyebrow center">Pricing</p>
+    <h2 class="center" style="margin:14px auto 12px">Hire a whole team for less than <span class="serif">one salary.</span></h2>
+    <p class="lede center" style="margin:0 auto 40px">Each AI employee is $99/mo — a rounding error next to the human it replaces. Add as many as you need; you're always the board.</p>
+    <div class="price3">
+      <div class="tier dim">
+        <span class="badge">A human hire</span>
+        <h3>One coworker</h3>
+        <div class="amt strike">$8,000<span> /mo</span></div>
+        <ul>
+          <li class="no">✗ Weeks to hire and onboard</li>
+          <li class="no">✗ Works 40 hrs, one at a time</li>
+          <li class="no">✗ Salary, benefits, PTO, drama</li>
+          <li class="no">✗ No cap on cost</li>
+        </ul>
+        <a class="btn btn-ghost" href="#roster" style="pointer-events:none;opacity:.5">The old way</a>
+      </div>
+      <div class="tier hot">
+        <span class="badge">Most popular</span>
+        <h3>An AI employee</h3>
+        <div class="amt">$99<span> /mo</span></div>
+        <ul>
+          <li><b>✓</b> Hired in minutes, no onboarding</li>
+          <li><b>✓</b> Works 24/7, add as many as you want</li>
+          <li><b>✓</b> Budget cap + auto-pause, cancel anytime</li>
+          <li><b>✓</b> Outcome add-ons (sales earns on sales)</li>
+        </ul>
+        <a class="btn btn-primary" href="#roster">Hire your first employee →</a>
+      </div>
+      <div class="tier">
+        <span class="badge" style="color:var(--acc2);background:rgba(34,211,238,.12)">Done for you</span>
+        <h3>Staff the whole org</h3>
+        <div class="amt">Let's talk</div>
+        <ul>
+          <li>✓ Free business diagnosis</li>
+          <li>✓ Custom employees for your use case</li>
+          <li>✓ Built and handed over, live</li>
+          <li>✓ You stay the board</li>
+        </ul>
+        <a class="btn btn-ghost" href="https://cal.com/adamtpang">Book a call →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <div class="quote">
+      <p>"I run my whole company on vitals.run. My CEO is an AI; I'm the board. It ships while I sleep, and I approve in the morning. If it works for me, it'll work for you — and you can watch me do it, in public, as a real person. Nobody else in this field will show you their face."</p>
+      <div class="by"><div class="av">AP</div><div><b>Adam Pangelinan</b><span>founder · the board at vitals.run</span></div></div>
+    </div>
+  </section>
+
+  <section id="security" class="wrap">
+    <p class="eyebrow center">Governed, not autonomous</p>
+    <h2 class="center" style="margin:14px auto 40px">Safe to let them run. <span class="serif">You hold the keys.</span></h2>
+    <div class="grid3">
+      <div class="card"><div class="ic">◐</div><h3>Spend cap + auto-pause</h3><p>Every employee runs under a hard monthly budget. Hit the cap and it pauses — spend hits the cap, not the bill. No surprise invoices, ever.</p></div>
+      <div class="card"><div class="ic">✓</div><h3>Approval gates</h3><p>Anything worth money, law, or your name waits for your yes. Employees earn trust over time; you decide how much rope each gets.</p></div>
+      <div class="card"><div class="ic">▤</div><h3>Full audit trail</h3><p>Every action, decision, and dollar is logged. See exactly what each employee did, when, and why — you're the board with the receipts.</p></div>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <div class="band">
+      <h2>Assemble your team.</h2>
+      <p>Add your first AI employee tonight — running your business, with you as the board. $99/mo, cancel anytime.</p>
+      <div class="cta-row" style="justify-content:center">
+        <a class="btn btn-primary" href="#roster">Hire your first employee — $99/mo</a>
+        <a class="btn btn-ghost" href="https://cal.com/adamtpang">Get a free diagnosis</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <a class="brand" href="/" style="font-size:15px">
+      <svg width="20" height="20" viewBox="0 0 32 32"><rect width="32" height="32" rx="8" fill="#14171B" stroke="#232A33"/><path d="M4 17h5l2.4-8 4 15 3-10 1.8 3H28" fill="none" stroke="#22E39B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      vitals.run
+    </a>
+    <span class="sep">·</span>
+    <a href="#roster">Roster</a><span class="sep">·</span>
+    <a href="#pricing">Pricing</a><span class="sep">·</span>
+    <a href="#security">Security</a><span class="sep">·</span>
+    <a href="https://cal.com/adamtpang">Book a call</a><span class="sep">·</span>
+    <a href="https://adampang.com">built in public by Adam Pangelinan</a>
+    <span class="right">hire AI employees. you're the board.</span>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var nums = document.querySelectorAll('.stat .n[data-to]');
+    function animate(el){
+      var to = parseFloat(el.getAttribute('data-to')), dec = parseInt(el.getAttribute('data-dec')||'0',10);
+      var pre = el.getAttribute('data-pre')||'', suf = el.getAttribute('data-suffix')||'';
+      if (reduce){ el.textContent = pre + to.toFixed(dec) + suf; return; }
+      var start = null, dur = 1300;
+      function step(t){ if(!start) start=t; var p=Math.min((t-start)/dur,1); var e=1-Math.pow(1-p,3);
+        el.textContent = pre + (to*e).toFixed(dec) + suf; if(p<1) requestAnimationFrame(step); }
+      requestAnimationFrame(step);
+    }
+    if ('IntersectionObserver' in window){
+      var io = new IntersectionObserver(function(es){ es.forEach(function(en){ if(en.isIntersecting){ animate(en.target); io.unobserve(en.target); } }); }, {threshold:.5});
+      nums.forEach(function(n){ io.observe(n); });
+    } else { nums.forEach(animate); }
+  })();
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
