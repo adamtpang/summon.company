@@ -29,8 +29,9 @@ It is a GAME in the truest sense: the player is the board, the pieces are real A
 employees, and the score is real revenue. SimCity where the city is a real company.
 
 ## Who it's for (in order)
-1. **Adam (Company Zero)** - dogfood: it builds and runs itself + his portfolio. The
-   proof IS the marketing (the field is pseudonymous; a visible founder-CEO is the moat).
+1. **The founder (Company Zero)** - dogfood: it builds and runs itself + the portfolio.
+   The proof IS the marketing: real runtime logs, run in public. The founder operates as
+   "the board" and stays unnamed on the site (decided 2026-07-15).
 2. **Solo founders / tiny teams** - hire employees at $99/mo each instead of $70K each.
 3. **Any existing business** (idiguam, Guam SMBs, the 8marketcap operator) - paste the
    business, get the diagnosis, staff the fix.
