@@ -27,7 +27,7 @@ export async function fetchAllQuotaWindows(): Promise<ProviderQuotaResult[]> {
     adapters.map((adapter) => withQuotaTimeout(adapter.type, adapter.getQuotaWindows!())),
   );
 
-  return settled.map((result, i) => {
+  const results = settled.map((result, i) => {
     if (result.status === "fulfilled") return result.value;
     const adapterType = adapters[i]!.type;
     return {
@@ -37,6 +37,38 @@ export async function fetchAllQuotaWindows(): Promise<ProviderQuotaResult[]> {
       windows: [],
     };
   });
+  quotaCache = { fetchedAt: Date.now(), results };
+  return results;
+}
+
+const QUOTA_CACHE_TTL_MS = 5 * 60_000;
+
+let quotaCache: { fetchedAt: number; results: ProviderQuotaResult[] } | null = null;
+let quotaRefreshInFlight: Promise<ProviderQuotaResult[]> | null = null;
+
+/**
+ * Non-blocking read of the quota windows for read-hot paths (the attention
+ * feed): returns the cached results immediately — possibly stale, null before
+ * the first fetch completes — and kicks off a background refresh when the
+ * cache is older than the TTL. Provider calls can take up to 20s each, so
+ * callers on request paths must never await a live fetch.
+ */
+export function peekQuotaWindows(): { fetchedAt: number; results: ProviderQuotaResult[] } | null {
+  const isStale = !quotaCache || Date.now() - quotaCache.fetchedAt > QUOTA_CACHE_TTL_MS;
+  if (isStale && !quotaRefreshInFlight) {
+    quotaRefreshInFlight = fetchAllQuotaWindows().finally(() => {
+      quotaRefreshInFlight = null;
+    });
+    // background refresh — never bubble a provider outage into the caller
+    quotaRefreshInFlight.catch(() => {});
+  }
+  return quotaCache;
+}
+
+/** test-only: clears the module-level quota cache */
+export function __resetQuotaWindowCacheForTests() {
+  quotaCache = null;
+  quotaRefreshInFlight = null;
 }
 
 async function withQuotaTimeout(

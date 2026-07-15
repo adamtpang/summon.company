@@ -1781,3 +1781,15 @@ export {
   type CreateEnvironmentCustomImageTerminalSessionToken,
   type EnvironmentCustomImageTerminalSessionToken,
 } from "./validators/environment-custom-images.js";
+
+export {
+  QUOTA_WARN_PERCENT,
+  QUOTA_URGENT_PERCENT,
+  evaluateQuotaAlerts,
+  forecastQuotaExhaustion,
+  parseWindowDurationMs,
+  quotaAlertDedupKey,
+  quotaProviderLabel,
+  type QuotaAlert,
+  type QuotaAlertLevel,
+} from "./quota-alerts.js";
