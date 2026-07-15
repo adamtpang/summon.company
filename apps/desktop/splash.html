@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Vitals — starting</title>
+<style>
+  html, body {
+    margin: 0;
+    height: 100%;
+    background: #0B0D12;
+    color: #E6EDF3;
+    font-family: "JetBrains Mono", "Cascadia Mono", "Consolas", ui-monospace, monospace;
+    overflow: hidden;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  .wrap {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+  }
+  .ekg-box {
+    width: min(520px, 72vw);
+  }
+  .ekg {
+    width: 100%;
+    height: 64px;
+    display: block;
+  }
+  .ekg path {
+    fill: none;
+    stroke: #22E39B;
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 620;
+    stroke-dashoffset: 620;
+    animation: trace 2.4s linear infinite;
+    filter: drop-shadow(0 0 6px rgba(34, 227, 155, 0.55));
+  }
+  @keyframes trace {
+    0%   { stroke-dashoffset: 620; }
+    70%  { stroke-dashoffset: 0; }
+    100% { stroke-dashoffset: -620; }
+  }
+  .label {
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    color: #8B98A5;
+  }
+  .label .brand { color: #22E39B; }
+  .dots::after {
+    content: "";
+    animation: dots 1.6s steps(4, end) infinite;
+  }
+  @keyframes dots {
+    0%   { content: ""; }
+    25%  { content: "."; }
+    50%  { content: ".."; }
+    75%  { content: "..."; }
+    100% { content: ""; }
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="ekg-box">
+      <svg class="ekg" viewBox="0 0 300 34" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 17 H70 l7 -13 7 24 6 -20 5 9 H150 l7 -11 7 22 6 -18 5 8 H300" />
+      </svg>
+    </div>
+    <div class="label"><span class="brand">summon.company</span> — starting your company<span class="dots"></span></div>
+  </div>
+</body>
+</html>

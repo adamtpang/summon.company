@@ -2,8 +2,8 @@
 
 <!-- BEGIN:claude-chat-continuation -->
 Cross-agent continuation: read `CLAUDE.md` and `CODEX_CONTINUE_FROM_CLAUDE.md`
-before changing vitals.run. The engine and landing are consolidated in
-`adamtpang/vitals.run`; `apps/landing/` is the public face and the `installer`
+before changing summon.company. The engine and landing are consolidated in
+`adamtpang/summon.company`; `apps/landing/` is the public face and the `installer`
 branch preserves the one-line portable dashboard. Company Zero completed S1-S4;
 S0 runtime portability is blocked on source/package migration-lineage compatibility.
 The main control plane is on port 3100 and the isolated brand preview is on 3102.
@@ -207,10 +207,10 @@ A change is done when all are true:
 4. Docs updated when behavior or commands change
 5. PR description follows the [PR template](.github/PULL_REQUEST_TEMPLATE.md) with all sections filled in (including Model Used)
 
-## 12. vitals.run fork
+## 12. summon.company fork
 
 Read `VITALS.md`, `CLAUDE.md`, and `VITALS_FORMATION_ROADMAP.md` before product
-work. The public product repository is `adamtpang/vitals.run`; `upstream` remains
+work. The public product repository is `adamtpang/summon.company`; `upstream` remains
 `paperclipai/paperclip`. Customer-facing behavior belongs in additive Vitals
 routes and components. Do not rename or fork shared Paperclip protocol surfaces.
 

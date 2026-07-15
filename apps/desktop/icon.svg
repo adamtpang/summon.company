@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+  <!-- Vitals EKG mark — 8x scale of the landing favicon (apps/landing/index.html) -->
+  <rect width="256" height="256" rx="64" fill="#0B0D12"/>
+  <path d="M24 136 h40 l20 -64 32 120 24 -80 16 24 h52"
+        fill="none" stroke="#22E39B" stroke-width="18.4"
+        stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

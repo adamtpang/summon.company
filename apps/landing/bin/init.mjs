@@ -15,7 +15,7 @@ for (const f of ["vitals.css", "vitals.core.js", "SKILL.md", "schema.md"]) {
   copyFileSync(join(lib, f), join(dest, f));
 }
 // The dashboard shell ships as index.html inside the vendored folder
-// (the repo's own index.html is the vitals.run landing page).
+// (the repo's own index.html is the summon.company landing page).
 copyFileSync(join(lib, "dashboard.html"), join(dest, "index.html"));
 
 const dataDest = join(dest, "vitals.data.js");

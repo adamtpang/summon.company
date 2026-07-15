@@ -43,7 +43,7 @@ Ask a few at a time, conversationally. Use answers to fill `vitals.data.js` and 
 
 ## Porting to any company
 This is a vendored library. Copy the `vitals/` folder into any repo (or run
-`npx github:adamtpang/vitals.run#installer`), then "interview me" to populate it. One renderer,
+`npx github:adamtpang/summon.company#installer`), then "interview me" to populate it. One renderer,
 many companies, each with its own data file.
 
 ## Principle

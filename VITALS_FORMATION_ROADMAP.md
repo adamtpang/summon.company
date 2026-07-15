@@ -1,4 +1,4 @@
-# vitals.run formation and roadmap
+# summon.company formation and roadmap
 
 Canonical product specification for VIT-12 and VIT-13.
 
@@ -49,7 +49,7 @@ department ownership.
   steps first`.
 - Incorporation, banking, external outreach, and similarly high-risk actions require
   explicit board approval.
-- vitals.run runs this roadmap on itself so product progress is visible dogfood.
+- summon.company runs this roadmap on itself so product progress is visible dogfood.
 
 ## Implementation boundary
 

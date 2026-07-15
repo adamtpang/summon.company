@@ -1,4 +1,4 @@
-# Vitals (vitals.run)
+# Vitals (summon.company)
 
 > A portable company operating dashboard: one config file per company, one zero-dependency renderer, and your AI coding agent as the runtime that keeps it in sync with the codebase.
 
@@ -7,12 +7,12 @@ Vitals gives any repo a founder-fillable "company OS." The codebase is the knowl
 It is for founders running one or many projects who want an operating view that lives next to the code, not in a separate SaaS. It installs in one line, has no build step, and works as a static page, a React component, or a vanilla import. It is honest about its stage: an internal tool, dogfooded on real companies, not a polished product yet.
 
 ## Key links
-- [Home](https://vitals.run/): what Vitals is, the install line, and how the AI operating loop works.
-- [Live demo](https://vitals.run/dashboard.html): vitals.run running its own vitals.
-- [SKILL.md](https://vitals.run/SKILL.md): how an AI agent operates the dashboard, the founder interview, and the commands.
-- [schema.md](https://vitals.run/schema.md): every field of the config object.
-- [Starter config](https://vitals.run/vitals.data.example.js): the template you copy and fill.
-- [llms-full.txt](https://vitals.run/llms-full.txt): the skill, schema, and starter config inlined in one fetch.
+- [Home](https://summon.company/): what Vitals is, the install line, and how the AI operating loop works.
+- [Live demo](https://summon.company/dashboard.html): summon.company running its own vitals.
+- [SKILL.md](https://summon.company/SKILL.md): how an AI agent operates the dashboard, the founder interview, and the commands.
+- [schema.md](https://summon.company/schema.md): every field of the config object.
+- [Starter config](https://summon.company/vitals.data.example.js): the template you copy and fill.
+- [llms-full.txt](https://summon.company/llms-full.txt): the skill, schema, and starter config inlined in one fetch.
 
 ## About
 - Part of adam.inc, the internet portfolio of Adam Pangelinan (Anchor Marianas LLC).

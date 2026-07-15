@@ -1,0 +1,21 @@
+{
+  "name": "vitals-desktop",
+  "productName": "Vitals",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Vitals desktop app: chromeless window + tray that attaches to (or starts) the local summon.company company OS server on 127.0.0.1:3100.",
+  "main": "main.js",
+  "author": "Adam Pangelinan",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "build-icon": "node build-icon.js",
+    "dist": "electron-builder --win nsis"
+  },
+  "devDependencies": {
+    "electron": "^33.2.0",
+    "electron-builder": "^26.0.12",
+    "png-to-ico": "^2.1.8",
+    "sharp": "^0.33.5"
+  }
+}

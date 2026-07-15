@@ -1,0 +1,27 @@
+appId: run.vitals.desktop
+productName: Vitals
+
+directories:
+  output: dist
+
+files:
+  - main.js
+  - splash.html
+  - icon.ico
+  - package.json
+
+win:
+  target: nsis
+  icon: icon.ico
+
+nsis:
+  oneClick: false
+  perMachine: false
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: true
+
+# Phase 2: bundle the self-contained server payload (node + server + embedded
+# postgres) so the installer needs no globally-installed paperclipai CLI.
+# extraResources:
+#   - from: ../../payload
+#     to: payload

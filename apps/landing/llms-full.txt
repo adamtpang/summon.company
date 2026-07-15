@@ -1,4 +1,4 @@
-# vitals.run
+# summon.company
 
 > Vitals is a portable company operating dashboard (a "company OS"): one JSON-style
 > config file per company, one zero-dependency renderer, and an AI coding agent as the
@@ -14,20 +14,20 @@ company OS); the AI agent reads both and recommends the next moves from first pr
 
 To give any repo a Vitals dashboard, run this from inside the repo:
 
-    npx github:adamtpang/vitals.run#installer
+    npx github:adamtpang/summon.company#installer
 
 This vendors the dashboard into `vitals/` (renderer, styles, schema, skill, and a starter
-`vitals.data.js`). Then follow https://vitals.run/SKILL.md: run the founder interview to
+`vitals.data.js`). Then follow https://summon.company/SKILL.md: run the founder interview to
 populate `vitals/vitals.data.js` from the repo's context files, and remind the user to
 open `vitals/index.html`.
 
 If `npx` is unavailable, fetch the files directly and write them into a `vitals/` folder:
 
-- https://vitals.run/vitals.core.js (renderer, UMD)
-- https://vitals.run/vitals.css (styles, scoped under `.vitals`)
-- https://vitals.run/dashboard.html (save as `vitals/index.html`)
-- https://vitals.run/vitals.data.example.js (save as `vitals/vitals.data.js`, then populate)
-- https://vitals.run/schema.md and https://vitals.run/SKILL.md (reference)
+- https://summon.company/vitals.core.js (renderer, UMD)
+- https://summon.company/vitals.css (styles, scoped under `.vitals`)
+- https://summon.company/dashboard.html (save as `vitals/index.html`)
+- https://summon.company/vitals.data.example.js (save as `vitals/vitals.data.js`, then populate)
+- https://summon.company/schema.md and https://summon.company/SKILL.md (reference)
 
 ## Operating loop (after install)
 
@@ -39,12 +39,12 @@ refreshes `vitals/index.html`.
 
 ## Docs
 
-- [SKILL.md](https://vitals.run/SKILL.md): how an AI agent operates the dashboard — commands, the founder interview, the principle.
-- [schema.md](https://vitals.run/schema.md): every field of the `window.VITALS` config object.
-- [vitals.data.example.js](https://vitals.run/vitals.data.example.js): the starter config template.
-- [llms-full.txt](https://vitals.run/llms-full.txt): all of the above inlined in one fetch.
-- [Live demo](https://vitals.run/dashboard.html): vitals.run running its own vitals.
-- [GitHub](https://github.com/adamtpang/vitals.run): source (MIT).
+- [SKILL.md](https://summon.company/SKILL.md): how an AI agent operates the dashboard — commands, the founder interview, the principle.
+- [schema.md](https://summon.company/schema.md): every field of the `window.VITALS` config object.
+- [vitals.data.example.js](https://summon.company/vitals.data.example.js): the starter config template.
+- [llms-full.txt](https://summon.company/llms-full.txt): all of the above inlined in one fetch.
+- [Live demo](https://summon.company/dashboard.html): summon.company running its own vitals.
+- [GitHub](https://github.com/adamtpang/summon.company): source (MIT).
 
 ---
 
@@ -95,7 +95,7 @@ Ask a few at a time, conversationally. Use answers to fill `vitals.data.js` and 
 
 ## Porting to any company
 This is a vendored library. Copy the `vitals/` folder into any repo (or run
-`npx github:adamtpang/vitals.run#installer`), then "interview me" to populate it. One renderer,
+`npx github:adamtpang/summon.company#installer`), then "interview me" to populate it. One renderer,
 many companies, each with its own data file.
 
 ## Principle

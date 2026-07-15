@@ -1,9 +1,9 @@
-// vitals.data.js — the live demo dataset for vitals.run.
-// This is vitals.run running its own vitals on itself. It powers index.html and /dashboard.html.
-// Want your own? `npx github:adamtpang/vitals.run#installer`, then ask Claude "interview me".
+// vitals.data.js — the live demo dataset for summon.company.
+// This is summon.company running its own vitals on itself. It powers index.html and /dashboard.html.
+// Want your own? `npx github:adamtpang/summon.company#installer`, then ask Claude "interview me".
 
 window.VITALS = {
-  company: "vitals.run",
+  company: "summon.company",
   tagline: "The operating dashboard for founders.",
   mission: "Give every founder one screen that tells the truth about their company.",
   problem:
@@ -41,7 +41,7 @@ window.VITALS = {
   ],
 
   goals: [
-    { text: "Landing page live on vitals.run", done: true },
+    { text: "Landing page live on summon.company", done: true },
     { text: "10 founders logging weekly", done: true },
     { text: "50 weekly active founders", done: false },
     { text: "First founder asks 'can I pay for this'", done: false },
@@ -78,7 +78,7 @@ window.VITALS = {
   ],
 
   decisions: [
-    { date: "2026-06-16", decision: "Renamed Company OS to vitals.run", why: "\"The vital signs of your company\" is the one-line pitch; the .run domain says it's a living dashboard, not a doc.", revisit: "If the name tests worse than 'Company OS' with real founders." },
+    { date: "2026-06-16", decision: "Renamed Company OS to summon.company", why: "\"The vital signs of your company\" is the one-line pitch; the .run domain says it's a living dashboard, not a doc.", revisit: "If the name tests worse than 'Company OS' with real founders." },
     { date: "2026-06-09", decision: "Stay zero-dependency and file-based", why: "Founders should own their data and drop it into any repo with no build step. Claude edits a plain JS file.", revisit: "If cross-device sync becomes the #1 request." },
   ],
 };

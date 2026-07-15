@@ -1,10 +1,10 @@
-# vitals.run cross-agent handoff
+# summon.company cross-agent handoff
 
 Last updated: 2026-07-14 by Codex.
 
 ## Product and doctrine
 
-vitals.run is a provider-neutral control plane for AI-agent companies. It diagnoses a
+summon.company is a provider-neutral control plane for AI-agent companies. It diagnoses a
 company constraint, assigns one accountable employee, executes through a Claude, Codex,
 Cognition, Cursor, OpenClaw, or future adapter, verifies business impact, and repeats.
 The human is the board. Vitals is Company Zero and dogfoods the loop on itself.
@@ -22,7 +22,7 @@ product work.
 
 ## Repository and fork
 
-- GitHub: `adamtpang/vitals.run`
+- GitHub: `adamtpang/summon.company`
 - `origin`: the Vitals fork
 - `upstream`: `paperclipai/paperclip`
 - Engine: repository root

@@ -21,4 +21,4 @@ The unmerged brand worktree is
 
 Do not split the landing and engine back into sibling repositories. The landing
 lives at `apps/landing/`, and the portable installer remains on the `installer`
-branch of `adamtpang/vitals.run`.
+branch of `adamtpang/summon.company`.
