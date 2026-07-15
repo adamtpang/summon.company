@@ -1,320 +1,356 @@
-# SUMMON - DESIGN_SYSTEM.md
+# SUMMON DESIGN_SYSTEM.md v2.0
+## summon.company: hire AI employees, you're the board
 
-**summon.company - "Hire AI employees. You're the board."**
-Version 1.0 · Dark-primary · Synthesized 2026-07-15
-
----
-
-## 0. Philosophy - Dorsey Minimalism
-
-> "Limit the details. Perfect every one."
-
-Summon's design system has a small, closed vocabulary. Every token below is the *only* legal value for its job. If a design decision isn't answerable from this document, the answer is "use the existing token" - never "invent a new value."
-
-The five laws:
-
-1. **One accent, rationed.** Emerald `#22E39B` (flowing into cyan `#22D3EE`) appears only where something is *alive*: the EKG line, primary CTAs, focus rings, live-status moments. Everything else is monochrome ink on near-black.
-2. **Depth is light, not gray.** Surfaces, borders, and highlights are white at low alpha over the `#0B0D12` base - depth reads as light hitting glass, never as stacked gray rectangles.
-3. **Tightness is luxury.** One weight step above normal, tracking that tightens as type grows, line-heights that crush toward 1.0 at display sizes. Premium comes from restraint, not boldness.
-4. **Motion is physics.** Interactive elements brighten like lit objects and compress like real buttons. One easing family. The only expressive animation is the EKG draw - our heartbeat, used sparingly so it stays sacred.
-5. **Mono means measured.** JetBrains Mono marks anything the machine says: metrics, eyebrows, statuses, table numerals. The sans/mono interplay is our engineering-credibility signal.
+**Status: canonical. Light mode is the source of truth. Dark is derived.**
+**Supersedes v1 (dark-primary). The Dorsey doctrine and the five laws carry over, re-derived for light.**
 
 ---
 
-## 1. Color Tokens
+## 0. Philosophy
 
-Dark is primary and canonical. Light theme is optional and derived (see 1.6).
+SUMMON sells trust in something new: AI employees reporting to a human board. New things earn trust by looking calm, expensive, and inevitable. v1 said this with darkness. v2 says it with light: a boardroom at 9am, not a server room at midnight.
 
-### 1.1 Background layers (solid)
+**The Dorsey doctrine (unchanged):**
+1. **Closed vocabulary.** Every color, size, radius, ease, and shadow used anywhere in the product exists in this file. If a value is not here, it does not ship. No one-off hexes, no "just this once" pixel values.
+2. **Limit the details.** Few tokens, few components, few moves. The system is small enough to hold in one head.
+3. **Perfect every one.** Because there are few details, each one gets obsessive attention: the pulse timing, the exact border alpha, the tracking on a label.
 
-| Token | Value | Use |
+**The Five Laws, re-derived for light:**
+
+- **LAW 1: LIGHT IS THE CANVAS.** The page is never pure white and never gray. Every surface carries a whisper of blue: the canvas is #F7FAFF, neutrals are alpha tints of the deep navy, borders are alpha tints of the ink. Pure #FFFFFF is reserved for elevated cards and inputs, so hierarchy comes from surface color before it comes from shadow. (Structure learned from Wise's brand-tinted neutrals and Mercury's tinted page backgrounds.)
+- **LAW 2: BLUE IS THE PULSE.** One accent family, one deep ink of the same hue. Summon Blue #0B5FFF is the only saturated color on screen outside of sentiment states. Every interactive color ships as a base/hover/active triad. If blue is everywhere it is nowhere: accent coverage stays under roughly 10% of any viewport.
+- **LAW 3: DEPTH WITHOUT DARKNESS.** The light UI is nearly shadowless. Depth comes from surface stepping (tinted canvas to white card), 1px alpha borders, and tinted fills. Real shadows are blue-keyed, never black, and appear only on floating objects: popovers, modals, and at most one hero object per page.
+- **LAW 4: THE HEARTBEAT IS SACRED.** The EKG trace is the signature. It is drawn in Summon Blue on light, it beats at one rhythm (see Motion), and it appears at most once per viewport. It is a sign of life, not a decoration: it marks where an AI employee is working.
+- **LAW 5: EVERY DETAIL IS A DECISION.** Nothing is default. If a property is unset, that was chosen. If two elements differ, the difference means something.
+
+---
+
+## 1. Color
+
+### 1.1 Architecture (three layers, borrowed from Neptune)
+
+Primitives (raw hexes) feed semantic roles (what a color means) which feed components. Components only ever reference semantic tokens. Themes (light canonical, dark derived, deep-navy section) re-point semantic tokens; components never change.
+
+### 1.2 Primitives: the Summon Blue family
+
+| Token | Hex | Role hint |
 |---|---|---|
-| `--bg-void` | `#07090D` | Marketing hero stage, deepest layer |
-| `--bg-base` | `#0B0D12` | Page background (brand anchor) |
-| `--bg-raise-1` | `#10131A` | Panels, first elevation |
-| `--bg-raise-2` | `#151922` | Nested panels, popovers |
-| `--bg-raise-3` | `#1A1F2A` | Highest solid elevation (rare) |
+| blue-050 | #EEF5FF | palest tint, quiet accent fills |
+| blue-100 | #DCEBFF | wash stop, accent borders |
+| blue-200 | #B9D6FF | wash stop |
+| blue-300 | #8AB9FF | gradient mid-stop only |
+| blue-400 | #5395FF | gradient mid-stop, dark-mode accent hover |
+| blue-500 | #2B78FF | CTA gradient top, dark-mode accent |
+| blue-600 | #0B5FFF | **PRIMARY. The Summon Blue.** |
+| blue-700 | #084DDB | hover |
+| blue-800 | #0640B4 | active |
+| blue-900 | #093180 | deep accents on tints |
+| navy-950 | #071F4D | **the deep ink: section flips, gradient anchor, shadow key** |
+| ink | #0C1428 | text primary, a blue-black |
 
-Each layer is ~+4 lightness on the same cool blue-green hue. Never pure `#000`.
+The chord is Wise's structure with our hue: one electric fill (blue-600) plus one near-black of the same family (navy-950). Everything neutral is an alpha tint of one of these two.
 
-### 1.2 Surface & border alphas (white-alpha ladder)
+### 1.3 Semantic: light (canonical)
 
-Translucent surfaces work on *any* background layer - prefer them over solid raises.
+**Surfaces**
+- `--bg-canvas: #F7FAFF` (page background, never pure white)
+- `--bg-elevated: #FFFFFF` (cards, inputs, popovers)
+- `--bg-neutral: rgba(7,31,77,0.06)` hover `0.10` active `0.15` (all "gray" fills are navy tints)
+- `--bg-accent-quiet: #EEF5FF` (selected states, info chips)
+- `--bg-section-tint: #EEF5FF` (alternating marketing sections)
+- `--bg-section-deep: #071F4D` (the one dark section per page, tokens remap, see 1.6)
 
-| Token | Value | Use |
-|---|---|---|
-| `--surface-1` | `rgba(255,255,255,0.03)` | Card fill, subtle wells |
-| `--surface-2` | `rgba(255,255,255,0.06)` | Hover fill, chips |
-| `--surface-3` | `rgba(255,255,255,0.10)` | Active fill, strong chips |
-| `--border-1` | `rgba(255,255,255,0.08)` | Default hairline |
-| `--border-2` | `rgba(255,255,255,0.13)` | Hover / emphasized hairline |
-| `--border-3` | `rgba(255,255,255,0.20)` | Strong border (selected) |
+**Text ladder**
+- `--text-primary: #0C1428`
+- `--text-secondary: #46506B`
+- `--text-tertiary: #6B7590`
+- `--text-disabled: rgba(12,20,40,0.35)`
+- `--text-on-accent: #FFFFFF`
+- `--text-accent: #084DDB` (links: 700, not 600, for AA on tinted canvas)
 
-### 1.3 Text hierarchy (ink ladder)
+**Borders (always alpha, never flat hex)**
+- `--border-neutral: rgba(12,20,40,0.12)`
+- `--border-strong: rgba(12,20,40,0.22)`
+- `--border-accent: rgba(11,95,255,0.35)` (focused inputs)
+- `--border-focus: #0B5FFF` (2px ring, offset 2px)
 
-One ink, four alpha stops - guarantees harmony on any surface. Base ink is a faintly emerald-tinted white.
+**Interactive triads (base / hover / active)**
+- Primary action: #0B5FFF / #084DDB / #0640B4
+- Quiet action: #EEF5FF / #DCEBFF / #B9D6FF (ink stays blue-800)
+- Neutral action: rgba(7,31,77,0.06) / 0.10 / 0.15
 
-| Token | Value | Use |
-|---|---|---|
-| `--text-1` | `#EDF2EF` | Headings, primary copy (never pure `#FFF`) |
-| `--text-2` | `rgba(237,242,239,0.72)` | Body copy, descriptions |
-| `--text-3` | `rgba(237,242,239,0.48)` | Captions, meta, placeholders |
-| `--text-4` | `rgba(237,242,239,0.32)` | Disabled, ghost labels |
+**Sentiment (dark content on pale tint, Wise's pairing structure)**
+- Positive: content #0A5C38 on #E2F6EB
+- Negative: content #C8232E on #FDEBEC
+- Warning: content #6B4E0A on #FFF4D6
+- Info: content #084DDB on #EEF5FF
 
-### 1.4 Accent - the living color
+Sentiment colors appear only in status UI. Never decorative.
 
-| Token | Value | Use |
-|---|---|---|
-| `--accent` | `#22E39B` | The one accent. CTAs, links, live states, EKG stroke |
-| `--accent-2` | `#22D3EE` | Gradient terminus only - never used alone |
-| `--accent-grad` | `linear-gradient(104deg, #22E39B, #22D3EE)` | Primary button, EKG stroke, ≤1 gradient element per viewport |
-| `--accent-ink` | `#052A1D` | Text/icons sitting ON emerald fills |
-| `--accent-tint` | `rgba(34,227,155,0.10)` | Accent-tinted wells, selected rows |
-| `--accent-border` | `rgba(34,227,155,0.35)` | Accent hairline (live cards, focus adjuncts) |
-| `--accent-glow` | `0 0 24px rgba(34,227,155,0.25)` | RESERVED: the EKG pulse and live-status dots only |
+### 1.4 The 10% rule
+Saturated blue (500 through 800) may cover at most ~10% of any viewport: primary CTA, links, the EKG trace, one selected state. The horizon-glow gradient in the closing section is the single sanctioned exception.
 
-Hover states on accent elements use `filter: brightness(1.12)` - never a second green hex.
+### 1.5 Shadows (blue-keyed, scarce)
+Shadow color is always navy-950, never black. Ladder:
+- `--shadow-xs: 0 1px 3px rgba(7,31,77,0.07)` (inputs on focus-within only)
+- `--shadow-sm: 0 2px 8px rgba(7,31,77,0.08), 0 1px 3px rgba(7,31,77,0.05)` (dropdowns)
+- `--shadow-md: 0 6px 20px rgba(7,31,77,0.10), 0 2px 6px rgba(7,31,77,0.05)` (popovers)
+- `--shadow-lg: 0 16px 40px rgba(7,31,77,0.12), 0 6px 16px rgba(7,31,77,0.06)` (modals)
+- `--shadow-hero: 0 24px 80px rgba(7,31,77,0.16), 0 8px 32px rgba(7,31,77,0.08)` (ONE floating hero object per page, maximum)
 
-### 1.5 Semantic
+Cards at rest have NO shadow: border plus white-on-tinted-canvas does the work. Scarcity is what makes the hero shadow feel premium.
 
-| Token | Value |
-|---|---|
-| `--ok` | `#22E39B` (success IS the brand - one green) |
-| `--warn` | `#F5B94B` |
-| `--danger` | `#F26D6D` |
-| `--info` | `#22D3EE` |
-
-Each pairs with a 10%-alpha tint of itself for fills.
-
-### 1.6 Optional light theme (derived, not designed twice)
-
-Invert the ladders: base `#F7F9F8` (emerald-tinted off-white), ink `#0B0D12` at alpha stops `e6/b3/73/4d`, borders `rgba(11,13,18,0.10)`, surfaces `rgba(11,13,18,0.04)`. Accent stays `#22E39B` with `--accent-ink` on fills. Light theme is a re-pointed token set, never per-component overrides.
+### 1.6 Section theme flips
+Marketing pages drift through three atmospheres, in this order of frequency: canvas (#F7FAFF), tint (#EEF5FF), deep (#071F4D). The deep section remaps the full token set (text flips to #EEF2FA, borders to rgba(255,255,255,0.16), accent brightens to #5395FF) so any component drops in unchanged. Maximum one deep section per page. This is Wise's color-block move and Mercury's theme-class move, done in one hue family.
 
 ---
 
 ## 2. Typography
 
-### 2.1 Families & roles
+Three faces, fixed jobs. Instrument Serif italic is retired in v2: it fought the light aesthetic and the Dorsey budget (see rejections).
 
-| Token | Stack | Role |
+| Face | Job | Never |
 |---|---|---|
-| `--font-display` | `"Space Grotesk", "Inter", sans-serif` | All headings, buttons, nav |
-| `--font-serif` | `"Instrument Serif", Georgia, serif` | *Italic accent only* - one emphasized word/phrase inside a display heading, always `font-style: italic` |
-| `--font-body` | `"Inter", -apple-system, sans-serif` | Body, UI copy. `font-feature-settings: "cv01","ss03"` |
-| `--font-mono` | `"JetBrains Mono", ui-monospace, monospace` | Eyebrows, metrics, statuses, table numerals, code |
+| **Space Grotesk** | Display and headings, 600/700 | body copy, UI labels |
+| **Inter** | Body, UI, buttons, forms, 400/500/600 | weight 700+ ("bold" body is 600) |
+| **JetBrains Mono** | Numbers, metrics, agent IDs, EKG readouts, code, 400/500 | prose |
 
-### 2.2 The scale (exact sizes / weights / tracking)
+`font-synthesis: none` globally. `text-wrap: balance` on all headings.
 
-Rule: **tracking tightens as size grows; display line-height crushes toward 1.0.** Space Grotesk headings run weight **500** (medium - never 700; hierarchy from size, not heaviness).
+**Scale (rem, fluid where marked):**
+- `display-1`: clamp(2.75rem, 2rem + 3.5vw, 4.5rem), Space Grotesk 700, lh 1.0, ls -0.03em
+- `display-2`: clamp(2rem, 1.6rem + 2vw, 3rem), Space Grotesk 700, lh 1.05, ls -0.025em
+- `title-section`: 1.75rem, Space Grotesk 600, lh 1.15, ls -0.02em
+- `title-card`: 1.25rem, Space Grotesk 600, lh 1.2, ls -0.015em
+- `body-lg`: 1.125rem, Inter 400, lh 1.55, ls -0.011em
+- `body`: 1rem, Inter 400, lh 1.55, ls -0.006em
+- `body-sm`: 0.875rem, Inter 400, lh 1.5, ls -0.003em
+- `label`: 0.8125rem, Inter 600, lh 1.2, ls +0.01em
+- `overline`: 0.75rem, JetBrains Mono 500, lh 1.2, ls +0.08em, uppercase (section kickers, agent status)
+- `metric`: clamp(1.75rem, 1.4rem + 1.5vw, 2.5rem), JetBrains Mono 500, lh 1.1, tabular-nums
 
-| Token | Size / Line-height | Weight | Tracking | Use |
-|---|---|---|---|---|
-| `display-1` | `4.5rem / 1.02` | 500 | `-0.035em` | Hero H1 (desktop) |
-| `display-2` | `3.5rem / 1.05` | 500 | `-0.03em` | Hero @1024px, section megaheads |
-| `display-3` | `2.75rem / 1.08` | 500 | `-0.025em` | Section H2 |
-| `heading-1` | `2rem / 1.15` | 500 | `-0.02em` | H3, card group titles |
-| `heading-2` | `1.5rem / 1.25` | 500 | `-0.015em` | H4, feature titles |
-| `heading-3` | `1.25rem / 1.3` | 500 | `-0.01em` | H5, card titles |
-| `body-lg` | `1.125rem / 1.6` | 400 | `-0.011em` | Lede paragraphs |
-| `body` | `0.9375rem / 1.6` | 400 | `-0.011em` | Default body (15px) |
-| `body-sm` | `0.8125rem / 1.5` | 400 | `-0.008em` | Meta, captions |
-| `label` | `0.875rem / 1.2` | 500 | `0` | Buttons, form labels |
-| `eyebrow` | `0.75rem / 1.4` | 500 (mono) | `+0.08em`, UPPERCASE | Mono section eyebrows |
-| `metric` | `2.5rem / 1.0` | 500 (mono) | `-0.02em` | Dashboard numerals, stats |
-| `micro` | `0.6875rem / 1.4` | 400 (mono) | `+0.04em` | Table headers, timestamps |
-
-Responsive: hero uses `display-1` → `display-2` @1024px → `2.375rem` @640px. Fluid helper: `clamp(2.375rem, 1.5rem + 4.2vw, 4.5rem)`.
-
-**Serif accent rule:** at most ONE Instrument Serif italic phrase per heading, per viewport. It renders at `1.04em` of the parent size (serif optical compensation), same weight 400.
-
-**Section pattern:** mono eyebrow (emerald) → display head (with optional serif italic word) → `--text-2` description capped at `38ch`.
-
-### 2.3 Body copy limits
-
-Prose max-width `640px` / `65ch`. Descriptions `38ch`. Never justify. Numerals in tables and metrics are always mono with `font-variant-numeric: tabular-nums`.
+Tracking ladder: more negative as display size grows (Wise), slightly positive on small labels (Mercury). Display type is huge, tight, and confident against generous whitespace; body stays quiet.
 
 ---
 
-## 3. Spacing & Layout
+## 3. Spacing, layout, radii, borders
 
-**Base unit: 4px.** All spacing is a multiple; nothing is eyeballed.
+**Spacing: strict 8-grid with 4px fine grain.**
+Scale (px): 4, 8, 12, 16, 24, 32, 40, 48, 64, 80, 96, 128, 160.
+Sections breathe at 80 to 128. Components at 16 to 32. Page margin 32/24/16 (desktop/tablet/mobile). Content max-width 1200px, 12-col grid, 24px gutter.
 
-| Token | Value |
-|---|---|
-| `--space-1..4` | 4 / 8 / 12 / 16px |
-| `--space-5..8` | 24 / 32 / 48 / 64px |
-| `--space-9..11` | 96 / 128 / 192px |
+**Control heights:** 32 (small), 40 (medium), 48 (default button and input), 56 (hero CTA).
 
-- **Section rhythm:** `padding-block: 128px` desktop → `96px` @1024 → `64px` mobile. Section header → content gap: `64px`.
-- **Standing gap:** `24px` (`--space-5`) between sibling components; `12px` inside components.
-- **Containers:** `--container-page: 1200px` + `24px` inline margin; `--container-narrow: 1024px` (docs/content); `--container-prose: 640px`.
-- **Grid:** 12 columns desktop / 8 tablet / 4 mobile, `24px` gutter.
-- **Controls:** heights 32 / 40 / 48px (sm/md/lg). Min tap target `44px`. Nav height `64px`.
+**Radii (closed set):**
+- `--radius-input: 10px`
+- `--radius-card: 16px`
+- `--radius-panel: 24px` (marketing surfaces, media frames)
+- `--radius-pill: 9999px` (ALL buttons, chips, badges, nav items)
 
----
+Buttons are pills, always. Pill + 48px height + Inter 600 at -0.011em is the button signature.
 
-## 4. Radii, Borders, Shadows
+**Borders:** 1px, applied as `box-shadow: inset 0 0 0 1px var(--border-neutral)` on interactive controls so hover can thicken to 2px without layout shift. Focus: 2px outline in `--border-focus`, offset 2px.
 
-### 4.1 Radii (closed set)
-
-| Token | Value | Use |
-|---|---|---|
-| `--radius-sm` | `6px` | Inputs, small controls, chips-with-corners |
-| `--radius-md` | `12px` | Cards, panels, popovers |
-| `--radius-lg` | `20px` | Feature cards, modals |
-| `--radius-full` | `9999px` | ALL buttons and pills |
-
-Nested children inside a bordered card use `calc(var(--radius-md) - 1px)`.
-
-### 4.2 Borders
-
-`1px` hairlines from the white-alpha ladder - never gray hexes. Default `--border-1`, hover `--border-2`, selected `--border-3`. Dividers: `--border-1`.
-
-### 4.3 Shadows - rings over blurs
-
-Elevation = a 1px alpha ring + at most two ultra-low-alpha soft layers. Crisp precision, not glow.
-
-| Token | Value |
-|---|---|
-| `--shadow-ring` | `0 0 0 1px rgba(255,255,255,0.08)` |
-| `--shadow-raise` | `0 0 0 1px rgba(255,255,255,0.08), 0 2px 4px rgba(0,0,0,0.24), 0 8px 24px rgba(0,0,0,0.24)` |
-| `--shadow-overlay` | `0 0 0 1px rgba(255,255,255,0.10), 0 4px 8px rgba(0,0,0,0.28), 0 16px 40px rgba(0,0,0,0.40)` |
-| `--shadow-button` | `inset 0 0 0 1px rgba(255,255,255,0.06), inset 0 1px 0 rgba(255,255,255,0.08), 0 0 0 1px rgba(0,0,0,0.55), 0 2px 6px rgba(0,0,0,0.25)` |
-
-`--shadow-button` is the signature chrome: hairline inner ring + 1px inner TOP highlight (machined/embossed feel) + dark outer ring. `--accent-glow` is the ONLY colored shadow and is reserved for the EKG pulse and live dots.
-
-### 4.4 Focus
-
-`--focus-ring: 0 0 0 2px var(--bg-base), 0 0 0 4px var(--accent)` - 2px gap ring, emerald, on every focusable element via `:focus-visible`.
+**Glass:** the sticky nav is a glass chip: `background: rgba(247,250,255,0.72); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(12,20,40,0.08)`. Glass is used for nav only.
 
 ---
 
-## 5. Motion
+## 4. Motion and the EKG
 
-### 5.1 Durations & easings (closed set)
+**Eases (closed set):**
+- `--ease-summon: cubic-bezier(0.62, 0.18, 0.12, 1)` (the house curve: fast entry, long settle; everything interactive)
+- `--ease-out-soft: cubic-bezier(0.16, 1, 0.3, 1)` (large reveals, section entrances)
+- `--ease-spring: cubic-bezier(0.34, 1.55, 0.6, 1)` (delight only: success states, the hire-confirmed moment)
 
-| Token | Value | Use |
-|---|---|---|
-| `--dur-1` | `120ms` | Micro: color, opacity, border |
-| `--dur-2` | `160ms` | Hover brighten / press (the workhorse) |
-| `--dur-3` | `240ms` | Panels, menus, accordions |
-| `--dur-4` | `600ms` | Entrances, hero reveals |
-| `--ease-out` | `cubic-bezier(0.25, 0.46, 0.45, 0.94)` | Default for all micro-interaction |
-| `--ease-expo` | `cubic-bezier(0.16, 1, 0.3, 1)` | Entrances, large moves, EKG draw |
+**Durations:** 120ms color/border micro, 200ms hovers and fills, 320ms panels and entrances, 600ms section reveals. Nothing slower except the EKG.
 
-No ease-in, ever. Transition-property is limited to `color, background-color, border-color, box-shadow, opacity, filter, transform`.
+Entrances animate opacity + transform(8px) together at 320ms `--ease-out-soft`. No parallax. No scroll-jacking.
 
-### 5.2 Interaction physics
+**The EKG heartbeat (signature motif):**
+- Stroke: `--ekg-stroke: #0B5FFF`, 2px, round caps, on light surfaces. On the deep section: #5395FF.
+- Glow: `filter: drop-shadow(0 0 6px rgba(11,95,255,0.35))`. This is the only glow in the system.
+- Rhythm: one 2.4s cycle: flatline, P wave, the QRS spike, settle, rest. Drawn via stroke-dashoffset, linear timing across the trace (a heartbeat does not ease).
+- Edges: the trace strip fades out at both ends with a mask (see gradient recipes), never a hard clip.
+- Budget: at most one animated EKG per viewport. Secondary appearances (card corners, dividers) are static traces at `--border-strong` alpha.
+- Meaning: animated = an agent is live/working. Static = capability, not activity. Do not blur this line.
 
-- **Hover:** `filter: brightness(1.12)` over `--dur-2 --ease-out` - objects light up, colors don't swap.
-- **Press:** `transform: scale(0.97)` + `brightness(0.98)`, `will-change: transform`.
-- **Row/list hover:** background `--surface-2` + border `--border-1` fade in together at `--dur-3`.
-
-### 5.3 Entrances
-
-`opacity: 0; translateY(16px)` → settled, `--dur-4 --ease-expo`, staggered by `calc(var(--stagger-i) * 80ms)`. Max 5 staggered items per group.
-
-### 5.4 The EKG signature animation
-
-Our one expressive motion. An SVG polyline (the heartbeat trace) stroked with `--accent-grad`:
-
-1. **Draw:** `stroke-dasharray: var(--ekg-length); stroke-dashoffset: var(--ekg-length) → 0` over `1.2s --ease-expo`, triggered on viewport entry (once).
-2. **Pulse:** at the QRS spike, a ring pulses - `scale(1) → scale(3)`, `opacity 0.6 → 0`, `1.6s --ease-expo`, with `--accent-glow` on the dot. Loops every `4s` (a calm ~15bpm ambient rhythm, not literal).
-3. **Live dots:** status indicators breathe `opacity 1 → 0.55 → 1` over `2.4s ease-in-out infinite`.
-
-Placement budget: hero (once), live agent-status components, loading states. Nowhere else.
-
-### 5.5 Reduced motion
-
-`@media (prefers-reduced-motion: reduce)`: EKG renders fully drawn and static, entrances become instant fades, pulses stop.
+**Reduced motion:** all animation collapses to opacity-only at 1ms; the EKG renders as its complete static trace, no drawing, no glow pulse.
 
 ---
 
-## 6. Component Rules
+## 5. Components (rules, not exhaustive specs)
 
-### 6.1 Buttons
+- **Primary button:** pill, 48px, CTA gradient fill (see recipes), white Inter 600 label, hover shifts to the darker gradient + translateY(-1px) at 200ms `--ease-summon`, active removes the lift.
+- **Secondary button:** pill, white fill, inset 1px `--border-neutral`, ink label; hover fill `--bg-neutral`.
+- **Quiet button:** pill, `--bg-accent-quiet` fill, blue-800 label.
+- **Cards:** white on canvas, `--radius-card`, 1px border, NO shadow at rest, 24 or 32 padding. Hover on interactive cards: border-strong + translateY(-2px), no shadow gain.
+- **Inputs:** white, `--radius-input`, 48px, inset border; focus swaps to `--border-accent` at 2px + `--shadow-xs`.
+- **Agent roster rows:** overline mono for agent ID, static EKG divider, sentiment chip for status.
+- **Nav:** glass chip, pill links, active link gets `--bg-accent-quiet` pill.
+- **The board table (core product surface):** JetBrains Mono tabular-nums for every number, right-aligned; row hover `--bg-neutral`.
 
-- Shape: **full pill** (`--radius-full`). Heights 32/40/48. Padding-inline 16/20/24. Label: `--font-display` 500, `0.875rem`.
-- **Primary:** `--accent-grad` fill, `--accent-ink` text, `--shadow-button`. Hover `brightness(1.12)`, press `scale(0.97)`.
-- **Secondary:** `--surface-2` fill, `--border-1` hairline, `--text-1` label, `--shadow-button` (glass key). Hover: fill → `--surface-3`, border → `--border-2`.
-- **Ghost:** transparent, `--text-2` label; hover `--surface-1` fill + `--text-1`.
-- One primary button per view region. Icons 16px, gap 8px.
-
-### 6.2 Cards
-
-`--surface-1` fill + `--border-1` hairline + `--radius-md` + `padding: 24px`. Elevation on hover: border → `--border-2` + `--shadow-raise`; never move the card. **Live cards** (an AI employee at work) may add `--accent-border` + a breathing live dot - the only cards allowed accent chrome.
-
-### 6.3 Inputs
-
-Height 40px, `--radius-sm`, `--bg-base` fill (recessed: darker than the card it sits in), `--border-1`, `--text-1` value, `--text-3` placeholder. Hover border `--border-2`; focus swaps border for `--focus-ring`. Labels above, `label` style `--text-2`; errors in `--danger` `body-sm`. No floating labels.
-
-### 6.4 Nav
-
-Height 64px, fixed. At rest: transparent. On scroll: `background: rgba(11,13,18,0.80)` + `backdrop-filter: blur(20px)` + bottom hairline `--border-1`. Links: `--text-2` → hover `--text-1` via `brightness`, `0.875rem` 500. Logo left, links center, one primary pill CTA right. Mobile: full-screen sheet at `--dur-3 --ease-expo`.
-
-### 6.5 Tables (the "board" views)
-
-Header row: `micro` mono UPPERCASE `--text-3`, bottom hairline `--border-2`. Rows: 48px, hairline `--border-1` dividers, hover `--surface-1`. Numerals: mono, `tabular-nums`, right-aligned. Status: pill chip, tint fill (`--accent-tint` / warn / danger at 10%) + matching text, live states get the breathing dot. Selected row: `--accent-tint` + left 2px `--accent` rule. No zebra striping, no vertical rules.
-
-### 6.6 Chips / badges
-
-Pill, height 24px, padding-inline 10px, `micro` or `body-sm`, `--surface-2` + `--border-1` default; semantic chips use 10% tint + colored text.
-
-### 6.7 Overlays
-
-Modal: `--bg-raise-1`, `--radius-lg`, `--shadow-overlay`, scrim `rgba(7,9,13,0.7)` + `blur(4px)`. Enter: `scale(0.98) → 1` + fade, `--dur-3 --ease-expo`. Menus: `--bg-raise-2`, `--radius-md`, `--shadow-overlay`, items 32px with `--surface-2` hover.
-
-### 6.8 Texture (optional, one per page)
-
-A 256px tiled monochrome grain at `opacity 0.05, mix-blend-mode: overlay` may sit over the hero gradient to kill banding. Data-URI, never a network image. That is the entire texture budget.
+**DON'Ts (the closed-vocabulary enforcement list):**
+- DON'T use pure #FFFFFF as a page background, or any flat gray anywhere.
+- DON'T use black shadows, or shadows on resting cards.
+- DON'T introduce a second hue. No purple, no teal, no multi-color gradients, ever.
+- DON'T put gradients on cards, borders, text, or icons. Gradients live in exactly three places (see recipes).
+- DON'T animate more than one EKG per viewport, and never animate it decoratively.
+- DON'T use Inter above 600, Space Grotesk below 600, or mono for prose.
+- DON'T use em dashes in any product copy. Commas, colons, periods.
+- DON'T exceed the 10% saturated-blue coverage rule.
+- DON'T add a radius, ease, duration, or spacing value that is not in this file.
 
 ---
 
-## 7. DON'Ts
+## 6. Derived dark theme (`[data-theme="dark"]`)
 
-1. **Don't add colors.** No purples, blues, oranges, second greens. Emerald→cyan is the whole palette beyond ink.
-2. **Don't use pure `#000` or `#FFF`.** Base is `#0B0D12`; brightest text is `#EDF2EF`.
-3. **Don't use gray hexes for depth.** Surfaces and borders come from the white-alpha ladder only.
-4. **Don't bold headings.** Space Grotesk 500, always. Hierarchy = size + tracking.
-5. **Don't use more than one serif-italic phrase per heading** - or per viewport.
-6. **Don't gradient more than one element per viewport.** The gradient budget goes to the primary CTA or the EKG line, not both in the same view.
-7. **Don't glow.** No colored shadows except `--accent-glow` on the EKG pulse and live dots.
-8. **Don't animate for decoration.** No spinners, no floating blobs, no parallax, no infinite marquees. Motion is interaction physics + the EKG.
-9. **Don't swap colors on hover.** Brighten (`filter`) and compress (`scale`), like a physical object.
-10. **Don't invent spacing.** 4px multiples; 24px standing gap; 128px sections. If it isn't a token, it's wrong.
-11. **Don't exceed radii vocabulary.** 6 / 12 / 20 / pill. No 5-rem section capsules, no per-corner creativity.
-12. **Don't put body copy wider than 65ch** or descriptions wider than 38ch.
-13. **Don't use mono for prose** or sans for metrics. The machine speaks mono; humans read Inter.
-14. **Don't ship a value that isn't in this file.**
+Dark is a re-pointing of semantic tokens, not a second design. Rules of derivation:
+- Canvas #0A1120 (navy-black, same hue family), elevated #111B33.
+- Text flips to #EEF2FA / #A9B4CE / #77829F.
+- Neutral fills become white alphas (0.06/0.10/0.15); borders rgba(255,255,255,0.14).
+- Accent brightens two steps for contrast: base #5395FF, hover #7FB0FF, active #A5C6FF; links #7FB0FF.
+- Shadows are replaced by 1-step surface lightening; the hero shadow becomes rgba(0,0,0,0.5).
+- Gradients invert their resolution target: washes resolve to #0A1120 and drop to half alpha.
+- The EKG keeps #5395FF stroke with the same glow at 0.45 alpha: it reads brighter in the dark, which is correct, it is a heartbeat at night.
+- The deep-navy section flip is a no-op in dark mode (renders as elevated surface).
+
+Everything else (type, spacing, radii, motion, budgets, laws) is theme-invariant.
 
 ---
 
-## Appendix A - Signature moves adopted (inspiration credits)
+## Appendix A: Gradient recipes
 
-- Linear - white-alpha depth system: all surfaces/borders built from white at 3-20% alpha over a near-black base (our #0B0D12), so depth reads as light on glass; plus the signature pill-button chrome (inset hairline ring + inset 1px top highlight + dark outer ring) as --shadow-button.
-- Linear - 15px (0.9375rem) body size with tracking that tightens as type grows (-0.011em body to -0.035em display) and display line-heights crushed to ~1.0.
-- Linear - physical micro-interactions: hover = filter brightness(1.12), press = scale(0.97), all at 160ms ease-out-quad; interactive elements light up and compress instead of swapping colors.
-- Vercel (Geist) - accent rationing and hairline-ring elevation: monochrome everywhere with the single accent reserved for links/focus/live states, floating surfaces elevated by a 1px alpha ring plus 2 ultra-low-alpha shadows (never one big blur), and the 2px-gap emerald focus ring (0 0 0 2px bg, 0 0 0 4px accent).
-- Stripe - one-hue color discipline and semantic token architecture: every neutral, border, and shadow tinted toward the brand hue family (our emerald-cool ink #EDF2EF ladder), with core tokens feeding semantic aliases so light theme is a re-pointed token set, not overrides. Also the 'spend the color budget in exactly one place per section' rule, applied to our emerald→cyan gradient (one gradient element per viewport).
-- cofounder.co - alpha-ladder ink: one base ink color at four alpha stops for the entire text hierarchy, guaranteeing harmony on any surface; plus the draw-path SVG stroke animation and --stagger CSS-var entrance system, adapted directly into our EKG signature draw (1.2s ease-out-expo).
-- 11x.ai - medium-weight display (headings at 500, never bold, hierarchy from size + tight negative tracking) and the radiating pulse-ring keyframe (scale 1→3 with fade) adapted as the EKG heartbeat pulse and live-status breathing dots.
-- Resend - mono-eyebrow-over-display-head section pattern (JetBrains Mono uppercase letterspaced eyebrow above a giant tight-tracked heading) and the never-pure-white text discipline (#EDF2EF cap, translucent scrolled nav with backdrop blur).
-- Linear - film-grain texture budget: a single optional 256px tiled grain overlay at ~5% opacity over the hero gradient to kill banding, as the entire texture allowance.
+/* ============================================================
+   SUMMON v2 GRADIENT SYSTEM
+   One hue family (Summon Blue), three sanctioned placements.
+   Every gradient resolves to a token surface (#F7FAFF light,
+   #0A1120 dark), never to pure white and never to black.
+   No multi-hue gradients exist anywhere in the system.
+   ============================================================ */
 
-## Appendix B - Deliberately rejected (Dorsey: limit the details)
+/* ------------------------------------------------------------
+   1. HERO WASH (top of page, the "9am sky")
+   Barely-there: peaks at blue-100 and dissolves into canvas
+   within the first ~80% of the hero. Applied to the hero
+   SECTION background, never to elements inside it.
+   ------------------------------------------------------------ */
+--gradient-hero-wash: radial-gradient(
+  140% 90% at 50% 0%,
+  #DCEBFF 0%,     /* blue-100, the strongest it ever gets */
+  #EEF5FF 42%,    /* blue-050 */
+  #F7FAFF 78%     /* resolves to canvas */
+);
+/* Optional second layer for depth, composited under the wash:
+   a faint side glow that keeps the hero from feeling flat. */
+--gradient-hero-side: radial-gradient(
+  60% 50% at 85% 12%,
+  rgba(11, 95, 255, 0.06) 0%,
+  rgba(11, 95, 255, 0) 70%
+);
+/* usage: background: var(--gradient-hero-side), var(--gradient-hero-wash); */
 
-- Stripe's WebGL animated gradient hero with blend-mode double-rendered headline text - spectacular but a maintenance-heavy detail we can't perfect; our hero gets one static gradient + the EKG draw instead.
-- Resend's four-typeface quartet with a giant display serif (Domaine at 96px) - we cap Instrument Serif at one italic accent phrase per heading; the serif never carries a whole headline.
-- 11x.ai's giant 5-6rem section-capsule radii and 120px frosted-glass blur cards - a whole second visual language; our radii vocabulary stays 6/12/20/pill and blur is reserved for nav/scrims at 20px.
-- Resend's decorative loops: disco-border rotating rainbow gradients, ai-shimmer-text, and 48-180s infinite marquees - decoration-as-motion violates law 4; our only expressive animation is the EKG.
-- Linear's hundreds of generated grid-dot ambient keyframes and Vercel's border-trail light effects - ambient generative motion is a detail farm we'd never perfect; rejected wholesale.
-- Vercel's true-black #000 base and pixel-font decorative accents - pure black flattens our emerald-tinted layering (base stays #0B0D12), and novelty display fonts dilute the four-family system.
-- cofounder.co's 5-6-layer shadow stacks and pointer-tracked radial sheen - we cap elevation at ring + two soft layers and skip cursor-reactive effects entirely.
-- Stripe's weight-300 light typography - elegant on warm light backgrounds but thin text on near-black fails contrast and readability; we hold body at 400 and display at 500.
-- Multi-accent semantic rainbows (Stripe's 8 graphic accents, Radix full-scale imports from Resend/Vercel) - we keep exactly one green (success IS the brand), one warn, one danger, and cyan doing double duty as info and gradient terminus.
-- Zebra striping, vertical table rules, floating input labels, and hover color-swaps - every one replaced by a single quieter mechanism already in the system (hairlines, surface fills, brightness).
+/* ------------------------------------------------------------
+   2. HORIZON GLOW (closing CTA section, the one loud moment)
+   Bottom-anchored radial positioned just below the viewport
+   edge (at 50% 104%) so saturated blue blooms up from the fold
+   and dissolves into canvas. 5 stops, perceptually spaced.
+   This is the ONLY place saturated blue may exceed the 10%
+   coverage rule. White text + white pill CTA sit on the
+   saturated zone.
+   ------------------------------------------------------------ */
+--gradient-horizon: radial-gradient(
+  120% 100% at 50% 104%,
+  #0B5FFF 0%,     /* Summon Blue, full strength at the anchor */
+  #4D8DFF 12%,
+  #A9CCFF 32%,
+  #DCEBFF 50%,
+  #F7FAFF 68%     /* resolves to canvas well before mid-viewport */
+);
 
-## Appendix C - Implementation
+/* ------------------------------------------------------------
+   3. CTA FILL (primary button, and nowhere else)
+   A near-invisible vertical shift within the 500-600 range:
+   reads as depth, not as "a gradient button".
+   ------------------------------------------------------------ */
+--gradient-cta:       linear-gradient(180deg, #2B78FF 0%, #0B5FFF 100%);
+--gradient-cta-hover: linear-gradient(180deg, #1E6CF2 0%, #084DDB 100%);
+--gradient-cta-active: none; /* active state flattens to #0640B4 */
 
-The canonical token file is `design/tokens.css`. Import it before any other styles. All surfaces (apps/landing, ui/, apps/desktop splash) must consume these variables; per-surface overrides are forbidden (law: don't ship a value that isn't in this file).
+/* ------------------------------------------------------------
+   FUNCTIONAL (not decorative, exempt from the budget)
+   ------------------------------------------------------------ */
+
+/* Navy scrim for text over imagery/video. Navy, never black,
+   in light mode. */
+--gradient-scrim: linear-gradient(
+  180deg,
+  rgba(7, 31, 77, 0.55) 0%,
+  rgba(7, 31, 77, 0.25) 45%,
+  rgba(7, 31, 77, 0) 80%
+);
+
+/* Edge-fade mask for the EKG strip and horizontal scrollers:
+   the trace dissolves at both ends, never hard-clipped. */
+--mask-edge-fade: linear-gradient(
+  90deg, transparent 0%, #000 12%, #000 88%, transparent 100%
+);
+/* usage: mask-image: var(--mask-edge-fade); */
+
+/* Media dissolve: hero media melts into the wash instead of
+   sitting in a box (4-edge mask, composited). */
+--mask-media-y: linear-gradient(180deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+--mask-media-x: linear-gradient(90deg, transparent 0%, #000 6%, #000 94%, transparent 100%);
+/* usage: mask-image: var(--mask-media-y), var(--mask-media-x);
+          mask-composite: intersect; */
+
+/* ------------------------------------------------------------
+   SECTION DRIFT (gradient-adjacent, but flat)
+   Between hero wash and horizon glow, the page drifts through
+   flat tinted sections: #F7FAFF canvas, #EEF5FF tint, #071F4D
+   deep (token-remapped via [data-section="deep"]). The drift
+   reads as one continuous atmosphere; no CSS gradient is used
+   at section boundaries.
+   ------------------------------------------------------------ */
+
+/* ============================================================
+   USAGE BUDGET (enforced in review, no exceptions)
+   1. Hero wash: exactly one per page, hero section only,
+      never exceeds blue-100 saturation.
+   2. Horizon glow: at most one per page, final CTA section
+      only. A page may have zero. Never in the hero AND the
+      footer: pick one loud moment.
+   3. CTA gradient: primary buttons only. Secondary, quiet,
+      and neutral buttons are flat.
+   4. Never on: cards, borders, text, icons, charts, dividers,
+      table rows, badges. Zero exceptions.
+   5. One hue family only. If a gradient contains a hue that
+      is not in the blue-050..navy-950 ladder, it is a bug.
+   6. Dark mode: same three placements, alpha-halved variants
+      resolving to #0A1120 (defined in the dark token block).
+   ============================================================ */
+
+## Appendix B: Signature moves adopted (inspiration credits)
+
+- Wise: brand-tinted neutrals. Every gray surface, hover fill, and border is a low-alpha tint of navy-950 (rgba(7,31,77,x)) or the ink, so the whole light UI carries the blue cast without ever showing flat gray.
+- Wise: the two-tone brand chord. One electric fill (#0B5FFF) plus one near-black of the same hue (#071F4D) carry the entire identity; base/hover/active triads on every interactive token; pill buttons at 48px with Inter 600 labels.
+- Wise: nearly shadowless light mode. Depth from surface stepping and 1px inset alpha borders; real shadows are scarce and reserved for floating objects, which is what makes them feel premium. Also the glass nav chip: 72%-alpha canvas tint + blur(20px).
+- Stripe: the bottom-anchored horizon glow. A 5-stop radial anchored at 50% 104% that blooms saturated blue from below the fold and resolves to the tinted canvas #F7FAFF, used once per page as the closing CTA moment.
+- Stripe: blue-keyed dual-layer shadows. Every shadow is navy-950 at 5 to 16% alpha in tight+ambient pairs, never black, so elevation stays inside the brand atmosphere.
+- Mercury: section-scoped theme flips and the tinted-page rule. No pure-white page background, pure #FFFFFF reserved for elevated cards and inputs, and the page drifts through flat tinted atmospheres (canvas, tint, deep navy) via full token remaps instead of mid-element gradients. Also the 4-edge mask-image media dissolve.
+- Wise: display type discipline. Huge, tight headlines (Space Grotesk 700 at line-height 1.0, tracking -0.03em) over a quiet Inter body, with the negative-tracking-grows-with-size ladder and slightly positive tracking on small labels (the label half is Mercury's).
+
+## Appendix C: Deliberately rejected (Dorsey: limit the details)
+
+- Instrument Serif italic accent: retired. It fought the light, engineered aesthetic and violated the three-font Dorsey budget. Space Grotesk carries all display personality now.
+- Stripe's purple-violet accent family and its multi-hue accessories (conic border rings, tri-color sweeps, per-product accent blobs): SUMMON is one hue family only. A second hue would dilute the blue-equals-pulse law.
+- Stripe's featherweight 300 typography: too ethereal for a company selling accountable AI employees. We keep weight in the display (600/700) and calm in the body (400).
+- Mercury's custom-font micro-weight system (360/420/480/530) and dual base/magic ramps per hue: beautiful but too much vocabulary for a system this small. One ramp plus alpha tints covers everything.
+- Mercury's 16-stop eased scrims and odometer digit-roll animations: craft we admire but detail count we cannot afford. Our scrim is 3 stops of navy and it is enough.
+- Wise's total gradient ban: Adam's directive is gradient backgrounds, so we keep gradients but adopt Wise's discipline instead, three sanctioned placements with a hard budget.
+- Wise's playful pastel block-color pool (yellow/orange/pink sections) and Stripe's WebGL hero wave: decorative surface area that adds nothing to trust. Flat tinted sections and a static radial wash say calm better.
+- v1's dark-primary glow language: neon glows, dark vignettes, and high-alpha black shadows are all gone from light mode. The only glow that survives is the EKG's 6px blue drop-shadow, because the heartbeat is sacred.
+
+## Appendix D: Implementation
+
+Canonical token file: `design/tokens.css` (light canonical, dark derived). All surfaces consume these variables. No value ships that is not in this file.
 
