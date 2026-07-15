@@ -2,14 +2,14 @@
 
 Chromeless Electron shell for the local summon.company company OS server
 (`http://127.0.0.1:3100`). Window + tray icon + single instance + graceful
-lifecycle. It does **not** bundle the server yet — Phase 1 attaches to (or
+lifecycle. It does **not** bundle the server yet - Phase 1 attaches to (or
 starts) the globally-installed `paperclipai` CLI.
 
 ## Run
 
 ```powershell
 cd apps/desktop
-npm install --no-workspaces   # npm, NOT pnpm — keeps Electron out of the workspace hoist
+npm install --no-workspaces   # npm, NOT pnpm - keeps Electron out of the workspace hoist
 npm start
 ```
 
@@ -19,10 +19,10 @@ menu, along with **Open Vitals** and a **Start on login** checkbox.
 
 ## Attached vs owned mode
 
-- **Attached** — the server was already running when the app launched (e.g. you
+- **Attached** - the server was already running when the app launched (e.g. you
   started `paperclipai run` yourself). The app just opens a window on it and
   will **never** stop the server, even on quit.
-- **Owned** — the server was down, so the app spawned `paperclipai run` itself
+- **Owned** - the server was down, so the app spawned `paperclipai run` itself
   (you see the dark "starting your company…" EKG splash while it boots, up to
   120s). On quit, the app terminates the spawned process tree gracefully
   (`taskkill /T` first, `/F` only after 8s) so the embedded Postgres on :54329
@@ -42,7 +42,7 @@ npm run dist   # electron-builder --win nsis -> dist/
 
 ## Roadmap
 
-- **Phase 2** — self-contained payload: bundle node + server + embedded
+- **Phase 2** - self-contained payload: bundle node + server + embedded
   Postgres as `extraResources` so the NSIS installer needs no preinstalled CLI.
-- **Phase 3** — code signing via Azure Trusted Signing (no SmartScreen scare
+- **Phase 3** - code signing via Azure Trusted Signing (no SmartScreen scare
   screen), auto-update channel.
