@@ -10241,12 +10241,29 @@ export function heartbeatService(db: Db, options: HeartbeatServiceOptions = {}) 
     }
 
     if (issue.status === "done" || issue.status === "cancelled") {
-      if (!resumeIntent && !wakeCommentId) {
+      // Issue status is re-checked at delivery time, not trusted from enqueue
+      // time: a queued comment wake that survived a runtime restart must not
+      // execute against (and thereby reopen) an issue that reached a terminal
+      // status after the wake was enqueued. Comments on terminal issues are
+      // recorded conversation; only explicit reopen/resume intent may proceed.
+      // Mention notifications still deliver: they carry no execution payload
+      // and cannot reopen the issue.
+      const explicitReopenIntent =
+        resumeIntent || wakeReason === "issue_reopened_via_comment";
+      const conversationOnlyWake =
+        wakeReason === "issue_comment_mentioned" && Boolean(wakeCommentId);
+      if (!explicitReopenIntent && !conversationOnlyWake) {
         return {
           stale: true,
           errorCode: "issue_terminal_status",
-          reason: `Cancelled because issue reached terminal status (${issue.status}) before the queued run could start`,
-          details: { issueId, currentStatus: issue.status },
+          reason: wakeCommentId
+            ? `Dropped because issue reached terminal status (${issue.status}) before the queued comment wake was delivered; comments on terminal issues are recorded conversation, not execution`
+            : `Cancelled because issue reached terminal status (${issue.status}) before the queued run could start`,
+          details: {
+            issueId,
+            currentStatus: issue.status,
+            ...(wakeCommentId ? { wakeCommentId, droppedCommentWake: true } : {}),
+          },
         };
       }
     }
@@ -10348,6 +10365,24 @@ export function heartbeatService(db: Db, options: HeartbeatServiceOptions = {}) 
       message: staleness.reason,
       payload: staleness.details,
     });
+
+    if (staleness.errorCode === "issue_terminal_status") {
+      await logActivity(db, {
+        companyId: run.companyId,
+        actorType: "system",
+        actorId: "heartbeat",
+        agentId: run.agentId,
+        runId: run.id,
+        action: "issue.wake_dropped_terminal",
+        entityType: "issue",
+        entityId: issueId,
+        details: {
+          ...staleness.details,
+          reason: staleness.reason,
+          wakeupRequestId: run.wakeupRequestId,
+        },
+      });
+    }
 
     return cancelled;
   }
@@ -13804,16 +13839,67 @@ export function heartbeatService(db: Db, options: HeartbeatServiceOptions = {}) 
             deferredComments.length > 0 &&
             deferredComments.every((comment) => comment.createdByRunId === run.id);
         }
-        // Only human/comment-reopen interactions should revive completed issues;
+        // Deferred wakes re-check issue status at delivery (promotion) time, not
+        // enqueue time. A comment wake whose issue has since reached a terminal
+        // status is recorded conversation, never execution: drop it with an
+        // audit event unless it carries explicit reopen/resume intent. Mere
+        // user authorship is not reopen intent; the board must use the reopen
+        // or resume flag to deliberately revive closed work. Mention
+        // notifications still deliver as conversation: they carry no execution
+        // payload and cannot reopen the issue.
+        const deferredIssueIsTerminal = issue.status === "done" || issue.status === "cancelled";
+        const deferredExplicitReopenIntent =
+          deferredWakeReason === "issue_reopened_via_comment" ||
+          deferredContextSeed.resumeIntent === true ||
+          deferredContextSeed.followUpRequested === true;
+        const deferredIsMentionNotification = deferredWakeReason === "issue_comment_mentioned";
+        if (
+          deferredIssueIsTerminal &&
+          deferredCommentIds.length > 0 &&
+          !deferredIsMentionNotification &&
+          (deferredCommentWakeIsSelfAuthored || !deferredExplicitReopenIntent)
+        ) {
+          const droppedAt = new Date();
+          const dropReason =
+            `Deferred comment wake dropped because issue reached terminal status (${issue.status}) before delivery; ` +
+            "comments on terminal issues are recorded conversation, not execution";
+          await tx
+            .update(agentWakeupRequests)
+            .set({
+              status: "skipped",
+              finishedAt: droppedAt,
+              error: dropReason,
+              updatedAt: droppedAt,
+            })
+            .where(eq(agentWakeupRequests.id, deferred.id));
+          await logActivity(tx as unknown as Db, {
+            companyId: issue.companyId,
+            actorType: "system",
+            actorId: "heartbeat",
+            agentId: deferred.agentId,
+            runId: run.id,
+            action: "issue.wake_dropped_terminal",
+            entityType: "issue",
+            entityId: issue.id,
+            details: {
+              issueId: issue.id,
+              identifier: issue.identifier,
+              currentStatus: issue.status,
+              droppedCommentWake: true,
+              wakeCommentIds: deferredCommentIds,
+              wakeupRequestId: deferred.id,
+              reason: dropReason,
+            },
+          });
+          continue;
+        }
+        // Only explicit reopen/resume intent may revive completed issues;
         // system follow-ups such as retry or cleanup wakes must not reopen closed work.
         const shouldReopenDeferredCommentWake =
           deferredCommentIds.length > 0 &&
           !deferredCommentWakeIsSelfAuthored &&
-          (issue.status === "done" || issue.status === "cancelled") &&
-          (
-            deferred.requestedByActorType === "user" ||
-            deferredWakeReason === "issue_reopened_via_comment"
-          );
+          deferredIssueIsTerminal &&
+          deferredExplicitReopenIntent;
         let reopenedActivity: LogActivityInput | null = null;
 
         if (shouldReopenDeferredCommentWake) {
