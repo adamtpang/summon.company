@@ -2,13 +2,14 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<title>Vitals — starting</title>
+<title>Summon: starting</title>
 <style>
+  /* Summon splash, light canonical per DESIGN_SYSTEM.md v2 */
   html, body {
     margin: 0;
     height: 100%;
-    background: #0B0D12;
-    color: #E6EDF3;
+    background: radial-gradient(140% 90% at 50% 0%, #DCEBFF 0%, #EEF5FF 42%, #F7FAFF 78%);
+    color: #46506B;
     font-family: "JetBrains Mono", "Cascadia Mono", "Consolas", ui-monospace, monospace;
     overflow: hidden;
     user-select: none;
@@ -22,24 +23,18 @@
     justify-content: center;
     gap: 28px;
   }
-  .ekg-box {
-    width: min(520px, 72vw);
-  }
-  .ekg {
-    width: 100%;
-    height: 64px;
-    display: block;
-  }
+  .ekg-box { width: min(520px, 72vw); }
+  .ekg { width: 100%; height: 64px; display: block; }
   .ekg path {
     fill: none;
-    stroke: #22E39B;
+    stroke: #0B5FFF;
     stroke-width: 2.5;
     stroke-linecap: round;
     stroke-linejoin: round;
     stroke-dasharray: 620;
     stroke-dashoffset: 620;
     animation: trace 2.4s linear infinite;
-    filter: drop-shadow(0 0 6px rgba(34, 227, 155, 0.55));
+    filter: drop-shadow(0 0 6px rgba(11, 95, 255, 0.35));
   }
   @keyframes trace {
     0%   { stroke-dashoffset: 620; }
@@ -49,9 +44,9 @@
   .label {
     font-size: 13px;
     letter-spacing: 0.08em;
-    color: #8B98A5;
+    color: #6B7590;
   }
-  .label .brand { color: #22E39B; }
+  .label .brand { color: #084DDB; font-weight: 500; }
   .dots::after {
     content: "";
     animation: dots 1.6s steps(4, end) infinite;
@@ -63,6 +58,10 @@
     75%  { content: "..."; }
     100% { content: ""; }
   }
+  @media (prefers-reduced-motion: reduce) {
+    .ekg path { animation: none; stroke-dashoffset: 0; }
+    .dots::after { animation: none; }
+  }
 </style>
 </head>
 <body>
@@ -72,7 +71,7 @@
         <path d="M0 17 H70 l7 -13 7 24 6 -20 5 9 H150 l7 -11 7 22 6 -18 5 8 H300" />
       </svg>
     </div>
-    <div class="label"><span class="brand">summon.company</span> — starting your company<span class="dots"></span></div>
+    <div class="label"><span class="brand">Summon</span> is starting your company<span class="dots"></span></div>
   </div>
 </body>
 </html>

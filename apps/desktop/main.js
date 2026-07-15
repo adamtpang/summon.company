@@ -128,7 +128,7 @@ function createMainWindow() {
     width: 1440,
     height: 900,
     autoHideMenuBar: true,
-    backgroundColor: '#0B0D12',
+    backgroundColor: '#F7FAFF',
     title: 'Summon - Company OS',
     icon: path.join(__dirname, 'icon.ico'),
     show: true,
@@ -167,6 +167,24 @@ function createMainWindow() {
 }
 
 // ---------------------------------------------------------------------------
+// Theme (drives the engine UI's own theme via its localStorage key)
+// ---------------------------------------------------------------------------
+let currentTheme = 'light';
+
+async function setUiTheme(theme) {
+  currentTheme = theme;
+  if (!mainWindow) return;
+  try {
+    await mainWindow.webContents.executeJavaScript(
+      `localStorage.setItem('paperclip.theme', ${JSON.stringify(theme)}); location.reload();`,
+      true
+    );
+  } catch {
+    // Splash or a failed page has no UI localStorage to set; theme applies on next load.
+  }
+}
+
+// ---------------------------------------------------------------------------
 // Tray
 // ---------------------------------------------------------------------------
 function createTray() {
@@ -184,6 +202,15 @@ function createTray() {
             mainWindow.focus();
           }
         },
+      },
+      {
+        label: 'Theme',
+        submenu: ['Light', 'Dark', 'System'].map((label) => ({
+          label,
+          type: 'radio',
+          checked: currentTheme === label.toLowerCase(),
+          click: () => setUiTheme(label.toLowerCase()).then(rebuildMenu),
+        })),
       },
       {
         label: 'Start on login',
