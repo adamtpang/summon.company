@@ -1,0 +1,193 @@
+:root {
+  /* ============ SUMMON DESIGN TOKENS v1.0 — dark primary ============ */
+
+  /* --- Background layers (solid) --- */
+  --bg-void: #07090D;
+  --bg-base: #0B0D12;
+  --bg-raise-1: #10131A;
+  --bg-raise-2: #151922;
+  --bg-raise-3: #1A1F2A;
+
+  /* --- Surfaces & borders (white-alpha ladder) --- */
+  --surface-1: rgba(255, 255, 255, 0.03);
+  --surface-2: rgba(255, 255, 255, 0.06);
+  --surface-3: rgba(255, 255, 255, 0.10);
+  --border-1: rgba(255, 255, 255, 0.08);
+  --border-2: rgba(255, 255, 255, 0.13);
+  --border-3: rgba(255, 255, 255, 0.20);
+
+  /* --- Ink (text hierarchy) --- */
+  --text-1: #EDF2EF;
+  --text-2: rgba(237, 242, 239, 0.72);
+  --text-3: rgba(237, 242, 239, 0.48);
+  --text-4: rgba(237, 242, 239, 0.32);
+
+  /* --- Accent (the living color) --- */
+  --accent: #22E39B;
+  --accent-2: #22D3EE;
+  --accent-grad: linear-gradient(104deg, #22E39B, #22D3EE);
+  --accent-ink: #052A1D;
+  --accent-tint: rgba(34, 227, 155, 0.10);
+  --accent-border: rgba(34, 227, 155, 0.35);
+  --accent-glow: 0 0 24px rgba(34, 227, 155, 0.25);
+
+  /* --- Semantic --- */
+  --ok: #22E39B;
+  --ok-tint: rgba(34, 227, 155, 0.10);
+  --warn: #F5B94B;
+  --warn-tint: rgba(245, 185, 75, 0.10);
+  --danger: #F26D6D;
+  --danger-tint: rgba(242, 109, 109, 0.10);
+  --info: #22D3EE;
+  --info-tint: rgba(34, 211, 238, 0.10);
+
+  /* --- Typography: families --- */
+  --font-display: "Space Grotesk", "Inter", -apple-system, sans-serif;
+  --font-serif: "Instrument Serif", Georgia, serif; /* italic accent only */
+  --font-body: "Inter", -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-body-features: "cv01", "ss03";
+
+  /* --- Typography: scale (size / line-height / tracking; display weight 500) --- */
+  --text-display-1: 4.5rem;    --lh-display-1: 1.02; --ls-display-1: -0.035em;
+  --text-display-2: 3.5rem;    --lh-display-2: 1.05; --ls-display-2: -0.03em;
+  --text-display-3: 2.75rem;   --lh-display-3: 1.08; --ls-display-3: -0.025em;
+  --text-heading-1: 2rem;      --lh-heading-1: 1.15; --ls-heading-1: -0.02em;
+  --text-heading-2: 1.5rem;    --lh-heading-2: 1.25; --ls-heading-2: -0.015em;
+  --text-heading-3: 1.25rem;   --lh-heading-3: 1.3;  --ls-heading-3: -0.01em;
+  --text-body-lg: 1.125rem;    --lh-body: 1.6;       --ls-body: -0.011em;
+  --text-body: 0.9375rem;      /* 15px default body */
+  --text-body-sm: 0.8125rem;   --lh-body-sm: 1.5;    --ls-body-sm: -0.008em;
+  --text-label: 0.875rem;      --lh-label: 1.2;
+  --text-eyebrow: 0.75rem;     --ls-eyebrow: 0.08em; /* mono, uppercase */
+  --text-metric: 2.5rem;       --lh-metric: 1.0;     --ls-metric: -0.02em; /* mono */
+  --text-micro: 0.6875rem;     --ls-micro: 0.04em;   /* mono */
+  --text-hero-fluid: clamp(2.375rem, 1.5rem + 4.2vw, 4.5rem);
+
+  --weight-regular: 400;
+  --weight-medium: 500;   /* the heading weight — never bolder */
+
+  /* --- Spacing (4px grid) --- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;   /* standing gap */
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+  --space-10: 128px; /* section padding desktop */
+  --space-11: 192px;
+
+  /* --- Layout --- */
+  --container-page: 1200px;
+  --container-narrow: 1024px;
+  --container-prose: 640px;
+  --desc-max: 38ch;
+  --page-margin: 24px;
+  --nav-height: 64px;
+  --tap-min: 44px;
+  --section-pad: var(--space-10);
+  --section-pad-tablet: var(--space-9);
+  --section-pad-mobile: var(--space-8);
+
+  /* --- Control heights --- */
+  --control-sm: 32px;
+  --control-md: 40px;
+  --control-lg: 48px;
+
+  /* --- Radii (closed set) --- */
+  --radius-sm: 6px;    /* inputs, small controls */
+  --radius-md: 12px;   /* cards, panels */
+  --radius-lg: 20px;   /* feature cards, modals */
+  --radius-full: 9999px; /* ALL buttons + pills */
+
+  /* --- Shadows (rings over blurs) --- */
+  --shadow-ring: 0 0 0 1px rgba(255, 255, 255, 0.08);
+  --shadow-raise:
+    0 0 0 1px rgba(255, 255, 255, 0.08),
+    0 2px 4px rgba(0, 0, 0, 0.24),
+    0 8px 24px rgba(0, 0, 0, 0.24);
+  --shadow-overlay:
+    0 0 0 1px rgba(255, 255, 255, 0.10),
+    0 4px 8px rgba(0, 0, 0, 0.28),
+    0 16px 40px rgba(0, 0, 0, 0.40);
+  --shadow-button:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 0 0 1px rgba(0, 0, 0, 0.55),
+    0 2px 6px rgba(0, 0, 0, 0.25);
+
+  /* --- Focus --- */
+  --focus-ring: 0 0 0 2px var(--bg-base), 0 0 0 4px var(--accent);
+
+  /* --- Motion --- */
+  --dur-1: 120ms;  /* micro: color, opacity, border */
+  --dur-2: 160ms;  /* hover brighten / press */
+  --dur-3: 240ms;  /* panels, menus */
+  --dur-4: 600ms;  /* entrances */
+  --ease-out: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --hover-brighten: brightness(1.12);
+  --press-scale: 0.97;
+  --enter-distance: 16px;
+  --stagger-step: 80ms;
+
+  /* --- EKG signature --- */
+  --ekg-draw-dur: 1.2s;
+  --ekg-pulse-dur: 1.6s;
+  --ekg-loop: 4s;
+  --live-breathe-dur: 2.4s;
+
+  /* --- Nav chrome --- */
+  --nav-bg-scrolled: rgba(11, 13, 18, 0.80);
+  --nav-blur: 20px;
+  --scrim: rgba(7, 9, 13, 0.70);
+
+  /* --- Texture budget --- */
+  --grain-opacity: 0.05;
+}
+
+/* Optional light theme: re-pointed token set, never per-component overrides */
+:root[data-theme="light"] {
+  --bg-void: #EFF3F1;
+  --bg-base: #F7F9F8;
+  --bg-raise-1: #FFFFFF;
+  --bg-raise-2: #FFFFFF;
+  --bg-raise-3: #FFFFFF;
+  --surface-1: rgba(11, 13, 18, 0.04);
+  --surface-2: rgba(11, 13, 18, 0.07);
+  --surface-3: rgba(11, 13, 18, 0.11);
+  --border-1: rgba(11, 13, 18, 0.10);
+  --border-2: rgba(11, 13, 18, 0.16);
+  --border-3: rgba(11, 13, 18, 0.24);
+  --text-1: rgba(11, 13, 18, 0.92);
+  --text-2: rgba(11, 13, 18, 0.70);
+  --text-3: rgba(11, 13, 18, 0.45);
+  --text-4: rgba(11, 13, 18, 0.30);
+  --accent-tint: rgba(34, 227, 155, 0.12);
+  --shadow-ring: 0 0 0 1px rgba(11, 13, 18, 0.08);
+  --shadow-raise:
+    0 0 0 1px rgba(11, 13, 18, 0.06),
+    0 2px 4px rgba(11, 32, 24, 0.06),
+    0 8px 24px rgba(11, 32, 24, 0.08);
+  --shadow-overlay:
+    0 0 0 1px rgba(11, 13, 18, 0.08),
+    0 4px 8px rgba(11, 32, 24, 0.08),
+    0 16px 40px rgba(11, 32, 24, 0.14);
+  --shadow-button:
+    inset 0 1px 0 rgba(255, 255, 255, 0.85),
+    0 0 0 1px rgba(11, 13, 18, 0.10),
+    0 2px 6px rgba(11, 32, 24, 0.10);
+  --nav-bg-scrolled: rgba(247, 249, 248, 0.80);
+  --scrim: rgba(11, 13, 18, 0.40);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-1: 1ms; --dur-2: 1ms; --dur-3: 1ms; --dur-4: 1ms;
+    --ekg-draw-dur: 1ms; --ekg-pulse-dur: 1ms;
+    --enter-distance: 0px;
+  }
+}
