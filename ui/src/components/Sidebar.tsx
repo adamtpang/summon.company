@@ -5,6 +5,7 @@ import {
   Target,
   LayoutDashboard,
   DollarSign,
+  Gauge,
   History,
   Search,
   SquarePen,
@@ -20,6 +21,7 @@ import {
   PanelLeftOpen,
   Pin,
   MessagesSquare,
+  MessageCircle,
   GanttChartSquare,
   UsersRound,
   Map,
@@ -198,6 +200,7 @@ export function Sidebar() {
             );
           })()}
           <SidebarNavItem to="/dashboard" label="Dashboard" icon={LayoutDashboard} liveCount={liveRunCount} />
+          <SidebarNavItem to="/messages" label="Messages" icon={MessageCircle} />
           <SidebarNavItem
             to="/inbox"
             label="Inbox"
@@ -276,6 +279,7 @@ export function Sidebar() {
           <SidebarNavItem to="/ai-sdr" label="AI SDR" icon={Send} />
           <SidebarNavItem to="/org" label="Org" icon={Network} />
           <SidebarNavItem to="/timeline" label="Timeline" icon={GanttChartSquare} />
+          <SidebarNavItem to="/usage" label="Usage" icon={Gauge} />
           <SidebarNavItem to="/costs" label="Costs" icon={DollarSign} />
           <SidebarNavItem to="/activity" label="Activity" icon={History} />
           <SidebarNavItem to="/company/settings" label="Settings" icon={Settings} />
