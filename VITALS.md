@@ -33,6 +33,28 @@ Production is deployed from `apps/landing/` to the existing Vercel project `vita
 The canonical department and company-stage definitions live in
 `VITALS_FORMATION_ROADMAP.md`.
 
+- `/roadmap`: portfolio-level company critical path.
+- `/:companyPrefix/roadmap`: company-scoped eight-stage critical path.
+- `/:companyPrefix/ai-sdr`: local AI SDR intake-to-dossier-to-draft dogfood loop.
+- `/:companyPrefix/design`: company design-system operating surface.
+
+The complete operating doctrine, core-eight ownership model, Company Zero queue, and
+runtime-neutral contract live in `VITALS_COMPANY_STANDARD.md`.
+
+## Company Zero
+
+Configure or inspect the dogfood company through repeatable scripts:
+
+```bash
+node scripts/vitals-company-zero-bootstrap.mjs
+node scripts/vitals-company-zero-status.mjs
+```
+
+Use Vitals for diagnosis, prioritization, assignment, budgets, approvals, and evidence.
+Use Claude, Codex, Cognition, Cursor, OpenClaw, or another adapter as replaceable
+execution machinery. Employee identity, skills, issue ownership, acceptance criteria,
+and evidence must survive an adapter switch.
+
 ## Install the portable CEO dashboard
 
 Run this inside any company repository:

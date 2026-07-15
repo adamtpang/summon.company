@@ -24,6 +24,7 @@ import { caseRoutes } from "./routes/cases.js";
 import { fileResourceRoutes } from "./routes/file-resources.js";
 import { routineRoutes } from "./routes/routines.js";
 import { pipelineRoutes } from "./routes/pipelines.js";
+import { vitalsAiSdrRoutes } from "./routes/vitals-ai-sdr.js";
 import { environmentRoutes } from "./routes/environments.js";
 import { executionWorkspaceRoutes } from "./routes/execution-workspaces.js";
 import { goalRoutes } from "./routes/goals.js";
@@ -245,6 +246,7 @@ export async function createApp(
   api.use(fileResourceRoutes(db));
   api.use(routineRoutes(db, { pluginWorkerManager: workerManager }));
   api.use(pipelineRoutes(db));
+  api.use(vitalsAiSdrRoutes(db));
   api.use(environmentRoutes(db, { pluginWorkerManager: workerManager }));
   api.use(executionWorkspaceRoutes(db, { pluginWorkerManager: workerManager }));
   api.use(goalRoutes(db));

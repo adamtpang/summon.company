@@ -2613,11 +2613,29 @@ export async function ensurePaperclipSkillSymlink(
 ): Promise<"created" | "repaired" | "skipped"> {
   const existing = await fs.lstat(target).catch(() => null);
   if (!existing) {
-    await linkSkill(source, target);
+    try {
+      await linkSkill(source, target);
+    } catch (err) {
+      const code = err && typeof err === "object" ? (err as { code?: unknown }).code : null;
+      if (code !== "EPERM" && code !== "EACCES") throw err;
+      const resolvedSource = await fs.realpath(source).catch(() => source);
+      await materializePaperclipSkillCopy(resolvedSource, target);
+    }
     return "created";
   }
 
   if (!existing.isSymbolicLink()) {
+    try {
+      const marker = JSON.parse(
+        await fs.readFile(path.join(target, MATERIALIZED_SKILL_SENTINEL), "utf8"),
+      ) as unknown;
+      if (parseObject(marker).version !== 1) return "skipped";
+      const resolvedSource = await fs.realpath(source).catch(() => source);
+      const result = await materializePaperclipSkillCopy(resolvedSource, target);
+      return result.copiedFiles > 0 ? "repaired" : "skipped";
+    } catch {
+      // Preserve user-owned directories that Paperclip did not materialize.
+    }
     return "skipped";
   }
 
@@ -2635,7 +2653,14 @@ export async function ensurePaperclipSkillSymlink(
   }
 
   await fs.unlink(target);
-  await linkSkill(source, target);
+  try {
+    await linkSkill(source, target);
+  } catch (err) {
+    const code = err && typeof err === "object" ? (err as { code?: unknown }).code : null;
+    if (code !== "EPERM" && code !== "EACCES") throw err;
+    const resolvedSource = await fs.realpath(source).catch(() => source);
+    await materializePaperclipSkillCopy(resolvedSource, target);
+  }
   return "repaired";
 }
 

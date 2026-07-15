@@ -131,12 +131,40 @@ async function isExpectedSymlink(target: string, source: string): Promise<boolea
   return path.resolve(path.dirname(target), linkedPath) === path.resolve(source);
 }
 
+async function isExpectedHardLink(target: string, source: string): Promise<boolean> {
+  const [targetStat, sourceStat] = await Promise.all([
+    fs.stat(target).catch(() => null),
+    fs.stat(source).catch(() => null),
+  ]);
+  if (!targetStat || !sourceStat || !targetStat.isFile() || !sourceStat.isFile()) return false;
+  return targetStat.dev === sourceStat.dev && targetStat.ino === sourceStat.ino;
+}
+
 async function createExpectedSymlink(target: string, source: string): Promise<void> {
   try {
     await fs.symlink(source, target);
   } catch (error) {
     const code = (error as NodeJS.ErrnoException).code;
-    if (code === "EEXIST" && await isExpectedSymlink(target, source)) return;
+    if (
+      code === "EEXIST" &&
+      ((await isExpectedSymlink(target, source)) || (await isExpectedHardLink(target, source)))
+    ) return;
+    if (code === "EPERM" || code === "EACCES") {
+      try {
+        // Windows file symlinks require Developer Mode or elevated privileges.
+        // A same-volume hard link preserves the single live auth file without
+        // copying refresh tokens into a stale credential snapshot.
+        await fs.link(source, target);
+        return;
+      } catch (linkError) {
+        const linkCode = (linkError as NodeJS.ErrnoException).code;
+        if (
+          linkCode === "EEXIST" &&
+          ((await isExpectedSymlink(target, source)) || (await isExpectedHardLink(target, source)))
+        ) return;
+        throw linkError;
+      }
+    }
     throw error;
   }
 }
@@ -150,6 +178,7 @@ export async function ensureSymlink(target: string, source: string): Promise<voi
   }
 
   if (!existing.isSymbolicLink()) {
+    if (await isExpectedHardLink(target, source)) return;
     // A previous Paperclip version copied this file into the managed home
     // instead of symlinking it. Codex refresh tokens rotate and are
     // single-use, so a stale copy fails with refresh_token_reused on the next
@@ -193,12 +222,11 @@ export async function writeApiKeyAuthJson(home: string, apiKey: string): Promise
 }
 
 /**
- * Seeds auth/config into an explicit Paperclip-managed `targetHome`. Symlinks
- * `auth.json` from the shared source home (so ChatGPT-subscription credentials
- * stay live and single-use refresh tokens are not copied), copies the static
- * shared config files, and — when an API key is supplied — writes an API-key
- * `auth.json` instead. Used both for the default company home and for the
- * per-agent home set by the server isolation guard.
+ * Seeds auth/config into an explicit Paperclip-managed `targetHome`. Links
+ * `auth.json` from the shared source home (a symlink normally, or a hard link
+ * when Windows denies symlink creation) so ChatGPT-subscription credentials
+ * stay live and single-use refresh tokens are not copied. Static config files
+ * are copied, and an explicitly supplied API key gets its own `auth.json`.
  */
 export async function seedManagedCodexHome(
   targetHome: string,
@@ -219,8 +247,13 @@ export async function seedManagedCodexHome(
   // authenticating with the stale key after it is removed from configuration.
   if (!apiKey && seedFromShared) {
     const authPath = path.join(targetHome, "auth.json");
+    const sharedAuthPath = path.join(sourceHome, "auth.json");
     const existing = await fs.lstat(authPath).catch(() => null);
-    if (existing && !existing.isSymbolicLink()) {
+    if (
+      existing &&
+      !existing.isSymbolicLink() &&
+      !(await isExpectedHardLink(authPath, sharedAuthPath))
+    ) {
       await fs.rm(authPath, { force: true });
     }
   }

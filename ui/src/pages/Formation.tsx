@@ -33,7 +33,7 @@ import { useCompany } from "../context/CompanyContext";
 import { cn, agentUrl, formatCents } from "../lib/utils";
 import { queryKeys } from "../lib/queryKeys";
 
-type DepartmentId =
+export type DepartmentId =
   | "engineering"
   | "design"
   | "marketing"
@@ -43,7 +43,7 @@ type DepartmentId =
   | "support"
   | "legal";
 
-type DepartmentDefinition = {
+export type DepartmentDefinition = {
   id: DepartmentId;
   name: string;
   hero: string;

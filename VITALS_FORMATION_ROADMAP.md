@@ -18,6 +18,11 @@ Canonical product specification for VIT-12 and VIT-13.
 A CEO agent sits above the departments as the orchestrator. The human remains the
 board and approves high-risk work.
 
+Product is not a ninth department. The CEO owns product and company strategy;
+Engineering owns product execution. Design, Marketing, Sales, Support, Finance,
+Operations, and Legal supply requirements and evidence through their existing
+department ownership.
+
 ## Eight roadmap stages
 
 1. **Initial idea**: define the product and outcome.
@@ -51,3 +56,6 @@ board and approves high-risk work.
 Build additively on the Paperclip fork. New Vitals routes may interpret existing
 agent metadata and tasks, but must not rename Paperclip packages, environment
 variables, API contracts, or protocol surfaces.
+
+The complete Company Zero operating contract, S-tier ownership, model policy, and
+provider-neutral runtime boundary live in `VITALS_COMPANY_STANDARD.md`.

@@ -2,84 +2,103 @@
 
 Last updated: 2026-07-14 by Codex.
 
-## Product
+## Product and doctrine
 
-vitals.run is an AI-agent company platform: hire AI employees by department while
-the human remains the board. High-risk work requires approval and agent spending
-stops at configured caps. The company dogfoods the platform on itself.
+vitals.run is a provider-neutral control plane for AI-agent companies. It diagnoses a
+company constraint, assigns one accountable employee, executes through a Claude, Codex,
+Cognition, Cursor, OpenClaw, or future adapter, verifies business impact, and repeats.
+The human is the board. Vitals is Company Zero and dogfoods the loop on itself.
 
-## Repository
+The long-term scoreboard is becoming the world's most valuable company by maximizing
+verified usefulness: value created per company multiplied by companies and people
+measurably improved. Market cap is a lagging result, not a daily metric.
 
-The engine and public landing now live in one GitHub repository:
+There are exactly eight departments. Product is not a ninth: the CEO owns product
+strategy, Engineering owns product execution, and every other department supplies
+requirements and evidence through its existing ownership.
+
+Read `VITALS_COMPANY_STANDARD.md`, `VITALS_FORMATION_ROADMAP.md`, and `DESIGN.md` before
+product work.
+
+## Repository and fork
 
 - GitHub: `adamtpang/vitals.run`
-- Engine: repository root, tracking `paperclipai/paperclip`
+- `origin`: the Vitals fork
+- `upstream`: `paperclipai/paperclip`
+- Engine: repository root
 - Product UI: additive routes and components under `ui/`
-- Landing and portable dashboard: `apps/landing/`
-- Portable installer compatibility: the `installer` branch
-- Installer command: `npx github:adamtpang/vitals.run#installer`
+- Landing: `apps/landing/`
+- Portable installer: `installer` branch
 
-The consolidation preserves both Git histories. Commit `fbe7c6d95` is descended
-from the former `vitals.run` landing master and current Paperclip upstream, so the
-public repository was updated with a normal fast-forward. Do not force-push.
+Preserve `@paperclipai/*`, `PAPERCLIP_*`, database, API, and protocol names. Prefer
+additive Vitals surfaces. Do not force-push or split the landing and engine again.
 
-## Fork rules
+## Company Zero live state
 
-1. Prefer additive files, routes, and components.
-2. Do not rename `@paperclipai/*`, `PAPERCLIP_*`, database, API, or protocol surfaces.
-3. Keep `upstream` pointed at `paperclipai/paperclip` and merge upstream regularly.
-4. Keep customer-facing Vitals language out of shared protocol names.
-5. Read `DESIGN.md` before UI work. Use the token layer in `ui/src/index.css`.
+Main control plane: `http://127.0.0.1:3100`, packaged version `2026.707.0`.
+Isolated brand preview: `http://127.0.0.1:3102`, fork version `0.3.1`.
 
-## Current progress
+- S0 `VIT-14` Runtime portability: `blocked`, owner Vitals CTO.
+- S1 `VIT-22` Operating context: `done`, owner Vitals COO.
+- S2 `VIT-4` Design dogfood: `done`, owner Vitals Design Director.
+- S3 `VIT-13` Critical path: `done`, owner Vitals Engineer.
+- S4 `VIT-11` Diagnosis loop: `done`, owner Vitals Company Diagnostician.
 
-- Consolidated engine and landing: `fbe7c6d95`
-- VIT-12 company formation view: `6595e93e4`
-- Route: `/:companyPrefix/formation`
-- Sidebar: Company -> Formation
-- Eight canonical departments map additively onto existing agents by metadata,
-  title, name, capabilities, and existing Paperclip roles.
-- The page ranks one constraint from unstaffed positions, runtime health, and
-  monthly budget pressure. It includes loading, error, empty-company, desktop,
-  and mobile states.
-- Canonical department and stage definitions: `VITALS_FORMATION_ROADMAP.md`
+The CTO and Design Director are temporarily paused because queued comment wakeups can
+reopen terminal issues after a packaged-runtime restart. Resume either only for a fresh
+assignment or deliberate canary. Current status command reports zero active runs.
 
-## Verification on 2026-07-14
+Company Zero IDs and repeatable configuration live in
+`scripts/vitals-company-zero-bootstrap.mjs`. `VIT` is the issue prefix, not an acronym.
 
-- Full 29-package TypeScript check passed.
-- Formation tests passed: 4 of 4.
-- Production UI build passed.
-- Local browser verification passed at 1280x900 and 375x812 with eight positions
-  and no horizontal overflow.
-- Published GitHub installer branch installed all six expected dashboard files.
-- Root `pnpm build` reaches `packages/db` and then fails on Windows because the
-  upstream package script uses POSIX `cp -r`; the UI production build passes.
-- `check-token-gates` still reports pre-existing upstream violations, with none in
-  `Formation.tsx` or `Formation.test.tsx`.
+## Delivered work
 
-## Deployment state
+- `VITALS_COMPANY_STANDARD.md`: opinionated core-eight company operating standard.
+- `/:companyPrefix/formation`: eight-department formation and current constraint.
+- `/roadmap` and `/:companyPrefix/roadmap`: eight real stages and one critical path.
+- Provider-neutral skill/instruction preservation and Codex model-profile coverage.
+- Windows auth-link and Paperclip-owned skill-link materialization fallbacks.
+- Company Zero bootstrap, status, and board-comment scripts.
+- Brand worktree at
+  `C:\Users\adamp\OneDrive\Aether\.worktrees\vitals-run-brand-system-20260714`
+  on `codex/vitals-brand-system`, with source-of-truth brand docs and desktop/mobile
+  evidence. It is not merged or deployed; those remain board decisions.
 
-The existing Vercel project is still `vitals.run` and the landing deploy root is
-`apps/landing/`. A preview deployment was not performed because external upload
-requires Adam's explicit approval in Codex. Do not create another Vercel project.
-When approved, deploy from `apps/landing/`, verify the preview, then promote the
-same project to production and check `https://vitals.run` directly.
+## S0 exact blocker
 
-## Next work
+Source fixes and focused tests pass, but this checkout's source migration journal is not
+compatible with the database created by the live packaged runner. Starting source against
+that database reports a large pending migration set and collides with existing schema.
+Do not point source at the live database. Build a version-compatible package or align the
+migration lineage, prove it on an isolated clone, take a backup, run a canary, then cut
+over with a rollback command.
 
-1. Build VIT-13 Roadmap / Critical Path from the eight canonical stages.
-2. Connect each roadmap step to a real task and department owner.
-3. Highlight the least-complete stage as the company constraint.
-4. Add hard approval gates for legal, banking, and outbound actions.
-5. Continue VIT-14 through VIT-20 only after VIT-13 is coherent and verified.
+No agent may restart or migrate the main control plane while company runs are active.
+Treat comments on terminal issues as executable wake events in the current runtime.
 
-## Commands
+## Verification completed
+
+- Provider-neutral materialized-skill fallback: 2 of 2 tests pass.
+- Codex skill-injection suite: 4 of 4 tests pass.
+- Focused adapter/runtime coverage: 115 tests pass, 7 are skipped.
+- Adapter utils and Codex adapter typechecks pass.
+- Formation/Roadmap/sidebar/routing UI coverage: 43 tests pass.
+- Canonical UI typecheck and production build pass.
+- Brand worktree BrandSystem coverage: 4 of 4 tests, UI typecheck, and build pass.
+- `git diff --check` and Company Zero script syntax checks pass.
+- Repository-wide token gate still has 112 pre-existing violations; none are in the
+  changed brand-worktree files.
+
+## Operating commands
 
 ```bash
-pnpm install
-pnpm dev
+node scripts/vitals-company-zero-bootstrap.mjs
+node scripts/vitals-company-zero-status.mjs
+node scripts/vitals-company-zero-bootstrap.mjs --wake=VIT-14
 pnpm --filter @paperclipai/ui typecheck
-pnpm --filter @paperclipai/ui exec vitest run src/pages/Formation.test.tsx
 pnpm --filter @paperclipai/ui build
-node scripts/smoke-vitals-installer.mjs
 ```
+
+Use Vitals to choose, assign, govern, and verify company work. Use Claude, Codex,
+Cognition, or another adapter to edit code. The control plane owns the outcome and
+evidence; the IDE is replaceable execution machinery.

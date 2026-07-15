@@ -396,6 +396,48 @@ describe("Sidebar", () => {
     });
   });
 
+  it("places Roadmap in the Company section after Formation", async () => {
+    mockInstanceSettingsApi.getExperimental.mockResolvedValue({ enableIsolatedWorkspaces: false });
+    const root = await renderSidebar();
+
+    const sections = [...container.querySelectorAll("nav > div")];
+    const workSection = sections.find((section) => section.textContent?.startsWith("Work"));
+    const companySection = sections.find((section) => section.textContent?.startsWith("Company"));
+    expect(workSection?.textContent).not.toContain("Roadmap");
+    expect(companySection?.textContent).toContain("Roadmap");
+
+    const roadmapLink = [...container.querySelectorAll("a")].find((anchor) => anchor.textContent === "Roadmap");
+    expect(roadmapLink?.getAttribute("href")).toBe("/roadmap");
+
+    const companyText = companySection?.textContent ?? "";
+    expect(companyText.indexOf("Formation")).toBeLessThan(companyText.indexOf("Roadmap"));
+
+    flushSync(() => {
+      root.unmount();
+    });
+  });
+
+  it("places AI SDR in the Company section after Roadmap", async () => {
+    mockInstanceSettingsApi.getExperimental.mockResolvedValue({ enableIsolatedWorkspaces: false });
+    const root = await renderSidebar();
+
+    const sections = [...container.querySelectorAll("nav > div")];
+    const workSection = sections.find((section) => section.textContent?.startsWith("Work"));
+    const companySection = sections.find((section) => section.textContent?.startsWith("Company"));
+    expect(workSection?.textContent).not.toContain("AI SDR");
+    expect(companySection?.textContent).toContain("AI SDR");
+
+    const aiSdrLink = [...container.querySelectorAll("a")].find((anchor) => anchor.textContent === "AI SDR");
+    expect(aiSdrLink?.getAttribute("href")).toBe("/ai-sdr");
+
+    const companyText = companySection?.textContent ?? "";
+    expect(companyText.indexOf("Roadmap")).toBeLessThan(companyText.indexOf("AI SDR"));
+
+    flushSync(() => {
+      root.unmount();
+    });
+  });
+
   it("shows the Conference Room nav item when conference room chat is enabled (PAP-137)", async () => {
     mockInstanceSettingsApi.getExperimental.mockResolvedValue({
       enableIsolatedWorkspaces: false,

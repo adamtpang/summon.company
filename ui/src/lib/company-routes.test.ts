@@ -88,6 +88,20 @@ describe("company routes", () => {
     expect(toCompanyRelativePath("/PAP/timeline")).toBe("/timeline");
   });
 
+  it("treats /roadmap as a board route that needs a company prefix", () => {
+    expect(isBoardPathWithoutPrefix("/roadmap")).toBe(true);
+    expect(extractCompanyPrefixFromPath("/roadmap")).toBeNull();
+    expect(applyCompanyPrefix("/roadmap", "VIT")).toBe("/VIT/roadmap");
+    expect(toCompanyRelativePath("/VIT/roadmap")).toBe("/roadmap");
+  });
+
+  it("treats /ai-sdr as a board route that needs a company prefix", () => {
+    expect(isBoardPathWithoutPrefix("/ai-sdr")).toBe(true);
+    expect(extractCompanyPrefixFromPath("/ai-sdr")).toBeNull();
+    expect(applyCompanyPrefix("/ai-sdr?issueId=task-1", "VIT")).toBe("/VIT/ai-sdr?issueId=task-1");
+    expect(toCompanyRelativePath("/VIT/ai-sdr?issueId=task-1")).toBe("/ai-sdr?issueId=task-1");
+  });
+
   it("treats Skill Studio create mode as an unprefixed board route", () => {
     expect(isBoardPathWithoutPrefix("/skills/studio/new")).toBe(true);
     expect(extractCompanyPrefixFromPath("/skills/studio/new")).toBeNull();

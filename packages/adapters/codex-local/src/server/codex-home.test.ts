@@ -12,12 +12,23 @@ import {
   seedManagedCodexHome,
 } from "./codex-home.js";
 
+async function expectSharedFileLink(target: string, source: string): Promise<void> {
+  const targetLstat = await fs.lstat(target);
+  if (targetLstat.isSymbolicLink()) {
+    expect(await fs.realpath(target)).toBe(await fs.realpath(source));
+    return;
+  }
+  const [targetStat, sourceStat] = await Promise.all([fs.stat(target), fs.stat(source)]);
+  expect(targetStat.dev).toBe(sourceStat.dev);
+  expect(targetStat.ino).toBe(sourceStat.ino);
+}
+
 describe("codex managed home", () => {
   afterEach(() => {
     vi.restoreAllMocks();
   });
 
-  it("treats a concurrently-created expected auth symlink as success", async () => {
+  it("treats a concurrently-created expected auth link as success", async () => {
     const root = await fs.mkdtemp(path.join(os.tmpdir(), "paperclip-codex-home-"));
     const sharedCodexHome = path.join(root, "shared-codex-home");
     const paperclipHome = path.join(root, "paperclip-home");
@@ -35,9 +46,8 @@ describe("codex managed home", () => {
     await fs.mkdir(sharedCodexHome, { recursive: true });
     await fs.writeFile(sharedAuth, '{"token":"shared"}\n', "utf8");
 
-    const originalSymlink = fs.symlink.bind(fs);
-    vi.spyOn(fs, "symlink").mockImplementationOnce(async (source, target, type) => {
-      await originalSymlink(source, target, type);
+    vi.spyOn(fs, "symlink").mockImplementationOnce(async (source, target) => {
+      await fs.link(source, target);
       const error = new Error("file already exists") as NodeJS.ErrnoException;
       error.code = "EEXIST";
       throw error;
@@ -56,8 +66,7 @@ describe("codex managed home", () => {
         ),
       ).resolves.toBe(managedCodexHome);
 
-      expect((await fs.lstat(managedAuth)).isSymbolicLink()).toBe(true);
-      expect(await fs.realpath(managedAuth)).toBe(await fs.realpath(sharedAuth));
+      await expectSharedFileLink(managedAuth, sharedAuth);
     } finally {
       await fs.rm(root, { recursive: true, force: true });
     }
@@ -83,9 +92,8 @@ describe("codex managed home", () => {
     await fs.writeFile(sharedAuth, '{"token":"shared"}\n', "utf8");
     await fs.writeFile(wrongAuth, '{"token":"other"}\n', "utf8");
 
-    const originalSymlink = fs.symlink.bind(fs);
-    vi.spyOn(fs, "symlink").mockImplementationOnce(async (_source, target, type) => {
-      await originalSymlink(wrongAuth, target, type);
+    vi.spyOn(fs, "symlink").mockImplementationOnce(async (_source, target) => {
+      await fs.link(wrongAuth, target);
       const error = new Error("file already exists") as NodeJS.ErrnoException;
       error.code = "EEXIST";
       throw error;
@@ -104,8 +112,62 @@ describe("codex managed home", () => {
         ),
       ).rejects.toMatchObject({ code: "EEXIST" });
 
-      expect((await fs.lstat(managedAuth)).isSymbolicLink()).toBe(true);
-      expect(await fs.readlink(managedAuth)).toBe(wrongAuth);
+      await expectSharedFileLink(managedAuth, wrongAuth);
+    } finally {
+      await fs.rm(root, { recursive: true, force: true });
+    }
+  });
+
+  it("falls back to a shared hard link when file symlinks are not permitted", async () => {
+    const root = await fs.mkdtemp(path.join(os.tmpdir(), "paperclip-codex-home-"));
+    const sharedCodexHome = path.join(root, "shared-codex-home");
+    const paperclipHome = path.join(root, "paperclip-home");
+    const managedCodexHome = path.join(
+      paperclipHome,
+      "instances",
+      "default",
+      "companies",
+      "company-1",
+      "codex-home",
+    );
+    const sharedAuth = path.join(sharedCodexHome, "auth.json");
+    const managedAuth = path.join(managedCodexHome, "auth.json");
+
+    await fs.mkdir(sharedCodexHome, { recursive: true });
+    await fs.writeFile(sharedAuth, '{"token":"shared"}\n', "utf8");
+
+    const symlinkError = Object.assign(new Error("operation not permitted"), { code: "EPERM" });
+    vi.spyOn(fs, "symlink").mockRejectedValueOnce(symlinkError);
+
+    try {
+      await expect(
+        prepareManagedCodexHome(
+          {
+            CODEX_HOME: sharedCodexHome,
+            PAPERCLIP_HOME: paperclipHome,
+            PAPERCLIP_INSTANCE_ID: "default",
+          },
+          async () => {},
+          "company-1",
+        ),
+      ).resolves.toBe(managedCodexHome);
+
+      expect((await fs.lstat(managedAuth)).isSymbolicLink()).toBe(false);
+      await fs.writeFile(managedAuth, '{"token":"rotated"}\n', "utf8");
+      expect(await fs.readFile(sharedAuth, "utf8")).toBe('{"token":"rotated"}\n');
+
+      await expect(
+        prepareManagedCodexHome(
+          {
+            CODEX_HOME: sharedCodexHome,
+            PAPERCLIP_HOME: paperclipHome,
+            PAPERCLIP_INSTANCE_ID: "default",
+          },
+          async () => {},
+          "company-1",
+        ),
+      ).resolves.toBe(managedCodexHome);
+      expect(await fs.readFile(managedAuth, "utf8")).toBe('{"token":"rotated"}\n');
     } finally {
       await fs.rm(root, { recursive: true, force: true });
     }
@@ -151,7 +213,7 @@ describe("codex managed home", () => {
         "company-1",
       );
 
-      expect((await fs.lstat(managedAuth)).isSymbolicLink()).toBe(true);
+      await expectSharedFileLink(managedAuth, sharedAuth);
       expect(await fs.readFile(managedAuth, "utf8")).toBe('{"token":"fresh"}');
     } finally {
       await fs.rm(root, { recursive: true, force: true });
@@ -173,7 +235,7 @@ describe("codex managed home", () => {
 
       await ensureSymlink(target, source);
 
-      expect((await fs.lstat(target)).isSymbolicLink()).toBe(true);
+      await expectSharedFileLink(target, source);
       expect(await fs.readFile(target, "utf8")).toBe('{"token":"fresh"}');
     } finally {
       await fs.rm(root, { recursive: true, force: true });
@@ -262,7 +324,7 @@ describe("codexHomeHasUsableAuth", () => {
     }
   });
 
-  it("is false for a dangling auth.json symlink", async () => {
+  it.skipIf(process.platform === "win32")("is false for a dangling auth.json symlink", async () => {
     const root = await fs.mkdtemp(path.join(os.tmpdir(), "paperclip-codex-auth-dangling-"));
     try {
       await fs.symlink(path.join(root, "missing-source.json"), path.join(root, "auth.json"));
@@ -296,8 +358,7 @@ describe("seedManagedCodexHome", () => {
 
       await seedManagedCodexHome(agentHome, { CODEX_HOME: sharedCodexHome }, async () => {});
 
-      expect((await fs.lstat(agentAuth)).isSymbolicLink()).toBe(true);
-      expect(await fs.realpath(agentAuth)).toBe(await fs.realpath(sharedAuth));
+      await expectSharedFileLink(agentAuth, sharedAuth);
     } finally {
       await fs.rm(root, { recursive: true, force: true });
     }
@@ -362,8 +423,7 @@ describe("reconcileManagedCodexHome", () => {
       });
       expect(first.status).toBe("seeded");
       expect(first.home).toBe(fx.agentHome);
-      expect((await fs.lstat(fx.agentAuth)).isSymbolicLink()).toBe(true);
-      expect(await fs.realpath(fx.agentAuth)).toBe(await fs.realpath(fx.sharedAuth));
+      await expectSharedFileLink(fx.agentAuth, fx.sharedAuth);
 
       const second = await reconcileManagedCodexHome({
         companyId: "company-1",
@@ -371,8 +431,7 @@ describe("reconcileManagedCodexHome", () => {
         env: fx.env,
       });
       expect(second.status).toBe("already_seeded");
-      expect((await fs.lstat(fx.agentAuth)).isSymbolicLink()).toBe(true);
-      expect(await fs.realpath(fx.agentAuth)).toBe(await fs.realpath(fx.sharedAuth));
+      await expectSharedFileLink(fx.agentAuth, fx.sharedAuth);
     } finally {
       await fs.rm(fx.root, { recursive: true, force: true });
     }
@@ -468,8 +527,7 @@ describe("reconcileManagedCodexHome", () => {
       });
 
       expect(result.status).toBe("seeded");
-      expect((await fs.lstat(fx.agentAuth)).isSymbolicLink()).toBe(true);
-      expect(await fs.realpath(fx.agentAuth)).toBe(await fs.realpath(fx.sharedAuth));
+      await expectSharedFileLink(fx.agentAuth, fx.sharedAuth);
     } finally {
       await fs.rm(fx.root, { recursive: true, force: true });
     }

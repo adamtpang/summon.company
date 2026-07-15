@@ -4,10 +4,29 @@
 Cross-agent continuation: read `CLAUDE.md` and `CODEX_CONTINUE_FROM_CLAUDE.md`
 before changing vitals.run. The engine and landing are consolidated in
 `adamtpang/vitals.run`; `apps/landing/` is the public face and the `installer`
-branch preserves the one-line portable dashboard. VIT-12 Formation is complete;
-VIT-13 Roadmap / Critical Path is next. Keep all Vitals product work additive and
-preserve Paperclip package, environment, API, database, and protocol names.
+branch preserves the one-line portable dashboard. Company Zero completed S1-S4;
+S0 runtime portability is blocked on source/package migration-lineage compatibility.
+The main control plane is on port 3100 and the isolated brand preview is on 3102.
+Keep all Vitals product work additive and preserve Paperclip package, environment,
+API, database, and protocol names.
 <!-- END:claude-chat-continuation -->
+
+<!-- BEGIN:imported-claude-context -->
+## Imported Claude context
+
+Current shared handoff, mirrored from `CLAUDE.md` on 2026-07-14:
+
+- Vitals is a provider-neutral company control plane; the human is the board.
+- Product is not a ninth department. CEO owns strategy; Engineering owns execution.
+- Company Zero S-tier: `VIT-22`, `VIT-4`, `VIT-13`, and `VIT-11` are done;
+  `VIT-14` is blocked on safe source/package database migration compatibility.
+- Vitals CTO and Vitals Design Director are temporarily paused because queued terminal
+  issue comments can reopen work after restart. Resume only for fresh assignments.
+- Never point source at the live packaged database or restart the control plane while
+  company runs are active. Prove cutover on an isolated clone with backup and rollback.
+- Brand worktree: `C:\Users\adamp\OneDrive\Aether\.worktrees\vitals-run-brand-system-20260714`.
+- Run `node scripts/vitals-company-zero-status.mjs` before taking over.
+<!-- END:imported-claude-context -->
 
 Guidance for human and AI contributors working in this repository.
 

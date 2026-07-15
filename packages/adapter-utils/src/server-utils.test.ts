@@ -11,6 +11,7 @@ import {
   buildRuntimeMountedSkillSnapshot,
   buildInvocationEnvForLogs,
   DEFAULT_PAPERCLIP_AGENT_PROMPT_TEMPLATE,
+  ensurePaperclipSkillSymlink,
   materializePaperclipSkillCopy,
   refreshPaperclipWorkspaceEnvForExecution,
   renderPaperclipWakePrompt,
@@ -206,6 +207,48 @@ describe("materializePaperclipSkillCopy", () => {
 
       await expect(materializePaperclipSkillCopy(source, target)).resolves.toMatchObject({ copiedFiles: 1 });
       await expect(fs.readFile(path.join(target, "SKILL.md"), "utf8")).resolves.toBe("# skill\n");
+    } finally {
+      await fs.rm(root, { recursive: true, force: true });
+    }
+  });
+});
+
+describe("ensurePaperclipSkillSymlink", () => {
+  it("materializes and refreshes a skill when Windows denies symlink creation", async () => {
+    const root = await fs.mkdtemp(path.join(os.tmpdir(), "paperclip-skill-link-"));
+    try {
+      const source = path.join(root, "source");
+      const target = path.join(root, "target");
+      await fs.mkdir(source, { recursive: true });
+      await fs.writeFile(path.join(source, "SKILL.md"), "# first\n", "utf8");
+      const denySymlink = async () => {
+        throw Object.assign(new Error("operation not permitted"), { code: "EPERM" });
+      };
+
+      await expect(ensurePaperclipSkillSymlink(source, target, denySymlink)).resolves.toBe("created");
+      expect((await fs.lstat(target)).isDirectory()).toBe(true);
+      await expect(fs.readFile(path.join(target, "SKILL.md"), "utf8")).resolves.toBe("# first\n");
+
+      await fs.writeFile(path.join(source, "SKILL.md"), "# second\n", "utf8");
+      await expect(ensurePaperclipSkillSymlink(source, target, denySymlink)).resolves.toBe("repaired");
+      await expect(fs.readFile(path.join(target, "SKILL.md"), "utf8")).resolves.toBe("# second\n");
+    } finally {
+      await fs.rm(root, { recursive: true, force: true });
+    }
+  });
+
+  it("preserves a user-owned directory that has no Paperclip materialization marker", async () => {
+    const root = await fs.mkdtemp(path.join(os.tmpdir(), "paperclip-skill-link-"));
+    try {
+      const source = path.join(root, "source");
+      const target = path.join(root, "target");
+      await fs.mkdir(source, { recursive: true });
+      await fs.mkdir(target, { recursive: true });
+      await fs.writeFile(path.join(source, "SKILL.md"), "# managed\n", "utf8");
+      await fs.writeFile(path.join(target, "SKILL.md"), "# user owned\n", "utf8");
+
+      await expect(ensurePaperclipSkillSymlink(source, target)).resolves.toBe("skipped");
+      await expect(fs.readFile(path.join(target, "SKILL.md"), "utf8")).resolves.toBe("# user owned\n");
     } finally {
       await fs.rm(root, { recursive: true, force: true });
     }
