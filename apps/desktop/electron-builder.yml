@@ -1,5 +1,5 @@
-appId: run.vitals.desktop
-productName: Vitals
+appId: company.summon.desktop
+productName: Summon
 
 directories:
   output: dist

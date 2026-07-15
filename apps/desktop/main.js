@@ -1,4 +1,4 @@
-// Vitals desktop — Phase 1
+// Summon desktop — Phase 1
 // Chromeless desktop shell for the local summon.company server (Paperclip fork).
 // Attached mode: server already running on :3100 -> just open a window, never kill it.
 // Owned mode:    server down -> spawn `paperclipai run`, show splash while it boots,
@@ -129,7 +129,7 @@ function createMainWindow() {
     height: 900,
     autoHideMenuBar: true,
     backgroundColor: '#0B0D12',
-    title: 'Vitals — Company OS',
+    title: 'Summon - Company OS',
     icon: path.join(__dirname, 'icon.ico'),
     show: true,
     webPreferences: {
@@ -172,12 +172,12 @@ function createMainWindow() {
 function createTray() {
   const icon = nativeImage.createFromPath(path.join(__dirname, 'icon.ico'));
   tray = new Tray(icon);
-  tray.setToolTip('Vitals — Company OS');
+  tray.setToolTip('Summon - Company OS');
 
   const rebuildMenu = () => {
     const menu = Menu.buildFromTemplate([
       {
-        label: 'Open Vitals',
+        label: 'Open Summon',
         click: () => {
           if (mainWindow) {
             mainWindow.show();
@@ -241,9 +241,9 @@ async function onReady() {
     await mainWindow.loadURL(APP_URL);
   } else {
     dialog.showErrorBox(
-      'Vitals could not start',
+      'Summon could not start',
       `The local server did not come up on ${SERVER_URL} within ${BOOT_POLL_MAX_TRIES}s.\n\n` +
-        'Try running "paperclipai run" in a terminal to see its output, then relaunch Vitals.'
+        'Try running "paperclipai run" in a terminal to see its output, then relaunch Summon.'
     );
     isQuitting = true;
     app.quit();
