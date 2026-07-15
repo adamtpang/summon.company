@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>VIT-51 — Summon Desktop IA contact sheet</title>
+<style>
+  :root {
+    --blue: #0B5FFF;
+    --canvas: #F7FAFF;
+    --surface: #FFFFFF;
+    --ink: #0C1428;
+    --ink-2: #46506B;
+    --ink-3: #6B7590;
+    --line: #DCE4F2;
+    --tint: #EAF1FF;
+    --green: #1A9E5C;
+    --amber: #C77D00;
+    --red: #D6455A;
+    --shadow: 0 1px 2px rgba(12,20,40,.06), 0 8px 24px rgba(12,20,40,.08);
+  }
+  .dark {
+    --canvas: #0C1428;
+    --surface: #131D36;
+    --ink: #EDF2FC;
+    --ink-2: #A9B4CE;
+    --ink-3: #7D89A8;
+    --line: #24304E;
+    --tint: #17264A;
+    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.35);
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body {
+    width: 1560px; padding: 40px; background: var(--canvas); color: var(--ink);
+    font: 14px/1.5 "Segoe UI", system-ui, sans-serif;
+  }
+  header { display: flex; align-items: baseline; gap: 16px; margin-bottom: 8px; }
+  header h1 { font-size: 22px; font-weight: 650; }
+  header .tag { color: var(--ink-3); font-size: 13px; }
+  .thesis { color: var(--ink-2); max-width: 1100px; margin-bottom: 28px; }
+  .thesis b { color: var(--ink); }
+  .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 20px; }
+  .panel {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+    box-shadow: var(--shadow); padding: 18px; display: flex; flex-direction: column; gap: 12px;
+  }
+  .panel h2 { font-size: 15px; font-weight: 650; }
+  .panel h2 .n {
+    display: inline-flex; width: 20px; height: 20px; border-radius: 6px; background: var(--blue);
+    color: #fff; font-size: 12px; align-items: center; justify-content: center; margin-right: 8px;
+  }
+  .panel .sub { font-size: 12px; color: var(--ink-3); margin-top: -8px; }
+  .c4 { grid-column: span 4; } .c5 { grid-column: span 5; } .c6 { grid-column: span 6; }
+  .c7 { grid-column: span 7; } .c8 { grid-column: span 8; } .c12 { grid-column: span 12; }
+
+  /* wireframe bits */
+  .wire { border: 1px solid var(--line); border-radius: 10px; background: var(--canvas); overflow: hidden; }
+  .rail { width: 190px; border-right: 1px solid var(--line); background: var(--surface); padding: 10px 8px; display: flex; flex-direction: column; gap: 2px; }
+  .rail .co { display: flex; gap: 6px; padding: 4px 8px 10px; }
+  .rail .co i { width: 22px; height: 22px; border-radius: 6px; background: var(--tint); border: 1px solid var(--line); display: inline-block; }
+  .rail .co i.on { background: var(--blue); border-color: var(--blue); }
+  .item { display: flex; align-items: center; gap: 8px; padding: 6px 8px; border-radius: 7px; font-size: 13px; color: var(--ink-2); }
+  .item.on { background: var(--tint); color: var(--ink); font-weight: 600; }
+  .item .badge { margin-left: auto; background: var(--blue); color: #fff; border-radius: 999px; font-size: 10.5px; padding: 0 6px; line-height: 16px; font-weight: 600; }
+  .item .new { margin-left: auto; color: var(--blue); font-size: 10px; font-weight: 700; letter-spacing: .04em; }
+  .flexrow { display: flex; }
+  .main { flex: 1; padding: 12px; }
+  .ghost { border: 1px dashed var(--line); border-radius: 8px; color: var(--ink-3); font-size: 12px; display: flex; align-items: center; justify-content: center; }
+
+  .qitem { border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; background: var(--surface); font-size: 12.5px; display: flex; gap: 8px; align-items: center; }
+  .qitem.on { border-color: var(--blue); box-shadow: 0 0 0 1px var(--blue); }
+  .dot { width: 8px; height: 8px; border-radius: 50%; flex: none; }
+  .g { background: var(--green); } .a { background: var(--amber); } .r { background: var(--red); } .b { background: var(--blue); }
+  .key {
+    display: inline-flex; min-width: 20px; height: 20px; padding: 0 5px; align-items: center; justify-content: center;
+    border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 5px;
+    font: 600 11px/1 Consolas, monospace; color: var(--ink-2); background: var(--surface);
+  }
+  .verbs { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; font-size: 12px; color: var(--ink-2); }
+
+  .card { border: 1px solid var(--line); border-radius: 10px; padding: 12px; background: var(--surface); display: flex; flex-direction: column; gap: 8px; }
+  .card .top { display: flex; align-items: center; gap: 10px; }
+  .avatar { width: 34px; height: 34px; border-radius: 50%; background: linear-gradient(135deg, var(--blue), #7FB0FF); position: relative; flex: none; }
+  .avatar .st { position: absolute; right: -1px; bottom: -1px; width: 11px; height: 11px; border-radius: 50%; border: 2px solid var(--surface); }
+  .who b { display: block; font-size: 13px; }
+  .who span { font-size: 11.5px; color: var(--ink-3); }
+  .act { font-size: 12px; color: var(--ink-2); background: var(--canvas); border-radius: 6px; padding: 5px 8px; font-family: Consolas, monospace; }
+  .ring { margin-left: auto; width: 26px; height: 26px; border-radius: 50%; flex: none;
+    background: conic-gradient(var(--blue) 0 62%, var(--line) 62% 100%); position: relative; }
+  .ring::after { content: ""; position: absolute; inset: 5px; border-radius: 50%; background: var(--surface); }
+
+  .tabs { display: flex; gap: 2px; border-bottom: 1px solid var(--line); }
+  .tab { padding: 6px 12px; font-size: 12.5px; color: var(--ink-3); border-bottom: 2px solid transparent; }
+  .tab.on { color: var(--blue); border-color: var(--blue); font-weight: 600; }
+
+  .composer { border: 1px solid var(--line); border-radius: 10px; background: var(--surface); padding: 10px 12px; }
+  .composer .input { color: var(--ink-3); font-size: 13px; padding-bottom: 10px; }
+  .composer .row { display: flex; gap: 8px; align-items: center; border-top: 1px solid var(--line); padding-top: 9px; }
+  .pill { border: 1px solid var(--line); border-radius: 999px; padding: 3px 10px; font-size: 11.5px; color: var(--ink-2); }
+  .send { margin-left: 6px; background: var(--blue); color: #fff; border-radius: 8px; padding: 5px 14px; font-size: 12.5px; font-weight: 600; }
+
+  .tray { display: flex; gap: 14px; }
+  .tray .t { flex: 1; border: 1px solid var(--line); border-radius: 10px; padding: 10px; display: flex; gap: 10px; align-items: flex-start; background: var(--surface); }
+  .ticon { width: 26px; height: 26px; border-radius: 7px; flex: none; }
+  .tray b { font-size: 12.5px; display: block; }
+  .tray span { font-size: 11.5px; color: var(--ink-3); }
+
+  table { border-collapse: collapse; width: 100%; font-size: 12.5px; }
+  td, th { text-align: left; padding: 5px 10px 5px 0; vertical-align: top; }
+  th { color: var(--ink-3); font-size: 11px; text-transform: uppercase; letter-spacing: .05em; }
+  td.mono, .mono { font-family: Consolas, monospace; font-size: 12px; color: var(--ink); }
+  tr + tr td { border-top: 1px solid var(--line); }
+  .note { font-size: 11.5px; color: var(--ink-3); }
+  .rulelist { font-size: 12.5px; color: var(--ink-2); display: flex; flex-direction: column; gap: 6px; }
+  .rulelist b { color: var(--ink); }
+</style>
+</head>
+<body>
+  <header>
+    <h1>Summon Desktop — proposed information architecture</h1>
+    <span class="tag">VIT-51 · board review contact sheet · source: doc/research/DESKTOP-UX-SKELETONS.md · 2026-07-15</span>
+  </header>
+  <p class="thesis">Claude Desktop and Codex converged on the same six-piece skeleton — Summon adopts it as table stakes and differentiates one level up: <b>persistent employees with roles, a company-level decision queue, and board-grade reporting.</b> The human is the board, not the driver.</p>
+
+  <div class="grid">
+    <!-- 1. Left rail + layout -->
+    <section class="panel c5">
+      <h2><span class="n">1</span>Left rail + fixed three-region layout</h2>
+      <p class="sub">Spatially stable forever. Inbox is the app home. No free-form panes.</p>
+      <div class="wire flexrow" style="height:322px">
+        <div class="rail">
+          <div class="co"><i class="on"></i><i></i><i></i></div>
+          <div class="item on">📥 Inbox <span class="badge">4</span></div>
+          <div class="item">🏢 Formation</div>
+          <div class="item">🗺️ Roadmap</div>
+          <div class="item">💬 Threads <span class="new">VIT-41</span></div>
+          <div class="item">💰 Costs</div>
+          <div class="item">⚙️ Customize</div>
+        </div>
+        <div class="main flexrow" style="gap:12px">
+          <div class="ghost" style="flex:1">queue list (j/k)</div>
+          <div class="ghost" style="flex:1.6">focused item detail</div>
+        </div>
+      </div>
+      <p class="note">Company switcher rail on top (Ctrl+1..9) — Adam runs ~25 ventures; VIT is #1.</p>
+    </section>
+
+    <!-- 2. Inbox -->
+    <section class="panel c7">
+      <h2><span class="n">2</span>Inbox — the decision queue (new surface, home screen)</h2>
+      <p class="sub">Only items needing a human decision. Two-pane; verbs work without opening anything.</p>
+      <div style="display:flex; gap:14px">
+        <div style="flex:1.1; display:flex; flex-direction:column; gap:6px">
+          <div class="qitem on"><span class="dot a"></span><b>Approval</b>&nbsp;Riley wants to run <span class="mono">pnpm db:migrate</span></div>
+          <div class="qitem"><span class="dot b"></span><b>Done</b>&nbsp;VIT-52 pricing page — +214 −8, awaiting review</div>
+          <div class="qitem"><span class="dot r"></span><b>Question</b>&nbsp;Sam: "Stripe test or live keys for staging?"</div>
+          <div class="qitem"><span class="dot g"></span><b>Quota</b>&nbsp;Jordan resting until 14:00 (weekly cap)</div>
+          <div class="note" style="padding-top:2px">Header: queue depth 4 · avg time-to-decision 11m · over threshold → “run fewer employees”</div>
+        </div>
+        <div style="flex:1; display:flex; flex-direction:column; gap:10px">
+          <div class="verbs">
+            <span class="key">1</span> approve · <span class="key">2</span> request changes ·
+            <span class="key">3</span> reject · <span class="key">h</span> snooze ·
+            <span class="key">e</span> archive · <span class="key">j</span><span class="key">k</span> move
+          </div>
+          <div class="ghost" style="flex:1; min-height:120px">right pane = issue thread (Summary mode)<br/>+ diff viewer, click-line-to-comment</div>
+          <div class="note">Empty state is a win: “All employees unblocked — nothing needs you.”</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Formation card -->
+    <section class="panel c4">
+      <h2><span class="n">3</span>Formation — live employee board</h2>
+      <p class="sub">Kanban by state: Working / Blocked on you / Idle / Resting. The signature screen.</p>
+      <div class="card">
+        <div class="top">
+          <div class="avatar"><span class="st" style="background:var(--green)"></span></div>
+          <div class="who"><b>Riley — Engineer</b><span>VIT-52 · working · 23m</span></div>
+          <div class="ring" title="62% of quota"></div>
+        </div>
+        <div class="act">editing pricing.ts · +214 −8</div>
+      </div>
+      <div class="card">
+        <div class="top">
+          <div class="avatar" style="filter:hue-rotate(40deg)"><span class="st" style="background:var(--amber)"></span></div>
+          <div class="who"><b>Sam — Designer</b><span>VIT-59 · blocked on you — 12m</span></div>
+          <div class="ring" style="background:conic-gradient(var(--amber) 0 88%, var(--line) 88% 100%)"></div>
+        </div>
+        <div class="act">waiting: approval to run figma export</div>
+      </div>
+      <p class="note">Presence dot + one live activity line + usage ring per card. AI presence is open territory — no incumbent renders it.</p>
+    </section>
+
+    <!-- 4. Agent detail -->
+    <section class="panel c4">
+      <h2><span class="n">4</span>Agent detail — tabs</h2>
+      <p class="sub">Permission mode is a trust attribute of the employee, not a per-message toggle.</p>
+      <div class="tabs">
+        <div class="tab on">Thread</div><div class="tab">Activity</div>
+        <div class="tab">Trust</div><div class="tab">Usage</div><div class="tab">Config</div>
+      </div>
+      <table>
+        <tr><td class="mono">Thread</td><td>DM history · density Normal/Verbose/<b>Summary</b> (default) · Ctrl+O — VIT-40</td></tr>
+        <tr><td class="mono">Activity</td><td>run log · worktrees · promote-to-branch</td></tr>
+        <tr><td class="mono">Trust</td><td>Intern / Employee / Trusted profiles · revocable “always allowed” grants = visible track record</td></tr>
+        <tr><td class="mono">Usage</td><td>spend by issue / tool / model</td></tr>
+        <tr><td class="mono">Config</td><td>default model + effort (VIT-37) · adapter · role</td></tr>
+      </table>
+    </section>
+
+    <!-- 5. Composer -->
+    <section class="panel c4">
+      <h2><span class="n">5</span>Composer — one anatomy everywhere</h2>
+      <p class="sub">Mirrors both incumbents: controls adjacent to send, switchable mid-run.</p>
+      <div class="composer">
+        <div class="input">Message Riley…</div>
+        <div class="row">
+          <span class="pill">⌘ sonnet ▾</span>
+          <span class="pill">effort: med ▾</span>
+          <span class="pill">trust: auto ▾</span>
+          <div class="ring" style="width:20px;height:20px;margin-left:auto"></div>
+          <span class="send">Send</span>
+        </div>
+      </div>
+      <p class="note">Picker sets a <b>per-employee default</b>; in-thread change is an override. Max tier shows projected cost vs remaining quota before applying (Codex warning pattern).</p>
+    </section>
+
+    <!-- 6. Tray -->
+    <section class="panel c4">
+      <h2><span class="n">6</span>Tray — status, not commands</h2>
+      <p class="sub">Close hides to tray; employees keep running. Left-click opens the Inbox.</p>
+      <div class="tray" style="flex-direction:column">
+        <div class="t"><div class="ticon" style="background:var(--green)"></div><div><b>Green</b><span>all employees working or idle</span></div></div>
+        <div class="t"><div class="ticon" style="background:var(--amber)"></div><div><b>Amber</b><span>decisions waiting (count in tooltip)</span></div></div>
+        <div class="t"><div class="ticon" style="background:var(--red)"></div><div><b>Red</b><span>employee blocked or adapter down</span></div></div>
+      </div>
+      <p class="note">Toasts, three classes: <b>needs permission</b> + <b>has a question</b> interrupt; <b>run completed</b> badges only; daily digest = card deck.</p>
+    </section>
+
+    <!-- 7. Palette -->
+    <section class="panel c8">
+      <h2><span class="n">7</span>Command palette (Ctrl+K) — company-level verbs neither incumbent has</h2>
+      <div style="display:flex; gap:20px">
+        <table style="flex:1">
+          <tr><th>Verb</th><th>Example</th></tr>
+          <tr><td class="mono">go</td><td>go inbox / formation / [employee] · g-chords outside palette</td></tr>
+          <tr><td class="mono">assign</td><td>assign VIT-52 to Riley (routes like #company Dispatch)</td></tr>
+          <tr><td class="mono">summon</td><td>summon designer — new employee from role template</td></tr>
+          <tr><td class="mono">pause / resume</td><td>pause all employees — the controller home button</td></tr>
+          <tr><td class="mono">approve / reject</td><td>approve next — drains Inbox head without opening it</td></tr>
+        </table>
+        <table style="flex:1">
+          <tr><th>Verb</th><th>Example</th></tr>
+          <tr><td class="mono">message</td><td>message Riley: ship the pricing page</td></tr>
+          <tr><td class="mono">set model / effort / trust</td><td>set Riley model to sonnet (VIT-37)</td></tr>
+          <tr><td class="mono">usage / costs</td><td>usage Riley · usage this week</td></tr>
+          <tr><td class="mono">snooze</td><td>snooze until tomorrow — returns on date OR activity</td></tr>
+          <tr><td class="mono">switch company</td><td>switch to beware.dog (future rail)</td></tr>
+        </table>
+      </div>
+      <div class="verbs">Global: <span class="key">Ctrl+K</span> palette · <span class="key">j/k</span> lists · <span class="key">1 2 3 h e</span> Inbox · <span class="key">Ctrl+O</span> density · <span class="key">Ctrl+Tab</span> surfaces · <span class="key">Esc</span> stop turn</div>
+    </section>
+
+    <!-- 8. Rules -->
+    <section class="panel c4">
+      <h2><span class="n">8</span>Adopted rules (anti-patterns)</h2>
+      <div class="rulelist">
+        <div><b>No invisible autonomy</b> — merge/publish/spend always lands in the Inbox first (Height 2.0 lesson).</div>
+        <div><b>Interrupt only when blocked</b> on human input; badge or digest everything else (Slack tiers).</div>
+        <div><b>Bounded queue</b> — show drain rate; suggest pausing hiring over threshold.</div>
+        <div><b>Never wait on the network</b> — local-first console, no spinners (Linear bar).</div>
+        <div><b>No IDE cosplay</b> — Summary transcripts default; terminals/diffs one level down.</div>
+      </div>
+    </section>
+
+    <!-- 9. Sub-issue slate -->
+    <section class="panel c12">
+      <h2><span class="n">9</span>Implementation slate — filed as sub-issues only after board approval</h2>
+      <table>
+        <tr><th style="width:30px">#</th><th style="width:260px">Sub-issue</th><th>Scope</th><th style="width:280px">Depends / overlaps</th></tr>
+        <tr><td class="mono">A</td><td><b>Inbox surface</b></td><td>New route + rail slot: decision queue, two-pane, one-key verbs, drain-rate header, win-state empty</td><td>reuses VIT-41 thread as right pane</td></tr>
+        <tr><td class="mono">B</td><td><b>Formation live board</b></td><td>Presence dots, activity line, usage ring, state grouping on existing formation view</td><td>VIT-48 usage data</td></tr>
+        <tr><td class="mono">C</td><td><b>Left-rail restructure</b></td><td>7 stable slots, badges, spatial-stability contract</td><td>A</td></tr>
+        <tr><td class="mono">D</td><td><b>Agent detail tabs</b></td><td>Thread / Activity / Trust / Usage / Config; revocable grants panel</td><td>VIT-37 (Config), VIT-40 (Thread)</td></tr>
+        <tr><td class="mono">E</td><td><b>Composer anatomy standard</b></td><td>model · effort · permission · usage ring adjacent to send, everywhere</td><td>VIT-37 lands inside this</td></tr>
+        <tr><td class="mono">F</td><td><b>Tray + notification tiers</b></td><td>State-colored tray, three-class toasts, daily digest deck</td><td>apps/desktop</td></tr>
+        <tr><td class="mono">G</td><td><b>Command palette</b></td><td>Ctrl+K, verb set above, g-chords, global keys</td><td>A–D for verb targets</td></tr>
+        <tr><td class="mono">H</td><td><b>Worktree console contract</b></td><td>Worktree per run visible, diff-stat chips on cards, promote-to-branch as Inbox item</td><td>A</td></tr>
+      </table>
+      <p class="note">Adoption notes (no new issues): VIT-37 ← composer placement + top-tier cost warning · VIT-40 ← Summary default, density as render filter · VIT-41 ← #company Dispatch channel + DM split · VIT-48 ← ring/meters model, let-the-turn-finish wall.</p>
+    </section>
+  </div>
+<script>
+  if (new URLSearchParams(location.search).get("theme") === "dark")
+    document.documentElement.classList.add("dark");
+</script>
+</body>
+</html>
