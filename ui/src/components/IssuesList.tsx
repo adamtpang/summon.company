@@ -65,7 +65,9 @@ import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover
 import { Collapsible, CollapsibleContent } from "@/components/ui/collapsible";
 import { CircleDot, Plus, ArrowUpDown, Layers, Check, ChevronRight, List, ListTree, User, Search, CircleSlash2, ChevronsDownUp, PanelTopClose, RotateCcw, ListCollapse,
   SquareKanban,
+  Rows3,
 } from "lucide-react";
+import { AgentLanesBoard } from "./AgentLanesBoard";
 import {
   KanbanBoard,
   KANBAN_BOARD_HIGH_VOLUME_THRESHOLD,
@@ -141,6 +143,7 @@ const progressSegmentClasses: Record<IssueStatus, string> = {
 /* ── View state ── */
 
 export type IssueSortField = "status" | "priority" | "title" | "created" | "updated" | "workflow";
+export type IssueViewMode = "list" | "board" | "lanes";
 export type BoardCardDensity = "auto" | "compact" | "comfortable";
 export type BoardColdLaneMode = "auto" | "collapsed" | "expanded";
 export type BoardColumnPageSize = KanbanColumnPageSize;
@@ -149,7 +152,7 @@ export type IssueViewState = IssueFilterState & {
   sortField: IssueSortField;
   sortDir: "asc" | "desc";
   groupBy: "status" | "priority" | "assignee" | "project" | "workspace" | "parent" | "none";
-  viewMode: "list" | "board";
+  viewMode: IssueViewMode;
   nestingEnabled: boolean;
   collapsedGroups: string[];
   collapsedParents: string[];
@@ -171,6 +174,10 @@ const defaultViewState: IssueViewState = {
   boardColdLaneMode: "expanded",
   boardColumnPageSize: KANBAN_COLUMN_DEFAULT_PAGE_SIZE,
 };
+
+function normalizeViewMode(value: unknown): IssueViewMode {
+  return value === "list" || value === "board" || value === "lanes" ? value : defaultViewState.viewMode;
+}
 
 function normalizeBoardCardDensity(value: unknown): BoardCardDensity {
   return value === "compact" || value === "comfortable" || value === "auto" ? value : "auto";
@@ -195,6 +202,7 @@ function getViewState(key: string): IssueViewState {
         ...defaultViewState,
         ...parsed,
         ...normalizeIssueFilterState(parsed),
+        viewMode: normalizeViewMode(parsed.viewMode),
         boardCardDensity: normalizeBoardCardDensity(parsed.boardCardDensity),
         boardColdLaneMode: normalizeBoardColdLaneMode(parsed.boardColdLaneMode),
         boardColumnPageSize: normalizeBoardColumnPageSize(parsed.boardColumnPageSize),
@@ -212,12 +220,16 @@ function getInitialViewState(
   key: string,
   initialAssignees?: string[],
   defaultSortField?: IssueSortField,
+  defaultViewMode?: IssueViewMode,
 ): IssueViewState {
   const hasStored = hasStoredViewState(key);
   const stored = getViewState(key);
-  const base = !hasStored && defaultSortField
+  let base = !hasStored && defaultSortField
     ? { ...stored, sortField: defaultSortField, sortDir: "asc" as const }
     : stored;
+  if (!hasStored && defaultViewMode) {
+    base = { ...base, viewMode: defaultViewMode };
+  }
   if (!initialAssignees) return base;
   return {
     ...base,
@@ -231,8 +243,9 @@ function getInitialWorkspaceViewState(
   initialAssignees?: string[],
   initialWorkspaces?: string[],
   defaultSortField?: IssueSortField,
+  defaultViewMode?: IssueViewMode,
 ): IssueViewState {
-  const stored = getInitialViewState(key, initialAssignees, defaultSortField);
+  const stored = getInitialViewState(key, initialAssignees, defaultSortField, defaultViewMode);
   if (!initialWorkspaces) return stored;
   return {
     ...stored,
@@ -424,6 +437,8 @@ interface IssuesListProps {
   baseCreateIssueDefaults?: Record<string, unknown>;
   createIssueLabel?: string;
   defaultSortField?: IssueSortField;
+  /** View mode used when the user has no stored view state for this surface. */
+  defaultViewMode?: IssueViewMode;
   showProgressSummary?: boolean;
   /**
    * When set together with `showProgressSummary`, the progress strip fetches
@@ -640,6 +655,7 @@ export function IssuesList({
   baseCreateIssueDefaults,
   createIssueLabel,
   defaultSortField,
+  defaultViewMode,
   showProgressSummary = false,
   parentIssueIdForCostSummary,
   enableRoutineVisibilityFilter = false,
@@ -706,7 +722,7 @@ export function IssuesList({
   const initialWorkspacesKey = initialWorkspaces?.join("|") ?? "";
 
   const [viewState, setViewState] = useState<IssueViewState>(() =>
-    getInitialWorkspaceViewState(scopedKey, initialAssignees, initialWorkspaces, defaultSortField),
+    getInitialWorkspaceViewState(scopedKey, initialAssignees, initialWorkspaces, defaultSortField, defaultViewMode),
   );
   const [assigneePickerIssueId, setAssigneePickerIssueId] = useState<string | null>(null);
   const [assigneeSearch, setAssigneeSearch] = useState("");
@@ -728,9 +744,9 @@ export function IssuesList({
     const nextContextKey = `${scopedKey}::${initialAssigneesKey}::${initialWorkspacesKey}`;
     if (prevViewStateContextKey.current !== nextContextKey) {
       prevViewStateContextKey.current = nextContextKey;
-      setViewState(getInitialWorkspaceViewState(scopedKey, initialAssignees, initialWorkspaces, defaultSortField));
+      setViewState(getInitialWorkspaceViewState(scopedKey, initialAssignees, initialWorkspaces, defaultSortField, defaultViewMode));
     }
-  }, [scopedKey, initialAssignees, initialAssigneesKey, initialWorkspaces, initialWorkspacesKey, defaultSortField]);
+  }, [scopedKey, initialAssignees, initialAssigneesKey, initialWorkspaces, initialWorkspacesKey, defaultSortField, defaultViewMode]);
 
   const prevColumnsScopedKey = useRef(scopedKey);
   useEffect(() => {
@@ -1638,6 +1654,15 @@ export function IssuesList({
             >
               <SquareKanban className="h-3.5 w-3.5" />
             </button>
+            <button
+              className={`flex h-8 w-8 items-center justify-center transition-colors ${viewState.viewMode === "lanes" ? "bg-accent text-foreground" : "text-muted-foreground hover:text-foreground"}`}
+              onClick={() => updateView({ viewMode: "lanes" })}
+              title="Lanes view — one lane per agent, dependencies drawn"
+              aria-label="Lanes view"
+              aria-pressed={viewState.viewMode === "lanes"}
+            >
+              <Rows3 className="h-3.5 w-3.5" />
+            </button>
           </div>
 
           {viewState.viewMode === "list" && (
@@ -1857,7 +1882,14 @@ export function IssuesList({
         />
       )}
 
-      {viewState.viewMode === "board" ? (
+      {viewState.viewMode === "lanes" ? (
+        <AgentLanesBoard
+          issues={filtered}
+          agents={agents}
+          liveIssueIds={liveIssueIds}
+          issueLinkState={issueLinkState}
+        />
+      ) : viewState.viewMode === "board" ? (
         <KanbanBoard
           issues={filtered}
           agents={agents}

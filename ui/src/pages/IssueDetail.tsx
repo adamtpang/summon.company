@@ -5,6 +5,8 @@ import { useInfiniteQuery, useQuery, useMutation, useQueryClient, type InfiniteD
 import { useVisibilityRefetchInterval } from "@/lib/polling";
 import { usePublishSharedQueryData, useSharedPollingQuery } from "@/hooks/useSharedPolling";
 import { ApiError } from "../api/client";
+import { AlgorithmStrip, buildDeletionProposalComment } from "../components/AlgorithmStrip";
+import { deriveRequirementOwner } from "../lib/algorithm-gates";
 import { issuesApi } from "../api/issues";
 import { approvalsApi } from "../api/approvals";
 import { activityApi, type RunForIssue } from "../api/activity";
@@ -1846,6 +1848,11 @@ export function IssueDetail() {
     for (const a of agents ?? []) map.set(a.id, a);
     return map;
   }, [agents]);
+  const agentNameMap = useMemo(() => {
+    const map = new Map<string, string>();
+    for (const a of agents ?? []) map.set(a.id, a.name);
+    return map;
+  }, [agents]);
   const userProfileMap = useMemo(
     () => buildCompanyUserProfileMap(companyMembers?.users),
     [companyMembers?.users],
@@ -1853,6 +1860,20 @@ export function IssueDetail() {
   const userLabelMap = useMemo(
     () => buildCompanyUserLabelMap(companyMembers?.users),
     [companyMembers?.users],
+  );
+  // Algorithm gate 1: the requirement owner is a named person or agent —
+  // whoever created the task — never a department.
+  const requirementOwner = useMemo(
+    () =>
+      deriveRequirementOwner(
+        {
+          createdByAgentId: issue?.createdByAgentId ?? null,
+          createdByUserId: issue?.createdByUserId ?? null,
+        },
+        agentNameMap,
+        issue?.createdByUserId ? userLabelMap.get(issue.createdByUserId) ?? null : null,
+      ),
+    [issue?.createdByAgentId, issue?.createdByUserId, agentNameMap, userLabelMap],
   );
   const mentionOptions = useMemo<MentionOption[]>(() => {
     return buildMarkdownMentionOptions({
@@ -4487,6 +4508,15 @@ export function IssueDetail() {
           }}
         />
       </div>
+
+      <AlgorithmStrip
+        issue={issue}
+        requirementOwner={requirementOwner}
+        onProposeDeletion={(reason) =>
+          addComment.mutate({ body: buildDeletionProposalComment(reason) })
+        }
+        proposeDeletionPending={addComment.isPending}
+      />
 
       <PluginSlotOutlet
         slotTypes={["toolbarButton", "contextMenuItem"]}

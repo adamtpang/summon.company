@@ -102,7 +102,10 @@ describe("IssueRow", () => {
       root.render(<IssueRow issue={createIssue({ status: "in_progress" })} />);
     });
 
-    const glyphs = container.querySelectorAll('svg[viewBox="0 0 24 24"]');
+    // Scope to status glyphs: the time-in-state age chip (VIT-61) carries its
+    // own smaller icon and is not governed by the md status-glyph rule.
+    const glyphs = [...container.querySelectorAll('svg[viewBox="0 0 24 24"]')]
+      .filter((glyph) => !glyph.closest("[data-testid='issue-age-chip']"));
     expect(glyphs.length).toBeGreaterThan(0);
     glyphs.forEach((glyph) => {
       expect(glyph.getAttribute("width")).toBe("16");
