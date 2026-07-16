@@ -11,6 +11,7 @@ import type {
 import {
   createContext,
   Component,
+  Fragment,
   forwardRef,
   memo,
   useCallback,
@@ -145,6 +146,11 @@ import {
   type SystemNoticeMetadataRow,
   type SystemNoticeMetadataSection,
 } from "./SystemNotice";
+import { ResumeAffordanceNotice } from "./ResumeAffordanceNotice";
+import {
+  deriveResumeAffordances,
+  type ResumeAffordance,
+} from "../lib/resume-affordance";
 import {
   buildSystemNoticeProps,
   mapCommentMetadataToSystemNoticeSections,
@@ -4399,6 +4405,35 @@ export function IssueChatThread({
   const latestMessagesRef = useRef<readonly ThreadMessage[]>(messages);
   latestMessagesRef.current = messages;
 
+  // VIT-40 — map the first message of each *resumed* run to its affordance, so
+  // a reopened chat shows a subtle "Resumed · N earlier messages" marker at the
+  // boundary instead of silently continuing from prior context.
+  const resumeNoticeByMessageId = useMemo(() => {
+    const affordances = deriveResumeAffordances(
+      messages.map((message) => ({
+        role: message.role,
+        runId:
+          typeof (message.metadata?.custom as Record<string, unknown> | undefined)?.runId === "string"
+            ? ((message.metadata!.custom as Record<string, unknown>).runId as string)
+            : null,
+        createdAtMs: new Date(message.createdAt).getTime(),
+      })),
+    );
+    const firstMessageIdByRun = new Map<string, string>();
+    for (const message of messages) {
+      const runId = (message.metadata?.custom as Record<string, unknown> | undefined)?.runId;
+      if (typeof runId === "string" && runId.length > 0 && !firstMessageIdByRun.has(runId)) {
+        firstMessageIdByRun.set(runId, message.id);
+      }
+    }
+    const byMessageId = new Map<string, ResumeAffordance>();
+    for (const [runId, messageId] of firstMessageIdByRun) {
+      const affordance = affordances.get(runId);
+      if (affordance?.resumed) byMessageId.set(messageId, affordance);
+    }
+    return byMessageId;
+  }, [messages]);
+
   const isRunning = displayLiveRuns.some((run) => run.status === "queued" || run.status === "running");
   const unresolvedBlockers = useMemo(
     () => blockedBy.filter((blocker) => blocker.status !== "done" && blocker.status !== "cancelled"),
@@ -4907,16 +4942,21 @@ export function IssueChatThread({
                 // Keep transcript rendering independent from assistant-ui's
                 // index-scoped message providers; live transcripts can shrink
                 // or regroup while the runtime still holds stale indices.
-                messages.map((message) => (
-                  <IssueChatMessageRow
-                    key={message.id}
-                    message={message}
-                    feedbackVoteByTargetId={feedbackVoteByTargetId}
-                    activeRunIds={activeRunIds}
-                    stoppingRunId={stoppingRunId}
-                    interruptingQueuedRunId={interruptingQueuedRunId}
-                  />
-              ))
+                messages.map((message) => {
+                  const resumeNotice = resumeNoticeByMessageId.get(message.id);
+                  return (
+                    <Fragment key={message.id}>
+                      {resumeNotice ? <ResumeAffordanceNotice affordance={resumeNotice} /> : null}
+                      <IssueChatMessageRow
+                        message={message}
+                        feedbackVoteByTargetId={feedbackVoteByTargetId}
+                        activeRunIds={activeRunIds}
+                        stoppingRunId={stoppingRunId}
+                        interruptingQueuedRunId={interruptingQueuedRunId}
+                      />
+                    </Fragment>
+                  );
+                })
             )}
               {showComposer ? (
                 <div data-testid="issue-chat-thread-notices" className="space-y-2">
