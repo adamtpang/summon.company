@@ -49,6 +49,20 @@ export {
   type ResponsibleUserDenialCopy,
   type ResponsibleUserDenialTone,
 } from "./responsible-user-denial.js";
+export {
+  PERSONA_GOVERNANCE_GUARDRAIL,
+  VITALS_DEPARTMENTS,
+  VITALS_PERSONAS,
+  buildPersonaBrief,
+  getPersonaById,
+  injectPersonaBrief,
+  personasForDepartment,
+  resolvePersona,
+  vitalsDepartmentSchema,
+  vitalsPersonaSchema,
+  type VitalsDepartment,
+  type VitalsPersona,
+} from "./vitals-personas.js";
 export type {
   AttentionDecisionVerb,
   AttentionDetailImage,
@@ -780,6 +794,7 @@ export type {
   AskUserQuestionsAnswer,
   AskUserQuestionsResult,
   RequestConfirmationIssueDocumentTarget,
+  RequestConfirmationTargetSnapshot,
   RequestConfirmationCustomTarget,
   RequestConfirmationTarget,
   RequestConfirmationPayload,
@@ -1300,6 +1315,7 @@ export {
   askUserQuestionsAnswerSchema,
   askUserQuestionsResultSchema,
   requestConfirmationIssueDocumentTargetSchema,
+  requestConfirmationTargetSnapshotSchema,
   requestConfirmationCustomTargetSchema,
   requestConfirmationTargetSchema,
   requestConfirmationPayloadSchema,
