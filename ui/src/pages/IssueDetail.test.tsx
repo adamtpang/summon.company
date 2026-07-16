@@ -2215,6 +2215,12 @@ describe("IssueDetail", () => {
     expect(container.textContent).toContain("report.md");
     expect(container.textContent).toContain("Attachments1");
     expect(container.querySelectorAll("video")).toHaveLength(1);
+    const thread = container.querySelector('[data-testid="issue-chat-thread"]');
+    const evidence = container.querySelector('[data-testid="issue-thread-evidence"]');
+    expect(evidence).not.toBeNull();
+    expect(thread?.contains(evidence)).toBe(true);
+    expect(evidence?.textContent).toContain("screenshot.png");
+    expect(evidence?.textContent).toContain("report.md");
     expect(mockImageGalleryRender.mock.calls.at(-1)?.[0].items.map((attachment: IssueAttachment) => attachment.id)).toEqual([
       videoAttachment.id,
       imageAttachment.id,

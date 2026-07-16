@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <meta name="theme-color" content="#18181b" />
-    <meta name="apple-mobile-web-app-title" content="Paperclip" />
-    <title>Paperclip</title>
+    <meta name="theme-color" content="#f7faff" />
+    <meta name="application-name" content="vitals.run" />
+    <meta name="apple-mobile-web-app-title" content="vitals.run" />
+    <title>vitals.run</title>
     <!-- PAPERCLIP_RUNTIME_BRANDING_START -->
     <!-- PAPERCLIP_RUNTIME_BRANDING_END -->
     <!-- PAPERCLIP_FAVICON_START -->
@@ -18,16 +19,12 @@
     <link rel="manifest" href="/site.webmanifest" />
     <script>
       (() => {
-        const key = "paperclip.theme";
-        const darkThemeColor = "#18181b";
-        const lightThemeColor = "#ffffff";
+        const key = "vitals.theme";
+        const darkThemeColor = "#0a1120";
+        const lightThemeColor = "#f7faff";
         try {
           const stored = window.localStorage.getItem(key);
-          const prefersDark =
-            typeof window.matchMedia === "function" &&
-            window.matchMedia("(prefers-color-scheme: dark)").matches;
-          const fallback = prefersDark ? "dark" : "light";
-          const theme = stored === "light" || stored === "dark" ? stored : fallback;
+          const theme = stored === "light" || stored === "dark" ? stored : "light";
           const isDark = theme === "dark";
           document.documentElement.classList.toggle("dark", isDark);
           document.documentElement.style.colorScheme = isDark ? "dark" : "light";
@@ -36,8 +33,8 @@
             themeColorMeta.setAttribute("content", isDark ? darkThemeColor : lightThemeColor);
           }
         } catch {
-          document.documentElement.classList.add("dark");
-          document.documentElement.style.colorScheme = "dark";
+          document.documentElement.classList.remove("dark");
+          document.documentElement.style.colorScheme = "light";
         }
       })();
     </script>

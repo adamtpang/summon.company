@@ -1,4 +1,5 @@
 import type { FeedbackDataSharingPreference } from "./feedback.js";
+import type { ModelChainConfig } from "../model-chain.js";
 
 export const DAILY_RETENTION_PRESETS = [3, 7, 14] as const;
 export const WEEKLY_RETENTION_PRESETS = [1, 2, 4] as const;
@@ -42,6 +43,11 @@ export interface InstanceGeneralSettings {
    * Kubernetes sandbox provider and denies local/ssh execution.
    */
   executionMode?: InstanceExecutionMode;
+  /**
+   * VIT-49: company-level default fallback model chains, keyed by companyId.
+   * An agent's runtimeConfig.modelChain overrides its company's default.
+   */
+  modelChainDefaults?: Record<string, ModelChainConfig>;
 }
 
 export interface InstanceExperimentalSettings {

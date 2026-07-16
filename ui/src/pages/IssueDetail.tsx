@@ -5,6 +5,8 @@ import { useInfiniteQuery, useQuery, useMutation, useQueryClient, type InfiniteD
 import { useVisibilityRefetchInterval } from "@/lib/polling";
 import { usePublishSharedQueryData, useSharedPollingQuery } from "@/hooks/useSharedPolling";
 import { ApiError } from "../api/client";
+import { AlgorithmStrip, buildDeletionProposalComment } from "../components/AlgorithmStrip";
+import { deriveRequirementOwner } from "../lib/algorithm-gates";
 import { issuesApi } from "../api/issues";
 import { approvalsApi } from "../api/approvals";
 import { activityApi, type RunForIssue } from "../api/activity";
@@ -1846,6 +1848,11 @@ export function IssueDetail() {
     for (const a of agents ?? []) map.set(a.id, a);
     return map;
   }, [agents]);
+  const agentNameMap = useMemo(() => {
+    const map = new Map<string, string>();
+    for (const a of agents ?? []) map.set(a.id, a.name);
+    return map;
+  }, [agents]);
   const userProfileMap = useMemo(
     () => buildCompanyUserProfileMap(companyMembers?.users),
     [companyMembers?.users],
@@ -1853,6 +1860,20 @@ export function IssueDetail() {
   const userLabelMap = useMemo(
     () => buildCompanyUserLabelMap(companyMembers?.users),
     [companyMembers?.users],
+  );
+  // Algorithm gate 1: the requirement owner is a named person or agent —
+  // whoever created the task — never a department.
+  const requirementOwner = useMemo(
+    () =>
+      deriveRequirementOwner(
+        {
+          createdByAgentId: issue?.createdByAgentId ?? null,
+          createdByUserId: issue?.createdByUserId ?? null,
+        },
+        agentNameMap,
+        issue?.createdByUserId ? userLabelMap.get(issue.createdByUserId) ?? null : null,
+      ),
+    [issue?.createdByAgentId, issue?.createdByUserId, agentNameMap, userLabelMap],
   );
   const mentionOptions = useMemo<MentionOption[]>(() => {
     return buildMarkdownMentionOptions({
@@ -3519,6 +3540,8 @@ export function IssueDetail() {
   }, [showInboxToolbar, backHref, issue?.id, issueHidden, archivePending, setMobileToolbar]);
 
   const attachmentsInitialLoading = attachmentsLoading && attachments === undefined;
+  const hasThreadEvidence =
+    getIssueOutputs(workProducts).count > 0 || attachmentsInitialLoading || attachmentList.length > 0;
   const loadOlderComments = useCallback(() => {
     void fetchOlderComments();
   }, [fetchOlderComments]);
@@ -4488,6 +4511,15 @@ export function IssueDetail() {
         />
       </div>
 
+      <AlgorithmStrip
+        issue={issue}
+        requirementOwner={requirementOwner}
+        onProposeDeletion={(reason) =>
+          addComment.mutate({ body: buildDeletionProposalComment(reason) })
+        }
+        proposeDeletionPending={addComment.isPending}
+      />
+
       <PluginSlotOutlet
         slotTypes={["toolbarButton", "contextMenuItem"]}
         entityType="issue"
@@ -4600,52 +4632,6 @@ export function IssueDetail() {
         userProfileMap={userProfileMap}
       />
 
-      <IssueOutputSection
-        workProducts={workProducts}
-        onMediaClick={(item) => {
-          const meta = item.metadata;
-          if (!meta) return;
-          const idx = mediaGalleryItems.findIndex((galleryItem) => (
-            galleryItem.contentPath === meta.contentPath ||
-            galleryItem.id === `work-product-${item.id}` ||
-            galleryItem.id === meta.attachmentId
-          ));
-          setGalleryIndex(idx >= 0 ? idx : 0);
-          setGalleryOpen(true);
-        }}
-      />
-
-      {attachmentsInitialLoading ? (
-        <IssueSectionSkeleton titleWidth="w-24" rows={2} />
-      ) : hasAttachments ? (
-        <IssueAttachmentsSection
-          attachments={attachmentList}
-          uploadButton={attachmentUploadButton}
-          error={attachmentError}
-          dragActive={attachmentDragActive}
-          deletePending={deleteAttachment.isPending}
-          onDelete={(attachmentId) => deleteAttachment.mutate(attachmentId)}
-          onImageClick={(attachment) => {
-            const idx = mediaGalleryItems.findIndex((a) => a.id === attachment.id);
-            setGalleryIndex(idx >= 0 ? idx : 0);
-            setGalleryOpen(true);
-          }}
-          onDragEnter={(evt) => {
-            evt.preventDefault();
-            setAttachmentDragActive(true);
-          }}
-          onDragOver={(evt) => {
-            evt.preventDefault();
-            setAttachmentDragActive(true);
-          }}
-          onDragLeave={(evt) => {
-            if (evt.currentTarget.contains(evt.relatedTarget as Node | null)) return;
-            setAttachmentDragActive(false);
-          }}
-          onDrop={(evt) => void handleAttachmentDrop(evt)}
-        />
-      ) : null}
-
       <ImageGalleryModal
         items={mediaGalleryItems}
         initialIndex={galleryIndex}
@@ -4743,14 +4729,70 @@ export function IssueDetail() {
               onLoadOlderComments={loadOlderComments}
               onRefreshLatestComments={refetchLatestComments}
               composerRef={commentComposerRef}
-              footer={
-                siblingNavigation ? (
-                  <IssueSiblingNavigation
-                    navigation={siblingNavigation}
-                    linkState={resolvedIssueDetailState ?? location.state}
-                  />
-                ) : null
-              }
+              footer={hasThreadEvidence || siblingNavigation ? (
+                <div className="space-y-4">
+                  {hasThreadEvidence ? (
+                    <section
+                      data-testid="issue-thread-evidence"
+                      aria-label="Evidence in this thread"
+                      className="space-y-4 border-t border-border pt-4"
+                    >
+                      <IssueOutputSection
+                        workProducts={workProducts}
+                        onMediaClick={(item) => {
+                          const meta = item.metadata;
+                          if (!meta) return;
+                          const idx = mediaGalleryItems.findIndex((galleryItem) => (
+                            galleryItem.contentPath === meta.contentPath ||
+                            galleryItem.id === `work-product-${item.id}` ||
+                            galleryItem.id === meta.attachmentId
+                          ));
+                          setGalleryIndex(idx >= 0 ? idx : 0);
+                          setGalleryOpen(true);
+                        }}
+                      />
+
+                      {attachmentsInitialLoading ? (
+                        <IssueSectionSkeleton titleWidth="w-24" rows={2} />
+                      ) : hasAttachments ? (
+                        <IssueAttachmentsSection
+                          attachments={attachmentList}
+                          uploadButton={attachmentUploadButton}
+                          error={attachmentError}
+                          dragActive={attachmentDragActive}
+                          deletePending={deleteAttachment.isPending}
+                          onDelete={(attachmentId) => deleteAttachment.mutate(attachmentId)}
+                          onImageClick={(attachment) => {
+                            const idx = mediaGalleryItems.findIndex((a) => a.id === attachment.id);
+                            setGalleryIndex(idx >= 0 ? idx : 0);
+                            setGalleryOpen(true);
+                          }}
+                          onDragEnter={(evt) => {
+                            evt.preventDefault();
+                            setAttachmentDragActive(true);
+                          }}
+                          onDragOver={(evt) => {
+                            evt.preventDefault();
+                            setAttachmentDragActive(true);
+                          }}
+                          onDragLeave={(evt) => {
+                            if (evt.currentTarget.contains(evt.relatedTarget as Node | null)) return;
+                            setAttachmentDragActive(false);
+                          }}
+                          onDrop={(evt) => void handleAttachmentDrop(evt)}
+                        />
+                      ) : null}
+                    </section>
+                  ) : null}
+
+                  {siblingNavigation ? (
+                    <IssueSiblingNavigation
+                      navigation={siblingNavigation}
+                      linkState={resolvedIssueDetailState ?? location.state}
+                    />
+                  ) : null}
+                </div>
+              ) : null}
               feedbackVotes={feedbackVotes}
               feedbackDataSharingPreference={feedbackDataSharingPreference}
               feedbackTermsUrl={FEEDBACK_TERMS_URL}

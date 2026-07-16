@@ -17,6 +17,7 @@ import { StatusIcon } from "./StatusIcon";
 import { productivityReviewTriggerLabel } from "./ProductivityReviewBadge";
 import { hasAssignedBacklogBlocker } from "../lib/issue-blockers";
 import { ExternalObjectStatusSummary } from "./ExternalObjectStatusSummary";
+import { IssueAgeChip } from "./IssueAgeChip";
 import { Badge } from "@/components/ui/badge";
 
 type UnreadState = "hidden" | "visible" | "fading";
@@ -150,6 +151,7 @@ export function IssueRow({
       <span className="flex shrink-0 items-center gap-1 pt-px sm:hidden">
         {mobileLeading ?? <StatusIcon status={issue.status} blockerAttention={issue.blockerAttention} size="md" className={selectedStatusClass} />}
         {productivityReviewIndicator}
+        <IssueAgeChip issue={issue} />
         {parkedBlockerIndicator}
         {recoveryIndicator}
       </span>
@@ -211,6 +213,7 @@ export function IssueRow({
               <span className="shrink-0 font-mono text-xs text-muted-foreground">
                 {identifier}
               </span>
+              <IssueAgeChip issue={issue} />
               {parkedBlockerIndicator}
               {recoveryIndicator}
             </>

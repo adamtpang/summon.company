@@ -74,6 +74,13 @@ interface UpdateAgentOptions {
   allowPendingApprovalConfigUpdate?: boolean;
 }
 
+interface CompanyAgentConfigurationUpdate {
+  id: string;
+  adapterType: string;
+  adapterConfig: Record<string, unknown>;
+  runtimeConfig: Record<string, unknown>;
+}
+
 interface CreateAgentOptions {
   allowBuiltInAgentMetadata?: boolean;
 }
@@ -570,6 +577,114 @@ export function agentService(db: Db) {
     });
   }
 
+  async function updateCompanyAgentConfigurationsIfIdle(
+    companyId: string,
+    updates: CompanyAgentConfigurationUpdate[],
+    revision: RevisionMetadata,
+  ) {
+    if (updates.length === 0) return [];
+
+    const uniqueAgentIds = Array.from(new Set(updates.map((update) => update.id))).sort();
+    if (uniqueAgentIds.length !== updates.length) {
+      throw unprocessable("Company configuration update contains duplicate agents");
+    }
+
+    const normalizedUpdates = await Promise.all(updates.map(async (update) => ({
+      ...update,
+      adapterConfig: await secretsSvc.normalizeAdapterConfigForPersistence(
+        companyId,
+        update.adapterConfig,
+        { adapterType: update.adapterType },
+      ),
+    })));
+    const updateByAgentId = new Map(normalizedUpdates.map((update) => [update.id, update]));
+
+    return db.transaction(async (tx) => {
+      const txDb = tx as unknown as Db;
+      const lockedAgents = await tx
+        .select()
+        .from(agents)
+        .where(and(eq(agents.companyId, companyId), inArray(agents.id, uniqueAgentIds)))
+        .orderBy(agents.id)
+        .for("update");
+
+      if (lockedAgents.length !== uniqueAgentIds.length) {
+        throw notFound("One or more agents were not found in this company");
+      }
+
+      const frozenAgent = lockedAgents.find((agent) =>
+        agent.status === "pending_approval" || agent.status === "terminated",
+      );
+      if (frozenAgent) {
+        throw conflict("Pending approval and terminated agents cannot be reconfigured", {
+          code: "company_model_pit_stop_agent_frozen",
+          agentId: frozenAgent.id,
+          status: frozenAgent.status,
+        });
+      }
+
+      const activeRuns = await tx
+        .select({ id: heartbeatRuns.id, status: heartbeatRuns.status })
+        .from(heartbeatRuns)
+        .where(and(
+          eq(heartbeatRuns.companyId, companyId),
+          inArray(heartbeatRuns.status, ["queued", "running"]),
+        ));
+      if (activeRuns.length > 0) {
+        const queued = activeRuns.filter((run) => run.status === "queued").length;
+        const running = activeRuns.length - queued;
+        throw conflict("Pit lane closed: wait for all queued and running work to finish", {
+          code: "company_model_pit_stop_active_runs",
+          activeRunCount: activeRuns.length,
+          queuedRunCount: queued,
+          runningRunCount: running,
+        });
+      }
+
+      const updatedAgents = [];
+      for (const existing of lockedAgents) {
+        const update = updateByAgentId.get(existing.id);
+        if (!update) throw notFound("Company configuration update is incomplete");
+        const beforeConfig = buildConfigSnapshot(existing);
+        const updated = await tx
+          .update(agents)
+          .set({
+            adapterType: update.adapterType,
+            adapterConfig: update.adapterConfig,
+            runtimeConfig: update.runtimeConfig,
+            updatedAt: new Date(),
+          })
+          .where(and(eq(agents.id, existing.id), eq(agents.companyId, companyId)))
+          .returning()
+          .then((rows) => rows[0] ?? null);
+        if (!updated) throw notFound("Agent not found");
+
+        await syncAgentSecretBindings(updated, txDb);
+        const normalizedUpdated = await agentService(txDb).getById(updated.id);
+        if (!normalizedUpdated) throw notFound("Agent not found");
+
+        const afterConfig = buildConfigSnapshot(normalizedUpdated);
+        const changedKeys = diffConfigSnapshot(beforeConfig, afterConfig);
+        if (changedKeys.length > 0) {
+          await tx.insert(agentConfigRevisions).values({
+            companyId,
+            agentId: normalizedUpdated.id,
+            createdByAgentId: revision.createdByAgentId ?? null,
+            createdByUserId: revision.createdByUserId ?? null,
+            source: revision.source ?? "company_model_pit_stop",
+            rolledBackFromRevisionId: null,
+            changedKeys,
+            beforeConfig: beforeConfig as unknown as Record<string, unknown>,
+            afterConfig: afterConfig as unknown as Record<string, unknown>,
+          });
+        }
+        updatedAgents.push(normalizedUpdated);
+      }
+
+      return updatedAgents;
+    });
+  }
+
   return {
     list: async (companyId: string, options?: { includeTerminated?: boolean }) => {
       const conditions = [eq(agents.companyId, companyId)];
@@ -631,6 +746,8 @@ export function agentService(db: Db) {
     },
 
     update: updateAgent,
+
+    updateCompanyAgentConfigurationsIfIdle,
 
     pause: async (id: string, reason: "manual" | "budget" | "system" = "manual") => {
       const existing = await getById(id);

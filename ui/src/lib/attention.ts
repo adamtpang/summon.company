@@ -284,6 +284,7 @@ export function attentionBadgeCount(feed: AttentionFeed | null | undefined): num
 
 export type AttentionGroupBy = "none" | "date" | "type" | "project" | "severity";
 export type AttentionSortOrder = "newest" | "oldest";
+export type AttentionViewMode = "deck" | "list";
 
 /** Ordered list used to render the group-by picker (label + value). */
 export const ATTENTION_GROUP_BY_OPTIONS: ReadonlyArray<[AttentionGroupBy, string]> = [
@@ -338,6 +339,7 @@ export interface AttentionFilterOptions {
 
 export const ATTENTION_GROUP_BY_KEY = "paperclip:attention:group-by";
 export const ATTENTION_SORT_KEY = "paperclip:attention:sort";
+export const ATTENTION_VIEW_MODE_KEY = "paperclip:attention:view-mode";
 export const ATTENTION_FILTERS_KEY_PREFIX = "paperclip:attention:filters";
 export const ATTENTION_COLLAPSED_GROUPS_KEY_PREFIX = "paperclip:attention:collapsed-groups";
 
@@ -374,6 +376,22 @@ export function loadAttentionSortOrder(): AttentionSortOrder {
 export function saveAttentionSortOrder(order: AttentionSortOrder) {
   try {
     localStorage.setItem(ATTENTION_SORT_KEY, order);
+  } catch {
+    // Ignore localStorage failures.
+  }
+}
+
+export function loadAttentionViewMode(): AttentionViewMode {
+  try {
+    return localStorage.getItem(ATTENTION_VIEW_MODE_KEY) === "list" ? "list" : "deck";
+  } catch {
+    return "deck";
+  }
+}
+
+export function saveAttentionViewMode(mode: AttentionViewMode) {
+  try {
+    localStorage.setItem(ATTENTION_VIEW_MODE_KEY, mode);
   } catch {
     // Ignore localStorage failures.
   }

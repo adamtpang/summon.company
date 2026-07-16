@@ -33,6 +33,8 @@ export function IssueScheduledRetryCard({
   if (scheduledRetry.status !== "scheduled_retry") return null;
 
   const continuation = isContinuationReason(scheduledRetry.scheduledRetryReason);
+  const quotaSuspended = scheduledRetry.errorFamily === "provider_quota"
+    || scheduledRetry.errorCode === "provider_quota";
   const dueAtIso = scheduledRetry.scheduledRetryAt
     ? new Date(scheduledRetry.scheduledRetryAt).toISOString()
     : null;
@@ -48,7 +50,11 @@ export function IssueScheduledRetryCard({
       ? scheduledRetry.scheduledRetryAttempt
       : null;
 
-  const badgeLabel = continuation ? "Continuation scheduled" : "Retry scheduled";
+  const badgeLabel = quotaSuspended
+    ? "Quota suspended"
+    : continuation
+      ? "Continuation scheduled"
+      : "Retry scheduled";
   const titleAction = continuation ? "Automatic continuation" : "Automatic retry";
   let titleSuffix: string;
   if (relative === "now") {
@@ -58,11 +64,21 @@ export function IssueScheduledRetryCard({
   } else {
     titleSuffix = "pending schedule";
   }
-  const title = `${titleAction} ${titleSuffix}`;
+  const title = quotaSuspended
+    ? relative === "now"
+      ? "Quota reset due now"
+      : relative
+        ? `Suspended · resets ${relative}`
+        : absolute
+          ? `Suspended until ${absolute}`
+          : "Suspended until provider quota resets"
+    : `${titleAction} ${titleSuffix}`;
 
-  const helperIdle = continuation
-    ? "Pulls continuation forward immediately"
-    : "Pulls retry forward immediately";
+  const helperIdle = quotaSuspended
+    ? "Retry only if provider quota recovered early"
+    : continuation
+      ? "Pulls continuation forward immediately"
+      : "Pulls retry forward immediately";
   const isError = retryNow.isError || retryNow.lastError !== null;
   const isSuccessTransient = retryNow.isSuccess
     && (retryNow.data?.outcome === "promoted" || retryNow.data?.outcome === "already_promoted");
@@ -82,8 +98,8 @@ export function IssueScheduledRetryCard({
             {attempt !== null ? (
               <span className="text-muted-foreground">Attempt {attempt}</span>
             ) : null}
-            {reason ? (
-              <span className="text-muted-foreground">{reason}</span>
+            {quotaSuspended || reason ? (
+              <span className="text-muted-foreground">{quotaSuspended ? "Provider quota" : reason}</span>
             ) : null}
           </div>
           <div className="mt-1 text-sm font-medium text-foreground">{title}</div>
@@ -104,7 +120,11 @@ export function IssueScheduledRetryCard({
               ) : null}
             </div>
           ) : null}
-          {scheduledRetry.error ? (
+          {quotaSuspended ? (
+            <div className="mt-1 text-xs text-muted-foreground">
+              Provider quota is exhausted. Work resumes automatically at the reset time.
+            </div>
+          ) : scheduledRetry.error ? (
             <div className="mt-1 text-xs text-muted-foreground">
               Last attempt failed: {scheduledRetry.error}. Paperclip will retry automatically.
             </div>

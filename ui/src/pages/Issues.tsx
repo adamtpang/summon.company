@@ -150,6 +150,7 @@ export function Issues() {
       workspaceIdFilter ?? "__all__",
       "compact",
       "with-routine-executions",
+      "with-blocked-by",
       "infinite",
       issuePageSize,
     ],
@@ -157,6 +158,8 @@ export function Issues() {
       participantAgentId,
       workspaceId: workspaceIdFilter,
       includeRoutineExecutions: true,
+      // Lanes view draws true dependencies as explicit edges (VIT-61).
+      includeBlockedBy: true,
       limit: issuePageSize,
       offset: pageParam,
       sortField: "updated",
@@ -202,6 +205,9 @@ export function Issues() {
       projects={projects}
       liveIssueIds={liveIssueIds}
       viewStateKey="paperclip:issues-view"
+      // Parallel lanes are the board's default work view (VIT-61): one lane
+      // per agent, dependencies drawn. Stored view preferences still win.
+      defaultViewMode="lanes"
       issueLinkState={issueLinkState}
       initialAssignees={searchParams.get("assignee") ? [searchParams.get("assignee")!] : undefined}
       initialWorkspaces={initialWorkspaces.length > 0 ? initialWorkspaces : undefined}

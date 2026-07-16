@@ -6,6 +6,7 @@ const BOARD_ROUTE_ROOTS = new Set([
   "teams-catalog",
   "org",
   "roadmap",
+  "messages",
   "ai-sdr",
   "agents",
   "projects",

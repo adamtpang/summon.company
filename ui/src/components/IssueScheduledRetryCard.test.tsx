@@ -163,6 +163,21 @@ describe("IssueScheduledRetryCard", () => {
     expect(text).toContain("Pulls continuation forward immediately");
   });
 
+  it("renders provider quota as an explicit suspension with its reset time", () => {
+    renderWithProviders(
+      <IssueScheduledRetryCard
+        issueId="issue-1"
+        scheduledRetry={{ ...baseRetry, errorFamily: "provider_quota" }}
+      />,
+    );
+    const text = getCard()?.textContent ?? "";
+    expect(text).toContain("Quota suspended");
+    expect(text).toContain("Suspended · resets in 15m");
+    expect(text).toContain("Provider quota is exhausted");
+    expect(text).toContain("Work resumes automatically at the reset time");
+    expect(text).toContain("Retry only if provider quota recovered early");
+  });
+
   it("uses 'due now' label when scheduledRetryAt is at the current time", () => {
     renderWithProviders(
       <IssueScheduledRetryCard

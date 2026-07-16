@@ -31,6 +31,7 @@ import {
 } from "@paperclipai/db";
 import { notFound, unprocessable } from "../errors.js";
 import { environmentService } from "./environments.js";
+import { formationSeedService } from "./formation-seed.js";
 import { heartbeatService } from "./heartbeat.js";
 import { logActivity } from "./activity-log.js";
 import { builtInAgentService } from "./built-in-agents.js";
@@ -52,6 +53,7 @@ const SYSTEM_COMPANY_ACTOR: CompanyActivityActor = {
 export function companyService(db: Db) {
   const ISSUE_PREFIX_FALLBACK = "CMP";
   const environmentsSvc = environmentService(db);
+  const formationSeed = formationSeedService(db);
   const heartbeat = heartbeatService(db);
   const builtInAgents = builtInAgentService(db);
 
@@ -266,6 +268,7 @@ export function companyService(db: Db) {
       const created = await createCompanyWithUniquePrefix(data);
       await environmentsSvc.ensureLocalEnvironment(created.id);
       await builtInAgents.autoProvisionBundledAgents(created.id);
+      await formationSeed.seedCoreEightFormationBestEffort(created.id);
       const row = await getCompanyQuery(db)
         .where(eq(companies.id, created.id))
         .then((rows) => rows[0] ?? null);

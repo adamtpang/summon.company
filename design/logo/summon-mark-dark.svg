@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <!-- Summon logomark · "Summon Circle" · dark-context variant (blue-400 per derived-theme rule) -->
+  <defs>
+    <mask id="summon-ring-gap-dark" maskUnits="userSpaceOnUse" x="0" y="0" width="64" height="64">
+      <rect width="64" height="64" fill="#fff"/>
+      <path d="M3 32 H20 L26 21 L33 44 L38 32 H61"
+            fill="none" stroke="#000" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+    </mask>
+  </defs>
+  <circle cx="32" cy="32" r="21" fill="none" stroke="#5395FF" stroke-width="4.5" mask="url(#summon-ring-gap-dark)"/>
+  <path d="M3 32 H20 L26 21 L33 44 L38 32 H61"
+        fill="none" stroke="#5395FF" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

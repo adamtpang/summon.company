@@ -15,6 +15,9 @@ import type {
   Approval,
   AgentConfigRevision,
   ClearAgentErrorResponse,
+  CompanyModelPitStopResult,
+  CompanyModelPitStopStatus,
+  ModelPitStopAdapterType,
   AgentApiKeyScope,
 } from "@paperclipai/shared";
 import type {
@@ -99,6 +102,15 @@ function agentPath(id: string, companyId?: string, suffix = "") {
 export const agentsApi = {
   list: (companyId: string) => api.get<Agent[]>(`/companies/${companyId}/agents`),
   org: (companyId: string) => api.get<OrgNode[]>(`/companies/${companyId}/org`),
+  modelPitStopStatus: (companyId: string) =>
+    api.get<CompanyModelPitStopStatus>(
+      `/companies/${encodeURIComponent(companyId)}/model-pit-stop`,
+    ),
+  switchModelPitStop: (companyId: string, adapterType: ModelPitStopAdapterType) =>
+    api.post<CompanyModelPitStopResult>(
+      `/companies/${encodeURIComponent(companyId)}/model-pit-stop`,
+      { adapterType },
+    ),
   listConfigurations: (companyId: string) =>
     api.get<Record<string, unknown>[]>(`/companies/${companyId}/agent-configurations`),
   get: async (id: string, companyId?: string) => {

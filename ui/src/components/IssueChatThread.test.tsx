@@ -827,6 +827,45 @@ describe("IssueChatThread", () => {
     });
   });
 
+  it("renders resume continuity markers through the virtualized thread path", () => {
+    const root = createRoot(container);
+    const originalInnerHeight = window.innerHeight;
+    Object.defineProperty(window, "innerHeight", { configurable: true, value: 40_000 });
+
+    try {
+      act(() => {
+        root.render(
+          <MemoryRouter>
+            <IssueChatThread
+              comments={issueChatLongThreadComments}
+              linkedRuns={issueChatLongThreadLinkedRuns}
+              timelineEvents={issueChatLongThreadEvents}
+              liveRuns={[]}
+              agentMap={issueChatLongThreadAgentMap}
+              currentUserId="user-board"
+              onAdd={async () => {}}
+              showComposer={false}
+              showJumpToLatest={false}
+              enableLiveTranscriptPolling={false}
+              transcriptsByRunId={issueChatLongThreadTranscriptsByRunId}
+              hasOutputForRun={(runId) => issueChatLongThreadTranscriptsByRunId.has(runId)}
+            />
+          </MemoryRouter>,
+        );
+      });
+
+      expect(container.querySelector('[data-testid="issue-chat-thread-virtualizer"]')).not.toBeNull();
+      const notices = container.querySelectorAll('[data-testid="resume-affordance-notice"]');
+      expect(notices.length).toBeGreaterThan(0);
+      expect(notices[0]?.getAttribute("aria-label")).toMatch(
+        /^Resumed · \d+ earlier messages? in this conversation$/,
+      );
+    } finally {
+      Object.defineProperty(window, "innerHeight", { configurable: true, value: originalInnerHeight });
+      act(() => root.unmount());
+    }
+  });
+
   it("measures tall virtual rows before positioning following rows", async () => {
     const root = createRoot(container);
     const requestAnimationFrameMock = vi

@@ -13,6 +13,7 @@ import { queryKeys } from "../lib/queryKeys";
 import { Button } from "@/components/ui/button";
 import { Settings, CloudUpload, Download, Upload } from "lucide-react";
 import { CompanyPatternIcon } from "../components/CompanyPatternIcon";
+import { CompanyModelPitStop } from "../components/CompanyModelPitStop";
 import {
   Field,
   ToggleField,
@@ -349,6 +350,14 @@ export function CompanySettings() {
           )}
         </div>
       )}
+
+      {/* Model routing */}
+      <div className="space-y-4">
+        <div className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
+          Models
+        </div>
+        <CompanyModelPitStop companyId={selectedCompany.id} />
+      </div>
 
       {/* Hiring */}
       <div className="space-y-4" data-testid="company-settings-team-section">

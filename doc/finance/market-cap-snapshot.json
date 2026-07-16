@@ -1,0 +1,83 @@
+{
+  "generatedAt": "2026-07-16T04:09:24.827Z",
+  "stage": {
+    "id": "NOW",
+    "proof": "dogfood runs itself + Quantus",
+    "capProxyLabel": "option value only"
+  },
+  "arrCents": null,
+  "arrLabel": "$0",
+  "capProxyLabel": "option value only",
+  "multipleLabel": "no multiple — pre-revenue",
+  "evidenceGaps": [
+    "Stripe not connected — ARR unproven, shown as $0",
+    "retention: no data yet (no paying cohort)",
+    "gross margin: no data yet (per-employee ledger pending)",
+    "growth: no trailing ARR series yet"
+  ],
+  "bindingLever": {
+    "key": "companies",
+    "statement": "# companies > 0 — the first externally paid $99 moves the number, not narrative"
+  },
+  "levers": [
+    {
+      "key": "companies",
+      "label": "# companies",
+      "ownerDepartment": "Marketing/Sales",
+      "how": "dogfood-in-public, leaderboard, one-line import, client engagements",
+      "currentValue": "4 on plane (0 paying)",
+      "proven": true
+    },
+    {
+      "key": "employeesPerCompany",
+      "label": "Employees per company",
+      "ownerDepartment": "CEO autopilot + Product",
+      "how": "land-and-expand: surface \"hire your next employee\" moments; NRR > 120%",
+      "currentValue": "3.3 avg (13 employees / 4 companies)",
+      "proven": true
+    },
+    {
+      "key": "price",
+      "label": "Price per employee",
+      "ownerDepartment": "Finance",
+      "how": "$99/mo anchor vs $70K salary; outcome metering raises effective price",
+      "currentValue": "$99/employee/mo anchor (0 sold at anchor)",
+      "proven": true
+    },
+    {
+      "key": "retention",
+      "label": "Retention",
+      "ownerDepartment": "Support/Success",
+      "how": "accumulated context + configured employees + memory = switching cost",
+      "currentValue": "no data yet",
+      "proven": false
+    },
+    {
+      "key": "grossMargin",
+      "label": "Gross margin",
+      "ownerDepartment": "Finance",
+      "how": "fuel doctrine: subscription-powered adapters; keep COGS < 20%",
+      "currentValue": "no data yet",
+      "proven": false
+    },
+    {
+      "key": "growth",
+      "label": "Growth (the multiple)",
+      "ownerDepartment": "CEO",
+      "how": "growth rate dominates the multiple; category leadership + public proof",
+      "currentValue": "no data yet",
+      "proven": false
+    }
+  ],
+  "inputs": {
+    "stripeConnected": false,
+    "stripeTestMode": false,
+    "arrCents": null,
+    "payingCompanies": null,
+    "totalCompanies": 4,
+    "totalEmployees": 13,
+    "retentionRate": null,
+    "grossMarginPct": null,
+    "arrGrowth30dPct": null
+  }
+}

@@ -1,6 +1,17 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { ArrowUpDown, Check, CheckCircle2, Inbox, Layers, ListFilter } from "lucide-react";
+import {
+  ArrowUpDown,
+  Check,
+  CheckCircle2,
+  ChevronLeft,
+  ChevronRight,
+  GalleryVerticalEnd,
+  Inbox,
+  Layers,
+  ListFilter,
+  Rows3,
+} from "lucide-react";
 import type { Agent, AttentionItem } from "@paperclipai/shared";
 import { useNavigate } from "@/lib/router";
 import { attentionApi } from "../api/attention";
@@ -23,18 +34,21 @@ import {
   loadAttentionFilters,
   loadAttentionGroupBy,
   loadAttentionSortOrder,
+  loadAttentionViewMode,
   loadCollapsedAttentionGroupKeys,
   NO_GROUP_SENTINEL,
   planAttentionRenderRows,
   saveAttentionFilters,
   saveAttentionGroupBy,
   saveAttentionSortOrder,
+  saveAttentionViewMode,
   saveCollapsedAttentionGroupKeys,
   sortAttentionItems,
   sourceMeta,
   type AttentionFilterState,
   type AttentionGroupBy,
   type AttentionSortOrder,
+  type AttentionViewMode,
 } from "../lib/attention";
 import { cn } from "../lib/utils";
 import { hasBlockingShortcutDialog, resolveAttentionQueueKeyAction } from "../lib/keyboardShortcuts";
@@ -87,6 +101,7 @@ export function WhatNeedsMe() {
   // Toolbar preferences (persisted to localStorage, Inbox pattern).
   const [groupBy, setGroupBy] = useState<AttentionGroupBy>(() => loadAttentionGroupBy());
   const [sortOrder, setSortOrder] = useState<AttentionSortOrder>(() => loadAttentionSortOrder());
+  const [viewMode, setViewMode] = useState<AttentionViewMode>(() => loadAttentionViewMode());
   const [filters, setFilters] = useState<AttentionFilterState>(() => defaultAttentionFilterState);
   const [collapsedGroupKeys, setCollapsedGroupKeys] = useState<Set<string>>(() => new Set());
   const [snoozedOpen, setSnoozedOpen] = useState(false);
@@ -186,9 +201,12 @@ export function WhatNeedsMe() {
   }, [activeItems, filters, sortOrder, groupBy]);
 
   const visibleCount = useMemo(() => groups.reduce((sum, group) => sum + group.items.length, 0), [groups]);
+  const deckItems = useMemo(() => groups.flatMap((group) => group.items), [groups]);
   const keyboardItems = useMemo(
-    () => groups.filter((group) => group.label === null || !collapsedGroupKeys.has(group.key)).flatMap((group) => group.items),
-    [collapsedGroupKeys, groups],
+    () => viewMode === "deck"
+      ? deckItems
+      : groups.filter((group) => group.label === null || !collapsedGroupKeys.has(group.key)).flatMap((group) => group.items),
+    [collapsedGroupKeys, deckItems, groups, viewMode],
   );
 
   // Rendered-row budget: only ratchets up (a hard reset mid-scroll would yank
@@ -285,6 +303,15 @@ export function WhatNeedsMe() {
     setAutoExpandDone(true);
   }, [activeItems, autoExpandDone, sortOrder]);
 
+  useEffect(() => {
+    if (viewMode !== "deck" || deckItems.length === 0) return;
+    const selected = deckItems.find((item) => item.id === selectedAttentionId) ?? deckItems[0]!;
+    if (selectedAttentionId !== selected.id) {
+      setSelectedAttentionId(selected.id);
+      setExpandedId(isInlineResolvable(selected) ? selected.id : null);
+    }
+  }, [deckItems, selectedAttentionId, viewMode]);
+
   const updateGroupBy = (next: AttentionGroupBy) => {
     setGroupBy(next);
     saveAttentionGroupBy(next);
@@ -292,6 +319,10 @@ export function WhatNeedsMe() {
   const updateSortOrder = (next: AttentionSortOrder) => {
     setSortOrder(next);
     saveAttentionSortOrder(next);
+  };
+  const updateViewMode = (next: AttentionViewMode) => {
+    setViewMode(next);
+    saveAttentionViewMode(next);
   };
   const updateFilters = (next: AttentionFilterState) => {
     setFilters(next);
@@ -382,7 +413,11 @@ export function WhatNeedsMe() {
             ? 0
             : keyboardItems.length - 1
           : (currentIndex + offset + keyboardItems.length) % keyboardItems.length;
-        setSelectedAttentionId(keyboardItems[nextIndex]?.id ?? null);
+        const nextItem = keyboardItems[nextIndex];
+        setSelectedAttentionId(nextItem?.id ?? null);
+        if (viewMode === "deck") {
+          setExpandedId(nextItem && isInlineResolvable(nextItem) ? nextItem.id : null);
+        }
         return;
       }
 
@@ -401,7 +436,7 @@ export function WhatNeedsMe() {
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [handleDismiss, keyboardItems, navigate, selectedAttentionId]);
+  }, [handleDismiss, keyboardItems, navigate, selectedAttentionId, viewMode]);
   const activeFilterCount = countActiveAttentionFilters(filters);
 
   if (!selectedCompanyId) {
@@ -424,6 +459,30 @@ export function WhatNeedsMe() {
               {visibleCount} {visibleCount === 1 ? "decision" : "decisions"}
             </span>
           )}
+          <div className="flex items-center rounded-md border border-border p-0.5" role="group" aria-label="Decision view">
+            <Button
+              type="button"
+              variant={viewMode === "deck" ? "secondary" : "ghost"}
+              size="icon-sm"
+              title="Deck view"
+              aria-label="Deck view"
+              aria-pressed={viewMode === "deck"}
+              onClick={() => updateViewMode("deck")}
+            >
+              <GalleryVerticalEnd className="size-4" aria-hidden="true" />
+            </Button>
+            <Button
+              type="button"
+              variant={viewMode === "list" ? "secondary" : "ghost"}
+              size="icon-sm"
+              title="List view"
+              aria-label="List view"
+              aria-pressed={viewMode === "list"}
+              onClick={() => updateViewMode("list")}
+            >
+              <Rows3 className="size-4" aria-hidden="true" />
+            </Button>
+          </div>
           {/* Filter */}
           <Popover>
             <PopoverTrigger asChild>
@@ -523,6 +582,22 @@ export function WhatNeedsMe() {
         <div className="space-y-4">
           {visibleCount === 0 ? (
             <CaughtUpNote filtered={activeItems.length > 0} />
+          ) : viewMode === "deck" ? (
+            <DecisionDeck
+              items={deckItems}
+              companyId={selectedCompanyId}
+              selectedId={selectedAttentionId}
+              expandedId={expandedId}
+              onSelect={(item) => {
+                setSelectedAttentionId(item.id);
+                setExpandedId(isInlineResolvable(item) ? item.id : null);
+              }}
+              onToggleExpand={handleToggleExpand}
+              onDismiss={handleDismiss}
+              onSnooze={handleSnooze}
+              agentMap={agentMap}
+              currentUserId={currentUserId}
+            />
           ) : (
             groups.map((group) => {
               const groupLabel = group.label;
@@ -613,6 +688,72 @@ export function WhatNeedsMe() {
         </div>
       )}
     </div>
+  );
+}
+
+export function DecisionDeck({
+  items,
+  companyId,
+  selectedId,
+  expandedId,
+  onSelect,
+  onToggleExpand,
+  onDismiss,
+  onSnooze,
+  agentMap,
+  currentUserId,
+}: {
+  items: AttentionItem[];
+  companyId: string;
+  selectedId: string | null;
+  expandedId: string | null;
+  onSelect: (item: AttentionItem) => void;
+  onToggleExpand: (item: AttentionItem) => void;
+  onDismiss: (item: AttentionItem) => void;
+  onSnooze: (item: AttentionItem, snoozedUntil: string) => void;
+  agentMap: Map<string, Agent>;
+  currentUserId: string | null;
+}) {
+  const selectedIndex = Math.max(0, items.findIndex((item) => item.id === selectedId));
+  const item = items[selectedIndex] ?? items[0];
+  if (!item) return null;
+
+  const move = (offset: number) => {
+    const nextIndex = (selectedIndex + offset + items.length) % items.length;
+    const next = items[nextIndex];
+    if (next) onSelect(next);
+  };
+
+  return (
+    <section data-testid="decision-deck" aria-label="Decision deck" className="space-y-3">
+      <div className="flex items-center justify-between gap-3">
+        <p className="text-xs font-medium text-muted-foreground">
+          Card {selectedIndex + 1} of {items.length}
+        </p>
+        <div className="flex items-center gap-2">
+          <Button type="button" variant="outline" size="icon-sm" onClick={() => move(-1)} aria-label="Previous decision">
+            <ChevronLeft className="size-4" aria-hidden="true" />
+          </Button>
+          <Button type="button" variant="outline" size="icon-sm" onClick={() => move(1)} aria-label="Next decision">
+            <ChevronRight className="size-4" aria-hidden="true" />
+          </Button>
+        </div>
+      </div>
+      <AttentionQueueRow
+        item={item}
+        companyId={companyId}
+        expanded={expandedId === item.id}
+        onToggleExpand={onToggleExpand}
+        onDismiss={onDismiss}
+        onSnooze={onSnooze}
+        agentMap={agentMap}
+        currentUserId={currentUserId}
+        selected
+      />
+      <p className="text-center text-xs text-muted-foreground">
+        J/K moves through the deck. Approve, accept, reject, or request revision on the card.
+      </p>
+    </section>
   );
 }
 

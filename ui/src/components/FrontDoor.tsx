@@ -1,4 +1,5 @@
 import { Rocket, Zap } from "lucide-react";
+import { APP_NAME } from "../lib/app-branding";
 import { cn } from "../lib/utils";
 
 interface FrontDoorProps {
@@ -10,10 +11,10 @@ export function FrontDoor({ onChoose }: FrontDoorProps) {
     <div className="flex flex-col items-center justify-center min-h-(--sz-60vh) px-8">
       <div className="text-center mb-10">
         <h2 className="text-2xl font-bold tracking-tight">
-          Welcome to Paperclip
+          Welcome to {APP_NAME}
         </h2>
         <p className="text-sm text-muted-foreground mt-2">
-          How would you like to get started?
+          Hire AI employees and keep board-level control.
         </p>
       </div>
 
@@ -30,9 +31,9 @@ export function FrontDoor({ onChoose }: FrontDoorProps) {
             <Rocket className="h-6 w-6" />
           </div>
           <div>
-            <h3 className="font-semibold text-sm">Build a new company</h3>
+            <h3 className="font-semibold text-sm">Start a company</h3>
             <p className="text-xs text-muted-foreground mt-1">
-              Begin with a mission, bring on a lead agent, and grow a team of agents to do the work.
+              Define the mission, hire the first AI employee, and train the operating loop.
             </p>
           </div>
         </button>
@@ -49,9 +50,9 @@ export function FrontDoor({ onChoose }: FrontDoorProps) {
             <Zap className="h-6 w-6" />
           </div>
           <div>
-            <h3 className="font-semibold text-sm">Add agents to your org</h3>
+            <h3 className="font-semibold text-sm">Improve my company</h3>
             <p className="text-xs text-muted-foreground mt-1">
-              Bring AI agents into your existing team or workflows.
+              Find the constraint, staff the first role, and assign work with budget caps.
             </p>
           </div>
         </button>

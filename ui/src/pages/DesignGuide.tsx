@@ -132,6 +132,8 @@ import { InlineEditor } from "@/components/InlineEditor";
 import { PageSkeleton } from "@/components/PageSkeleton";
 import { Identity } from "@/components/Identity";
 import { IssueReferencePill } from "@/components/IssueReferencePill";
+import { GlobalComposer } from "@/components/GlobalComposer";
+import type { ComposerRoster } from "@/lib/globalComposer";
 import { MembershipAction } from "@/components/MembershipAction";
 import { IssueOutputSection } from "@/components/issue-output/IssueOutputSection";
 import { EnvironmentVariablesEditor } from "@/components/environment-variables-editor";
@@ -223,6 +225,34 @@ const DESIGN_GUIDE_DEGRADED_OUTPUTS: IssueWorkProduct[] = [
     // Strip the path metadata so it fails the shared artifact schema.
     metadata: { attachmentId: "cccccccc-cccc-4ccc-8ccc-cccccccccccc", contentType: "video/mp4" },
   } as IssueWorkProduct,
+];
+
+const DESIGN_GUIDE_COMPOSER_ROSTER: ComposerRoster = [
+  {
+    id: "summon",
+    name: "Summon",
+    issuePrefix: "VIT",
+    agents: [
+      {
+        id: "summon-ceo",
+        companyId: "summon",
+        name: "Summon CEO",
+        urlKey: "ceo",
+        role: "ceo",
+        title: "CEO",
+        status: "active",
+      },
+      {
+        id: "summon-engineer",
+        companyId: "summon",
+        name: "Summon Engineer",
+        urlKey: "engineer",
+        role: "engineer",
+        title: "Engineer",
+        status: "running",
+      },
+    ],
+  },
 ];
 
 /* ------------------------------------------------------------------ */
@@ -425,7 +455,7 @@ export function DesignGuide() {
                 "StatusBadge", "StatusIcon", "PriorityIcon", "EntityRow", "EmptyState", "MetricCard",
                 "FilterBar", "InlineEditor", "PageSkeleton", "Identity", "CommentThread", "MarkdownEditor",
                 "PropertiesPanel", "Sidebar", "CommandPalette", "EnvironmentVariablesEditor",
-                "InlineBanner", "BuiltInAgentGate", "BuiltInAgentBadge",
+                "InlineBanner", "BuiltInAgentGate", "BuiltInAgentBadge", "GlobalComposer",
               ].map((name) => (
                 <Badge key={name} variant="ghost" className="font-mono text-(length:--text-nano)">
                   {name}
@@ -822,6 +852,18 @@ export function DesignGuide() {
             </div>
           </SubSection>
         </div>
+      </Section>
+
+      <Section title="Global Composer">
+        <SubSection title="Company front door">
+          <div className="rounded-lg border border-border bg-background p-3">
+            <GlobalComposer
+              roster={DESIGN_GUIDE_COMPOSER_ROSTER}
+              scopedCompanyId="summon"
+              onDispatch={() => undefined}
+            />
+          </div>
+        </SubSection>
       </Section>
 
       {/* ============================================================ */}

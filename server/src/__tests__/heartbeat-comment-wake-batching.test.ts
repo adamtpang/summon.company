@@ -644,7 +644,7 @@ describeEmbeddedPostgres("heartbeat comment wake batching", () => {
     }
   }, 120_000);
 
-  it("promotes deferred comment wakes after the active run closes the issue", async () => {
+  it("drops deferred comment wakes without explicit reopen intent after the active run closes the issue", async () => {
     const gateway = await createControlledGatewayServer();
     const companyId = randomUUID();
     const agentId = randomUUID();
@@ -787,22 +787,34 @@ describeEmbeddedPostgres("heartbeat comment wake batching", () => {
 
       gateway.releaseFirstWait();
 
-      await waitFor(() => gateway.getAgentPayloads().length >= 2, 90_000);
+      // VIT-53: the issue reached a terminal status before the deferred comment
+      // wake was delivered, and the wake carries no explicit reopen/resume
+      // intent. It must be dropped at promotion time — recorded conversation,
+      // never execution — instead of reopening the closed issue.
       await waitFor(async () => {
-        const runs = await db
-          .select()
+        const run = await db
+          .select({ status: heartbeatRuns.status })
           .from(heartbeatRuns)
-          .where(eq(heartbeatRuns.agentId, agentId))
-          .orderBy(asc(heartbeatRuns.createdAt));
-        const [initialRun, promotedRun] = runs;
-        return (
-          initialRun?.id === firstRun?.id &&
-          initialRun.status === "succeeded" &&
-          promotedRun?.status === "succeeded"
-        );
+          .where(eq(heartbeatRuns.id, firstRun!.id))
+          .then((rows) => rows[0] ?? null);
+        return run?.status === "succeeded";
+      }, 90_000);
+      await waitFor(async () => {
+        const deferred = await db
+          .select({ status: agentWakeupRequests.status })
+          .from(agentWakeupRequests)
+          .where(
+            and(
+              eq(agentWakeupRequests.companyId, companyId),
+              eq(agentWakeupRequests.agentId, agentId),
+              eq(agentWakeupRequests.status, "skipped"),
+            ),
+          )
+          .then((rows) => rows[0] ?? null);
+        return Boolean(deferred);
       }, 90_000);
 
-      const reopenedIssue = await db
+      const issueAfterDrop = await db
         .select({
           status: issues.status,
           completedAt: issues.completedAt,
@@ -811,27 +823,17 @@ describeEmbeddedPostgres("heartbeat comment wake batching", () => {
         .where(eq(issues.id, issueId))
         .then((rows) => rows[0] ?? null);
 
-      expect(reopenedIssue).toMatchObject({
-        status: "in_progress",
-        completedAt: null,
+      expect(issueAfterDrop).toMatchObject({
+        status: "done",
       });
+      expect(issueAfterDrop?.completedAt).not.toBeNull();
 
-      const secondPayload = gateway.getAgentPayloads()[1] ?? {};
-      expect(secondPayload.paperclip).toBeUndefined();
-      const secondWake = parseWakePayloadFromMessage(secondPayload.message);
-      expect(secondWake).toMatchObject({
-        reason: "issue_commented",
-        commentIds: [comment2.id],
-        latestCommentId: comment2.id,
-        issue: {
-          id: issueId,
-          identifier: `${issuePrefix}-1`,
-          title: "Reopen after deferred comment",
-          status: "in_progress",
-          priority: "medium",
-        },
-      });
-      expect(String(secondPayload.message ?? "")).toContain("Please handle this follow-up after you finish");
+      const runs = await db
+        .select({ id: heartbeatRuns.id })
+        .from(heartbeatRuns)
+        .where(eq(heartbeatRuns.agentId, agentId));
+      expect(runs.length).toBe(1);
+      expect(gateway.getAgentPayloads().length).toBe(1);
     } finally {
       gateway.releaseFirstWait();
       await gateway.close();
@@ -1177,16 +1179,29 @@ describeEmbeddedPostgres("heartbeat comment wake batching", () => {
 
       gateway.releaseFirstWait();
 
-      // The deferred wake still promotes (so the agent gets the message), but
-      // the issue must remain `done` because the only referenced comment is
-      // self-authored by the run that is now ending.
-      await waitFor(() => gateway.getAgentPayloads().length === 2, 90_000);
+      // VIT-53: the self-authored deferred comment wake targets an issue that
+      // is now terminal, so it is dropped at promotion time. The issue must
+      // remain `done` and no second run may be delivered.
+      await waitFor(async () => {
+        const deferred = await db
+          .select({ status: agentWakeupRequests.status })
+          .from(agentWakeupRequests)
+          .where(
+            and(
+              eq(agentWakeupRequests.companyId, companyId),
+              eq(agentWakeupRequests.agentId, agentId),
+              eq(agentWakeupRequests.status, "skipped"),
+            ),
+          )
+          .then((rows) => rows[0] ?? null);
+        return Boolean(deferred);
+      }, 90_000);
       await waitFor(async () => {
         const runs = await db
           .select()
           .from(heartbeatRuns)
           .where(eq(heartbeatRuns.agentId, agentId));
-        return runs.length === 2 && runs.every((run) => run.status === "succeeded");
+        return runs.length === 1 && runs.every((run) => run.status === "succeeded");
       }, 90_000);
 
       const issueAfterPromotion = await db
@@ -1202,13 +1217,14 @@ describeEmbeddedPostgres("heartbeat comment wake batching", () => {
         status: "done",
       });
       expect(issueAfterPromotion?.completedAt).not.toBeNull();
+      expect(gateway.getAgentPayloads().length).toBe(1);
     } finally {
       gateway.releaseFirstWait();
       await gateway.close();
     }
   }, 120_000);
 
-  it("still reopens a finished issue when a deferred batch mixes self-authored and human comments", async () => {
+  it("drops a mixed self-authored and human deferred batch when the issue is already terminal", async () => {
     const gateway = await createControlledGatewayServer();
     const companyId = randomUUID();
     const agentId = randomUUID();
@@ -1370,22 +1386,33 @@ describeEmbeddedPostgres("heartbeat comment wake batching", () => {
 
       gateway.releaseFirstWait();
 
-      await waitFor(() => gateway.getAgentPayloads().length >= 2, 90_000);
+      // VIT-53: even though the batch contains a real human follow-up, the
+      // issue reached a terminal status before delivery and the wake carries
+      // no explicit reopen/resume intent. The batch is dropped as recorded
+      // conversation; a deliberate reopen requires the reopen flag.
       await waitFor(async () => {
-        const runs = await db
-          .select()
+        const run = await db
+          .select({ status: heartbeatRuns.status })
           .from(heartbeatRuns)
-          .where(eq(heartbeatRuns.agentId, agentId))
-          .orderBy(asc(heartbeatRuns.createdAt));
-        const [initialRun, promotedRun] = runs;
-        return (
-          initialRun?.id === firstRun?.id &&
-          initialRun.status === "succeeded" &&
-          promotedRun?.status === "succeeded"
-        );
+          .where(eq(heartbeatRuns.id, firstRun!.id))
+          .then((rows) => rows[0] ?? null);
+        return run?.status === "succeeded";
+      }, 90_000);
+      await waitFor(async () => {
+        const pending = await db
+          .select({ id: agentWakeupRequests.id })
+          .from(agentWakeupRequests)
+          .where(
+            and(
+              eq(agentWakeupRequests.companyId, companyId),
+              eq(agentWakeupRequests.agentId, agentId),
+              eq(agentWakeupRequests.status, "deferred_issue_execution"),
+            ),
+          );
+        return pending.length === 0;
       }, 90_000);
 
-      const issueAfterPromotion = await db
+      const issueAfterDrop = await db
         .select({
           status: issues.status,
           completedAt: issues.completedAt,
@@ -1394,27 +1421,17 @@ describeEmbeddedPostgres("heartbeat comment wake batching", () => {
         .where(eq(issues.id, issueId))
         .then((rows) => rows[0] ?? null);
 
-      expect(issueAfterPromotion).toMatchObject({
-        status: "in_progress",
-        completedAt: null,
+      expect(issueAfterDrop).toMatchObject({
+        status: "done",
       });
+      expect(issueAfterDrop?.completedAt).not.toBeNull();
 
-      const secondPayload = gateway.getAgentPayloads()[1] ?? {};
-      expect(secondPayload.paperclip).toBeUndefined();
-      const secondWake = parseWakePayloadFromMessage(secondPayload.message);
-      expect(secondWake).toMatchObject({
-        reason: "issue_commented",
-        commentIds: [selfComment.id, humanComment.id],
-        latestCommentId: humanComment.id,
-        issue: {
-          id: issueId,
-          identifier: `${issuePrefix}-1`,
-          title: "Human follow-up must survive mixed deferred batches",
-          status: "in_progress",
-          priority: "medium",
-        },
-      });
-      expect(String(secondPayload.message ?? "")).toContain("Real follow-up from a human after the run closes");
+      const runs = await db
+        .select({ id: heartbeatRuns.id })
+        .from(heartbeatRuns)
+        .where(eq(heartbeatRuns.agentId, agentId));
+      expect(runs.length).toBe(1);
+      expect(gateway.getAgentPayloads().length).toBe(1);
     } finally {
       gateway.releaseFirstWait();
       await gateway.close();

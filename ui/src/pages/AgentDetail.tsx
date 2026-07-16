@@ -112,6 +112,7 @@ import {
   useResourceMemberships,
 } from "../hooks/useResourceMemberships";
 import { Badge } from "@/components/ui/badge";
+import { ModelQuickSwitch } from "@/components/model-picker/ModelQuickSwitch";
 
 const runStatusIcons: Record<string, { icon: typeof CheckCircle2; color: string }> = {
   succeeded: { icon: CheckCircle2, color: "text-green-600 dark:text-green-400" },
@@ -1125,6 +1126,15 @@ export function AgentDetail() {
           </div>
         </div>
         <div className="flex items-center gap-2 shrink-0">
+          {resolvedCompanyId && (
+            <ModelQuickSwitch
+              agentId={agent.id}
+              companyId={resolvedCompanyId}
+              adapterType={agent.adapterType}
+              adapterConfig={agent.adapterConfig}
+              className="hidden md:inline-flex max-w-sm"
+            />
+          )}
           <StarToggle
             size="button"
             starred={agentStarred}

@@ -1,14 +1,14 @@
 {
   "id": "/",
-  "name": "Paperclip",
-  "short_name": "Paperclip",
-  "description": "AI-powered project management and agent coordination platform",
+  "name": "vitals.run",
+  "short_name": "Vitals",
+  "description": "The company operating system for hiring, training, and managing AI employees.",
   "start_url": "/",
   "scope": "/",
   "display": "browser",
   "orientation": "any",
-  "theme_color": "#18181b",
-  "background_color": "#18181b",
+  "theme_color": "#f7faff",
+  "background_color": "#f7faff",
   "icons": [
     {
       "src": "/android-chrome-192x192.png",

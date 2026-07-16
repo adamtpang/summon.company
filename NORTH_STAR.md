@@ -12,6 +12,22 @@ department; Summon operates the whole company.
 gives you back a company: a formation of AI employees that diagnoses the constraint,
 does the work 24/7, and reports to you as the board.**
 
+## The offer (RATIFIED 2026-07-16, board, VIT-103)
+- **We SELL:** one hireable AI employee that owns an outcome end-to-end (the board
+  approves every send and spend), fed by a free instant whole-company diagnosis, on top
+  of a company-context file we never sell (the moat).
+- **To WHOM:** LEAD = the solo technical-ish founder (1-5 projects, revenue intent, zero
+  staff), self-serve, found in founder communities. EXPANSION = the SMB owner-operator,
+  service-wedge (the Quantus pattern), higher touch and LTV. Strangers only.
+- **At WHAT PRICE:** $99/employee/mo, flat, no usage metering. The entry offer is ONE
+  first employee at $99 - never "staff the 8-person formation for $792" at first touch.
+  Land-and-expand grows seats per company.
+- Compete on "one accountable employee that owns a VERIFIED outcome, human as board,
+  flat no-surprise price" - not on being cheaper per agent than Cofounder.co.
+- Reversibility: price and packaging are reversible; the positioning ("AI EMPLOYEES you
+  HIRE, the human is the BOARD") is sticky - hold pricing loosely, commit to positioning.
+- Full card: doc/VIT-103-OFFER-ICP-DECISION-CARD.md.
+
 ## The mission (the optimism.fun thesis, operationalized)
 Infinite problems, infinite solutions. Opportunity = demand (humans affected x severity
 x market) / supply (companies, capital, and solution quality already on it). Massive
@@ -72,6 +88,15 @@ employees, and the score is real revenue. SimCity where the city is a real compa
 - **The engine** - Paperclip fork monorepo, additive customization, upstream-tracked.
 - **The public face** - the landing (hire employees, $99/mo each) + the leaderboard
   (summon.company/agents, "companiesmarketcap of the AI-agent economy") as distribution.
+
+## The interface (DECIDED 2026-07-15: chat-first)
+The founder's job is exactly two conversations: **talking to users** and **talking to
+AI employees**. Summon's primary surface is therefore a simple, WhatsApp-grade chat -
+one thread per employee, the CEO as the company's front door - and EVERYTHING flows
+through it: information, messages, decisions, code, prompts, evidence. Dashboards
+(formation, roadmap, vitals) are the map; chat is the territory. If a workflow can't
+be driven from the chat surface, it isn't done. (VIT-41 the inbox, VIT-57 the CEO
+front door, VIT-40 the memory that makes it feel human.)
 
 ## Naming (DECIDED: Summon / summon.company)
 Adam's brief: the name must evoke "an AI agent company that creates or improves

@@ -1,6 +1,7 @@
-import { and, asc, desc, eq, gt, inArray, isNotNull, isNull, notInArray, sql } from "drizzle-orm";
+import { and, asc, desc, eq, gt, gte, inArray, isNotNull, isNull, notInArray, sql } from "drizzle-orm";
 import type { Db } from "@paperclipai/db";
 import {
+  activityLog,
   agents,
   approvals,
   assets,
@@ -34,9 +35,15 @@ import type {
   AttentionSubject,
   AttentionWorkspaceRef,
 } from "@paperclipai/shared";
+import {
+  evaluateQuotaAlerts,
+  quotaAlertDedupKey,
+  quotaProviderLabel,
+} from "@paperclipai/shared";
 import { PRODUCTIVITY_REVIEW_ORIGIN_KIND } from "./productivity-review.js";
 import { budgetService } from "./budgets.js";
 import { issueService } from "./issues.js";
+import { peekQuotaWindows } from "./quota-windows.js";
 import { parseIssueExecutionState } from "./issue-execution-policy.js";
 
 const ATTENTION_SOURCE_KINDS: AttentionSourceKind[] = [
@@ -1171,6 +1178,144 @@ export function attentionService(db: Db) {
             observedPercent,
             amountObserved: incident.amountObserved,
             amountLimit: incident.amountLimit,
+            images: [],
+          },
+        }));
+      }
+
+      // provider quota alerts (VIT-48): warn at 70%, urgent at 90%, critical
+      // when a subscription window is exhausted. Reads the non-blocking cache
+      // so the feed never waits on a live provider call; items appear once the
+      // first background refresh lands.
+      const quotaSnapshot = peekQuotaWindows();
+      if (quotaSnapshot) {
+        // anchor item timestamps to the snapshot so feed ordering and unread
+        // indicators stay stable between reads of the same cached data
+        const quotaNowIso = new Date(quotaSnapshot.fetchedAt).toISOString();
+        for (const alert of evaluateQuotaAlerts(quotaSnapshot.results, new Date(quotaSnapshot.fetchedAt))) {
+          const dedupKey = quotaAlertDedupKey(alert);
+          const providerName = quotaProviderLabel(alert.provider);
+          add(createItem({
+            companyId,
+            sourceKind: "budget_alert",
+            subject: {
+              kind: "budget_incident",
+              id: dedupKey,
+              companyId,
+              title: alert.level === "exhausted"
+                ? `${providerName} ${alert.windowLabel} quota exhausted`
+                : `${providerName} ${alert.windowLabel} quota at ${Math.round(alert.usedPercent)}%`,
+              identifier: null,
+              status: alert.level,
+              href: `/${prefix}/usage`,
+              metadata: {
+                provider: alert.provider,
+                windowLabel: alert.windowLabel,
+                usedPercent: alert.usedPercent,
+                level: alert.level,
+                resetsAt: alert.resetsAt,
+                forecastExhaustAt: alert.forecastExhaustAt,
+              },
+            },
+            whyNow: alert.message,
+            decisionVerbs: decisionVerbs(
+              { id: "open_usage", label: "Open usage", description: "Review provider burn and per-employee attribution." },
+              { id: "dismiss", label: "Dismiss", description: "Dismiss this quota alert for the current window." },
+            ),
+            inlineResolvable: true,
+            entryRule: "provider subscription quota window is >= 70% consumed (warn), >= 90% (urgent), or exhausted.",
+            exitRule: "The window resets or consumption drops below the threshold, or the row is dismissed.",
+            dedupKey,
+            severity: alert.level === "exhausted" ? "critical" : alert.level === "urgent" ? "high" : "medium",
+            activityAt: quotaNowIso,
+            createdAt: quotaNowIso,
+            updatedAt: quotaNowIso,
+            relatedIssue: null,
+            detail: {
+              kind: "generic",
+              summaryExcerpt: alert.message,
+              images: [],
+            },
+          }));
+        }
+      }
+
+      // model failover notifications (VIT-49): every chain shift an employee
+      // makes (fell back to a fallback provider, restored to its primary, or
+      // has nowhere left to go) surfaces to the board, one item per event.
+      const failoverSince = new Date(Date.now() - 7 * 86_400_000);
+      const failoverEvents = await db
+        .select({
+          id: activityLog.id,
+          action: activityLog.action,
+          agentId: activityLog.agentId,
+          details: activityLog.details,
+          createdAt: activityLog.createdAt,
+        })
+        .from(activityLog)
+        .where(and(
+          eq(activityLog.companyId, companyId),
+          inArray(activityLog.action, [
+            "agent.model_failover",
+            "agent.model_failback",
+            "agent.model_fallback_unavailable",
+          ]),
+          gte(activityLog.createdAt, failoverSince),
+        ))
+        .orderBy(desc(activityLog.createdAt))
+        .limit(50);
+      for (const event of failoverEvents) {
+        const details = (event.details ?? {}) as Record<string, unknown>;
+        const agentName = typeof details.agentName === "string" ? details.agentName : "An employee";
+        const message = typeof details.message === "string" ? details.message : null;
+        const eventIso = toIso(event.createdAt);
+        const title = event.action === "agent.model_failback"
+          ? `${agentName} restored to primary model`
+          : event.action === "agent.model_fallback_unavailable"
+            ? `${agentName} has no available fallback model`
+            : `${agentName} fell back to ${typeof details.selectedAdapterType === "string" ? details.selectedAdapterType : "a fallback model"}`;
+        add(createItem({
+          companyId,
+          sourceKind: "budget_alert",
+          subject: {
+            kind: "budget_incident",
+            id: `model-failover:${event.id}`,
+            companyId,
+            title,
+            identifier: null,
+            status: event.action === "agent.model_fallback_unavailable" ? "exhausted" : "active",
+            href: `/${prefix}/usage`,
+            metadata: {
+              action: event.action,
+              agentId: event.agentId,
+              trigger: details.trigger ?? null,
+              primaryAdapterType: details.primaryAdapterType ?? null,
+              selectedAdapterType: details.selectedAdapterType ?? null,
+              chainIndex: details.chainIndex ?? null,
+              resetsAt: details.resetsAt ?? null,
+            },
+          },
+          whyNow: message ?? title,
+          decisionVerbs: decisionVerbs(
+            { id: "open_usage", label: "Open usage", description: "Review provider quota state and the employee's model chain." },
+            { id: "dismiss", label: "Dismiss", description: "Acknowledge this model chain shift." },
+          ),
+          inlineResolvable: true,
+          entryRule: "an employee's model chain shifted (failover, failback, or no fallback available) in the last 7 days.",
+          exitRule: "The notification is dismissed.",
+          dedupKey: `model-failover:${event.id}`,
+          severity: event.action === "agent.model_fallback_unavailable"
+            ? "critical"
+            : event.action === "agent.model_failover"
+              ? "high"
+              : "medium",
+          activityAt: eventIso,
+          createdAt: eventIso,
+          updatedAt: eventIso,
+          relatedIssue: null,
+          detail: {
+            kind: "generic",
+            summaryExcerpt: message ?? title,
             images: [],
           },
         }));

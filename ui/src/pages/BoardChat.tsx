@@ -22,8 +22,10 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { Activity, ArrowDown, History, MessageSquarePlus, X } from "lucide-react";
+import { Activity, ArrowDown, History, ListChecks, MessageSquarePlus } from "lucide-react";
 import { ActivityFeed } from "../components/ActivityFeed";
+import { PrioritiesPanel } from "../components/PrioritiesPanel";
+import type { Agent, Issue } from "@paperclipai/shared";
 import { ChatComposer, type ChatComposerHandle } from "../components/ChatComposer";
 import {
   AgentBubbleActionRow,
@@ -95,6 +97,68 @@ function TypingBubble() {
           <span />
           <span />
         </span>
+      </div>
+    </div>
+  );
+}
+
+type RightPaneView = "priorities" | "feed";
+
+/**
+ * Right-hand companion pane for the Conference Room. Defaults to the VIT-70
+ * Priorities scoreboard (board-approved side-by-side-with-chat surface) with a
+ * toggle back to the live Activity feed. Shared between the desktop split pane
+ * and the mobile sheet so both stay in sync.
+ */
+function BoardRightPane({
+  view,
+  onViewChange,
+  issues,
+  agents,
+}: {
+  view: RightPaneView;
+  onViewChange: (view: RightPaneView) => void;
+  issues: Issue[] | undefined;
+  agents: Agent[] | undefined;
+}) {
+  return (
+    <div className="flex h-full min-h-0 min-w-0 flex-1 flex-col bg-background">
+      <div className="relative flex shrink-0 items-center gap-1 px-3 py-2">
+        <div
+          className="pointer-events-none absolute bottom-0 left-0 right-0 h-px bg-border"
+          aria-hidden
+        />
+        <div className="inline-flex items-center gap-0.5 rounded-md bg-muted p-0.5">
+          <Button
+            type="button"
+            size="sm"
+            variant={view === "priorities" ? "secondary" : "ghost"}
+            className="h-7 gap-1.5 px-2 text-xs"
+            aria-pressed={view === "priorities"}
+            onClick={() => onViewChange("priorities")}
+          >
+            <ListChecks className="h-3.5 w-3.5" />
+            Priorities
+          </Button>
+          <Button
+            type="button"
+            size="sm"
+            variant={view === "feed" ? "secondary" : "ghost"}
+            className="h-7 gap-1.5 px-2 text-xs"
+            aria-pressed={view === "feed"}
+            onClick={() => onViewChange("feed")}
+          >
+            <Activity className="h-3.5 w-3.5" />
+            Feed
+          </Button>
+        </div>
+      </div>
+      <div className="min-h-0 flex-1">
+        {view === "priorities" ? (
+          <PrioritiesPanel issues={issues} agents={agents} />
+        ) : (
+          <ActivityFeed />
+        )}
       </div>
     </div>
   );
@@ -653,6 +717,9 @@ export function BoardChat() {
   // guard caused "Rendered more hooks than during the previous render" and a
   // blank page once a company was selected.
   const [mobileFeedOpen, setMobileFeedOpen] = useState(false);
+  // Right pane defaults to the VIT-70 Priorities scoreboard beside chat; the
+  // board can flip to the live Activity feed.
+  const [rightPaneView, setRightPaneView] = useState<RightPaneView>("priorities");
 
   if (!selectedCompanyId) {
     return (
@@ -992,13 +1059,18 @@ export function BoardChat() {
           />
         </div>
 
-        {/* Right: Agent Feed — hidden on mobile */}
+        {/* Right: Priorities scoreboard / Agent Feed — hidden on mobile */}
         <div className="hidden md:flex md:min-h-0 md:min-w-0 md:flex-1">
-          <ActivityFeed />
+          <BoardRightPane
+            view={rightPaneView}
+            onViewChange={setRightPaneView}
+            issues={issues}
+            agents={agents}
+          />
         </div>
       </div>
 
-      {/* Mobile: floating feed toggle + sheet drawer */}
+      {/* Mobile: floating companion toggle + sheet drawer */}
       <div className="md:hidden">
         <Sheet open={mobileFeedOpen} onOpenChange={setMobileFeedOpen}>
           <SheetTrigger asChild>
@@ -1007,13 +1079,18 @@ export function BoardChat() {
               size="icon"
               variant="secondary"
               className="fixed bottom-20 right-4 z-20 h-10 w-10 rounded-full shadow-lg"
-              aria-label="Open agent feed"
+              aria-label="Open priorities and feed"
             >
-              <Activity className="h-4 w-4" />
+              <ListChecks className="h-4 w-4" />
             </Button>
           </SheetTrigger>
           <SheetContent side="bottom" className="h-(--sz-70vh) p-0 rounded-t-xl">
-            <ActivityFeed />
+            <BoardRightPane
+              view={rightPaneView}
+              onViewChange={setRightPaneView}
+              issues={issues}
+              agents={agents}
+            />
           </SheetContent>
         </Sheet>
       </div>

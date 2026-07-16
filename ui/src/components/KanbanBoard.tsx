@@ -20,6 +20,7 @@ import {
 import { StatusIcon } from "./StatusIcon";
 import { PriorityIcon } from "./PriorityIcon";
 import { Identity } from "./Identity";
+import { IssueAgeChip } from "./IssueAgeChip";
 import type { Issue, IssueStatus } from "@paperclipai/shared";
 import { AlertTriangle } from "lucide-react";
 import { isSuccessfulRunHandoffRequired } from "../lib/successful-run-handoff";
@@ -330,6 +331,7 @@ function KanbanCard({
           <span className="text-xs text-muted-foreground font-mono shrink-0">
             {issue.identifier ?? issue.id.slice(0, 8)}
           </span>
+          <IssueAgeChip issue={issue} />
           {isSuccessfulRunHandoffRequired(issue) ? (
             <Badge variant="outline"
               className="border-amber-400/45 bg-amber-50/60 px-1.5 text-(length:--text-nano) text-amber-700 dark:border-amber-300/35 dark:bg-amber-400/10 dark:text-amber-300"

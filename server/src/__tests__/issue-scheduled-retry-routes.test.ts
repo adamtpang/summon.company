@@ -180,6 +180,7 @@ describeEmbeddedPostgres("issue scheduled retry routes", () => {
         scheduledRetryAt: scheduledRetryAt.toISOString(),
         scheduledRetryAttempt: 2,
         retryReason: "transient_failure",
+        errorFamily: "provider_quota",
       },
       updatedAt: now,
       createdAt: now,
@@ -219,6 +220,7 @@ describeEmbeddedPostgres("issue scheduled retry routes", () => {
       retryOfRunId: sourceRunId,
       scheduledRetryAttempt: 2,
       scheduledRetryReason: "transient_failure",
+      errorFamily: "provider_quota",
     });
     expect(res.body.scheduledRetry.scheduledRetryAt).toBe(scheduledRetryAt.toISOString());
   });
@@ -233,6 +235,7 @@ describeEmbeddedPostgres("issue scheduled retry routes", () => {
     expect(first.body).toMatchObject({
       outcome: "promoted",
       scheduledRetry: {
+        errorFamily: "provider_quota",
         runId: retryRunId,
         status: "queued",
       },

@@ -4,7 +4,7 @@
 // Owned mode:    server down -> spawn `paperclipai run`, show splash while it boots,
 //                and shut it down gracefully (taskkill tree, no /F first) on quit.
 
-const { app, BrowserWindow, Tray, Menu, nativeImage, dialog } = require('electron');
+const { app, BrowserWindow, Tray, Menu, nativeImage, nativeTheme, dialog } = require('electron');
 const { spawn, execFile } = require('child_process');
 const http = require('http');
 const path = require('path');
@@ -187,10 +187,35 @@ async function setUiTheme(theme) {
 // ---------------------------------------------------------------------------
 // Tray
 // ---------------------------------------------------------------------------
+// Monochrome Summon Circle glyph that follows the OS shell theme (VIT-36).
+// macOS gets a Template image (system tints it); Windows/Linux pick the white
+// glyph on dark shells and the ink glyph on light shells. icon.ico is the fallback.
+function trayIcon() {
+  const trayDir = path.join(__dirname, 'assets', 'tray');
+  try {
+    if (process.platform === 'darwin') {
+      const img = nativeImage.createFromPath(path.join(trayDir, 'summonTrayTemplate.png'));
+      if (!img.isEmpty()) {
+        img.setTemplateImage(true);
+        return img;
+      }
+    } else {
+      const file = nativeTheme.shouldUseDarkColors ? 'summon-tray-dark.ico' : 'summon-tray-light.ico';
+      const img = nativeImage.createFromPath(path.join(trayDir, file));
+      if (!img.isEmpty()) return img;
+    }
+  } catch {
+    // fall through to the tile icon
+  }
+  return nativeImage.createFromPath(path.join(__dirname, 'icon.ico'));
+}
+
 function createTray() {
-  const icon = nativeImage.createFromPath(path.join(__dirname, 'icon.ico'));
-  tray = new Tray(icon);
+  tray = new Tray(trayIcon());
   tray.setToolTip('Summon - Company OS');
+  nativeTheme.on('updated', () => {
+    if (tray) tray.setImage(trayIcon());
+  });
 
   const rebuildMenu = () => {
     const menu = Menu.buildFromTemplate([

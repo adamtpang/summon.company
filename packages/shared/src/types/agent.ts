@@ -4,6 +4,7 @@ import type {
   PauseReason,
   AgentRole,
   AgentStatus,
+  ModelPitStopAdapterType,
 } from "../constants.js";
 import type {
   CompanyMembership,
@@ -15,6 +16,7 @@ import type {
 } from "../trust-policy.js";
 import type { AgentOrgChainHealth } from "../agent-eligibility.js";
 import type { AgentApiKeyScope } from "../validators/agent.js";
+import type { ModelChainConfig } from "../model-chain.js";
 
 export interface AgentPermissions extends Record<string, unknown> {
   canCreateAgents: boolean;
@@ -31,6 +33,8 @@ export interface AgentModelProfileConfig {
 
 export interface AgentRuntimeConfig extends Record<string, unknown> {
   modelProfiles?: Partial<Record<ModelProfileKey, AgentModelProfileConfig>>;
+  /** VIT-49: ordered fallback model chain; see packages/shared/src/model-chain.ts */
+  modelChain?: ModelChainConfig;
 }
 
 export type AgentInstructionsBundleMode = "managed" | "external";
@@ -134,6 +138,35 @@ export interface AgentConfigRevision {
   beforeConfig: Record<string, unknown>;
   afterConfig: Record<string, unknown>;
   createdAt: Date;
+}
+
+export interface CompanyModelPitStopProvider {
+  adapterType: ModelPitStopAdapterType;
+  label: string;
+  primaryModel: string | null;
+  cheapModel: string | null;
+}
+
+export interface CompanyModelPitStopStatus {
+  currentAdapterType: ModelPitStopAdapterType | "mixed" | null;
+  eligibleAgentCount: number;
+  excludedAgentCount: number;
+  activeRuns: {
+    total: number;
+    queued: number;
+    running: number;
+  };
+  canSwitch: boolean;
+  blockingReason: string | null;
+  providers: CompanyModelPitStopProvider[];
+}
+
+export interface CompanyModelPitStopResult {
+  adapterType: ModelPitStopAdapterType;
+  changedAgentCount: number;
+  primaryModel: string;
+  cheapModel: string | null;
+  status: CompanyModelPitStopStatus;
 }
 
 export type AdapterEnvironmentCheckLevel = "info" | "warn" | "error";

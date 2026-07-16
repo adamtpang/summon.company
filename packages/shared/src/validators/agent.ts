@@ -4,11 +4,13 @@ import {
   AGENT_ROLES,
   AGENT_STATUSES,
   INBOX_MINE_ISSUE_STATUS_FILTER,
+  MODEL_PIT_STOP_ADAPTER_TYPES,
 } from "../constants.js";
 import { agentAdapterTypeSchema } from "../adapter-type.js";
 import { envConfigSchema } from "./secret.js";
 import { trustAuthorizationPolicySchema, trustPresetSchema } from "./trust-policy.js";
 import { agentDesiredSkillSelectionSchema } from "./adapter-skills.js";
+import { modelChainConfigSchema } from "../model-chain.js";
 
 export const agentPermissionsSchema = z.object({
   canCreateAgents: z.boolean().optional().default(false),
@@ -66,6 +68,9 @@ export const agentRuntimeConfigSchema = z.object({
   modelProfiles: z.object({
     cheap: agentModelProfileConfigSchema.optional(),
   }).strict().optional(),
+  // VIT-49: ordered fallback model chain (primary = the agent's own
+  // adapterType/adapterConfig; entries are provider-crossing fallbacks).
+  modelChain: modelChainConfigSchema.optional(),
 }).catchall(z.unknown());
 
 export const createAgentSchema = z.object({
@@ -124,6 +129,12 @@ export const updateAgentSchema = createAgentSchema
   });
 
 export type UpdateAgent = z.infer<typeof updateAgentSchema>;
+
+export const switchCompanyModelPitStopSchema = z.object({
+  adapterType: z.enum(MODEL_PIT_STOP_ADAPTER_TYPES),
+}).strict();
+
+export type SwitchCompanyModelPitStop = z.infer<typeof switchCompanyModelPitStopSchema>;
 
 export const updateAgentInstructionsPathSchema = z.object({
   path: z.string().trim().min(1).nullable(),

@@ -5,6 +5,7 @@ import {
   Target,
   LayoutDashboard,
   DollarSign,
+  Gauge,
   History,
   Search,
   SquarePen,
@@ -20,6 +21,7 @@ import {
   PanelLeftOpen,
   Pin,
   MessagesSquare,
+  MessageCircle,
   GanttChartSquare,
   UsersRound,
   Map,
@@ -85,14 +87,10 @@ export function Sidebar() {
   const showPipelines = experimentalSettings?.enablePipelines === true;
   const goalsLinkPending = experimentalSettings === undefined;
   const showGoalsLink = experimentalSettings?.enableGoalsSidebarLink === true;
-  // Decisions (attention home) is an experimental surface (PAP-13481): the nav
-  // item is hidden entirely until the flag is enabled (same no-flash pattern as
-  // showWorkspacesLink — it defaults hidden, so no placeholder is needed).
-  const showDecisions = experimentalSettings?.enableDecisions === true;
   const { data: attentionFeed } = useQuery({
     queryKey: queryKeys.attention(selectedCompanyId!),
     queryFn: () => attentionApi.list(selectedCompanyId!),
-    enabled: !!selectedCompanyId && showDecisions,
+    enabled: !!selectedCompanyId,
     refetchInterval: 60_000,
   });
   const attentionCount = attentionBadgeCount(attentionFeed);
@@ -198,6 +196,7 @@ export function Sidebar() {
             );
           })()}
           <SidebarNavItem to="/dashboard" label="Dashboard" icon={LayoutDashboard} liveCount={liveRunCount} />
+          <SidebarNavItem to="/messages" label="Messages" icon={MessageCircle} />
           <SidebarNavItem
             to="/inbox"
             label="Inbox"
@@ -207,15 +206,13 @@ export function Sidebar() {
             badgeTone={inboxBadge.failedRuns > 0 ? "danger" : "default"}
             alert={inboxBadge.failedRuns > 0}
           />
-          {showDecisions ? (
-            <SidebarNavItem
-              to="/decisions"
-              label="Decisions"
-              icon={ListChecks}
-              badge={attentionCount}
-              badgeLabel="decisions"
-            />
-          ) : null}
+          <SidebarNavItem
+            to="/decisions"
+            label="Decisions"
+            icon={ListChecks}
+            badge={attentionCount}
+            badgeLabel="decisions"
+          />
           {conferenceRoomChatEnabled ? (
             <SidebarNavItem to="/board-chat" label="Conference Room" icon={MessagesSquare} />
           ) : null}
@@ -276,6 +273,7 @@ export function Sidebar() {
           <SidebarNavItem to="/ai-sdr" label="AI SDR" icon={Send} />
           <SidebarNavItem to="/org" label="Org" icon={Network} />
           <SidebarNavItem to="/timeline" label="Timeline" icon={GanttChartSquare} />
+          <SidebarNavItem to="/usage" label="Usage" icon={Gauge} />
           <SidebarNavItem to="/costs" label="Costs" icon={DollarSign} />
           <SidebarNavItem to="/activity" label="Activity" icon={History} />
           <SidebarNavItem to="/company/settings" label="Settings" icon={Settings} />

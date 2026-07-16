@@ -14,6 +14,7 @@ import { NewAgentDialog } from "./NewAgentDialog";
 import { KeyboardShortcutsCheatsheet } from "./KeyboardShortcutsCheatsheet";
 import { ToastViewport } from "./ToastViewport";
 import { MobileBottomNav } from "./MobileBottomNav";
+import { GlobalComposerDock } from "./GlobalComposerDock";
 import { WorktreeBanner } from "./WorktreeBanner";
 import { DevRestartBanner } from "./DevRestartBanner";
 import { StandaloneBrowserControls } from "./StandaloneBrowserControls";
@@ -604,7 +605,7 @@ export function Layout() {
                 // changes (e.g. switching skill-detail tabs) don't widen/shift
                 // when the vertical scrollbar appears or disappears (PAP-10907).
                 isMobile
-                  ? "overflow-visible pb-(--sz-calc-14)"
+                  ? "overflow-visible pb-(--sz-calc-43)"
                   : "overflow-auto [scrollbar-gutter:stable]",
               )}
             >
@@ -621,6 +622,7 @@ export function Layout() {
             </main>
             <PropertiesPanel />
           </div>
+          <GlobalComposerDock mobile={isMobile} />
         </div>
       </div>
       {isMobile && <MobileBottomNav visible={mobileNavVisible} />}

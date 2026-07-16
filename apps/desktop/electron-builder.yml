@@ -8,6 +8,7 @@ files:
   - main.js
   - splash.html
   - icon.ico
+  - assets/**
   - package.json
 
 win:

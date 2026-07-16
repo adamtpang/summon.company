@@ -47,6 +47,10 @@ Isolated brand preview: `http://127.0.0.1:3102`, fork version `0.3.1`.
 The CTO and Design Director are temporarily paused because queued comment wakeups can
 reopen terminal issues after a packaged-runtime restart. Resume either only for a fresh
 assignment or deliberate canary. Current status command reports zero active runs.
+VIT-53 fixed the wake bug in source (delivery-time terminal check plus
+`issue.wake_dropped_terminal` audit events); semantics, regression tests, and the
+unpause criteria live in `doc/VIT-53-WAKE-SEMANTICS.md`. The live packaged runtime
+still predates the fix, so rollout rides the VIT-14 cutover.
 
 Company Zero IDs and repeatable configuration live in
 `scripts/vitals-company-zero-bootstrap.mjs`. `VIT` is the issue prefix, not an acronym.

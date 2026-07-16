@@ -3,6 +3,7 @@ import type { AttentionFeed, AttentionItem, AttentionSourceKind } from "@papercl
 import {
   ATTENTION_GROUP_BY_KEY,
   ATTENTION_GROUP_BY_OPTIONS,
+  ATTENTION_VIEW_MODE_KEY,
   attentionBadgeCount,
   attentionDateBucket,
   attentionDetailLine,
@@ -15,9 +16,11 @@ import {
   groupAttentionItems,
   isInlineResolvable,
   loadAttentionGroupBy,
+  loadAttentionViewMode,
   NO_GROUP_SENTINEL,
   planAttentionRenderRows,
   saveAttentionGroupBy,
+  saveAttentionViewMode,
   severityBadge,
   severityStyle,
   sortAttentionItems,
@@ -67,6 +70,24 @@ describe("attention group preference persistence", () => {
 
     localStorage.setItem(ATTENTION_GROUP_BY_KEY, "unexpected");
     expect(loadAttentionGroupBy()).toBe("none");
+  });
+});
+
+describe("attention view preference persistence", () => {
+  beforeEach(() => {
+    localStorage.clear();
+  });
+
+  it("defaults to the one-card deck", () => {
+    expect(loadAttentionViewMode()).toBe("deck");
+  });
+
+  it("round-trips list mode and treats stale values as deck", () => {
+    saveAttentionViewMode("list");
+    expect(loadAttentionViewMode()).toBe("list");
+
+    localStorage.setItem(ATTENTION_VIEW_MODE_KEY, "unexpected");
+    expect(loadAttentionViewMode()).toBe("deck");
   });
 });
 
@@ -259,13 +280,13 @@ describe("sortAttentionItems", () => {
 });
 
 describe("attentionDateBucket", () => {
-  const now = new Date("2026-07-10T12:00:00Z").getTime();
+  const now = new Date(2026, 6, 10, 12).getTime();
 
   it("buckets by rolling calendar-day windows relative to now", () => {
-    expect(attentionDateBucket("2026-07-10T09:00:00Z", now)).toBe("today");
-    expect(attentionDateBucket("2026-07-09T23:00:00Z", now)).toBe("yesterday");
-    expect(attentionDateBucket("2026-07-06T09:00:00Z", now)).toBe("this_week");
-    expect(attentionDateBucket("2026-06-01T09:00:00Z", now)).toBe("earlier");
+    expect(attentionDateBucket(new Date(2026, 6, 10, 9).toISOString(), now)).toBe("today");
+    expect(attentionDateBucket(new Date(2026, 6, 9, 23).toISOString(), now)).toBe("yesterday");
+    expect(attentionDateBucket(new Date(2026, 6, 6, 9).toISOString(), now)).toBe("this_week");
+    expect(attentionDateBucket(new Date(2026, 5, 1, 9).toISOString(), now)).toBe("earlier");
   });
 
   it("treats invalid timestamps as earlier", () => {

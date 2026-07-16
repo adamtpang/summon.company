@@ -7,6 +7,11 @@ import {
   useState,
   type ReactNode,
 } from "react";
+import {
+  APP_DARK_THEME_COLOR,
+  APP_LIGHT_THEME_COLOR,
+  APP_THEME_STORAGE_KEY,
+} from "../lib/app-branding";
 
 type Theme = "light" | "dark";
 
@@ -16,13 +21,13 @@ interface ThemeContextValue {
   toggleTheme: () => void;
 }
 
-const THEME_STORAGE_KEY = "paperclip.theme";
-const DARK_THEME_COLOR = "#18181b";
-const LIGHT_THEME_COLOR = "#ffffff";
+const THEME_STORAGE_KEY = APP_THEME_STORAGE_KEY;
+const DARK_THEME_COLOR = APP_DARK_THEME_COLOR;
+const LIGHT_THEME_COLOR = APP_LIGHT_THEME_COLOR;
 const ThemeContext = createContext<ThemeContextValue | undefined>(undefined);
 
 function resolveThemeFromDocument(): Theme {
-  if (typeof document === "undefined") return "dark";
+  if (typeof document === "undefined") return "light";
   return document.documentElement.classList.contains("dark") ? "dark" : "light";
 }
 
@@ -50,9 +55,8 @@ function applyTheme(theme: Theme) {
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setThemeState] = useState<Theme>(() => resolveThemeFromDocument());
-  // Track whether the user has explicitly chosen a theme. If false, the
-  // theme is being derived from the OS `prefers-color-scheme` and should
-  // follow OS-level changes mid-session without being persisted.
+  // Track whether the user has explicitly chosen a theme. If false, use the
+  // light-first document default without persisting a preference.
   const [hasExplicitChoice, setHasExplicitChoice] = useState<boolean>(() => hasStoredTheme());
 
   const setTheme = useCallback((nextTheme: Theme) => {
@@ -74,19 +78,6 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
       // Ignore local storage write failures in restricted environments.
     }
   }, [theme, hasExplicitChoice]);
-
-  // When the user has not made an explicit choice, follow OS-level
-  // `prefers-color-scheme` changes so the UI flips alongside the OS theme.
-  useEffect(() => {
-    if (hasExplicitChoice) return;
-    if (typeof window === "undefined" || typeof window.matchMedia !== "function") return;
-    const media = window.matchMedia("(prefers-color-scheme: dark)");
-    const handleChange = (event: MediaQueryListEvent) => {
-      setThemeState(event.matches ? "dark" : "light");
-    };
-    media.addEventListener("change", handleChange);
-    return () => media.removeEventListener("change", handleChange);
-  }, [hasExplicitChoice]);
 
   const value = useMemo(
     () => ({

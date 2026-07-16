@@ -41,6 +41,7 @@ export const queryKeys = {
   },
   agents: {
     list: (companyId: string) => ["agents", companyId] as const,
+    modelPitStop: (companyId: string) => ["agents", companyId, "model-pit-stop"] as const,
     detail: (id: string) => ["agents", "detail", id] as const,
     runtimeState: (id: string) => ["agents", "runtime-state", id] as const,
     taskSessions: (id: string) => ["agents", "task-sessions", id] as const,
@@ -309,6 +310,8 @@ export const queryKeys = {
     ["usage-window-spend", companyId] as const,
   usageQuotaWindows: (companyId: string) =>
     ["usage-quota-windows", companyId] as const,
+  usageAgentAttribution: (companyId: string, from?: string, to?: string) =>
+    ["usage-agent-attribution", companyId, from, to] as const,
   heartbeats: (companyId: string, agentId?: string) =>
     ["heartbeats", companyId, agentId] as const,
   runDetail: (runId: string) => ["heartbeat-run", runId] as const,

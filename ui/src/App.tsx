@@ -35,6 +35,7 @@ import { GoalDetail } from "./pages/GoalDetail";
 import { Approvals } from "./pages/Approvals";
 import { ApprovalDetail } from "./pages/ApprovalDetail";
 import { Costs } from "./pages/Costs";
+import { Usage } from "./pages/Usage";
 import { Activity } from "./pages/Activity";
 import { Inbox } from "./pages/Inbox";
 import { WhatNeedsMe } from "./pages/WhatNeedsMe";
@@ -65,7 +66,9 @@ import { AdapterManager } from "./pages/AdapterManager";
 import { PluginPage } from "./pages/PluginPage";
 import { OrgChart } from "./pages/OrgChart";
 import { Formation } from "./pages/Formation";
+import { MarketCap } from "./pages/MarketCap";
 import { Roadmap } from "./pages/Roadmap";
+import { Messages } from "./pages/Messages";
 import { AiSdrDogfood } from "./pages/AiSdrDogfood";
 import { NewAgent } from "./pages/NewAgent";
 import { AuthPage } from "./pages/Auth";
@@ -125,7 +128,9 @@ function boardRoutes() {
       <Route path="plugins/:pluginId" element={<PluginPage />} />
       <Route path="org" element={<OrgChart />} />
       <Route path="formation" element={<Formation />} />
+      <Route path="marketcap" element={<MarketCap />} />
       <Route path="roadmap" element={<Roadmap />} />
+      <Route path="messages" element={<Messages />} />
       <Route path="ai-sdr" element={<AiSdrDogfood />} />
       <Route path="agents" element={<Navigate to="/agents/all" replace />} />
       {AGENT_FILTER_TABS.map((tab) => (
@@ -213,6 +218,7 @@ function boardRoutes() {
       <Route path="approvals/all" element={<Approvals />} />
       <Route path="approvals/:approvalId" element={<ApprovalDetail />} />
       <Route path="costs" element={<Costs />} />
+      <Route path="usage" element={<Usage />} />
       <Route path="activity" element={<Activity />} />
       {/* Conference Room Chat surfaces (PAP-136/PAP-137): routes stay
           registered but redirect to the company home while the experimental
@@ -486,6 +492,7 @@ export function App() {
           <Route path="agents" element={<UnprefixedBoardRedirect />} />
           <Route path="formation" element={<UnprefixedBoardRedirect />} />
           <Route path="roadmap" element={<UnprefixedBoardRedirect />} />
+          <Route path="messages" element={<UnprefixedBoardRedirect />} />
           <Route path="ai-sdr" element={<UnprefixedBoardRedirect />} />
           {AGENT_FILTER_TABS.map((tab) => (
             <Route key={tab} path={`agents/${tab}`} element={<UnprefixedBoardRedirect />} />
