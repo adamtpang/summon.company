@@ -1809,3 +1809,26 @@ export {
   type QuotaAlert,
   type QuotaAlertLevel,
 } from "./quota-alerts.js";
+
+export {
+  FAILOVER_TRIGGERS,
+  classifyProviderProbeError,
+  describeModelChainShift,
+  evaluateProviderFailoverHealth,
+  mergeFallbackAdapterConfig,
+  modelChainConfigSchema,
+  modelChainFallbackEntrySchema,
+  providerSlugForAdapterType,
+  readAgentModelChain,
+  readModelFailoverState,
+  resolveModelChainSelection,
+  type FailoverTrigger,
+  type ModelChainBlockedEntry,
+  type ModelChainConfig,
+  type ModelChainFallbackEntry,
+  type ModelChainSelection,
+  type ModelChainSelectionInput,
+  type ModelChainShift,
+  type ModelFailoverState,
+  type ProviderFailoverHealth,
+} from "./model-chain.js";

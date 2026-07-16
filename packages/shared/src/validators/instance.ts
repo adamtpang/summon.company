@@ -10,6 +10,7 @@ import {
   MIN_ISSUE_GRAPH_LIVENESS_AUTO_RECOVERY_LOOKBACK_HOURS,
 } from "../types/instance.js";
 import { feedbackDataSharingPreferenceSchema } from "./feedback.js";
+import { modelChainConfigSchema } from "../model-chain.js";
 
 function presetSchema<T extends readonly number[]>(presets: T, label: string) {
   return z.number().refine(
@@ -34,6 +35,9 @@ export const instanceGeneralSettingsSchema = z.object({
   // Execution policy. Absent/"any" = unrestricted; "kubernetes" forces the
   // Kubernetes sandbox provider and denies local/ssh execution (cloud_tenant).
   executionMode: z.enum(["kubernetes", "any"]).optional(),
+  // VIT-49: company-level default fallback model chains, keyed by companyId.
+  // An agent's runtimeConfig.modelChain overrides its company's default.
+  modelChainDefaults: z.record(z.string(), modelChainConfigSchema).optional(),
 }).strict();
 
 export const patchInstanceGeneralSettingsSchema = instanceGeneralSettingsSchema.partial();

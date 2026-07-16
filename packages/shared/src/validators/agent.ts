@@ -9,6 +9,7 @@ import { agentAdapterTypeSchema } from "../adapter-type.js";
 import { envConfigSchema } from "./secret.js";
 import { trustAuthorizationPolicySchema, trustPresetSchema } from "./trust-policy.js";
 import { agentDesiredSkillSelectionSchema } from "./adapter-skills.js";
+import { modelChainConfigSchema } from "../model-chain.js";
 
 export const agentPermissionsSchema = z.object({
   canCreateAgents: z.boolean().optional().default(false),
@@ -66,6 +67,9 @@ export const agentRuntimeConfigSchema = z.object({
   modelProfiles: z.object({
     cheap: agentModelProfileConfigSchema.optional(),
   }).strict().optional(),
+  // VIT-49: ordered fallback model chain (primary = the agent's own
+  // adapterType/adapterConfig; entries are provider-crossing fallbacks).
+  modelChain: modelChainConfigSchema.optional(),
 }).catchall(z.unknown());
 
 export const createAgentSchema = z.object({

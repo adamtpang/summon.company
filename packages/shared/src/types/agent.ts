@@ -15,6 +15,7 @@ import type {
 } from "../trust-policy.js";
 import type { AgentOrgChainHealth } from "../agent-eligibility.js";
 import type { AgentApiKeyScope } from "../validators/agent.js";
+import type { ModelChainConfig } from "../model-chain.js";
 
 export interface AgentPermissions extends Record<string, unknown> {
   canCreateAgents: boolean;
@@ -31,6 +32,8 @@ export interface AgentModelProfileConfig {
 
 export interface AgentRuntimeConfig extends Record<string, unknown> {
   modelProfiles?: Partial<Record<ModelProfileKey, AgentModelProfileConfig>>;
+  /** VIT-49: ordered fallback model chain; see packages/shared/src/model-chain.ts */
+  modelChain?: ModelChainConfig;
 }
 
 export type AgentInstructionsBundleMode = "managed" | "external";

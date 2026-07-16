@@ -109,6 +109,7 @@ import {
   isThrottleCandidateIssueRewake,
 } from "./issue-rewake-throttle.js";
 import { logActivity, publishPluginDomainEvent, type LogActivityInput } from "./activity-log.js";
+import { resolveAgentModelFailoverForRun } from "./model-failover.js";
 import {
   buildWorkspaceReadyComment,
   cleanupExecutionWorkspaceArtifacts,
@@ -11065,8 +11066,8 @@ export function heartbeatService(db: Db, options: HeartbeatServiceOptions = {}) 
     let runScratch: HeartbeatRunScratch | null = null;
 
     try {
-    const agent = await getAgent(run.agentId);
-    if (!agent) {
+    const agentRecord = await getAgent(run.agentId);
+    if (!agentRecord) {
       await setRunStatus(runId, "failed", {
         error: "Agent not found",
         errorCode: "agent_not_found",
@@ -11081,8 +11082,27 @@ export function heartbeatService(db: Db, options: HeartbeatServiceOptions = {}) 
       return;
     }
 
+    // VIT-49 fallback model chains: resolve the effective adapter for this
+    // run. When the primary provider is quota-exhausted / auth-failed / down
+    // and the agent (or its company default) has an ordered fallback chain,
+    // the run launches on the first available fallback; when the primary
+    // recovers, the next run falls back up automatically. Governance events
+    // land in the activity log and board attention feed. Never throws — on
+    // any internal failure the agent's primary adapter is used unchanged.
+    const modelFailoverResolution = await resolveAgentModelFailoverForRun({
+      db,
+      agent: agentRecord,
+      runId: run.id,
+    });
+    const agent = modelFailoverResolution.agent;
+
     const runtime = await ensureRuntimeState(agent);
     const context = parseObject(run.contextSnapshot);
+    if (modelFailoverResolution.contextMetadata) {
+      context.paperclipModelFailover = modelFailoverResolution.contextMetadata;
+    } else {
+      delete context.paperclipModelFailover;
+    }
     const taskKey = deriveTaskKeyWithHeartbeatFallback(context, null);
     const sessionCodec = getAdapterSessionCodec(agent.adapterType);
     const issueId = readNonEmptyString(context.issueId);
