@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>VIT-112 — LIVE AGENT RUNS zone — contact sheet (light + dark)</title>
+<style>
+/* Summon v2.0 tokens (subset) — design/tokens.css is the source of truth */
+.sheet[data-theme="light"] {
+  --bg-canvas:#F7FAFF; --bg-elevated:#FFFFFF;
+  --bg-neutral:rgba(7,31,77,0.06);
+  --text-primary:#0C1428; --text-secondary:#46506B; --text-tertiary:#6B7590;
+  --text-accent:#084DDB;
+  --border-neutral:rgba(12,20,40,0.12); --border-strong:rgba(12,20,40,0.22);
+  --border-accent:rgba(11,95,255,0.35);
+  --accent:#0B5FFF; --accent-soft:#EEF5FF;
+  --positive-content:#0A5C38; --positive-bg:#E2F6EB;
+  --warning-content:#6B4E0A; --warning-bg:#FFF4D6;
+  --shadow-sm:0 2px 8px rgba(7,31,77,0.08),0 1px 3px rgba(7,31,77,0.05);
+  color-scheme:light;
+}
+.sheet[data-theme="dark"] {
+  --bg-canvas:#0A1120; --bg-elevated:#111B33;
+  --bg-neutral:rgba(255,255,255,0.06);
+  --text-primary:#EEF2FA; --text-secondary:#A9B4CE; --text-tertiary:#77829F;
+  --text-accent:#7FB0FF;
+  --border-neutral:rgba(255,255,255,0.14); --border-strong:rgba(255,255,255,0.26);
+  --border-accent:rgba(83,149,255,0.45);
+  --accent:#5395FF; --accent-soft:rgba(11,95,255,0.16);
+  --positive-content:#6EE7A8; --positive-bg:rgba(16,122,74,0.22);
+  --warning-content:#F5D06B; --warning-bg:rgba(107,78,10,0.28);
+  --shadow-sm:none;
+  color-scheme:dark;
+}
+* { box-sizing:border-box; margin:0; }
+body { background:#3A4358; font-family:"Inter",system-ui,sans-serif; padding:32px; }
+.sheet {
+  background:var(--bg-canvas); color:var(--text-primary);
+  border-radius:24px; padding:32px; max-width:1400px; margin:0 auto 32px;
+  border:1px solid var(--border-neutral);
+}
+.sheet-title {
+  font-family:"Space Grotesk","Inter",system-ui,sans-serif;
+  font-size:1.25rem; letter-spacing:-0.02em; margin-bottom:4px;
+}
+.sheet-sub { font-size:0.8125rem; color:var(--text-tertiary); margin-bottom:24px; }
+.layout { display:grid; grid-template-columns:240px 1fr; gap:24px; }
+
+/* ---- fleet strip (sidebar mock) ---- */
+.fleet { background:var(--bg-elevated); border:1px solid var(--border-neutral);
+  border-radius:16px; padding:16px; box-shadow:var(--shadow-sm); align-self:start; }
+.fleet h3 { font-size:0.75rem; letter-spacing:0.08em; text-transform:uppercase;
+  color:var(--text-tertiary); margin-bottom:12px; }
+.fleet-row { display:flex; align-items:center; gap:10px; padding:10px 8px;
+  border-radius:10px; cursor:pointer; }
+.fleet-row.active { background:var(--accent-soft); }
+.fleet-row .co { font-weight:600; font-size:0.875rem; flex:1; }
+.fleet-count { display:flex; align-items:center; gap:6px;
+  font-family:"JetBrains Mono",ui-monospace,monospace; font-size:0.75rem;
+  color:var(--text-secondary); }
+.fleet-initials { display:flex; gap:3px; }
+.fleet-initials span { width:18px; height:18px; border-radius:9999px;
+  background:var(--accent-soft); color:var(--text-accent);
+  font-size:0.625rem; font-weight:700; display:grid; place-items:center;
+  border:1px solid var(--border-accent); }
+.fleet-total { margin-top:12px; padding-top:12px; border-top:1px solid var(--border-neutral);
+  font-size:0.75rem; color:var(--text-tertiary); }
+
+/* ---- formation live grid ---- */
+.formation { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+.glance { grid-column:1 / -1; display:flex; gap:16px; align-items:baseline;
+  padding:0 4px 4px; }
+.glance strong { font-family:"Space Grotesk","Inter",system-ui,sans-serif;
+  font-size:1.75rem; letter-spacing:-0.02em; }
+.glance .g { font-size:0.8125rem; color:var(--text-secondary); }
+.glance .g b { color:var(--text-primary); font-weight:600; }
+
+.card { background:var(--bg-elevated); border:1px solid var(--border-neutral);
+  border-radius:16px; padding:14px 16px; box-shadow:var(--shadow-sm);
+  min-height:104px; display:flex; flex-direction:column; gap:8px; }
+.card.live { border-color:var(--border-accent); }
+.card.idle { opacity:0.62; }
+.card.unstaffed { border-style:dashed; opacity:0.5; background:transparent; }
+.dept { display:flex; align-items:center; justify-content:space-between; }
+.dept .name { font-size:0.8125rem; font-weight:600; letter-spacing:0.01em; }
+.dept .tag { font-size:0.6875rem; color:var(--text-tertiary); }
+.run { display:flex; align-items:center; gap:8px; min-width:0; }
+.dot { width:8px; height:8px; border-radius:9999px; flex:none; }
+.dot.running { background:var(--accent); animation:pulse 2s ease-in-out infinite; }
+.dot.queued { background:transparent; border:1.5px solid var(--border-strong); }
+.dot.silent { background:var(--warning-content); }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.35} }
+.who { font-size:0.75rem; font-weight:600; flex:none; }
+.task { font-size:0.75rem; color:var(--text-secondary); white-space:nowrap;
+  overflow:hidden; text-overflow:ellipsis; min-width:0; }
+.dur { font-family:"JetBrains Mono",ui-monospace,monospace; font-size:0.6875rem;
+  color:var(--text-accent); flex:none; margin-left:auto; padding-left:8px; }
+.queue-note { font-size:0.6875rem; color:var(--text-tertiary); }
+.idle-label, .unstaffed-label { font-size:0.75rem; color:var(--text-tertiary); }
+
+/* legend */
+.legend { grid-column:1 / -1; display:flex; gap:24px; padding:10px 4px 0;
+  border-top:1px solid var(--border-neutral); margin-top:4px; }
+.legend .run { gap:6px; } .legend .task { color:var(--text-tertiary); }
+</style>
+</head>
+<body>
+
+<!-- ============ LIGHT ============ -->
+<div class="sheet" data-theme="light">
+  <div class="sheet-title">LIVE AGENT RUNS — formation zone, live mode</div>
+  <div class="sheet-sub">VIT-112 board addition · real Company Zero snapshot, 2026-07-16 04:36Z · light</div>
+  <div class="layout">
+    <aside class="fleet">
+      <h3>Fleet — all companies</h3>
+      <div class="fleet-row active">
+        <span class="dot running"></span>
+        <span class="co">Summon</span>
+        <span class="fleet-count">5<span class="fleet-initials"><span>C</span><span>E</span><span>D</span><span>O</span></span></span>
+      </div>
+      <div class="fleet-row">
+        <span class="dot running"></span>
+        <span class="co">Quantus</span>
+        <span class="fleet-count">4<span class="fleet-initials"><span>C</span><span>E</span><span>M</span><span>L</span></span></span>
+      </div>
+      <div class="fleet-total">9 agents running across 2 companies</div>
+    </aside>
+
+    <div class="formation">
+      <div class="glance">
+        <strong>5 running</strong>
+        <span class="g"><b>15</b> queued</span>
+        <span class="g"><b>2</b> idle</span>
+        <span class="g"><b>3</b> unstaffed</span>
+      </div>
+
+      <!-- row 1 -->
+      <div class="card idle">
+        <div class="dept"><span class="name">Marketing</span><span class="tag">Sells</span></div>
+        <div class="run"><span class="who">Vitals CMO</span></div>
+        <div class="idle-label">idle — no live run</div>
+      </div>
+      <div class="card live">
+        <div class="dept"><span class="name">CEO</span><span class="tag">Decides</span></div>
+        <div class="run"><span class="dot running"></span><span class="who">Vitals CEO</span><span class="dur">2m</span></div>
+        <div class="task">VIT-107 · Company Diagnostician has zero open assigned work</div>
+      </div>
+      <div class="card unstaffed">
+        <div class="dept"><span class="name">Sales</span><span class="tag">Sells</span></div>
+        <div class="unstaffed-label">unstaffed — staff this department</div>
+      </div>
+
+      <!-- row 2 -->
+      <div class="card live">
+        <div class="dept"><span class="name">Design</span><span class="tag">Builds</span></div>
+        <div class="run"><span class="dot running"></span><span class="who">Design Director</span><span class="dur">5m</span></div>
+        <div class="task">VIT-112 · Mission Control: the one-screen master dashboard</div>
+        <div class="queue-note">+2 queued</div>
+      </div>
+      <div class="card live">
+        <div class="dept"><span class="name">Operations</span><span class="tag">Runs</span></div>
+        <div class="run"><span class="dot running"></span><span class="who">Vitals COO</span><span class="dur">12m</span></div>
+        <div class="task">VIT-114 · Core-8 by default for every new company</div>
+        <div class="run"><span class="dot running"></span><span class="who">Diagnostician</span><span class="dur">1m</span></div>
+        <div class="task">VIT-111 · WIP diagnosis: collapse to the ONE binding constraint</div>
+      </div>
+      <div class="card live">
+        <div class="dept"><span class="name">Engineering</span><span class="tag">Builds</span></div>
+        <div class="run"><span class="dot running"></span><span class="who">Vitals CTO</span><span class="dur">37m</span></div>
+        <div class="task">VIT-49 · Fallback model chains: auto-failover per employee</div>
+        <div class="run"><span class="dot queued"></span><span class="who">Vitals Engineer</span><span class="dur">queued</span></div>
+        <div class="queue-note">+13 queued across 2 agents</div>
+      </div>
+
+      <!-- row 3 -->
+      <div class="card unstaffed">
+        <div class="dept"><span class="name">Support</span><span class="tag">Runs &amp; sells</span></div>
+        <div class="unstaffed-label">unstaffed — staff this department</div>
+      </div>
+      <div class="card idle">
+        <div class="dept"><span class="name">Finance</span><span class="tag">Runs</span></div>
+        <div class="run"><span class="who">Vitals CFO</span></div>
+        <div class="idle-label">idle — no live run</div>
+      </div>
+      <div class="card unstaffed">
+        <div class="dept"><span class="name">Legal</span><span class="tag">Runs</span></div>
+        <div class="unstaffed-label">unstaffed — staff this department</div>
+      </div>
+
+      <div class="legend">
+        <div class="run"><span class="dot running"></span><span class="task">running (real process)</span></div>
+        <div class="run"><span class="dot queued"></span><span class="task">queued (no timer until start)</span></div>
+        <div class="run"><span class="dot silent"></span><span class="task">silent &gt; 1h (server threshold)</span></div>
+        <div class="run"><span class="task" style="opacity:0.62">dimmed = staffed, idle</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ DARK ============ -->
+<div class="sheet" data-theme="dark">
+  <div class="sheet-title">LIVE AGENT RUNS — formation zone, live mode</div>
+  <div class="sheet-sub">VIT-112 board addition · real Company Zero snapshot, 2026-07-16 04:36Z · dark</div>
+  <div class="layout">
+    <aside class="fleet">
+      <h3>Fleet — all companies</h3>
+      <div class="fleet-row active">
+        <span class="dot running"></span>
+        <span class="co">Summon</span>
+        <span class="fleet-count">5<span class="fleet-initials"><span>C</span><span>E</span><span>D</span><span>O</span></span></span>
+      </div>
+      <div class="fleet-row">
+        <span class="dot running"></span>
+        <span class="co">Quantus</span>
+        <span class="fleet-count">4<span class="fleet-initials"><span>C</span><span>E</span><span>M</span><span>L</span></span></span>
+      </div>
+      <div class="fleet-total">9 agents running across 2 companies</div>
+    </aside>
+
+    <div class="formation">
+      <div class="glance">
+        <strong>5 running</strong>
+        <span class="g"><b>15</b> queued</span>
+        <span class="g"><b>2</b> idle</span>
+        <span class="g"><b>3</b> unstaffed</span>
+      </div>
+
+      <div class="card idle">
+        <div class="dept"><span class="name">Marketing</span><span class="tag">Sells</span></div>
+        <div class="run"><span class="who">Vitals CMO</span></div>
+        <div class="idle-label">idle — no live run</div>
+      </div>
+      <div class="card live">
+        <div class="dept"><span class="name">CEO</span><span class="tag">Decides</span></div>
+        <div class="run"><span class="dot running"></span><span class="who">Vitals CEO</span><span class="dur">2m</span></div>
+        <div class="task">VIT-107 · Company Diagnostician has zero open assigned work</div>
+      </div>
+      <div class="card unstaffed">
+        <div class="dept"><span class="name">Sales</span><span class="tag">Sells</span></div>
+        <div class="unstaffed-label">unstaffed — staff this department</div>
+      </div>
+
+      <div class="card live">
+        <div class="dept"><span class="name">Design</span><span class="tag">Builds</span></div>
+        <div class="run"><span class="dot running"></span><span class="who">Design Director</span><span class="dur">5m</span></div>
+        <div class="task">VIT-112 · Mission Control: the one-screen master dashboard</div>
+        <div class="queue-note">+2 queued</div>
+      </div>
+      <div class="card live">
+        <div class="dept"><span class="name">Operations</span><span class="tag">Runs</span></div>
+        <div class="run"><span class="dot running"></span><span class="who">Vitals COO</span><span class="dur">12m</span></div>
+        <div class="task">VIT-114 · Core-8 by default for every new company</div>
+        <div class="run"><span class="dot running"></span><span class="who">Diagnostician</span><span class="dur">1m</span></div>
+        <div class="task">VIT-111 · WIP diagnosis: collapse to the ONE binding constraint</div>
+      </div>
+      <div class="card live">
+        <div class="dept"><span class="name">Engineering</span><span class="tag">Builds</span></div>
+        <div class="run"><span class="dot running"></span><span class="who">Vitals CTO</span><span class="dur">37m</span></div>
+        <div class="task">VIT-49 · Fallback model chains: auto-failover per employee</div>
+        <div class="run"><span class="dot queued"></span><span class="who">Vitals Engineer</span><span class="dur">queued</span></div>
+        <div class="queue-note">+13 queued across 2 agents</div>
+      </div>
+
+      <div class="card unstaffed">
+        <div class="dept"><span class="name">Support</span><span class="tag">Runs &amp; sells</span></div>
+        <div class="unstaffed-label">unstaffed — staff this department</div>
+      </div>
+      <div class="card idle">
+        <div class="dept"><span class="name">Finance</span><span class="tag">Runs</span></div>
+        <div class="run"><span class="who">Vitals CFO</span></div>
+        <div class="idle-label">idle — no live run</div>
+      </div>
+      <div class="card unstaffed">
+        <div class="dept"><span class="name">Legal</span><span class="tag">Runs</span></div>
+        <div class="unstaffed-label">unstaffed — staff this department</div>
+      </div>
+
+      <div class="legend">
+        <div class="run"><span class="dot running"></span><span class="task">running (real process)</span></div>
+        <div class="run"><span class="dot queued"></span><span class="task">queued (no timer until start)</span></div>
+        <div class="run"><span class="dot silent"></span><span class="task">silent &gt; 1h (server threshold)</span></div>
+        <div class="run"><span class="task" style="opacity:0.62">dimmed = staffed, idle</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
