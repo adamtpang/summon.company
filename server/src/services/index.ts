@@ -68,6 +68,19 @@ export type {
   WorkTimelineSpan,
 } from "./work-timeline.js";
 export { approvalService } from "./approvals.js";
+export {
+  approvalGateService,
+  assertSeparationOfDuties,
+  classifyRiskTier,
+  decideApprovalRoute,
+  ALWAYS_ASK_CATEGORIES,
+  RISK_GATED_ACTION_APPROVAL_TYPE,
+  type RiskAxes,
+  type RiskTier,
+  type TrustLevel,
+  type ApprovalRouteDecision,
+  type ApprovalGatePayload,
+} from "./approval-gate.js";
 export { budgetService } from "./budgets.js";
 export { secretService } from "./secrets.js";
 export { routineService } from "./routines.js";
