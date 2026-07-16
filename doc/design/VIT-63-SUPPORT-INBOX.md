@@ -6,6 +6,15 @@ link deployed to production (summon.company + vitals.run). Remaining: founder st
 (ImprovMX account + Gmail label/filter) and the end-to-end test email.
 Parent: VIT-59 (`doc/design/VIT-59-USERS-LANE.md`).
 
+Board answers 2026-07-16 (question card `541477f4`): ImprovMX — not yet, will do.
+Gmail label/filter — not yet, will do. Test email — **skip: verify without a test
+email**. The board lowered the Step 4 acceptance bar accordingly: once the founder
+confirms Steps 1 and 3 are done, the CMO closes VIT-63 on (a) DNS + published link
+evidence already captured, (b) the founder's confirmation that ImprovMX shows green
+checks and the aliases exist, and (c) a Gmail `search_threads` sweep for any inbound
+to hello@ — an actual test email is no longer required. A live confirmation card on
+the issue wakes the CMO when the founder finishes.
+
 ## Decision proposed
 
 Publish **`hello@summon.company`** as the user-facing address (matches the visible
