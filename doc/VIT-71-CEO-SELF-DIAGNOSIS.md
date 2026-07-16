@@ -72,3 +72,19 @@ key, plus throttled evidence updates.
   exhausted, 137h to reset → CTO, high) and VIT-107 (Diagnostician has zero
   open work → CEO, medium), both goal-linked with evidence.
 - Immediate re-run: both anomalies `skip_recent`, zero duplicates filed.
+
+## Installed-runtime status (2026-07-16)
+
+The live CEO timer is enabled at a 30-minute interval, and source timer tests prove
+that an explicitly proactive generic timer wake invokes the adapter even when there
+is no assigned issue. The installed Company Zero configuration is not yet an
+accepted overnight loop, however: the CEO is currently `claude_local` while a stale
+Codex cheap profile requests `gpt-5.5`, so recovery wakes fail before diagnosis.
+
+`scripts/vitals-company-zero-bootstrap.mjs` now enforces provider-correct cheap
+profiles (`claude-sonnet-4-6` for Claude, `gpt-5.5` for Codex) and puts the
+self-diagnosis `--file` command directly in the CEO's `heartbeat_timer` instructions.
+Apply that bootstrap only in a zero-active-run window. G7 reaches 100% only after
+three mornings of useful evidenced work and a fresh CEO-filed task the board agrees
+mattered; source wiring and the earlier VIT-106/VIT-107 filing proof are necessary
+but not sufficient.

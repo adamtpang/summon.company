@@ -124,7 +124,8 @@ New, self-contained, token-gated, additive files (no engine/protocol changes):
   runId, label pluralization.
 - `ui/src/components/ResumeAffordanceNotice.test.tsx` — 3 tests: renders label
   when resumed; renders nothing when not resumed or label empty.
-- Regression: `ui/src/components/IssueChatThread.test.tsx` — 72/72 still pass.
+- Regression: `ui/src/components/IssueChatThread.test.tsx` includes 73 tests,
+  including a direct long-thread assertion for the virtualized resume marker.
 - UI typecheck adds zero errors (one pre-existing unrelated error in
   `src/lib/issue-age.test.ts`).
 
@@ -139,13 +140,15 @@ New, self-contained, token-gated, additive files (no engine/protocol changes):
   thread (sections 1–2); the UI now makes that continuity legible instead of
   silent.
 
-## Remaining follow-up (named, not blocking this slice)
+## Remaining live proof
 
-- **Virtualized thread path**: threads at/above
-  `VIRTUALIZED_THREAD_ROW_THRESHOLD` render via `VirtualizedIssueChatThread`,
-  which does not yet thread `resumeNoticeByMessageId` to its rows. The affordance
-  shows on standard (non-virtualized) threads today; extending it into the
-  virtualized renderer is a mechanical follow-up.
+- **Virtualized thread path is now covered**: threads at/above
+  `VIRTUALIZED_THREAD_ROW_THRESHOLD` pass `resumeNoticeByMessageId` into each
+  measured row and render the same marker as the direct path.
 - **Codex adapter parity**: the same Resume Delta pattern exists in
   `packages/adapters/codex-local/src/server/execute.ts`; the UI affordance is
   adapter-agnostic (derived from thread messages) and already covers it.
+- **48-hour desktop canary**: reopen one packaged Claude thread and one packaged
+  Codex thread after 48 hours, ask for a prior decision without re-briefing, and
+  record the answer plus marker in each thread. This is required before calling
+  G2 100%.
