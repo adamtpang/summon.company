@@ -1,16 +1,39 @@
-# Paperclip Design Principles
+# Summon Design Principles
 
-**Status:** v0.3 - anchor document for design-language simplification. Governs structure, not brand. Brand values (color, type, iconography) are intentionally unspecified: they are being redesigned and will land as token values only. Nothing in `ui/` may hardcode them. Spacing/radius scales are likewise TBD pending the token audit (see Principle 3).
+**Status:** v0.4 - the source of truth for a beautiful, ruthlessly minimal AI-agent command center. Governs both structure AND intentionality. Full research + evidence: `doc/research/AGENT-COMMAND-CENTER-DESIGN.md` (Sequoia agent thesis, peer command centers, the design canon), `doc/research/BEST-DASHBOARDS.md` (the Dashboard grid), `doc/research/DESKTOP-UX-SKELETONS.md` (the IA). Brand token VALUES live only in `ui/src/index.css`; nothing in `ui/` hardcodes them.
 
-Changes from v0.2: token layer location corrected to the repo's real source (`ui/src/index.css`); existing token tiers inventoried; snapshot-coverage scope bounded for Run 1; the issue→task copy rename moved out of the zero-visual-change run.
+Changes from v0.3: elevated from a token-extraction anchor to the command-center design spine; added the thesis, the twelve laws, and the intentionality gate. The token-layer and enforcement sections below still hold.
 
 ## What this document is for
 
-Agents and humans modifying `ui/` treat this file as the source of truth for design decisions. Storybook is the verification surface - it documents the system; it does not define it. If a change conflicts with this document, change this document first (with review) or change the code.
+Agents and humans modifying `ui/` treat this file as the source of truth for design decisions. **The intentionality gate (below) is binding:** every on-screen element must trace to a reason here. Storybook is the verification surface - it documents the system; it does not define it. If a change conflicts with this document, change this document first (with review) or change the code.
+
+## The thesis (the one question)
+
+Summon is a command center for a founder supervising AI employees. It answers ONE question first, above all others: **which of my agents needs me right now.** Every element either sharpens that answer or is deleted. Three surfaces, nothing more: **Dashboard** (the glance - which employees need me, what's the company's state), **Chat** (talk to any employee, WhatsApp-simple, outcomes not logs), **Decisions** (the drainable queue of what needs my yes). Beauty here is not decoration - it is the absence of everything that isn't that answer. The canon and the Sequoia peer set agree: the defining design decision is almost always a *subtraction*.
+
+## The twelve laws (enforceable; each element must pass all)
+
+1. **Deletion test.** Every element must survive a deletion attempt - if removing it loses no data and no affordance, DELETE it (don't shrink it). Log the removal in the PR.
+2. **Intentionality gate.** Every on-screen element traces to a DESIGN.md entry; every entry states its REASON + the trade-off it settles + the alternative rejected. No trade-off = no decision = no bespoke element.
+3. **One primary action per surface.** Only one element carries primary visual weight (size + placement + weight). Demote or delete every competing CTA.
+4. **Monochrome + one accent.** Black/white/gray by default, plus ONE accent that does all the work - reserved for the single primary action and true status escalation only.
+5. **Status color is semantic and never alone.** Pair every green/amber/red with an icon or label. Never red/green decoratively.
+6. **Every metric earns its place** with trend + delta-vs-target + a next step. A lone big number gets context or gets cut.
+7. **Hierarchy from type + space first.** A border/box ships only if meaning is still lost after spacing and weight are set. Draw kept borders as a 1px shadow, not a line.
+8. **One type family, roles by size/weight/case.** Display type carries negative letter-spacing; body is zero, never positive. Few weights. No chips/boxes to signal role.
+9. **Double the whitespace.** Take the spacing that feels like enough, then double it. Every gap is a multiple of one base unit; repeated data is the same component at the same scale.
+10. **No spinners on the home screen.** Cache all console state locally, stream the event log in the background, keep every hop < 100ms. Speed is a design decision.
+11. **Motion is sub-100ms, GPU-only.** Animate transform/opacity, never layout (width/height/top).
+12. **Five-second test, two levels max.** Any screen: identify the primary signal, tell good from bad, know if action is needed - in five seconds. Disclosure caps at two levels; a third level means the structure is wrong.
+
+## The intentionality gate (how "everything has a reason" is enforced)
+
+An element ships to `ui/` only if it can point to a law it serves OR a DESIGN.md entry that records: *what it is · the reason it exists · the trade-off that reason settles · the alternative that was rejected.* "It looked empty" and "just in case" are not reasons. A PR that adds a surface, a nav item, a card, a badge, or a CTA without that trace fails review. This is the Google design-doc discipline (Malte Ubl): the decision and its rejected alternatives are written down BEFORE the pixels, so the interface stays legible to the next agent and stays honest over time.
 
 ## Product stance
 
-Paperclip is an operational control plane: org charts, tasks, heartbeat runs, budgets, approvals, audit logs. The user is an operator scanning state and making decisions. Every screen should answer, in order: *what is happening, does it need me, what do I do about it.* Density in service of scanning beats whitespace in service of aesthetics - but density comes from information, never from chrome.
+Summon is an AI-agent company command center. The user is the BOARD, scanning which employees need them and deciding. Every screen answers, in order: *which agent needs me, what's the company state, what do I do about it.* Density serves scanning - but density comes from information, never from chrome.
 
 ## The token layer (where visual values live)
 
