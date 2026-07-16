@@ -25,7 +25,7 @@ export function ResumeAffordanceNotice({
       aria-label={affordance.label}
     >
       <span className="h-px flex-1 bg-border" />
-      <span className="inline-flex items-center gap-1.5 text-[0.6875rem] font-medium uppercase tracking-wide">
+      <span className="inline-flex items-center gap-1.5 text-(length:--text-micro) font-medium uppercase tracking-wide">
         <History className="h-3 w-3" aria-hidden="true" />
         {affordance.label}
       </span>
