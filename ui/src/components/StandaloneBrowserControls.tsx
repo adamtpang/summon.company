@@ -3,6 +3,7 @@ import { ExternalLink, RefreshCw, Share2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { useOptionalToastActions } from "../context/ToastContext";
+import { APP_NAME } from "../lib/app-branding";
 import { CHROMELESS_DISPLAY_MODES, isChromelessDisplayMode } from "../lib/pwa-display-mode";
 
 function ControlButton({
@@ -68,7 +69,7 @@ export function StandaloneBrowserControls({ mobile }: { mobile: boolean }) {
     const url = window.location.href;
     try {
       if (navigator.share) {
-        await navigator.share({ title: document.title || "Paperclip", url });
+        await navigator.share({ title: document.title || APP_NAME, url });
         return;
       }
       if (navigator.clipboard?.writeText) {

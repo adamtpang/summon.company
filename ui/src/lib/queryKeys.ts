@@ -41,6 +41,7 @@ export const queryKeys = {
   },
   agents: {
     list: (companyId: string) => ["agents", companyId] as const,
+    modelPitStop: (companyId: string) => ["agents", companyId, "model-pit-stop"] as const,
     detail: (id: string) => ["agents", "detail", id] as const,
     runtimeState: (id: string) => ["agents", "runtime-state", id] as const,
     taskSessions: (id: string) => ["agents", "task-sessions", id] as const,

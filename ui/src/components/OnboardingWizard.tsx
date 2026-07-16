@@ -39,6 +39,7 @@ import {
   selectReusableOnboardingProject,
 } from "../lib/onboarding-launch";
 import { buildNewAgentRuntimeConfig } from "../lib/new-agent-runtime-config";
+import { APP_NAME } from "../lib/app-branding";
 import { DEFAULT_CODEX_LOCAL_BYPASS_APPROVALS_AND_SANDBOX } from "@paperclipai/adapter-codex-local";
 import { DEFAULT_CURSOR_LOCAL_MODEL } from "@paperclipai/adapter-cursor-local";
 import { DEFAULT_GEMINI_LOCAL_MODEL } from "@paperclipai/adapter-gemini-local";
@@ -67,9 +68,9 @@ type Step = 0 | 1 | 2 | 3 | 4 | 5;
 type AdapterType = string;
 
 const MISSION_PROMPT_CHIPS = [
-  "Build a SaaS product",
-  "Scale a content business",
-  "Launch a marketplace"
+  "Hire an AI SDR",
+  "Staff engineering",
+  "Run founder operations"
 ];
 
 function buildMissionFromQuestionnaire(q1: string, q2: string, q3: string, q4: string): string {
@@ -82,12 +83,12 @@ function buildMissionFromQuestionnaire(q1: string, q2: string, q3: string, q4: s
 }
 
 const ONBOARDING_STORAGE_KEY = "paperclip-onboarding-state";
-const DEFAULT_TASK_TITLE = "Hire your first engineer and create a hiring plan";
-const DEFAULT_TASK_DESCRIPTION = `You are the CEO. You set the direction for the company.
+const DEFAULT_TASK_TITLE = "Hire your first AI employee and create the operating plan";
+const DEFAULT_TASK_DESCRIPTION = `You are the CEO. The human is the board. Set the operating constraint and train the first accountable AI employee.
 
-- hire a founding engineer
-- write a hiring plan
-- break the roadmap into concrete tasks and start delegating work`;
+- define the first constraint to improve
+- assign board-visible work with a clear budget cap
+- create the next operating tasks and start delegating work`;
 const INCOMPLETE_ONBOARDING_STATE_MESSAGE =
   "Onboarding state is incomplete. Please restart onboarding and try again.";
 
@@ -535,7 +536,7 @@ export function OnboardingWizard() {
   }
 
   // Step 2 → 3 ("Confirm mission"): create the company + its company-level
-  // goal, then advance to naming the team lead. Guarded so revisiting the
+  // goal, then advance to naming the first AI employee. Guarded so revisiting the
   // mission step (e.g. via Back) doesn't create a duplicate company.
   async function handleConfirmMission() {
     if (createdCompanyId) {
@@ -565,7 +566,7 @@ export function OnboardingWizard() {
         queryKey: queryKeys.goals.list(company.id)
       });
 
-      setStep(3); // → Create your team lead
+      setStep(3); // → Hire your first AI employee
     } catch (err) {
       setError(err instanceof Error ? err.message : "Failed to create company");
     } finally {
@@ -573,7 +574,7 @@ export function OnboardingWizard() {
     }
   }
 
-  // Step 4 → 5 ("Give it a heartbeat"): hire the lead agent + seed its
+  // Step 4 → 5 ("Give them a heartbeat"): hire the first AI employee + seed its
   // instructions, then advance to Review. Guarded so revisiting step 4
   // doesn't hire a second agent.
   async function handleGiveHeartbeat() {
@@ -830,24 +831,24 @@ export function OnboardingWizard() {
                     <div>
                       <h3 className="font-medium">
                         {step === 3
-                          ? "Create your team lead"
+                          ? "Hire your first AI employee"
                           : step === 4
-                            ? "Connect a model"
+                            ? "Connect their runtime"
                             : "Review"}
                       </h3>
                       <p className="text-xs text-muted-foreground">
                         {step === 3 ? (
                           <>
-                            Name your lead. They'll help drive{" "}
+                            Name the first employee. They'll help move{" "}
                             <span className="font-medium text-foreground">{companyName}</span>{" "}
-                            toward its mission. We default to{" "}
+                            against its operating constraint. We default to{" "}
                             <span className="font-medium text-foreground">Chief of staff</span> —
                             rename it to anything you like.
                           </>
                         ) : step === 4 ? (
-                          <>Pick the adapter and model your lead will run on, then check the environment.</>
+                          <>Pick the adapter and model this employee will run on, then check the environment.</>
                         ) : (
-                          <>Everything's set up — your team lead is online and ready to work.</>
+                          <>Everything's set up — your first AI employee is online and ready for board-approved work.</>
                         )}
                       </p>
                     </div>
@@ -862,13 +863,13 @@ export function OnboardingWizard() {
                     />
                     <p className="text-(length:--text-micro) text-muted-foreground">
                       {step === 3 ? (
-                        "an empty slot for an agent"
+                        "an open AI employee seat"
                       ) : step === 4 ? (
-                        "your team lead, taking shape"
+                        "your AI employee, taking shape"
                       ) : (
                         <>
                           <span className="font-medium text-foreground">{agentName}</span>{" "}
-                          is online and ready to work!
+                          has a heartbeat and is ready for assigned work.
                         </>
                       )}
                     </p>
@@ -884,14 +885,14 @@ export function OnboardingWizard() {
                       <Sparkles className="h-5 w-5 text-muted-foreground" />
                     </div>
                     <div>
-                      <h3 className="font-medium">Tell us about your team</h3>
+                      <h3 className="font-medium">Tell us about your company</h3>
                       <p className="text-xs text-muted-foreground">
-                        We'll use this to set up your lead agent and plan which agents to add.
+                        We'll use this to train the first AI employee and identify which departments to staff next.
                       </p>
                     </div>
                   </div>
                   <div className="group">
-                    <label className="text-xs text-muted-foreground mb-1 block">What does your team work on?</label>
+                    <label className="text-xs text-muted-foreground mb-1 block">What does your company work on?</label>
                     <input
                       className="w-full rounded-md border border-border bg-transparent px-3 py-2 text-sm outline-none focus:ring-1 focus:ring-ring placeholder:text-muted-foreground/50"
                       placeholder="e.g. We create educational YouTube content about AI"
@@ -918,7 +919,7 @@ export function OnboardingWizard() {
                     />
                   </div>
                   <div className="group">
-                    <label className="text-xs text-muted-foreground mb-1 block">What would you automate first?</label>
+                    <label className="text-xs text-muted-foreground mb-1 block">Which role should the first AI employee take over?</label>
                     <input
                       className="w-full rounded-md border border-border bg-transparent px-3 py-2 text-sm outline-none focus:ring-1 focus:ring-ring placeholder:text-muted-foreground/50"
                       placeholder="e.g. Social media scheduling and content repurposing"
@@ -939,7 +940,7 @@ export function OnboardingWizard() {
                             setCompanyGoal(parts.join(". "));
                           }}
                         >
-                          Generate mission from answers
+                          Generate operating mission
                         </Button>
                       )}
                       {companyGoal.trim() && (
@@ -971,9 +972,9 @@ export function OnboardingWizard() {
                       <Building2 className="h-5 w-5 text-muted-foreground" />
                     </div>
                     <div>
-                      <h3 className="font-medium">Name your company</h3>
+                      <h3 className="font-medium">Name the company</h3>
                       <p className="text-xs text-muted-foreground">
-                        What should we call your company?
+                        Which company should {APP_NAME} improve?
                       </p>
                     </div>
                   </div>
@@ -1020,9 +1021,9 @@ export function OnboardingWizard() {
                       <Building2 className="h-5 w-5 text-muted-foreground" />
                     </div>
                     <div>
-                      <h3 className="font-medium">Define your mission</h3>
+                      <h3 className="font-medium">Set the operating mission</h3>
                       <p className="text-xs text-muted-foreground">
-                        Your mission guides everything — your lead agent, who you bring on, and the work <strong>{companyName}</strong> takes on.
+                        This guides the first AI employee you hire, the constraint they attack, and the work <strong>{companyName}</strong> takes on.
                       </p>
                     </div>
                   </div>
@@ -1030,7 +1031,7 @@ export function OnboardingWizard() {
                   {/* Mission path selector */}
                   <div className="space-y-3">
                     <label className="text-xs text-foreground block">
-                      How would you like to define your mission?
+                      How should {APP_NAME} understand the mission?
                     </label>
                     <div className="grid grid-cols-2 gap-2">
                       <button
@@ -1043,7 +1044,7 @@ export function OnboardingWizard() {
                         onClick={() => setMissionPath("direct")}
                       >
                         <Sparkles className="h-4 w-4" />
-                        <span className="font-medium">I know my mission</span>
+                        <span className="font-medium">I know the mission</span>
                         <span className="text-muted-foreground text-(length:--text-nano)">
                           Type it directly
                         </span>
@@ -1082,7 +1083,7 @@ export function OnboardingWizard() {
                         </label>
                         <textarea
                           className="w-full rounded-md border border-border bg-transparent px-3 py-2 text-sm outline-none focus:ring-1 focus:ring-ring placeholder:text-muted-foreground/50 resize-none min-h-(--sz-60px)"
-                          placeholder="What is your team trying to achieve?"
+                          placeholder="What should this company improve first?"
                           value={companyGoal}
                           onChange={(e) => setCompanyGoal(e.target.value)}
                           autoFocus
@@ -1113,7 +1114,7 @@ export function OnboardingWizard() {
                     <div className="space-y-3 animate-in fade-in duration-200">
                       <div className="group">
                         <label className="text-xs text-muted-foreground mb-1 block">
-                          What does your team work on?
+                          What does your company work on?
                         </label>
                         <input
                           className="w-full rounded-md border border-border bg-transparent px-3 py-2 text-sm outline-none focus:ring-1 focus:ring-ring placeholder:text-muted-foreground/50"
@@ -1151,7 +1152,7 @@ export function OnboardingWizard() {
                         </label>
                         <input
                           className="w-full rounded-md border border-border bg-transparent px-3 py-2 text-sm outline-none focus:ring-1 focus:ring-ring placeholder:text-muted-foreground/50"
-                          placeholder="e.g. Publishing daily content across 4 platforms with a team of AI agents"
+                          placeholder="e.g. Daily qualified pipeline from a trained AI SDR"
                           value={q4}
                           onChange={(e) => setQ4(e.target.value)}
                         />
@@ -1165,7 +1166,7 @@ export function OnboardingWizard() {
                             setMissionConfirmed(true);
                           }}
                         >
-                          Generate my mission
+                          Generate operating mission
                         </Button>
                       )}
                     </div>
@@ -1176,7 +1177,7 @@ export function OnboardingWizard() {
                     <div className="space-y-3 animate-in fade-in duration-200">
                       <div className="group">
                         <label className="text-xs text-foreground mb-1 block">
-                          Here's your draft mission — edit it however you like:
+                          Here's the draft mission — edit it however you like:
                         </label>
                         <textarea
                           className="w-full rounded-md border border-border bg-transparent px-3 py-2 text-sm outline-none focus:ring-1 focus:ring-ring placeholder:text-muted-foreground/50 resize-none min-h-(--sz-80px)"
@@ -1197,7 +1198,7 @@ export function OnboardingWizard() {
                   {/* Confirm mission note */}
                   {companyGoal.trim() && (
                     <p className="text-(length:--text-micro) text-muted-foreground italic">
-                      You can always change your mission later in settings.
+                      You can update this mission later in settings.
                     </p>
                   )}
 
@@ -1210,7 +1211,7 @@ export function OnboardingWizard() {
                 </div>
               )}
 
-              {/* Step 3: Create your team lead — name only (capsule above) */}
+              {/* Step 3: Hire your first AI employee — name only (capsule above) */}
               {step === 3 && (
                 <div className="space-y-5">
                   <div>
@@ -1582,7 +1583,7 @@ export function OnboardingWizard() {
                 </div>
               )}
 
-              {/* Step 5: Review — lead is online (shared capsule above) */}
+              {/* Step 5: Review — first AI employee is online (shared capsule above) */}
               {step === 5 && (
                 <div className="space-y-5 py-1">
                   {/* Review checklist — everything that's now set up */}
@@ -1590,8 +1591,8 @@ export function OnboardingWizard() {
                     {[
                       { label: "Company name", done: Boolean(companyName.trim()) },
                       { label: "Mission", done: Boolean(companyGoal.trim()) },
-                      { label: "Agent created", done: Boolean(createdAgentId) },
-                      { label: "Model connected", done: Boolean(createdAgentId) },
+                      { label: "AI employee hired", done: Boolean(createdAgentId) },
+                      { label: "Runtime connected", done: Boolean(createdAgentId) },
                     ].map(({ label, done }) => (
                       <div key={label} className="flex items-center gap-2 text-sm">
                         <span
@@ -1617,7 +1618,7 @@ export function OnboardingWizard() {
                     </p>
                   )}
                   <p className="text-xs text-muted-foreground text-center">
-                    We'll create the first task for {agentName} and take you to the dashboard.
+                    We'll create the first board-visible task for {agentName} and take you to the dashboard.
                   </p>
                 </div>
               )}
@@ -1693,7 +1694,7 @@ export function OnboardingWizard() {
                       ) : (
                         <ArrowRight className="h-3.5 w-3.5 mr-1" />
                       )}
-                      {loading ? "Bringing to life..." : "Give it a heartbeat"}
+                      {loading ? "Bringing to life..." : "Give them a heartbeat"}
                     </Button>
                   )}
                   {step === 5 && (
@@ -1707,7 +1708,7 @@ export function OnboardingWizard() {
                       ) : (
                         <ArrowRight className="h-3.5 w-3.5 mr-1" />
                       )}
-                      {loading ? "Launching..." : "Get started"}
+                      {loading ? "Launching..." : "Open dashboard"}
                     </Button>
                   )}
                 </div>
@@ -1716,7 +1717,7 @@ export function OnboardingWizard() {
           </div>
           )}
 
-          {/* Right half — ASCII art (hidden on mobile, only for the team
+          {/* Right half — ASCII art (hidden on mobile, only for the company
               name + mission steps) */}
           <div
             className={cn(

@@ -1,9 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <style>
-    path { stroke: #18181b; }
-    @media (prefers-color-scheme: dark) {
-      path { stroke: #e4e4e7; }
-    }
-  </style>
-  <path stroke-width="2" d="m16 6-8.414 8.586a2 2 0 0 0 2.829 2.829l8.414-8.586a4 4 0 1 0-5.657-5.657l-8.379 8.551a6 6 0 1 0 8.485 8.485l8.379-8.551"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Summon favicon · "Summon Circle" small-size variant (VIT-36) -->
+  <defs>
+    <mask id="summon-favicon-gap" maskUnits="userSpaceOnUse" x="0" y="0" width="64" height="64">
+      <rect width="64" height="64" fill="#fff"/>
+      <path d="M3 32 H20 L26 21 L33 44 L38 32 H61"
+            fill="none" stroke="#000" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
+    </mask>
+  </defs>
+  <rect width="64" height="64" rx="15" fill="#0B5FFF"/>
+  <circle cx="32" cy="32" r="21" fill="none" stroke="#FFFFFF" stroke-width="6" mask="url(#summon-favicon-gap)"/>
+  <path d="M3 32 H20 L26 21 L33 44 L38 32 H61"
+        fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>

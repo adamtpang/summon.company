@@ -147,7 +147,7 @@ describe("SidebarAccountMenu", () => {
     expect(docsPos).toBeLessThan(feedbackPos);
     expect(feedbackPos).toBeLessThan(themePos);
 
-    expect(document.body.textContent).toContain("Paperclip v1.2.3");
+    expect(document.body.textContent).toContain("vitals.run v1.2.3");
     expect(document.body.textContent).toContain("jane@example.com");
     expect(document.body.querySelector('[data-slot="popover-content"]')?.className)
       .toContain("w-(--sz-277px)");
@@ -203,7 +203,7 @@ describe("SidebarAccountMenu", () => {
     });
     await flushReact();
 
-    expect(document.body.textContent).toContain("feature/source-build-labelPaperclip 518fc71");
+    expect(document.body.textContent).toContain("feature/source-build-labelvitals.run 518fc71");
     expect(document.body.textContent).not.toContain("2026.626.0+58.git.518fc71ce");
     expect(document.body.querySelector('a[href="https://github.com/paperclipai/paperclip/tree/feature%2Fsource-build-label"]')?.textContent).toBe(
       "feature/source-build-label",

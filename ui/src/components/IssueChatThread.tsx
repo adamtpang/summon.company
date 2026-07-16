@@ -3003,6 +3003,7 @@ const VIRTUALIZED_THREAD_GAP_EMBEDDED_PX = 12;
 
 interface VirtualizedIssueChatThreadListProps {
   messages: readonly ThreadMessage[];
+  resumeNoticeByMessageId: ReadonlyMap<string, ResumeAffordance>;
   feedbackVoteByTargetId: ReadonlyMap<string, FeedbackVoteValue>;
   activeRunIds: ReadonlySet<string>;
   stoppingRunId?: string | null;
@@ -3267,6 +3268,7 @@ const VirtualizedIssueChatThreadListInner = forwardRef<
   VirtualizedIssueChatThreadListInnerProps
 >(function VirtualizedIssueChatThreadListInner({
   messages,
+  resumeNoticeByMessageId,
   feedbackVoteByTargetId,
   activeRunIds,
   stoppingRunId,
@@ -3394,6 +3396,7 @@ const VirtualizedIssueChatThreadListInner = forwardRef<
         const message = messages[virtualItem.index];
         if (!message) return null;
         const anchorId = issueChatMessageAnchorId(message);
+        const resumeNotice = resumeNoticeByMessageId.get(message.id);
         return (
           <div
             key={virtualItem.key}
@@ -3423,6 +3426,7 @@ const VirtualizedIssueChatThreadListInner = forwardRef<
               transform: `translateY(${virtualItem.start - scrollMargin}px)`,
             }}
           >
+            {resumeNotice ? <ResumeAffordanceNotice affordance={resumeNotice} /> : null}
             <IssueChatMessageRow
               message={message}
               feedbackVoteByTargetId={feedbackVoteByTargetId}
@@ -4932,6 +4936,7 @@ export function IssueChatThread({
                 <VirtualizedIssueChatThreadList
                   ref={virtualizedThreadRef}
                   messages={messages}
+                  resumeNoticeByMessageId={resumeNoticeByMessageId}
                   feedbackVoteByTargetId={feedbackVoteByTargetId}
                   activeRunIds={activeRunIds}
                   stoppingRunId={stoppingRunId}

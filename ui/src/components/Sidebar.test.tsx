@@ -298,11 +298,12 @@ describe("Sidebar", () => {
     });
   });
 
-  it("does not poll attention until Decisions is enabled", async () => {
+  it("always exposes and polls the graduated Decisions surface", async () => {
     mockInstanceSettingsApi.getExperimental.mockResolvedValue({ enableDecisions: false });
     const root = await renderSidebar();
 
-    expect(mockAttentionApi.list).not.toHaveBeenCalled();
+    expect(container.textContent).toContain("Decisions");
+    expect(mockAttentionApi.list).toHaveBeenCalled();
 
     flushSync(() => {
       root.unmount();

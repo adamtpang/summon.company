@@ -24,7 +24,7 @@ import { useBreadcrumbs } from "../context/BreadcrumbContext";
 import { useCompany } from "../context/CompanyContext";
 import { cn } from "../lib/utils";
 
-function useMarketCapSnapshot(companyId: string | null) {
+export function useMarketCapSnapshot(companyId: string | null) {
   const companiesQuery = useQuery({
     queryKey: ["vitals-market-cap", "companies"],
     queryFn: () => companiesApi.list(),
