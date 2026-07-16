@@ -14,12 +14,17 @@ import {
   createAgentSchema,
   deriveAgentUrlKey,
   isUuidLike,
+  MODEL_PIT_STOP_ADAPTER_TYPES,
   normalizeIssueIdentifier,
   resetAgentSessionSchema,
   testAdapterEnvironmentSchema,
+  switchCompanyModelPitStopSchema,
+  type CompanyModelPitStopProvider,
+  type CompanyModelPitStopStatus,
   type AgentDesiredSkillEntry,
   type AgentSkillSnapshot,
   type InstanceSchedulerHeartbeatAgent,
+  type ModelPitStopAdapterType,
   upsertAgentInstructionsFileSchema,
   updateAgentInstructionsBundleSchema,
   updateAgentPermissionsSchema,
@@ -155,6 +160,7 @@ export function agentRoutes(
     pi_local: "instructionsFilePath",
   };
   const DEFAULT_MANAGED_INSTRUCTIONS_ADAPTER_TYPES = new Set(Object.keys(DEFAULT_INSTRUCTIONS_PATH_KEYS));
+  const MODEL_PIT_STOP_ADAPTER_TYPE_SET = new Set<string>(MODEL_PIT_STOP_ADAPTER_TYPES);
 
   /** Check if an adapter supports the managed instructions bundle. */
   function adapterSupportsInstructionsBundle(adapterType: string): boolean {
@@ -1533,6 +1539,79 @@ export function agentRoutes(
     return details;
   }
 
+  function isModelPitStopAdapterType(value: string): value is ModelPitStopAdapterType {
+    return MODEL_PIT_STOP_ADAPTER_TYPE_SET.has(value);
+  }
+
+  async function describeModelPitStopProvider(
+    adapterType: ModelPitStopAdapterType,
+  ): Promise<CompanyModelPitStopProvider> {
+    const [models, profiles] = await Promise.all([
+      listAdapterModels(adapterType),
+      listAdapterModelProfiles(adapterType),
+    ]);
+    const cheapProfile = profiles.find((profile) => profile.key === "cheap");
+    const cheapConfig = asRecord(cheapProfile?.adapterConfig);
+    return {
+      adapterType,
+      label: adapterType === "claude_local" ? "Claude Code" : "Codex",
+      primaryModel: models[0]?.id ?? null,
+      cheapModel: asNonEmptyString(cheapConfig?.model),
+    };
+  }
+
+  async function getCompanyModelPitStopStatus(
+    companyId: string,
+  ): Promise<CompanyModelPitStopStatus> {
+    const company = await db
+      .select({ id: companies.id })
+      .from(companies)
+      .where(eq(companies.id, companyId))
+      .then((rows) => rows[0] ?? null);
+    if (!company) throw notFound("Company not found");
+
+    const [companyAgents, activeRunRows, providers] = await Promise.all([
+      svc.list(companyId),
+      db
+        .select({ status: heartbeatRuns.status })
+        .from(heartbeatRuns)
+        .where(and(
+          eq(heartbeatRuns.companyId, companyId),
+          inArray(heartbeatRuns.status, ["queued", "running"]),
+        )),
+      Promise.all(MODEL_PIT_STOP_ADAPTER_TYPES.map(describeModelPitStopProvider)),
+    ]);
+    const eligibleAgents = companyAgents.filter((agent) =>
+      agent.status !== "pending_approval" && isModelPitStopAdapterType(agent.adapterType),
+    );
+    const activeRuns = {
+      total: activeRunRows.length,
+      queued: activeRunRows.filter((run) => run.status === "queued").length,
+      running: activeRunRows.filter((run) => run.status === "running").length,
+    };
+    const activeAdapterTypes = new Set(eligibleAgents.map((agent) => agent.adapterType));
+    const currentAdapterType = eligibleAgents.length === 0
+      ? null
+      : activeAdapterTypes.size === 1
+        ? eligibleAgents[0]!.adapterType as ModelPitStopAdapterType
+        : "mixed";
+    const blockingReason = activeRuns.total > 0
+      ? `Pit lane closed: ${activeRuns.total} queued or running ${activeRuns.total === 1 ? "run must" : "runs must"} finish first.`
+      : eligibleAgents.length === 0
+        ? "No Claude or Codex agents are available to reconfigure."
+        : null;
+
+    return {
+      currentAdapterType,
+      eligibleAgentCount: eligibleAgents.length,
+      excludedAgentCount: companyAgents.length - eligibleAgents.length,
+      activeRuns,
+      canSwitch: blockingReason === null,
+      blockingReason,
+      providers,
+    };
+  }
+
   function buildUnsupportedSkillSnapshot(
     adapterType: string,
     desiredSkillEntries: AgentDesiredSkillEntry[] = [],
@@ -2004,6 +2083,149 @@ export function agentRoutes(
     }
     res.json(result.map((agent) => redactForRestrictedAgentView(agent)));
   });
+
+  router.get("/companies/:companyId/model-pit-stop", async (req, res) => {
+    const companyId = req.params.companyId as string;
+    assertCompanyAccess(req, companyId);
+    res.json(await getCompanyModelPitStopStatus(companyId));
+  });
+
+  router.post(
+    "/companies/:companyId/model-pit-stop",
+    validate(switchCompanyModelPitStopSchema),
+    async (req, res) => {
+      const companyId = req.params.companyId as string;
+      await assertBoardCanManageAgentsForCompany(req, companyId);
+
+      const targetAdapterType = req.body.adapterType as ModelPitStopAdapterType;
+      const statusBefore = await getCompanyModelPitStopStatus(companyId);
+      if (statusBefore.activeRuns.total > 0) {
+        throw conflict(statusBefore.blockingReason ?? "Pit lane closed", {
+          code: "company_model_pit_stop_active_runs",
+          activeRunCount: statusBefore.activeRuns.total,
+          queuedRunCount: statusBefore.activeRuns.queued,
+          runningRunCount: statusBefore.activeRuns.running,
+        });
+      }
+      if (statusBefore.eligibleAgentCount === 0) {
+        throw unprocessable(statusBefore.blockingReason ?? "No agents are available to reconfigure");
+      }
+
+      const targetProvider = statusBefore.providers.find(
+        (provider) => provider.adapterType === targetAdapterType,
+      );
+      if (!targetProvider?.primaryModel) {
+        throw unprocessable(`No primary model is available for ${targetAdapterType}`);
+      }
+
+      const targetProfiles = await listAdapterModelProfiles(targetAdapterType);
+      const targetCheapProfile = targetProfiles.find((profile) => profile.key === "cheap");
+      const companyAgents = await svc.list(companyId);
+      const eligibleAgents = companyAgents.filter((agent) =>
+        agent.status !== "pending_approval" && isModelPitStopAdapterType(agent.adapterType),
+      );
+      const updates: Array<{
+        id: string;
+        adapterType: ModelPitStopAdapterType;
+        adapterConfig: Record<string, unknown>;
+        runtimeConfig: Record<string, unknown>;
+      }> = [];
+
+      for (const agent of eligibleAgents) {
+        const existingAdapterConfig = asRecord(agent.adapterConfig) ?? {};
+        let nextAdapterConfig: Record<string, unknown> = {};
+        for (const key of ADAPTER_AGNOSTIC_KEYS) {
+          if (existingAdapterConfig[key] !== undefined) {
+            nextAdapterConfig[key] = existingAdapterConfig[key];
+          }
+        }
+        nextAdapterConfig = preserveInstructionsBundleConfig(existingAdapterConfig, nextAdapterConfig);
+        nextAdapterConfig.model = targetProvider.primaryModel;
+        nextAdapterConfig = applyCodexLocalKeyIsolation(
+          companyId,
+          agent.id,
+          targetAdapterType,
+          applyCreateDefaultsByAdapterType(targetAdapterType, nextAdapterConfig),
+        );
+        const normalizedAdapterConfig = syncInstructionsBundleConfigFromFilePath(
+          agent,
+          await normalizeMediatedAdapterConfigForPersistence({
+            companyId,
+            adapterType: targetAdapterType,
+            adapterConfig: nextAdapterConfig,
+          }),
+        );
+
+        const existingRuntimeConfig = asRecord(agent.runtimeConfig) ?? {};
+        const existingModelProfiles = asRecord(existingRuntimeConfig.modelProfiles) ?? {};
+        const nextModelProfiles = { ...existingModelProfiles };
+        if (targetCheapProfile) {
+          const existingCheapProfile = asRecord(existingModelProfiles.cheap);
+          nextModelProfiles.cheap = {
+            enabled: typeof existingCheapProfile?.enabled === "boolean"
+              ? existingCheapProfile.enabled
+              : true,
+            label: targetCheapProfile.label,
+            adapterConfig: { ...(asRecord(targetCheapProfile.adapterConfig) ?? {}) },
+          };
+        } else {
+          delete nextModelProfiles.cheap;
+        }
+        const runtimeConfig = await normalizeRuntimeConfigAdapterConfigsForPersistence(
+          companyId,
+          targetAdapterType,
+          { ...existingRuntimeConfig, modelProfiles: nextModelProfiles },
+          normalizedAdapterConfig,
+        );
+        updates.push({
+          id: agent.id,
+          adapterType: targetAdapterType,
+          adapterConfig: normalizedAdapterConfig,
+          runtimeConfig,
+        });
+      }
+
+      const changedAgentCount = updates.filter((update) => {
+        const agent = eligibleAgents.find((candidate) => candidate.id === update.id)!;
+        return agent.adapterType !== update.adapterType
+          || JSON.stringify(agent.adapterConfig) !== JSON.stringify(update.adapterConfig)
+          || JSON.stringify(agent.runtimeConfig) !== JSON.stringify(update.runtimeConfig);
+      }).length;
+      const actor = getActorInfo(req);
+      await svc.updateCompanyAgentConfigurationsIfIdle(companyId, updates, {
+        createdByAgentId: actor.agentId,
+        createdByUserId: actor.actorType === "user" ? actor.actorId : null,
+        source: "company_model_pit_stop",
+      });
+
+      await logActivity(db, {
+        companyId,
+        actorType: actor.actorType,
+        actorId: actor.actorId,
+        agentId: actor.agentId,
+        runId: actor.runId,
+        action: "company.model_pit_stop_completed",
+        entityType: "company",
+        entityId: companyId,
+        details: {
+          adapterType: targetAdapterType,
+          primaryModel: targetProvider.primaryModel,
+          cheapModel: targetProvider.cheapModel,
+          eligibleAgentCount: eligibleAgents.length,
+          changedAgentCount,
+          excludedAgentCount: statusBefore.excludedAgentCount,
+        },
+      });
+
+      res.json({
+        adapterType: targetAdapterType,
+        changedAgentCount,
+        primaryModel: targetProvider.primaryModel,
+        cheapModel: targetProvider.cheapModel,
+        status: await getCompanyModelPitStopStatus(companyId),
+      });
+    },
+  );
 
   router.get("/instance/scheduler-heartbeats", async (req, res) => {
     assertInstanceAdmin(req);

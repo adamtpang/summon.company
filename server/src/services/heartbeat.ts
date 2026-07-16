@@ -9573,6 +9573,9 @@ export function heartbeatService(db: Db, options: HeartbeatServiceOptions = {}) 
       scheduledRetryAt: row.run.scheduledRetryAt,
       scheduledRetryAttempt: row.run.scheduledRetryAttempt,
       scheduledRetryReason: row.run.scheduledRetryReason,
+      errorFamily: readNonEmptyString(
+        (row.run.contextSnapshot as Record<string, unknown> | null)?.errorFamily,
+      ),
       error: row.run.error,
       errorCode: row.run.errorCode,
     };

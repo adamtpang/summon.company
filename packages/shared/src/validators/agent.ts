@@ -4,6 +4,7 @@ import {
   AGENT_ROLES,
   AGENT_STATUSES,
   INBOX_MINE_ISSUE_STATUS_FILTER,
+  MODEL_PIT_STOP_ADAPTER_TYPES,
 } from "../constants.js";
 import { agentAdapterTypeSchema } from "../adapter-type.js";
 import { envConfigSchema } from "./secret.js";
@@ -128,6 +129,12 @@ export const updateAgentSchema = createAgentSchema
   });
 
 export type UpdateAgent = z.infer<typeof updateAgentSchema>;
+
+export const switchCompanyModelPitStopSchema = z.object({
+  adapterType: z.enum(MODEL_PIT_STOP_ADAPTER_TYPES),
+}).strict();
+
+export type SwitchCompanyModelPitStop = z.infer<typeof switchCompanyModelPitStopSchema>;
 
 export const updateAgentInstructionsPathSchema = z.object({
   path: z.string().trim().min(1).nullable(),

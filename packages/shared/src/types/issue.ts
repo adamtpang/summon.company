@@ -540,6 +540,8 @@ export interface IssueScheduledRetry {
   scheduledRetryAt: Date | string | null;
   scheduledRetryAttempt: number;
   scheduledRetryReason: string | null;
+  /** Persisted retry cause from the scheduled run context (for example provider_quota). */
+  errorFamily?: string | null;
   retryExhaustedReason?: string | null;
   error?: string | null;
   errorCode?: string | null;

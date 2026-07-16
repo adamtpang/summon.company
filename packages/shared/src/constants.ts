@@ -92,6 +92,9 @@ export const ADAPTER_AGNOSTIC_KEYS = [
 ] as const;
 export type AdapterAgnosticKey = (typeof ADAPTER_AGNOSTIC_KEYS)[number];
 
+export const MODEL_PIT_STOP_ADAPTER_TYPES = ["claude_local", "codex_local"] as const;
+export type ModelPitStopAdapterType = (typeof MODEL_PIT_STOP_ADAPTER_TYPES)[number];
+
 export const MODEL_PROFILE_KEYS = ["cheap"] as const;
 export type ModelProfileKey = (typeof MODEL_PROFILE_KEYS)[number];
 

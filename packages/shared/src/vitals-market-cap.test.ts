@@ -7,7 +7,7 @@ import {
   resolveBindingLever,
   resolveMarketCapStage,
   type MarketCapInputs,
-} from "./vitals-market-cap";
+} from "./vitals-market-cap.js";
 
 const NOW = "2026-07-16T00:00:00.000Z";
 
