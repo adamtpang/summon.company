@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>VIT-112 — Mission Control, the one screen — contact sheet (light + dark)</title>
+<style>
+/* Summon v2.0 tokens (subset) — design/tokens.css is the source of truth */
+.sheet[data-theme="light"] {
+  --bg-canvas:#F7FAFF; --bg-elevated:#FFFFFF;
+  --bg-neutral:rgba(7,31,77,0.06);
+  --text-primary:#0C1428; --text-secondary:#46506B; --text-tertiary:#6B7590;
+  --text-accent:#084DDB;
+  --border-neutral:rgba(12,20,40,0.12); --border-strong:rgba(12,20,40,0.22);
+  --border-accent:rgba(11,95,255,0.35);
+  --accent:#0B5FFF; --accent-soft:#EEF5FF;
+  --positive-content:#0A5C38; --positive-bg:#E2F6EB;
+  --warning-content:#6B4E0A; --warning-bg:#FFF4D6;
+  --shadow-sm:0 2px 8px rgba(7,31,77,0.08),0 1px 3px rgba(7,31,77,0.05);
+  color-scheme:light;
+}
+.sheet[data-theme="dark"] {
+  --bg-canvas:#0A1120; --bg-elevated:#111B33;
+  --bg-neutral:rgba(255,255,255,0.06);
+  --text-primary:#EEF2FA; --text-secondary:#A9B4CE; --text-tertiary:#77829F;
+  --text-accent:#7FB0FF;
+  --border-neutral:rgba(255,255,255,0.14); --border-strong:rgba(255,255,255,0.26);
+  --border-accent:rgba(83,149,255,0.45);
+  --accent:#5395FF; --accent-soft:rgba(11,95,255,0.16);
+  --positive-content:#6EE7A8; --positive-bg:rgba(16,122,74,0.22);
+  --warning-content:#F5D06B; --warning-bg:rgba(107,78,10,0.28);
+  --shadow-sm:none;
+  color-scheme:dark;
+}
+* { box-sizing:border-box; margin:0; }
+body { background:#3A4358; font-family:"Inter",system-ui,sans-serif; padding:32px; }
+.sheet {
+  background:var(--bg-canvas); color:var(--text-primary);
+  border-radius:24px; padding:28px; max-width:1440px; margin:0 auto 32px;
+  border:1px solid var(--border-neutral);
+}
+.sheet-title {
+  font-family:"Space Grotesk","Inter",system-ui,sans-serif;
+  font-size:1.25rem; letter-spacing:-0.02em; margin-bottom:4px;
+}
+.sheet-sub { font-size:0.8125rem; color:var(--text-tertiary); margin-bottom:20px; }
+.mono { font-family:"JetBrains Mono",ui-monospace,monospace; }
+
+/* ============ grid: fixed spatial hierarchy (glass cockpit) ============ */
+.screen { display:grid; gap:14px;
+  grid-template-columns:2fr 1fr;
+  grid-template-areas:
+    "wywg wywg"
+    "vitals vitals"
+    "formation roadmap"
+    "queue queue"; }
+.zone-label { font-size:0.625rem; letter-spacing:0.1em; text-transform:uppercase;
+  color:var(--text-tertiary); margin-bottom:8px; }
+
+/* ---- while you were gone ---- */
+.wywg { grid-area:wywg; display:flex; align-items:center; gap:18px;
+  background:var(--accent-soft); border:1px solid var(--border-accent);
+  border-radius:14px; padding:10px 16px; font-size:0.8125rem; }
+.wywg strong { font-weight:600; }
+.wywg .dismiss { margin-left:auto; font-size:0.75rem; color:var(--text-accent);
+  cursor:pointer; font-weight:600; }
+.wywg .since { color:var(--text-tertiary); font-size:0.75rem; }
+
+/* ---- zone A: vitals strip + zone E: decision badge ---- */
+.vitals { grid-area:vitals; display:grid; gap:12px;
+  grid-template-columns:1.5fr 1fr 1fr 1fr 1.3fr; align-items:stretch; }
+.hero { background:var(--bg-elevated); border:1px solid var(--border-neutral);
+  border-radius:16px; padding:14px 16px; box-shadow:var(--shadow-sm);
+  display:flex; flex-direction:column; gap:6px; min-height:118px; }
+.hero .k { font-size:0.6875rem; letter-spacing:0.08em; text-transform:uppercase;
+  color:var(--text-tertiary); }
+.hero .v { font-family:"Space Grotesk","Inter",system-ui,sans-serif;
+  font-size:1.5rem; letter-spacing:-0.02em; line-height:1.1; }
+.hero .d { font-size:0.75rem; color:var(--text-secondary); }
+.hero .spark { margin-top:auto; }
+.hero.pending { border-style:dashed; opacity:0.6; }
+.hero.pending .v { font-size:0.875rem; color:var(--text-tertiary); font-family:"Inter",system-ui,sans-serif; }
+
+/* EKG card */
+.ekg-row { display:flex; align-items:center; gap:12px; }
+.ring { flex:none; }
+.pressure { display:flex; flex-direction:column; gap:5px; margin-top:auto; }
+.pbar { display:grid; grid-template-columns:14px 1fr 28px; gap:8px; align-items:center;
+  font-size:0.6875rem; color:var(--text-tertiary); }
+.pbar .track { height:5px; border-radius:9999px; background:var(--bg-neutral); overflow:hidden; }
+.pbar .fill { height:100%; border-radius:9999px; background:var(--accent); }
+.pbar.hot .fill { background:var(--warning-content); }
+
+/* decision badge (zone E) */
+.decision { background:var(--accent); color:#fff; border-radius:16px;
+  padding:14px 16px; display:flex; flex-direction:column; gap:6px;
+  box-shadow:var(--shadow-sm); cursor:pointer; }
+.decision .k { font-size:0.6875rem; letter-spacing:0.08em; text-transform:uppercase; opacity:0.75; }
+.decision .count { font-family:"Space Grotesk","Inter",system-ui,sans-serif;
+  font-size:1.5rem; letter-spacing:-0.02em; }
+.decision .next { font-size:0.8125rem; line-height:1.35; font-weight:500; }
+.decision .go { margin-top:auto; font-size:0.75rem; font-weight:700; opacity:0.9; }
+
+/* ---- zone B: formation ---- */
+.formation { grid-area:formation; }
+.fgrid { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; }
+.card { background:var(--bg-elevated); border:1px solid var(--border-neutral);
+  border-radius:14px; padding:12px 14px; box-shadow:var(--shadow-sm);
+  min-height:96px; display:flex; flex-direction:column; gap:7px; }
+.card.live { border-color:var(--border-accent); }
+.card.idle { opacity:0.62; }
+.card.unstaffed { border-style:dashed; opacity:0.5; background:transparent; }
+.dept { display:flex; align-items:center; justify-content:space-between; }
+.dept .name { font-size:0.8125rem; font-weight:600; }
+.dept .tag { font-size:0.6875rem; color:var(--text-tertiary); }
+.run { display:flex; align-items:center; gap:7px; min-width:0; }
+.dot { width:8px; height:8px; border-radius:9999px; flex:none; }
+.dot.running { background:var(--accent); animation:pulse 2s ease-in-out infinite; }
+.dot.queued { background:transparent; border:1.5px solid var(--border-strong); }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.35} }
+.who { font-size:0.75rem; font-weight:600; flex:none; }
+.task { font-size:0.7188rem; color:var(--text-secondary); white-space:nowrap;
+  overflow:hidden; text-overflow:ellipsis; min-width:0; }
+.dur { font-family:"JetBrains Mono",ui-monospace,monospace; font-size:0.6875rem;
+  color:var(--text-accent); flex:none; margin-left:auto; padding-left:6px; }
+.queue-note, .idle-label, .unstaffed-label { font-size:0.6875rem; color:var(--text-tertiary); }
+
+/* ---- zone C: roadmap ---- */
+.roadmap { grid-area:roadmap; background:var(--bg-elevated);
+  border:1px solid var(--border-neutral); border-radius:16px; padding:14px 16px;
+  box-shadow:var(--shadow-sm); display:flex; flex-direction:column; gap:9px; }
+.stage { display:grid; grid-template-columns:16px 1fr 92px; gap:8px; align-items:center; }
+.stage .n { font-family:"JetBrains Mono",ui-monospace,monospace; font-size:0.6875rem;
+  color:var(--text-tertiary); }
+.stage .bar { position:relative; height:16px; border-radius:6px; background:var(--bg-neutral); overflow:hidden; }
+.stage .bar .fill { position:absolute; inset:0 auto 0 0; background:var(--accent); opacity:0.85; }
+.stage.closed .bar .fill { background:var(--positive-content); opacity:0.7; }
+.stage .bar .lbl { position:absolute; inset:0; display:flex; align-items:center;
+  padding:0 7px; font-size:0.6875rem; font-weight:600; color:var(--text-primary); }
+.stage .eta { font-family:"JetBrains Mono",ui-monospace,monospace; font-size:0.6875rem;
+  color:var(--text-tertiary); text-align:right; }
+.stage.constraint .bar { outline:2px solid var(--warning-content); outline-offset:1px; }
+.stage.constraint .eta { color:var(--warning-content); font-weight:700; }
+.stage.locked { opacity:0.45; }
+
+/* ---- zone D: task queue ---- */
+.queue { grid-area:queue; background:var(--bg-elevated);
+  border:1px solid var(--border-neutral); border-radius:16px; padding:12px 16px;
+  box-shadow:var(--shadow-sm); }
+.qrow { display:grid; grid-template-columns:22px 1fr 90px 64px 84px 70px; gap:10px;
+  align-items:center; padding:6px 4px; border-top:1px solid var(--border-neutral);
+  font-size:0.8125rem; }
+.qrow:first-of-type { border-top:none; }
+.qrow .i { font-family:"JetBrains Mono",ui-monospace,monospace; font-size:0.6875rem; color:var(--text-tertiary); }
+.qrow .t { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; font-weight:500; }
+.qrow .key { font-family:"JetBrains Mono",ui-monospace,monospace; font-size:0.6875rem; color:var(--text-tertiary); }
+.stars { color:var(--text-accent); font-size:0.75rem; letter-spacing:0.05em; }
+.chip { font-size:0.6563rem; font-weight:600; border-radius:9999px; padding:2px 8px;
+  justify-self:start; }
+.chip.review { background:var(--warning-bg); color:var(--warning-content); }
+.chip.progress { background:var(--accent-soft); color:var(--text-accent); }
+.owner { font-size:0.6875rem; font-weight:700; color:var(--text-accent);
+  background:var(--accent-soft); border:1px solid var(--border-accent);
+  border-radius:9999px; padding:2px 8px; justify-self:start; }
+.qmore { padding:8px 4px 2px; font-size:0.75rem; color:var(--text-accent); font-weight:600; }
+
+/* annotations under each sheet */
+.notes { margin-top:16px; padding-top:12px; border-top:1px solid var(--border-neutral);
+  font-size:0.7188rem; color:var(--text-tertiary); line-height:1.6; column-count:2; column-gap:28px; }
+</style>
+</head>
+<body>
+
+<!-- ======================= LIGHT ======================= -->
+<div class="sheet" data-theme="light">
+  <div class="sheet-title">Mission Control — the one screen</div>
+  <div class="sheet-sub">VIT-112 · five zones per doc/research/BEST-DASHBOARDS.md §3 · real Company Zero snapshot 2026-07-16 04:52Z · light</div>
+
+  <div class="screen">
+    <!-- while you were gone (idea #12) -->
+    <div class="wywg">
+      <strong>While you were gone</strong>
+      <span>18 tasks shipped</span>
+      <span>3 agents running now</span>
+      <span>47 runs queued</span>
+      <span>2 decisions waiting</span>
+      <span class="since">since last open · all from run logs</span>
+      <span class="dismiss">Dismiss ✕</span>
+    </div>
+
+    <!-- ZONE A vitals strip + ZONE E decision badge -->
+    <div class="vitals">
+      <div class="hero">
+        <div class="k">Company EKG · revenue events</div>
+        <div class="ekg-row">
+          <svg class="ring" width="34" height="34" viewBox="0 0 34 34">
+            <circle cx="17" cy="17" r="14" fill="none" stroke="var(--bg-neutral)" stroke-width="4"/>
+            <text x="17" y="21" text-anchor="middle" font-size="11" fill="var(--text-tertiary)">○</text>
+          </svg>
+          <svg width="150" height="34" viewBox="0 0 150 34">
+            <polyline points="0,24 150,24" fill="none" stroke="var(--border-strong)" stroke-width="1.5"/>
+            <circle cx="147" cy="24" r="2.5" fill="var(--text-tertiary)"/>
+          </svg>
+        </div>
+        <div class="d">0 revenue events — the flatline is the truth · green-day ring: open</div>
+        <div class="pressure">
+          <div class="pbar hot"><span>D</span><span class="track"><span class="fill" style="width:80%"></span></span><span>↑</span></div>
+          <div class="pbar hot"><span>C</span><span class="track"><span class="fill" style="width:86%"></span></span><span>↑</span></div>
+          <div class="pbar"><span>$</span><span class="track"><span class="fill" style="width:28%"></span></span><span>→</span></div>
+        </div>
+      </div>
+      <div class="hero">
+        <div class="k">Market cap</div>
+        <div class="v">Option value</div>
+        <div class="d">pre-revenue · stage NOW</div>
+        <div class="d spark">lever: first external $99</div>
+      </div>
+      <div class="hero">
+        <div class="k">MRR</div>
+        <div class="v">$0</div>
+        <div class="d">Δ $0</div>
+        <svg class="spark" width="120" height="18" viewBox="0 0 120 18">
+          <polyline points="0,14 120,14" fill="none" stroke="var(--border-strong)" stroke-width="1.5"/>
+        </svg>
+      </div>
+      <div class="hero pending">
+        <div class="k">Runway</div>
+        <div class="v">No cost ledger yet — gate G10 blanks this slot until VIT-46 wires real spend</div>
+      </div>
+      <div class="decision">
+        <div class="k">Decisions</div>
+        <div class="count">2 waiting</div>
+        <div class="next">Confirm: via-negativa delete slate (VIT-115)</div>
+        <div class="go">Open decisions →</div>
+      </div>
+    </div>
+
+    <!-- ZONE B formation -->
+    <div class="formation">
+      <div class="zone-label">Formation — 8 departments · live mode</div>
+      <div class="fgrid">
+        <div class="card live">
+          <div class="dept"><span class="name">Engineering</span><span class="tag">Builds</span></div>
+          <div class="run"><span class="dot running"></span><span class="who">CTO</span><span class="dur">14m</span></div>
+          <div class="task">VIT-43 · Split propose/apply: no write credentials</div>
+          <div class="run"><span class="dot running"></span><span class="who">Engineer</span><span class="dur">9m</span></div>
+          <div class="task">VIT-57 · CEO chat routes the work</div>
+          <div class="queue-note">+45 queued across 2 agents</div>
+        </div>
+        <div class="card live">
+          <div class="dept"><span class="name">Design</span><span class="tag">Builds</span></div>
+          <div class="run"><span class="dot running"></span><span class="who">Design Director</span><span class="dur">3m</span></div>
+          <div class="task">VIT-112 · Mission Control: the one screen</div>
+          <div class="queue-note">+2 queued</div>
+        </div>
+        <div class="card idle">
+          <div class="dept"><span class="name">Operations</span><span class="tag">Runs</span></div>
+          <div class="run"><span class="who">COO · Diagnostician</span></div>
+          <div class="idle-label">idle — no live run</div>
+        </div>
+        <div class="card idle">
+          <div class="dept"><span class="name">Marketing</span><span class="tag">Sells</span></div>
+          <div class="run"><span class="who">CMO</span></div>
+          <div class="idle-label">idle — no live run</div>
+        </div>
+        <div class="card idle">
+          <div class="dept"><span class="name">Finance</span><span class="tag">Runs</span></div>
+          <div class="run"><span class="who">CFO</span></div>
+          <div class="idle-label">idle — no live run</div>
+        </div>
+        <div class="card unstaffed">
+          <div class="dept"><span class="name">Sales</span><span class="tag">Sells</span></div>
+          <div class="unstaffed-label">unstaffed — staff this department</div>
+        </div>
+        <div class="card unstaffed">
+          <div class="dept"><span class="name">Support</span><span class="tag">Runs &amp; sells</span></div>
+          <div class="unstaffed-label">unstaffed — staff this department</div>
+        </div>
+        <div class="card unstaffed">
+          <div class="dept"><span class="name">Legal</span><span class="tag">Runs</span></div>
+          <div class="unstaffed-label">unstaffed — staff this department</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ZONE C roadmap -->
+    <div class="roadmap">
+      <div class="zone-label">Roadmap — 8 stages · constraint outlined</div>
+      <div class="stage closed"><span class="n">1</span><span class="bar"><span class="fill" style="width:100%"></span><span class="lbl">Initial idea</span></span><span class="eta">closed ✓</span></div>
+      <div class="stage closed"><span class="n">2</span><span class="bar"><span class="fill" style="width:100%"></span><span class="lbl">Found it</span></span><span class="eta">closed ✓</span></div>
+      <div class="stage"><span class="n">3</span><span class="bar"><span class="fill" style="width:92%"></span><span class="lbl">Identity</span></span><span class="eta">92% · ~2d</span></div>
+      <div class="stage"><span class="n">4</span><span class="bar"><span class="fill" style="width:61%"></span><span class="lbl">Build</span></span><span class="eta">61% · ~9d</span></div>
+      <div class="stage constraint"><span class="n">5</span><span class="bar"><span class="fill" style="width:18%"></span><span class="lbl">Distribute</span></span><span class="eta">18% ◄ constraint</span></div>
+      <div class="stage"><span class="n">6</span><span class="bar"><span class="fill" style="width:22%"></span><span class="lbl">Launch</span></span><span class="eta">22%</span></div>
+      <div class="stage"><span class="n">7</span><span class="bar"><span class="fill" style="width:31%"></span><span class="lbl">Operate &amp; close</span></span><span class="eta">31%</span></div>
+      <div class="stage locked"><span class="n">8</span><span class="bar"><span class="fill" style="width:26%"></span><span class="lbl">Scale</span></span><span class="eta">26%</span></div>
+    </div>
+
+    <!-- ZONE D task queue -->
+    <div class="queue">
+      <div class="zone-label">Task queue — top 7 · stars = priority until Summon Score lands (both are logged fields)</div>
+      <div class="qrow"><span class="i">1</span><span class="t">CEO chat: talk to any company's CEO like Claude Code</span><span class="key">VIT-57</span><span class="stars">★★★★</span><span class="chip progress">in progress</span><span class="owner">ENG</span></div>
+      <div class="qrow"><span class="i">2</span><span class="t">Decisions tab: every decision funnels through the CEO to the board</span><span class="key">VIT-72</span><span class="stars">★★★★</span><span class="chip progress">in progress</span><span class="owner">CEO</span></div>
+      <div class="qrow"><span class="i">3</span><span class="t">Mission Control: the one-screen master dashboard</span><span class="key">VIT-112</span><span class="stars">★★★★</span><span class="chip review">in review</span><span class="owner">DES</span></div>
+      <div class="qrow"><span class="i">4</span><span class="t">Via negativa: audit the entire frontend and delete to the minimum</span><span class="key">VIT-115</span><span class="stars">★★★★</span><span class="chip review">in review</span><span class="owner">DES</span></div>
+      <div class="qrow"><span class="i">5</span><span class="t">Board scoreboard: star-rated priorities table + progress bars</span><span class="key">VIT-70</span><span class="stars">★★★★</span><span class="chip review">in review</span><span class="owner">CEO</span></div>
+      <div class="qrow"><span class="i">6</span><span class="t">Fallback model chains: auto-failover per employee</span><span class="key">VIT-49</span><span class="stars">★★★★</span><span class="chip review">in review</span><span class="owner">ENG</span></div>
+      <div class="qrow"><span class="i">7</span><span class="t">WhatsApp-feel messaging: a persistent per-employee chat inbox</span><span class="key">VIT-41</span><span class="stars">★★★★</span><span class="chip review">in review</span><span class="owner">CEO</span></div>
+      <div class="qmore">+34 more →</div>
+    </div>
+  </div>
+
+  <div class="notes">
+    Zones are fixed — never rearranged (glass cockpit, idea #5). 5 zones (G4 cap: 5). 4 heroes incl. EKG (G4 cap: 4). One primary action: the Decision badge (idea #11).
+    Every number except stage % is from the live API snapshot: live-runs (3 running, 47 queued), agents (8 staffed roles, 3 departments unstaffed), issues (41 open, 18 done), MARKET-CAP-MODEL.md (option value · first-$99 lever).
+    Stage % is illustrative pending Zone C wiring to the existing Roadmap evidence engine (ui/src/pages/Roadmap.tsx) — the mechanics already exist and are log-derived.
+    The empty Runway hero is gate G10 enforced visibly: no cost ledger → no number, and the slot says why.
+    Formation shows the 8 departments only (research §3 is binding); the CEO is the founder's counterpart in Chat and surfaces here through the Decision badge, not as a ninth card.
+    Click paths: hero → input breakdown · department card → employee chat · stage → task breakdown · queue row → task thread · badge → Decisions tab. All level-2, all under the 100ms budget (G11).
+  </div>
+</div>
+
+<!-- ======================= DARK ======================= -->
+<div class="sheet" data-theme="dark">
+  <div class="sheet-title">Mission Control — the one screen</div>
+  <div class="sheet-sub">VIT-112 · five zones per doc/research/BEST-DASHBOARDS.md §3 · real Company Zero snapshot 2026-07-16 04:52Z · dark</div>
+
+  <div class="screen">
+    <div class="wywg">
+      <strong>While you were gone</strong>
+      <span>18 tasks shipped</span>
+      <span>3 agents running now</span>
+      <span>47 runs queued</span>
+      <span>2 decisions waiting</span>
+      <span class="since">since last open · all from run logs</span>
+      <span class="dismiss">Dismiss ✕</span>
+    </div>
+
+    <div class="vitals">
+      <div class="hero">
+        <div class="k">Company EKG · revenue events</div>
+        <div class="ekg-row">
+          <svg class="ring" width="34" height="34" viewBox="0 0 34 34">
+            <circle cx="17" cy="17" r="14" fill="none" stroke="var(--bg-neutral)" stroke-width="4"/>
+            <text x="17" y="21" text-anchor="middle" font-size="11" fill="var(--text-tertiary)">○</text>
+          </svg>
+          <svg width="150" height="34" viewBox="0 0 150 34">
+            <polyline points="0,24 150,24" fill="none" stroke="var(--border-strong)" stroke-width="1.5"/>
+            <circle cx="147" cy="24" r="2.5" fill="var(--text-tertiary)"/>
+          </svg>
+        </div>
+        <div class="d">0 revenue events — the flatline is the truth · green-day ring: open</div>
+        <div class="pressure">
+          <div class="pbar hot"><span>D</span><span class="track"><span class="fill" style="width:80%"></span></span><span>↑</span></div>
+          <div class="pbar hot"><span>C</span><span class="track"><span class="fill" style="width:86%"></span></span><span>↑</span></div>
+          <div class="pbar"><span>$</span><span class="track"><span class="fill" style="width:28%"></span></span><span>→</span></div>
+        </div>
+      </div>
+      <div class="hero">
+        <div class="k">Market cap</div>
+        <div class="v">Option value</div>
+        <div class="d">pre-revenue · stage NOW</div>
+        <div class="d spark">lever: first external $99</div>
+      </div>
+      <div class="hero">
+        <div class="k">MRR</div>
+        <div class="v">$0</div>
+        <div class="d">Δ $0</div>
+        <svg class="spark" width="120" height="18" viewBox="0 0 120 18">
+          <polyline points="0,14 120,14" fill="none" stroke="var(--border-strong)" stroke-width="1.5"/>
+        </svg>
+      </div>
+      <div class="hero pending">
+        <div class="k">Runway</div>
+        <div class="v">No cost ledger yet — gate G10 blanks this slot until VIT-46 wires real spend</div>
+      </div>
+      <div class="decision">
+        <div class="k">Decisions</div>
+        <div class="count">2 waiting</div>
+        <div class="next">Confirm: via-negativa delete slate (VIT-115)</div>
+        <div class="go">Open decisions →</div>
+      </div>
+    </div>
+
+    <div class="formation">
+      <div class="zone-label">Formation — 8 departments · live mode</div>
+      <div class="fgrid">
+        <div class="card live">
+          <div class="dept"><span class="name">Engineering</span><span class="tag">Builds</span></div>
+          <div class="run"><span class="dot running"></span><span class="who">CTO</span><span class="dur">14m</span></div>
+          <div class="task">VIT-43 · Split propose/apply: no write credentials</div>
+          <div class="run"><span class="dot running"></span><span class="who">Engineer</span><span class="dur">9m</span></div>
+          <div class="task">VIT-57 · CEO chat routes the work</div>
+          <div class="queue-note">+45 queued across 2 agents</div>
+        </div>
+        <div class="card live">
+          <div class="dept"><span class="name">Design</span><span class="tag">Builds</span></div>
+          <div class="run"><span class="dot running"></span><span class="who">Design Director</span><span class="dur">3m</span></div>
+          <div class="task">VIT-112 · Mission Control: the one screen</div>
+          <div class="queue-note">+2 queued</div>
+        </div>
+        <div class="card idle">
+          <div class="dept"><span class="name">Operations</span><span class="tag">Runs</span></div>
+          <div class="run"><span class="who">COO · Diagnostician</span></div>
+          <div class="idle-label">idle — no live run</div>
+        </div>
+        <div class="card idle">
+          <div class="dept"><span class="name">Marketing</span><span class="tag">Sells</span></div>
+          <div class="run"><span class="who">CMO</span></div>
+          <div class="idle-label">idle — no live run</div>
+        </div>
+        <div class="card idle">
+          <div class="dept"><span class="name">Finance</span><span class="tag">Runs</span></div>
+          <div class="run"><span class="who">CFO</span></div>
+          <div class="idle-label">idle — no live run</div>
+        </div>
+        <div class="card unstaffed">
+          <div class="dept"><span class="name">Sales</span><span class="tag">Sells</span></div>
+          <div class="unstaffed-label">unstaffed — staff this department</div>
+        </div>
+        <div class="card unstaffed">
+          <div class="dept"><span class="name">Support</span><span class="tag">Runs &amp; sells</span></div>
+          <div class="unstaffed-label">unstaffed — staff this department</div>
+        </div>
+        <div class="card unstaffed">
+          <div class="dept"><span class="name">Legal</span><span class="tag">Runs</span></div>
+          <div class="unstaffed-label">unstaffed — staff this department</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="roadmap">
+      <div class="zone-label">Roadmap — 8 stages · constraint outlined</div>
+      <div class="stage closed"><span class="n">1</span><span class="bar"><span class="fill" style="width:100%"></span><span class="lbl">Initial idea</span></span><span class="eta">closed ✓</span></div>
+      <div class="stage closed"><span class="n">2</span><span class="bar"><span class="fill" style="width:100%"></span><span class="lbl">Found it</span></span><span class="eta">closed ✓</span></div>
+      <div class="stage"><span class="n">3</span><span class="bar"><span class="fill" style="width:92%"></span><span class="lbl">Identity</span></span><span class="eta">92% · ~2d</span></div>
+      <div class="stage"><span class="n">4</span><span class="bar"><span class="fill" style="width:61%"></span><span class="lbl">Build</span></span><span class="eta">61% · ~9d</span></div>
+      <div class="stage constraint"><span class="n">5</span><span class="bar"><span class="fill" style="width:18%"></span><span class="lbl">Distribute</span></span><span class="eta">18% ◄ constraint</span></div>
+      <div class="stage"><span class="n">6</span><span class="bar"><span class="fill" style="width:22%"></span><span class="lbl">Launch</span></span><span class="eta">22%</span></div>
+      <div class="stage"><span class="n">7</span><span class="bar"><span class="fill" style="width:31%"></span><span class="lbl">Operate &amp; close</span></span><span class="eta">31%</span></div>
+      <div class="stage locked"><span class="n">8</span><span class="bar"><span class="fill" style="width:26%"></span><span class="lbl">Scale</span></span><span class="eta">26%</span></div>
+    </div>
+
+    <div class="queue">
+      <div class="zone-label">Task queue — top 7 · stars = priority until Summon Score lands (both are logged fields)</div>
+      <div class="qrow"><span class="i">1</span><span class="t">CEO chat: talk to any company's CEO like Claude Code</span><span class="key">VIT-57</span><span class="stars">★★★★</span><span class="chip progress">in progress</span><span class="owner">ENG</span></div>
+      <div class="qrow"><span class="i">2</span><span class="t">Decisions tab: every decision funnels through the CEO to the board</span><span class="key">VIT-72</span><span class="stars">★★★★</span><span class="chip progress">in progress</span><span class="owner">CEO</span></div>
+      <div class="qrow"><span class="i">3</span><span class="t">Mission Control: the one-screen master dashboard</span><span class="key">VIT-112</span><span class="stars">★★★★</span><span class="chip review">in review</span><span class="owner">DES</span></div>
+      <div class="qrow"><span class="i">4</span><span class="t">Via negativa: audit the entire frontend and delete to the minimum</span><span class="key">VIT-115</span><span class="stars">★★★★</span><span class="chip review">in review</span><span class="owner">DES</span></div>
+      <div class="qrow"><span class="i">5</span><span class="t">Board scoreboard: star-rated priorities table + progress bars</span><span class="key">VIT-70</span><span class="stars">★★★★</span><span class="chip review">in review</span><span class="owner">CEO</span></div>
+      <div class="qrow"><span class="i">6</span><span class="t">Fallback model chains: auto-failover per employee</span><span class="key">VIT-49</span><span class="stars">★★★★</span><span class="chip review">in review</span><span class="owner">ENG</span></div>
+      <div class="qrow"><span class="i">7</span><span class="t">WhatsApp-feel messaging: a persistent per-employee chat inbox</span><span class="key">VIT-41</span><span class="stars">★★★★</span><span class="chip review">in review</span><span class="owner">CEO</span></div>
+      <div class="qmore">+34 more →</div>
+    </div>
+  </div>
+
+  <div class="notes">
+    Zones are fixed — never rearranged (glass cockpit, idea #5). 5 zones (G4 cap: 5). 4 heroes incl. EKG (G4 cap: 4). One primary action: the Decision badge (idea #11).
+    Every number except stage % is from the live API snapshot: live-runs (3 running, 47 queued), agents (8 staffed roles, 3 departments unstaffed), issues (41 open, 18 done), MARKET-CAP-MODEL.md (option value · first-$99 lever).
+    Stage % is illustrative pending Zone C wiring to the existing Roadmap evidence engine (ui/src/pages/Roadmap.tsx) — the mechanics already exist and are log-derived.
+    The empty Runway hero is gate G10 enforced visibly: no cost ledger → no number, and the slot says why.
+    Formation shows the 8 departments only (research §3 is binding); the CEO is the founder's counterpart in Chat and surfaces here through the Decision badge, not as a ninth card.
+    Click paths: hero → input breakdown · department card → employee chat · stage → task breakdown · queue row → task thread · badge → Decisions tab. All level-2, all under the 100ms budget (G11).
+  </div>
+</div>
+
+</body>
+</html>

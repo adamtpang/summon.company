@@ -1,23 +1,46 @@
 # VIT-112 — Mission Control: the one-screen master dashboard
 
-Status: **spec in progress**. This document is the running design spec for Mission
-Control. The full one-screen layout proposal waits on `doc/research/BEST-DASHBOARDS.md`
-(not yet landed). The LIVE AGENT RUNS zone (board addition, 2026-07-16, comment
-`a0b27fde`) is spec'd below and does not depend on that research.
+Status: **full-screen proposal awaiting board confirmation**. The binding layout
+source is `doc/research/BEST-DASHBOARDS.md` (landed 2026-07-16) — its §3 five-zone
+layout and §2 gates G1–G12 govern every decision below. The LIVE AGENT RUNS zone
+(board addition, comment `a0b27fde`) is spec'd below as the formation zone's live mode.
 
 Owner: Vitals Design Director. Board decisions recorded inline.
 
 ---
 
-## Zone ledger (gate: max 7 top-level zones)
+## Zone ledger (gate G4: max 5 zones)
 
 | # | Zone | Source ticket | Status |
 |---|------|--------------|--------|
-| 1 | Vitals strip (EKG scoreboard + market cap panel) | VIT-101 | awaiting layout research |
-| 2 | Formation (org chart) — **with LIVE AGENT RUNS as its live mode** | VIT-112 + board addition | zone spec'd (below) |
-| 3 | Roadmap (8 stage bars, constraint highlighted) | VIT-13 mechanics | awaiting layout research |
-| 4 | Task queue (top 5–7 by Summon Score) | companion ticket | awaiting layout research |
-| 5 | Decisions badge | VIT-72 | awaiting layout research |
+| A | Vitals strip (EKG hero top-left + Market Cap + MRR + Runway; WYWG strip on first open) | VIT-101 | proposed on contact sheet |
+| B | Formation (8 departments) — **with LIVE AGENT RUNS as its live mode** | VIT-112 + board addition | proposed on contact sheet |
+| C | Roadmap (8 stage bars, constraint outlined) | VIT-13 mechanics | proposed on contact sheet |
+| D | Task queue (top 7 by Summon Score) | companion ticket | proposed on contact sheet |
+| E | Decision badge (single primary action, fixed top-right) | VIT-72 | proposed on contact sheet |
+
+## Layout decisions taken with the research as binding (2026-07-16)
+
+1. **CEO is not a ninth formation card.** Research §3 draws the formation as the 8
+   departments. The CEO is the founder's counterpart in Chat (the FM "assistant
+   manager"), and CEO-mediated items surface through the Decision badge. The
+   nine-archetype mapping below survives for the fleet strip counts only.
+2. **Runway hero ships as a visible G10-blank.** No cost ledger exists, so the slot
+   renders "No cost ledger yet — G10 blanks this slot until VIT-46 wires real spend"
+   instead of a number. The gate is enforced in public, not silently.
+3. **Task-queue stars = issue priority until the Summon Score ships.** Both are logged
+   fields, so the interim mapping (critical=4★, high=3★, …) passes G10; invented
+   decimal scores would not. The queue caption states the mapping.
+4. **Honest flatline.** The EKG renders 0 revenue events as a flat line and the
+   green-day ring open. Pre-revenue truth is the whole point of the 11x rule.
+5. **Stage % comes from the existing Roadmap evidence engine**
+   (`ui/src/pages/Roadmap.tsx` — stage definitions + `ISSUE_STATUS_PROGRESS`
+   weights + `selectRoadmapConstraint`). The contact sheet's stage percentages are
+   illustrative until Zone C is wired to that engine; every other number on the
+   sheet is from the live API snapshot (04:52Z).
+6. **Fixed spatial hierarchy** (research idea #5): grid areas `wywg / vitals /
+   formation+roadmap / queue`, never user-rearranged. The 8-pane drag-and-drop
+   layout is recorded for deletion in the research §3 delete table.
 
 **Placement decision (Design Director):** the board offered two placements for LIVE
 AGENT RUNS — a standalone zone or the formation zone's live mode. It is the formation
@@ -106,15 +129,26 @@ Unstaffed departments keep the existing "staff this department" treatment.
 
 ### Evidence
 
-- Contact sheet (light + dark, real Company Zero data):
+- **Full one-screen contact sheet** (light + dark, five zones, real Company Zero
+  snapshot 2026-07-16 04:52Z):
+  `doc/design/vit-112-mission-control-contact-sheet.html` and
+  `doc/design/vit-112-mission-control-contact-sheet.png`.
+- Live-runs zone contact sheet (earlier iteration):
   `doc/design/vit-112-live-runs-contact-sheet.html` and
   `doc/design/vit-112-live-runs-contact-sheet.png`.
+
+Snapshot data on the full sheet, all API-verified: 3 running runs (Design Director
+on VIT-112 3m, Engineer on VIT-57 9m, CTO on VIT-43 14m), 47 queued (CTO 34,
+Engineer 11, DD 2), 8 staffed roles / 3 unstaffed departments, 41 open + 18 done
+issues, market cap "option value / first-$99 lever" from `doc/MARKET-CAP-MODEL.md`.
 
 ---
 
 ## Remaining (sequenced)
 
-1. `doc/research/BEST-DASHBOARDS.md` lands → full one-screen layout proposal.
-2. Full-screen contact sheet, light + dark, board gallery, BEFORE build.
-3. Board confirmation → build → Company Zero + Quantus render with real data.
-4. DECISION-SHEET entries for every absorbed/deleted surface.
+1. ~~`doc/research/BEST-DASHBOARDS.md` lands~~ → done, layout reconciled above.
+2. ~~Full-screen contact sheet, light + dark, board gallery, BEFORE build.~~ → done.
+3. **Board confirmation of the contact sheet** → build → Company Zero + Quantus
+   render with real data.
+4. DECISION-SHEET entries for every absorbed/deleted surface (research §3 delete
+   table is the source list).
