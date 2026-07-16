@@ -1,0 +1,168 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1492" height="836" viewBox="0 0 1492 836">
+  <!-- VIT-36 · Summon logomark concepts · contact sheet for board review -->
+  <!-- Light canonical, dark derived. Marks use blue-600 #0B5FFF on light, blue-400 #5395FF on dark. -->
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@500&amp;display=swap');
+    .display { font-family: "Space Grotesk","Segoe UI",system-ui,sans-serif; font-weight: 700; letter-spacing: -0.02em; }
+    .name    { font-family: "Space Grotesk","Segoe UI",system-ui,sans-serif; font-weight: 600; letter-spacing: -0.015em; }
+    .body    { font-family: "Inter","Segoe UI",system-ui,sans-serif; font-weight: 400; }
+    .mono    { font-family: "JetBrains Mono","Cascadia Code",Consolas,monospace; font-weight: 500; letter-spacing: 0.08em; }
+  </style>
+  <defs>
+    <!-- 01 · PULSE TILE: the incumbent redrawn. One clean beat: P wave, QRS spike, settle. -->
+    <symbol id="mark-tile" viewBox="0 0 64 64">
+      <rect width="64" height="64" rx="14" fill="#0B5FFF"/>
+      <path d="M10 32 H19 L23 26.5 L27 32 H31 L36.5 13 L42.5 49 L47 32 H54"
+            fill="none" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+
+    <!-- 02 · FIRST BEAT: one beat out of flatline. Open mark, currentColor. -->
+    <symbol id="mark-beat" viewBox="0 0 64 64">
+      <path d="M6 40 H17 L28 10 L39 54 L46 40 H58"
+            fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+
+    <!-- 03 · SUMMON CIRCLE: a portal with a pulse passing through it. -->
+    <mask id="ring-gap" maskUnits="userSpaceOnUse" x="0" y="0" width="64" height="64">
+      <rect width="64" height="64" fill="#fff"/>
+      <path d="M3 32 H20 L26 21 L33 44 L38 32 H61"
+            fill="none" stroke="#000" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+    </mask>
+    <symbol id="mark-circle" viewBox="0 0 64 64">
+      <circle cx="32" cy="32" r="21" fill="none" stroke="currentColor" stroke-width="4.5" mask="url(#ring-gap)"/>
+      <path d="M3 32 H20 L26 21 L33 44 L38 32 H61"
+            fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+
+    <!-- 04 · TRACE S: the S monogram drawn as one continuous trace with a beat in its center stroke. -->
+    <symbol id="mark-s" viewBox="0 0 64 64">
+      <path d="M45 14 H24 Q16 14 16 22 Q16 30 24 30 H27 L31 24 L34 37 L37 30 H40 Q48 30 48 38 Q48 46 40 46 H19"
+            fill="none" stroke="currentColor" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+
+    <!-- 05 · HORIZON: a company rising over a live baseline. The 9am sky. -->
+    <symbol id="mark-horizon" viewBox="0 0 64 64">
+      <path d="M24 42 A12 12 0 0 1 48 42 Z" fill="currentColor"/>
+      <path d="M4 42 H8 L12 34 L16 42 H60"
+            fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+  </defs>
+
+  <!-- sheet canvas -->
+  <rect width="1492" height="836" fill="#FFFFFF"/>
+
+  <!-- header -->
+  <text x="48" y="64" class="mono" font-size="12" fill="#084DDB">VIT-36 · SUMMON LOGOMARK · 5 CONCEPTS · FOR BOARD REVIEW</text>
+  <text x="48" y="102" class="display" font-size="30" fill="#0C1428">One mark to summon a company.</text>
+  <text x="48" y="128" class="body" font-size="14" fill="#46506B">Every concept is built from the brand's sacred motif, the EKG heartbeat, in the one sanctioned hue family. Blue-600 #0B5FFF on light, blue-400 #5395FF on dark. Concepts only: no icon wiring until the board picks.</text>
+
+  <!-- ============ column 1 · PULSE TILE ============ -->
+  <g transform="translate(48,0)">
+    <text x="0" y="178" class="mono" font-size="11" fill="#084DDB">01</text>
+    <text x="24" y="178" class="name" font-size="16" fill="#0C1428">Pulse Tile</text>
+    <text x="0" y="200" class="body" font-size="12" fill="#46506B">The incumbent, redrawn. One clean beat:</text>
+    <text x="0" y="216" class="body" font-size="12" fill="#46506B">P wave, spike, settle. App-tile native.</text>
+    <rect x="0" y="232" width="260" height="212" rx="16" fill="#F7FAFF" stroke="#0C1428" stroke-opacity="0.12"/>
+    <use href="#mark-tile" x="66" y="274" width="128" height="128"/>
+    <rect x="0" y="456" width="260" height="212" rx="16" fill="#0A1120" stroke="#FFFFFF" stroke-opacity="0.14"/>
+    <use href="#mark-tile" x="66" y="498" width="128" height="128"/>
+    <rect x="0" y="680" width="130" height="72" rx="12" fill="#F7FAFF" stroke="#0C1428" stroke-opacity="0.12"/>
+    <rect x="130" y="680" width="130" height="72" rx="12" fill="#0A1120" stroke="#FFFFFF" stroke-opacity="0.14"/>
+    <use href="#mark-tile" x="24" y="698" width="36" height="36"/>
+    <use href="#mark-tile" x="78" y="708" width="16" height="16"/>
+    <use href="#mark-tile" x="158" y="698" width="36" height="36"/>
+    <use href="#mark-tile" x="212" y="708" width="16" height="16"/>
+  </g>
+
+  <!-- ============ column 2 · FIRST BEAT ============ -->
+  <g transform="translate(332,0)">
+    <text x="0" y="178" class="mono" font-size="11" fill="#084DDB">02</text>
+    <text x="24" y="178" class="name" font-size="16" fill="#0C1428">First Beat</text>
+    <text x="0" y="200" class="body" font-size="12" fill="#46506B">The moment of summoning: one beat out</text>
+    <text x="0" y="216" class="body" font-size="12" fill="#46506B">of flatline. The most minimal candidate.</text>
+    <rect x="0" y="232" width="260" height="212" rx="16" fill="#F7FAFF" stroke="#0C1428" stroke-opacity="0.12"/>
+    <g color="#0B5FFF"><use href="#mark-beat" x="66" y="274" width="128" height="128"/></g>
+    <rect x="0" y="456" width="260" height="212" rx="16" fill="#0A1120" stroke="#FFFFFF" stroke-opacity="0.14"/>
+    <g color="#5395FF"><use href="#mark-beat" x="66" y="498" width="128" height="128"/></g>
+    <rect x="0" y="680" width="130" height="72" rx="12" fill="#F7FAFF" stroke="#0C1428" stroke-opacity="0.12"/>
+    <rect x="130" y="680" width="130" height="72" rx="12" fill="#0A1120" stroke="#FFFFFF" stroke-opacity="0.14"/>
+    <g color="#0B5FFF">
+      <use href="#mark-beat" x="24" y="698" width="36" height="36"/>
+      <use href="#mark-beat" x="78" y="708" width="16" height="16"/>
+    </g>
+    <g color="#5395FF">
+      <use href="#mark-beat" x="158" y="698" width="36" height="36"/>
+      <use href="#mark-beat" x="212" y="708" width="16" height="16"/>
+    </g>
+  </g>
+
+  <!-- ============ column 3 · SUMMON CIRCLE ============ -->
+  <g transform="translate(616,0)">
+    <text x="0" y="178" class="mono" font-size="11" fill="#084DDB">03</text>
+    <text x="24" y="178" class="name" font-size="16" fill="#0C1428">Summon Circle</text>
+    <text x="0" y="200" class="body" font-size="12" fill="#46506B">A portal with a pulse passing through:</text>
+    <text x="0" y="216" class="body" font-size="12" fill="#46506B">you call, and a company answers.</text>
+    <rect x="0" y="232" width="260" height="212" rx="16" fill="#F7FAFF" stroke="#0C1428" stroke-opacity="0.12"/>
+    <g color="#0B5FFF"><use href="#mark-circle" x="66" y="274" width="128" height="128"/></g>
+    <rect x="0" y="456" width="260" height="212" rx="16" fill="#0A1120" stroke="#FFFFFF" stroke-opacity="0.14"/>
+    <g color="#5395FF"><use href="#mark-circle" x="66" y="498" width="128" height="128"/></g>
+    <rect x="0" y="680" width="130" height="72" rx="12" fill="#F7FAFF" stroke="#0C1428" stroke-opacity="0.12"/>
+    <rect x="130" y="680" width="130" height="72" rx="12" fill="#0A1120" stroke="#FFFFFF" stroke-opacity="0.14"/>
+    <g color="#0B5FFF">
+      <use href="#mark-circle" x="24" y="698" width="36" height="36"/>
+      <use href="#mark-circle" x="78" y="708" width="16" height="16"/>
+    </g>
+    <g color="#5395FF">
+      <use href="#mark-circle" x="158" y="698" width="36" height="36"/>
+      <use href="#mark-circle" x="212" y="708" width="16" height="16"/>
+    </g>
+  </g>
+
+  <!-- ============ column 4 · TRACE S ============ -->
+  <g transform="translate(900,0)">
+    <text x="0" y="178" class="mono" font-size="11" fill="#084DDB">04</text>
+    <text x="24" y="178" class="name" font-size="16" fill="#0C1428">Trace S</text>
+    <text x="0" y="200" class="body" font-size="12" fill="#46506B">The S monogram as one continuous trace,</text>
+    <text x="0" y="216" class="body" font-size="12" fill="#46506B">a heartbeat in its center stroke.</text>
+    <rect x="0" y="232" width="260" height="212" rx="16" fill="#F7FAFF" stroke="#0C1428" stroke-opacity="0.12"/>
+    <g color="#0B5FFF"><use href="#mark-s" x="66" y="274" width="128" height="128"/></g>
+    <rect x="0" y="456" width="260" height="212" rx="16" fill="#0A1120" stroke="#FFFFFF" stroke-opacity="0.14"/>
+    <g color="#5395FF"><use href="#mark-s" x="66" y="498" width="128" height="128"/></g>
+    <rect x="0" y="680" width="130" height="72" rx="12" fill="#F7FAFF" stroke="#0C1428" stroke-opacity="0.12"/>
+    <rect x="130" y="680" width="130" height="72" rx="12" fill="#0A1120" stroke="#FFFFFF" stroke-opacity="0.14"/>
+    <g color="#0B5FFF">
+      <use href="#mark-s" x="24" y="698" width="36" height="36"/>
+      <use href="#mark-s" x="78" y="708" width="16" height="16"/>
+    </g>
+    <g color="#5395FF">
+      <use href="#mark-s" x="158" y="698" width="36" height="36"/>
+      <use href="#mark-s" x="212" y="708" width="16" height="16"/>
+    </g>
+  </g>
+
+  <!-- ============ column 5 · HORIZON ============ -->
+  <g transform="translate(1184,0)">
+    <text x="0" y="178" class="mono" font-size="11" fill="#084DDB">05</text>
+    <text x="24" y="178" class="name" font-size="16" fill="#0C1428">Horizon</text>
+    <text x="0" y="200" class="body" font-size="12" fill="#46506B">The 9am sky: a company rising over a live</text>
+    <text x="0" y="216" class="body" font-size="12" fill="#46506B">baseline. Kin to the horizon-glow gradient.</text>
+    <rect x="0" y="232" width="260" height="212" rx="16" fill="#F7FAFF" stroke="#0C1428" stroke-opacity="0.12"/>
+    <g color="#0B5FFF"><use href="#mark-horizon" x="66" y="274" width="128" height="128"/></g>
+    <rect x="0" y="456" width="260" height="212" rx="16" fill="#0A1120" stroke="#FFFFFF" stroke-opacity="0.14"/>
+    <g color="#5395FF"><use href="#mark-horizon" x="66" y="498" width="128" height="128"/></g>
+    <rect x="0" y="680" width="130" height="72" rx="12" fill="#F7FAFF" stroke="#0C1428" stroke-opacity="0.12"/>
+    <rect x="130" y="680" width="130" height="72" rx="12" fill="#0A1120" stroke="#FFFFFF" stroke-opacity="0.14"/>
+    <g color="#0B5FFF">
+      <use href="#mark-horizon" x="24" y="698" width="36" height="36"/>
+      <use href="#mark-horizon" x="78" y="708" width="16" height="16"/>
+    </g>
+    <g color="#5395FF">
+      <use href="#mark-horizon" x="158" y="698" width="36" height="36"/>
+      <use href="#mark-horizon" x="212" y="708" width="16" height="16"/>
+    </g>
+  </g>
+
+  <!-- footer -->
+  <text x="48" y="788" class="body" font-size="12" fill="#6B7590">Sizes shown: 128 / 36 / 16 px. Open marks re-point to blue-400 in dark per the derived-theme rule; the tile keeps white-on-blue in both modes. No new hues, no gradients on icons.</text>
+  <text x="48" y="808" class="mono" font-size="11" fill="#6B7590">DESIGN/LOGO/SUMMON-LOGOMARK-CONCEPTS.SVG · VITALS DESIGN DIRECTOR · 2026-07-15</text>
+</svg>
