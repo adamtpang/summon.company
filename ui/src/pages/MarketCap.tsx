@@ -136,7 +136,7 @@ export function MarketCapPanel({ companyId }: { companyId: string | null }) {
                 />
                 <span
                   className={cn(
-                    "text-[10px] font-medium uppercase tracking-wide",
+                    "text-(length:--text-nano) font-medium uppercase tracking-wide",
                     i === stageIndex ? "text-foreground" : "text-muted-foreground",
                   )}
                 >
@@ -199,7 +199,7 @@ export function MarketCapPanel({ companyId }: { companyId: string | null }) {
                   <div className="font-medium">
                     {lever.label}
                     {lever.key === snapshot.bindingLever.key && (
-                      <span className="ml-2 rounded-full border border-amber-500/40 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide text-amber-600 dark:text-amber-400">
+                      <span className="ml-2 rounded-full border border-amber-500/40 px-2 py-0.5 text-(length:--text-nano) font-medium uppercase tracking-wide text-amber-600 dark:text-amber-400">
                         binding
                       </span>
                     )}
