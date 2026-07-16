@@ -110,6 +110,20 @@ Per ELON-OPERATING-MODEL §3.4: one inbox, one settings surface, one status voca
 | D6 | **Agent `active` status is self-contradictory**: gray idle-alias in `agentStatusColor` (status-colors.ts:76) but green in `agentStatusDot` (:132) and rendered as "Active"/"Available" tabs/labels (Agents.tsx:53, Messages) | Decide whether `active` is inert (gray, = idle) or live (green); fix the losing map + labels | PENDING |
 | D7 | Genuinely distinct, leave alone: Messages (chat), BoardChat (concierge), Activity (audit log); Secrets/Invites/Environments/Experimental/Plugins/Adapters/Heartbeats/Profile (each edits a different entity); task/approval/goal/external-object/run vocabularies sharing the status palette (that sharing IS the dedup win); Case statuses aliasing task words (explicit alias) | No action | RECORDED |
 
+## R6. Via-negativa slate judgment calls (VIT-115, Jul 16 2026)
+
+Full inventory + sentences in `VIT-115-RUN6-INVENTORY.md`. Binding spec: `doc/research/BEST-DASHBOARDS.md`. Slate: **DELETE 24 / DEMOTE 26 / KEEP 9**, submitted to the board as one decision card.
+
+| # | Judgment call | Ruling & why | Status |
+|---|---|---|---|
+| R6-1 | Sidebar deletion is the whole game — could instead thin it | DELETE outright (spec §3: "three surfaces = three tabs"). Thinning preserves the Tesla failure mode: a place for demoted things to creep back. Company switcher + account menu relocate to a slim top bar; ⌘K absorbs all nav rows | PENDING board card |
+| R6-2 | Inbox + Approvals: spec deletes the tray, but the wake loop and approval gate (VIT-45) are ACTIVE workflows | DEMOTE not DELETE (issue guardrail). Routes stay, nav rows die, Decisions surface absorbs. Hard delete re-sentenced only after VIT-111's collapse lands | RECORDED |
+| R6-3 | Timeline (PAP-12424) + UX-lab pages are upstream-owned — deleting diverges the fork | DELETE anyway; board doctrine "deleted code is deleted, not commented out." Divergence cost is a handful of `git rm` conflicts on future upstream merges, cheaper than carrying dead surfaces. Flagged individually in the top-10 riskiest list | PENDING board card |
+| R6-4 | Spec bans toasts, but toasts also carry transactional failure feedback (save failed) | Split the sentence: notification-style toasts DELETE (anchored badges replace), transactional error toasts KEEP (that's feedback, not notification — Norman, not Skylines) | RECORDED |
+| R6-5 | Costs/Usage/Activity/Formation/Roadmap deletion vs G9 (decision-critical numbers stay on level 1) | Zone-dependent deletes land WITH their absorber (Zone A bars, Zone B badges, while-you-were-gone), never before. Execution order in inventory §5 encodes this | RECORDED |
+| R6-6 | AI SDR page: bias-to-delete says kill it | DEMOTE (palette-only) — active sales dogfood (VIT-103) depends on it; guardrail beats bias | RECORDED |
+| R6-7 | Four `*UxLab.tsx` pages found orphaned (no route) + MyIssues.tsx apparently unrouted | Dead code — delete first, before board approval even, is defensible; kept in slate for the clean one-card record | RECORDED |
+
 ## Tune session — CLOSED (Jul 6, 2026)
 
 User approved the complete new design language via gallery v4 + live test drive on the :3300 worktree instance ("ship it"). Merged origin/master (12 commits; one conflict — upstream deliberately removed the Wakes-on-confirm chip, deletion accepted). 296 snapshots re-baselined; gates 3/3 CLEAN; typecheck green; final suite verification run against the new baseline. Remaining roadmap: Run 3 (cards/pills/C11 sidebar + investigations + AgentDetail story), issue→task rename run, Run 4 (palette classes + toast), ESLint ratchet.
