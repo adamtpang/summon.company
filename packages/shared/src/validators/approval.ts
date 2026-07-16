@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { APPROVAL_TYPES } from "../constants.js";
+import { formationDeclinedSeatSchema } from "../vitals-formation.js";
 import { multilineTextSchema } from "./text.js";
 
 export const createApprovalSchema = z.object({
@@ -13,6 +14,12 @@ export type CreateApproval = z.infer<typeof createApprovalSchema>;
 
 export const resolveApprovalSchema = z.object({
   decisionNote: multilineTextSchema.optional().nullable(),
+  /**
+   * Only meaningful for `staff_formation` approvals: seats the board declines
+   * while approving the rest of the formation. Each declined seat documents
+   * the named human who owns that department instead.
+   */
+  declinedSeats: z.array(formationDeclinedSeatSchema).optional(),
 });
 
 export type ResolveApproval = z.infer<typeof resolveApprovalSchema>;

@@ -63,6 +63,20 @@ export {
   type VitalsDepartment,
   type VitalsPersona,
 } from "./vitals-personas.js";
+export {
+  CORE8_FORMATION_KEY,
+  CORE8_FORMATION_SEATS,
+  CORE8_SEAT_DEFAULT_BUDGET_CENTS,
+  STAFF_FORMATION_APPROVAL_TYPE,
+  buildStaffFormationCard,
+  formationDeclinedSeatSchema,
+  formationSeatPersonaOptions,
+  resolveFormationSeatDecisions,
+  type FormationDeclinedSeat,
+  type FormationSeat,
+  type FormationSeatResolution,
+  type StaffFormationCard,
+} from "./vitals-formation.js";
 export type {
   AttentionDecisionVerb,
   AttentionDetailImage,

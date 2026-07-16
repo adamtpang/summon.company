@@ -6,6 +6,7 @@ import {
   agentConfigRevisions,
   agents,
   agentWakeupRequests,
+  approvals,
   builtInManagedResources,
   companies,
   companySkillVersions,
@@ -45,6 +46,7 @@ describeEmbeddedPostgres("companyService", () => {
   }, 20_000);
 
   afterEach(async () => {
+    await db.delete(approvals);
     await db.delete(routineTriggers);
     await db.delete(routines);
     await db.delete(builtInManagedResources);
@@ -123,6 +125,50 @@ describeEmbeddedPostgres("companyService", () => {
     await reconcileBuiltInAgentsOnStartup(db);
     const afterReconcileRows = await db.select().from(agents).where(eq(agents.companyId, created.id));
     expect(afterReconcileRows.filter((row) => readBuiltInAgentMarker(row.metadata)?.key === "reflection-coach")).toHaveLength(1);
+  });
+
+  it("seeds the core-8 formation as pending proposals plus one staff_formation decision card", async () => {
+    const created = await companyService(db).create({
+      name: "Formation Test Co",
+    });
+
+    const agentRows = await db.select().from(agents).where(eq(agents.companyId, created.id));
+    const formationRows = agentRows.filter((row) => {
+      const metadata = row.metadata as Record<string, unknown> | null;
+      const marker = metadata?.vitalsFormation as Record<string, unknown> | undefined;
+      return marker?.formation === "core8";
+    });
+    expect(formationRows).toHaveLength(8);
+    for (const row of formationRows) {
+      expect(row.status).toBe("pending_approval");
+      expect(row.spentMonthlyCents).toBe(0);
+      const marker = (row.metadata as Record<string, unknown>).vitalsFormation as Record<string, unknown>;
+      expect(typeof marker.department).toBe("string");
+      expect(marker.personaSlot).toBeNull();
+      expect(String(marker.instructionsTemplate)).toContain("Operating contract");
+    }
+    expect(new Set(formationRows.map((row) => {
+      const marker = (row.metadata as Record<string, unknown>).vitalsFormation as Record<string, unknown>;
+      return marker.department;
+    })).size).toBe(8);
+
+    const approvalRows = await db
+      .select()
+      .from(approvals)
+      .where(eq(approvals.companyId, created.id));
+    const formationCards = approvalRows.filter((row) => row.type === "staff_formation");
+    expect(formationCards).toHaveLength(1);
+    expect(formationCards[0]).toMatchObject({ status: "pending" });
+    const payload = formationCards[0]!.payload as Record<string, unknown>;
+    expect(payload.question).toBe("Staff the formation?");
+    expect(payload.summary).toBe("8 employees, $80/mo total cap");
+    expect(Array.isArray(payload.seats)).toBe(true);
+    expect((payload.seats as unknown[]).length).toBe(8);
+
+    // Idempotency: a second seed attempt must not add seats or cards.
+    const { formationSeedService } = await import("../services/formation-seed.js");
+    const second = await formationSeedService(db).seedCoreEightFormation(created.id);
+    expect(second).toBeNull();
   });
 
   it("archives companies by pausing runnable agents and cancelling active runs", async () => {

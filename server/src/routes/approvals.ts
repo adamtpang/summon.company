@@ -201,7 +201,9 @@ export function approvalRoutes(
       return;
     }
     const decidedByUserId = req.actor.userId ?? "board";
-    const { approval, applied } = await svc.approve(id, decidedByUserId, req.body.decisionNote);
+    const { approval, applied } = await svc.approve(id, decidedByUserId, req.body.decisionNote, {
+      declinedSeats: req.body.declinedSeats,
+    });
 
     if (applied) {
       const linkedIssues = await issueApprovalsSvc.listIssuesForApproval(approval.id);
