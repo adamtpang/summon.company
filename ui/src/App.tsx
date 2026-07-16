@@ -66,6 +66,7 @@ import { AdapterManager } from "./pages/AdapterManager";
 import { PluginPage } from "./pages/PluginPage";
 import { OrgChart } from "./pages/OrgChart";
 import { Formation } from "./pages/Formation";
+import { MarketCap } from "./pages/MarketCap";
 import { Roadmap } from "./pages/Roadmap";
 import { Messages } from "./pages/Messages";
 import { AiSdrDogfood } from "./pages/AiSdrDogfood";
@@ -127,6 +128,7 @@ function boardRoutes() {
       <Route path="plugins/:pluginId" element={<PluginPage />} />
       <Route path="org" element={<OrgChart />} />
       <Route path="formation" element={<Formation />} />
+      <Route path="marketcap" element={<MarketCap />} />
       <Route path="roadmap" element={<Roadmap />} />
       <Route path="messages" element={<Messages />} />
       <Route path="ai-sdr" element={<AiSdrDogfood />} />
