@@ -730,11 +730,19 @@ export const requestConfirmationIssueDocumentTargetSchema = requestConfirmationT
   revisionNumber: z.number().int().positive().nullable().optional(),
 });
 
+export const requestConfirmationTargetSnapshotSchema = z.object({
+  fingerprint: z.string().trim().min(1).max(200),
+  algorithm: z.enum(["sha256"]).nullable().optional(),
+  capturedAt: z.string().trim().min(1).max(64).nullable().optional(),
+  summary: z.string().trim().max(500).nullable().optional(),
+});
+
 export const requestConfirmationCustomTargetSchema = requestConfirmationTargetBaseSchema.extend({
   type: z.literal("custom"),
   key: z.string().trim().min(1).max(120),
   revisionId: z.string().trim().min(1).max(255).nullable().optional(),
   revisionNumber: z.number().int().positive().nullable().optional(),
+  snapshot: requestConfirmationTargetSnapshotSchema.nullable().optional(),
 });
 
 export const requestConfirmationTargetSchema = z.discriminatedUnion("type", [

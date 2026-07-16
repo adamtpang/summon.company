@@ -109,6 +109,9 @@ import {
   agentInstructionsChangeTargetKey,
   agentProfileChangeTargetKey,
   changeConsentGateService,
+  computeChangeGateRowFingerprint,
+  founderProtectedFromMetadata,
+  refuseFounderProtectedMutation,
   touchesAgentProfileChangeConsentFields,
 } from "../services/change-consent-gate.js";
 
@@ -1396,10 +1399,27 @@ export function agentRoutes(
 
   async function assertCanApplyProtectedAgentChange(
     req: Request,
-    targetAgent: { id: string; companyId: string },
+    targetAgent: {
+      id: string;
+      companyId: string;
+      metadata?: Record<string, unknown> | null;
+      updatedAt?: Date | string | null;
+    },
     targetKeys: string[],
   ) {
     assertCompanyAccess(req, targetAgent.companyId);
+
+    // Founder protection tier (VIT-43): founder-protected agents refuse every
+    // employee mutation outright, before any consent path is consulted.
+    if (req.actor.type === "agent" && founderProtectedFromMetadata(targetAgent.metadata)) {
+      await refuseFounderProtectedMutation(db, {
+        companyId: targetAgent.companyId,
+        actorAgentId: req.actor.agentId,
+        actorRunId: req.actor.runId ?? null,
+        targetKey: targetKeys[0] ?? agentProfileChangeTargetKey(targetAgent.id),
+      });
+    }
+
     const changeScope = { requiresChangeGrant: true };
     const decision = await access.decide({
       actor: req.actor,
@@ -1412,12 +1432,17 @@ export function agentRoutes(
     }
 
     if (decision.reason === "deny_missing_consent" && req.actor.type === "agent" && targetKeys.length > 0) {
+      // Propose/apply split (VIT-43): fingerprint the live agent row re-read by
+      // the caller immediately before this apply so the consent gate can block
+      // on drift from the accepted proposal's snapshot.
+      const liveAgentFingerprint = computeChangeGateRowFingerprint(targetAgent.updatedAt ?? null);
       try {
         await changeConsentGateService(db).assertConsented({
           companyId: targetAgent.companyId,
           actorAgentId: req.actor.agentId,
           actorRunId: req.actor.runId ?? null,
           targetKeys,
+          ...(liveAgentFingerprint ? { liveTargetFingerprint: liveAgentFingerprint } : {}),
         });
       } catch (err) {
         if (err instanceof HttpError && err.status === 403) {

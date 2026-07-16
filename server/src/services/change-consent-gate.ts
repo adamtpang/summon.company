@@ -1,8 +1,10 @@
+import { createHash } from "node:crypto";
 import type { Db } from "@paperclipai/db";
 import { issueThreadInteractions } from "@paperclipai/db";
 import { and, desc, eq, or, sql } from "drizzle-orm";
 import type { RequestConfirmationPayload, RequestConfirmationResult } from "@paperclipai/shared";
 import { forbidden } from "../errors.js";
+import { logActivity } from "./activity-log.js";
 
 export const AGENT_PROFILE_CHANGE_CONSENT_FIELDS = ["name", "role", "title", "capabilities"] as const;
 
@@ -33,6 +35,69 @@ export function skillImportChangeTargetKey(source: string) {
 
 export function skillsScanProjectsChangeTargetKey() {
   return "skills:scan-projects";
+}
+
+/**
+ * Canonical fingerprint for propose/apply drift detection (VIT-43). Proposers
+ * embed this over the live target content at propose time
+ * (payload.target.snapshot.fingerprint); the apply gate recomputes it over the
+ * live target immediately before applying and refuses on any mismatch.
+ */
+export function computeChangeGateTargetFingerprint(content: string) {
+  return `sha256:${createHash("sha256").update(content, "utf8").digest("hex")}`;
+}
+
+/**
+ * Live-state fingerprint for DB-row change-gate targets (VIT-43). The
+ * canonical content both sides fingerprint is the row's updatedAt as an
+ * ISO-8601 string: every mutation bumps it, the proposer reads it from the
+ * public GET response at propose time, and the apply path re-reads it from
+ * the database immediately before applying. Returns null when the live row
+ * (or its updatedAt) cannot be read; the gate fails closed on null for
+ * snapshot-bearing proposals.
+ */
+export function computeChangeGateRowFingerprint(updatedAt: Date | string | null | undefined) {
+  const parsed = updatedAt instanceof Date
+    ? updatedAt
+    : (typeof updatedAt === "string" && updatedAt.trim().length > 0 ? new Date(updatedAt) : null);
+  if (!parsed || Number.isNaN(parsed.getTime())) return null;
+  return computeChangeGateTargetFingerprint(parsed.toISOString());
+}
+
+/**
+ * Founder protection tier (VIT-43): artifacts flagged founder-protected cannot
+ * be mutated by employee (agent) actors at all — no proposal, accepted or not,
+ * unlocks them. Only the board can set or clear the flag, because flagged
+ * artifacts refuse every agent mutation including the flag itself.
+ */
+export function founderProtectedFromMetadata(metadata: Record<string, unknown> | null | undefined) {
+  return metadata?.founderProtected === true;
+}
+
+export async function refuseFounderProtectedMutation(db: Db, input: {
+  companyId: string;
+  actorAgentId: string | null | undefined;
+  actorRunId: string | null | undefined;
+  targetKey: string;
+}): Promise<never> {
+  await logActivity(db, {
+    companyId: input.companyId,
+    actorType: "system",
+    actorId: "change-consent-gate",
+    action: "change_gate.founder_protected_blocked",
+    entityType: "change_gate_target",
+    entityId: input.targetKey,
+    agentId: readNonEmptyString(input.actorAgentId),
+    runId: readNonEmptyString(input.actorRunId),
+    details: { targetKey: input.targetKey },
+  });
+  throw forbidden(
+    "This artifact is founder-protected: employee mutations are refused regardless of consent.",
+    {
+      code: "change_gate_founder_protected",
+      targetKey: input.targetKey,
+    },
+  );
 }
 
 export function touchesAgentProfileChangeConsentFields(patchData: Record<string, unknown>) {
@@ -119,6 +184,13 @@ export function changeConsentGateService(db: Db) {
       actorAgentId: string | null | undefined;
       actorRunId: string | null | undefined;
       targetKeys: string[];
+      /**
+       * Fingerprint of the live target state re-read immediately before this
+       * apply (computeChangeGateTargetFingerprint over current content). When
+       * the accepted proposal carries a target snapshot, a missing or
+       * mismatched live fingerprint blocks the apply as drift.
+       */
+      liveTargetFingerprint?: string | null;
     }): Promise<boolean> => {
       const actorAgentId = readNonEmptyString(input.actorAgentId);
       if (!actorAgentId) return false;
@@ -147,6 +219,7 @@ export function changeConsentGateService(db: Db) {
       const rows = await db
         .select({
           id: issueThreadInteractions.id,
+          issueId: issueThreadInteractions.issueId,
           sourceRunId: issueThreadInteractions.sourceRunId,
           payload: issueThreadInteractions.payload,
           result: issueThreadInteractions.result,
@@ -197,6 +270,49 @@ export function changeConsentGateService(db: Db) {
         );
       }
 
+      // Pre-apply live-state recheck (VIT-43): when the proposal captured a
+      // target snapshot, the live target re-read by the caller must match it
+      // exactly. Any drift — or an apply path that failed to re-read the live
+      // state — blocks the mutation and surfaces an audit alert. Proposals
+      // without a snapshot predate this contract and pass as legacy.
+      const acceptedPayload = accepted.payload as RequestConfirmationPayload;
+      const acceptedTarget = acceptedPayload.target?.type === "custom" ? acceptedPayload.target : null;
+      const proposalFingerprint = readNonEmptyString(acceptedTarget?.snapshot?.fingerprint);
+      const liveFingerprint = readNonEmptyString(input.liveTargetFingerprint);
+      const recheck = proposalFingerprint
+        ? (liveFingerprint === proposalFingerprint ? "match" : (liveFingerprint ? "drift" : "live_state_unavailable"))
+        : "proposal_has_no_snapshot";
+      if (recheck === "drift" || recheck === "live_state_unavailable") {
+        await logActivity(db, {
+          companyId: input.companyId,
+          actorType: "system",
+          actorId: "change-consent-gate",
+          action: "change_gate.drift_blocked",
+          entityType: "issue_thread_interaction",
+          entityId: accepted.id,
+          agentId: actorAgentId,
+          runId: actorRunId,
+          details: {
+            issueId: accepted.issueId,
+            targetKey: acceptedTarget?.key ?? targetKeys[0],
+            recheck,
+            proposalFingerprint,
+            liveFingerprint,
+            proposalSourceRunId: accepted.sourceRunId,
+          },
+        });
+        throw forbidden(
+          "The live target state changed after this proposal was created (or could not be re-read); the apply is blocked. "
+            + "Re-propose against the current target state.",
+          {
+            code: "change_gate_target_drift",
+            targetKeys,
+            interactionId: accepted.id,
+            recheck,
+          },
+        );
+      }
+
       const now = new Date();
       const [consumed] = await db
         .update(issueThreadInteractions)
@@ -225,6 +341,28 @@ export function changeConsentGateService(db: Db) {
           },
         );
       }
+
+      // Event-log linkage (VIT-43): every gated mutation records the proposal
+      // it consumed and the pre-apply live-state recheck result.
+      await logActivity(db, {
+        companyId: input.companyId,
+        actorType: "system",
+        actorId: "change-consent-gate",
+        action: "change_gate.apply_consumed",
+        entityType: "issue_thread_interaction",
+        entityId: accepted.id,
+        agentId: actorAgentId,
+        runId: actorRunId,
+        details: {
+          issueId: accepted.issueId,
+          targetKey: acceptedTarget?.key ?? targetKeys[0],
+          recheck,
+          proposalFingerprint,
+          liveFingerprint,
+          proposalSourceRunId: accepted.sourceRunId,
+          applyRunId: actorRunId,
+        },
+      });
 
       return true;
     },

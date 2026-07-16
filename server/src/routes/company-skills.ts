@@ -37,6 +37,9 @@ import { getTelemetryClient } from "../telemetry.js";
 import { authorizationDeniedDetails } from "../services/authorization.js";
 import {
   changeConsentGateService,
+  computeChangeGateRowFingerprint,
+  founderProtectedFromMetadata,
+  refuseFounderProtectedMutation,
   skillChangeTargetKey,
   skillImportChangeTargetKey,
   skillSlugChangeTargetKey,
@@ -123,6 +126,27 @@ export function companySkillRoutes(db: Db) {
 
   async function assertCanMutateCompanySkills(req: Request, companyId: string, targetKeys: string[] = []) {
     assertCompanyAccess(req, companyId);
+
+    // Propose/apply split (VIT-43): employee mutations re-read the live skill
+    // row up front — founder-protected skills refuse agent mutations outright,
+    // and the live row fingerprint feeds the consent gate's pre-apply drift
+    // recheck against the accepted proposal's snapshot.
+    let liveSkillFingerprint: string | null = null;
+    if (req.actor.type === "agent") {
+      const skillTargetKey = targetKeys.find((key) => key.startsWith("skill:"));
+      const skillId = skillTargetKey ? skillTargetKey.slice("skill:".length) : null;
+      const liveSkill = skillId ? await svc.getById(companyId, skillId) : null;
+      if (liveSkill && skillTargetKey && founderProtectedFromMetadata(liveSkill.metadata)) {
+        await refuseFounderProtectedMutation(db, {
+          companyId,
+          actorAgentId: req.actor.agentId,
+          actorRunId: req.actor.runId ?? null,
+          targetKey: skillTargetKey,
+        });
+      }
+      liveSkillFingerprint = computeChangeGateRowFingerprint(liveSkill?.updatedAt ?? null);
+    }
+
     const decision = await access.decide({
       actor: req.actor,
       action: "skill_config:update",
@@ -139,6 +163,7 @@ export function companySkillRoutes(db: Db) {
           actorAgentId: req.actor.agentId,
           actorRunId: req.actor.runId ?? null,
           targetKeys,
+          ...(liveSkillFingerprint ? { liveTargetFingerprint: liveSkillFingerprint } : {}),
         });
       } catch (err) {
         if (err instanceof HttpError && err.status === 403) {

@@ -1031,6 +1031,14 @@ export interface RequestConfirmationIssueDocumentTarget {
   href?: string | null;
 }
 
+export interface RequestConfirmationTargetSnapshot {
+  /** Fingerprint of the live target state observed at propose time, e.g. "sha256:<hex>". */
+  fingerprint: string;
+  algorithm?: "sha256" | null;
+  capturedAt?: string | null;
+  summary?: string | null;
+}
+
 export interface RequestConfirmationCustomTarget {
   type: "custom";
   key: string;
@@ -1038,6 +1046,7 @@ export interface RequestConfirmationCustomTarget {
   revisionNumber?: number | null;
   label?: string | null;
   href?: string | null;
+  snapshot?: RequestConfirmationTargetSnapshot | null;
 }
 
 export type RequestConfirmationTarget =
