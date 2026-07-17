@@ -1,7 +1,7 @@
 {
   "id": "/",
-  "name": "vitals.run",
-  "short_name": "Vitals",
+  "name": "summon.company",
+  "short_name": "Summon",
   "description": "The company operating system for hiring, training, and managing AI employees.",
   "start_url": "/",
   "scope": "/",

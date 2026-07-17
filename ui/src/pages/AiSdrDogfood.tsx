@@ -44,7 +44,7 @@ const DEFAULT_FORM: AiSdrFormState = {
   bannedClaims: "guaranteed meetings\ninbox placement",
   geography: "United States",
   maxDraftCount: "1",
-  notes: "Dogfood inside Paperclip only.",
+  notes: "Dogfood inside Summon only.",
 };
 
 export function parseBannedClaims(value: string): string[] {
@@ -287,7 +287,7 @@ export function AiSdrDogfood() {
         <section className="space-y-4 lg:col-span-7" aria-labelledby="ai-sdr-intake-title">
           <div>
             <h2 id="ai-sdr-intake-title" className="text-base font-semibold">Intake</h2>
-            <p className="mt-1 text-sm text-muted-foreground">Issue-backed intake stored as Paperclip documents.</p>
+            <p className="mt-1 text-sm text-muted-foreground">Issue-backed intake stored as Summon documents.</p>
           </div>
 
           <form

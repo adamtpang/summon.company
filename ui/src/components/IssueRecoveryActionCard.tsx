@@ -126,15 +126,15 @@ const KIND_LABEL: Record<IssueRecoveryActionKind, string> = {
 const KIND_HEADLINE: Record<IssueRecoveryActionKind, string> = {
   missing_disposition: "This task's run finished, but no next step was chosen.",
   stranded_assigned_issue:
-    "Paperclip retried this task's last run and it still has no live execution path.",
+    "Summon retried this task's last run and it still has no live execution path.",
   workspace_validation:
-    "Paperclip stopped this run because the task's git workspace could not be validated.",
+    "Summon stopped this run because the task's git workspace could not be validated.",
   configuration_validation:
-    "Paperclip stopped before dispatching this run because required secret/env bindings are missing.",
+    "Summon stopped before dispatching this run because required secret/env bindings are missing.",
   active_run_watchdog:
     "The active run has been silent. Recovery is observing without interrupting it.",
   issue_graph_liveness:
-    "Paperclip detected this task lost a live action path. A recovery owner needs to act.",
+    "Summon detected this task lost a live action path. A recovery owner needs to act.",
 };
 
 const STATE_TONE: Record<RecoveryCardCardState, {
@@ -536,7 +536,7 @@ function BreakGlassOverride({
             Break-glass reconciliation
           </div>
           <p className="text-xs leading-5 text-muted-foreground">
-            This overrides Paperclip&apos;s safety check and points the recorded workspace at the live
+            This overrides Summon&apos;s safety check and points the recorded workspace at the live
             branch{" "}
             <span className="font-medium text-foreground/80">without an ancestry proof</span>. Confirm
             the divergence below and record why before continuing.
