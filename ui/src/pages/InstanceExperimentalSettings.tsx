@@ -472,7 +472,7 @@ export function InstanceExperimentalSettings() {
           <div className="space-y-1.5">
             <h2 className="text-sm font-semibold">Built-in Agents</h2>
             <p className="max-w-2xl text-sm text-muted-foreground">
-              Show Paperclip-managed built-in agent surfaces, including built-in roster badges, the Built-in agents
+              Show Summon-managed built-in agent surfaces, including built-in roster badges, the Built-in agents
               tab, and built-in agent setup controls.
             </p>
           </div>
@@ -633,7 +633,7 @@ export function InstanceExperimentalSettings() {
           <div className="space-y-1.5">
             <h2 className="text-sm font-semibold">Cloud Sync</h2>
             <p className="max-w-2xl text-sm text-muted-foreground">
-              Show local Paperclip Cloud upstream connection, preview, push, retry, and activation review surfaces.
+              Show local Summon Cloud upstream connection, preview, push, retry, and activation review surfaces.
               Saved connections and run history are preserved when this is disabled.
             </p>
           </div>

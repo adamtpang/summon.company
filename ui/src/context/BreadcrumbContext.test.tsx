@@ -61,18 +61,18 @@ describe("BreadcrumbContext", () => {
 
   it("builds page titles with the selected company name before the app name", () => {
     expect(buildDocumentTitle([{ label: "Inbox" }], "Anachronist Wiki")).toBe(
-      "Inbox • Anachronist Wiki • vitals.run",
+      "Inbox • Anachronist Wiki • summon.company",
     );
     expect(
       buildDocumentTitle(
         [{ label: "Issues", href: "/issues" }, { label: "PAP-3515" }],
         "Anachronist Wiki",
       ),
-    ).toBe("PAP-3515 • Issues • Anachronist Wiki • vitals.run");
+    ).toBe("PAP-3515 • Issues • Anachronist Wiki • summon.company");
   });
 
   it("omits blank company names from page titles", () => {
-    expect(buildDocumentTitle([{ label: "Inbox" }], "  ")).toBe("Inbox • vitals.run");
-    expect(buildDocumentTitle([], null)).toBe("vitals.run");
+    expect(buildDocumentTitle([{ label: "Inbox" }], "  ")).toBe("Inbox • summon.company");
+    expect(buildDocumentTitle([], null)).toBe("summon.company");
   });
 });

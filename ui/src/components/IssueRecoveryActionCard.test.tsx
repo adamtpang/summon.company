@@ -190,7 +190,7 @@ describe("IssueRecoveryActionCard", () => {
     expect(node.textContent).toContain("Workspace Validation");
     expect(node.textContent).not.toContain("workspace_validation\n");
     expect(node.textContent).toContain(
-      "Paperclip stopped this run because the task's git workspace could not be validated.",
+      "Summon stopped this run because the task's git workspace could not be validated.",
     );
     expect(node.textContent).toContain("Repair the source issue workspace link");
     expect(node.textContent).toContain("Manual repair required");

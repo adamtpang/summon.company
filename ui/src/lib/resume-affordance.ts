@@ -1,6 +1,6 @@
 // VIT-40 — Conversation continuity: make session resume observable in the UI.
 //
-// The Paperclip engine already binds a durable session per conversation thread
+// The Summon engine already binds a durable session per conversation thread
 // (agentTaskSessions, keyed on the issue/task) and re-injects the standing
 // context bundle as a "Resume Delta" on every turn. What was missing was a
 // subtle, truthful affordance so a reopened chat never *silently* resumes.
