@@ -1,4 +1,5 @@
 import fs from "node:fs/promises";
+import { existsSync } from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { execFile } from "node:child_process";
@@ -855,6 +856,33 @@ async function writePaperclipClaudeSettings(input: {
   };
 }
 
+// The agent wrapper is a bash script (shebang + process substitution), which
+// Windows CreateProcess cannot exec directly — spawning the bare .sh path
+// fails with "Failed to spawn agent command" before the agent ever starts.
+// acpx's splitCommandLine understands single-quoted words (backslashes stay
+// literal inside them), so on win32 the override becomes `'…\bash.exe' '…\wrapper.sh'`.
+// Git-for-Windows bash is preferred explicitly: System32\bash.exe is WSL,
+// a different world that cannot run the Windows CLI shims the wrapper execs.
+function resolveWindowsBashPath(env: NodeJS.ProcessEnv = process.env): string {
+  const candidates = [
+    path.join(env.ProgramFiles ?? "C:\\Program Files", "Git", "bin", "bash.exe"),
+    path.join(env["ProgramFiles(x86)"] ?? "C:\\Program Files (x86)", "Git", "bin", "bash.exe"),
+    path.join(env.LOCALAPPDATA ?? "", "Programs", "Git", "bin", "bash.exe"),
+  ];
+  for (const candidate of candidates) {
+    if (candidate && existsSync(candidate)) return candidate;
+  }
+  return "bash";
+}
+
+export function buildWrapperOverrideCommand(
+  wrapperPath: string,
+  platform: NodeJS.Platform = process.platform,
+): string {
+  if (platform !== "win32") return wrapperPath;
+  return `${shellQuote(resolveWindowsBashPath())} ${shellQuote(wrapperPath)}`;
+}
+
 async function writeAgentWrapper(input: {
   stateDir: string;
   acpxAgent: string;
@@ -1177,7 +1205,9 @@ async function buildRuntime(input: {
     await paperclipBridge?.stop().catch(() => {});
     throw err;
   }
-  const overrideCommand = processSessionBridge?.agentCommand ?? wrapperPath;
+  const overrideCommand =
+    processSessionBridge?.agentCommand ??
+    (wrapperPath ? buildWrapperOverrideCommand(wrapperPath) : null);
   const overrides = overrideCommand ? { [acpxAgent]: overrideCommand } : undefined;
   const agentRegistry = createAgentRegistry({ overrides });
   const fingerprint = shortHash({

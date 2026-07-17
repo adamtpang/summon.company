@@ -1559,3 +1559,25 @@ describe("summarizeAcpxTurnUsage no-report turns", () => {
     expect(summary.cumulativeCostUsd).toBeCloseTo(0.75);
   });
 });
+
+describe("buildWrapperOverrideCommand", () => {
+  it("passes the wrapper path through untouched off Windows", async () => {
+    const { buildWrapperOverrideCommand } = await import("./execute.js");
+    expect(buildWrapperOverrideCommand("/state/wrappers/claude-abc.sh", "linux")).toBe(
+      "/state/wrappers/claude-abc.sh",
+    );
+    expect(buildWrapperOverrideCommand("/state/wrappers/claude-abc.sh", "darwin")).toBe(
+      "/state/wrappers/claude-abc.sh",
+    );
+  });
+
+  it("routes the wrapper through bash on Windows with single-quoted words", async () => {
+    const { buildWrapperOverrideCommand } = await import("./execute.js");
+    const override = buildWrapperOverrideCommand("C:\state dir\wrappers\claude-abc.sh", "win32");
+    // Windows cannot exec a shebang .sh directly; acpx's splitCommandLine keeps
+    // backslashes literal inside single quotes, so both words must be quoted.
+    expect(override).toMatch(/bash/);
+    expect(override).toContain("'C:\state dir\wrappers\claude-abc.sh'");
+    expect(override.startsWith("'")).toBe(true);
+  });
+});

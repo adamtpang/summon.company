@@ -43,7 +43,7 @@ What remains per measure is mostly *proof*, not code:
 | 3 | Proof in the chat | Screenshots/markdown/files render inside the thread | One real run observed end-to-end |
 | 4 | One-tap decisions | Decisions is a one-card deck with one-gesture actions | Measure a real median decision time |
 | 5 | No silent failures | Watchdog, quota windows, failover, "paused — resumes at" copy | A real quota wall observed showing the friendly state |
-| 6 | One-glance dashboard | Mission Control built over real data | **Not wired in: /dashboard still renders the old page.** Wire MissionControl, then the 10-second test |
+| 6 | One-glance dashboard | Mission Control built over real data — **and live**: /dashboard renders it (verified 2026-07-17 during the wizard's end-to-end test) | The 10-second test on real data |
 | 7 | Works while you sleep | Overnight heartbeat + CEO self-diagnosis runner exist and have filed real tasks | CEO's model config still mismatched (old cheap-model setting); apply the corrected bootstrap, then three good mornings |
 
 ## The acceptance week (unchanged, plain words)
