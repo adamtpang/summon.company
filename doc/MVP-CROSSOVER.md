@@ -1,167 +1,85 @@
-# The crossover: when Summon-on-Summon beats Claude-Code-on-Summon
+# The MVP scoreboard: when running the company inside Summon just works
 
-Board ruling (2026-07-16): the Summon feedback loop is too disjointed vs Claude Code;
-until the crossover, Summon gets perfected BY Claude Code, not by itself. This doc is
-the gap analysis: where the company is vs the MVP bar where dogfooding wins.
+Board rulings baked in (2026-07-17): **Claude Code is for codebases. Summon is for
+companies. They are aligned, not in opposition** — Claude Code is the pair-programmer
+that builds Summon; Summon is where the companies run. Customers bring their own
+Claude/Codex subscriptions as fuel, same as the board does. Plain language only: no
+"gates", no G-numbers without their names.
 
-## 1. Why Claude Code wins today (name the enemy precisely)
+History: the first version of this doc (2026-07-16) framed Claude Code as the enemy to
+beat. The board overruled that framing on 2026-07-17. The seven measures below are the
+same ones — renamed in plain English — because they still describe what "running a
+company in Summon feels tight" means.
 
-| Dimension | Claude Code (the bar) | Summon today |
+## The seven measures (the MVP progress bars)
+
+Formerly G1–G7. Each is one sentence you can test.
+
+| # | Name | Passes when |
 |---|---|---|
-| Loop latency | prompt → streaming work in seconds | comment → wake → minutes of silence |
-| Visibility | every step streams inline | runs are opaque until evidence posts ("review silent active run" tickets exist) |
-| Context | full session + memory files, never forgets mid-project | continuity in review (VIT-40), memory unbuilt (VIT-47) |
-| Evidence | diffs/screenshots inline in the conversation | file paths in comments; board hunts |
-| Ceremony | zero — just talk | issue → assign → wake → review chain |
-| Decisions | inline yes/no in conversation | list UI, jargon cards (deck in build) |
+| 1 | **Message loop** (was G1) | You message any employee; the right one answers in under 10 seconds and you watch the work stream live in that chat. |
+| 2 | **Memory** (was G2) | Reopen any chat days later — the employee remembers everything; you never re-explain. |
+| 3 | **Proof in the chat** (was G3) | Screenshots, diffs, and files show up inside the conversation. You never hunt for a file path. |
+| 4 | **One-tap decisions** (was G4) | Every approval arrives as one card; a yes is one gesture; the median decision takes under 10 seconds. |
+| 5 | **No silent failures** (was G5) | Work never dies quietly. A usage-limit wall shows "paused — resumes at 6pm", never an error black hole. |
+| 6 | **One-glance dashboard** (was G6) | The dashboard answers "how is my company doing?" in 10 seconds. |
+| 7 | **Works while you sleep** (was G7) | You wake up to real, evidenced overnight work, and the CEO files useful tasks you never asked for. |
 
-## 2. Why Summon must win eventually (what Claude Code structurally cannot do)
+## Where each measure stands (2026-07-17)
 
-1. **24/7 proactivity** — works while the board sleeps (heartbeat, VIT-44).
-2. **True parallelism with accountability** — 8+ owned lanes at once, per-lane evidence.
-3. **Institutional memory across companies** — Quantus context doesn't live in a chat scroll.
-4. **Self-diagnosis** — surfaces problems the board never asked about (VIT-71).
-5. **Governed spend/approvals** — an auditable company, not a terminal session.
+The old doc tracked two numbers per measure — "in source" (code written) vs "installed"
+(what the running app had) — because the running app was an old package. **That split is
+over: on 2026-07-16 the running server was switched to the current code, and on
+2026-07-17 the reboot trap that kept silently undoing that switch was closed**
+(`scripts/start-summon.cmd`; the desktop app's fallback used to boot the old package
+after every reboot). What the code has, the app now has.
 
-The crossover is NOT parity on every row of table 1. It is: close the loop/trust gaps
-ENOUGH that the five unique values net positive for a real week of work.
+What remains per measure is mostly *proof*, not code:
 
-## 3. The seven gaps (state as of 2026-07-16)
+| # | Measure | Built | Still to prove or finish |
+|---|---|---|---|
+| 1 | Message loop | Global composer dispatches to the right employee and opens the live thread | Time it for real: one prompt, stopwatch under 10s |
+| 2 | Memory | Per-chat resume for Claude/Codex with fallback | The 48-hour reopen test on real threads |
+| 3 | Proof in the chat | Screenshots/markdown/files render inside the thread | One real run observed end-to-end |
+| 4 | One-tap decisions | Decisions is a one-card deck with one-gesture actions | Measure a real median decision time |
+| 5 | No silent failures | Watchdog, quota windows, failover, "paused — resumes at" copy | A real quota wall observed showing the friendly state |
+| 6 | One-glance dashboard | Mission Control built over real data | **Not wired in: /dashboard still renders the old page.** Wire MissionControl, then the 10-second test |
+| 7 | Works while you sleep | Overnight heartbeat + CEO self-diagnosis runner exist and have filed real tasks | CEO's model config still mismatched (old cheap-model setting); apply the corrected bootstrap, then three good mornings |
 
-| # | Gap | MVP bar | Tickets | Where we are |
-|---|---|---|---|---|
-| G1 | Prompt loop | Global composer; correct agent acks <10s; work STREAMS in the thread | VIT-57 (in_progress), VIT-41 (in_review) | ~75% in source / ~50% installed — composer now dispatches one assigned issue and opens its real live-run thread; packaged-desktop cutover and a measured <10s canary remain |
-| G2 | Continuity | Reopen any thread days later; agent remembers; no re-briefing | VIT-40 (in_review), VIT-47 (in_progress) | ~80% in source / ~60% installed — per-thread Claude/Codex resume and fallback are implemented; resume markers now cover direct and virtualized threads; 48-hour packaged canary remains |
-| G3 | Evidence inline | Screenshots/diffs render IN the thread; zero file-path hunting | VIT-41 steer (binding) | ~75% in source / ~40% installed — output media and Markdown/file evidence now render inside the Chat thread; packaged desktop and real-run proof remain |
-| G4 | Decision friction | Tinder deck; reversible yes = one gesture | VIT-72 (in_progress, deck steer binding) | ~85% in source / ~50% installed — Decisions is graduated into nav and defaults to a one-card deck using the existing one-gesture actions; packaged canary + median decision-time proof remain |
-| G5 | Reliability | No silent runs; quota walls = suspended-with-reset-time, never error black holes | VIT-53 DONE; VIT-64, VIT-48/49, watchdog VIT-74..77 | ~90% in source / ~45% installed — silent-run watchdog, quota windows, failover/failback, reset-time retries, and explicit `Quota suspended · resets …` issue copy are wired; the installed package predates the cure |
-| G6 | One-glance state | Mission Control + Summon Score ordering | VIT-112, VIT-113 | ~75% in source / ~30% installed — Dashboard is now the five-zone Mission Control over real control-plane data; the queue is honestly labeled a two-factor proxy until money/time/effort/human-attention inputs are persisted |
-| G7 | Unique value ON | Heartbeat executes real work nightly; CEO files useful tasks unprompted | VIT-44, VIT-71 | ~75% in source / ~25% installed — timer wakes enqueue real executable runs and the deduplicated CEO diagnosis runner has live filing evidence; source bootstrap now wires it into scheduled heartbeats and fixes cross-provider cheap profiles, but the live CEO is still failing on the old Claude+`gpt-5.5` mismatch |
+## The acceptance week (unchanged, plain words)
 
-## 4. The MVP crossover test (run it as a literal acceptance test)
+One week where all seven hold at once, on real work:
 
-One week where ALL of these hold:
-1. Board prompts from the global composer; right agent acknowledges <10s; work
-   streams visibly; result + evidence land in the SAME thread. (G1+G3)
-2. Reopening any employee thread after 48h requires zero re-briefing. (G2)
-3. Every decision arrives as a deck card; median decision <10 seconds. (G4)
-4. Zero silent runs and zero error black holes all week; a quota wall shows
-   "suspended, resets <t>". (G5)
-5. Mission Control answers "state of the company?" in 10 seconds. (G6)
-6. ≥3 mornings the board wakes to useful, evidenced overnight work + ≥1 CEO-filed
-   task the board agrees mattered. (G7 — the reason to switch at all)
-7. Tie-breaker: one identical real task run both ways (Summon vs Claude Code);
-   Summon's total board-minutes consumed ≤ 2x Claude Code's, while running 5+
-   other lanes in parallel.
+1. Prompts from the composer get the right employee in <10s, work streams, results land
+   in the same thread with proof. (1+3)
+2. Reopening any thread after 48h needs zero re-briefing. (2)
+3. Every decision is a card; median under 10 seconds. (4)
+4. Zero silent failures all week; any usage wall shows "paused — resumes at <time>". (5)
+5. The dashboard answers "state of the company?" in 10 seconds. (6)
+6. On 3+ mornings there is useful, evidenced overnight work and at least one CEO-filed
+   task the board agrees mattered. (7)
+7. Sanity check: one identical task run in Summon vs Claude Code costs at most 2x the
+   board-minutes — while Summon also runs 5+ other lanes in parallel.
 
-When 1-7 hold, Summon-on-Summon wins and the board switches. Until then: Claude Code
-drives, Summon executes what it's already good at (parallel bounded lanes).
+## Division of labor (aligned, not versus)
 
-## 5. Verified gap evidence: 2026-07-16
+- **Claude Code** = the cofounder's tool for building Summon itself: deep seams, test
+  lockstep, migrations, pre-verifying the review queue.
+- **Summon** = where companies run: parallel owned lanes with evidence, decisions,
+  overnight work, institutional memory across companies (Summon, Quantus, Anchor, …).
+- **The board** decides: reviews, decisions deck, and pointing one employee at one
+  S-tier task at a time (Manual mode default; 24/7 mode is opt-in with a budget).
 
-The binding constraint was not missing streaming machinery. It was a disconnected
-front door:
+## What ships next (one at a time)
 
-- `GlobalComposer` and its routing brain existed but were mounted nowhere.
-- Board Chat streamed a separate hard-coded Claude concierge process. That does not
-  count as the assigned employee acknowledging or working.
-- The real issue thread already merges active runs, live transcripts, comments,
-  interactions, attachments, and work products into one conversation.
+1. **First-run: name → connect your own Claude/Codex subscription → pair the GitHub
+   repo/org → done** (ticket VIT-128, now spec'd fuel-first). This is the customer's
+   first 60 seconds — Michael (Hawaii Tech Week) and Anton Kim (Regain/salomatic.com)
+   are the first two real prospects.
+2. **Wire Mission Control into /dashboard** (measure 6's missing piece).
+3. **Control room**: the kill switch (see everything running, stop it all in two
+   clicks), Manual vs 24/7 modes, CEO's three skills (surface → triage → route).
+4. Run the acceptance week.
 
-The source cure now mounts a persistent global composer in `Layout`, loads the
-cross-company assignable roster, files one assigned issue, relies on the server's
-single assignment wakeup, and opens the canonical issue thread. Paused and errored
-employees produce explicit warnings; failed dispatch preserves the board's draft.
-
-The evidence cure moves the existing output and attachment renderers into that same
-thread before its composer. Promoted videos/images remain first-class output cards;
-unpromoted screenshots, Markdown reports/diffs, PDFs, and other files render beside
-the conversation instead of in a separate page section.
-
-The Decisions cure graduates the attention surface out of Experimental settings and
-defaults it to one expanded card at a time. J/K and previous/next move the card and
-its inline action panel together; list mode remains available and persisted.
-
-The reliability cure carries the scheduled run's persisted `errorFamily` into the
-issue read model. Provider quota recovery is no longer a generic retry: it is shown
-as `Quota suspended`, names the reset time, states that work resumes automatically,
-and retains an explicit early-retry escape hatch. Existing model-chain failover,
-failback, reset-time scheduling, liveness classification, and silent-run watchdog
-surfaces were audited as connected production paths rather than isolated code.
-
-The one-glance cure replaces the legacy metrics-and-charts Dashboard with Mission
-Control: honest market-cap proxy, live execution/reliability, spend, Decisions,
-one binding constraint, Demand/Capacity/Cash pressure, eight departments, eight
-roadmap stages, and the top seven tasks. The task number remains explicitly a
-two-factor proxy; calling it the full Summon Score before its other four inputs are
-persisted would violate the 11x evidence rule.
-
-The proactive-loop audit found that generic timer wakes do execute adapter work when
-the employee opts into proactive heartbeats, and VIT-71 already has a deduplicated,
-tested runner with prior live filing evidence. The live CEO timer is enabled every
-30 minutes, but its installed configuration currently combines `claude_local` with
-a stale Codex cheap profile (`gpt-5.5`). Source bootstrap now installs a Claude
-Sonnet cheap lane for Claude and a GPT cheap lane for Codex, and tells timer wakes to
-run the VIT-71 filing pass before choosing the next constraint.
-
-Verification:
-
-- 31 focused composer/routing/dispatch tests pass.
-- 50 affected composer/layout/app tests pass.
-- 122 Issue Detail/live-thread/output tests pass, including a direct assertion that
-  screenshot and Markdown evidence are descendants of the Chat thread.
-- 134 Decisions preference/action/sidebar/settings/deck tests pass.
-- 30 shared quota/model-chain tests, 27 reliability UI tests, 12 scheduled-retry API
-  tests, and the focused provider-quota scheduling proof pass.
-- 27 Mission Control/routing/formation/roadmap/scoreboard tests and 14 market-cap
-  model tests pass.
-- UI, shared, and server TypeScript checks pass; the production UI build passes.
-- The token gate reports 118 repository-wide pre-existing violations and zero in
-  the files changed for this cure.
-- Live desktop proof remains deliberately unclaimed: the installed packaged runtime
-  predates this source work and the VIT-53 wake fix. Rollout remains gated by VIT-14's
-  isolated migration-lineage canary and rollback plan.
-- The final G7 test rerun and live bootstrap application were not performed after the
-  local command-approval reviewer hit its execution-usage ceiling. Existing VIT-71
-  documentation records 17/17 rule-engine tests and two previously filed live
-  anomalies; neither substitutes for the required fresh overnight canary.
-
-Next acceptance move: with zero queued/running runs, apply the provider-correct
-Company Zero bootstrap (or the packaged Model Pit Stop once VIT-14 ships), then ship
-the source through the VIT-14 cutover. Run one real desktop prompt and the 48-hour
-continuity canary, measure decision time, and leave the CEO timer on for three
-mornings. Only the resulting same-thread evidence raises G1–G7 to 100%.
-
-## 6. Division of labor until crossover
-
-- **Claude Code (the board's pair):** the deep seams agents are slow at — the
-  packaged/source runtime seam (VIT-14, still the root of dev-loop pain), heartbeat
-  execution (VIT-44 with CTO), Summon Score backend (VIT-113, small and gating
-  Mission Control), Run 4 execution as a /goal worktree run, and PRE-VERIFYING the
-  board's review queue (run the code, screenshot, one-line verdict) so board reviews
-  take minutes.
-- **Agents:** keep their current single S-tier lanes (VIT-57, 112, 48, 49, 114, 111;
-  QUA-1/2) — bounded, parallel, evidence-gated.
-- **Board:** clear the review queue (it gates G1/G2/G4 all at once); swipe the deck
-  when it ships.
-
-## 6. The 80/20 to 100% (board-ratified 2026-07-16)
-
-Three moves close most of the remaining installed-gap; everything else is post-MVP.
-
-1. **Review + merge the source stack.** The board reviews the seven in-review cures
-   ON the live source UI (localhost:5173, real data), then the cofounder merges
-   `vitals/vit-41-messages-inbox` (+132 dirty files, committed properly) to master.
-   Unlocks: G1/G3/G4/G6 become the real surface.
-2. **The packaged->source cutover (VIT-14).** Isolated-clone lineage proof -> backup
-   -> canary -> cutover w/ rollback (board+cofounder op per the recovery rules).
-   Unlocks: G2 resume, G5 quota states, G7 executing heartbeats - server-side cures.
-3. **The control room.** VIT-125 kill switch + VIT-127 Manual/24-7 modes w/ token
-   governor + VIT-126 CEO Surface/Triage/Route skills + VIT-113 score fields.
-   Unlocks: the operating rhythm (Manual by day, governed 24/7 by night).
-
-Then run the section-4 seven-day test. DEFERRED until after crossover: personas
-polish (42/104), iOS (73), users lane (59), rebrand sweep (52), model-picker UI
-beyond the pit stop, leaderboard (27), AI SDR (21/62), Run 4/5/6 execution beyond
-what review requires. The core-8 + roadmap floor (VIT-114, extended to imports) and
-kill switch ship WITH the MVP because control and defaults are the product.
+Deferred until after: personas polish, iOS, users lane, model-picker beyond the pit
+stop, leaderboard, AI SDR, deeper UI reduction runs.
