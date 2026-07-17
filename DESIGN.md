@@ -1,8 +1,8 @@
 # Summon Design Principles
 
-**Status:** v0.4 - the source of truth for a beautiful, ruthlessly minimal AI-agent command center. Governs both structure AND intentionality. Full research + evidence: `doc/research/AGENT-COMMAND-CENTER-DESIGN.md` (Sequoia agent thesis, peer command centers, the design canon), `doc/research/BEST-DASHBOARDS.md` (the Dashboard grid), `doc/research/DESKTOP-UX-SKELETONS.md` (the IA). Brand token VALUES live only in `ui/src/index.css`; nothing in `ui/` hardcodes them.
+**Status:** v0.5 - the source of truth for a beautiful, ruthlessly minimal AI-agent command center. Governs both structure AND intentionality. Full research + evidence: `doc/research/AGENT-COMMAND-CENTER-DESIGN.md` (Sequoia agent thesis, peer command centers, the design canon), `doc/research/BEST-DASHBOARDS.md` (the Dashboard grid), `doc/research/DESKTOP-UX-SKELETONS.md` (the IA). Brand token VALUES live only in `ui/src/index.css`; nothing in `ui/` hardcodes them.
 
-Changes from v0.3: elevated from a token-extraction anchor to the command-center design spine; added the thesis, the twelve laws, and the intentionality gate. The token-layer and enforcement sections below still hold.
+Changes from v0.4: added law 13 (glass signals elevation, never data), which admits glassmorphism to the system on the only terms that survive the intentionality gate. Changes from v0.3: elevated from a token-extraction anchor to the command-center design spine; added the thesis, the laws, and the intentionality gate. The token-layer and enforcement sections below still hold.
 
 ## What this document is for
 
@@ -12,7 +12,7 @@ Agents and humans modifying `ui/` treat this file as the source of truth for des
 
 Summon is a command center for a founder supervising AI employees. It answers ONE question first, above all others: **which of my agents needs me right now.** Every element either sharpens that answer or is deleted. Three surfaces, nothing more: **Dashboard** (the glance - which employees need me, what's the company's state), **Chat** (talk to any employee, WhatsApp-simple, outcomes not logs), **Decisions** (the drainable queue of what needs my yes). Beauty here is not decoration - it is the absence of everything that isn't that answer. The canon and the Sequoia peer set agree: the defining design decision is almost always a *subtraction*.
 
-## The twelve laws (enforceable; each element must pass all)
+## The thirteen laws (enforceable; each element must pass all)
 
 1. **Deletion test.** Every element must survive a deletion attempt - if removing it loses no data and no affordance, DELETE it (don't shrink it). Log the removal in the PR.
 2. **Intentionality gate.** Every on-screen element traces to a DESIGN.md entry; every entry states its REASON + the trade-off it settles + the alternative rejected. No trade-off = no decision = no bespoke element.
@@ -26,6 +26,7 @@ Summon is a command center for a founder supervising AI employees. It answers ON
 10. **No spinners on the home screen.** Cache all console state locally, stream the event log in the background, keep every hop < 100ms. Speed is a design decision.
 11. **Motion is sub-100ms, GPU-only.** Animate transform/opacity, never layout (width/height/top).
 12. **Five-second test, two levels max.** Any screen: identify the primary signal, tell good from bad, know if action is needed - in five seconds. Disclosure caps at two levels; a third level means the structure is wrong.
+13. **Glass signals elevation, never data.** Translucent/blurred surfaces are permitted ONLY where something floats above the context it came from and is dismissible: the Cmd-K palette, modals and sheets, the Decisions deck card, toasts. They are forbidden on Dashboard data zones, tables, metrics, status, and any number the board reads to make a call. *Reason:* glass carries exactly one honest meaning - "this is transient and sits above what you were doing" - which is a real affordance the flat system otherwise spends a border on (law 7), so used here it ADDS signal rather than decoration. *Trade-off it settles:* it buys that depth cue at the cost of text contrast and of compositing during scroll; we pay that only where content is transient, short, and recoverable by dismissing it - never where law 12 or a metric's legibility is at stake. *Alternative rejected:* glass as a global skin across every card and panel. It lowers contrast on precisely the dense data the console exists to show, it competes with the single accent (law 4), and by making every surface equally shiny it flattens hierarchy - the opposite of what a command center is for. Board ruling 2026-07-17: the look is wanted; this law is where it is allowed to live.
 
 ## The intentionality gate (how "everything has a reason" is enforced)
 
