@@ -27,7 +27,7 @@ import {
 import { parseObject, asBoolean, asNumber } from "../../adapters/utils.js";
 import { runningProcesses } from "../../adapters/index.js";
 import { visibleIssueCondition } from "../issue-visibility.js";
-import { forbidden, notFound } from "../../errors.js";
+import { HttpError, forbidden, notFound } from "../../errors.js";
 import { logger } from "../../middleware/logger.js";
 import { isPidAlive, isProcessGroupAlive, terminateLocalService } from "../local-service-supervisor.js";
 import { redactCurrentUserText } from "../../log-redaction.js";
@@ -4281,6 +4281,7 @@ export function recoveryService(db: Db, deps: { enqueueWakeup: RecoveryWakeup })
       pauseHoldSkipped: 0,
       notReadySkipped: 0,
       candidateLimitSkipped: 0,
+      notInvokableSkipped: 0,
       deferredOrFailed: 0,
       enqueueFailed: 0,
       issueIds: [] as string[],
@@ -4486,6 +4487,20 @@ export function recoveryService(db: Db, deps: { enqueueWakeup: RecoveryWakeup })
             },
           });
         } catch (err) {
+          // A 409 from the wake guard is a DELIBERATE state, not a failure:
+          // the board paused the agent (kill switch / Manual mode), it awaits
+          // approval, or a budget cap is holding it. The backstop re-runs
+          // every 30s, so it heals on the next tick after the state clears —
+          // retrying loudly until then just floods the log with stack traces
+          // and fights the board's own pause. Skip quietly, count it.
+          if (err instanceof HttpError && err.status === 409) {
+            result.notInvokableSkipped += 1;
+            logger.debug(
+              { issueId: candidate.id, agentId, source, detail: err.message },
+              "backstop skipped wake: agent deliberately not invokable (paused/pending/budget)",
+            );
+            continue;
+          }
           result.deferredOrFailed += 1;
           result.enqueueFailed += 1;
           logger.warn(
