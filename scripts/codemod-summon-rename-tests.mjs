@@ -38,7 +38,11 @@ const IS_TEST = /\.(test|spec)\.(ts|tsx)$/;
 
 // Old brand -> new. Ordered: longest/most specific first.
 const RULES = [
-  [/\bPaperclip\b(?!ai)/g, "Summon"],
+  // The bracketed log prefix is safe to rewrite even though it is lowercase:
+  // the brackets make it collision-proof against paths (~/.paperclip), the db
+  // user, backup filenames, and session keys — none of which are bracketed.
+  [/\[paperclip\]/g, "[summon]"],
+  [/(?<!X-)\bPaperclip\b(?!ai)/g, "Summon"],
   [/\bvitals\.run\b/g, "summon.company"],
 ];
 
@@ -47,6 +51,7 @@ const MATCHERS = new Set([
   "toBe", "toEqual", "toStrictEqual", "toContain", "toContainEqual", "toMatch",
   "toThrow", "toThrowError", "toHaveTextContent", "toHaveBeenCalledWith",
   "toHaveAccessibleName", "toHaveAttribute", "toHaveValue",
+  "toMatchObject", "toHaveProperty", "objectContaining",
   "stringContaining", "stringMatching",
 ]);
 const QUERIES = new Set([

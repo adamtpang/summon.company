@@ -152,7 +152,7 @@ async function runExecutor(
 }
 
 describe("shared ACPX engine runtime behavior", () => {
-  it("includes Paperclip env and API access notes in the ACPX prompt without leaking the token", async () => {
+  it("includes Summon env and API access notes in the ACPX prompt without leaking the token", async () => {
     const { meta } = await runExecutor(
       { agent: "custom", agentCommand: "node ./fake-acp.js" },
       {
@@ -170,11 +170,11 @@ describe("shared ACPX engine runtime behavior", () => {
 
     const prompt = String(meta[0]?.prompt ?? "");
     const promptMetrics = meta[0]?.promptMetrics as Record<string, number> | undefined;
-    expect(prompt).toContain("Paperclip runtime note:");
+    expect(prompt).toContain("Summon runtime note:");
     expect(prompt).toContain("PAPERCLIP_AGENT_ID");
     expect(prompt).toContain("PAPERCLIP_API_KEY");
     expect(prompt).toContain("PAPERCLIP_WAKE_PAYLOAD_JSON");
-    expect(prompt).toContain("Paperclip API access note:");
+    expect(prompt).toContain("Summon API access note:");
     expect(prompt).toContain('PAPERCLIP_API_BASE="${PAPERCLIP_API_URL%/}"; PAPERCLIP_API_BASE="${PAPERCLIP_API_BASE%/api}"');
     expect(prompt).toContain("$PAPERCLIP_API_BASE/api/agents/me");
     expect(prompt).toContain("$PAPERCLIP_API_BASE/api/issues/$PAPERCLIP_TASK_ID");
@@ -193,7 +193,7 @@ describe("shared ACPX engine runtime behavior", () => {
     );
 
     const prompt = String(meta[0]?.prompt ?? "");
-    expect(prompt).toContain("Paperclip API access note:");
+    expect(prompt).toContain("Summon API access note:");
     expect(prompt).toContain("Use a real issue id from the current context before making issue write requests.");
     expect(prompt).not.toContain("$PAPERCLIP_API_BASE/api/issues/$PAPERCLIP_TASK_ID");
   });
@@ -888,7 +888,7 @@ describe("shared ACPX engine runtime behavior", () => {
     expect(runLog).toContain("some genuine crash: TypeError: x is not a function");
   });
 
-  it("passes Paperclip env through the ACP agent wrapper instead of process.env", async () => {
+  it("passes Summon env through the ACP agent wrapper instead of process.env", async () => {
     let observedApiKeyDuringStream: string | undefined;
     const execute = createAcpxEngineExecutor({
       createRuntime: () => ({
@@ -935,7 +935,7 @@ describe("shared ACPX engine runtime behavior", () => {
     }
   });
 
-  it("writes a Paperclip-managed .claude/settings.local.json for the claude agent so it can reach the Paperclip API", async () => {
+  it("writes a Summon-managed .claude/settings.local.json for the claude agent so it can reach the Summon API", async () => {
     const root = await makeTempRoot();
     const stateDir = path.join(root, "state");
     const cwd = path.join(root, "worktree");
@@ -970,7 +970,7 @@ describe("shared ACPX engine runtime behavior", () => {
     expect(note).toBeTruthy();
   });
 
-  it("merges Paperclip allowlist into an existing .claude/settings.local.json without losing user entries", async () => {
+  it("merges Summon allowlist into an existing .claude/settings.local.json without losing user entries", async () => {
     const root = await makeTempRoot();
     const stateDir = path.join(root, "state");
     const cwd = path.join(root, "worktree");
@@ -1294,7 +1294,7 @@ describe("shared ACP engine execution timeouts", () => {
     );
     expect(startLine).toBeTruthy();
     expect(startLine!.text).toContain(
-      `[paperclip] Adapter execution timeout: timeoutSec=${DEFAULT_REMOTE_SANDBOX_ADAPTER_TIMEOUT_SEC} ` +
+      `[summon] Adapter execution timeout: timeoutSec=${DEFAULT_REMOTE_SANDBOX_ADAPTER_TIMEOUT_SEC} ` +
         "(sandbox default; set adapterConfig.timeoutSec to override).",
     );
   });

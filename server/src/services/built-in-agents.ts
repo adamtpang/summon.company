@@ -147,9 +147,9 @@ const SOURCE_BUILT_INS_DIR = path.resolve(moduleDir, "../../src/built-ins/agents
 const FALLBACK_REFLECTION_COACH_INSTRUCTIONS = [
   "# Reflection Coach",
   "",
-  "You are Paperclip's built-in Reflection Coach.",
+  "You are Summon's built-in Reflection Coach.",
   "Review recent agent execution records, identify evidence-backed improvement patterns, and propose the smallest durable instruction, skill, or tool-description change.",
-  "Do not apply changes in the same run. Present a reviewable diff and wait for the required Paperclip issue-thread approval before any follow-up applies it.",
+  "Do not apply changes in the same run. Present a reviewable diff and wait for the required Summon issue-thread approval before any follow-up applies it.",
   "",
 ].join("\n");
 
@@ -201,7 +201,7 @@ export function readBuiltInTextWithFallback(
         if (!warnedBuiltInTextReadErrors.has(warningKey)) {
           warnedBuiltInTextReadErrors.add(warningKey);
           console.warn(
-            "[paperclip] Built-in agent asset " + label + " read error on " + candidatePath + ": " + codeLabel,
+            "[summon] Built-in agent asset " + label + " read error on " + candidatePath + ": " + codeLabel,
           );
         }
       }
@@ -212,7 +212,7 @@ export function readBuiltInTextWithFallback(
   if (!warnedBuiltInTextFallbacks.has(label)) {
     warnedBuiltInTextFallbacks.add(label);
     console.warn(
-      `[paperclip] Built-in agent asset ${label} was not readable; using bundled fallback text. `
+      `[summon] Built-in agent asset ${label} was not readable; using bundled fallback text. `
       + `Checked: ${attemptedPaths.join(", ")}`,
     );
   }
@@ -254,7 +254,7 @@ const DEFINITIONS = validateBuiltInAgentDefinitions([
     featureKeys: ["briefs"],
     shortPurpose: "Prepares concise operational briefs for the board and agent company.",
     defaultInstructions:
-      "You are Paperclip's built-in Briefs agent. Produce concise, sourced operational briefs that help the board understand current company work, risks, and next actions.",
+      "You are Summon's built-in Briefs agent. Produce concise, sourced operational briefs that help the board understand current company work, risks, and next actions.",
     defaultRole: "general",
     allowedAdapterTypes: ["codex_local", "claude_local", "gemini_local", "opencode_local", "process"],
     defaultBudgetMonthlyCents: 0,
@@ -265,7 +265,7 @@ const DEFINITIONS = validateBuiltInAgentDefinitions([
     featureKeys: ["learning"],
     shortPurpose: "Maintains reusable company learning from completed work and recurring patterns.",
     defaultInstructions:
-      "You are Paperclip's built-in Learning agent. Extract durable lessons from completed work, preserve useful patterns, and keep learning artifacts grounded in source context.",
+      "You are Summon's built-in Learning agent. Extract durable lessons from completed work, preserve useful patterns, and keep learning artifacts grounded in source context.",
     defaultRole: "general",
     allowedAdapterTypes: ["codex_local", "claude_local", "gemini_local", "opencode_local", "process"],
     defaultBudgetMonthlyCents: 0,

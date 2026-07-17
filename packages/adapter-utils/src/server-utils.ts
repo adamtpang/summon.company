@@ -130,7 +130,7 @@ export function resolvePaperclipInstanceRootForAdapter(input: {
 }
 
 export const DEFAULT_PAPERCLIP_AGENT_PROMPT_TEMPLATE = [
-  "You are agent {{agent.id}} ({{agent.name}}). Continue your Paperclip work.",
+  "You are agent {{agent.id}} ({{agent.name}}). Continue your Summon work.",
   "",
   "Execution contract:",
   "- Start actionable work in this heartbeat; do not stop at a plan unless the issue asks for planning.",
@@ -141,7 +141,7 @@ export const DEFAULT_PAPERCLIP_AGENT_PROMPT_TEMPLATE = [
   "- Use child issues for parallel or long delegated work instead of polling agents, sessions, or processes.",
   "- If woken by a human comment on a dependency-blocked issue, respond or triage the comment without treating the blocked deliverable work as unblocked.",
   "- Create child issues directly when you know what needs to be done; use issue-thread interactions when the board/user must choose suggested tasks, answer structured questions, or confirm a proposal.",
-  "- Use `PAPERCLIP_SCRATCH_DIR` / `PAPERCLIP_RUN_SCRATCH_DIR` for temporary scratch files instead of ad hoc `/tmp` paths; Paperclip removes that run-owned directory after the run ends.",
+  "- Use `PAPERCLIP_SCRATCH_DIR` / `PAPERCLIP_RUN_SCRATCH_DIR` for temporary scratch files instead of ad hoc `/tmp` paths; Summon removes that run-owned directory after the run ends.",
   "- To ask for that input, create an interaction on the current issue with POST /api/issues/{issueId}/interactions using kind suggest_tasks, ask_user_questions, or request_confirmation. Use continuationPolicy wake_assignee when you need to resume after a response; for request_confirmation this resumes only after acceptance.",
   "- When you intentionally restart follow-up work on a completed assigned issue, include structured `resume: true` with the POST /api/issues/{issueId}/comments or PATCH /api/issues/{issueId} comment payload. Generic agent comments on closed issues are inert by default.",
   "- For plan approval, update the plan document first, then create request_confirmation targeting the latest plan revision with idempotencyKey confirmation:{issueId}:plan:{revisionId}. Wait for acceptance before creating implementation subtasks, and create a fresh confirmation after superseding board/user comments if approval is still needed.",
@@ -158,7 +158,7 @@ export const WATCHDOG_DEFAULT_MANDATE = [
   "- Do not accept \"I could not\" or \"waiting for approval\" as automatically valid. Read the evidence before deciding.",
   "- If a stopped leaf is genuinely complete, leave it alone and record why you believe so.",
   "- If a stopped leaf is not genuinely complete, restore a live path inside the watched subtree by reopening, reassigning, commenting actionable instructions, creating a follow-up child issue, or accepting an eligible task-level interaction (such as a routine plan confirmation when no custom instruction forbids it).",
-  "- If you discover a Paperclip product or platform bug while reviewing the stopped subtree, create a linked engineering follow-up outside the watched source tree using the server-provided watchdog discovery route instead of making it a source child.",
+  "- If you discover a Summon product or platform bug while reviewing the stopped subtree, create a linked engineering follow-up outside the watched source tree using the server-provided watchdog discovery route instead of making it a source child.",
   "- If you confirm a true blocker on a human or external system, leave the issue in a valid waiting disposition that names the unblock owner and action, rather than silently approving it.",
   "",
   "Safety constraints (these always apply, even if custom instructions disagree):",
@@ -282,7 +282,7 @@ function buildManagedSkillOrigin(): Pick<
 > {
   return {
     origin: "company_managed",
-    originLabel: "Managed by Paperclip",
+    originLabel: "Managed by Summon",
     readOnly: false,
   };
 }
@@ -1319,9 +1319,9 @@ export function renderPaperclipWakePrompt(
   ];
   const lines = resumedSession
       ? [
-        "## Paperclip Resume Delta",
+        "## Summon Resume Delta",
         "",
-        "You are resuming an existing Paperclip session.",
+        "You are resuming an existing Summon session.",
         "This heartbeat is scoped to the issue below. Do not switch to another issue until you have handled this wake.",
         "Focus on the new wake delta below and continue the current task without restating the full heartbeat boilerplate.",
         "Fetch the API thread only when `fallbackFetchNeeded` is true or you need broader history than this batch.",
@@ -1330,7 +1330,7 @@ export function renderPaperclipWakePrompt(
         ...wakeSummaryLines,
       ]
     : [
-        "## Paperclip Wake Payload",
+        "## Summon Wake Payload",
         "",
         "Treat this wake payload as the highest-priority change for the current heartbeat.",
         "This heartbeat is scoped to the issue below. Do not switch to another issue until you have handled this wake.",
@@ -1826,7 +1826,7 @@ export function shapePaperclipWorkspaceEnvForExecution(input: {
   if (executionCwd === null) {
     // eslint-disable-next-line no-console
     console.warn(
-      "[paperclip] shapePaperclipWorkspaceEnvForExecution called with executionCwd=null on a remote target; " +
+      "[summon] shapePaperclipWorkspaceEnvForExecution called with executionCwd=null on a remote target; " +
         "stripping workspaceCwd to avoid leaking local paths into the remote environment.",
     );
   }
@@ -2203,11 +2203,11 @@ export function buildRuntimeMountedSkillSnapshot(
     availableEntries,
     desiredSkills,
     configuredDetail,
-    missingDetail = "Paperclip cannot find this skill in the local runtime skills directory.",
+    missingDetail = "Summon cannot find this skill in the local runtime skills directory.",
     mode = "ephemeral",
     externalInstalled,
     externalLocationLabel,
-    externalDetail = "Installed outside Paperclip management.",
+    externalDetail = "Installed outside Summon management.",
     skillsHome,
   } = options;
   const supported = options.supported ?? mode !== "unsupported";
@@ -2251,7 +2251,7 @@ export function buildRuntimeMountedSkillSnapshot(
           ? resolveSkillDetail(configuredDetail, available)
           : resolveSkillDetail(
               options.unsupportedDetail
-                ?? "Desired state is stored in Paperclip only; this adapter cannot apply skills at runtime.",
+                ?? "Desired state is stored in Summon only; this adapter cannot apply skills at runtime.",
               available,
             )
         : null,
@@ -2261,7 +2261,7 @@ export function buildRuntimeMountedSkillSnapshot(
 
   for (const desiredSkill of desiredSkills) {
     if (availableByKey.has(desiredSkill)) continue;
-    warnings.push(`Desired skill "${desiredSkill}" is not available from the Paperclip skills directory.`);
+    warnings.push(`Desired skill "${desiredSkill}" is not available from the Summon skills directory.`);
     entries.push({
       key: desiredSkill,
       runtimeName: null,
@@ -2389,7 +2389,7 @@ export function buildPersistentSkillSnapshot(
 
   for (const desiredSkill of desiredSkills) {
     if (availableByKey.has(desiredSkill)) continue;
-    warnings.push(`Desired skill "${desiredSkill}" is not available from the Paperclip skills directory.`);
+    warnings.push(`Desired skill "${desiredSkill}" is not available from the Summon skills directory.`);
     entries.push({
       key: desiredSkill,
       runtimeName: null,
@@ -2398,7 +2398,7 @@ export function buildPersistentSkillSnapshot(
       state: "missing",
       sourcePath: null,
       targetPath: null,
-      detail: "Paperclip cannot find this skill in the local runtime skills directory.",
+      detail: "Summon cannot find this skill in the local runtime skills directory.",
       origin: "external_unknown",
       originLabel: "External or unavailable",
       readOnly: false,
@@ -2634,7 +2634,7 @@ export async function ensurePaperclipSkillSymlink(
       const result = await materializePaperclipSkillCopy(resolvedSource, target);
       return result.copiedFiles > 0 ? "repaired" : "skipped";
     } catch {
-      // Preserve user-owned directories that Paperclip did not materialize.
+      // Preserve user-owned directories that Summon did not materialize.
     }
     return "skipped";
   }
@@ -2725,7 +2725,7 @@ async function acquireMaterializeLock(lockDir: string): Promise<() => Promise<vo
       if (code !== "EEXIST") throw err;
       if (await removeStaleMaterializeLock(lockDir, MATERIALIZED_SKILL_LOCK_STALE_MS)) continue;
       if (Date.now() >= deadline) {
-        throw new Error(`Timed out waiting for Paperclip skill materialization lock at ${lockDir}`);
+        throw new Error(`Timed out waiting for Summon skill materialization lock at ${lockDir}`);
       }
       await new Promise((resolve) => setTimeout(resolve, 50));
     }
@@ -2784,7 +2784,7 @@ export async function materializePaperclipSkillCopy(
     throw new Error("Refusing to materialize a skill root that is itself a symlink.");
   }
   if (!rootStat.isDirectory()) {
-    throw new Error("Paperclip skills must be directories.");
+    throw new Error("Summon skills must be directories.");
   }
 
   const result: MaterializedPaperclipSkillCopyResult = {
@@ -2934,7 +2934,7 @@ export async function runChildProcess(
 
     // Strip Claude Code nesting-guard env vars so spawned `claude` processes
     // don't refuse to start with "cannot be launched inside another session".
-    // These vars leak in when the Paperclip server itself is started from
+    // These vars leak in when the Summon server itself is started from
     // within a Claude Code session (e.g. `npx paperclipai run` in a terminal
     // owned by Claude Code) or when cron inherits a contaminated shell env.
     const CLAUDE_CODE_NESTING_VARS = [

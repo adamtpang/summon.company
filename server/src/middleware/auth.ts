@@ -388,7 +388,7 @@ export async function resolveCloudTenantActor(db: Db, req: Request): Promise<Exp
   const userName = req.header("x-paperclip-cloud-user-name")?.trim() || userEmail;
   const paperclipCompanyId = req.header("x-paperclip-cloud-paperclip-company-id")?.trim();
   const companyId = cloudTenantCompanyId(stackId);
-  const companyName = paperclipCompanyId || `${stackId} Paperclip`;
+  const companyName = paperclipCompanyId || `${stackId} Summon`;
   const now = new Date();
 
   await db
@@ -426,7 +426,7 @@ export async function resolveCloudTenantActor(db: Db, req: Request): Promise<Exp
     .values({
       id: companyId,
       name: companyName,
-      description: `Provisioned by Paperclip Cloud for stack ${stackId}.`,
+      description: `Provisioned by Summon Cloud for stack ${stackId}.`,
       status: "active",
       issuePrefix: issuePrefixForCloudStack(stackId),
       updatedAt: now,

@@ -400,7 +400,7 @@ function resolveRoutineVariableValues(
 
   for (const variable of variables) {
     // Workspace-derived automatic values are authoritative for variables that
-    // Paperclip manages from execution context, so callers cannot override them.
+    // Summon manages from execution context, so callers cannot override them.
     const candidate = automaticVariables[variable.name] !== undefined
       ? automaticVariables[variable.name]
       : provided[variable.name] !== undefined

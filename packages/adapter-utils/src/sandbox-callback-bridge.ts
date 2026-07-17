@@ -28,7 +28,7 @@ export interface SandboxCallbackBridgeRouteRule {
 // Routes the in-sandbox heartbeat skill is documented to call. The server
 // still enforces actor-level permissions on top of this allowlist; the list
 // exists to bound the surface area a compromised CLI could reach via the
-// reverse bridge. Keep this in sync with the Paperclip skill in
+// reverse bridge. Keep this in sync with the Summon skill in
 // `skills/paperclip/SKILL.md` and `references/api-reference.md`.
 export const DEFAULT_SANDBOX_CALLBACK_BRIDGE_ROUTE_ALLOWLIST: readonly SandboxCallbackBridgeRouteRule[] = [
   // Identity, inbox, agent self-management
@@ -672,7 +672,7 @@ export async function startSandboxCallbackBridgeWorker(input: {
       });
     } catch (error) {
       console.warn(
-        `[paperclip] sandbox callback bridge handler failed for ${request.id}: ${error instanceof Error ? error.message : String(error)}`,
+        `[summon] sandbox callback bridge handler failed for ${request.id}: ${error instanceof Error ? error.message : String(error)}`,
       );
       await writeBridgeResponse(input.client, requestPath, responsePath, {
         id: request.id,
@@ -709,7 +709,7 @@ export async function startSandboxCallbackBridgeWorker(input: {
         });
       } catch (error) {
         console.warn(
-          `[paperclip] sandbox callback bridge failed to abort pending request ${requestId}: ${error instanceof Error ? error.message : String(error)}`,
+          `[summon] sandbox callback bridge failed to abort pending request ${requestId}: ${error instanceof Error ? error.message : String(error)}`,
         );
       } finally {
         await input.client.remove(requestPath).catch(() => undefined);
@@ -743,12 +743,12 @@ export async function startSandboxCallbackBridgeWorker(input: {
       }
     } catch (error) {
       const message = buildWorkerFailureMessage(error);
-      console.warn(`[paperclip] ${message}`);
+      console.warn(`[summon] ${message}`);
       try {
         await failPendingRequests(message);
       } catch (failPendingError) {
         console.warn(
-          `[paperclip] sandbox callback bridge failed to abort queued requests after worker failure: ${failPendingError instanceof Error ? failPendingError.message : String(failPendingError)}`,
+          `[summon] sandbox callback bridge failed to abort queued requests after worker failure: ${failPendingError instanceof Error ? failPendingError.message : String(failPendingError)}`,
         );
       }
     } finally {

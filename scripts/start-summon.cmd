@@ -14,5 +14,7 @@ rem Rollback (if the new server won't boot): run `paperclipai run` instead —
 rem that is the old packaged app, kept installed as the fallback.
 rem ============================================================================
 cd /d "%~dp0..\server"
+set "LOGFILE=%USERPROFILE%\.paperclip\instances\default\data\server-console.log"
 echo Starting Summon (source runtime) on http://127.0.0.1:3100 ...
-node ..\cli\node_modules\tsx\dist\cli.mjs src\index.ts
+echo Console log: %LOGFILE%
+node ..\cli\node_modules\tsx\dist\cli.mjs src\index.ts >> "%LOGFILE%" 2>&1

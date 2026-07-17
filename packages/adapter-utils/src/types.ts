@@ -239,7 +239,7 @@ export interface AdapterEnvironmentTestContext {
   /**
    * Optional execution target the adapter should run probes against.
    *
-   * If omitted (or `kind === "local"`), the adapter tests on the Paperclip
+   * If omitted (or `kind === "local"`), the adapter tests on the Summon
    * host. For SSH/sandbox targets the adapter should run command/auth probes
    * inside the remote environment so the result reflects what an agent run
    * would actually see at execution time.
@@ -340,7 +340,7 @@ export interface AdapterConfigSchema {
 
 export interface AdapterRuntimeCommandSpec {
   /**
-   * The command Paperclip should execute for this adapter in the current config.
+   * The command Summon should execute for this adapter in the current config.
    */
   command: string;
   /**
@@ -382,7 +382,7 @@ export interface ServerAdapterModule {
    * Optional explicit refresh hook for model discovery.
    * Use this when the adapter caches discovered models and needs a bypass path
    * so the UI can fetch newly released models without waiting for cache expiry
-   * or a Paperclip code update.
+   * or a Summon code update.
    */
   refreshModels?: () => Promise<AdapterModel[]>;
   agentConfigurationDoc?: string;

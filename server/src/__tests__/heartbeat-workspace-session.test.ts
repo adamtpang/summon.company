@@ -2067,7 +2067,7 @@ describe("stripConfiguredModelFromSessionParams", () => {
 });
 
 describe("stripPaperclipSessionMetadataFromSessionParams", () => {
-  it("removes all internal Paperclip session metadata before adapter invocation", () => {
+  it("removes all internal Summon session metadata before adapter invocation", () => {
     expect(
       stripPaperclipSessionMetadataFromSessionParams({
         sessionId: "thread-1",
@@ -2483,7 +2483,7 @@ describe("formatRuntimeWorkspaceWarningLog", () => {
   it("emits informational workspace warnings on stdout", () => {
     expect(formatRuntimeWorkspaceWarningLog("Using fallback workspace")).toEqual({
       stream: "stdout",
-      chunk: "[paperclip] Using fallback workspace\n",
+      chunk: "[summon] Using fallback workspace\n",
     });
   });
 });
@@ -2525,7 +2525,7 @@ describe("prioritizeProjectWorkspaceCandidatesForRun", () => {
 });
 
 describe("parseSessionCompactionPolicy", () => {
-  it("disables Paperclip-managed rotation by default for codex and claude local", () => {
+  it("disables Summon-managed rotation by default for codex and claude local", () => {
     expect(parseSessionCompactionPolicy(buildAgent("codex_local"))).toEqual({
       enabled: true,
       maxSessionRuns: 0,

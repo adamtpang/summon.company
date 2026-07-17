@@ -369,7 +369,7 @@ async function prepareManagedCodexHome(input: {
 
   await onLog(
     "stdout",
-    `[paperclip] Using Paperclip-managed ACPX Codex home "${targetHome}" (seeded from "${sourceHome}").\n`,
+    `[summon] Using Summon-managed ACPX Codex home "${targetHome}" (seeded from "${sourceHome}").\n`,
   );
   return targetHome;
 }
@@ -465,13 +465,13 @@ async function prepareClaudeSkillRuntime(input: {
       if (result.skippedSymlinks.length > 0) {
         await input.onLog(
           "stdout",
-          `[paperclip] Materialized ACPX Claude skill "${entry.runtimeName}" into ${skillsHome} and skipped ${result.skippedSymlinks.length} symlink(s).\n`,
+          `[summon] Materialized ACPX Claude skill "${entry.runtimeName}" into ${skillsHome} and skipped ${result.skippedSymlinks.length} symlink(s).\n`,
         );
       }
     } catch (err) {
       await input.onLog(
         "stderr",
-        `[paperclip] Failed to materialize ACPX Claude skill "${entry.key}" into ${skillsHome}: ${err instanceof Error ? err.message : String(err)}\n`,
+        `[summon] Failed to materialize ACPX Claude skill "${entry.key}" into ${skillsHome}: ${err instanceof Error ? err.message : String(err)}\n`,
       );
     }
   }
@@ -479,7 +479,7 @@ async function prepareClaudeSkillRuntime(input: {
   const selectedNames = selectedSkills.map((entry) => entry.runtimeName).sort();
   const promptInstructions = selectedSkills.length > 0
     ? [
-        "Paperclip has materialized selected runtime skills for this ACPX Claude session.",
+        "Summon has materialized selected runtime skills for this ACPX Claude session.",
         `Skill root: ${skillsHome}`,
         selectedNames.length > 0 ? `Selected skills: ${selectedNames.join(", ")}` : "",
         "When a task calls for one of these skills, read its SKILL.md from that root and follow it.",
@@ -496,7 +496,7 @@ async function prepareClaudeSkillRuntime(input: {
     },
     promptInstructions,
     commandNotes: selectedSkills.length > 0
-      ? [`Materialized ${selectedSkills.length} Paperclip skill(s) for ACPX Claude at ${skillsHome}.`]
+      ? [`Materialized ${selectedSkills.length} Summon skill(s) for ACPX Claude at ${skillsHome}.`]
       : [],
   };
 }
@@ -544,7 +544,7 @@ async function reconcileManagedCodexSkills(input: {
   for (const name of managed) {
     if (desired.has(name)) continue;
     if (await removeSkillTarget(path.join(input.skillsHome, name))) {
-      await input.onLog("stdout", `[paperclip] Revoked ACPX Codex skill "${name}" from ${input.skillsHome}\n`);
+      await input.onLog("stdout", `[summon] Revoked ACPX Codex skill "${name}" from ${input.skillsHome}\n`);
     }
   }
 
@@ -558,14 +558,14 @@ async function reconcileManagedCodexSkills(input: {
     const resolvedLinkedPath = path.resolve(path.dirname(target), linkedPath);
     if (resolvedLinkedPath !== path.resolve(entry.source)) continue;
     if (await removeSkillTarget(target)) {
-      await input.onLog("stdout", `[paperclip] Revoked legacy ACPX Codex skill "${entry.runtimeName}" from ${input.skillsHome}\n`);
+      await input.onLog("stdout", `[summon] Revoked legacy ACPX Codex skill "${entry.runtimeName}" from ${input.skillsHome}\n`);
     }
   }
 
   for (const name of managed) {
     if (desired.has(name) || availableByRuntimeName.has(name)) continue;
     if (await removeSkillTarget(path.join(input.skillsHome, name))) {
-      await input.onLog("stdout", `[paperclip] Revoked unavailable ACPX Codex skill "${name}" from ${input.skillsHome}\n`);
+      await input.onLog("stdout", `[summon] Revoked unavailable ACPX Codex skill "${name}" from ${input.skillsHome}\n`);
     }
   }
 }
@@ -612,13 +612,13 @@ async function prepareCodexSkillRuntime(input: {
       if (result.skippedSymlinks.length > 0) {
         await input.onLog(
           "stdout",
-          `[paperclip] Materialized ACPX Codex skill "${entry.runtimeName}" into ${skillsHome} and skipped ${result.skippedSymlinks.length} symlink(s).\n`,
+          `[summon] Materialized ACPX Codex skill "${entry.runtimeName}" into ${skillsHome} and skipped ${result.skippedSymlinks.length} symlink(s).\n`,
         );
       }
     } catch (err) {
       await input.onLog(
         "stderr",
-        `[paperclip] Failed to inject ACPX Codex skill "${entry.key}" into ${skillsHome}: ${err instanceof Error ? err.message : String(err)}\n`,
+        `[summon] Failed to inject ACPX Codex skill "${entry.key}" into ${skillsHome}: ${err instanceof Error ? err.message : String(err)}\n`,
       );
     }
   }
@@ -661,7 +661,7 @@ async function prepareGeminiSkillRuntime(input: {
   const allowedSkillNames = selectedSkills.map((entry) => entry.runtimeName);
   const removedSkills = await removeMaintainerOnlySkillSymlinks(skillsHome, allowedSkillNames);
   for (const skillName of removedSkills) {
-    await input.onLog("stdout", `[paperclip] Removed maintainer-only ACPX Gemini skill "${skillName}" from ${skillsHome}\n`);
+    await input.onLog("stdout", `[summon] Removed maintainer-only ACPX Gemini skill "${skillName}" from ${skillsHome}\n`);
   }
 
   for (const entry of selectedSkills) {
@@ -671,13 +671,13 @@ async function prepareGeminiSkillRuntime(input: {
       if (result === "created" || result === "repaired") {
         await input.onLog(
           "stdout",
-          `[paperclip] ${result === "repaired" ? "Repaired" : "Linked"} ACPX Gemini skill "${entry.runtimeName}" into ${skillsHome}\n`,
+          `[summon] ${result === "repaired" ? "Repaired" : "Linked"} ACPX Gemini skill "${entry.runtimeName}" into ${skillsHome}\n`,
         );
       }
     } catch (err) {
       await input.onLog(
         "stderr",
-        `[paperclip] Failed to link ACPX Gemini skill "${entry.key}" into ${skillsHome}: ${err instanceof Error ? err.message : String(err)}\n`,
+        `[summon] Failed to link ACPX Gemini skill "${entry.key}" into ${skillsHome}: ${err instanceof Error ? err.message : String(err)}\n`,
       );
     }
   }
@@ -780,7 +780,7 @@ function uniqueSorted(values: Array<string | null | undefined>): string[] {
 // `.claude/settings.local.json` we override the user's potentially-restrictive
 // `~/.claude/settings.json` (e.g. `defaultMode: "dontAsk"`, which silently
 // denies every non-allowlisted tool and never reaches `canUseTool`), and we
-// widen the SDK's Read sandbox to include the Paperclip state dirs the agent
+// widen the SDK's Read sandbox to include the Summon state dirs the agent
 // needs to talk to its own control plane.
 async function writePaperclipClaudeSettings(input: {
   cwd: string;
@@ -917,7 +917,7 @@ async function writeAgentWrapper(input: {
     "if [[ -n \"${PAPERCLIP_RUN_ID:-}\" ]]; then",
     "  mkdir -p \"$stderr_dir\"",
     // Keep the run-stderr file unfiltered, but do not forward the known-benign
-    // ACP nes/close cleanup RPC error to Paperclip's live stderr stream.
+    // ACP nes/close cleanup RPC error to Summon's live stderr stream.
     "  exec 2> >(tee -a \"$stderr_dir/$PAPERCLIP_RUN_ID.log\" | grep -Ev \"method: ['\\\"]nes/close['\\\"].*-32601\" >&2 || true)",
     "fi",
     `exec ${input.agentCommandShell} "$@"`,
@@ -1092,7 +1092,7 @@ async function buildRuntime(input: {
       companyId: agent.companyId,
     });
     skillCommandNotes.push(
-      `Wrote Paperclip-managed Claude settings to ${paperclipClaudeSettings.filePath} (defaultMode=${paperclipClaudeSettings.defaultMode}${
+      `Wrote Summon-managed Claude settings to ${paperclipClaudeSettings.filePath} (defaultMode=${paperclipClaudeSettings.defaultMode}${
         paperclipClaudeSettings.overrodeDontAsk ? "; overrode user dontAsk" : ""
       }, +${paperclipClaudeSettings.additionalDirectories.length} read root(s), +${paperclipClaudeSettings.allow.length} allow rule(s)).`,
     );
@@ -1121,7 +1121,7 @@ async function buildRuntime(input: {
     );
     skillsIdentity = { mode: "custom_unsupported", desiredSkillNames: desired };
     if (desired.length > 0) {
-      skillCommandNotes.push("Selected Paperclip skills are tracked only; ACPX custom commands do not expose a runtime skill contract yet.");
+      skillCommandNotes.push("Selected Summon skills are tracked only; ACPX custom commands do not expose a runtime skill contract yet.");
     }
   }
 
@@ -1173,7 +1173,7 @@ async function buildRuntime(input: {
     });
     if (paperclipBridge) {
       Object.assign(env, paperclipBridge.env);
-      await input.ctx.onLog("stdout", "[paperclip] Sandbox ACP API callback bridge enabled for this run.\n");
+      await input.ctx.onLog("stdout", "[summon] Sandbox ACP API callback bridge enabled for this run.\n");
     }
   }
   const runtimeEnv = Object.fromEntries(
@@ -1308,7 +1308,7 @@ async function applySessionConfigOptions(input: {
   if (!input.runtime.setConfigOption) {
     const message =
       "ACPX runtime does not expose session config controls; upgrade ACPX or remove configured model, effort, and fast mode overrides.";
-    await input.onLog("stderr", `[paperclip] ${message}\n`);
+    await input.onLog("stderr", `[summon] ${message}\n`);
     throw new Error(message);
   }
   for (const option of options) {
@@ -1319,7 +1319,7 @@ async function applySessionConfigOptions(input: {
     });
     await input.onLog(
       "stdout",
-      `[paperclip] Applied ACPX ${input.prepared.acpxAgent} config ${option.key}=${option.value}\n`,
+      `[summon] Applied ACPX ${input.prepared.acpxAgent} config ${option.key}=${option.value}\n`,
     );
   }
 }
@@ -1337,7 +1337,7 @@ function renderPaperclipEnvNote(env: Record<string, string>): string {
     .sort();
   if (paperclipKeys.length === 0) return "";
   return [
-    "Paperclip runtime note:",
+    "Summon runtime note:",
     `The following PAPERCLIP_* environment variables are available in this run: ${paperclipKeys.join(", ")}`,
     "Do not assume these variables are missing without checking your shell environment.",
   ].join("\n");
@@ -1346,8 +1346,8 @@ function renderPaperclipEnvNote(env: Record<string, string>): string {
 function renderApiAccessNote(env: Record<string, string>): string {
   if (!env.PAPERCLIP_API_URL || !env.PAPERCLIP_API_KEY) return "";
   const lines = [
-    "Paperclip API access note:",
-    "Use terminal commands with curl to make Paperclip API requests.",
+    "Summon API access note:",
+    "Use terminal commands with curl to make Summon API requests.",
     "Normalize the base URL before adding API paths:",
     `  PAPERCLIP_API_BASE="\${PAPERCLIP_API_URL%/}"; PAPERCLIP_API_BASE="\${PAPERCLIP_API_BASE%/api}"`,
     "GET example:",
@@ -1390,7 +1390,7 @@ async function buildPrompt(ctx: AdapterExecutionContext, resumedSession: boolean
       const reason = err instanceof Error ? err.message : String(err);
       await onLog(
         "stderr",
-        `[paperclip] Warning: could not read agent instructions file "${instructionsFilePath}": ${reason}\n`,
+        `[summon] Warning: could not read agent instructions file "${instructionsFilePath}": ${reason}\n`,
       );
       commandNotes.push(`Configured instructionsFilePath ${instructionsFilePath}, but file could not be read.`);
     }
@@ -1750,7 +1750,7 @@ async function emitAcpxFailure(input: {
   if (childStderrTail) {
     await ctx.onLog(
       "stderr",
-      `[paperclip] ACPX child stderr tail (${phase}):\n${childStderrTail}\n`,
+      `[summon] ACPX child stderr tail (${phase}):\n${childStderrTail}\n`,
     );
   }
   await emitAcpxLog(ctx, {
@@ -1877,7 +1877,7 @@ export function createAcpxEngineExecutor(deps: AcpxEngineExecutorOptions = {}) {
     // stay machine-parseable line by line.
     await ctx.onLog(
       "stderr",
-      `[paperclip] ${formatAdapterExecutionTimeoutStartLogLine(prepared.timeoutResolution)}\n`,
+      `[summon] ${formatAdapterExecutionTimeoutStartLogLine(prepared.timeoutResolution)}\n`,
     );
     const warmIdleMs = asNumber(ctx.config.warmHandleIdleMs, DEFAULT_ACP_ENGINE_WARM_HANDLE_IDLE_MS);
     await cleanupIdleHandles({ handles: warmHandles, now: now(), idleMs: warmIdleMs });
@@ -1903,7 +1903,7 @@ export function createAcpxEngineExecutor(deps: AcpxEngineExecutorOptions = {}) {
     if (!canResume && asString(previousParams.runtimeSessionName, "")) {
       await ctx.onLog(
         "stdout",
-        `[paperclip] ACPX session "${asString(previousParams.runtimeSessionName, "")}" does not match the current agent/cwd/mode/runtime identity; starting fresh in "${prepared.cwd}".\n`,
+        `[summon] ACPX session "${asString(previousParams.runtimeSessionName, "")}" does not match the current agent/cwd/mode/runtime identity; starting fresh in "${prepared.cwd}".\n`,
       );
     }
 
@@ -1927,7 +1927,7 @@ export function createAcpxEngineExecutor(deps: AcpxEngineExecutorOptions = {}) {
           resumedSession = false;
           await ctx.onLog(
             "stdout",
-            `[paperclip] ACPX resume session "${resumeSessionId}" is unavailable; retrying with a fresh session.\n`,
+            `[summon] ACPX resume session "${resumeSessionId}" is unavailable; retrying with a fresh session.\n`,
           );
           handle = await runtime.ensureSession({
             sessionKey: prepared.sessionKey,
@@ -2039,7 +2039,7 @@ export function createAcpxEngineExecutor(deps: AcpxEngineExecutorOptions = {}) {
         command: prepared.agentCommand ?? prepared.acpxAgent,
         cwd: prepared.cwd,
         commandNotes: [
-          `ACPX runtime embedded in Paperclip with ${prepared.mode} session mode.`,
+          `ACPX runtime embedded in Summon with ${prepared.mode} session mode.`,
           `Effective ACPX permission mode: ${prepared.permissionMode}.`,
           ...(prepared.requestedModel
             ? [

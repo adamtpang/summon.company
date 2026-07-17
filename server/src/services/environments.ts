@@ -33,7 +33,7 @@ type EnvironmentRow = typeof environments.$inferSelect;
 type EnvironmentLeaseRow = typeof environmentLeases.$inferSelect;
 const DEFAULT_LOCAL_ENVIRONMENT_NAME = "Local";
 const DEFAULT_LOCAL_ENVIRONMENT_DESCRIPTION =
-  "Default execution environment for Paperclip runs on this machine.";
+  "Default execution environment for Summon runs on this machine.";
 
 const DEFAULT_KUBERNETES_ENVIRONMENT_NAME = "Kubernetes Sandbox";
 const DEFAULT_KUBERNETES_ENVIRONMENT_DESCRIPTION =
@@ -309,7 +309,7 @@ export function environmentService(db: Db) {
       }
 
       // The partial unique index `environments_managed_sandbox_idx` enforces
-      // "at most one Paperclip-managed sandbox row per instance" at the DB
+      // "at most one Summon-managed sandbox row per instance" at the DB
       // level. Use ON CONFLICT DO NOTHING keyed on that index so concurrent
       // callers can race the INSERT; losers re-read the surviving row.
       const inserted = await db

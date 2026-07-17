@@ -63,8 +63,8 @@ const STANDALONE_BUNDLED_PLUGIN_SDK_PACKAGE = "@paperclipai/plugin-sdk";
 // ---------------------------------------------------------------------------
 
 /**
- * Naming convention for npm-published Paperclip plugins.
- * Packages matching this pattern are considered Paperclip plugins.
+ * Naming convention for npm-published Summon plugins.
+ * Packages matching this pattern are considered Summon plugins.
  *
  * @see PLUGIN_SPEC.md §10 — Package Contract
  */
@@ -416,7 +416,7 @@ export interface PluginLoader {
   discoverFromLocalFilesystem(dir?: string): Promise<PluginDiscoveryResult>;
 
   /**
-   * Discover Paperclip plugins installed as npm packages in the current
+   * Discover Summon plugins installed as npm packages in the current
    * Node.js environment matching the "paperclip-plugin-*" naming convention.
    *
    * Looks for packages in node_modules that match the naming convention.
@@ -432,8 +432,8 @@ export interface PluginLoader {
    * the "paperclipPlugin.manifest" key, loads the manifest module, and
    * validates it against the plugin manifest schema.
    *
-   * Returns null if the package is not a Paperclip plugin.
-   * Throws if the package is a Paperclip plugin but the manifest is invalid.
+   * Returns null if the package is not a Summon plugin.
+   * Throws if the package is a Summon plugin but the manifest is invalid.
    *
    * @see PLUGIN_SPEC.md §10 — Package Contract
    */
@@ -580,7 +580,7 @@ export interface PluginLoader {
 // ---------------------------------------------------------------------------
 
 /**
- * Check whether a package name matches the Paperclip plugin naming convention.
+ * Check whether a package name matches the Summon plugin naming convention.
  * Accepts both the "paperclip-plugin-" prefix and scoped "@scope/plugin-" packages.
  *
  * @see PLUGIN_SPEC.md §10 — Package Contract
@@ -1213,7 +1213,7 @@ export function pluginLoader(
         ? formatLocalPluginManualBuildHint(resolvedPackagePath, pkgJson)
         : "";
       throw new Error(
-        `Package ${resolvedPackageName} at ${resolvedPackagePath} does not appear to be a Paperclip plugin (no manifest found).${manualBuildHint}`,
+        `Package ${resolvedPackageName} at ${resolvedPackagePath} does not appear to be a Summon plugin (no manifest found).${manualBuildHint}`,
       );
     }
 
@@ -1305,7 +1305,7 @@ export function pluginLoader(
   ): Promise<PluginRecord> {
     const manifest = await loadManifestFromPackageRoot(packageRoot);
     if (!manifest) {
-      throw new Error(`Plugin package ${plugin.packageName} no longer exposes a Paperclip manifest`);
+      throw new Error(`Plugin package ${plugin.packageName} no longer exposes a Summon manifest`);
     }
     if (manifest.id !== plugin.pluginKey) {
       throw new Error(
@@ -1334,7 +1334,7 @@ export function pluginLoader(
 
   /**
    * Build a DiscoveredPlugin from a resolved package directory, or null
-   * if the package is not a Paperclip plugin.
+   * if the package is not a Summon plugin.
    */
   async function buildDiscoveredPlugin(
     packagePath: string,

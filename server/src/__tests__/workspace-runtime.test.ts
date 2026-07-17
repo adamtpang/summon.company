@@ -351,7 +351,7 @@ afterEach(async () => {
 });
 
 describe("sanitizeRuntimeServiceBaseEnv", () => {
-  it("removes inherited Paperclip and pnpm auth flags before spawning runtime services", () => {
+  it("removes inherited Summon and pnpm auth flags before spawning runtime services", () => {
     const sanitized = sanitizeRuntimeServiceBaseEnv({
       PATH: process.env.PATH,
       DATABASE_URL: "postgres://example.test/paperclip",
@@ -1244,7 +1244,7 @@ describe("realizeExecutionWorkspace", () => {
     await expect(fs.readFile(path.join(reused.cwd, ".paperclip-provision-version"), "utf8")).resolves.toBe("v2\n");
   }, 30_000);
 
-  it("writes an isolated repo-local Paperclip config and worktree branding when provisioning", async () => {
+  it("writes an isolated repo-local Summon config and worktree branding when provisioning", async () => {
     const repoRoot = await createTempRepo();
     const previousCwd = process.cwd();
     const previousPath = process.env.PATH;
@@ -1840,7 +1840,7 @@ describe("realizeExecutionWorkspace", () => {
         },
       });
 
-      expect(result.stderr).toContain("Existing isolated Paperclip worktree config is stale for this host; regenerating.");
+      expect(result.stderr).toContain("Existing isolated Summon worktree config is stale for this host; regenerating.");
       await expect(fs.readFile(path.join(paperclipDir, ".env"), "utf8")).resolves.toContain(
         `PAPERCLIP_CONFIG=${worktreeRoot}/.paperclip/config.json`,
       );
@@ -3306,7 +3306,7 @@ describe("ensureRuntimeServicesForRun", () => {
     expect(services).toEqual([]);
   });
 
-  it("requires Paperclip dev runtime services to pass /api/health readiness", async () => {
+  it("requires Summon dev runtime services to pass /api/health readiness", async () => {
     const workspaceRoot = await fs.mkdtemp(path.join(os.tmpdir(), "paperclip-runtime-health-"));
     const workspace = buildWorkspace(workspaceRoot);
     const runId = "run-paperclip-health";
@@ -3552,7 +3552,7 @@ describe("ensureRuntimeServicesForRun", () => {
     expect(await executionResponse.text()).toBe(path.join(worktreeWorkspaceRoot, ".paperclip", "runtime-services"));
   });
 
-  it("does not leak parent Paperclip instance env into runtime service commands", async () => {
+  it("does not leak parent Summon instance env into runtime service commands", async () => {
     const workspaceRoot = await fs.mkdtemp(path.join(os.tmpdir(), "paperclip-runtime-env-"));
     const workspace = buildWorkspace(workspaceRoot);
     const envCapturePath = path.join(workspaceRoot, "captured-env.json");

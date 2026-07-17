@@ -310,7 +310,7 @@ export async function integrateImportedGitHead(input: {
         "-p",
         input.importedHead,
         "-m",
-        `Paperclip remote git sync merge ${input.importedHead.slice(0, 12)}`,
+        `Summon remote git sync merge ${input.importedHead.slice(0, 12)}`,
       ],
       {
         timeout: 60_000,
@@ -370,7 +370,7 @@ export async function resetLocalGitIndexToHead(input: {
   });
   if (workingTreeDiff.stdout.trim().length > 0) {
     console.warn(
-      "[paperclip] Workspace restore preserved local working tree changes after clean sandbox restore.",
+      "[summon] Workspace restore preserved local working tree changes after clean sandbox restore.",
     );
   }
 }

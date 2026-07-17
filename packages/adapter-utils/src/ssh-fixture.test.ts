@@ -729,7 +729,7 @@ describe("ssh env-lab fixture", () => {
 
     await expect(readFile(path.join(localRepo, "run-a.txt"), "utf8")).resolves.toBe("from run a\n");
     await expect(readFile(path.join(localRepo, "run-b.txt"), "utf8")).resolves.toBe("from run b\n");
-    expect(await git(localRepo, ["log", "-1", "--pretty=%s"])).toContain("Paperclip SSH sync merge");
+    expect(await git(localRepo, ["log", "-1", "--pretty=%s"])).toContain("Summon SSH sync merge");
 
     const recentSubjects = await git(localRepo, ["log", "--pretty=%s", "-3"]);
     expect(recentSubjects).toContain("remote update a");

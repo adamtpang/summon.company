@@ -404,7 +404,7 @@ export async function createApp(
           .end(readBrandedStaticIndexHtml(uiDist));
       });
     } else {
-      console.warn("[paperclip] UI dist not found; running in API-only mode");
+      console.warn("[summon] UI dist not found; running in API-only mode");
     }
   }
 

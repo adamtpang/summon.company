@@ -935,7 +935,7 @@ function explainGitWorktreeBranchIncoherence(input: {
 }) {
   const actualBranch = formatBranchForMessage(input.actualBranchName);
   if (!input.expectedHeadSha || !input.actualHeadSha) {
-    return `Paperclip could not determine branch ancestry because the recorded branch "${input.expectedBranchName}" or checked-out branch "${actualBranch}" is missing a resolvable HEAD commit.`;
+    return `Summon could not determine branch ancestry because the recorded branch "${input.expectedBranchName}" or checked-out branch "${actualBranch}" is missing a resolvable HEAD commit.`;
   }
   if (input.sameHead) {
     return `The recorded branch "${input.expectedBranchName}" and checked-out branch "${actualBranch}" resolve to the same commit, so the mismatch is branch metadata rather than commit divergence.`;
@@ -944,9 +944,9 @@ function explainGitWorktreeBranchIncoherence(input: {
     return `The recorded branch "${input.expectedBranchName}" is an ancestor of the checked-out branch "${actualBranch}", so the checked-out branch is forward of the recorded branch.`;
   }
   if (input.ancestryVerdict === "diverged") {
-    return `The recorded branch "${input.expectedBranchName}" is not an ancestor of the checked-out branch "${actualBranch}", so Paperclip cannot prove a forward-only reconciliation.`;
+    return `The recorded branch "${input.expectedBranchName}" is not an ancestor of the checked-out branch "${actualBranch}", so Summon cannot prove a forward-only reconciliation.`;
   }
-  return `Paperclip could not determine whether the checked-out branch "${actualBranch}" is forward of the recorded branch "${input.expectedBranchName}".`;
+  return `Summon could not determine whether the checked-out branch "${actualBranch}" is forward of the recorded branch "${input.expectedBranchName}".`;
 }
 
 async function inspectGitWorktreeBranchIncoherence(input: {
@@ -1377,7 +1377,7 @@ async function quarantineDirtyWorktreeBranchIncoherence(input: {
       args: [
         "commit",
         "-m",
-        "Paperclip dirty workspace rescue",
+        "Summon dirty workspace rescue",
         "-m",
         [
           `Source-Issue: ${input.evidence.sourceIdentifier ?? input.evidence.sourceIssueId ?? "unknown"}`,
@@ -1850,7 +1850,7 @@ export async function ensureGitWorktreeBranchCoherent(input: {
       branchName: currentBranch,
       reconciledForward: false,
       warnings: [
-        `${warningPrefix} The checked-out branch contains the recorded branch plus newer commits, so Paperclip adopted it for subsequent runs.`,
+        `${warningPrefix} The checked-out branch contains the recorded branch plus newer commits, so Summon adopted it for subsequent runs.`,
       ],
     };
   }
@@ -1900,7 +1900,7 @@ export async function ensureGitWorktreeBranchCoherent(input: {
       branchName: expectedBranchName,
       reconciledForward: false,
       warnings: [
-        `${warningPrefix} The detached HEAD contained the recorded branch plus newer commits, so Paperclip moved the recorded branch to that HEAD.`,
+        `${warningPrefix} The detached HEAD contained the recorded branch plus newer commits, so Summon moved the recorded branch to that HEAD.`,
       ],
     };
   }
@@ -4827,7 +4827,7 @@ export async function restartDesiredRuntimeServicesOnStartup(db: Db) {
     try {
       const refs = await startRuntimeServicesForWorkspaceControl({
         db,
-        actor: { id: null, name: "Paperclip", companyId: row.companyId },
+        actor: { id: null, name: "Summon", companyId: row.companyId },
         issue: null,
         workspace: {
           baseCwd: row.cwd,
@@ -4875,7 +4875,7 @@ export async function restartDesiredRuntimeServicesOnStartup(db: Db) {
     try {
       const refs = await startRuntimeServicesForWorkspaceControl({
         db,
-        actor: { id: null, name: "Paperclip", companyId: row.companyId },
+        actor: { id: null, name: "Summon", companyId: row.companyId },
         issue: row.sourceIssueId
           ? {
               id: row.sourceIssueId,

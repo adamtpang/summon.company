@@ -26,9 +26,27 @@ import { createRequire } from "node:module";
 const require = createRequire(import.meta.url);
 const ts = require("typescript");
 
-const ROOT = path.resolve(import.meta.dirname, "..", "ui", "src");
+// server/src added 2026-07-17 (board: "i dont want any remnants of paperclip"):
+// system-comment copy, workspace warnings, and log sentences are user-visible.
+// The same AST discipline applies — strings/JSX/comments only, sentinels skipped.
+// Lowercase "[paperclip]" log prefixes are handled by a separate targeted pass
+// (scripts/, sed on the exact bracketed token): lowercase `paperclip` can NEVER
+// be blanket-renamed — it is the data dir (~/.paperclip), the db user/name, the
+// backup file prefix, and the session-key namespace.
+const ROOTS = [
+  path.resolve(import.meta.dirname, "..", "ui", "src"),
+  path.resolve(import.meta.dirname, "..", "server", "src"),
+  // Wake-payload docs and runtime notes rendered into agent prompts live here;
+  // verified write-only (never parsed back) before inclusion.
+  path.resolve(import.meta.dirname, "..", "packages", "adapter-utils", "src"),
+];
 const DRY = process.argv.includes("--dry");
-const WORD = /\bPaperclip\b(?!ai)/g;
+// (?<!X-) : copy sometimes NAMES protocol identifiers — the HTTP header
+// X-Paperclip-Run-Id appears inside an auth error message (auth.ts). The header
+// itself is protocol and can never change, so the message must keep naming it
+// truthfully. A rename there would produce an error pointing at a header that
+// does not exist.
+const WORD = /(?<!X-)\bPaperclip\b(?!ai)/g;
 
 // Tests are NOT copy — never rewrite them. Two reasons, both learned from a real break:
 //   1. A test that a codemod rewrites alongside the product is self-fulfilling: it can no
@@ -56,6 +74,10 @@ const IS_TEST = /\.(test|spec)\.(ts|tsx)$|[\\/]__tests__[\\/]|[\\/]test-utils[\\
 const SENTINEL_FILES = [
   path.join("lib", "successful-run-handoff.ts"),
   path.join("fixtures", "systemNoticeFixtures.ts"),
+  // Server twin of the ui sentinel: NOTICE_BODY values are compared with ===
+  // against comment rows already in the database (and interpolated into a live
+  // SQL WHERE in heartbeat.ts). Renaming them silently orphans existing rows.
+  path.join("recovery", "successful-run-handoff.ts"),
 ];
 const isSentinel = (full) => SENTINEL_FILES.some((s) => full.endsWith(s));
 
@@ -114,7 +136,7 @@ let filesChanged = 0;
 let sitesChanged = 0;
 const touched = [];
 
-for (const file of walk(ROOT)) {
+for (const file of ROOTS.flatMap((root) => walk(root))) {
   const text = readFileSync(file, "utf8");
   WORD.lastIndex = 0;
   if (!WORD.test(text)) continue;
@@ -138,7 +160,7 @@ for (const file of walk(ROOT)) {
   if (hits > 0) {
     sitesChanged += hits;
     filesChanged++;
-    touched.push(`${path.relative(ROOT, file)} (${hits})`);
+    touched.push(`${path.relative(path.resolve(import.meta.dirname, ".."), file)} (${hits})`);
     if (!DRY) writeFileSync(file, out, "utf8");
   }
 }

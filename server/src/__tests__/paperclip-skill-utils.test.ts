@@ -46,7 +46,7 @@ describe("paperclip skill utils", () => {
     expect(entries[1]?.source).toBe(path.join(root, "skills", "paperclip-create-agent"));
   });
 
-  it("documents artifact uploads in the installed Paperclip skill", async () => {
+  it("documents artifact uploads in the installed Summon skill", async () => {
     const skillBody = await fs.readFile(path.resolve("skills/paperclip/SKILL.md"), "utf8");
     const referenceBody = await fs.readFile(path.resolve("skills/paperclip/references/artifacts.md"), "utf8");
 

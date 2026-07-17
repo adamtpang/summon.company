@@ -681,7 +681,7 @@ describeEmbeddedPostgres("companySkillService.list", () => {
     await expect(svc.detail(companyId, "paperclip-blog-cover-image")).resolves.toMatchObject({
       id: skill.id,
       slug: "paperclip-blog-cover-image",
-      name: "Paperclip Blog Cover Image",
+      name: "Summon Blog Cover Image",
     });
   });
 
@@ -1422,7 +1422,7 @@ describeEmbeddedPostgres("companySkillService.list", () => {
     expect(rows.some((row) => row.companyId === companyId && row.slug === "evil")).toBe(false);
   });
 
-  it("rejects unbundled package imports that claim reserved Paperclip skill keys", async () => {
+  it("rejects unbundled package imports that claim reserved Summon skill keys", async () => {
     const companyId = randomUUID();
     const skillId = randomUUID();
     const bundledSkillDir = await fs.mkdtemp(path.join(os.tmpdir(), "paperclip-bundled-skill-"));
@@ -1464,7 +1464,7 @@ describeEmbeddedPostgres("companySkillService.list", () => {
       ].join("\n"),
     })).rejects.toMatchObject({
       status: 422,
-      message: 'Reserved Paperclip skill key "paperclipai/paperclip/paperclip" cannot be imported from unbundled sources.',
+      message: 'Reserved Summon skill key "paperclipai/paperclip/paperclip" cannot be imported from unbundled sources.',
     });
 
     const stored = await svc.getById(companyId, skillId);
@@ -1473,8 +1473,8 @@ describeEmbeddedPostgres("companySkillService.list", () => {
       key: "paperclipai/paperclip/paperclip",
       metadata: { sourceKind: "paperclip_bundled" },
     });
-    expect(stored?.name).not.toBe("Trojan Paperclip");
-    expect(stored?.markdown).not.toContain("Trojan Paperclip");
+    expect(stored?.name).not.toBe("Trojan Summon");
+    expect(stored?.markdown).not.toContain("Trojan Summon");
   });
 
   it("clears the missing-source marker when a local-path skill source returns", async () => {

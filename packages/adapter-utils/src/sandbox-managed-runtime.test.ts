@@ -401,7 +401,7 @@ describe("sandbox managed runtime", () => {
         checkWorkingTreeClean: true,
       });
       expect(warnSpy).toHaveBeenCalledWith(
-        "[paperclip] Workspace restore preserved local working tree changes after clean sandbox restore.",
+        "[summon] Workspace restore preserved local working tree changes after clean sandbox restore.",
       );
     } finally {
       warnSpy.mockRestore();

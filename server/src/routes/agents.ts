@@ -252,7 +252,7 @@ export function agentRoutes(
    * Resolve the execution target the adapter should run its test probes against.
    *
    * - No environmentId / local environment → returns a local target so the
-   *   adapter probes the Paperclip host (legacy behavior).
+   *   adapter probes the Summon host (legacy behavior).
    * - SSH environment → builds an SSH execution target from the environment
    *   config so the adapter probes the remote box. No lease is required:
    *   the SSH spec is fully derived from the saved environment config.

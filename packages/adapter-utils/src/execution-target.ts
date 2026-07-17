@@ -103,7 +103,7 @@ export interface AdapterExecutionTargetProcessOptions {
   onSpawn?: (meta: { pid: number; processGroupId: number | null; startedAt: string }) => Promise<void>;
   terminalResultCleanup?: TerminalResultCleanupOptions;
   /**
-   * Sandbox-only: factory from the Paperclip bridge handle that streams the
+   * Sandbox-only: factory from the Summon bridge handle that streams the
    * CLI's stdout/stderr during the run. When provided, the batched provider
    * onLog is suppressed and incremental chunks flow through `onLog` instead.
    */
@@ -170,7 +170,7 @@ function resolveDefaultPaperclipApiUrl(): string {
   const runtimeHost = resolveHostForUrl(
     process.env.PAPERCLIP_LISTEN_HOST ?? process.env.HOST ?? "localhost",
   );
-  // 3100 matches the default Paperclip dev server port when the runtime does not provide one.
+  // 3100 matches the default Summon dev server port when the runtime does not provide one.
   const runtimePort = process.env.PAPERCLIP_LISTEN_PORT ?? process.env.PORT ?? "3100";
   return `http://${runtimeHost}:${runtimePort}`;
 }
@@ -348,7 +348,7 @@ export function formatAdapterExecutionTimeoutErrorMessage(
 
 /**
  * One-line start-of-run statement of the effective wall-clock timeout and its
- * source. Callers prefix with `[paperclip] ` and append a newline.
+ * source. Callers prefix with `[summon] ` and append a newline.
  */
 export function formatAdapterExecutionTimeoutStartLogLine(
   resolution: AdapterExecutionTargetTimeoutResolution,
@@ -875,7 +875,7 @@ export async function ensureAdapterExecutionTargetRuntimeCommandInstalled(input:
         const reason = result.timedOut ? "timed out" : `exited ${result.exitCode ?? "?"}`;
         await input.onLog(
           "stderr",
-          `[paperclip] Install command ${reason} (${installCommand}) but ${detectCommand} is on PATH; continuing.\n`,
+          `[summon] Install command ${reason} (${installCommand}) but ${detectCommand} is on PATH; continuing.\n`,
         );
       }
       return;
@@ -908,7 +908,7 @@ export async function ensureAdapterExecutionTargetFile(
  * For local targets this delegates to the local `ensureAbsoluteDirectory` helper
  * (Node fs). For remote (SSH/sandbox) targets it shells out and runs
  * `mkdir -p` (when allowed) followed by a `[ -d ]` check so the result reflects
- * the directory state inside the environment, not on the Paperclip host.
+ * the directory state inside the environment, not on the Summon host.
  *
  * Throws an Error with a human-readable message on failure.
  */
@@ -1317,7 +1317,7 @@ export async function startAdapterExecutionTargetProcessSessionBridge(input: {
     env: sanitizeRemoteExecutionEnv(input.env),
   }), "utf8").toString("base64");
 
-  await onLog("stdout", `[paperclip] Starting ACP process session bridge in sandbox (${target.providerKey ?? "provider"}).\n`);
+  await onLog("stdout", `[summon] Starting ACP process session bridge in sandbox (${target.providerKey ?? "provider"}).\n`);
   const startResult = await runner.execute({
     command: shellCommand,
     args: shellCommandArgs(
@@ -1466,7 +1466,7 @@ export async function startAdapterExecutionTargetProcessSessionBridge(input: {
       }
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
-      await onLog("stderr", `[paperclip] ACP process session bridge poll failed: ${message}\n`);
+      await onLog("stderr", `[summon] ACP process session bridge poll failed: ${message}\n`);
       deliverRemoteEvent({ type: "error", message });
       return;
     } finally {
@@ -1637,7 +1637,7 @@ export async function startAdapterExecutionTargetPaperclipBridge(input: {
   const onLog = input.onLog ?? (async () => {});
   const hostApiToken = input.hostApiToken?.trim() ?? "";
   if (hostApiToken.length === 0) {
-    throw new Error("Sandbox bridge mode requires a host-side Paperclip API token.");
+    throw new Error("Sandbox bridge mode requires a host-side Summon API token.");
   }
 
   const runtimeRootDir =
@@ -1666,7 +1666,7 @@ export async function startAdapterExecutionTargetPaperclipBridge(input: {
 
   await onLog(
     "stdout",
-    `[paperclip] Starting sandbox callback bridge for ${input.adapterKey} in ${bridgeRuntimeDir}.\n`,
+    `[summon] Starting sandbox callback bridge for ${input.adapterKey} in ${bridgeRuntimeDir}.\n`,
   );
 
   const bridgeAsset = await createSandboxCallbackBridgeAsset();
@@ -1695,7 +1695,7 @@ export async function startAdapterExecutionTargetPaperclipBridge(input: {
         if (bridgeDebugEnabled) {
           await onLog(
             "stdout",
-            `[paperclip] Bridge proxy ${method} ${request.path}${request.query ? `?${request.query}` : ""}\n`,
+            `[summon] Bridge proxy ${method} ${request.path}${request.query ? `?${request.query}` : ""}\n`,
           );
         }
         const headers = new Headers();
@@ -1714,7 +1714,7 @@ export async function startAdapterExecutionTargetPaperclipBridge(input: {
         if (bridgeDebugEnabled) {
           await onLog(
             "stdout",
-            `[paperclip] Bridge proxy response ${response.status} for ${method} ${request.path}${request.query ? `?${request.query}` : ""}\n`,
+            `[summon] Bridge proxy response ${response.status} for ${method} ${request.path}${request.query ? `?${request.query}` : ""}\n`,
           );
         }
         return {
@@ -1752,7 +1752,7 @@ export async function startAdapterExecutionTargetPaperclipBridge(input: {
       logsDir: sandboxCallbackBridgeDirectories(queueDir).logsDir,
       shellCommand,
     });
-    await onLog("stdout", "[paperclip] Sandbox run log streaming enabled for this run.\n");
+    await onLog("stdout", "[summon] Sandbox run log streaming enabled for this run.\n");
   }
 
   return {

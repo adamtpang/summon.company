@@ -440,7 +440,7 @@ async function emitInteractionResolvedTelemetry(
       try {
         roleByAgentId = await fetchCreatorAgentRoleById(db, [interaction]);
       } catch (error) {
-        console.error("[paperclip] Failed to load interaction.resolved creator role", error);
+        console.error("[summon] Failed to load interaction.resolved creator role", error);
       }
     }
     const creatorAgentRole = interaction.createdByAgentId
@@ -461,7 +461,7 @@ async function emitInteractionResolvedTelemetry(
       }),
     });
   } catch (error) {
-    console.error("[paperclip] Failed to emit interaction.resolved telemetry", error);
+    console.error("[summon] Failed to emit interaction.resolved telemetry", error);
   }
 }
 
@@ -474,7 +474,7 @@ async function emitResolvedInteractionsTelemetry(
   try {
     roleByAgentId = await fetchCreatorAgentRoleById(db, interactions);
   } catch (error) {
-    console.error("[paperclip] Failed to load interaction.resolved creator roles", error);
+    console.error("[summon] Failed to load interaction.resolved creator roles", error);
   }
   await Promise.all(interactions.map((interaction) =>
     emitInteractionResolvedTelemetry(db, interaction, { creatorRoleByAgentId: roleByAgentId })

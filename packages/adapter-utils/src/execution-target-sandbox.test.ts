@@ -872,7 +872,7 @@ describe("sandbox adapter execution targets", () => {
     }));
   });
 
-  it("starts a localhost Paperclip bridge for sandbox targets in bridge mode", async () => {
+  it("starts a localhost Summon bridge for sandbox targets in bridge mode", async () => {
     const rootDir = await mkdtemp(path.join(os.tmpdir(), "paperclip-execution-target-bridge-"));
     cleanupDirs.push(rootDir);
     const remoteCwd = path.join(rootDir, "workspace");
@@ -1180,11 +1180,11 @@ describe("sandbox adapter execution targets", () => {
 
     expect(combinedStream(events, "stdout")).toBe("final out\n");
     expect(combinedStream(events, "stderr")).toBe(
-      "final err\n[paperclip] Run log streaming degraded during the run; remaining output was delivered at completion.\n",
+      "final err\n[summon] Run log streaming degraded during the run; remaining output was delivered at completion.\n",
     );
   });
 
-  it("exposes the Paperclip bridge to the sandbox shell surface", async () => {
+  it("exposes the Summon bridge to the sandbox shell surface", async () => {
     const rootDir = await mkdtemp(path.join(os.tmpdir(), "paperclip-execution-target-bridge-shell-"));
     cleanupDirs.push(rootDir);
     const remoteCwd = path.join(rootDir, "workspace");
