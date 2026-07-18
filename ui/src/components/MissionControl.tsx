@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { Link } from "@/lib/router";
 import { Card } from "@/components/ui/card";
+import { FleetRunningNow } from "./FleetRunningNow";
 import { buildFormationAssignments } from "../pages/Formation";
 import { buildRoadmapStages, selectRoadmapConstraint } from "../pages/Roadmap";
 import { buildScoreboard } from "../lib/scoreboard";
@@ -129,6 +130,11 @@ export function MissionControl({
             detail={decisionCount === 0 ? "Nothing waiting on the board" : "One-card deck ready"}
           />
         </div>
+
+        {/* The kill switch lives on the glance surface: "which of my agents is
+            doing something right now" is the thesis question, and stopping all
+            of it must never be more than two interactions away. */}
+        <FleetRunningNow />
 
         <div className="grid gap-3 lg:grid-cols-3">
           <Card className="block p-4 lg:col-span-2">

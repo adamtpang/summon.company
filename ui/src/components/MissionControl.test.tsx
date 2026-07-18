@@ -5,7 +5,16 @@ import { createRoot, type Root } from "react-dom/client";
 import type { DashboardSummary, Issue } from "@paperclipai/shared";
 import { computeMarketCapSnapshot } from "@paperclipai/shared/vitals-market-cap";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { MissionControl } from "./MissionControl";
+
+vi.mock("../api/fleet", () => ({
+  fleetApi: {
+    running: vi.fn().mockResolvedValue({ runs: [], queuedWakeups: 0 }),
+    stop: vi.fn(),
+    cancelRun: vi.fn(),
+  },
+}));
 
 vi.mock("@/lib/router", () => ({
   Link: ({ to, children, ...props }: { to: string; children: ReactNode }) => (
@@ -58,6 +67,7 @@ describe("MissionControl", () => {
     root = createRoot(container);
     await act(async () => {
       root.render(
+        <QueryClientProvider client={new QueryClient({ defaultOptions: { queries: { retry: false } } })}>
         <MissionControl
           companyId="company-1"
           summary={summary}
@@ -76,7 +86,8 @@ describe("MissionControl", () => {
             grossMarginPct: null,
             arrGrowth30dPct: null,
           }, "2026-07-16T00:00:00.000Z")}
-        />,
+        />
+        </QueryClientProvider>,
       );
     });
   });

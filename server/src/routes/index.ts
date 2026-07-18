@@ -13,6 +13,7 @@ export { goalRoutes } from "./goals.js";
 export { approvalRoutes } from "./approvals.js";
 export { secretRoutes } from "./secrets.js";
 export { costRoutes } from "./costs.js";
+export { fleetRoutes } from "./fleet.js";
 export { activityRoutes } from "./activity.js";
 export { dashboardRoutes } from "./dashboard.js";
 export { attentionRoutes } from "./attention.js";

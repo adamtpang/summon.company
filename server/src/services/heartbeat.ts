@@ -16365,6 +16365,106 @@ export function heartbeatService(db: Db, options: HeartbeatServiceOptions = {}) 
     cancelInvocationsForAgents: (agentIds: string[], reason: string) =>
       cancelInvocationsForAgentsInternal(agentIds, reason),
 
+    /**
+     * The board kill switch (SUM-125 lineage). One sweep, race-proof order:
+     * 1) pause every pausable agent FIRST so nothing can enqueue new work
+     *    (the wake guard 409s paused agents),
+     * 2) cancel queued/deferred wakeups (the "hidden wake queue" that made
+     *    manual stops take three sweeps),
+     * 3) cancel active runs last, catching any wakeup that was mid-claim.
+     * Scoped to one company or, with no companyId, the whole fleet.
+     */
+    fleetStop: async (input: { companyId?: string | null; reason?: string } = {}) => {
+      const reason = input.reason?.trim() || "Board kill switch";
+      const now = new Date();
+      const pausableStatuses = ["active", "idle", "running", "error"] as const;
+      const pauseWhere = input.companyId
+        ? and(inArray(agents.status, [...pausableStatuses]), eq(agents.companyId, input.companyId))
+        : inArray(agents.status, [...pausableStatuses]);
+      const pausedRows = await db
+        .update(agents)
+        .set({ status: "paused", pauseReason: reason, pausedAt: now, updatedAt: now })
+        .where(pauseWhere)
+        .returning({ id: agents.id });
+
+      const scopedAgentIds = await db
+        .select({ id: agents.id })
+        .from(agents)
+        .where(input.companyId ? eq(agents.companyId, input.companyId) : undefined)
+        .then((rows) => rows.map((row) => row.id));
+
+      const wakeupsCancelled = await cancelPendingWakeupsForAgentsInternal(scopedAgentIds, reason);
+      let runsCancelled = 0;
+      for (const agentId of scopedAgentIds) {
+        runsCancelled += await cancelActiveForAgentInternal(agentId, reason, "board_kill_switch");
+      }
+
+      return {
+        agentsPaused: pausedRows.length,
+        wakeupsCancelled,
+        runsCancelled,
+        reason,
+      };
+    },
+
+    /** Everything live or about to be: the RUNNING NOW panel's data. */
+    fleetRunning: async (input: { companyId?: string | null } = {}) => {
+      const runWhere = input.companyId
+        ? and(
+            inArray(heartbeatRuns.status, [...CANCELLABLE_HEARTBEAT_RUN_STATUSES]),
+            eq(heartbeatRuns.companyId, input.companyId),
+          )
+        : inArray(heartbeatRuns.status, [...CANCELLABLE_HEARTBEAT_RUN_STATUSES]);
+      const runRows = await db
+        .select({
+          runId: heartbeatRuns.id,
+          status: heartbeatRuns.status,
+          startedAt: heartbeatRuns.startedAt,
+          createdAt: heartbeatRuns.createdAt,
+          agentId: heartbeatRuns.agentId,
+          agentName: agents.name,
+          agentStatus: agents.status,
+          companyId: heartbeatRuns.companyId,
+          companyName: companies.name,
+          issuePrefix: companies.issuePrefix,
+          issueId: sql<string | null>`${heartbeatRuns.contextSnapshot} ->> 'issueId'`.as("fleetIssueId"),
+        })
+        .from(heartbeatRuns)
+        .innerJoin(agents, eq(agents.id, heartbeatRuns.agentId))
+        .innerJoin(companies, eq(companies.id, heartbeatRuns.companyId))
+        .where(runWhere)
+        .orderBy(desc(heartbeatRuns.createdAt))
+        .limit(100);
+
+      const issueIds = [...new Set(runRows.map((row) => row.issueId).filter((v): v is string => Boolean(v)))];
+      const issueRows = issueIds.length
+        ? await db
+            .select({ id: issues.id, identifier: issues.identifier })
+            .from(issues)
+            .where(inArray(issues.id, issueIds))
+        : [];
+      const identifierByIssueId = new Map(issueRows.map((row) => [row.id, row.identifier]));
+
+      const wakeupWhere = input.companyId
+        ? and(
+            inArray(agentWakeupRequests.status, ["queued", "deferred_issue_execution"]),
+            eq(agentWakeupRequests.companyId, input.companyId),
+          )
+        : inArray(agentWakeupRequests.status, ["queued", "deferred_issue_execution"]);
+      const [wakeupCount] = await db
+        .select({ n: sql<number>`count(*)::int` })
+        .from(agentWakeupRequests)
+        .where(wakeupWhere);
+
+      return {
+        runs: runRows.map((row) => ({
+          ...row,
+          issueIdentifier: row.issueId ? identifierByIssueId.get(row.issueId) ?? null : null,
+        })),
+        queuedWakeups: Number(wakeupCount?.n ?? 0),
+      };
+    },
+
     cancelBudgetScopeWork,
 
     getRunIssueSummary: async (runId: string) => {
