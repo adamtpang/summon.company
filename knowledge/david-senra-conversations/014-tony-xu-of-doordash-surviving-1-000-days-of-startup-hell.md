@@ -1,0 +1,651 @@
+---
+rank: 14
+title: "Tony Xu of DoorDash: Surviving 1,000 Days of Startup Hell"
+guest: "Tony Xu"
+host: "David Senra"
+company: "DoorDash"
+format: interview
+youtube_url: "https://www.youtube.com/watch?v=a8LWEMD9VJA"
+youtube_id: "a8LWEMD9VJA"
+published: "2026-03-29"
+duration_min: 109
+word_count: 21197
+views: 45975
+date_extracted: "2026-07-18"
+principle: "The data you can't see is what kills you: do the work yourself, run relentless experiments, and control what you can control."
+tags: [david-senra, interview, doordash, logistics, startups, resilience]
+---
+
+# Tony Xu of DoorDash: Surviving 1,000 Days of Startup Hell
+
+> **Key principle — Tony Xu:** DoorDash's edge lives in everything you can't see. Because the physical world is unstructured chaos you can't scrape, the only way to win is to do the unglamorous work yourself, run tens of thousands of experiments where most fail, and — when the market turns on you — control your own psychology instead of your stock price.
+
+*David Senra in conversation with Tony Xu, co-founder and CEO of DoorDash. [Watch](https://www.youtube.com/watch?v=a8LWEMD9VJA) · 109 min · published 2026-03-29.*
+
+## Key lessons
+
+- **Ship the most minimal MVP imaginable to test demand.** PaloAltoDelivery.com was built in 43 minutes: a $9 URL, a static page of eight PDF menus, a Google Voice number that rang the four founders' cell phones, and Square dongles for payment. Prove people care before you build anything real.
+- **Do things that don't scale, and do the work yourself.** The founders did every delivery. That's how you discover a delivery decomposes into ~20 steps, each with hidden delays — "it's always the data that you can't see that kills you" (you dodge the truck you can see; the one you can't is the one that hits you).
+- **Chase organic need, not obvious density.** They started in suburban Palo Alto, not dense San Francisco — and found deliveries were *faster* there (easy parking, single-family homes, hub-and-spoke layout). Product-market fit is someone wanting your product organically (busy moms, young families), not demand inflated by discounts and marketing.
+- **Build a system that learns.** DoorDash runs tens of thousands of experiments; ~95% fail before a customer ever sees them, but the 5% that work compound for everyone the next year. The loop: do things that don't scale → form hypotheses → experiment → ship → engineer the winners, keeping the loop as tight as possible.
+- **Earn trust every day; the scoreboard resets to zero.** After a September 2013 Stanford-game meltdown (late on every order, weeks from broke), they refunded every customer unasked — ~40% of the bank account — then baked cookies and delivered them at 5 a.m. "We'd rather die trying to be excellent than live to be mediocre."
+- **Control your psychology through the hell.** Through three years and 100+ investor rejections (he stopped counting at 50) while every internal metric improved, Xu obsessed only over what he could control — grow share AND get profitable AND don't run out of cash, an "and" not an "or" — leaned on genuine friendships and a mission bigger than himself, and kept constants like exercise and date nights. He still doesn't watch the stock price.
+- **Hire Rhodes Scholars who are also Navy SEALs.** He screened for bias for action: the interview was $20 and 8 hours to acquire 100 customers (with a plane ticket offered to quit on the spot); engineers were interviewed while doing deliveries in his Honda. Look for lowest-level detail, holding opposing ideas at once, "followership," and an obsession with getting 1% better. Run the core business and invent the next one as two separate systems — a mid-air engine transplant on the big airplane while launching paper airplanes that search for product-market fit.
+
+## Transcript
+
+So I want to start with the the fact that you said that Paulo Alto Delivery.com which was Door Dash and Ford Door Dash was the most minimal version of a minimal viable product. Can you explain how you built it?
+
+Well, whenever you can ship something in 43 minutes to test your idea,
+
+I think that's pretty good. And certainly this is, you know, 12 13 years before the rise of LLMs and AI tools to make it so easy to do that. But basically, the four of us wanted to test this idea that if you wanted to offer delivery from places that never offered delivery before, what is the fastest way to see whether or not consumers would care? I mean, at the end of the day, delivery is not a new idea. And so, we thought actually one of the reasons why maybe delivery in 2013 hadn't been around yet was just because nobody wanted it.
+
+So, we shipped powaltodely.com that alias was available for $9. And so, that's why we got it. not a super scalable URL, but we were able to get it. Um, it was a static page um where you saw eight PDF menus of restaurants that we frequented in Palo Alto. And the only way you can in which you can order is you can read through the menus. You can call a Google voice number that would ring the cell phones of the four founders and one of us would pick up. We would take your order, place the order on your behalf, go and get the order, deliver it to you.
+
+And I used to be an internet square and so I had these card readers which was one of their earliest products. These wide dongles that you could stick into the audio jacks of iPhones and that's how we would collect payment. Something I didn't remember until cuz it feels like Door Dash and and Uber Eats and everything else has been around forever but there wasn't what was the state of there was other delivery companies but you essentially created the market for this. Can you explain like when I was telling people I'm coming I'm really excited.
+
+I'm going to go speak Tony for Door Dash. They were like, I can't believe he survived in this like competitive market, but they just assumed that all like there was other apps out there that were already delivering for for restaurants that didn't have a delivery fleet that didn't exist then.
+
+No, actually, yeah. I I think one of the biggest misconceptions when we were founded was just how wide open the space was where there were about a million restaurants in the states and maybe 20 to 25,000 of them offered deliveries. Most of them were pizza shops, places in New York City, some in, you know, Chicago, some in, you know, big city centers. But outside of pizza places, maybe a few Chinese restaurants, nobody offered delivery. And so the real grand question or experiment of Door Dash, Palto Delivery.com was, okay, what about everyone else?
+
+What if you can enable everyone to actually offer delivery? What would that take? Um, and first of all, would people care? And that's really why we ship something so quickly, just to see if people would actually come and place orders.
+
+So what were the existing companies doing then?
+
+They were mostly um honestly faxing orders, believe it or not. So they would be a website that would receive orders, if you can believe it. They would fax the orders literally um into machines that would sit near the kitchen or the payment systems inside these restaurants. Then the restaurants would actually go out and do the deliveries themselves. So they were lead gen companies at the time. I've heard you talk about de developing this like last mile logistics network. Did you think about that back then or you were just like, "Hey, I'm just going to try to expand the market for food delivery."
+
+No, we did. So, the when we started um I guess to take a step back before we shipped Paltodely.com or even how we got there, you know, my co-founders and I really got connected because of an interest in small businesses. You know, I think my story I've told publicly, which is really I mean I grew up uh coming as to the States as an immigrant from China and my mom um you know, put food on the table by working three jobs a day for 12 years. One of those jobs happened to be at a Chinese restaurant where she was a waitress.
+
+I got to hang out with her, wash a few dishes when she allowed me to. That's kind of how I grew up while my dad was getting his PhD at the University of Illinois. That was, you know, the first 10 years or so of childhood growing up in the states. And that moment and experience always just gave me a deep appreciation for what small business owners represent. I mean that to them it there's no such thing as work. It it work life it's it's all the same thing. There's no concept of a weekend or a Saturday.
+
+It's Saturdays and Tuesdays are exactly the same days. And you just kind of get into this um process where that becomes your identity. And it's actually one of the most fascinating things I find about the great experiment that's America where you know because it becomes this all-consuming thing. One of the nice positive derivatives is actually they don't just create great experiences like a restaurant or a bar or a furniture store or a t-shirt shop. They actually create the GDP for all the cities that we live in. That GDP is what allows us to have great neighborhoods, schools, all the positive things that happen from a local community.
+
+And that was always my fascination with it. We had no idea though when we're looking at starting Door Dash about anything related to what these business owners problems were. And so my co-founders and I, we spoke with 300 maybe businesses up and down the Bay Area from San Jose to San Francisco, restaurants retailers service businesses, and it was actually a baker who showed us a booklet, a 3-in binder of delivery orders she had turned down. She was a oneperson shop who had no ability to fulfill or desire, frankly, to fulfill all those orders.
+
+And that was just a very strange moment for us where I said delivery is not a new idea. It's 2013. No one offers delivery. Why? And that's really what prompted us to think about, you know, launching Palo Alto Delivery.com to see if people cared. But to your question on logistics networks, you know, we said, okay, well, if the first place in which we can help local businesses is by building a logistics network, we have to pick a place to start. And and this is where I guess the math brain, you know, comes in for me where when we studied every category of local retail of where we would start, whether it was deliveries for restaurants, grocery stores, convenience stores, retail shops,
+
+oh, those are all options.
+
+We looked at all of them. And we had this hypothesis that if you wanted a chance of creating a logistics network that could actually be successful that can be very fast that can you know be very flexible meaning it can you know deliver in 30 minutes or it can deliver you know uh longer than that. Um you needed network density. You needed um the most number of connections between consumers and stores. We kind of targeted restaurants because there were a million restaurants. You know, if you compare that to the number of grocery stores, there was maybe a couple hundred thousand grocery stores.
+
+Um, and you looked at other categories of retail, restaurants had the highest count of stores. And so very quickly um you know we made the assumption that if there's any vertical to get started in doing deliveries it would be restaurants and prepared meals to give us a chance to build to build the highest density network so that one day we can deliver everything else.
+
+There was other people that had maybe a similar idea, but I heard you tell the story one time where you're like, well, they actually went into like city centers
+
+and one advantage you I I don't even think this might have been an accidental you started in Palo Alto instead of like New York City. Can you talk about why that was important?
+
+Yeah. Well, starting in Palo Alto was um I mean not a conscious choice. I it was just where we were students at the time. But one of the earliest experiments we ran at Door Dash was doing deliveries in Palo Alto versus doing deliveries in San Francisco. So a city center if you will. That was close to where we started the company. And one of the fascinating things we found out um and we didn't understand why initially was we were actually completing deliveries faster um inside Palo Alto than we were inside San Francisco.
+
+Obviously San Francisco is a more dense place. But one of the things we learned early on though was that obviously, you know, in Palo Alto, you had much easier parking. You had a lot um fewer apartment complexes where you had to go up and down the stairs and figure out where the lobby was or the right elevator entrance, things like that. Palo Alto had the following which is if you looked at places like Palo Alto it's really um it you know represents I think most cities in the US or a lot of the world where you have main streets and then you kind of have you know in the spokes um outside of this main street hub of commerce you have where the people live and if you actually thought intelligently about what that really told you you can actually build a very efficient logistics system if you just you know understood how to you know manipulate some of these hubs and spokes.
+
+And so this was one of the earliest you know hypotheses we had that you can actually make a logistics business as efficient you know in a place like a Palo Alto versus San Francisco that was you know guided by that experiment. But the second thing was actually just in talking to customers. What customers told us was they said, "Look, in San Francisco, I can just walk down, you know, the the the the elevator from and head out the lobby and we could probably find a few places to go and eat." In Palo Alto, you'd be walking for miles before you could achieve something like that.
+
+You know, the closest, you know, set of restaurants near Stanford University where we started this was 2 miles away on University Avenue, as an example. And that's true in a lot of places um in in America. And so if there was any place we thought where there would be the highest um interest from consumers and a possibility where you can actually make the math work, it was places like Palo Alto. And the question, you know, to us was just how many of them are there
+
+and the only people doing deliveries at this time are the four founders.
+
+Yeah. In the in the very beginning, it was just it was just the four founders.
+
+Okay. So you had a line about this where it said it became obvious that the need was higher outside of the cities. We did not have the data to prove it at the time. We had the conviction that because we were doing the deliveries ourselves that this could be true.
+
+Yeah. I mean we saw I mean when one of the um benefits when you do the deliveries is well one you see how hard it is to actually you know bring you a burrito on time every time correctly. Um, and the second thing is you get to see who the customer is. And you saw the customer actually almost always was a mom, you know, who had young children, who had not a lot of time, who didn't want to cook, you know, every single meal, who wanted just looked for any solution to save her time.
+
+And so when we did those deliveries, we just saw, wow, well, there are a lot of young families out there, and let's go find out where they hang out. Let's go find out where they live. And that's why we had that sense that you know we can build a business you know with this audience to start.
+
+Is that another unexpected benefit of starting in these basically the suburbs or the cities? Think about like the typical city populations like maybe more single people or maybe like just a couple but it's not large families shoved in these buildings.
+
+Yeah. I mean, I I I think that was probably a derivative of the discovery, but no, I think in the beginning, especially when you're looking for product market fit as an entrepreneur, you're looking for
+
+someone who actually just wants your product organically. And we could tell very quickly that someone who has young children who maybe doesn't want to take a stroller, pack it up, pack all the things that come with the stroller, then, you know, put that, you know, stroller and the children into the vehicle, then get it out and then somehow get into inside of a crowded parking lot or a restaurant. Well, there are a lot of those people. And if we can solve it for that group, then we believe we could build a business that can easily grow organically.
+
+You're right. I mean, there's a second derivative, which is there more mouths to feed when you have a family than when you have, you know, one or two people living inside of a city. But that wasn't the first thought we had.
+
+But even more than a second derivative, because you were just explaining like, okay, well, if I'm delivering to somebody's house, I know where the park where to park as opposed if I'm in a city, you have to navigate where's the lobby, how do I get in this building, what floor do I get, how to access the elevator right?
+
+Yeah, totally. And the the presence of single family homes made it a lot easier for sure. Um that was one of the benefits of delivering to places like Palo Alto. But again I think it just came from this very simple experiment which had an anomalous finding which is why is it faster to deliver in Palo Alto than it is in San Francisco? Why is it faster to to deliver in a less dense place in in other words? Exactly. This is what is interesting to me. It almost made it sense like your competitors seem to do the the most obvious or like the the logical thing.
+
+It's like no I need order density. Where are all the people? let me just go to the cities. We chased where the I think when you're starting out the number one thing every entrepreneur is looking for is do you have something that someone else wants and is it real? Meaning like it's not artificially inflated with discounts and marketing dollars and you know just other ways to inorganically grow. Um will people actually use it? Will they actually tell their friends about it if they actually like the service? And that's what we found early on with places like Palo Alto.
+
+Even when you were called Palo Alto delivered
+
+especially when we were called money right yeah we had no exactly we were we were we ran this out of my bank account and that's why I knew early on even though look we didn't have any models or you know unit economic forecast or anything like this but even though I was running out of my bank account where I also had student debt at the time my bank account wasn't going down you know every single week or every single month so something was telling me that maybe this is a chance of working.
+
+What were your costs at the time? Cuz you have the four founders lab essentially labor. You probably not paying yourself. Exactly. You're not paying yourself free labor, right? Just your time. You built a $9 website. Yeah.
+
+I heard something that was hilarious. We were like, well, we we don't have a sophisticated dispatch system, so we just use the Find My Friends app.
+
+We used Find My Friends. We used Find My Friends. We used
+
+to track the drivers, which just happened to be all of you, our co-founders.
+
+You have a Google voice number.
+
+You're not There's no marketing advertising right?
+
+No. No. No, we had no money to market or advertise.
+
+So, what are you what other expenses did you have back then? Do you remember?
+
+It was all kind of like self-unded. This entire uh you know activity was selfunded until we had to start recruiting drivers and actually you know testing this out beyond just the four of us.
+
+This is when you applied to Y Combinator or No.
+
+Yeah. Yeah. I mean in that time period.
+
+Okay. By the time you apply to Y Cominator, do you have more than drivers than just the founders or No,
+
+we may have had one or two. Okay.
+
+Yeah. Very quickly we realized, well, we're we're in class and so, you know, we took turns doing deliveries while we were in class, but at some point it's tough to, you know, be a student and do the deliveries.
+
+How many years did you have left of business school? Like, how many years were you in school and running?
+
+We had maybe 6 months left before graduation. I mean, we were effectively Stanford's delivery service, you know, for the second half of or for the first half of 2013. We were effectively Stanford's delivery service. Then we then we um um get Door Dash um the URL and and and the company name and then we launch out of Y Cominator in the summer June 20.
+
+So was it like now once somebody starts using Door Dash or when I start using Door Dash, right? I'm like, "Oh, this is very convenient." I just keep using it over and over again, did you see that same behavior pattern back then?
+
+Yeah, with a very small group of users because in the beginning we actually did not have high volume. I mean it was probably 10 orders a day, something like that. and maybe our high day was like 21 orders a day, something like this. Most of them uh however were done by a small group of users at Stanford. When you see that fact that the same customers are ordering over and again uh even though it wasn't growing like wildfire um but our bank account also wasn't getting depleted um it gave us enough conviction to keep going.
+
+What were the conversations amongst the founders when you guys are saying that let's keep going and let's I think we viewed it as a project more than we viewed it as a company. In fact, we were barely incorporated. We were not incorporated when we were running this um at Stanford University and then we you know just got incorporated when we actually um got into YC. But at the time it was just like let's just see what the next phase should be. I think sometimes when you start these projects, you absolutely should have a point of view on maybe where this can go in terms of going the distance, but the most important thing is to just get started and then to have a sense of what the next two or three steps are.
+
+No one is able to, you know, know everything about the future. And for us, the summer was really instructive. I mean, the summer, I think doing the deliveries ourselves for the first six months gave us the clarity that the summer was really about answering three questions. what consumers want to pay us six bucks, which is what we charged. Um, are there restaurants who would be willing to partner with us for 15%. And, you know, could we afford a wage that we could pay dashers, the drivers, for the service? That was it.
+
+That was the entirety of the YC summer. It was not about demo day or, you know, raising the most amount of money or becoming the most popular, you know, at some event. Um, it was just answering those three questions. And if we had enough conviction answering those questions, then we'd keep going. Again,
+
+you told this hilarious story um where, you know, during the summer, some of your classmates are like, "Yeah, I'm going to go, you know, ski in or something like that. What are you doing, Tony? Like, I'm delivering hummus in my Honda."
+
+Yes. Yes. That was uh Yeah. Look, I mean, I think we had a lot of classmates at Stanford who looked at us and just thought, "Boy, like I thought they were like, you know, smart, but you know, I I guess they want to spend their time doing this." Um, and so look, in the beginning of a lot of these entrepreneurial ventures, nothing looks that amazing, right? We were working out of an apartment. We had dashers in that apartment. We had the co-founders live in that apartment. We worked 10:00 a.m. to 2 a.m.
+
+every single day, but it wasn't like this glamorous exercise. And but nor did we seek that, you know, we were just trying to answer those three questions that summer. We didn't care that much about what our friends were doing. Clearly, we thought that um it was um interesting enough to keep going that if we can actually answer these questions, I think we're actually on to something.
+
+We just had uh Mark Andre on the show and he's got this great line where he says, "I firmly believe that people that do great things are doing them for the first time."
+
+Huh. Did anybody have any restaurant or or actually not even restaurant experience because you're not even in the restaurant, any delivery? Any of the founders have anything to do with logistics or delivery, anything?
+
+No. No. It's actually why we had to do the deliveries. I mean I mean the reason why we did so the reason why we were so hellbent on doing the deliveries besides the fact that we had no idea whether we had any business recruiting other drivers was how does this work? How should it work? I think Door Dash early on even to this day but early on was so hard to explain because it was actually even to build the MVP yes to test it was just this website you know palmut.com but we had to build like four things.
+
+We had to build this website for consumers. We had to build some app for the restaurants actually receive the orders. We had to build an app for the drivers, the dashers. And then we had to build a dispatch system, you know, that actually could oversee all of the operations. So even in the very beginning, we realized, wow, this is actually pretty interesting. It's just such a fun problem that you in order to actually just bring you a burrito, you have to build these four things. And then to do it really, really well, I mean, that's why we did all the deliveries to figure out how you actually do that.
+
+So, you were misunderstood back then. You just said something interesting. You think that's still the case to this day?
+
+Absolutely. Because I think most people, and I totally get it. I mean, think of Door Dash as a consumer app. You know, most people think of us as lunch and dinner. And I think what they don't see is everything behind the scenes. I think a lot of times I think you can look at, you know, products like ours, especially as a consumer, and you say, "Wow, this looks like any other product. You know, there are so many of them." But then I would ask the question, well, how come one just gets used more often than the next or the others?
+
+And it comes down to everything that you can't see. You know, one of the things we say a lot internally at the company at Door Dash is it's always the data that you can't see that kills you. Because if you can see a truck coming at you, you're just going to dodge and get out the way, but if you can't see it, you're dead. And it's no different with our business. Our business is one where all of the magic or the secret sauce, if you will, are in things that you cannot see.
+
+You know, no consumer is sitting there while they're ordering Door Dash thinking about what the Dasher experience should look like or what the operations should be to get the best quality experience at the most affordable price or what are the ways in which you take out every single friction and cost with a restaurant or a retailer and make sure that all the items are actually there even when they're not there. You know, I think all of these things are the things that make Door Dash special and make Door Dash an end-to-end experience that's very difficult to replicate.
+
+But yeah, I think early on we knew that because we we did all the deliveries. You know who knows it? Your competitors. So, you're not going to like this cuz you're in my opinion really humble, probably too humble uh for my liking. Uh but people in your industry are afraid of you. And uh one I I have to tell you a personal story that I don't even think you know. And um I didn't know I I've heard about you before. I didn't really, you know, obviously use Door Dash, but I never thought about it.
+
+Exact. What you just described is exactly my experience. I was just like, I have a magic button that brings me a burrito. Exactly.
+
+Okay. I love that magic button. Don't take that magic button away from me, whatever you do. But I was in Stockholm about a year and a half ago
+
+and uh Daniel was very kind to host uh me and like a handful of European founders. And one of the European founders that was sitting next to me and Daniel at dinner was somebody I had never met before and it's Mickey from Vault. Okay. Right. Cool.
+
+But he told me something interesting because you know basically the story was he's just like listen I built the Door Dash of Europe I guess is how was described.
+
+And uh he's like I always thought of myself as an entrepreneur. I never thought I would work for anybody. And he's just like we were in a head-to-head battle right and he's like I had a term sheet in front of me if I remember the number correctly. He was getting like a bill. He had the ability to raise another fresh billion dollars of capital. Yeah.
+
+And he was looking at the term sheet thinking about signing it. And then he said involuntarily something came out of his mouth. And he says, I can't beat him. He's like, I can't beat him. And he's like, I cannot believe that came out of my mouth. And he's like, and then he looked down. He's like, I could either light this money on fire or I could sell my company for life-changing money and go work for Tony and learn a lot. And I think to this day, he still directly reports to you. Correct. Yeah,
+
+he runs all of our European business
+
+and he was trying to explain to me and Daniel about just you don't it's all the magic is very similar what the stuff that you don't see how hard he is to to compete against. You had some another interesting quote I want to read to you. You say the way that Door Dash has achieved so much success is tens of thousands of experience 95% of which never even make it to the customer before they fail. The way to get a more to get more accurate on a delivery probably requires some level of detail that is lower and deeper than you realize.
+
+Can you explain what you meant behind that statement?
+
+This again starts from actually doing the work ourselves and realizing that if you actually want to get something on time, um I think it's very easy to think about uh when you're just intellectualizing it, you know, on the outside when we're getting started. Oh, maybe there's a traffic issue or maybe oh the food is taking longer than it than it should. Whatever the reasons might be, but you actually have no idea actually what are all the sources of delay in an order until you actually go and do the work. Sure, there might be some of the issues that I I think you can think about on the outside, but then very very quickly you realize that there's a lot of seconds of delay in every emotion.
+
+In fact, there's about 20 steps you can decompose a delivery into. And there's delays at each one of those moments. And that's, you know, even more complicated if, you know, the delivery today is uh they happen outside of restaurants, they happen inside shopping contexts like groceries or retail items or if they happen inside malls that are multi-story, sometimes below ground, sometimes above ground. And one of the things you start realizing is, wow, actually there are a lot of causes for delays. And there's no way that you're going to know about all of them until you literally actually encounter it for the first time.
+
+A lot of what's difficult about Door Dash is we're trying to build a structured data set in a world that is chaos. That's the physical world. The one of the reasons why there's all these sources for mistakes, for delays, for costs that ultimately, you know, yield into costs and good or bad um you know, experiences for customers is because there is no data that exists. There is no nice data set that a company like a Google or somebody else has organized for you. Um because it's all physical information and it's also changing all the time.
+
+When you go into a grocery store and somebody moves an apple from aisle 6 to aisle 8, is that always going to get documented? Of course not. Uh those are the kinds of things we have to work on every single day. And and and you wouldn't know that. You know what? If I told you the the cause for a delay was because actually somebody was homesick that day. How would you know that actually, you know, until that event actually transpired? And what would you do to respond, you know, to that event if that were to occur, which happens every single day, you know, when we're doing millions of orders every single day.
+
+the one in a million event happens a lot and the one in a thousand event happens way more than that. And so building a system that can ideally detect and prevent these issues, but then also a very fast twitch muscle to actually be able to build this I mean almost like an emergency response system when something actually goes ary to fix it. That requires doing the work over and again and building the system that can learn over time to get better and better and better. Most of the time we have no idea.
+
+We start with the these experiments and that's why most experiments fail. But when you get enough goodness out of it, if you can get the 5% out of tens of thousands of experiments to work, you know, in one year, that has the benefit on all of your audience for the next year. And then you just keep going and that adds compounding surplus for all of the audiences.
+
+How do you do that many experiments though and on a like is this a yearly basis? Is this like over the history of Door Dash? Like you're running thousands of experiments every year
+
+ideally. Yeah. Yes. I I think when we are at our best that's that's that's what's happening. But but but it starts with actually building a system that actually wants to learn. If you think about like like why do we have to learn? It's because the physical world a is not structured. It's not documented anywhere. It's you you can't scrape it. Um it's constantly changing. It's I mean there's a winter storm right now, for example, in the Northeast. I mean, these are all things that happen differently. You know,
+
+it's beautiful here in California.
+
+Yeah, I know. We would have no idea here. We're spoiled here in the Bay Area. But like, but in general, all these things are happening every single, you know, hour of the day. Okay. There's going to be some missing item today. There's going to be some order that took a lot longer today. There's going to be some incorrect gate we entered at an apartment complex. there's going to be some dasher who's going to get lost coming up the stairs of this office building. There will be guaranteed. And so the question is like well it would be impossible to try to you know figure out all of that if you can't build a system to learn how to do this.
+
+So the most important thing is actually building systems and building a system that you know at Door Dash really starts with testing things in a very operational hacky do things that don't scale kind of way into then taking the things that ultimately work the ideas and actually building products around them and then engineering the ones that actually work so that you're actually very efficient with this learning loop so that you can go from learning to shipping something that actually works. Because you know it's a resource constraint with you know how many engineers we have and how many things that we can actually ship especially when the stakes are high and you want to make that loop as tight and as fast as possible.
+
+That's how you build a system in which you can learn thousands of things and you just have to keep doing it over and over. You know our business is one where we believe we have to earn you know the right to serve you the next day. Even though you ordered with us today, thank you very much for your business. We have to earn it again. you know, the scoreboard goes back down to zero tomorrow and we have to just do that all over again.
+
+Where did you learn the importance of that? Of what?
+
+Of starting over again every day. I've heard you say that before and I love that idea.
+
+Very early at Door Dash. Um, we learned um how how hard it is to keep someone's trust and how easy it is to lose it. And you know, I I I think I may have said this before, but there was um there was a Stanford football game in which we lost um a lot of trust where we were late on every single delivery because we didn't have enough drivers on the road. We had no ability to shut down the website, but we had a lot of those
+
+pause there. So, where in Door Dash history is this this game?
+
+This is the third month of our operations, September of 2013, where it was a Saturday. We had no ability to fulfill the orders that came in. We had no ability to even shut down the website. So, we couldn't even like stop the floodgates. And usually,
+
+why were you having floodgates 3 months in?
+
+We had floodgates not 3 months in on that day specifically, for whatever reason, because of when the game ended, people wanted to order Door Dash for dinner in Palo Alto.
+
+And for whatever reason, um you know, that volume spiked pretty hard. We had no ability to turn it off and no ability to to fulfill. So, we were late by at least an hour on every single delivery. I think when you go through experiences like that, but not just once, but we've had a lot of those kinds of experiences at Door Dash. I mean, you know, I still do customer support every day. I see them literally every single day. When you see that you can lose someone's trust um on one order, you realize that you got to earn it again the next day.
+
+And there is no such thing as this, you know, just set it and forget it kind of mentality. Yeah, that came a lot from the early days. But I think this daily reminder when I do customer support is also another great reinforcing function.
+
+So what happened that night of the game?
+
+We were late on every single delivery. Um and I think it was probably somewhere around 1000 p.m. or something where we're tallying up all the refunds that it would, you know, cost us if uh we wanted to make right and kind of give back everybody their money.
+
+Were the customers asking for the refunds or no one was asking? No one was asking for anything. We were the the night was over. We finished our last delivery and we said, "Okay, that was a terrible night. what are we going to do about it? We could complain about, you know, the orders or or something, but at the end of the day, I I think within a very short period of time, 15 seconds, we decided, okay, we got to make right by the customer. So, we got to refund everybody. Now, the complication is we had no money at the time.
+
+I was having a hard time raising I mean, this is a pattern for me. I've had a hard time raising capital for the company in the earliest years. Uh, and that started right from the beginning. I mean like we were maybe two or 3 weeks of cash out and this refund would have cost us about 40% of the bank account. So it would have just made the two or three weeks and just shrunk that into even fewer days. But yeah, you're right. Nobody asked us for the refunds. I'm sure they were pissed, but nobody asked.
+
+We did we did the refund right away and then we stayed up that night actually baking cookies and we delivered those cookies at around 5:00 a.m. U before we thought when customers would awake. And the idea was we'd rather die trying to be excellent or at least die trying to do the thing that we want to stand for than to live to be mediocre and not something that we'd be proud of. And that's what we did.
+
+That's excellent. So tell me more about building the system, this self-reinforcing like learning system.
+
+Look, these things kind of happen um in in in steps, right? So it started with the four of us doing the deliveries and Okay. Well, we can keep doing the deliveries. Um, but at some point we're going to start um running into scale issues. I mean, four people can only do so many deliveries. So, of course, we're going to start recruiting dashers. We're going to start recruit um recruiting consumers um selling restaurants. Um and you start noticing uh a as you do the deliveries, well, you have to build products to scale yourself.
+
+That's one. Two, you also just start noticing all the problems. And when you whenever you see a problem recur more than once, you would say to yourself, "Aha, maybe that's, you know, an example of a problem that we should actually build something for or actually run an experiment to see if we could actually solve." So I think very early on um the bias for action turned into this experimentation mentality. Now, we didn't have like any organizations at the time or anything like that. It was just like a few of us in my apartments.
+
+It wasn't like, "Okay, there's this like rigorous system that I'm talking about." That's probably the earliest inklings though of how we thought about okay, you can go from doing things that don't scale to identifying hypotheses to test to then running experiments and then to shipping products. That was probably the earliest like time, the first year of the company. You fast forward maybe a year as we started launching into multiple cities, all of the general managers of different cities. So you could be running Boston, someone else is running Dallas, someone else is running, you know, a different city.
+
+Uh they would be reporting into me. Um and you start seeing that oh okay well patterns actually emerge you know from city A to city B to city C but they are still quite local um there's slightly you you know for example in Boston there's not a lot of cars um car ownership is one of the lowest in Boston you know in the United States versus other places there's there's some strange setups because of the historic nature of the city in terms of that hub and spoke nature I was describing that that actually violate that that that setup.
+
+So there there are like local nuances and you start realizing well okay well how do I actually you know teach this way of doing things that don't scale all the way to shipping you know some feature that we know is going to work to each one of these people so that we could run more experiments at the same time and then we would just build more products that would actually um you know go across all of these different patterns. So that's kind of how this thing you know has morphed over the years where you basically start with some basic scientific you know process if you will.
+
+You meet some point in which you have to figure out the next iteration in order to scale that process and then you just keep that going and you're always testing you know against whether or not you're delivering better for customers. That's always going to be the northstar metric of whether or not this process is actually making a difference or not. Is it better for customers if it's faster, cheaper, more efficient? Like what are the
+
+Yeah, it's all of the above. So, look, customers, I mean, this business is tough because customers unfortunately don't just judge us on one dimension. Some customers, all customers want the widest available selection. They want every item they can get, you know, delivered. They want the lowest possible price. They want the fastest possible delivery. They want obviously no mistakes. They absolutely, you know, expect it to be on time. And then if something were to go wrong, of course they deserve to be treated correctly. We get judged on all of those things on every single order.
+
+So this is this idea of like you can build a business around things that don't change. Yes.
+
+What are the things that don't change from the customer's perspective for Door Dash? Then
+
+customers are always going to want more and more selection. They're going to always want more and more affordability. They're going to want faster deliveries. is like Amazon almost the exact like mirror of what Amazon
+
+well I think when you when you just think about what people want I I I actually think it's pretty easy because we can play that role ourselves and yeah I I I I think you just ask the you can ask very basic questions about what's the direction of travel of certain things like for example like do you think people are going to expect more convenience or less convenience especially in a world where you think that people are earning more um you know whether today versus the past tomorrow versus today. What do you think they're going to do with those dollars?
+
+Is it going to go more towards consumption? Are they going to expect or demand more convenience or less? I think when you start asking questions just out loud, you you get the common sense answers in which you can build a business around.
+
+We were talking about this with the crew at breakfast. It's just like, well, their cornerstone of their business is some a trait in human nature that's never going to change, which is like we want more convenience.
+
+Yeah. Always. I I I it's not um it's not rocket science. I think the rocket science is actually how do you make it happen?
+
+Yeah. I love this idea of like you're hiding the complexity. I I spent several hours with Basos uh oneonone and u I'm obviously a massive fan of his. I've done like 15 episodes on him and he had he listens to my other podcast and I told him I was like, "Dude, you know how crazy it is that they put a guillotine in front of your house in Washington?" And I go, "You made a magic button I can press that that anything I want in the world shows up to my house in two days and now it's like a few hours and all I do is press the button and you handle all the other complexity behind it." I was like, "You deserve all the money.
+
+I hope you have all the money." He just laughed and laughed and laughed. You said something. You're doing customer support every day. Is this customer support? Emails. What is this? Emails or chats? Sometimes phone calls every day?
+
+Yeah. Say more about this.
+
+Well, why do you do this? You know, I I was saying earlier that for a few reasons. You know, one of the things that we're talking about earlier is that so much of the magic or the difficulty of building a company like Door Dash is in all the things you can't see. And so, the first thing you got to do is you got to build observability everywhere. you know, of course there's observability with dashboards and systems and um you know, increasingly, you know, AI tools, but but also I can see the inbound, you know, of of customers who write us, whether it's a consumer, a merchant, a dasher, an advertiser, and I can choose to ignore them, but those are freebies.
+
+I mean like how lucky am I to actually have a product in which people care enough you know even I mean usually usually they're not very positive emails but I mean like but they care enough to actually let me know you know I think the greatest killer of a business is usually silence and and here they're actually they care enough to actually let me know something went wrong in their experience. I owe them, you know, uh certainly not just a response, but actually I think the and not the courtesy, but I owe them the responsibility of actually solving that problem ultimately.
+
+And so, first, it's an obligation to the the customers. Second, it's actually something that I want the rest of the company to do. You know, I think one of the easiest things as companies get a little bit bigger, perhaps earn a little bit more success is there more obstacles between them and the uh the the customers or the jobs to be done. You know, for example, when you become a company, you know, all of a sudden there are the only things that kind of get spotlighted are the financial metrics, your revenue, your profits.
+
+Um none of which are metrics that customers care about. that there are no metrics in in what we report uh you know to to as a public company that customers know about probably or care about frankly and that always is quite bothersome to me because it's because of our ability to serve customers that can hopefully achieve you know strong financial metrics that uh investors care about and so a lot of what I'm trying to do is building as many reinforcing and repetitive mechanisms and motions, including things that I do individually, that will allow this company to always recognize that the number one job and the only religion at this company is to solve problems for customers.
+
+What do you do when the data and the anecdotes conflict?
+
+It's a tough one. Um, I think that um, usually there's always an element of truth in what customers are saying and and it usually becomes a trade-off, you know, discussion. uh you know for for different teams. The the reason why it's a tough decision is because it is so easy to always just veer on the side of the data because almost always when a customer notices something that is wrong um or or there's an anecdote um uh that may be a quote unquote edge case. It's usually at some tail of a distribution.
+
+Um, a distribution of the wait times for customer support, a distribution of how friendly we were when we actually took the call, a distribution of how on time we were or how late we were or how accurate we were, or what are the number of items of the types of SKUs you care about in a particular category of lettuce. Just lettuce, not vegetables, but just lettuce, right? So, it's always some tail example. And so the data is probably always going to win when it comes to a some sort of a prioritization discussion.
+
+But when you actually think about how to make a product better, it's going to almost always by definition be in improving the edges, you know, and that's why a lot of times what I like to do personally is I love to spend time um uh you know, with a lot of our power users, whether it's, you know, the the top dashers or um uh the consumers who order the most often or the merchants who we've been doing um you know, business with for a very long period of time and also the new users.
+
+They're at the tales of the distribution of almost every outcome. A new user, you know, who's never touched Door Dash before and, you know, for the 13 years that we've been around will absolutely, you know, tell us about how easy or difficult it is to place their first order in a way that, you know, someone who's been used to all the things that, you know, we've been training together with customers on have figured out. a power user also, you know, you know, sees all the issues too because they have the most shots on goal for some chaotic event to happen in the real world that we couldn't capture.
+
+And so those edges of the distribution are almost always where the anecdotes are that are the most valuable um that you have to pay the most attention to because they almost always will disagree with the data and they are probably worth the most in terms of improving your product. So let's say you find one of these edge cases as you're doing customer support every day. What's your next step?
+
+So the ones I love the most are actually um the really long ones actually the ones where there's a lot of gold. It's probably like you know uh the research you do on founders which is the longer almost the better because you get to study the distributions. When it's a short you know email about something you already know about there's not as much you know perhaps interesting material in it. What you know I love the 2,000word emails especially from dashers who will give many use cases of why the logistics algorithm broke for them and it becomes almost like a debugging exercise right of both physical world things that have occurred things about our systems that you know probably broke um and things in our products that couldn't interface well enough between the physical world and our systems and so then I go into our debugging tools and I actually literally track the And every single step I'm watching and
+
+personally, you're doing this personally.
+
+Yeah. Yeah. And and you know, once I start figuring uh out potentially where, you know, the sources of error are, you know, I'll either generate the hypothesis and call the dasher or email the dasher, you know, depending on the best way to reach them or or the consumer. Um, and then actually find out whether or not there's a nugget of insight there of something we actually could improve. So put a different way, can we put a spotlight on an anecdote that improves the product? That's the opportunity I'm looking for.
+
+I've heard you describe this as like this inter eternal mission, right? How would you describe what the eternal mission of Door Dash is?
+
+Yeah. Well, the eternal mission of Door Dash is to grow and empower local economies. We say this a lot. And the reason why it's eternal is because I think it's a it it's a fight worth fighting for or a cause worth fighting for forever, which is the best way to grow the GDP or the happiness or the safety um of a city is by making the small, medium, and large businesses in that city successful. they produce the vast majority of jobs and you know consumption dollars for the economy and the the monies for the police department, the fire department, the parks, the schools etc.
+
+the hospitals. So the question is like well how do you actually make them successful? One of the most positive tailwinds of why this could be a very fruitful eternal mission is because the physical world is always changing, right? And and and it's hard to just scrape it. Um and it's one of the things I love the most about it. It's hard to just, you know, scrape all that information, say job is finished, and then put it through some LLM or something. The Well, A, that data is always changing. B, it it's not organized as all at all.
+
+And C, it's not just an it's not like some relationship between a text, you know, editor and a person. I mean, there's a lot of people. There's there are three people involved on every single order at Door Dash. at least there is a consumer, there's a dasher, there's a merchant, at least three people. Um, now given that we do more complicated things, there's even more sometimes. And you know, for those people, this is this could be their identity. Back to, you know, what I was saying about small business owners and how they believe that what they do, it's not a office job or something, you know, that they just use to earn money so that they could spend consumption dollars or something else.
+
+This is like their livelihood. This is like who they are. When I think about those kinds of people, I want those people to win. And so if we have to eternally always look for the edges of the distribution to keep improving the product, of course we will. And if we can do that and we can make them successful, then they're going to make many things, you know, about the cities and the neighborhoods that we live in continue to be sustainable and very, very thriving.
+
+And the alternative is terrifying. You have one or two big players.
+
+Yeah. I don't even want to think about the alternative. You're totally right. I mean the alternative is it's a very robotic world where maybe we buy things in one or two ways or from one or two places. That's not a world in which you're going to grow, you know, the GDP of these cities. And actually, that's a world in which you may take away some of the identity, I would argue, of some of the neighborhoods. I think one of the reasons why people love neighborhoods or that there's certain neighborhoods that they, you know, maybe preference is because there's a personality to it.
+
+So much of the personality is given by who the businesses are and therefore you and your friends want to go frequent and go hang out in those places in addition to, you know, your homes and things like that. And that's what makes it tick. That's what makes a place feel awesome. Um, a city feel awesome. And so I think that's an eternal mission worth fighting for.
+
+Yeah. Cuz this is not something that you can accomplish in a year, 5 years, 10 years. It's constantly changing. What do you do with all this data that you're collecting? Well, I mean the first is we have to structure it. So um you know one of the things that I think um Google uh you know so brilliantly did was they did organize a lot of the information on the internet and they made it searchable you know to everybody. Right now the first thing we're doing is we're still collecting lots of information and then right now we're trying to do two things with it.
+
+You know, the first thing is we're certainly trying to grow a merchants's business by allowing you to search for their stuff through our app and you know, we'll bring them incremental business that way. The other way is we're actually trying to make it useful for them. So, we're giving data back to them telling them when
+
+data about their own business.
+
+Yeah. like when you're out of stock of certain items or that did you know that you know you are underpriced in this particular you know menu item versus what you know what you could be pricing at or that there's an opportunity to bundle certain um uh or or to create certain you know SKs or new uh um items on your on on your menu or in your catalog if you're a retailer that we think would grow your actual business.
+
+This is like Bezos has that line about Amazon Prime. He's like, "We want to make it so valuable. It's irresponsible if you're not a member." Like, it's just insane. So, if you can have data for small businesses, medium businesses, big, even large businesses that they didn't know, like that pricing thing is interesting to me where it's like, well, you're charging, you know, $15 for this plate of chicken where we see all these other I assume you're getting the data from all the other merchants on your platform where it's like you could be people are willing to pay $25 for that thing.
+
+Essentially, it' be irresponsible not to partner with you if you have all those insights. We can also take the same approach that we've built for ourselves, you know, the scientific process from doing things that don't scale to shipping things at scale on your behalf. Like you as a merchant can be running experiments too. Now maybe you can't because you're a single person. You're single. You're literally one person like the baker that I was telling you about that inspired a lot of our discovery of delivery who doesn't have all the capabilities to run all these.
+
+But why can't we do those things for you? Why can't we for instance what do you mean do them for me?
+
+We could talk about simple things to more difficult things. the simple things. We could, you know, change menu prices on your behalf. We can buy different kind of promotions for you based on what return thresholds you want to achieve. We can talk about more complicated things. You know, for example, you know, there's there are certain merchants who want to actually grow um tremendously. They why not, right? They don't just they want their identity their I mean their passion project to be exposed to as many people as possible. Some of those businesses, for example, um find it very hard though to grow, you know, from one store to two stores to then somehow 2,000 stores.
+
+But imagine if you baked cookies, as an example, and you wanted everyone to have your cookies. Why can't we match your products with businesses that don't sell your product and actually create a supply chain in which you can actually, you know, sell those products in more places and you can literally make everyone win. You know, the the the new business who's selling your product now has a new menu item called a cookie. You get to maximally, you know, increase your um your exposure. There's a range of things in which we can do with the information.
+
+um and make it productive if we knew what your goals were. And so a lot of what we're doing with a lot of businesses is at scale, how do we maximally increase, you know, your exposure, your identity and achieve whatever goal you may have.
+
+So that's with restaurants. Tell me some of the or retailers.
+
+Yeah. Like this gets really interesting when you expand out to every physical business. When I think about restaurant tours retailers to me, they are they're no different from me in the sense that they're are entrepreneurs. They want to create something. They want something that they have, an idea they may have, um a passion they may have, and they want it to be exposed into the world. That gives them fulfillment of a variety of sort of ways. Okay. So, let's say that you want to um make t-shirts and sell t-shirts. That's a passion um project of yours.
+
+There should be no reason why you can't do that today from you know testing that idea with the audiences that we have with the warehousing and logistics inventory that we have with the ability very quickly to test in any neighborhood any city in the tens of thousands of you know different neighborhoods that we serve or cities that we serve and operate in and see whether or not you may have something before you actually go out and try to spend a lot of money to open up a store or something like that there's no reason why we can't be your business partner for any future creation.
+
+Dude, this is blowing my mind because I just think about Door Dash as a way to get food.
+
+Yeah, I love the idea behind this.
+
+It's all about where you start and how you keep going, right? And by the way, a lot of these ideas um came to us from our customers. You know, back to your question about why do I do customer support? I learn a ton too. Yeah, of course. I learn about all the edges of the distribution.
+
+What are some examples of things that customers have? Okay. So, one customer in 2014, I'll never forget, was a farmer um who runs one of the largest farms in the state of California. And they run hundreds of trucks every day up and down the state of California. Okay? Distributing their produce and their uh meats and other products to a variety of grocerers, restaurants, hotels, etc. and they they've been doing this for three generations as a family. They did not start their farm to drive a bunch of trucks. That is not the business that they aspired to be in or passionate about.
+
+And literally um in our second year of operation, they called me or they wrote in actually and then we had a conversation on the phone about um what they were interested in. They were in they were curious whether we could solve that problem for them.
+
+That's wild. They even asked you that. and and this was the second year of the business and and so you know I I I I said not yet at the time you know perhaps I should you know I I almost feel like I owe him a call so this conversation is a good reminder but the the when I I I think you've earned you know our goal over time is to be the first phone call for any business um that any business for any issue yes today the number one calls we get about are about delivery totally get it totally understood Increasingly, they've been about other things.
+
+Can you actually help us build our app? Can you help us acquire customers? Can you help us analyze customers, retain customers, customer support customers? Can you help us store inventory? So, those questions are more and more coming inbound and that's why we've shipped a lot of the products that we have at Door Dash. Um, but I think if done right, Door Dash can be your first phone call to start any business. I mean that that's really what we wanted and and and we can do it in a way that is very low cost that you know doesn't have to scale if you don't want it to.
+
+You know some people are very happy with one or two locations or if you want to become the next McDonald's or you want to become the next Walmart.
+
+Something that again I want to compare your story to Bezos because I just think every time I hear you speak I hear a lot of uh Bezos. He obviously did a ton of customer support at the very beginning of Amazon. He publicized publicized his email and like made it public like email me all the time and one um he tells this great story in one of the books that when he realized you know they were selling at the I think at the time I think just books CDs and like VH maybe DVDs okay and somebody's like he would ask I think he would send an email to like a thousand customers a day or something like that and he's like what else would you buy and one guy's like will you sell me windshield wipers and bas's like oh my god we're going to be able to sell anything
+
+or everything in that Um, so yeah, I love that idea. What are these other products that you're building? Okay, we have to like educate me now cuz I figured you need first of all, you need to do more podcasts because I've listened to all of them and I didn't know some of the stuff you're telling me right now, but I know you've launched a bunch of different products during the last 12 months. Tell me about one that you're really excited about.
+
+Well, one of the things that we're trying to do is we're trying to obviously deliver everything inside the city. Okay. in order to and just to put some you know context behind it. There are tens of millions of items inside of a city that you could deliver. Door Dash delivers a fraction of those items to
+
+what fraction do you deliver today? A very small fraction.
+
+Very very small fraction. There are many times the amount of things to deliver than what we currently offer. But there are challenges in in in making these deliveries, right? For instance, you know, how do you actually know what the catalog looks like for what for each city? How do you know if the catalog is actually accurate? What if the items are not available in store but are available in a warehouse somewhere far far away? There are a lot of these challenges in order to actually, you know, address before you can actually do something like deliver everything inside of a city.
+
+So, one of the things that we launched um do you talk about like that internally? We're going to deliver everything in a city.
+
+Yeah. But one of the things that we launched last uh fall, it was actually in September, we announced Dashar fulfillment solutions where, you know, for companies like a Kroger or um companies um like a CVS, we'll actually carry their items and you can order their items, you know, directly from our site, but sometimes they'll actually come from a warehouse that we're operating on their behalf. That is an example of a product of of a warehousing, an inventory management and a logistics solution in which we are offering, you know, perfect accuracy, fast delivery in a way that retailers don't have access to or the capabilities to do so today.
+
+That's part of how you can deliver, you know, all of a city by actually bringing and aggregating and making closer some of the inventory to where someone lives. We're building um uh autonomous vehicles as uh that's something else that um we announced um last year uh where actually I mean it it was a fascinating journey where again candidly mostly uh pain and suffering but most of the journey was recognizing that you actually have to build a purpose um uh built or intentional product to do last mile delivery in a way that's very different from say robo taxis or delivering humans.
+
+You have to solve problems of getting products, for example, inside and out from the vehicle in a way that passengers naturally can do in a robo taxi that items cannot do on their own. You have to think about what types of, you know, vehicles you may need for shorter distance deliveries versus longer distance deliveries. Heavier deliveries versus lighter packages. When I kind of think about some of those products, for example, that's all part of this mission of trying to bring you everything inside the city and giving every business a chance to win.
+
+And are you making the hardware yourself?
+
+Yeah. So, uh, is in some of the cases we are and so we don't have again like the the only religion we really subscribe to is making customers win. Uh, we don't have a religion about whether or not we have to build you know the product or someone else has to build the product. Actually, when we started the autonomous project, the autonomous vehicle project, we started with the um belief that we did not have to build um the vehicles. And in partnering with a lot of different companies, um we ultimately realized that nobody actually wanted to build what we wanted to build.
+
+And that's ultimately why we decided to, you know, um start um our own project in 2019 and and you know, shipped it uh last year. So that's what six se seven years almost seven years of development years six years to
+
+why did they not want to build they just didn't want to build what you wanted.
+
+Yeah. Well if you think about it um in the world of autonomous vehicles you have um a lot of the projects and a lot of the capital and a lot of the attention are going towards rope taxi and that's just a very different solution and form factor um in our opinion than what you need for last mile delivery. you know, when you're it's very hard, for example, to drive a robo taxi into a crowded um hub of merchants, you know, whether it's a mall or, you know, a main street um and actually somehow find parking and actually, you know, get access to, you know, the products by itself somehow.
+
+You know, I think that's a that's a that's a difficult endeavor to to accomplish. Um we built actually Door Dash Dot, which actually will yes, it will travel on the road, but it also can travel on the sidewalk and in the bike lanes. Um, it's a much smaller form factor. It doesn't go as fast. Um, but it has the ability to actually get to the last 10 feet of actually, you know, solving the problem of last mile delivery, which really is a last 10 ft problem.
+
+Is this live like right now?
+
+It's in Arizona. So, it's it's in it's in the Phoenix uh Scottsdale area.
+
+Is it true? I heard that Whimo, you guys have partnered with Whimo to for to close the doors of Is that true?
+
+We do. We do partner with Whimo. um and we do lots of things together.
+
+Is it people just not shutting the door when they get out of a Whimo? Is that true?
+
+One of the things that I think is fascinating about um uh the problems that a company like a Whimo or a problem like Door or a company like Door Dash has to solve is there's always these uh funny edge cases in the real world that are very hard to predict. Um uh shutting doors may be one of those examples, right? But you actually wouldn't know about that until literally you read the logs of these customer transcripts of, you know, these things. Look, I I I think there's going to be lots of things that we could do together over time.
+
+But I I I think it starts with just building the foundation. I I think the foundations you need to build one of these companies for the physical world are just very very different um from the uh from the digital world. And you know, that's kind of the fun part of the exercise at Door Dash.
+
+Okay. So, let's talk about the talent needed to do all the things that you're describing. I heard you say that when you were recruiting you look for road scholars uh that meet Navy Seals. What does that mean?
+
+Yeah, this was uh this was a shortorthhand I suppose early on um when we were looking for I think the types of people that we thought would do well at Door Dash. Um and I think it started um first from by because we did every job ourselves whether it was the deliveries, customer support, making menus, selling restaurants. We recognized the personality type, if you will. Yes, you needed to be smart and and you needed to be able to, you know, have high processing power um in terms of uh um you know, analyzing all the information, especially um in a world that's very unstructured.
+
+But one of the things you really needed was you needed to just do things. So much I I I I I think u that that's challenging is um that's very different about the physical world and say building software is you have no control in the physical world. We don't get to control when you hit that order button. We don't get to control whether or not a dasher accepts or rejects an order. We don't get to control how how how slow or how fast somebody makes an item or how in stock or out of stock some item is.
+
+you have to be able to do things to go figure those things out. So, one of the earliest things I did I remember was um the interview question if you made it to the interview with me. um your final round interview was most likely a surprise because you know our our teams would you know ask you to you know answer some prompt about fixing some problem in a city or something like that and you probably would go out and do your analyses and um you know um come ready with a one pager of notes or something and then you come to me and you thought you might think that the interview is to present that to me.
+
+I would literally ask you, I said, "Well, this could be a really long or really short interview." Um, where I'm going to give you um 20 minutes and you can ask me any question that you want. Um, but after the 20 minutes expires, I'm going to give you $20 that you can use to go and acquire 100 customers for us. Um, and you have 8 hours to do so. But here's also a plane ticket. I know you traveled far to come to this interview in case you want to quit the interview now and just move on and find somewhere else to work and and and and that was the interview because that's the action part, right?
+
+So much of um what we were trying to test for um early on is someone who's going to do something to go and collect information as opposed to someone who's going to collect data, scrape information from some, you know, internet protocol and then do some magical analysis on it and then ship code. Okay. I mean, but what if none of that information existed? You have to go and do things in order to actually collect information. That was one big kind of behavior bias for action that we were testing for. So that's the Navy Seal part.
+
+That's the Navy Seal part where you have to be willing to do things and be accountable, you know, for things. A lot of that was on the, you know, the non-engineering front. On the engineering front, we looked for engineers who certainly were great at coding, but we looked for engineers who would be willing to do deliveries with us. In fact, the interview with me, if you're an engineer, is the final round interview was we would go and do deliveries together. So the interview would literally take place in my Honda and we would be doing deliveries for maybe an hour or two or something like that.
+
+And I'm walking you through the flow of literally the order and asking your opinion of how we could productize this. In Silicon Valley, I think sometimes there's the um mythical obsession with the 10x engineer, right? and and I totally get it and and they do absolutely exist but a lot of times that is about coding prowess. Um that's great. We have a lot of respect for that. Um, at Door Dash, we also need you to have problem solving prowess or the coding prowess and quotes at Door Dash is about how do you solve this end-to-end problem?
+
+And it takes a certain kind of engineer who's willing, you know, to to do deliveries. Um, and not just think about code all day or what the latest greatest AI tools are, but is what I'm going to ship actually going to solve a realworld problem? Is there going to be a real customer benefit? Yes or no? That was the type of profile and personality and aptitude and attitude that we're looking for for engineers.
+
+Was there a specific source where you were finding people like this?
+
+Not really. There wasn't um in fact to this day I don't really look at people's backgrounds that much. I think one of the things I discovered along the way, you know, probably in the 2015 to 2020 era when especially when Door Dash was building out its team, um there were more attributes that I was listening for than there were things on a resume that I was seeking or looking out a bias for action, you know, and a lot of the ways I can tell in an interview is actually just what people naturally talk to me about.
+
+You know, for example, Christopher Payne, our first chief operating officer, I didn't ask him a single interview question. Um, but after a two-hour discussion about our logistics algorithm, he went home that night. It was Friday, drove with his son for 4 hours doing deliveries. I didn't ask him to do that. I also didn't ask him the next morning to write me a 30,000word email about why our logistics algorithm sucks. But he did it. But he did it. And that told me more than any set of interview questions.
+
+You hadn't even hired him yet.
+
+No, hadn't hired Hadn't hired him yet. And then you immediately
+
+And this is certainly this is certainly beyond the resume, right? Um or you know, we look for the ability to operate at the lowest level of detail.
+
+I remember my first um it was actually supposed to be a coffee chat, not a quote unquote interview. It was scheduled for 45 minutes with our um you know now president then CFO candidate and he came to the coffee with his computer and this like multimegabyte file which was some projection of our financials somehow. I said, "What?" Like, like this was this is supposed to be me getting we're supposed to get to know each other and this but but this is how he thinks, right? Like I don't need to watch the resume or read the resume to decipher how does this person work.
+
+He showed it to you.
+
+So he built a model and then he walks you through. Yeah.
+
+How long did that take? We I think debated it for over four hours that that so it was like and but it was literally going line by line to think through that these kinds of examples ultimately and then there's like you know three or four other attributes that we look for those tell me more about I think how you operate what makes you tick what's the environment in which you'd be most successful and whether or not I think it matches um what's required so there wasn't there wasn't like a source it wasn't like oh yeah we discovered the secret that it's this company or this school or this background that ultimately
+
+but don't they have to be very different people than would be people satisfied working in like just a completely digital like software company like you told this story one time where you were wondering um let me see if I remember correctly correct me if I'm wrong but like you took like a small sample of like 20 Dasher drivers and 20 Uber X drivers
+
+and I think the control of this experiment was like you all are getting guaranteed $20 an hour
+
+if I offer you more money how many of these groups would switch
+
+yes Right. And what was the observation that you discovered from this experiment? Do you remember?
+
+Yeah. So, um yeah, they were making about 20 an hour at the time. I made a guaranteed offer of 25 an hour if the if you switch jobs. So, if the Uber X- drivers would go to Door Dash, Door Dash would go to Uber. And one out of two groups of 20. So, one out of 40 made the move.
+
+And what did you derive and conclusion draw from that?
+
+And this was very early. I this is weeks within the companies getting uh uh started because at the time one of the one of the um you know back to the three questions we're trying to answer we're trying to figure out whether or not we could acquire enough dashers enough drivers was well if drivers only cared about money well we're ultimately going to lose because obviously it's more valuable to transport David than a burrito or a coffee and and so we were testing this you know we were almost you know trying to confirm or to deny this hypothesis so I ran that experiment what What I learned was well actually they're two groups of completely different people.
+
+The Door Dash drivers um they were younger about half of them were female or women and they had all sorts of vehicles. Some of them drove motorcycles um scooters, bikes, uh yes cars but but but but not exclusively cars. The Uber X drivers at the time were um usually men in their 40s. Um I think almost exclusively men. Maybe there were a few women in the group, but almost exclusively men. Um all of them drove vehicles, cars, uh sorry, four-wheelers. And and they viewed that job almost like a full-time job.
+
+You know, in some ways they're moving from taxi 1.0 to taxi 2.0. and because some of them had formerly duh drove for taxi. The the dashers on the other hand came from a variety of places, schools, hospitals restaurants retailers service businesses, moms. I and and then if you look at it today, there's almost no overlap, very little overlap between ride sharing drivers and delivery drivers. And the dashers, more than half of them are women today. They come from dozens of industries literally I mean um every place the average dasher only does three to four hours a week 90% do drive fewer than 10 hours a week and so it just became a very different setup you know the delivery
+
+they kind of self- selected into what they self- selected
+
+I wonder if there's that insight that you derived there is like it's kind of what I'm getting to is like how do you find the people like the engineer that is willing to go get in your shitty Honda no offense
+
+and do yeah I feel like that that is such different person than it's a software engineer at Google.
+
+It's a super feeasant or something for lunch.
+
+Yeah, it's super different. Yeah, it's exactly. No, I I think you said it yourself. I mean, if you think about, you know, the the the early days, it was I mean I remember we would at and it's a strange memory, but um we would take a coding break at 10 p.m. to take out the trash because it was an apartment. So, it wasn't like an office building where there was, you know, janitorial services. we were janitorial and and so we would take out the trash. It takes a certain kind of engineer.
+
+It takes a certain kind of person to actually want to work in that environment. But I don't think there was like a background. If anything, it was probably like a personal background as opposed to a professional one in which um we were looking for. But I I I think all of these people had a bias for action. All of them cared about the details. All of them had the ability to hold opposing ideas in their brains. All of them had strong followership. They tended to move with others as they moved from one once they joined a company a bunch of others followed them.
+
+Oh, that's an interesting trait to hire for. Say say that about that again.
+
+Yeah, it's around followership. Okay. they had the they had this ability where um and I I didn't even know the why many times but when you just look at you know you know company A they worked for organization A they started whatever and they tend to have these groups that are attracted to them and they're tend to be quite like-minded um they tend to always want to get better. That was one trait that we discovered. And you know, and you see this, it's not always professionally like trying to get better at some skill all the time.
+
+Sometimes it was they wanted to be the best burger maker or they wanted to be the best karaoke singer and they would literally like tell you about their process in which they would on the weekends improve every single week. But that's not that different from if you think about the scientific process that we're recruiting for or trying to institute in our systems here at Door Dash. It's very similar actually, very very very similar. There was an obsession almost um to some activity uh and there was a system that they devised for themselves to actually get better.
+
+Those were the traits that we looked for as opposed to what company did you work for etc. You have a great quote where it says, uh, Door Dash has always been a company where bias for action is the way we solve and settle debates. We don't debate a lot. We tend to ship hundreds of thousands of experiments a week. So, you're not saying an office or that conference room behind us mapping things out and like, oh, I have an hypothesis. You're just like, "No, we're just going to experiment. We're going to get to the truth as fast as possible."
+
+Yeah. I I I I think Well, because so much of the phys big part of this is because the physical world, so much of it is there is no analysis you can run on it sometimes. and and or and or or or or it can be very counterintuitive. Um and you know, for example, had we not done deliveries in both Palo Alto and San Francisco, maybe we never would have landed on the idea that you could deliver maybe faster or more economically inside of a quote unquote suburb than a city.
+
+It's almost like an earned secret. You read um Sam Walton's autobiography a long time ago.
+
+Okay. So he has that line in there because
+
+he his main competitors Sears Kmart there was people had the idea before he did and they're like they're in the city center. He's like well I'm in Bentonville. I'm in like he basically said like if we didn't he he was resource constrained and so he's like I didn't have a lot of money so I had to start out in these lot these small towns and if I didn't never did that because I was forced to because I didn't have the money that Kmart or the other competitors had. I didn't realize how much business there was out in these little towns.
+
+And then the earned secret that he had was if he could compete on his his you know organizing mantra was everyday low prices. If I can actually sell this same item to you cheaper, people would drive in human nature vast diff distances to save money. Yes.
+
+And what was interesting is Bernie Marcus, founder of Home Depot, realized that same exact uh idea like 30 or 40 years later applied to a different um different different
+
+industry. Trains definitely breed I mean creativity. I mean for us because we had no money or because I was so unsuccessful you know raising money in the earliest years we had to run these experiments. If you think about it if a company has no ability to compete with budget and other companies are outspending them with marketing dollars as an example. You only have one way to compete which is you have to build a product that has better retention better engagement. You have to there's no other way.
+
+So what do you think when you see these giant like seed rounds that we're seeing now? It's impressive is what I think. I think it's really my encouragement to those founders is to actually find a problem um worth solving first, but then once you find the problem to actually go and solve the problem because at the end of the day that's going to cover for you know whatever financial you know metrics um that they're going to be solving for. Yeah. One of my favorite um because everybody's like well I need more money because if I have more money I win.
+
+And one of my favorite historical anecdotes. You ever read the biography of the Wright brothers by David McCulla? No.
+
+Oh, I know you like to read history.
+
+I do. I should probably I should probably check that one out.
+
+Listen to the audio book if you I know you're busy. Um it's it's great because you know human powered fight was a centuries old problem. Like people were trying to figure it out over and over again. Uh the right at the same exact time the Wright brothers were trying to do it. They had better funded competitors, better brand names. Sure.
+
+I think it was Samuel Lang Samuel Langley was I think backed by like the Smithsonian. And I think he'd raised like $500,000. This is like a crazy amount of money there. And uh there's a great line in the book where like uh essentially the Wright brothers solved the centuries old problem with the modest profits from their bicycle business and they tallied up how much it cost them. It was like $1,500. That's incredible.
+
+Which I absolutely love. I want to go back. Uh you you make some jokes uh that I maybe there were jokes, but I laughed when I heard you say this that you're like, I must be a really bad fundraiser.
+
+What is this like thousand days of hell? Can you talk about this for your you're trying to tell and it's weird because the the the metrics in the business were all trending in the positive direction, right? They were.
+
+So explain what the hell was going on.
+
+Well, so one of the hardest things I think you you learn as a founder and certainly as a CEO is you have to learn how to control your own psychology because there's lots of things that are going to be out of your control and that won't make sense to you. And this happened very early um you know with Door Dash. Um, I mentioned earlier that we had uh a difficult time raising the seed round and then this, you know, difficult uh event at with Stanford football in which we we ran out of even our money faster.
+
+Um, but we survived that. Um, we raised the seed round. Our series A, series B were hot rounds. You know, we uh we I don't know somehow was able to raise money in less than a week, something like that in each one of those instances. But in the spring of um 2016, you know, a few things happened and this is probably when I first started learning about the importance of dealing with your own psychology. It was actually the first time I took a vacation. Uh I think it was so we started the company June uh I guess January 2013 June January 2013 January of 2016.
+
+So about 3 years or so. So I'm first vacation 5 days with my wife. We didn't go on a honeymoon. So I promised her that uh that we should we should make up for that. And so we go for 5 days I think to Hawaii. And uh we were uh actually we had received an inbound term sheet actually. So things were going pretty well um to raise our series C in the winter of 2015 in the spring of 16. And I asked I remember specifically asking the investor um why don't we just close this like you know why don't we just close this now like before the year.
+
+He's like no don't worry about it. You've never taken a vacation. Go take go take your honeymoon. Everything's going to be fine. um you know, we're we're we're good for it. And I said, "Okay, all right. I I I'll go with you on this one." You know, my intention and my my my style is usually to get things done quickly. But I said, "I'll go with you on this one. I I owe this to my wife. So, we we go to Hawaii, have a great time, come back in January, and the markets actually tank, the public markets." Um so, that's the first thing that happens.
+
+you know, companies at the time, companies I remember, I think it was like LinkedIn when they were still a independent public company or Salesforce, they drop 30 40% something like that in value in a matter of like a week or something. Um, all of a sudden analysts and, you know, uh, Twitter at the time, you know, maybe wasn't as big as X is today, but they had all the commentary about how, oh, this is the beginning of the end, right? Finally, like the bubble's going to burst. And that very quickly trickles to the private sector uh private uh companies and private financings where investors start backing out um including from the Door Dash series.
+
+And so this is the start I would say of three years. So, you know, um, where Door Dash could raise very little money, a fraction of what our peers could raise and where we encounter several bouts of almost running out of cash. But you're right, there was this tension internally because, okay, so here we are. It's the markets are going down. All of a sudden, the narrative for Door Dash was this, you know, really hot company now is a company that can do no right. You you can't ever make money.
+
+You can't beat all these competitors who are better funded. At the time there was Uber, there was Amazon um uh uh who were who were either coming in or who already were in or announcing you know um more expansion. Um and even if you win, you're going to lose because this is a money losing business or a forever money losing business. Those are kind of some of the headlines or the the themes behind the headlines. But at the same instance, you look at the the metrics on the inside and you actually see everything going the direction that you would hope as an entrepreneur.
+
+You see repeatability from city A to city B to city C. You see unit economics improving. And the reason why the company wasn't profitable is because we were constantly launching new markets. And new markets require investment in the beginning because you're actually paying um for drivers to make sure that they can stay on the road even when you have no business. Um and so that was what was happening internally. That happened for about 3 years though. um where it we were kind of stuck in this one of these cycles, macro cycles, investment cycles where the company could do no right.
+
+The sector was viewed as toxic and that was certainly, you know, probably the three years in which I certainly had to learn how to deal with my own psychology.
+
+So, how were you doing that?
+
+There was no one way. I I think the first thing is you have to make sure that um I think a lot of times it's very easy to believe in your own And so the first thing you know I think a place like Door Dash which is very intellectually honest is well what's what's actually real um versus what maybe people are saying and so we used to do this u because we could fit all in one conference room the all hands I would show every metric in the company um including our cash balance which is obviously going towards the x-axis and people are getting nervous but people are asking a very good question which is Tony I don't get it the cash balance is coming down but the business is going the opposite direction.
+
+It's going up and to the right. And the way that in a very organic way, we weren't spending. We didn't even have a marketing team, let alone a marketing budget. We didn't have money. People were very confused. So, job number one to me was actually put the company in the best possible place by focusing on what we could control because otherwise I'm going to go crazy. I'm I'm going to go crazy and we're actually now going to, you know, put the company in the best chance of success. And so we got a group of I think it was maybe 20 25 people.
+
+The people that kind of ran a lot of different important areas and basically brought them under the 10 said look we have to do the following. We got to keep growing and keep taking share. We got to get more profitable and we can't run out of cash. And there's no ore in any of these statements. It's an and function across all these statements. And that was ultimately what I just kind of kept obsessing over, you know, because if I obsessed over anything else, the markets or what people were writing about us or another rejection from an investor, if I just obsessed over what was not in my control, I think I was going to go certainly nuts.
+
+That was, you know, certainly part one, focusing on what I can control. Part two I think is and this is another lesson I learned during during those years is that I think this can be risky but I actually think that it's really important and undervalued to have to have genuine friends at work and meaning that this can't just be about a financial success or a commercial success or some professional success on the resume that there is this adventure if you will that we're on on this worthy the eternal mission and that at least we're going to die trying, right?
+
+Worst case, we're going to die trying. Kind of like the Stanford football example day. Yes, of course, we want Door Dash to make it, but what gets you through the next day isn't thinking about Door Dash as much as I just want to make you to be successful, like my teammate to be successful. And so this willingness to think about someone else in addition to just thinking about your own problems, I think actually made this a bit easier to go through. And then the final thing is, you know, back to trying to find to build anything out of things that don't change.
+
+One thing that I've been able to keep throughout the Door Dash chapter so far is just my exercise routine. So it the the routine itself has changed, but you know, back then I was really into running marathons, things like that. just keeping that up, having something that was a bit of a constant in my life, whereas everything else was out of my control, extremely chaotic, usually extremely negative. And part of the routine was also date nights with my wife. So, there was no one thing to answer your question about how to manage my own psychology.
+
+And trust me, I didn't, you know, have my thing all together during every single period. But that was kind of when I look back, what were the things that got me through it? What were the things that I kept trying to tell myself, you know, in my notebook of what to do every single day? Those were the things.
+
+Yeah. You control what you control. And I love this idea of having a mission bigger than yourself
+
+because you have this great line where it's like at some point willpower is going to give out. Like your own personal willpower is going to give out. Especially cuz you're doing this is over a thousand days. How many rejections? How many nos are you getting from investors?
+
+I stopped counting after 50, but it was over 100.
+
+That's incredible. To this day though, you don't I heard uh so we have a mutual friend of Robbie Gupta. Yeah. And you went on his podcast and uh you said, "I don't look at the stock price. You try to get everybody else not to pay in the company to pay tre." And he goes, "You had to remind me of our market cap because I don't know what it is."
+
+Yes. Yes. That's still the case today.
+
+Yeah. I mean, I I I back to the things that I can control, you know? Well, I mean, usually our our finance team will remind me of the market cap during earnings calls and things like this, but like but sincerely speaking, it's not something I get to control and it's also not what is fulfilling or motivating to me. You know, what am I going to do on a daily basis knowing what the stock price like? Am I going to behave any No, I'm not going to behave any differently. Um, I'm probably going to still stick to my routine, which is I'm going to spend time with, you know, our teams that are, you know, trying to make sure that they can hit the year.
+
+there's one group and the team that is trying to invent the future and there's several of those teams and then with customers that's how I spend my time.
+
+I want to talk about that. I I just be remiss not to mention this because again I don't know why every time I hear you speak and now having this conversation with you personally it's like there's just so much like Jeff Bezoses stuff going on here. I think you already know this, but there was a time in Amazon history where he talks about this and I think I don't know what the exact numbers were but the stock price went from like 180 down to like six. And his whole point I think he talks about this in his shareholders I think it dropped like 90% or whatever the number was
+
+and he's like yeah but I he they're like I was I wasn't focused on stock price I was focused on the internal metrics of the business and they were all getting better and better and better and constantly improving. So he's like I knew this was just this was temporary like I will get out of this. I will survive because I'm going in the right direction. What is this idea you you had this this saying where you like as an operator you need two management systems. I think you just dropped a hint right there in what you said earlier.
+
+Yeah. So, if you're so lucky as an entrepreneur to one day find product market fit um where you can organically grow um and and and and build a business that's self-sustaining that generates cash, in other words, you have the privilege now of making a choice. That choice is, you know, keep doing what I'm doing um or to keep um expanding in in service of our mission. And when you look at I think um and and one of the reasons why I I think Amazon is inspiring or um a lot of these big tech companies now actually um is they tend to do two things at the same time.
+
+One is they continue to build the core business the business that kind of got them you know to their place both in terms of their place with customers in terms of what they're known for as well as their financial place where they can invest from. but they also do new things and they you know launch the next thing or the next thing or you know um they're trying to create the next thing and those are two very different systems you know one system is about making sure that you can constantly reinvent yourself almost you're trying to build the next version of the product to disrupt yourself to build something that is 10 times better than what you have today um while you're also running the machine at the same time right so it's like you are flying the airplane.
+
+It's a big airplane. You're carrying lots of passengers and you're going to do a midair engine transplant, right? That's one type of system um that that you're constantly trying to build. And then there's new stuff there. It's not even an airplane. It's like a paper stick airplane. It's like a paper airplane. There are no passengers, no nothing. You're in search of product market fit all over again. And they required different ways in which you measure success. They require usually different talent. Um they require a different amount of resourcing. They have vastly different timelines in terms of rate of progress and they tend to have a lot larger airbounds on some of these newer areas.
+
+And and it's really hard to do because the more successful your big airplane is, the more probably paper airplanes you're going to have to have. And they may be very expensive some of those, you know, paper airplanes that you're going to build. um because you need more shots on goal to keep up, you know, um the kind of this this big business that you're trying to move um in ser in service of your mission.
+
+So the people scaling the the businesses in Door Dash that are post product market fit, right? And then the inventors are they are do you separate these people in We try to.
+
+Okay. Separate buildings. How how extreme? No, no, no. I was just saying like do you even take it to that extreme like separating
+
+separating them like physically like how do you do this?
+
+Yeah, usually that happens but that that's that that that that I don't know if is as important as you need very different goals, goaling systems and incentive systems. Um and you know that is probably more important than physically necessarily where they are per se. Um you know some you know Door Dash today also you know operates in more than 40 countries. So it's it's tough to get every single person in exactly the same location. Um but you know it's very important though to to to separate how you actually track, manage, measure incentivize um you know these projects.
+
+And so that that's more what I'm referring to.
+
+Are you making these decisions about like we're going to allocate this amount of resources, this amount of time, this amount of people to these experiments? Like how does how do you actually structure this?
+
+Yes and no. I mean, if I had to make every single decision, I mean, Door Dash would certainly move a lot slower than than than we would um want to move. Um, but certainly I have to set the standards and the pace, if you will. You know, that's kind of what I view a lot um of my job. And um and so usually how it works is um well, first of all, anyone should be able to come up with an idea. It it can't be somehow that only the leaders come up with the idea.
+
+Usually it's the people closest to the problems that actually come up with the ideas or have the ideas and you know if they can run an experiment you know back to uh this process that actually demonstrates some viability of success that customers actually want this product then it starts um you know entering the phase where we can evaluate whether or not we should actually pursue it during our planning process. And you know through the planning process then we decide you know okay well how many chips should we bet in project A versus B versus C.
+
+And some projects look they're not all starting at the same time. Some projects are older. Some project projects just got born. And so it's almost like an internal venture system if you will where it's stage gated. There is no oh you get all the money up front and no um you kind of have to earn your right to the next stage and um and that's going to be based on how well you're solving that customer problem. Where did you get that idea from the this internal stage getting like essentially treating it as like internal venture capital?
+
+Well, I you know, a lot of it came from Door Dash's own history where Door Dash kind of worked this way, right? And and maybe some of it wasn't in the exact, you know, formulation we wanted, but um that's how Door Dash was born. You know, you started with little resources or not a lot. Um and as we got progressively more um successful or or discover more product market fit, we were given more resources. And to me, when I think about the the things that we um built that were the most um that most solve customer problems, it tended to be when we were most resource constrainted.
+
+And it's just so I I I do feel like that's important to to know whether because the most important thing again when you're starting something is do you really have something or or you just you know believing that you have something and you don't get to make that call as the inventor. It's the customers that you're inventing for that ultimately are going to tell you whether or not they're going to buy or not. And so that's the most important thing. We're we're trying to make sure that we actually can create something that is 10 times better than the status quo.
+
+Um and then if we can do that, yeah, of course we'll keep scaling. Now some projects cost more money to start, but that's just the nature of the problem, but we're still relative to its size giving it a small amount of budget to begin with.
+
+Are you also learning from your peers? Like the reason I ask is because uh we just did I think one of the episodes I'm most proud of so far for this new show is the one we did with Toby Luke. Okay. And I was really excited to talk to Toby because I'm constantly asking world class founders, who are you learning from? Tobyy's like your favorite founder's favorite founder and his name kept coming up over and over again. And that was the conversation I had where it's like you ask a question and you you cannot predict what's going to come out of his mouth next cuz he has all these like uncorrelated ideas which makes for a very like fascinating conversation.
+
+So, like what are who are the people that like you've either built relationships with or you've like studied like your peer group uh that you're also like learning from and like taking ideas from?
+
+Yeah. Well, I mean I mean you're right, Toby is absolutely great. Um and um well well first of all uh some of the peers I have are just people that I grew up with, right? Like if you think like one of the benefit which we didn't get into was one of the benefits of you know Y Cominator besides just being a forcing function of whether or not of testing our commitment um you know to the project uh was actually the peer group but we actually never got into that part where you know if you think about like the 2010s right so the companies that grew out of Y cominator that we kind of grew alongside with maybe we were slightly in different batches or you know not exactly in the same but whether it was the Airbnbs Stripe, Coinbase, we all kind of grew up in the same era, if you will.
+
+And so, as a result, got to know each other um through, you know, different events and venues and things like this. But trading notes, you know, uh with one another, I I think certainly was and and we've all had our shares of, you know, challenges and and and triumphs. Um and then looking at companies that are ahead of us, right? um you know in my not day job in my other job I play a small role in Meta's part where I serve on the board um learning from you know founders like Mark um who certainly have built companies that are at a different level of scale um versus where Door Dash is at.
+
+Let's stay on Mark for a second because um we were talking before we recorded. I got to spend uh some time with him. I had a few conversations with him and came across like even more impressed than I thought I would be given the fact that for his age he doesn't really have a peer and I actually told him that. So I was like I wish you did more podcasts and talked about how you built a company that no one else your age is even remotely close to. But like what are some things that you like you're on the board what are some things like you've learned from observing him?
+
+Well I think the first thing that impresses me a lot about Mark is this willingness to always learn new things. I I think one of the the the the traps, if you will, of success or fighting your own psychology um is actually not just the challenging parts about that when things aren't going well, but it's also when after things go well and maybe you actually have achieved some milestone. Um and one of the trappings of success is actually wanting to hold on to it. And what you see in someone like Mark and the team I would argue at Meta is this willingness to reinvent themselves um betting early for example on um building a different platform in the case of you know virtual reality augmented reality um obviously they're going all in on AI um and those things take a ton of courage there's not a lot of data you know early on in a either a platform shift or a new technology is arrival to know whether or not you're on the right track all the time.
+
+But you got to place the bets um you know before you can see the success. And I think that that willingness to learn a new domain where you're the rookie, where you're going to stumble, where you're going to get criticized, misunderstood, you don't know the answer. um which is the opposite, if you will, of the successes maybe that they came from in terms of the previous businesses they've created. That is really impressive. That willingness to always be the beginner, to always go in the arena and and and and and sweat and bleed and toil and and and struggle.
+
+Um that's really impressive. You both share a love of jiu-jitsu. Have you found anything from your jiu-jitsu practice that uh like you brought back to your day job?
+
+Well, jiu-jitsu is a is a fascinating um activity. I mean, it it is it's like some version of physical chess. It's a great way to think about it.
+
+And it's almost like an exercise where there's so many um opposites that you have to hold at the same time. The best jiu-jitsu athletes can both be extremely firm and strong yet at the same time extremely relaxed. Um, they're very capable of being intentional with their game plan, but then give up and release their agenda within a nancond if they see that they're losing their position. I think the willingness uh of how to be so flexible um is certainly something that I I I think I'm trying to teach both myself in my personal life and also um bringing that back at to Door Dash.
+
+I think the other thing is just, you know, no different I think from frankly any craft, the the willingness to just get 1% better every day. Um, in a particular position, any particular flexibility exercise to actually just improve your balance in order to hold a position. very small things um ultimately compound when you look at the elite athletes, the not someone like myself, but the elite jiu-jitsu practitioners um who win the world championships or who win medals at events um they all have that and when you actually talk to them about their craft, it's the tiny details.
+
+It's the edges of a move. It's actually not some, you know, silver bullet that they're looking for in a match or something like that. In fact, actually, these matches at the most competitive levels are decided by sometimes not even points. They're decided by like what are called advantages and that is, you know, one thing that I think is just a great reminder that you always have to be trying to master that craft.
+
+I have to ask you about how AI is changing the way that you guys are running a business. You have this great line. said, I think some of the technical advances like AI have given people new ways to run companies. Yes.
+
+How are you using it? What are you doing? How's it affecting your work?
+
+Yeah. Well, um it changes by the month. So, I I uh this is a this is a question that if we were to talk, you know, in the future, I'm I'm not sure it' be actually the same answer. Um well, one of the first things I would say is, you know, I think about some of the systems that we've architected here about how you can learn from doing things that don't scale all the way to um shipping, especially with something like coding. Right now, I I think where the agents are, they're they're still good at what I call, you know, functional tasks.
+
+Um for example, coding. Um but outside of coding and looking at cross functional areas, they're not quite there yet for for a lot of reasons. But um but within something like coding, the things that you could do today um where uh anyone actually, frankly, it doesn't have to be anyone of any function. anyone can come up with an idea, run the prototype, run the experimentation and the analysis and then actually ship to a small group of people all by themselves. Um that is very impressive and and that collapses if you will um you know the the amount of activity required or speeds up the the learning loop you can have in any scientific process inside your company that touches code.
+
+That's very cool. Um second, um LLMs, you know, what are they good at that humans are not good at or less good at? Well, they can have almost infinite memory and infinite context and search across any sort of file. Um okay, so then the question becomes how do you actually feed it the right information? And if you can feed it the right information, it probably can do a lot better than humans can at the same activity. So I think those are two areas in which whether it's speeding up your learning processes or actually improving um the same activities right now that are effectively manually done um to be done with higher not just efficiency but also effectiveness.
+
+Would there be any benefit for you like partnering with one of the big model companies with all the the physical data that you're guys collecting or you would keep that proprietary? most of the information to run you know Door Dash to be a great service um you know are things that we use for ourselves and the reason why we use them for ourselves is because I it it's not just that simple like oh we just give away information and then somehow someone's going to be able to do something positive with it.
+
+You also have to take the action that the data kind of suggests. For example, if the data says something is missing in this order um or the dasher is at the wrong location um and cannot find the customer. Let's say that those are all parts of you know pieces of information. some corresponding action has to take place in order to actually solve the endto-end job in order to get the item that was missing or in order to actually find the customer um you know where the dasher is and and so a lot of Door Dash is sure we have a lot of information but we have to do something productive because it's the endto-end job that ultimately you know we get judged on um with customers and so I if we can um partner with anyone frankly in order to solve the endto-end problem better of course we would do that but I think it's very hard sometimes to just give away something um if there is no ability to you know correspond that with action that ultimately will solve some customer's problem.
+
+Think about like what a wild ride you're on like you start the company and your competitors are literally using fax machines to now we're in like the age of AI.
+
+You have this great in 13 years.
+
+Yeah. And I I love this quote and we'll end here. Um but you have this great quote where it's like there's just no way better way to be an expert than to just do the work. You might be surprised at how quickly you get to become the expert.
+
+Yeah, that's beautiful. Thank you very much for the time, Tony. Uh I think we just like scratched surface. I think there's a lot of things that you said today that I haven't heard anywhere else. I'd love if you just come back on every, you know, a few months, every year, whenever you want.
+
+Sure. That was fun. Thanks for making time. Thanks, David.

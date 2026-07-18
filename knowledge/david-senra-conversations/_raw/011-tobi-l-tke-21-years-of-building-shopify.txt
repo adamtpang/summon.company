@@ -1,0 +1,2115 @@
+- One of the things I admire most about
+- Yeah. - you is, like, you've been running your
+company for 21 years, something like that. I love people that do things
+for a long time, people that chase excellence,
+that try to be great. My entire life is founders, right?
+So during the day, I read biographies of history's greatest
+founders. I've read, like, 410 of them, and then at night,
+I hang out with founders. I don't think I have a single friend
+that's not an entrepreneur. - And then,
+- Love it. - I'm always asking the
+founders I most admire, - who are the founders they most admire,
+- Yeah. - and your goddamn name comes up
+over and over and over again. And what they talk about is that
+you have very unique ideas on company building
+and management, - and they use the word 'singular' a lot.
+- Yeah. - So, I want to kind of lay out
+how you think about building companies, building products,
+building technology, and then, you know, spreading
+the gospel of entrepreneurship. I want to start with one thing
+that you said. You said,
+"Companies are technologies themselves." What do you mean by that? - In a lot of ways, I mean,
+take the social angle. A lot of companies are social technology
+in the sense that they allow us to go all-in. The only time you are really allowed
+to spend, I don't know, eight... I'm going to say eight because
+that's the right number to say, really, like f****** fourteen hours a day,
+right? Just singularly pursuing
+a thing is like... I mean, we want kids to spend this
+time in school, and that's okay, and then university,
+you dedicate yourself. Other than that, you can't just, like,
+not have a job, but just be
+really, really into things. It's socially not acceptable.
+So, company building turns out to be
+the perfect excuse. Once you call it a company,
+it's not like tinkering around anymore - with your ideas, and
+- Mm-hmm. - you get to explore things. What a company fundamentally allows
+you to do is just run the counterfactual to the world you see around you, right?
+Like, you get to try to build a thing that you think ought to be there, and then you means-test it
+against the market, and if a market agrees with you that
+this thing needs to exist, it moves energy in the
+form of money back to you, so you can do more of the
+thing that you were pursuing all along. And not only that,
+it's like self-financing. Like, if you find out... Again, I started a company
+which I didn't think was going to be have this very, very big market, and
+along the way, the market pulled Shopify out of the project I started,
+essentially. You know, that's an
+incredible intelligence to tap into. So,
+you put all these things together, and you say, like, "Well, look, the
+concept of companies is not that old." It's like, we are on a 500-year run,
+and sort of, kind of extracted from things
+called companies, which were actually more like quasi
+governments, like the East India Company. And so, the modern
+company is not that old. I find that if you take
+that mindset, that companies are just sort of
+a path-dependent solution to social and somewhat legal problems,
+they allow thousands of people to
+join your project, and it's called a job, and
+therefore, everyone accepts this. And obviously, you can make money,
+so it's a good deal. And then you can figure out if
+this counterfactual of yours might be correct or needs updating
+along the way, or any of these kinds of things.
+And you could, at the end of the day,
+if you are lucky, you work with other people who
+are really all-in and inspiring, and taking it further than you ever think.
+And just the whole thing is just like... I marvel at the institution of
+a company in a way, because if it wouldn't exist
+for some reason, and someone would propose the
+whole idea now, it would sound insane. Like, from first principles,
+none of this makes sense, really. - Well, I heard you say something
+that was fascinating. It really piqued my interest
+when you were like, "We do not know how
+to build companies yet. All companies are terrible, - including mine," which you said.
+- Yes. - And, you know, that's
+- Mm-hmm. - hilarious when you're running a
+200 billion plus dollar company, and you think that in the next
+twenty years, we're going to look back at what we were doing
+at this point and be embarrassed by what
+we were doing. Why do you think that? - Because it's like everything else. I'm sure even you listen to
+your first podcast, - you're like, "Oh, my God!"
+- Oh, please don't. - Please don't. - But honestly,
+this should be seen as the most joyous of moments. You should
+actually do it if you haven't done it. - No, I do it all time. Yeah.
+- Okay, good. - The difference between that
+and what you would do today - is your progress, right?
+- Yeah. - And as a computer programmer, I experience this all the time. I look at
+old code, and it's like, "What the hell? Like, this is terrible. Why would I ever do this?
+This is way too abstract and complex." But I made it better because
+I now have the skills to do so. And one of the saddest days
+of my life was when I opened old code and
+was really impressed with how good it was. - That was one of the saddest days?
+- That's really, really - the saddest day of my life,
+because I'm like, "Holy s***, the implication of this just
+hit me like a train," right? - That you weren't progressing - and you weren't learning.
+- Exactly. - It figures, because
+- Yeah. -  I wasn't programming all day.
+I was trying to, you know, build a company instead, which
+honestly is very, very similar. - This is one of the things
+Daniel Ek told me about you. - Yeah.
+Here's what I'm observing. Like you, I read a lot of books.
+I try to figure out... Like,
+if you don't read books, you live a lifetime. If you read books,
+you live a thousand, right? - I'm going to interrupt you
+real quick, because I took notes on this podcast
+six years ago. This is the first time I came across you,
+and you said, "Books are the closest thing you'll ever
+come to finding cheat codes for real life. You can access the entire learnings of
+someone else's career in a few hours." - It tracks,
+doesn't it? - Yeah. I mean,
+I dedicate my life to this, so - of course I'm going to agree with that.
+- Absolutely. I mean, - you're predisposed to agree with me,
+but I really think we need to shout this more from the rooftops,
+right? The one weird trick seems to be
+just read books, right? And it kind of doesn't matter.
+Just make a habit of reading books, and ideally, change genre
+every three books or so, at least for one book, and then
+that alone will give you a range that you can draw on for basically
+everything you'll ever do. So, look, I read lots of books,
+lots of them, you know, especially when I went from
+programmer to a business, realizing I have to just learn
+business really quick. I got really dismayed with the
+quality of business books pretty quickly, because frankly, I think the
+business books are largely written by the people who have time, who are not the people who
+actually build companies, frankly. - Yeah. - And so you read
+between the lines as well. Depends on if a person who starts a company or a person
+writing a book is a salesperson, every problem can be
+solved with sales. If a person is a marketer, clearly, every
+problem can be solved with a marketer. And I mean, at least that I can take away
+as a trap to not fall into, right? So, I was determined to not be the
+engineering-type founder who was going to see everything as
+an engineering problem, because that would be called blindness,
+and that would cap my capabilities. So I really tried everything,
+including, you know, just how to build the team in such a way that
+I delegate everything, and I have my different business lines, and
+arrange things. This is sort of after the IPO, and I realized I have to be
+a very "serious" public company CEO. And so it almost killed
+the company, honestly. - How did it almost kill the company? - It was actually COVID that saved it
+at this point. Like, I had the inclinations that something
+was really, really going poorly. It was a time we didn't have
+a lot of competition, which is also really,
+really hard for businesses. It's not a good thing at all,
+because again, you don't have good rivalry,
+and you can't sort of, like... Even if something seems really good,
+you don't know, because there's no one else to
+keep you honest about it. You have a distinction between a
+competitor and a rival. - Yeah.
+- And you think competition is one thing. -  Rivalry is really good. - I mean, it's the same, but it depends. It's a mindset change. I think again,
+if you compete with another company,
+like there's a lot of, "We need also a version
+of what they have," copying, like you do
+with Xerox strategy very quickly. Companies tend to get obsessed. There are companies, the most
+active channel in their Slack is a competitive analysis channel
+where people just bring everything
+everyone else is doing. And I think that while that has some merit, I think the problem is it makes companies very reactionary,
+right? Like in the arts,
+part of everyone's art studies, or at least in fine arts,
+you copy the great pieces, you make copies of great works. Your next painting is not at the quality
+of a Van Gogh. You just copy it, right? So, mimicry is actually not an
+excellent way of getting to excellence, and companies end up falling
+very much into this. Whereas if you treat someone, like,
+other companies in your space, as rivals, much easier to have a positive
+sum-outcome there, because rivalries inspire you to be best.
+Like, Agassi could not have been Agassi
+without Sampras being there, right? And he very, very clearly
+states this in his book. The Sampras that existed
+during the Agassi area, that Agassi understood,
+wasn't a real person. When you read Sampras' biography,
+he just liked tennis. - Yeah, and Agassi hated it.
+- Agassi hated it. - And so the rivalry he created for
+himself created him in a very real way. In "The Last Dance,"
+which I loved, Michael Jordan, he admits that he
+might have made up -  a slight at some point, which
+- Yeah. - to me is like one of the
+most profound moments. Sometimes I play "The Last Dance"
+in the background while at work. It's my favorite documentary. - My second favorite one is
+- It makes so much sense. - "The Defiant Ones." It's about the partnership
+between Dr. Dre and Jimmy Iovine, the multi-decade partnership. - That's good.
+- That's the description. - That's not what it's about. It's one of the best documentaries
+about entrepreneurship. - Interesting. Hip-hop/rap history
+is incredibly entrepreneurial. -  It's fantastic.
+- So, we just recorded with -  Jimmy Iovine, who's the star
+of the documentary, two days ago or
+whenever this was. - I don't even know what day it is.
+- Amazing. - And that's exactly what he said. - It's like they understood the business
+- Yeah. - of music before anybody else.
+- Yep. - That makes perfect sense and totally
+tracks. You can see it from outside. Actually, we see it from inside.
+Like, it was the first category of music
+that just killed it on Shopify. It's like opportunity is
+converted into products like that, and it's like they're made
+different. It's really, really cool. Like, this is the beautiful thing about
+Shopify. It's a front-row seat to just seeing how high-agency
+the different industries are, and how quick they absorb new ideas. And anyway,
+it's a different topic, but like... - Almost like in a video game, like a
+god-level view of entrepreneurship, because you... How many entrepreneurs
+are on the Shopify platform? - It's like millions, right?
+- Yeah. - And you're drawing, like,
+insights for your own work from the entrepreneurs
+on your platform. One of them we'll talk a lot about today,
+was like, the importance of differentiation. - Mm-hmm. - But I want to come back to that.
+I want to go back to, like, so you were thinking,
+"Okay, right after the IPO, I'm going to approach everything, - this as like an engineering problem?"
+- Yeah, I'll cosplay a company, - a public company CEO,
+like a 60-year-old guy in a suit. - Like, a legal background, right?
+- Okay. - That's sort of what everyone
+emulates for whatever reason. And it just worked
+really poorly for me from a product perspective.
+The company did fine, right, all the way through.
+COVID happened though, and I'm like, "Okay, so what my company needs
+here for me is five different things. One of them is all plans are invalidated,
+fundamentally. Everyone who has a plan,
+just please throw it out. We need to go through everything
+we are doing and rederive it, because, again, everything is based
+on a very long tree." Like, you start with axioms, and then you
+make a huge amount of decisions on top, and then you get to a conclusion,
+and that means this is how you spend your
+day to day building this thing because of these things. If any variable along this way
+is invalidated, what you should be doing is
+rederive the entire thing on top, right? You should always prune back
+the decision tree all the way there and go forward. People not being
+able to go out of their houses, it's one of those things, like... I don't think we all knew
+that was a core assumption we had, that people could just freely move around
+in the world, but we got told that we can't do this anymore,
+and it ended up being
+quite long during COVID, at least in California and Canada,
+and some places. So we need to rederive everything,
+and that was kind of clear to me and sort of what I... That's how you structure a
+computer program, frankly. I went through the entire roadmap,
+and what I've figured out is, first of all, that was really,
+really hard to get, and people were fighting,
+even like very much resisting talking about everything
+that's going on. And I found out why, because there are
+just a lot of boondoggles going on. There are just random projects by random people that I would have
+never found out about, all that. - Why did you not know that it was going
+on in your own company, though? - Because the company was like,
+let's say, four or five thousand people. You know, it's sort of quasi-distributed.
+We started in Ottawa, Canada. We had a Toronto office and
+a Montreal office, and so on. And so it just turned out that,
+you know, in the Toronto office, there was a fairly big project to build
+the features to add to Shopify, so you could use it for
+running a supermarket, because just they decided that the supermarket
+industry is very large, and we should go and capture 1% of all that,
+like in the [unintelligible], right? And frankly, I'm not saying
+those were wrong decisions. The sort of really
+surprising thing about building a business or just in
+decision-making in general, is that making the right decision is
+actually child's play, usually. You can make wrong calls which, because the world changes, end up
+being the wrong call later, and so on. That's a different thing. But most of the time, the bad options in front of you just
+prune themselves away. They just don't make sense.
+They're too expensive or just off-mission, or whatever. The problem is, and I think school,
+unfortunately, accidentally drills this into people,
+is that, "There's one right answer,"
+is sort of what people think. And once they find a right answer that
+could plausibly accomplish the goals that they set out, they go with it.
+But that's like... Well, there are probably hundreds of
+great answers, and one of them is, like, far less work, far more... Especially in an engineering project, like, the best solutions are always
+modular and components. You build one thing, and
+it will work with everything else you did. Lots of the bad software that people
+use are things which are just like hairballs inside, where
+none of the pieces fit together, and a huge amount of code has
+to be written to extend the new thing, make it usable from everything else.
+And like, I'm not going to bore you
+with those kinds of details, but if you look at the project brief,
+the team killed it. Probably everyone made their bonus.
+They delivered the thing. It's like an island
+upon itself now that... And after it's delivered,
+nothing else in the product works. - So,
+you were looking at things as like "cosplaying like a CEO
+or a business person" - as opposed to an engineer?
+- Yeah. I was trust-falling. - I was saying, "Okay, cool, you seem passionate, and you seem
+to know what you're doing. I trust you to do the right thing.
+And when I hear... You know, obviously, we're going to keep
+talking, you give me updates on things." People learn pretty quickly what are
+the projects that I'm interested in. Talk to me about those
+and nothing else. People learned how to
+direct my attention to the things that
+they wanted to have my attention. - So, how did you fix that? - The moment I went through
+absolutely every project, I did it myself, took 16-hour days. I canceled probably 60% of the
+projects, and over the course of a year, I turned over every one of my
+executives. This is basically the consequence of this,
+because I just realized that, in many cases,
+the core skill was... Well, I mean, I don't want
+to be unfair, right? It's just that trust was broken
+in many cases, and in a real crisis like COVID...
+Again, COVID was hard, the hardest time of my life
+for sure. And in a crisis, if everyone is a one before,
+some people go to zero in a crisis, some people go to a hundred. And I found
+it's almost unpredictable. In fact, if I would have been betting
+before COVID about who is going to be contributing the most, I would have
+been wrong, I think, entirely. - Why do you think that is? - I have been thinking about this
+for a long time, and I still haven't gotten a good answer.
+I don't think they would have known. This is the interesting thing. I think a real crisis tests you in
+a way that nothing else does, and nothing prepares you
+right for it. I think at the end of the day, the thing that I have found is people
+who can adapt the fastest actually quite self-identify. Now, I would be able to predict it. Very simple:
+"Have you started a company before?" So Shopify is by founders, for founders,
+causing more founders, right? It's a celebration of entrepreneurship.
+We believe entrepreneurship is glorious, and people will reach for their heroes,
+and do modern-day heroics, go on a hero's journey
+with lots of naysayers, overcome incredible odds, and
+lots and lots and lots of headwinds. That conviction runs really deep.
+Sometimes we buy companies, of course. Many of the people we purchased
+are still at Shopify. People don't stay for a very long time
+because I think it's such a place for
+founders and for high-agency people. So, I always had a Slack channel
+with all the founders of our companies that we purchased. I did a founder
+off-site with them once a year, where just like... Because
+I find their advice just to be so good. They all have been responsible
+for people's livelihoods, and that changes you. So, I went to the founders channel
+and said, "Guys, I need help, right? Like, this place is...
+It's crazy here." - Had you already started
+turning over your executives? -Yeah. Once I realized that, I was like...
+- Okay. - And it wasn't one moment,
+it was just like... - How did you know that instinct to go to
+the founders channel and ask for help? - I think that in a moment of, like,
+"Where the f*** do I go? Who do I have most in common with,
+and who can actually relate
+to the types of problems here?" Because again my relation to Shopify is different,
+right? Like, I started it, right? It's different from everyone else.
+But the second-best thing is
+to talk to people who have had this type of
+relationship with a thing they created. You know, I asked a lot of the
+founders to become my executives. In some cases, I took people from
+individual contributors in an engineering team and put them
+in charge of a very large thing. You know what? Every one of those things worked. And it was really remarkable,
+because it really fed into an intuition
+I had anyway. And what I found is, during COVID, the founders of a company
+were actually not doing well because they were similarly managed.
+They were like irritants. - What does that mean? - They don't settle.
+Like, they talk about absolutes.
+If something is s***, they say so. It doesn't matter if everyone has
+agreed to move on or something. It just gnaws on them in a way
+that's deeper than this other thing. - And it's exactly what
+you have inside of you. - Exactly. And so I feel it's a very
+special thing, and companies reject it.
+Companies cocoon them. Sometimes they give outskirts,
+like the skunkworks team, it's daycare for people who otherwise
+tell you that your s*** doesn't smell, right?
+And s*** does smell. So once I'm like, "No, you don't get to
+put them in founder daycare. I'm going to put them
+right in front of you, or, in fact, on top of you."
+And so, you know, the difference that made
+to this business is nuts. And so this is why I'm saying
+COVID saved Shopify, because I needed to take a move
+that was very much, "Okay, I built this company.
+I got to this point. It's important." It's actually maybe even more important
+during COVID than before, because it was kind of, for millions of
+small businesses, their livelihood for this time and the
+only way to make livelihood. And I'm super proud of what we did,
+because I think the businesses that
+started in Shopify and came early, like,
+actually grew and did better - during a...
+- Some of them grew faster than you. - You said somebody beat you guys to
+- Yes. -  a billion the other day.
+- Yes. - which is the craziest thing.
+When have businesses ever raised their customers that
+started on the platform? It's the greatest. I love this thing.
+And so, I mean, again, they're fantastic. They're heroes, they're
+glorious, they're wonderfully discontent. My customers have the
+same irritation with my software. And like I tell you, it's perfect, right?
+It's exactly what I want. And so, this was one of
+those moments saying, "You know what, Tobi, maybe you didn't
+build Shopify completely by accident, and your intuition might have
+been actually helpful, and cosplaying someone else is
+probably not what you need to do." - At that point, you were running
+Shopify for how long? - Fifteen years?
+- Now, it's... Yeah, about that... - So that, you were fifteen years... - Fifteen years, yeah.
+- This is very common in biographies. I think it would surprise people like,
+"Oh, why did it take so long to figure it out?"
+It's like, no, it takes a long time to actually build the skills.
+And then the important thing about intuition,
+it has to be refined. - Yeah. - So it's like,
+maybe in 2005, you shouldn't have been
+trusting your intuition. - "Trust your gut" is sometimes good
+advice, but it really depends on your gut. - Yeah.
+- So it's like, - no one is born with
+intuition for building businesses. Because, first of all, building businesses are completely...
+Every decade is different. Like, some problems are persistent. Like, I laughed.
+I listened to, I think, the episode you did
+on Larry Ellison. You were describing his frustration
+with problems in his sales team, which literally, I had to.
+It's like, "You know what? I didn't actually
+have to live that horror." I could have actually, like...
+There, if I would have read the right... - If you read software - or any biographies...
+- Or I listen to... - Or I listen to founders.
+Yeah, there you go. - The incentive problems around - commercial teams, it's like...
+- Yeah, it's just like... - But that's the amazing part. I'm glad you picked that up,
+because he's like, "I'm f****** embarrassed." - He's like, "I'm 40-something years old."
+- Mm-hmm, yes. - Yeah. - "I've been running
+this company forever, and I didn't understand that incentives
+with my sales team mattered," - and they almost destroyed his company.
+- Yeah. Yeah. - They almost went out of business. - I usually listen to podcasts
+when I'm sitting in my racing simulator to practice
+for my next race, and it got to that point,
+and I had to go, "Okay, I have to stop and
+just listen to this, because I'm just feeling so much empathy for Larry Ellison of all people."
+How funny is that? So, anyway... - Who's that empathetic person?
+Before you move on, because I love where you're going. I can't
+help myself, because you know this. It's like, when I hear you saying, like, "I'm getting rid of the executives. I'm going to build
+an executive team of founders." That's not a new idea.
+Rockefeller was doing that 150 years ago. - It's interesting how the building blocks
+that, largely, Rockefeller invented... I mean, we call these things trusts,
+because that was a term - Mm-hmm. - they first used there. - Tobi's relentless dedication to
+improving his company reminds me of my friend Karim, who is
+the cofounder and CTO of Ramp. Karim is one of the greatest
+technical minds working in finance. I spend a lot of time talking to Karim, and every single conversation centers
+around his obsession with crafting a high-quality product and using the latest technology
+to constantly create better experiences for his customers. Like Tobi, Karim believes that nothing is ever good
+enough, and it can always be improved. Karim is running one of the most
+talented technical teams in finance, and they use
+rapid, relentless iteration to make their product better every day.
+So far this year, Ramp has shipped over
+300 new features. Ramp is completely committed to using
+AI to make a better experience for their customers and to automate as much of
+your business's finances as possible. In fact, Karim just wrote this, "AI is all I think about these days. It is our duty to be
+first movers and push limits, so we can make the greatest possible
+product experience for our customers." That sounds a lot like
+the approach Tobi uses. Both Karim and Tobi never rest on
+their laurels, and use rapid iteration to invent new products for their customers.
+Many of the fastest growing and most innovative companies
+in the world are running their business
+on Ramp, including Shopify. Make sure you go to ramp.com to
+learn how they can help your business save time and money. Let AI chase your receipts
+and close your books so you can use
+your time and energy building great things for your customers,
+because at the end of the day, that is what this is all about; building a product or service that
+makes someone else's life better. That is what I'm trying to do, that is what Tobi has
+dedicated his life to doing, and that is what
+Ramp has done, too. Get started today by going to
+ramp.com. So now,
+you have the executives. You're going through the
+most difficult point in your life. - Yeah. And you realize, "Oh, I'm
+cosplaying. I'm going to go lean -  into my intuition."
+- Yeah. - This is another thing why
+I think that decision you made six, seven years ago,
+however long it was, is why so many founders
+study you, respect you, take pieces of your philosophy as well,
+because you're like, "Goddamn it, I'm just going to do
+this the way I want to do it." - I was like, okay, I need to try something different. You have to do things differently,
+axiomatically. Obviously, axiomatically, if you do the
+same thing, you get the same results. Differentiation
+requires new ideas. Instead of spending the next
+ten years of my life figuring out how well
+I can cosplay someone else, what would a company
+look like if it just taps entirely into my intuitions
+and my biases? I'm doing literally the opposite now
+as I did before, because this didn't work,
+so maybe the opposite works, and worst case, I triangulate
+the midpoint between those things. So, enabled by the very clear, fast,
+and obvious success of asking people from the founders channel to
+step up and run the company with me, my real set of intuitions here... Again, intuition is
+your entire life's story rolled out for you to make a snap decision
+in the moment. What does my intuition say about
+what a company actually should look like? Let's forget about
+the path dependence. Let's go full tabula rasa
+and go up from axioms. And I started with
+really, really, really nothing. I started a project on GitHub,
+literally. So, engineering tools,
+my intuitions again. What is the first principle
+of a company? What are the inputs?
+What are our decisions? Put in config files,
+what titles exist, what levels exist, how...
+You know, I asked for all the sales, like compensation data,
+all the market data, and put them into the repository. I turned them into machine-readable
+files because I got them as PDFs, and so on and so on. So, I built a thing
+that then created, like, at the end, had all the information to create a
+model of the company. Like, literally,
+this is Python code which takes the configuration files
+that we agreed on, things like how many people
+should report to a manager, all these bits,
+and then computes them, uses something called
+a solver, like a SAT solver, specifically. And then, with all these constraints,
+all these inputs, what should Shopify look like? What
+departments exist? What level exists? How many people are there in
+which group and everything? And of course, the first version, very
+utterly incorrect, and then I realized... - Are you doing this alone? - I started it, and then I got two, three
+other people in it to help me with this, and really got into it. And so this is called Shopify OS,
+the Shopify Operating System. It is really a large part of
+Shopify now. What it did, is it became irrefutable
+that we didn't know all the principles.
+We had like, something... There were 8,000 people
+in the company, and there were 5,500 different titles
+in the company. And it's like... And some of them are just
+senior and senior staff, but in some groups, senior staff was
+lower than director and some above. And when I tried to make something software-addressable
+and tried to reproduce it, it showed every crazy, unviable choice in the company
+very, very easily. So there's a
+system in engineering, not actually a well-understood part,
+but I think it should be called
+desired state systems. And what desired state systems are,
+is it's a thing where you say, "Okay, here's what should be." You hold that up to what
+is, like, you click on a website on a link,
+and your React library behind it,
+what it does, is it says, "Okay, I compute what
+it should be, I see what it is, and now I figure out what is the
+minimum amount of steps I take to get this to that." And that's what you see
+on your web browser. I need a desired state
+system for this company. So
+we have this model we created, and then we hold it up
+to the company, and the job of HR is
+to be this reconciler. How do you take the minimum steps
+to get from here to there, or change what
+we have in this system to approximate what we actually want?
+So, this is very technical.
+Here's the effect of it. Think about how much
+politics this removes. When my head of sales comes to me and
+says, "Hey, I need 50 new salespeople," I can put this now into the system,
+and it says, "Well, that means you have to either
+make these changes, or you're going to lose
+some of your engineers." Because the system, based on
+our agreements, recomputes everything. So we can always
+look at the counterfactual, and then it's not like, "Yes, boss agreed while playing golf
+to hire 50 more salespeople, and now someone has to carve... You have to find a pound of flesh
+somewhere in the engineering team, and suddenly you don't actually
+work on innovation anymore, because you never actually made
+the decision to not hire engineers because your
+budget doesn't allow anymore. But you did make the
+decision to hire salespeople." And maybe this is
+the right decision, but now we can actually look
+at the consequences of every one of those things.
+So, it was hugely successful
+because it just created such a legibility for us and such a
+simplicity. It also just told us that so much was undecided. For instance,
+we took the concept of... In engineering,
+this was already around. Individual contributors are a really,
+really excellent career track, right? Like, you can make as much money in good
+companies as an individual contributor as you can as a VP or manager. The best paid people in many companies
+are now individual contributors at this point in history,
+especially in machine learning, like at least at the
+machine learning labs like OpenAI. But no other discipline really had that.
+You had to become a manager to progress in your career.
+And so, I think one of the consequences
+for us that, when I really, really looked at it, is
+like, "Hey, I need more great engineers." The best place to recruit them from
+was my own management team. And that seems silly,
+and especially because, are they actually great managers? They're really well-respected because
+they're good engineers, so maybe, but don't they want to code? And so we created this sort of
+mastery system, we call it, where, , just you know every job
+has this ability to stay... You can get these,
+basically, level upgrades frequently, and at any set of
+responsibilities, if you're insanely good at it,
+you can make lots of money. And, that just seems like, of course,
+you design it like this. Why would you not?
+Like, why... -So they can stay individual contributors.
+- Yeah, take an example. In engineering, if you're
+a hundred times better than the other people in this discipline,
+usually, you can make more money
+than a vice president. Now, that depends on the value
+you can bring, but it is possible. And just like,
+I kind of hated the way we did compensation in the industry, right?
+Again, these are boring topics, - and you need to...
+- No, it's not. - They're not boring to me,
+and to the people listening. Wait, why do you hate the way that they were
+doing compensation in the industry? What I love about entrepreneurship
+is the level of personal responsibility people take.
+I said as much earlier when we talked about the founders
+who have been responsible for people's livelihoods. It changes you. It does, right?
+So, I don't work, myself, well in
+an environment where sort of like everything is pre-described. I don't like joining other
+people's games, and so on. All these kinds of things are my biases,
+and again, we are implementing my biases here. So in COVID, like this is 2022,
+I think, or 2021, suddenly Shopify went down 80%
+of stock value, right? Again, I think that was a problem,
+because I think the stock market is basically
+like a polling market. It's sort of a betting market
+on a future value, right? Like,
+when you guys are wrong, then you're just bad at betting. So, I work on the real
+market value of a company, which you guys are betting on,
+but I don't know. So, there is such a discrepancy
+from the way I see people talk about stock price and
+how I have ever, or inside of companies, perceived. - But what was going on in your head
+when it dropped by 80% though? - Well, I'm like, in my head
+I'm relieved, because I'm like, "I mean, we have a stock loss."
+- Relieved. - Yeah, yeah, of course, because... - What do you mean, "Of course?" That's not a normal reaction.
+- No, I was not about to raise money. I had enough money in the bank. I'm German, so I don't take
+debt much, and so on. - Were the internal metrics strong? - Yeah.
+- You felt you didn't deserve... - Yeah, the unit economics are amazing. However... I don't want
+to say this, right, but I honestly don't remember
+the exact numbers. Like, at the high point
+of our stock price, I think we were trading at beyond
+50X of revenue and stuff like this. I'm like, "Yeah, that's not exactly
+value investing here," right? Like, "Guys." And so, I get it, like... - But you weren't worried about the
+fundamentals of the business? - No, but when it is 50 times revenue,
+I see it as my obligation to do that. - Okay.
+- Right? Like, my job is to build
+the best company I can. The betting market says that
+I can deliver that kind of thing. And I'm like, "Yeah, maybe, but you've
+got to give me a moment here." Like, I need a moment here
+for doing this, right? So... - The reason I bring this up
+is because, again, everything... I talk to another entrepreneur,
+and I just run it through this, whatever the hell's in my head from all these books.
+- Yeah. - And when I hear you talk about that,
+I think of the time when... Amazon stock. Bezos talks about this-
+- Yeah. - in his shareholder letters. - Yeah, yeah.
+- It went from something like 180 down to 6, or a 120 down to 6.
+- Yeah. - And he's like, "Yeah, but they were
+focused on something else." I saw the actual fundamentals of
+the business, and I was like, "This thing's going to work." And so eventually-
+- Exactly. - I think Buffett always repeats
+that thing where, like, in the short term, the
+stock market's a voting machine, and in the long term,
+it's a weighing machine. You just want to build a heavy-ass company.
+- Yeah, exactly. And Jeff's like, "I'm building
+a very heavy company. Amazon will be a heavy company, so I'm not worried about this
+short-term drop by 80% or 90%." - That really tracks. But, like, one of the effects was...
+And this is right. Like, well, people got stock options at-
+- Yeah. - the level up there,
+and they rightfully say, "Well, how about it?" Right? It's like, even if you say, like, "Okay, well, I'm super game
+here to get us back there," like, this is going to take some doing. I realized the psychological problem
+with everyone being so underwater and having to spend years
+getting to basically the zero point where the stock options are
+worth even a penny again. And, of course, they were like,
+"Well, but that's the company." They're like, "The company gave
+me those things at the time. It's like I received them.
+I was passive in this interaction. Therefore, the company has
+some kind of responsibility to kind of make me whole here." And I think that's actually...
+I mean, I, not necessarily see it this way because, like, the risk was there
+and these kinds of things, and again, it's like, other people
+voting that's causing this price. I didn't set it. However,
+I do receive the point. Like, they had no agency in the process. So, we rebuilt our compensation system to be completely the opposite
+of what everyone else's does. We give people,
+"Here's your annual salary. Here's an internal system.
+You go in, you look at it. This is a number. Now you get sliders. You can say, how much
+do you want in stock? How many do you want in RSU? How much of this do you
+want in shop cash, actually, and how much do you want in cash?" And you can change it every quarter. It's like you decide how
+much money you want. And you can even use,
+like, a tool that's there to lock in the value of the stock
+you receive for three years. So, it's like, again, sometimes orthodoxy
+can come back on the table if you get there from good principles. Like, you can actually join Shopify and get exactly the same stock option
+deal that companies get at other places by using the tool we give you, but you have full agency,
+and you make this choice. The consequence of this compensation
+system is kind of beautiful because what happens is,
+first of all, it's super predictable. Second, if you grow stock
+and the stock appreciates, and you hold them,
+you make more money. If the stock goes down, you now get
+more stock options in your next quarter. So, it's rebalanced against the
+actual value every quarter. So, it works really, really well.
+It's very popular. It was kind of hard to do
+because doing this worldwide with people in many different countries
+was, like, kind of a legal nightmare because there are all sorts of
+rules around changing of salaries. We figured it all out,
+so we have a blueprint. If other people want to do it,
+it works really well for us. But we're kind of proud of it because,
+again, it's a point of differentiation, and we believe it works much better. And again, I want people at the company
+to also feel like this is a company that never sleepwalks
+into anything, right? We are deliberate about things. - When you started this,
+"I'm going to do it my way. I'm working with the
+founder executive team," you were in the process of that,
+and the stock's dropping? - No, it was already there. Like, that was a-
+- Okay. - early 2021 project, I think,
+and then I think the stock market... When did that change? Like, '21, late? These years are totally
+running together for me because, I mean, there were no weekends, there was no everything else.
+- I can't tell... I can't remember who said this. I was talking to a much...
+I talk to a lot of older founders. People think I'm obsessed with
+old people. It's not that. It's like, this guy's got 50 years of-
+- Yeah. - experience as an entrepreneur. Turns out they know some shit.
+They've seen some shit. - Surprise. - Yeah, and he's just like, "Man, you're
+going to remember the beginning of your company, you're
+going to remember the end, and, like, so much
+in the middle is going to..." He said exactly what you said.
+It just like, blurs together. - Yeah. - So he's saying you should
+document it more. - I totally agree. Lots of years
+are totally running together. I have reasonable
+record-keeping on this, so I... And especially with
+all this AI-led agentic, like, reprocessing of notes
+and press, and so on, you can actually reconstruct
+these histories and timelines, and I'm fascinated with this right now. But going back to the...
+- So my understanding though- like, you're now looking at running a
+company as an engineering project. - That's right. So I'm like,
+"Let's engineer a company." "Be a company engineer,"
+as I told my team. - That applies for every
+single department in... Do you engineer marketing? Do you engineer...
+- Yeah. - Everything?
+- Everything. I require my executives to, I mean, at least tell me,
+but actually do it, go to a podcast,
+some international conference, and talk about how Shopify does the
+thing the conference is about differently and why that's better every year. If they don't have a good answer for
+how they are doing this right now or how they would, that's what I'm working
+on with them, to crystallize that message. And there are a couple of reasons why I do it this particular
+way that we can get into. They are partly psychological, but, like, it's also just...
+- No, let's get into them now. What's the psychological? - I study the brain quite a bit, and, you know, the main conclusion
+you get to about the brain is really that the brain is a retrospective narrative
+alignment mechanism. It's actually terrible at record keeping, but it mostly attempts to take
+the most salient version of our self-identity and
+reconcile the history with it. And it sort of rewards you
+for actions that are directly congruent with this identity, and it dissuades you from
+dissonance with your own identity. But you can actually change
+your identity quite a bit, and that actually makes this whole
+process work for you significantly. - What do you mean by
+change your identity? Like the way you view yourself? Literally, affirmations work, right? Like, affirmations work, which is
+the dumbest trick that works. - I'm so glad you're saying this, because
+people from the outside are like, "This guy's very logical, engineering..."
+- No, it's like... - But you're all about intuition.
+Now you're talking about affirmations. You're speaking to the choir,
+just so you know. - I'm a toolmaker. Like, I always
+project as very idealistic, but I'm actually not that idealistic. I'm super... I'm like a craftsperson,
+a toolmaker person. My entire life was making tools.
+Literally, Shopify is a tool. I make tools very often for toolmakers. My hobby is making tools for engineers
+or people who make tools, right? So, like, my life's a
+fractal of toolmaking. It's all about toolmaking aesthetics. It's all about the craft behind it, but
+also not because of craft for its own sake although I appreciate that too, but even that's not for
+idealistic reasons, because appreciating the
+craft behind the toolmaking happens to be pragmatically an excellent
+way to get really good at toolmaking. Like, everything is about outcomes. - What's the affirmation part, though? The affirmation that, like, if you tell
+yourself or write down a hundred times something about yourself, that writes it
+into the neural frontal cortex at such a deep level that your brain
+will start reconciling you to that. It just works. I've used that very often to... Like, I was terrified of public speaking
+until I just sat down for like, a week, and every day I spent like, 10 minutes
+just writing that I like public speaking. I love public speaking. - You wrote that down?
+- I know... Yes. - And now you love it? - Yeah, like, a week later, and I knew... This works when you know
+what you're doing, right? Like, you don't even...
+It's not like a placebo. It's actually like you
+just actively change your neural frontal cortex in this moment. So, I use this often. I sort of write to myself, message
+in a bottle, and these kinds of things. That's all a different topic,
+but like, it's... - No, no, no.
+- So the point is like, I tell... - What's the topic there? Hold on.
+You write messages to yourself? - Yeah. - Affirmations or just... - No, just generally, when I feel
+like something is like, "Hey, there's something I've
+figured out that I really like," I know I have to write a scheduled
+message to myself to remember it. Because I need spaced
+repetition on the idea. - What's an example of that? - I mean, for instance, we have a
+company keynote kind of thing, like a company get-together summit
+once a year, and around a full week. And so, usually, I did a keynote there, and, like, then I write a
+message in a bottle to myself of what was good about the process,
+what was bad about the process, what to do next differently, and all the
+topics are left on the cutting board, just to get a head start. So, that's a random example of that. - How did you learn this, that you could
+change identity, that affirmations work, that writing these things to yourself? - I think trial and error, but I think the
+hints are everywhere, right? Like, affirmations are
+one of those things that... I mean, there's a reason why
+society creates rituals, right? Because rituals end up being largely
+affirmations on repeat, right? So... - What do you think of visualization? - So manifestation, these kinds of things,
+probably works too. You know what? The funny thing is, I think
+everything works if you just do it. The question is,
+what's effective and quick? - It sounded to me before, like, I started
+reading all these biographies, I was like, "This is some willy-foo-foo nonsense."
+- Yeah - Yeah.
+- And then you see very smart, analytical- - Yeah.
+- logical, in many cases, inventors and engineers, and it appears over and over again.
+- Yeah. - People didn't know each other. They worked in different
+industries, at different times, lived in different parts of the planet-
+- Yeah. - and they all talk about doing this. - And it's parallel construction. They all come to the same
+conclusions in different words. - Yeah.
+- And so, yeah, I personally... I mean, in the self department, I'm
+extremely taken with the stoic philosophy: control what is under
+your control, know what is, and then do the best possible job. The job is the thing. Like, the whole project in life is just
+try to become very, very good at something and, ideally, cultivate
+some significant skill, create potential services and products, and then share them with
+as many people, right? Like, you do this because that's what
+you're on planet Earth for, right? It's like, do things that matter in the
+world, that are under your control, but also sign yourself up for... Like, it's okay to sign yourself up
+for the most interesting places, as long as you remember what
+your job is within them. So, in this way, like, I love the current
+times, and I love the technology industry. I have a role inside of it, which is like I'm taking care of millions
+of entrepreneurs and small businesses that are trying to use the world of
+technology, use the world of retail through their own work,
+then self-actualize, and that is a worthy goal
+and worthy job. And so, like, AI comes out,
+and people are like, "Well, should I start an AI lab
+or whatever, or should I, like... Don't you want to work at OpenAI?" And it's like, I mean, everything would be
+interesting, but you know what? What's really cool is pursuing the same
+problem in a changing landscape, right? Like, now I get to reinvent
+everything I've already done. How fun is that, right? Because I really care
+about these problems. Anyway, back to the affirmations and
+sort of the brain sort of self-gymnastics. Going to my team and just saying, "Look, just tell me what you
+will talk about on stage," is that. It's like, afterwards,
+you need to internalize this as something that you have
+committed to me, as imagining... I imagine that's something
+they care about. They care about reconciling,
+and so they have to do it, you know? Because otherwise, they said
+something untrue to me, right? And, like, they don't see themselves as
+someone who says untrue things, and therefore, you can actually
+make the reconciliation work for your own benefit in this kind of way. It also just means, like,
+it emphasizes difference, right? Difference is so important. Like, orthodoxy just really
+needs to be off the table from the beginning of a project or from
+the beginning of decision-making. - Have you ever studied James Dyson? - No, no.
+- Okay, if I can only recommend one book ever-
+- Mm-hmm. - it's his first autobiography. He has a crazy line about this. So, this is also very common
+with great entrepreneurs, and you hit on it in your earlier talks, well, if I'm trying to chase excellence,
+trying to be the best in the world or make the best tools possible, like,
+therefore, that demands difference. That path, that mission I'm on-
+-Yeah. - I can't do it if... Literally, I can't be the
+best if it's the same. - Yeah, right, exactly.
+- Like, just think about this. - Yeah.
+- And so, Edwin Land, who was Steve Jobs' hero and the founder of Polaroid-
+- Yeah. - he had a personal motto. He says, "My personal motto is very
+personal, and it may not work for you," but he said it is, "Don't do anything
+that somebody else can do." - Right.
+- He just would not... "I'm not making a 'me-too' product." But the reason I bring up Dyson,
+because now he owns one of the most valuable privately held
+companies in the world, right? - Yeah.
+- But he's writing that book when the business was fine, but he had
+one product in one or two markets. It was doing, like, 300 million
+a year in revenue. Not a bad business, but a very small
+business compared to the size that it compounded to over the next
+four decades or three decades. And he says in that book,
+even at that time, he's like, "Differentiation and
+retention of total control." And he goes, "You make it
+different, even if it's worse." - Yeah. - That's one of the craziest
+sentences I've ever read. - I totally agree with that, though.
+- It has to be different, even if it's worse.
+- I completely agree. I see it all the time because, again, it gets back into the copying
+of a painting problem. Like, you can make a seven-out-of-ten
+solution to everything by copying the seven-out-of-ten that
+are already out there in the market. But if you make from tabula rasa
+axions, your own version of it, you have mastery over... Even if it's a six out of ten,
+you can iterate on this. You can take this past
+the seven afterwards. So, very often, especially in technology,
+the world belongs to the fast, the people who iterate,
+the people who adjust, the people who understand what's
+costly and what's unnecessary, and who prune away the rest. And I find that actually,
+probably, pixel-for-pixel, the most inspiring picture that I think
+exists, that I've ever come across, is the SpaceX Raptor rocket evolution. Do you know the photo I'm talking about?
+- Yes, I know exactly... I use that as an image for
+the Dyson episode I made. - That's perfect. Exactly.
+It's perfect, right? Like, you look at this, and it's like, "Yeah, that's today's Picasso, right?" It's just like, this is it. Like, we're not at a point in time where
+the great works and the masterpieces are being done by one person.
+They are done by teams. Very few teams can move
+forward by subtraction. That does not exist in industry, usually. Very, very, very rare.
+So, it's beautiful in that way. You have to do things different,
+you have to make them your own, and you have to have
+mastery over the first version if you want to take this further. I mean, this is... We talked
+earlier about the podcast I do inside of a company called
+Context, and it's about that. It's like, how did we make the decision? It's like everything around the decision
+is more interesting than the decision. - Is this podcast constantly updated? - Yes.
+- So it's internal- - Mm-hmm.
+- only for Spotify. Goddamn it, only for Shopify. - I mean, especially when we talk about
+podcasts, that makes sense. It's like... - Well, they have...
+It's funny, I looked at my end-of-year wrap on Spotify-
+- Yeah. - and one of the podcasts I listened to
+the most, which was shocking to me, was they have the
+internal company history. - Oh, yeah.
+- It's called Spotify: A Product Story. - Uh-huh.
+- And it's... Because, you know, everybody else... I think one of the reasons that-
+- Yeah. we have a mutual friend, obviously,
+in Lulu, she's on your board, and the importance of
+telling your own story. - Yeah. Yeah, yeah. - We went to dinner
+one night, and I was like, "Lulu, what I love about you is, like,
+you're repackaging old ideas." Like Napoleon told his own story. Julius Caesar told his own story.
+- Yes. - Like, all these people did it.
+It's a very valuable idea. And so everybody who's trying
+to tell the company history outside of the company-
+- Yeah. - you're like, "No, you
+got all this other wrong. We're going to make it ourselves,"
+and it's like, I think, a 10-part podcast. But originally, I think they built it for
+themselves, and then they published it. - I didn't know about this. I love this. - You should listen to it-
+- Yeah. - because it's narrated by Gustav, who was Head of Product-
+- Yeah. - who's now co-CEO.
+- Yeah. And they take it in chronological
+order, and so, like, Sean Parker played a big role at
+the very beginning, right? - Yeah.
+- He's obviously not there now, but he's on, like, episode one or two,
+- Mm-hmm. - and then they interview the
+people that made the decisions, and that's the whole point. Like, we were making...
+Think about all the crazy shifts. They had to go from  desktop to mobile,
+all the things they had to deal with. Well, just go listen to
+what the company... - Did at the time, yes. - Executives and founders...
+- It's totally right. - But not only what they did,
+why they did it. - And the why is so much more interesting. Like, one of the
+[unintelligible] of "Tobi said" is real inside of Shopify, right? It's like people just throw
+these things around. Like, "Well, Tobi said we're
+doing it this way," right? I just try to get people
+to always ask, "When?" - When I said it. Exactly.
+You change your mind all the time? - Yeah, and this is not even...
+I learn about this because something is really, really odd,
+and, like, really odd decisions. Like, there were easier ways available. How did we get there? It's like, "Well, everyone said that
+you wanted it this way." It's like, "Under which context,
+when did I say this? Like, clearly, we've
+never talked about this," so it's like this very common thing, so... - What's a typical episode? It's just you explaining the thinking of
+what's going on currently in the company? - Yeah. It's like taking people
+back to major decisions. - Are these short episodes? - No. Like, initially,
+we went through phases. For the first maybe
+50 episodes, we said, like, "We have to mix it down to 23 minutes," because we calculated that that was
+the average commute in Shopify. So, we checked where everyone
+lived compared to the offices, we ran the data, and it was 23 minutes. And so, we made it 23 minutes
+because that seemed as good... Like, we needed a reason. - And you like designing your constraints. You talked about this a lot.
+- Exactly. Exactly. Well, I also just don't like picking
+20 minutes because it sounds good. Like, I need a better reason. So I might say, "I want something to be...
+20 minutes sounds right," but let's find an actual good
+reason why it's 20 minutes, and then we found a 23-minute reason. So, sometimes you're allowed to just parallel construct the thing
+you want to do anyway. Then at some point, we
+abandoned it because, just like... You know, the nice thing with
+podcasts is people can skip, move. It doesn't matter. Like, you can just
+keep going for hours and hours and... - Do you have any ones
+that are like, long? - I think there's one which we had to cut
+over a couple of episodes that ran like... I mean, if you ran it,
+it's like five hours. - What was that one about? - That was like the
+philosophy of engineering with a bunch of our
+distinguished engineers. Like how... You would not believe how immature
+engineering is as a discipline. It's just like, there are so many
+good ideas and so many bad ideas, and it's so hard for people to sort
+through them in a way that's, like, way harder than any other industry,
+because software has a weird property. I mean, the best thing, and why the
+business model of software is so insane, is because zero marginal copying
+of software is free, right? It's like you can... We build Shopify,
+the first person signs up, we make money. Second person signs up,
+uses exactly the same thing, and it's like the second
+instance of it is not... It's the same piece of software. So, hence the margins of
+software are incredible. The same thing causes a lot of
+problems for the creation of software, because you just don't know how
+much dead weight is in the system. If you compare this with
+electrical engineering, there's a very clear cost
+of manufacturing, right? Like, the bill of materials is the thing
+that dominates the success of a product, because it dominates the cost, which
+then dominates the product market fit. Also, manufacturability is a huge
+component in electrical engineering. It's like, is the board laid out in such
+a way that it's prone to defects? Did you choose all the
+right components? Does one chip get really hot
+next to a soldering thing that... You know, I remember the
+original Xbox disordered itself if you just played certain games too long. So, you know, there are
+real constraints like this, so excellence is obvious in a way. It's in the numbers and everything, everyone's trained on
+costing waste into the system. Software engineering just throws away so much of the capability of
+these incredibly powerful machines, partly because it just
+doesn't cost anything. However, at a certain scale,
+it starts costing, but at this point, it's being fixed by operations
+teams getting more servers, rather than engineering teams
+going back to fixing those things. So, the consequences of bad decisions in software engineering are an externality that doesn't
+accrue back to the engineers who caused it in almost all instances. So, it's a little bit like a factory is
+polluting the environment. It's just like it doesn't
+cost back to them. And so anyway, therefore, it's a very
+tricky industry to move forward. It actually quite often
+moves backwards significantly. Computers got much faster, and they threw a huge
+amount of capabilities away, making these very, very heavy
+client-side JavaScript applications that took over everything. They were just godawfully slow and very
+error-prone and took forever to load, especially in e-commerce,
+where people visit sites rarely. Some of our customers
+went out of business because they talked themselves
+into their own stack. They hired a CTO who
+brought in their own team. They used a set of technologies
+that they wanted to use because they are currently the "in" thing that has the most interesting conferences
+in the most interesting places. Then they deploy it, and you know,
+it sort of works in the demos, but the problem is, when you're
+going to a website for the first time, you have to load it all, and you don't
+have an up-to-date MacBook, perfect hardware with much memory, like everyone has who's
+working on engineering teams. You might have an Android device,
+and you might be on a train right now. You're sitting there a minute
+and a half for this thing, for this online store to load. Guess what the conversion
+rate of that online store is? - Zero. - Yeah. I'm quite annoyed by this,
+although that was a real, real problem in 2023 especially,
+when I think a bunch of, frankly, us older engineers had to take the kids to the side
+and just have a good conversation. - And that was the context- - Yeah.
+- of the episode of Context. - At least that's what led
+to this particular thing. I don't know if we actually succeeded
+there, but I think we didn't need to, because I think the world just changed. Like, the moment of the zero interest rate
+phenomena, where they're gone... People actually wrote
+better code all of a sudden. It's amazing how consequential the absence of 0% interest rates
+actually ended up being. You could feel it in the engineering
+team being less prone to accepting random waste into their stacks.
+It's unbelievable. - Oh, that's interesting. I don't know if I've ever heard
+anybody else make that point. I think this idea of hearing
+directly from the founder in an audio way-
+- Yeah. - is underutilized.
+- Totally. - I did this episode on the founder of
+Kinko's. He was dyslexic, okay? - Yeah.
+- So... - So am I. - Yeah, I heard, which surprised me. So he... Actually, a lot of great
+founders are dyslexic. - It's very common.
+- Yeah, it's very common. So, it shouldn't surprise me. So, he's like, "I can't read
+your goddamn email." He was also... I think he
+said he had, like, ADHD, so he couldn't sit down at a desk. So, his job was like,
+"What do I like to do best?" And he's like, "I just go around..." And all the Kinko's at the time
+were owned by individual people, so it wasn't like one
+cohesive corporate structure, and so therefore, there was a lot of
+experimentation going around. So, he would just travel the country, and then he'd spend
+all his days in the stores, and he'd be finding,
+because of all these people doing different trial
+and error, good ideas. - Yeah. And so what he would do... This is back in the day, he would
+call into a corporate voicemail, and so at the end of the day,
+he'd give a three-minute update about all the good ideas that he saw. - Mm-hmm.
+- And then you'd come in as a Kinko's employee the next morning, and you could play Paul's voicemail.
+- That's cool - I love it. - And then this is an interesting thing
+that you might agree with, though. After doing this a while, he's like, "You're resurfacing all
+these great ideas, right? This guy in Memphis found
+the best way to do X." - Yeah.
+- "Why don't you mandate that everybody in the company-
+- Yeah. Yeah.
+- does X this guy's way?" He goes, "Because if I do that,
+that's the best way it will ever be." - Mm-hmm. Which kind of relates
+to what you just said. - Mm-hmm.
+- He's like, "Listen, there are probably a hundred different good
+ideas or right ideas, - Yeah.
+- and if I stop here and don't keep tinkering..." going back to that word that you like-
+- Yeah. - "Then that's the best it will ever be." - If you need something and
+you tell people what to do, you might get it,
+or you probably will get it. If you don't tell them what to do, you might get something you cannot
+possibly imagine, if you have good people. And so this is actually a
+really, really important thing. It's much more important
+to create an environment in which people can be their most
+excellent self, than it is to prescribe, "Here's the precise moves to do." - So, how do you create an environment
+that people can be the best version, the excellent version, of themselves? I heard you say... Is this related to
+your idea where you're like, you said something that made me chuckle... You're like, "I don't do
+corporate babyproofing." - Yeah. Yeah, exactly. I mean, exactly.
+Absolutely, it's the same idea. Like, the babyproofing thing is real. Like, what is internal
+proper policies, right? Like, processes, what are they? They are like, "Do this thing differently
+from the way your intuition tells you to." Okay, why are you wanting people to
+behave differently from their intuition? Like, let's look at the
+higher-order bits there. It's like, what other
+opportunities do you have? Well, you could change the
+environment in such a way that doing the right thing
+is intuitive, right? That's pretty good because now
+you don't have to post the policy. You could also hire people whose
+intuition is better honed. Very often, policies and processes are
+a sort of downside protection. You're trying very hard to avoid the people who do things wrong to be causing so much damage. That's like the downside protection, but you're also really limiting what
+the best people can do, right? So, I think in creating an environment
+almost as a box for people, like, "Here's the space,
+and I want you to follow... Like, inside of this space is this
+problem I need you to solve." Right now, my world,
+in the commerce world, is attempting to figure out what
+agentic commerce is, how it works, how all the companies
+are working together, how the research labs
+work with everyone else, how to expose product catalogues
+from the entrepreneurs, how to make sure that
+transactions can be met, what the large language models
+need in terms of information to do a fantastic job when people
+ask them to be their personal shoppers. You know, that's a box. Like, inside of this,
+somewhere in it, it's all dark, is the most beautiful solution. What tools do we have to explore this box? It's like, dark. I don't know.
+I can take a stab at it. I can paint a picture of
+what I think is good, but that's just like sending people into
+the room with a couple of tools. Afterwards, they need to make their
+own decisions, and I want them to do this. Like, I'm not there. I don't
+want to control every decision. The company makes millions of
+decisions every day, right? Like, in a building like this, right? But what I can make a decision of, is help them really
+want to be on this journey, help them fall in love with the problem,
+and see the potential. And I can make sure it's the right team,
+and everyone has the right skills, and I can make sure that they know what
+they have decision power over, and how to, at some point, because people are only
+willing to take so much risk, how to transfer that risk to me,
+ideally, or to a company, right? In the form of our
+projects work in phases. A prototype phase is what I just described
+where you explore the problem. Then you think of... Like, when you've
+learned what you need to learn, and think you have
+something that you can build, you make a proposal, and you
+transition out of the prototyping phase. That's a meeting, right? Like, that's what we call a phase
+transition in our project system. There's software that
+manages all this kind of thing. They can use an AI to preview what the transition will be like because it's trained on all the
+other reviews I've ever done. So, they can sort of mock-do it and
+figure out what I will probably say. That saves me a lot of time. And then you have an actual
+meeting, and, you know, then they tell me what they're
+planning to do, what they've learned. That helps me a lot. And then I say, "Okay to transition." There are some engineering leads,
+design leads, give the okay, one. I give okay, two. And then they are in a
+build phase, and then a new phase starts. That's a new box. They have
+agency to make decisions in there. At this point, I assume the risk. It's like a trade-off of accountability for autonomy. And so, that's how we found we can
+almost operationalize this system, because what I'm finding is... I mean, all the biographies you read,
+what you find, I'm sure, is that the moment of insight... Often the product that started it all, or the artworks that are
+defining the careers, they were not really coming out of an
+office building environment, right? Where someone had OKRs of a
+precise metric to hit, and then... Like, da Vinci probably did not have one "Vitruvian Man" as an
+OKR given to him, right? Like, it's like you kind of have to
+create, like, a box for them, sometimes a physical space as well. Like, he was in an attic. That just ended up being where he did
+most of his creative work, too, I believe. And so you try to figure out what is this
+sort of environment where excellence and creativity can come together,
+and then collapse it to saying, "Okay, now the company
+needs what it needs, because we need to make
+resource allocation decisions." I mean, you're putting more
+people onto a project. At this point, there are a couple of
+sort of things that need to be decided, and then autonomy is regained
+until the next phase is releasing, at which point we do that review. And sometimes we say,
+"Okay, we're not ready to transition because there are some
+things we need to do differently." But that's the way
+Shopify orchestrates now. These are all things that exist today
+based on the days during COVID, where I reviewed every
+project and couldn't. And like, well, what should
+I be able to do if I would be... Like, if I would be a competent CEO,
+what would I have put in place so I could do this thing I need to do
+here in the beginning of COVID very, very quickly, given that I wasn't,
+and now I aspire to be, what needs to be created? And so, like, whatever the answer
+to that is, we worked hard on, and I think we just discovered some
+extraordinarily powerful systems and mechanisms in this sort of journey. - That was the prompt?
+Like, what would a competent CEO do in this situation?
+- Yeah. - I love to take the view that,
+like, I'm a corporate raider, and Shopify went bankrupt,
+and I bought it on a fire sale, and I'm marching in on day one here,
+and previous management was crazy, and we need to turn this
+place around, right? Like, that's my favorite.
+I love playing this game every year. Yeah. Figure out what I would
+do differently, and it's like, "Let's go!" I have my to-do list. And I ask a lot of teams to do this a lot. It's like when we have
+systems that just don't work, one of the most powerful,
+maybe through affirmations, maybe through experience,
+things you can do is just don't be prideful about
+the prior work too much. You're allowed to have pride in it, but, like, you want to wake up
+better every day, right? You want tomorrow's version
+to be better than today, and for that, you have to kind of
+downgrade what's there. Like, the sunk cost
+fallacy is so powerful. - But how is that an affirmation?
+Like, how does that represent... How do you... When you're
+actually talking to yourself, or you're writing this down-
+- Yeah. or is this your inner monologue? - I literally write hit pieces
+on the past, right? It's just like... - A hit piece? - Yeah, like, just all of the things that are wrong with the thing
+I somehow am really proud of. - You are so much like some of
+my favorite founders. Dyson's like this. My friend Karim,
+who is one of my closest friends, - Yeah.
+- he is the co-founder and CTO of Ramp. It's like nothing's ever good. The way I describe him is just like-
+- Yeah. no resting on laurels,
+no sleeping on wins. Do something great, and then do it again. - Yeah.
+- Steve Jobs said this. He's just like-
+- Yeah. "Well, what's the proper response
+when you make something wonderful?" He's like, "You do it again."
+- Do it again. Yeah, let's go. No, a lot of these great people, they
+don't really have rearview mirrors. - Yeah.
+- Like, they'll obviously learn from what they did, but they're not like, "Wow, look at my trophy room." - Mm-hmm.
+- They don't think that way. - Mm-hmm. Look, nostalgia was put on
+death certificates in the 1800s, right? It's like, people died of
+nostalgia in their minds. I mean, they really died of
+something else, but like... - I've never heard that before. - It's like we used to know
+that nostalgia is not a good thing. It's like it was one of
+the bad indulgences. Now it's barely a vice. So, I think nostalgia needs
+a little bit more scrutiny. Overcoming sunk cost fallacy
+is one of those things that, like, any path that you
+can take to get there is going to be enormously beneficial. - Well, I think playing the
+game of corporate raider is a great way to do that.
+- Exactly. So, then you develop
+tools for that preset. - You kind of separate yourself-
+- Yeah. - ... because that was your decision.
+- Yeah. - You might be like,
+"Oh, well, like, - I feel a little sensitive about that."
+- Yeah. - It's like,
+"No, no, that was somebody else's." - Yeah, yeah. - This is a new company now. - So, one of the things that is unpopular
+when I do it inside of a company, is thatI really s*** talk the past,
+especially if I did it. It's still like systems that
+I built inside of a system, so I- - You s*** talk the past publicly?
+- Yeah, I trash. I make fun of all the ways, and
+this is hilariously wrong in funny ways. And I need to remind myself, especially
+when I do a certain area I didn't work on, that I have to provide to it,
+or I need these corporate raider, like I'm collecting these now. - It's almost like dissing yourself. - I need to help people not think that what I'm doing is I'm passing judgment
+on their prior work, because I'm not. We are all to.
+I expect everyone. - Well, you are passing judgment
+on the prior work. You're not passing judgment
+on them as a person. This is what Rick Rubin talks
+about in his book all the time. - But it's not theirs anymore
+once it's out there, right? Like, this is the thing. - Ooh, say more about that. - They need to disconnect from.
+Like the work is collected. The moment the pull request is accepted,
+or the "Okay two" is accepted, you've converted your craft
+into something for the company. It's in the company's commons. A company is a collaborative project,
+where everyone contributes, and there's a process
+by which it's contributed, at which point the company accepts
+it as being on quality and says, "This is now part of the
+company's embodiment, essentially, so the product."
+You've contributed it. You deserve the credit
+for this, and so on. But the company could have had someone
+improve it at any point of time, right? It's not yours. It's like, we don't allow people to use the word ownership over
+parts of the codebase or so. We only allow stewardship as a work,
+just as a proxy term, because sometimes you
+need to be able to talk about it. In this way, Shopify thinks of itself
+more as an open-source project. You're contributing into the commons. People talk about Wikipedia, not about the particular
+editor of a Wikipedia page. You know what I'm saying? - I have a selfish question
+before you move on. - Yeah.
+- So, you're looking at all past work. There's this guy named David Ogilvy, who is one of the greatest
+advertising agency founders. - Mm-hmm. - And he says that we have a divine
+discontent with our work. - I love that quote. - It's a perfect anecdote to smugness.
+- Yeah. - Right? Because he's like,
+"You don't want to rest on your laurels." - Yeah. - I talked to James Dyson
+about this though, because he has a very
+interesting organizing principle. So, we're going to take
+this cup right here. This is a product. He goes, "This is..."
+He organized his entire life. He's been an inventor and
+engineer for 55 years now. And he's just like,
+"I see this product," And I ask myself,
+how can this product be better? - Yeah.
+- Then I make it better, and
+then I put it down, and then, a short time after,
+I pick it back up. How can this product be better?
+I make it better. I put it back down. And he goes,
+"I see the bad in everything." - Yes.
+- But the interesting part is that he's intellectually and
+emotionally mature enough. He goes,
+"You have to understand, it doesn't. Like, I'm not a miserable person.
+- Yeah. - I just look at it like,
+this is a problem. That problem is an opportunity-
+- Yeah. - ...and I want to work on that." What is your inner monologue when
+you're critiquing your past work? Are you harsh on yourself?
+- I get excited. Yeah, no, no. - Oh, you get excited. Oh, s***!
+- I get excited by finding problems. Just like, I love, I mean,
+look, at this point, I'm such a long-term veteran
+of tech company building. I love figuring out if we're bad at stuff. Because we have a
+pretty good thing going on. By all intents and purposes,
+this thing's working, right? So, when I figure out
+that we are actually bad at something, I'm like, "Holy s***!
+I have an obvious blueprint for now, how to become a better company,
+which is actually my job, my craft, right?
+This is all opportunities. Things go into the commons. They are hopefully being
+judged by everyone. I get grumpy when things that are s***ty are not identified
+as such and improved. And then I make people go do it. And sometimes,
+I do it by trying to create energy by just roasting the thing's
+current state about. I want people to feel no deference to it. I don't want people to respect
+the piece of code that exists, or the system that I want them to improve. And I want people to just find
+their sort of energy source, because what I'm asking them is, "Go into the particular box
+that contains this problem, and do the best possible, better than anything I could possibly
+ask you right now for solving it. Because I expect people
+to be highly agentic, and fall in love with problems, And just find better solutions than what industry usually
+produces and so on, right? That's the entire point. It's unpopular when people aren't
+in the right headspace for it, and it's incredibly effective if they are. So, the difference very often is just a
+couple of words and a bit of framing, and I just find that's one
+of the most powerful, sort of, tools you pick up,
+I think, along the journey. It's like the fivewords to say at
+the beginning of a sentence that change everything. And myco-founder actually gave
+me one of those very early, which was probably why Ituned
+into this kind of thinking, and just collecting these
+kinds of things. Because- - Wait, what did you mean
+by the five words you said at the beginning of the sentence? - I used to go, again, engineer. That's always been an interesting experience with four
+other engineers working for me, and I stay pretty
+current with engineering. I still do, not a ton of
+production engineering. I sometimes start new
+projects with people, and the first 20 to 30 pull requests or commits in many of the repositories for
+things that we use come from me. So, I like doing this. It's part fun, part. I sometimes need to tap into my craft. Anyway, so that's a surprising
+thing for people, of course. So, my intuition was always like, "Okay, well, this is not the right
+architecture for this kind of thing, and I know this for a fact because
+I've built this thing before. So, let me go to the whiteboard,
+and just re-architect this." And so, at some point in that now. Daniel, my co-founder, explained to me, "Well, look, you get pretty
+defensive then because they just came to show you, basically, what was objectively their best work,
+because they presented it to you, and that matters to them." Like, it just doesn't matter if you go and make a much better system
+here on top of your head. They are like, If I truly ever did this, they're going to be defensive
+and try to save face. So, just put "for example"
+in front of every sentence and say, "What do you mean?" And now,
+I tried this, and it works perfectly. So, instead of just telling them,
+"Hey, instead of doing this, here's an architecture
+that you should use," just say, "I could think of doing
+this a couple of other ways. Maybe it's something you want to consider. For example, what about this?"
+And then just do it. Now, you're on the same side. You're on a team. We are all working
+together on the same problem. I'm just adding input. Now, everything is the same. It's five words or so in the beginning.
+I just find the magic of these five words. Oh, not this specifically,
+it's things like this. Just frame things slightly differently,
+and life's easier. - I read something Jeff Bezos said that changed my perspective on the
+importance of high-quality sleep. He said that he makes sure he gets
+eight hours of sleep a night, and as a result, his mood, his energy,
+and his decision-making is improved. His point was that you get paid
+to make high-quality decisions, and you can't do that
+if you're sleeping terribly. And the product that has made the biggest impact on my quality
+of sleep for years is "Eight Sleep." I'm lucky enough to be friends with
+the founder of Eight Sleep, Matteo, and we live in the same city. A few months after
+I started using Eight Sleep, I randomly ran into
+Matteo at a restaurant, and I was with some friends. So, I go over and said "Hi." When I got back to my table,
+my friend asked me who was I talking to? And I said, "That's Matteo,
+the founder of Eight Sleep." And my friend replied,
+"He looks like he gets good sleep." Matteo is living and
+breathing his product. I had never had the ability to change
+the temperature of my bed before I had an Eight Sleep. I had no idea how much that would
+improve the quality of my sleep. I keep my Eight Sleep ice cold. It's cold before I get into bed,
+so I fall asleep faster and wake up less during the night. That feature alone is worth
+ten times the price. There are very few
+no-brainer investments in life, and I believe Eight Sleep is one of them. That is why elite founders
+like Mark Zuckerberg and Elon Musk have all said publicly
+that they use Eight Sleep. I would recommend getting the Pod 5, which is the newest generation
+of their signature product. It is a smart mattress cover that you
+place on top of your existing mattress, and it is next-level sleep tech. It automatically regulates your body
+temperature throughout the night, independently for each side of the bed. The result is you get up to a full hour
+of additional quality sleep per night. Make the no-brainer investment in your
+sleep by going to eightsleep.com/senra, and use the code "SENRA"
+to get 350 dollars off. You can try it for 30 days at home,
+and return it if you don't like it, but I'm confident you will love it. I will never let anyone take
+my Eight Sleep from me. Make sure you get yours at
+eightsleep.com/senra. One of the things that
+Daniel from Spotify. I almost said Shopify. Now, for him,
+Daniel from Spotify, told me. - I want to be fair. - He's like, "You should ask him what were
+some of the advantages of starting with Silicon Valley?" - I think there's just too
+much cross-pollination. You kind of have to sync
+with companies towards. Entropy creates equilibria. And so, you end up with the companies just being very recognizably
+similar to each other, and the activation energy for being
+very different is super high, because that means people come with
+the wrong ideas into your company, behave incorrectly, and you have
+to tell them to behave differently. Where, if you are outside of a
+place like Silicon Valley, where people just move
+along between companies. I mean, first of all, especially early, I traveled to Silicon Valley
+a few times a year, but I tried to just take it all in
+and learn asmuch as I could. But of course, what I got from everyone was not
+actually the answers to my questions about how to do things. I was getting the aspirations,
+usually, or the highlight reel. People wanted to seem smart, right? And so, they give me the best version of
+what they think the answer should be, or what their company ought to be doing. And so, which is great, because then I took that back
+home with me, free flights in, and sort of took the ideas
+that are relevant, tried to always put a Shopify spin on it. I don't like taking ideas,
+as you clearly can tell, and never did. Sort of like, figure out how to
+localize them to our problems, and ideally, try to do something better. And so, only very many years later, I did realize that always for my career, was comparing my and our average
+to everyone else's aspirations and highlight reel. And just like that,
+alone is a really, really good thing. And if you then try to do
+better than that. You know, sometimes just ignorance is an incredible
+way of actually just doing better. And so, that helps. The process of having to translate,
+being able to translate things. We had no one. When Shopify IPO'd, we had one member of the executive team who ever worked for a public company.
+That's it. - Wow! - We had no one who took
+the company public. We had no one who was an
+executive at a public company. We had one executive who worked
+at a public company once, and it's just like,
+I think that's cool, right? I've had a real sense of
+accomplishment about that because it meant we became our own thing. Our entire motto becoming a public
+company was we are not going public. We are creating a public
+version of Shopify. And so that was like-
+- What's the difference between those two sentences? - Again, becoming something else.
+It's like we don't want to, Like a lot of people avoid,
+when they're a public company, they're going to be different
+because like people sort of expect, public companies to be a certain way, at least, for people who
+work at Shopify did. I felt it was important to be different
+and do things differently. One thing we did, and
+you will appreciate this, Yes, we looked at the requirements. We talked about Formula One.
+Formula One is fun. Sorry, it's a little bit of a veer, but Formula One I love because
+it's like, there's a rulebook. It's the opposite of every other
+rule book on planet Earth. People read it so that they can comply. The Formula One rulebook
+is a rulebook that is read, so that you figure out
+how to beat it, right? And there's no engineer in Formula One who has anything to do
+with a central casting engineer. Central casting engineers actually, usually want to get requirements
+and then comply to them. They're like, the people going to
+Formula One are the people who want to beat the system, right? Like, this is very important to them. So I count myself as of the archetype
+of the latter, like a group of, I would have liked being an
+engineer in Formula One. I like beating the systems that
+other people tell me to abide by. - I heard a story one time that somebody had hacked your compensation
+system, to get more money than, Essentially they just
+studied the rule book, found this loophole and
+you're like, good for that person. - Yeah. - And then you'll fix the loophole or
+whatever the case is, but that's exactly-
+- Yeah. - ... the kind of person
+I want working for me. - Exactly. I mean, yeah,
+especially if it's, I mean, there's a way. I mean, what happens next
+ends up mattering, right? So, okay, this goes on. And at some point, this becomes, Well, you're just exploiting
+a weakness fully. I mean, I don't want to
+give too many provisos, but generally, like people who are
+looking around to figure out, like I never begrudge anyone
+being an intelligent actor in the local incentive system,
+but it's just like everyone's allowed. That's pretty much my
+morality at this point. Or at least a big part of it. You're allowed to do this.
+I own the incentive system. You get too much out
+of the incentive system, or the incentive system
+tells you to behave in a way that is not congruent with
+the company's goals. That is my skills issue in
+designing the compensation. Not you. - Not their fault for-
+- Yeah. - ... taking advantage of it. - But, really appreciate it if
+you give me a heads-up. Because we are still the same team here, so maybe you raise your hand at
+some point saying, "This is fine." - Yeah, not like ten years later, after,
+- Yeah. So, back to the IPO, just like in the IPO,
+we just looked for ways to, Like, within the
+constrained rules by the SEC, do we have agency,
+where we can do different things? We sort of honed in on
+the IPO roadshow video. It's like a horrible video player,
+the IPO roadshow website. It's like an, And in every other IPO, we could find this CEO standing
+in front of a screen, camcorder, and just sort of
+going through the same slides. - Mm-hmm.
+- We're like, "There's no rule for that. Let's shoot a f***ing documentary here. Let's go through the history of why this
+company exists and why it's important." And we said, "What video can be put onto
+this space where no one expects it, that will somehow hook people into full-screen
+the video within the first 20 seconds, and actually watch the entire thing?" And we heard so much
+about this on the road. Like, so many people were like,
+"I always looked forward to meeting you. What you guys did with
+this video was insane. I didn't even know you could do this." Every IPO after this was like our way, so it was kind of like a nice
+little moment of putting a bit of an agency into a process,
+which was pretty. - I heard this story one time.
+I think it was the founder of Sirius XM. I forgot who the person was,
+but they were like, "Well, how do you make annual reports?" And there are no rules around this, so
+you have to present certain information. - Mm-hmm.
+- So they made a book, and the book would be illustrated. - Yeah.
+- And no one said we couldn't do it. It's like, we're just going
+to do it our own way. Let me ask you a question, though, because I think I heard
+you say this as well. You were getting, what you felt was,
+bad advice, or incomplete advice, or maybe advice not from first principles,
+about whether to go public or not. Or some people were saying,
+- But if I said- - "Stay private longer."
+- So yeah, I get you. The advice was always like,
+"Don't," right? It's like. - Who was telling you this?
+Other founders? - Yeah, founders. At Silicon Valley,
+orthodoxy definitely is to avoid it. And, I don't know. I can tell you the story
+about my decision, but it's just basically like, I mean, I suppose I'm predisposed, also,
+when everyone agrees with something, to take the counterfactual, just to hold it up to see
+if I potentially like it better. - It's your personality,
+embedded personality trait. - I just find plan B is
+usually a better one. Everyone puts plan B. I think for many, many, many
+people on planet Earth, always doing their plan B would
+lead to a better experience, right? Like, plan B gets the ambitious one, "If this eventhappens in my life, f*** it,
+I'm just going to build a company." It's such a common plan B. - That might be what you actually want, but you're lying to yourself,
+or you're scared, or whatever. - Yeah. And also, again,
+you are a human being; therefore, your firmware comes
+preloaded with a problem called the sunk cost fallacy.
+We just do, right? It's like, you've got to operate that
+out of yourself a little bit. You've got to be able to discount
+what has happened more, to make good choices. Because otherwise, you just chase bad
+with good money all the time, or chase a bad plan with, You're always in the data,
+- Yeah, I think humans are reflexively or whatever, just to
+- ... scared of change, too. - 100%. - They'd rather be in a boring-
+- Yeah. - ...or even miserable
+environment than actually change- because the fear of change is so great.
+- Yes. Yeah. - So wait-
+- Exactly. - ...people are telling you
+to stay private longer? - Like, being private is better. Friends of mine at Stripe are
+running this experiment. They managed what they could of, in terms of figuring out how to
+stay private for such a long time, which is actually remarkable. I just think they spent a lot of time
+figuring out how to stay private. And I don't think that's the most
+valuable way to spend time, right? I think you could. - So, you went public in 2015?
+- 2015, yeah. - What were the arguments for staying
+private longer in 2013 and 2014, when you're having these discussions? - We were tiny. We were 800 people.
+We were Canadian. - So they're saying, "You're too small?"
+- What was our revenue? Yeah, I mean, when Shopify's
+first trades happened at, I think a billion, 1.5 billion dollar
+valuation, right? Like so, - That's pretty wild that the public market almost could
+have gotten a venture if you - And people did, yes.
+- ...bought Shopify. You essentially had venture-
+- Oh, yeah. - ...returns in the public market. - Every once in a while, someone puts together a list of
+the best stock market returns over the last ten years, or whatever. And yeah, I own that list, right? Just because I decided to take Shopify.
+Like, I did the old-school thing. That was normal.
+That's what everyone did. People went public fast,
+and by the way, this is kind of important. Public market needs to have growth, because where else is
+prosperity coming from, for people who don't have. These obviously accredited
+investor laws and stuff like this, all they do is like, make it so. Like, when you're rich,
+you can invest in private company stock, - Yeah.
+- and when you're not, you can't. And well, where are the returns? Like, of course, this is such a f***ing
+conspiracy to keep everyone private, because that just sequesters all the growth exposure
+to institutional investors and people who are already accredited. And so, I just really
+dislike that whole thing. I think, like, man. Again, it's about building things
+and sharing what you've figured out, and people buying a
+ticket to ride on Shopify, because they like what we're building. It's like, please.
+That's clearly what we want. So, I just think the institution of
+public companies is good. I mean, but my beef is just with the
+whole notion of influence over companies. Again, path dependence. Like, one stock,
+one vote is like, yeah, but no. Like, everyone who studies
+decision-making knows that you want to move towards people who have the most context
+should make a decision. That doesn't say about
+the leadership of a company. This is literally what I'm talking about,
+creating space for creativity, because I want the decisions
+to be made locally on the ground. - So, were the arguments for staying
+private back then just mimetic? They were just for repeating what everyone else was saying at the time?
+- Well, no, I- I think people are generally right.
+It washes out, right? Again, people have problems
+with the concepts of, Very often,
+a new idea is dismissed because someone can formulate a reason against it, and somehow that
+dismisses the entire thing, right? We live fundamentally,
+most people spend their entire lives sadly in a vitocracy, right? Where you need everyone
+to agree to do something, but you only need one person to
+vote against it, to not do something. And again, good companies
+overcome this in important ways. And so, similarly, one good
+argument dismisses the entire idea, which is a very common
+way to evaluate options. What people very, very often don't do is
+reformulate all the arguments against the status quo, right? Like, the thing you're doing
+right now also isflawed. It's just that we really understand
+the upsides and downsides. The new thing might have way higher
+upsides, or actually, maybe not. Maybe the upsides are obscure
+or hard to know for sure. But the downsides are clear,
+and they can be formulated; therefore, the usual
+default position is not to do it. So that, I think, is incredibly
+undisciplined because you need to think in propensities, you need to think in chances, and sometimes you need to really, really
+lard up a decision for all the pros and cons that can bearticulated,
+and in your mind, look at where the scale comes out. For a company that's trying to sell the
+e-commerce platform for everyone, especially for many American companies,
+being a Canadian private company that's tiny, and it's not ideal. So, people don't usually go
+public because of marketing or name recognition, but it's. - Super valuable. Anyway- - Put it on the pro side, and then put
+everything else on the pro side, too. We might get better people working for us, because some people really
+want liquid stock, and so on. In the end, it's not even close. The downsides have been a
+couple of annoying phone calls I have to do every couple of quarters, at least for the first ten
+years, I suppose. I thought that, actually, most of the
+process was quite valuable. I learned a lot about my own business,
+having to. - Explain to others. - Exactly. - There have been a few previous guests on
+the show: Brad Jacobs, John Mackey, and Daniel Ek, obviously,
+running public companies. In Brad Jacobs and John
+Mackey's case, they both said, Jacobs makes that point, well, one,
+he thinks it's wonderful free marketing- - Mm-hmm. - ...and advertising; two,
+you now have a currency. Mackey said the same thing, like, it
+benefited Whole Foods being public fast, because then he used that currency to
+acquire a bunch of his other competitors, and accelerated his growth. - That's such a good point.
+- But Brad Jacobs' point was just like he likes the pressure of that check-in, - Yeah.
+- where he's like, "This is what I'm trying
+to do with the company, this is what I'm saying, I'm doing the company,
+and this is our results. - Mm-hmm. - And I want somebody to say,
+"Oh, like, there's a big disconnect here." - Mm-hmm. - And I want the pressure to
+actually perform in and have some of these
+expectations externally. We talked about the environment
+that you're building at Shopify. I'm curious about how you think about
+the talent that's inside the environment. - Yeah, of course.
+I mean, argumentatively, I really, really believe in the
+sort of stoic, maybe, Adlerian idea of separation of tasks. What do I have control over,
+and what I don't? I always love the particular formulation about thinking about how
+other people think about you. Like, again, you need to make yourself
+aperson worthy of being liked. If someone then dislikes you,
+that's up to them. It's not your job to make people like
+you, it's your job to be likable. And if they make the category mistake,
+it's their own f***ing problem, right? So, it's a really, really freeing
+way to think about what talent. My job is to make a company worthy
+for the best and brightest to work for. This is the part everyone skips. Everyone's like, "Oh, we need to
+hire a better recruiting team." Well, maybe you need to also just be
+worthy of the kind of talent that you would like to have. So, I mean, this goes from office space. If you have any to a company, like the amount of bullshit
+people have to deal with to, How much bullshit politics can
+you subtract from the whole thing? And can your large company feel like a
+small company with lots of resources and lots of impact? You know, it's more fun to ship
+software to millions of people that you really respect than to a few people who you then try to make
+a sale for at some point. Or it's just like, impact matters. In a way, this is likely
+going to be misquoted, but I think the talent
+eventually takes care of itself. There are not that many
+good companies to work for. There are not many good companies that
+deserve the attention of people who are the most capable people, because they have the option to start their own companies.
+- That's a very interesting idea. There are actually not that
+many great companies. It's your job to make one of your
+companies one of those companies that the best people in the world will want to. Wait, what do these
+people look like, though? - Because, the reason why
+I didn't move to Silicon Valley is because I knew how to create geographical
+consensus in the eastern seaboard, that Shopify is the best
+company to work for, full stop. - And I just knew-
+- How? -...I had the ability to do it, because I knew how to build a company
+that I would want to work for. And, I think, given that I estimated I would need somewhere
+between a thousand people or something like this back in those days, I'm like, "I'm going to find
+another thousand people that think like me about how good a
+company needs to be to work for, and I can dislodge all of them." So, if I go to Silicon Valley,
+I can't pay what Google pays, potentially, or someone else makes up for their
+skills issue by just overcompensating. Yeah, it's called compensation because you kind of have to compensate people
+for the s*** you ask them to do. And you know, if there's a lot of s***,
+you have to compensate people for it,  but if you have an enormous
+amount of resources, you can make up for
+skills issues by money. And so, in the East Coast,
+which was much more hedge fundy, and much more high finance,
+and for the kinds of hackers I wanted, I knew how to do this. - But wait, I want to pause there. I love this idea, where you're like, "I'm going to build a company that
+I would wanna work for." - Oh, yeah. - That's on one end of the spectrum,
+which is great. You also had this thought experiment that I heard you say before,
+which is one of the worst things that could happen on the other
+end of the spectrum, is you wake up ten years from now and you built a company
+you don't want to work at. - Yeah, totally. - And then you have this great
+line I want to pull, it's like, "That's dystopian. There's so many companies
+I wouldn't want to work for, why did I use my life to build a
+company to build another one that I wouldn't want to work for?" You just should build a company
+that's worth working for. - Yeah. Again, you should
+take pride in your work. In the inputs and how you. Did you accomplish the things you
+set out for in the aggregate, right? Like, be easy on the path,
+but the outcome should matter to you. And man,
+I just shake my head sometimes with how people over
+complicate these things. It's just like, it's kind of. Man, people know what
+we're looking for, right? And I'm talking about very, very,
+very fortunate people here, people who have a lot of choices, who have incredible competency,
+and some of the rarer skills, and combining this with enormous drive. Like, there's a couple of
+different attributes that all have to come together
+to be one of those people who can command hundreds of thousands, millions of dollars of
+compensation packages that you can make in this industry. But partly because you're worth it, right? Like, you're contributing more than
+that to a mission like this, and therefore,you can command
+this kind of compensation. And that's the way this all fits together. I think of everyone as an
+entrepreneur, really. Your capability is that you are the
+entrepreneur of your own work output. Your product is what you can do
+and what you can accomplish. Your market is the companies that exist, and you are selling an
+exclusive subscription, and that's the institution
+of employment, right? It's a two-sided opt-in relationship. Whenever people come to me and say,
+"Hey, how do I earn more money?" I'm like, "Well, be too good to ignore,
+then we increase compensation." You know, it's like, be better. You're making this amount,
+you would like to make this amount. In which way have you become
+so good that you can add that amount of increase to
+just the collaborative project we are all working on? And so, I think this just sort of
+clarifies and simplifies things, right? So I mean, all of this said, I don't want to make it
+sound like it's inevitable that if you just do all the right things,
+you end up. There's always an information gap
+and a reputation lag, and I'm out there recruiting and telling
+people about the company a lot. What helps me a lot is that people are
+curious about the company, and I've heard about the
+company, and so on now. But that is because of things
+that were under my control. I tell people that it's an
+unshared-attention company. There are s no part-time jobs.
+You will have to put a lot into it. You're going to get even more out of it. You will make great money, but we attempt to never be the
+highest compensation play bit. Because we have found that the people
+who optimize for that above all else, actually don't do well at the company. - Because Shopify is a
+mission-driven company. - Exactly. And the thing I'll promise is
+like, in terms of your own skill set, partly by demand, partly by osmosis, and partly based on culture
+that's surrounding you, you will advance vastly faster at Shopify,
+building capabilities, skills, and correct ways of thinking and
+mental models, and these kind of things, than, I think, at any other place. Therefore, the compound
+return to your career is going to be vastly higher
+here than anywhere else. Because you get to a potentially higher
+compensation level earlier in your career because you're worth it. The entrepreneurial story
+is very fractal in Shopify. It's just like, what is your product?
+What's the market, and does it fit? So, it's a clarifier that
+I think is worth talking about. - I'm going to quote David Ogilvy again,
+because I think it's interesting. He says, "Talent is most likely to be
+found amongst non-conformist dissenters and rebels." So, when I asked the question about, like, "Hey, we know the environment,
+we have a description of the environment. What are the people in the environment?" There are two ideas I got from
+two separate entrepreneurs. I've mentioned both of them already, but I
+because they use the same terminology when they're looking for talented
+people to hire in their company. Daniel from Spotify and Karim from Ramp. And they both said the same thing to me:
+"They hire for spikes." - Mm-hmm. Spikiness. Yeah.
+- Spikiness. So, a lot of big corporations they want
+you to be well-rounded. Like, no, no, this guy might
+be a bipolar alcoholic- - Exactly.
+- ... or this guy might have some other might not shower.
+- Yeah, yeah. - Like Steve Jobs, he was hired at Atari. Everybody's like, Nolan, Nolan Bushnell,
+the founder of Atari, like you can't hire this guy.
+He stinks.  and he wants to sleep at the office." And Nolan's like,
+"Yeah, but he's really talented. So he's going to sleep at the office, and you just got to hold
+your nose when he's around." Do you agree with the idea? - 100%.
+- Okay. - It's like, we never look at the
+credentials and stuff like this. Again, I'm a high school dropout. I would be rich if I would start making
+everyone want to have a PhD. The path by which we do it,
+is we go through a life story. We ask you like, "Hey, give us your story. And it's a very important
+ingredient in our hiring process." And frankly, what we're looking
+for is high agency experience. We look at it like, "Something went
+wrong in your story at some point." Well, now let's zoom in.
+How do you react? Give me minute by minute.
+This is what we want to know, right? Because a lot of us are entrepreneurs. Like, I talked about the founders
+of companies we purchased, but most of the people, just in general,
+in Shopify are entrepreneurs. Many started Shopify stores,
+built a business, and then fell in love with the company, and applied for a job, and got it. So, there's a huge amount of
+company-building background, and we want to be surrounded
+by people we admire. That's, I think the biggest
+product any company can deliver to their employees is so, is that every day they are
+surrounded by people they deeply admire and can learn from. So, it's a very important part of this. So, lots of entrepreneurship,
+lots of entrepreneurial impulses. And then, we look for this
+high agency behavior, and then, you know, obviously, "Did you drive a particular craft that
+you're applying for to excellence? How do you think about this kind of thing? Can you just sort of
+talk about the excellence, or actually perform it?" And then, this is really what
+we fill our buildings with. And, you know, again,
+create the space then, and let them be
+creative in this sort of, This is how it always worked,
+and it's worked really, really well. We couldn't do anything other
+than this in the beginning, right? Like, in the beginning, we had no money,
+none, like, really zero. I didn't take a salary
+for like, four years? - I heard your father-in-law covered your
+payroll when you couldn't make it. - That's right. So yeah, we were living
+with my parents-in-law. Fiona, my wife's older bedroom,
+from which I also added. I put an Ikea desk, and
+I built a lot of Shopify from there. And I mean, just kept costs low.
+That was the main thing. Making every dollar count is
+something that I'm so glad. Like, this is what I worry sometimes with
+all these really, really big seed rounds. The main thing money does is it. It just gets you, I mean it sometimes it reveals but usually It just, like, makes you get a whole
+lot more of what you got before. And, people did raise early partly because
+they were not tight with money, and you get a whole lot more tight,
+not tight with moneyness, at larger scale- - Mm-hmm.
+- ... and it gets really, really bad. - You're making my heart sing, because I feel like I'm on an
+island by myself about this, because I've spent ten years
+reading 410 of these biographies. All of them control
+their costs like crazy. They'll tell you when we're getting
+constraints to your best friend. - Yeah. - And then I talk to these young founders. I usually don't meet startup founders-
+- Yeah. - because I'm not an investor, but a good friend of mine is like-
+- Yeah. - ..."Hey, meet this young kid." I met him, and one of the things
+he was talking about was like, "Yeah, let me show you pictures of this
+beautiful office we're moving into," and he was showing me everything. And I was like, this is stupid. - Yeah.
+- You haven't done anything. You don't deserve this.
+- Yeah. - And I'm like,
+"Go look at where did Apple start? Look at Microsoft." Microsoft started work in a strip
+mall in Albuquerque, New Mexico. - Yeah, right. - And you need a triplex in Soho?
+What are you talking about? - That's so true.
+- And the question that I pointed to him, I was like, "Okay, how does this make your product
+better for your customers?" - Right. - And his answer was, "Well, I'll be able to recruit better
+talent because the office is nicer." Then you don't have a mission. It can work, but I feel like you're not
+increasing the - You built a two hundred billion dollar
+company in your wife's childhood bedroom. That's where you started. - Yeah. - Like, maybe we should repeat
+that over and over again. Just go look at where
+these companies were. - Yeah. - You mentioned the Larry
+Ellison episode I did earlier. They were in a s***** office building. - Yep. Yeah, yeah. - I think they had three separate rooms.
+Oracle, that's where Oracle started. - I think, I mean, there's a
+well-documented effect of when companies to themselves, they
+usually decline right after. - Yeah. - So, that has a long, running
+history and business history. I do think there's an art-- like I do think that companies  under-invested into office
+space for a very long time, and it actually was a mistake. I think space around us is
+actually extremely important, but it doesn't need to be expensive. Like that's probably an aside, but like- - Oh, let's go down there.
+What does that mean? - So again, we didn't have a lot of money
+but we wanted nice office spaces. This was-was the decade where
+ there was a lot of open concept versus own room office spaces. Like, it was sort of a kind of fight. My co-founder is Daniel Weinand. He's a polymath. He learned programming when I asked him
+that I needed some help with programming, and just was good immediately,
+which was annoying as hell. And before he was our designer
+and just literally everything else, too. Now a DJ, and before that,
+he won poker tournaments. So, it keeps going. - Yeah. - It's like one of these little-- It's
+actually really, really helpful to have someone like Daniel as a childhood friend
+because it really, really misleads you about human capabilities. Because if this is just your buddy
+who does stuff like this... Anyway, he, at some point,
+really, really tapped into this. No one can be more creative
+than the space around them, and no one can care more than
+the person they work for. That's the way he sort of created
+ this philosophy around this. I told him, Look, here's max budget, and
+we are getting B office space. That's kind of cool, and you need to
+figure out how to create play spaces are like, a ten out of ten on
+doing world class work because - But inexpensively. - But, you'd need to figure out
+how to make this cheap. Man, we built a bunch
+of offices in a row, and Daniel was insanely good at this. - Yeah. How many years into Shopify? - This is like, two thousand,
+I think, ten was the first one. It was the sixth year since founding,
+ four years after Shopify launched. We went out of, sort of
+above,a coffee shop, which was really nothing,
+to our first office. - So how do you do this? - Daniel, like he said, first of all,
+the dichotomy is wrong. It's not between open office
+and closed office spaces. There's like, a perfect midpoint, because and it has to come
+from your strategy of products. Shopify loves the five-person team. We increase to eight sometimes,
+ but we think the best team size is one, because a single author
+can do things that is impossible to do for teams and hit
+high notes that are unreachable. But I think product has
+rather played the field of what can be done as solo projects. Actually, it's changing again
+because of AI, which is a exciting bit. But like, most projects worth
+doing need to be done in teams. Then there's a magic number at five. It's sort of what the military
+ends up,like, figuring out, too.  Like, they test these things
+and come to the same conclusions. You can sort of temporarily go up,
+but then at some point, you have to split teams
+and parcel out the tasks. Each of these gradations is,
+I think, a ten X loss of productivity. So Shopify is like, our R&D team is, I think, three and
+a half thousand people. That's really lots and lots
+and lots of small teams. And this is also why we need
+this legibility coordination layer that I talked about earlier. Okay, so pods. Daniel figured out how to
+make pods that are like, exactly They are private enough
+while being open enough, and never make the office feel dead, but they also throw you around. It's like- - What's a pod? What does that mean? - It's a room, that just sits up to Like, when you put the seventh person
+in, it's uncomfortable. It's like, again, think about how much
+policy you don't have to post, if the environment just makes
+you do the obvious thing. You can play the uncomfortable
+to many people in this area. When you know what you're doing, now
+you don't need to post a policy about how many people you want in a pod. And people self-organize
+into five-person teams because that's the most comfortable
+thing to put in a pod. So, not meeting rooms. Meeting rooms go in the middle
+on our limited floor space, because we don't want people
+to spend all day in meetings, and then get out of the dark rooms. Like,everyone sits around
+the windows in pods, and they are structured in
+such a way that, it all  works. The coffee area is on the other side. To create serendipity, we cut through
+every floor eventually to create stairs that we move teams in such a way that
+certain teams that have to work together but work on infrastructure, separated
+them out in floors so that they, going to each other,
+would run into other people who are using the infrastructure to You know, and so on and so on and so on. So, design-- Being super conscientious
+about this is really important. Daniel did an amazing job. I think we open-sourced the floor plans,
+and I think lots of-- Like, this is not interesting anymore when you look at what
+they look like, because I think that work has gotten absorbed into the tech
+industry as a right midpoint. But many, many people cargo cult it like, they
+just Xerox copy it, essentially, instead of understanding, so they
+make pots to bake or whatever. Look, you know, these kind of things. - We talked about
+cargo culting a few times. - Mm-hmm. - You observe that behavior
+in other companies. I'm curious what, internally, you have
+caught your own company cargo culting. - Oh, we are in a Toronto office here. The Toronto office actually
+has a few floorsthat are clearly a mimicry of these ideas
+that they figured out, but they don't understand
+where these come from. Like, again, the pod's too big. It is like, more the
+nice meeting room is right on the window, has lots of light. Just like, maybe this is
+okay to have a few, but I went with the
+teams through it because we then changed some of the floor plans, and
+they moved here and realized, like, "Holy s***, this is like..." Oh, Norman doors everywhere. F***!
+That's the craziest thing.  -Wait, what? - I fundamentally allergic
+to Norman doors. - What's that? - Doors that you push, and then, - You can't tell. - you realize you can't tell. - Yes! - Yeah. This is the most
+fundamental design error that you can possibly make, is like
+create affordances on inner product that make people predictably
+do the wrong thing. This is such a like, literally everyone
+who's ever involved in the process of designing a Norman door
+should revoke their design license. I'm being facetious,
+obviously, that isn't a thing. But it's just like, man like - Yeah. - skills issues as a door is
+a very common occurrence, I think, in places that are
+not conscientiously designed, and all of those doors
+are in place very fast. The funny thing is, you can usually
+turn a Norman door into a non-Norman door by cutting things away and putting a push
+plate somewhere, you know, so that helps. So I make a big deal out
+of these kind of things. And it's like this just needs to like, I cannot surround people with
+things that are underperforming, the quality of engineering we want to do. - And that's down to the detail
+of the doors in the office? - Yes. - Wow. - Yeah. - Yeah, of course. Yeah. I mean, because product is not a thing. Product is an abstraction. Product is a name that, like a handle that you put
+on some totality of a body of work. From perspective of people creating
+product, the product doesn't exist. It's what other people call your work. A product is just details. It's many, many little details that
+are appreciated if they compose right, and make a bloody
+mess if they don't, right? So from the inside perspective,
+you have to sweat all the details. The way you do anything
+is how you do everything. And that is absolutely down to the floor
+plans and the ambient noise levels and soon. Just like you go in a room,
+and it's silent. It's just like you notice
+when you're talking while going to a meeting room, at least on the floors
+we fixed, based on pre specs. It's kind of uncomfortable to talk in the
+hallway because it's so echoey, then you walk in a meeting room,
+and immediately, it's just a different noise
+level because it's just diffused. We have enormous amounts of,
+like In fact, we actually worked with companies on Shopify to
+create the products of sound dampening that now supply all companies, tech
+companies, which is really fun. And so, in fact, everything in our
+offices is from Shopify stores, right? Because again, if anything
+we are doing is not mission aligned, we just didn't align
+to a mission, axiomatically. You can go pretty far
+in these kind of things. When you need something for
+office spaces, and it's not on Shopify, we usually put a call out for someone
+ to start that thing, so it's on Shopify,  and we help them get
+started and build the thing, and then, we can maintain our one
+hundred percent Shopify quarter. So it's also fun. -That's incredible. - We did at least one enterprise
+sale with a supplier, because we really wanted
+their floorboards for something. They really looked great
+and were at the right price level, but we can't place the order
+unless you come to our price. So sometimes we are maybe cheating. - That's actually a good
+way to get a customer. - Yeah, it's also a funny way
+of doing enterprise sales. - I want this thing, but you just need
+ to migrate over to our platform first. - Yeah, yeah. Yeah, yeah. - All of the founders and extreme winners that I have studied have
+this one trait in common: They have excessively
+high energy levels. If you're going to be
+the best at what you do, you need to maximize
+your energy and output, and that's why I've
+partnered with Function. I signed up for Function long before
+they were a sponsor of this podcast, and when you sign up,
+they ask you what your health goals are, and my response in all capital
+letters was, "Maximum energy." Function provides access
+ to comprehensive blood tests and other lab testing to help you improve your health so you can
+perform at your highest level. Function has made it easy for me to
+monitor and improve my internal health markers so that I feel at
+my absolute strongest. As a member of Function, you get access
+to test over one hundred plus biomarkers, from hormones, to toxins, to markers for
+heart health, inflammation, and stress. Function gives you a
+straightforward analysis of all your results, along with
+advice from expert doctors on how to improve things like
+your testosterone, your stress hormones,
+how to reduce toxins in your body, and much more. The platform is absolutely
+beautiful and provides an easy-to-understand
+picture of your overall health. Once you try Function, you will
+immediately understand why it's the fastest-growing health
+platform in the country. You can now join Function for just three
+hundred and sixty-five dollars a year. That's a dollar a day. Learn more and join by visiting
+functionhealth.com/senra, and use code SENRA25
+for a twenty-five-dollar credit towards your membership. That is functionhealth.com/senra. - All right, I want to talk
+about video games. I want to talk about AI. - Sure.
+- I want to talk about them being related. I mentioned my friend,
+Karim a few times. I went to his house last week, and
+I was like, Dude, I'm talking to Tobi. He's also obsessed. He has an engineering mindset like you. He's obsessed with playing video games. And you've mentioned a
+few times where you thought you learned more about building a company from StarCraft than by talking to a bunch of people or reading a bunch of books. But then his whole thing was just like, he's got to feel like it's even building
+with AI now is even more like a video - Yeah, have said-- Factorio, yes. - Okay, so that's the example he gave me. I haven't played the game. Can you elaborate on this? - I completely agree. So again, this is like, man,
+the world has such a weird way of somehow changing itself around
+me to make the stuff that I thought was irrelevant, relevant, so as late in life.
+It's absolutely amazing. It's just like okay, so video games. Video games are best
+for-- I mean, this depends very much on the video game, but in the
+aggregate, very often, say, the good video games are simulations. They are a world upon itself, and you are a high-agency
+actor, and you modify things. You perform actions,
+you make decisions, and then the game rearranges themselves, giving you usually a very quick feedback
+loop because otherwise it's unfun. But you learn about consequences
+of your actions. So like, competitive multiplayer
+games are very obvious there, and StarCraft and strategy games, they're not that popular as a
+category of games anymore, but when I was going
+through my teens in the '90s, StarCraft was the biggest game. And I loved it because
+it was really, really hard. It was easy to learn, hard to master,
+which is exactly, I think, a hallmark of everything that's worth doing,
+for motorsports, for kiteboarding, for my hobbies, tennis,
+all these things are like this. But like, it specifically is
+honest in a way that there's two people
+on the map mirrored. Everyone has the same
+potential every single game, and one person wins at the end, right? Additionally, it's a game
+of imperfect information. It's not like chess. You don't see the moves. You see only some information
+that you like, in fact, you have to invest. You have to use one
+of the things that could get you resources instead to go
+to the enemy base to figure out what he's building, and
+then you need to interpret this. So all these kind of things is like, what you learn in this game is
+that information is everything. Like, there's no right decision. There's only context in which
+decisions turn out to be correct. And while resource management
+is extremely important, you have to understand that resource
+management is not just quantifiables. It's not just minerals and vespene gas
+that you have to manage, which allows you to build units. It's also your attention, and frankly, attacking other people's attention
+is much more profitable, very often in a game of StarCraft,
+than it is to actually attack their base. Because if you overtax
+their ability to pay attention to things, they will make mistakes. - How do you overtax their ability
+to pay attention to things? - You can do an early attack. You can do any number
+of things, especially if you play against the same person. When you get to a very high level, you will play the same people
+over and over again. They get a sense for how you play. So at that moment, there's always been the people
+who are just incredibly prepared. They're just like, they perfected
+playing a single way, which my play was always different. Chess, StarCraft, all the same. Like, I disrupt the other person's play. I do moves that aren't in books. They're not in books
+because they're not good. But other people can't deal with it because they need their preparation.
+Their skill set is-- Their ability to play chess is the
+crystallized intelligence, not the fluid intelligence,
+to roll with the punches. And so, I learned a lot
+about myself doing this. But I also learned a lot about
+how do you, like You know, just like,
+how to approach a game. Like, how do you get better? How do you get more out
+of every game you play? Because I never, ever in
+my life had as much time as some other people could to
+invest in something like this. So I always had to like, How can I get more skill
+progress units out of the time I have than other people out of less
+constrained calendars," right? I'm talking very fondly of StarCraft. It might just have been oddly the right
+teacher for me at that moment, and the student was ready. And so I could have maybe learned the
+same lessons from any number of things. But I think it was specifically good
+ of it being a simulation. You start a new game,
+it had skill-based matchmaking, so you should play against other people
+of your skill set, based on Elo rating. So you had a very, very clear sense. If you  started winning more
+games when you lost, that means you were progressing. If you started losing more games, if you
+were regressing on an absolute scale compared to all other
+players in the world. And I think that was a perfect
+little sandbox to explore how to think about when
+it's time to build infrastructure, when it's time to invest in resources,
+when it's time to prepare, when it's time to reveal your hand,
+when it's not time to reveal your hand. And, I think it was a perfect place to
+spend time for me in my teenagers years, given what I did afterwards.   So, back to your AI question. I just find that working
+with AI, like agents, especially for I mean,
+we are recording this. This is like week three of 2026. If we would have recorded
+this in week fifty-two of 2025, it would even be different. I might not even make this
+analogy so strongly, but that's how much is happening, that the world changes
+every three weeks right now. We figured out some new
+harnesses for agentic loops that are much more autonomous
+and frankly, supported by models which didn't exist
+at the beginning of December, that can perform at this level. And so I look at my computer, and I have
+like six different agents going, all coordinating between them. They send emails to each other,
+which I think is hilarious. And so, you know, I'm like, Man, this is
+starting to really look like StarCraft. My attention is paid like,
+this one is currently working on a module for what I really, really need,
+so I'm zooming in, paying attention, doing
+a little bit of micro, giving a little bit of extra double check,
+sort of the output of the critic, which looks at all of them all the time
+to figure out if they're still on task. It's the exact same thing.
+It is a fascinating time. It is just like I can't describe
+how fast progress is right now. You know what I tell my team? It's like, 21 years now, starting
+companies is really, really, really hard, right? So first years,
+ just like, it-- that's interesting, and everything's urgent because
+ you're getting to a margin. We got, like, within a week of running
+out of money so many times, and sometimes we were bailed out. Many times it was just like the clearance of the one-time try hurdles, which I've went through was like,
+ millimetres at times. Like, there's so I bet you if
+you rerun the first six years simulation ten thousand times, it would not succeed in
+most of them, right? So in a way, luck is a big
+component, timing, all these kind of things.
+ People luck, especially. After that, IPO,
+you think that's probably the most interesting thing, a
+period of a company. I think it was hard and maybe
+not terribly interesting. It's financing event at
+the end of the day. Maybe, but some aspects were interesting, like figuring out-- but
+there were aspects of how we make it our own as a process. Partly, this is why I did it. This is why we made
+changes to the process, or why we wanted to have
+our own stamp on it, because I didn't want to
+join someone else's process. I wanted to have it my own. Then there's COVID,
+which was very, very hard. Definitely not interesting,
+actually f***ing annoying, mostly. So I'm just trying
+to figure out, like 2026, man. This is going to be
+hard and interesting. - Those are the things you're most
+attracted to, hard and interesting? -Year twenty-one is like, this is going to
+be the most interesting year in this company's history, probably in, I think, literally, everyone's career. Just everything is lined up. It's like, doesn't matter what you've got, everyone's going to be measured against
+how well did you prepare yourself? Like, what your skill set? How quickly can you react to
+everything that's happening? How quickly can you readjust? How quickly can you rederive everything? -You put out this internal memo where
+you're just like... I think it's for, you know the language better than I do, but it's basically,
+it's a company expectation that the first thing
+when you have a problem, you reflexively try to use AI. -Yeah. -When did you put that,
+that out, a year ago? -Yeah, no, maybe not quite, -but, like, something along those lines. -And people were just like:
+-Yeah. "This is ridiculous." There was, like, some pushback. -Yeah. -And now, to your point about how fast
+everything is moving, it's like, of -Yeah. -course, you would. -Yeah exactly. People will look at that
+memo in two years and just like, "He didn't say anything." -Right. It's like saying the sky is blue. -Yeah exactly. So does this excite you?
+- But it's also like- - What's it like- Oh, yeah! Man, I love that. -Okay.
+-It's like this is what I'm here for. It's just like I... If AI
+wouldn't have happened, I don't think I would run
+Shopify anymore. Like, there's much better
+leaders if in times like- -Whoa, what?
+ -If times are stable. -Yeah, but I thought you were
+in love with this problem, -Yeah, but like I-
+-this unsolvable problem.  So you'd still work on it, but
+you wouldn't be running it? What do you mean? -I mean, I think I would be no,
+l might try my hand at a different aspect of helping people self-actualize. Like, my personal mission is
+to because more entrepreneurship. I'm going to judge
+my own career by: The thing I discovered
+that was meaningful to me, have I helped the maximum amount
+of other people do this thing? -When did you realize
+that was your mission? -So, I know exactly because
+it was like, preparing for one of those internal events, summit talks, which I was like,
+it's always a bit of a, like, soul like, I do a lot of this message in a
+bottle reading and self-introspection. It was 2014. I was preparing
+for my summer talk, and I'm like my biggest struggle
+was with my own identity. I think I was mentally preparing
+for the cosplay period, which I wish I wouldn't. But I like engineering. I want to spend my day hacking on stuff
+and building things, not managing. And so, again, I used my trick partly
+to give a talk on something that I was sort of come to realization,
+but maybe not fully internalize. To basically I said,
+I loved engineering because it turns out that was the way how I, as a kid, when I started doing it,
+could build things. What I actually love
+doing is building things. And specifically, I love building
+things that share a thing that I have experienced. This is a moment of becoming an
+entrepreneur, getting your first sale. And so, I made a talk about combining
+those two things and just saying, My mission in life, my craft is actually
+building things in general. I build.
+I started with products, like code. I then create products, and now I create
+companies that create products, and I engineer those. And that causes more
+of this kind of thing. So I kind of wrote that as a personal
+mission for me and said, I will attempt to run Shopify and try to be the best CEO I can be until someone taps me
+on the shoulder and says, Other people could be
+better for this company, as long as it's in cohesion
+with my personal mission. But I'm also like, I'm perfectly
+fatalistic about this kind of thing. I don't do the job for money. It's like I do it because I feel like
+ I can contribute a lot. -I love this idea that you view
+entrepreneurship as a way to get self-actualized. -Oh yeah. I mean, what's more honest? -But it's also your form of
+entrepreneurship. I was reading-- I never read comments of
+ podcasts and YouTube videos. I highly recommend against that. But people were saying, like, "This is,
+like, one of the good entrepreneurs." This is like, what you're building, and the other entrepreneurs
+you're trying to enable, it's not like they're crony capitalistic. There's, like, a lot of dirty part
+I'm as capitalist as they come, so I understood what that comment meant. Out of every single note that I took from all the talks
+that I've seen you give before, the one that was at
+the top of my list is exactly how I feel about what I'm trying to do. And you said, "Focus on
+craft and giving a s***." And you said, "It doesn't matter that a bunch
+of this stuff isn't quantifiable." It's exactly how I feel. -It's such a basic thing, but why It's so simple,
+but it's just not easy, right? In any which way. Companies hate the
+unquantifiables, in fact. It's amazing to see it. Like, man, you hire
+ the first team together, and if you get to talk about building a company on a podcast,
+that means you were successful. So the first team clearly did this, and therefore,
+the first team was very good. And the first team,
+you hired based on your gut. You just knew. These were the people you needed. You make mistakes, but you correct. And that's all just sort of like judgment,
+taste, maybe even bias. I think we need to move nostalgia
+into the bad category of words and bias into the good category of words, because bias is actually perfectly fine. It's like, without bias,
+you actually have no convictions. Like, you should try your convictions. This is really what
+I learned from the thing. So you make the first
+team as a pure play, this is the best I know
+how to make decisions, and then everyone wants
+you to write it down. And you know what happens
+when you write it down? Like, here's the things
+that you are looking for. Here's the thing. Well, the people who read it are the people who are very, very
+good at following lists. So, the people that
+you probably described, not the people who go look
+for a cheat sheet. The people you are trying
+to avoid hiring are the people who would study a cheat sheet very well. So you just gave everyone
+a way of performatively doing the thing that you want to see, without being intrinsically like this. And so, you end up very quickly losing
+your company once you systematize things. However, everyone
+is telling you to do it. There's a giant conspiracy against these things, taste, quality. If it can't be put in numbers or can't be
+written as a list, companies hate it, yet almost everything you have to do
+to build a great company is other things that are these things,
+and you shouldn't write down. Actively avoiding to write
+something down is sometimes the most important thing
+you can possibly do. -Do you think it's also related to the way you brought up sunk
+costs a bunch of times? -Yeah.
+-Where it's like, well, I wrote this down. I might change my mind, but there's some
+kind of human element where it's like, "Oh, I don't want to contradict
+this because it's in writing." -Yeah exactly. Again, people like to
+be consistent over time. I just don't find that important. I found the cheat code
+to always being right is just change your opinion every time
+you get better information. Because as you get closer to a point that
+you have to make a decision, that means you will
+wind up with the right one. It's like if you'd not stop at some point
+to incorporate new information. And if even if you are wrong, and if I figure it out again, what do you do? Like, you have to you have
+one momentarily chance to steeryour concern
+to the best possible outcome.  Are you going to take it,
+or are you going to be the person who just leans into the comfort
+of somehow character consistency? What, like, why? For what? Again, what's the job you want to do? It's like, you want
+to look good or be good. And so you're going to like, just change it needs
+to be okay to change your mind when better
+information comes along. And again, here's the crazy thing: I think if you go through
+the transcript of this podcast, you will find-- or just ask
+an AI to do it, it will probably point out
+various contradictions inside of what I'm saying about what to do. I'm in this. I'm probably on multiple sides. The reason is actually--
+This is the almost most important thing, everything comes in layers. I guess there's
+just so many different like, what's the optimal operating system in some frame of reference,
+is often contradictory and the opposite of
+a larger frame of reference. Because, you know,
+I like this box, talking about boxes, because inside of a box, it is
+After a while, you can have a map of it, you can illuminate all the corners,
+ and you understand what's there. You may decide what wasn't
+the right box to pursue. Maybe then you need to figure out-- like, maybe you need to bend
+ it and say, "Okay, actually, the problem is actually an
+aspect of another problem, and maybe if I put a larger box, if you solve that, then this problem
+doesn't even need to be solved." That happens. But this is exactly what I mean. As you zoom out, you actually
+need to completely change the way you problem solve, because you're starting
+to work much more with longer timelines. You need to actually
+make bets at a high level, but you shouldn't make bets with
+infrastructure, because you can. In engineering, again,
+you can run benchmarks, figure out if something is fast enough, and it'll be a yes or a no. You don't need to bet on
+the trajectory of databases are growing faster
+at a certain thing. It's like you don't need
+to. You can measure. So there, you want
+to be super quantifiable. When you try to figure out
+which market to go into, you need to figure out Well, right now you have to figure out
+how is AI going to change that market. It's because you need to
+figure out if you join market or is that market going
+to be a temporary, unnecessary aspect of something
+else we are already doing, and will it be absorbed into
+a different category of products? And is this still valuable
+for you to do, and so on. And what are humanoid robotics going
+to do to the world of logistics? And you got to work with
+trend lines mostly, right? Which is not important in many
+other decision-making. So I think there's probably like four
+or five different levels by which you have to look at a problem. And that is actually a lot of
+the skill of a good executive, is to be able to meet the team where they are and help them talk about
+the outside world, quote-unquote. Like, here is how their work relates to
+all the other frames of reference, all the other abstraction, and how
+it sits as a part in the larger company. And everyone should be able to connect what their day-to-day
+work back to the mission. You work on customer support,
+well, you're helping people, literally not giving up on being entrepreneurs. Like, it's not even subtle. It's actually an easy exercise to do
+ for people when you ask them to do it. But it's distressing in how many companies
+it's actually kind of unstated. The company mission is
+some kind of set of attitudes or something that aren't actionable. Those are unforced errors, and I think things go better
+when you get them right. -Hey, real quick, I need a favor from you. Right now, I'm conducting a survey to better understand
+the listeners of this show. So the survey is entirely anonymous. It's going to ask you things like
+what your position is at your company, what your household income is,
+things like that. This information is going
+to help me both keep and attract the best possible sponsors for the show, which then, in turn, allows me to create
+the best possible conversations for you. Now, I don't want to just ask for
+something without giving you something. So, as a thank you for
+completing the survey, I'm going to host a live
+stream on YouTube, where I talk about some of
+the most important things I've learned from spending hours
+with the guests on this show, and some of the best ideas that they have
+shared with me after our conversation. So please, do me a huge favor
+and complete the survey. It takes just five minutes, probably
+less than five minutes for you. But after you complete the survey,
+I'll email you a link to the live stream. A link for the survey is in
+the show notes of this episode,  and is also available on
+davidsenra.com. I love the idea of tying everything
+back to the mission. - I do hope people go through
+the transcripts of this conversation.
+- Mm-hmm. - I think it's going to be incredible. - I printed out some of them. - And I'm sure people are going to
+tell me about all the contradictions. It's just- And I think, again,
+this is the fun bit. I find contradictions in
+my belief systems all the time because we are like
+balls of contradictions. - I'll get messages. I'm like, "I'm listening
+to this episode you did in 2019, and you said this, and on the new
+one, you said this. " I'm like, "I've read two hundred
+ and fifty of these things since then. Like, what, do you think
+I'm doing this to stay the same? - Right.
+- Like, what's the point? - It's a good point. - I had high expectations
+of this conversation. Tobi, you exceeded them. I hope we do this at least once a year, and I think the next time we do this,
+we design with the constraints which you like,
+and we just evangelize entrepreneurship and the fact that it's one of the most
+important things in the world. And I think you're creating
+a lot more entrepreneurs, and I'm trying to create a lot more
+entrepreneurs with my books as well. - I'll tell you one thing. Because I'm not sure
+if I-- maybe I've shared this publicly, but I think you are going to get more
+mileage out of this than anyone else. When we did surveys with our customers
+about because we need to identify where are our customers, what they do, what do they read, these kind of things. What we have found, this is a long time
+ago, before your podcast existed, it was, like, almost 80%
+or high 70% people checked the box saying they have someone who, if they sent an
+entrepreneurial question to, would respond to the email in 24 hours. And I initially thought that was insanely
+cool how many people have such a resource.  - And then- It's not like in
+the general population, though, right? - Eventually, I clued in. I think it was probably on Wikipedia when I read about
+survivor bias, survivorship bias, and I realized, "F***, the reason why they are my customers is
+because they have someone who responds to
+these questions in 24 hours. It's the other way around. It's causal. And the concept of entrepreneurship is
+so underexposed and underexplained. It's sort of got better in the ten years,
+fifteen years since these surveys. But I love what you're doing because
+ you're just bringing this con-- like, you're rolling this
+out for people to introspect, like an entire life
+story of entrepreneurship, giving people the thing
+that is implied by the question. It's like, do you have any exposure to the
+world of entrepreneurship in some way, that you actually know
+what you're signing up for? Because the people
+who don't know it exists, the people who have no relation to it, or the people who don't happen to
+have someone in their family or friends who have, at some point, started
+anything, well, they just won't try. It's not part of their toolbox. And just making, putting this part
+into more people's toolboxes, because it's going to
+be so load-bearing. Because I think
+actually in this world of AI, there's going to be disruption, and so many more people than people
+believe have a plan B than entrepreneurship. I think making things will be much
+simpler in the world of just-in-time manufacturing and 3D printing,
+and additive and raisin printing, and all these kind of like products,
+ just humanoid robotics, dreadnought, lights off factories
+making anything on demand, and 3D printers in every home, or at
+least very, very commonly in homes now. You know, in that world,
+more people will realize, and working with AI is about
+learning the skills of figuring out how to make the better cup, and how to design a better version,
+and not having a Norman door. It's capitalism, the best parts,
+and I think it will be much more common and much more exciting,
+and it's so fun to work on. And like, in that way, you and
+I work on the same project, which I think is super,super cool. It's because the information
+gap is getting the stories out, telling people that's possible, and it's so
+important for people to then try, and hopefully then
+they might use Shopify, and then hopefully
+we can push them behind. - I love that.
+I appreciate you saying it. Appreciate the time. Thank you so much, Tobi.
+- Awesome, man. - I hope you enjoyed this episode. Please remember to subscribe wherever
+you're listening and leave a review, and make sure you listen
+to my other podcast, Founders. For almost a decade, I've
+obsessively read over four hundred biographies of history's greatest
+entrepreneurs, searching for ideas that you can use in your work. Most of the guests you hear on this
+show first found me through Founders.

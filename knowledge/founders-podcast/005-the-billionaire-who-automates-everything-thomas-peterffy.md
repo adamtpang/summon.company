@@ -1,0 +1,177 @@
+---
+rank: 5
+title: "The Billionaire Who Automates Everything: Thomas Peterffy"
+subject: "Thomas Peterffy"
+company: "Interactive Brokers (and Timber Hill)"
+source_book: "Colossus Review profile of Thomas Peterffy by Dom Cook"
+youtube_url: "https://www.youtube.com/watch?v=Q5WIv9vGKpA"
+youtube_id: "Q5WIv9vGKpA"
+published: "2025-10-05"
+duration_min: 32
+word_count: 5148
+views: 113626
+date_extracted: "2026-07-18"
+principle: "Automate everything so the business runs on math, not intuition, and route around every arbitrary rule between you and growth."
+tags: [founders-podcast, david-senra, automation, trading, fintech]
+---
+
+# The Billionaire Who Automates Everything: Thomas Peterffy
+
+> **Founder principle — Thomas Peterffy:** Peterffy spent 60 years automating every part of his business until Interactive Brokers ran on math instead of human intuition, reaching 71% profit margins with a staff that is mostly engineers. His edge was refusing to let his mind be clouded by conventional wisdom, and inventing a novel workaround every time an exchange threw up an arbitrary rule to stop him.
+
+*David Senra on Thomas Peterffy, reading from the Colossus Review profile by Dom Cook. Founders Podcast · [watch](https://www.youtube.com/watch?v=Q5WIv9vGKpA) · 32 min · published 2025-10-05.*
+
+## Key lessons
+
+- Automate the work itself: as a $65-a-week draftsman he taught himself the office's unused desktop computer and turned 20-minute calculations into 30-second ones, the same instinct that later produced Wall Street's first fully automated trading system in 1987, after 16 years of trial and error.
+- Trade on math, not intuition: "I'm a computer programmer and so are all the most important people in my company." He built pricing systems, including a partial differential equation for options, while rivals still relied on traders' gut feel.
+- If a smart person figured something out, so can you: watching his psychiatrist boss Jereki become "the dean of the American gold market" taught Peterffy that expertise is learnable ("I realized if he can figure it out, so can I") and gave him the confidence to leave and start his own firm.
+- Route around arbitrary rules: banned analytical devices, a severed data line, and a hostile clique of specialists each produced a novel workaround, from color-coded screens readable 30 feet away, to hijacking a data feed with an oscilloscope, to a mechanical "spider" that typed orders to satisfy NASDAQ's keyboard rule.
+- Charge less to win more: like Costco, Interactive Brokers makes more money by charging less, driving fees so low that rivals stopped competing on price ($3.7B profit on $5.2B revenue in 2024).
+- Common sense over credentials: "I've never read a business book"; his whole story, he says, is hard work and common sense, plus a relentless focus on saving customers money and making markets more efficient.
+
+## Transcript
+
+Before a few days ago, I didn't know who Thomas Peterffy was. And I was shocked to learn that he's 81 years old. He's worth $80 billion. And he's built his $120 billion company, Interactive Brokers, into one of the most efficient companies in the world.
+
+So, for example, in 2024, they generated $3.7 billion in profits on just 5.2 billion in revenue. And I discovered Peterffy by reading this incredible profile about him that was written by Colossus. And I actually couldn't put it down and immediately called my friend Patrick who's the founder of Colossus. and I told him that I wanted to make an episode on Peterffy's incredible life story.
+
+So that is what this episode is about. I want to get right into the profile which will be linked below and is written by Dom Cook. And so Dom writes, "I'm at the $108 million Aspen House of Thomas Peterffy." Once inside, I find Peterffy hunched over his chair. His piercing eyes look up at me in confusion as I was introduced. "I thought we were doing this over Zoom," he said. My stomach dropped.
+
+"Where have you come from?" he asked. London? That's crazy, he said as if I'd come by boat. To a man who has spent the past 60 years automating as much of his business as possible to the point where Interactive Brokers has 71% profit margins, my journey to meet him was an absurd misallocation of resources. Peterffy is the 23rd richest person in the world. He pioneered automated trading and built one of the largest options market makers on earth.
+
+He is the reason that you can trade stocks in your pajamas. His second act, Interactive Brokers, is worth over a hundred billion dollars. I was surprised that he was surprised that anyone would travel to hear his story. He settled down in his chair and began to explain how he got his start in life by dragging a metal bathtub through the rubble of postwar Budapest. I was born during a Soviet bombing raid, Peterffy began. It was September 30th, 1944, and the Red Army was pushing into Hungary.
+
+He remembers nothing until he was five, by which time Hungary belonged to the communists and his father had vanished, having divorced his mother and fled the country when Peterffy was two. I often remember my mother crying and I'd ask, "Mom, why are you crying?" And she'd reply, "We're going to starve to death." And she was dead serious about that. At school, Peterffy had no hope.
+
+But his grandmother's library had survived the war. And through the 19th century French classics written by Bolzac and Hugo and Zola, he learned about capitalism. I always wanted to make some money because we didn't have any, he said. At 12, he went into business with a classmate who returned from Austria with packets of gum. Peterffy took out a knife, cut each stick into five pieces, and worked the schoolyard until they were sold. The principal, upon hearing about his venture, confronted him.
+
+"Where is your communist conscience?" he said. A year later, he was organizing platoon of children to hunt for metal in bombedout buildings. 70% of Budapest had been hit during the war, and Hungary desperately needed steel. Signs throughout the capital offered to buy scrap by the pound. Once we found a humongous metal bathtub, which was incredibly heavy. It took eight of us all afternoon to drag it to the weigh station, but we got a lot of money for it.
+
+When Peterffy was 21, through what he called a series of very, very lucky mistakes, he managed to secure a short-term visa to West Germany on the premise of visiting distant relatives. From there, he walked into the American consulate and applied to immigrate. When the papers came through, he bought a one-way ticket to New York City. Each month throughout his childhood, a letter had arrived from America. This letter was from his father. Peterffy paid little attention to the words.
+
+What interested him was the envelope and in particular the green stamp showing the Statue of Liberty. America had those stamps for something like 30 years. He said that was extremely effective advertising. On December 12th, 1965, he landed in New York. He remembers a building in the middle of the street. It was the New York General Building and it straddled the Avenue as cars moved under its arches.
+
+He learned why it was there. The New York Central Railroad had dug beneath the avenue to lay the railway. Then they used the space above to build its headquarters. For a young man who had grown up in a world defined by limits, the building was proof that in America, someone could take an established system and simply build over it. He soon found work at a highway engineering firm earning $65 a week drawing road maps. He spent his days converting surveyor's field notes into highway drawings, plotting elevation changes, sight lines, and banking angles for new roads.
+
+Routine calculations could take up to 20 minutes. Yet, in the corner of the office sat a $3,000 solution that nobody wanted to touch. The Alveti Programmer 101 weighed 20 lb and looked like an oversized cash register. It was one of the first desktop computers. When Peterffy volunteered to tackle the unused machine, nobody objected. I figured it would be easier to learn than English, he said.
+
+The computer performed basic arithmetic and printed results on paper receipts. It could also store simple programs. The first night, Peterffy took the manual home, and he was relieved to find it contained only 100 English words. The rest was equations and diagrams. The machine's logic immediately appealed to him. Break each calculation into steps, record those steps on a card, feed the card into the slot, enter the surveyor's numbers, and receive an answer.
+
+Peterffy began writing his first programs. When a card finally worked, he labeled the function and added it to his growing stack. Within weeks, he had built a library of programs for the office's most common calculations. What had taken 20 minutes by hand now took 30 seconds. Each morning, draftsman formed a line at Peterffy's desk as the machine chattered away next to him. Its printer unfurling solutions to his colleagueu's problems.
+
+I was very proud of myself, Peterffy said. And so, at this point, he's just working for an engineering firm. There's a series of people that he's going to meet that is going to change the trajectory of his life. The first one was a fellow Hungarian. When someone mentioned Janos Arani, a Hungarian who's making money helping Wall Street firms learn how to use computers. Peterffy went to Arani's office and asked for work.
+
+The consulting work introduced Peterffy to finance. Most clients wanted the same reports that compared securities across various metrics like price to earnings, book value, and earning growth rates. Peterffy wrote programs and waited as the machine hummed and clicked through the calculations. The results emerged. He organized them into folders and then delivered them to the clients each week.
+
+And so then is going to introduce him to another person that's going to change the trajectory of his life. One day Ronnie mentioned an unusual client. I know this crazy psychiatrist who wants to do some computer work. You should meet him. That psychiatrist was Dr. Dr.
+
+Henry Jerki, a former Yale professor who had left medicine to establish the American operation of Maca and Goldsmith, one of the world's leading bullion trading firms. Peterffy arrived at Jerky's office armed with a book called Gold that he had been using to learn about commodities. Jerki explained his observation that the price of silver was volatile but stayed within defined boundaries. He wanted somebody to write a program that could model what would happen if they bought every down tick and sold every uptick profiting from silver's nervous energy. To answer Jerky's question, Peterffy needed data.
+
+So he goes down to ComX, which is the commodity exchange, and this is what he finds. He found a prehistoric setup. reporters seated in a circular pit dictating prices through radio headsets to clerks on scaffolding who scrolled numbers on the walls. At day's end, the prices were copied to paper.
+
+So once I learned about Thomas Peterffy, not only did I read this profile, but I read every interview I could find with him and every other profile about him. And in another profile, I discovered one of the most important sentences that I think is key to understanding Peterffy and what makes him personally interesting to me. And he said, "On Wall Street, I feel like I'm Alice in Wonderland. Nothing makes sense. Everything is mixed up and different than the way that I think it should be." And so Peterffy's assignment is very simple. Trade silver and try to make money.
+
+And Peterffy has no idea how to do this. He says, "I had a horrible time. How do you decide when you're going to buy and how do you decide when you're going to sell?" He had no framework for decisions, no system beyond intuition that he did not possess. Jereki also had a larger vision, but we will see not as large a vision as Peterffy had. Jereki wanted his naent business to become a bullion dealer, quoting continuous silver and gold prices to banks and traders in New York, London, and Hong. The exact problems that a computer could solve best.
+
+Peterffy designed the system from scratch. So there's another quote in one of these other profiles that I read about Peterffy where he he talks about that he does not consider himself a trader. He says, "I'm a computer programmer and so are all the most important people in my company." So it says Peterffy designed the system from scratch. Peterffy's programs ran the data through proprietary equations and printed fresh bid ask quotes on green bar paper. Runners then grabbed the sheets and raced them to the trading pit where clerks gave live prices through hand signals. Other firms relied on their traders intuition.
+
+Peterffy built a machine that ran on math. And so keep in mind what I'm about to read to you. He's saying this in 1971. He is 27 years old and he's giving an interview to Baron's magazine about this system that he just created. It's going to take him more than a decade and a half of trial and error to figure out how to do what he's saying he wants to do, which is, "As soon as this electronic brain is hooked up to its voice box so he can answer the phone, staff will be able to go on a permanent vacation." His words reveal how clearly he saw the future. As Jerky's company became one of the most powerful commodities firms in the world, Peterffy's influence grew.
+
+By 1976, he commanded a team of 80 programmers, one of the largest financial coding operations in the world. And Jerecki began bringing him into meetings that had nothing to do with software. Jereki never entered an important negotiation without him. In rooms full of traders and executives, Jereki would defer to Peterffy.
+
+But their partnership began to fracture later that year when Peterffy visited the Chicago Board Options Exchange. Traders were making prices out of thin air. Bid ass spreads stretched two to3 dollars wide. Inefficiencies that dwarfed anything in the precious metals market. And as we're about to see, the mistake that Dreeri makes is trying to constrain Peterffy's what I would say obviously unlimited ambition. When Peterffy proposed expanding into stock options, Jerki refused, preferring to remain a precious metals dealer.
+
+And it is at this point in the story where Peterffy realizes that Jereki is stopping him from seizing an opportunity to grow. So Jerecki does not want to expand in options but Peterffy. Peterffy had used his computer to invent a partial differential equation that priced options based on variables such as the underlying assets price, volatility, and the options time to expiration. He had been testing the formula inside of Dreky's company quietly on silver options and making money on almost every trade. That success made Jerky's refusal more frustrating. And this is so important. the importance of seeing somebody else succeed in realizing if they figured it out, I could too.
+
+Over seven years, Peterffy had watched his boss become known as the dean of the American gold market. When I asked what Derek had taught him, Peterffy didn't hesitate. He was a very well educated man, but he was a psychiatrist. He didn't know anything about markets. I realized if he can figure it out, so can I. He has another great quote in another profile about Jerky.
+
+He says, "I learned," he was talking about what he learned from him. He says, "I learned an immense amount about how the markets worked. The best lesson was to not let my mind become clouded by conventional wisdom. For the first few decades of Peterffy's career, everybody thinks he's crazy." They say over and over again, "That guy's mad. His ideas are too strange." So, Peterffy is going to leave Direct and start on his own in 1977 with $200,000 in savings. Peterffy left and bought a seat on the American Stock Exchange for $36,000.
+
+So he's in the pit with all the other traders and immediately he's doing things his own way. Peterffy had folded his computerenerated sheets into precise squares and distributed them among his pockets. IBM went into his breast pocket, DuPont into his left trouser pocket, another company in his back pocket, so on and so forth. When prices moved, he would duck his head, fish into the appropriate pocket, consult his numbers, then surface to make his bid. The other traders watched this performance with fascination and growing unease. That that sentence, the meaning behind that sentence is repeated over and over again throughout his early career.
+
+Some of the stories in this profile are insane. Wait till we get to them. He was treating the trading floor like a chemistry experiment. People thought I was mad, he said. Again, something he hears over and over again.
+
+But he was comfortable enough trusting his own judgment and thought they were the mad ones. And so, of course, at the beginning of anything, you're going to make a lot of mistakes. And so he actually loses half of his capital. He's trading his own money in a few minutes on a single bad trade that he is convinced uh was actually the result of insider trading.
+
+And so he starts to be a lot more careful and starts hedging every single trade. Between 1977 and 1982, Peterffy slowly rebuilt his capital, one careful trade at a time. He stuck religiously to his fair value sheets and made sure to hedge all of his trades. He also began hiring others to execute his ideas. By 1982, his operation had grown large enough to deserve a name, Timber Hill.
+
+So, this is his first company. The second one is going to be Interactive Brokers. That same year, Peterffy tore several ligaments in his knee through a series of accidents. He found himself unable to stand on the trading floor for long periods. Confined to his office, Peterffy spent hours watching his Quatron machine, a beige box that pulled up one stock price at a time over a dedicated phone line. He asked Quotron to sell him the data feed.
+
+And when they refused, he helped himself, cutting the wire and attaching an oscilloscope. I had to look this up. An oscilloscope is an electric test instrument that visually displays the variation of voltage over time.
+
+So listen to this. I want to buy your data. You say no. And it says he helped himself. He essentially hacked the system, cutting the wire and attaching the oscilloscope. The oscilloscope sat on sat on his desk like a small television with a grid hashed over its face.
+
+When he attached the probes to the severed line, green traces swept across the screen, displaying the electrical pulses carrying each stock price. This is insane. Every number had its own signature in spikes and dips. He studied the patterns matching each trace to the prices appearing on his quotron. Maybe they were right. This is he he was like a he was a mad scientist or he is a mad scientist.
+
+Soon his computer was being fed price changes across the entire market in real time. This is the early 1980s. With that stream of data, his algorithms could spot profitable options trades faster than anyone else.
+
+But he still needed humans to execute the instructions on the floor, which meant dealing with the specialists who controlled order flow. And in that clubby world, Peterffy was not one of the boys. His solution was calculated. He hired six tall, beautiful women to trade for him. The specialists who had ignored his bids suddenly fought to fill his new employees trades, which Peterffy was delivering by phone. Everybody loved the women.
+
+He said, "We were making money hand over fist." And so there's I know Dom Cook, the the writer of this profile. And so I asked Dom to send me as much background information on Pedroy as possible to help me make this episode. There is a story that did not make it in the profile, which is nuts. And it's exact. It's about this time in Peterffy's career.
+
+So it says in 1982, Peterffy was out to dinner on the Upper East Side with a friend. When they walked into the restaurant, three men at a table near the entrance spotted his friend and invited them over. All three of the men sitting at the table worked in show business. Peterffy knew none of them. One was Aaron Russo, the film producer. Another was Melvin Van Peebles, the filmmaker.
+
+Russo turned to Peterffy. So, what do you do? Peterffy explained that he was a trader, but that he had injured his knee and couldn't stand on the floor anymore.
+
+So, he hired attractive women to execute his trades. They took instructions over the phone and relayed them to specialists on the exchange floor. "You mean anybody could do this?" Russo asked. Peterffy shrugged. Theoretically, yes. Russo put his hand on Vain Peele's shoulder, the filmmaker.
+
+Okay. You mean Melvin here could do it? I think so. I'll make you a $10,000 bet, said Russo. You hire Melvin. If he lasts a year, I'll pay you.
+
+Peterffy agreed. Melvin went through Timber Hills 2E training course, learning to take Peterffy's instructions and relay orders to specialists. Then he was sent to the American Stock Exchange floor where he quickly gained popularity. He spent a full year trading for Timber Hill and did a fantastic job. Peterffy collected Russo's $10,000. Here's the insane part.
+
+A year later, Russo produced the movie Trading Places starring Eddie Murphy and Dan Akroyd, which was about a wealthy broker and a street hustler whose lives are switched as part of a bet by two rich financiers. The film earned $120 million in its first year. That takes place exactly where we are in the story.
+
+Back to the story. The honeymoon ended when the specialists finally groed what was going on. They delivered an ultimatum. If Peterffy wanted to keep trading, he would have to become a market maker, maintaining constant bid and offer prices instead of cherrypicking only the most profitable options to trade. Market making required split-second responses to price movements.
+
+But his traders took their orders from algorithms running in his office. How could they make markets without direct access? And as he does with almost every problem throughout his career, he comes up with a novel solution in 1983, 27 years before Steve Jobs unveiled the iPad. Peterffy invented the first handheld trading computer. He built rectangular boxes, each about the size of a hardcover encyclopedia. Inside were rows of transistors and circuit boards powered by a crude touchcreen.
+
+Each morning, Peterffy lined up the devices along his desk, plugged them in, and uploaded fresh market data and options prices. Then he handed them off on the floor. When specialists demanded quotes, his traders glanced at their screens, answered with prices, and tapped again to log the trades.
+
+But the cycle required constant feeding. After five trades, the devices had to be updated. The clerks would sprint the two blocks between the American Stock Exchange floor and Peter's office, carrying the computers in satchels. he would upload the trades, recalculate exposures, feed in new prices, and then send them racing back. The American Stock Exchange reluctantly agreed to allow the devices.
+
+But when he attempted to bring the tablets to the Chicago Board Options Exchange, the response was unequivocal. They actually passed a rule that analytical devices may not be used on the trading floors, Peterffy said. I mean, how can you say such a thing? In 1985, Peterffy turned to the New York Stock Exchange struggling options division. They were hungry for volume and open to concessions. Peterffy's devices were banned in the pits, but he could install monitors so long as they were mounted along the back wall of the trading floor, 30 ft from the action.
+
+So, there's so many times when you're reading this profile where you just realize that one of his gifts is created because of the absurdity of these arbitrary rules that are constantly put upon him. Peterffy has to successfully navigate multiple different environments full of arbitrary illogical rules. And so they throw up another impediment and he figures out a way to route around it. The distance made realtime trading impossible. I was desperate at this time, Peterffy said. That weekend at his house, he sat alone in his kitchen table staring into a mug of colored pencils.
+
+He picked one up and set it back down. Red, then green, then blue. What if each digit flashed as a color? He wondered. On Monday morning, he rewrote the code, creating a psychedelic light show that his traders could read from across the room and put on that giant screen that's 30 feet from the action. People took a day or two to learn the colors, he told me.
+
+There's actually a picture of this screen in the profile. It looks incredibly confusing to me. In 1987, Peterffy achieved what he had first dreamed of in 1971.
+
+So, that's 16 years of trial and error. The first fully automated trading system in Wall Street history. His machines could now place trades without human intervention. An achievement made possible not on the floor of a traditional exchange, but through the NASDAQ, a new quote-driven network that operated without pits or clerks and just screens and a central matching engine.
+
+Now, the way he built the very first automated trading system in Wall Street history is going to be very familiar to you and I. He's going to hijack the data. So, a NASDAQ employee who is making a routine visit to one of its fastest growing clients, office, sees that there's no human in sight. Unbeknownst to NASDAQ, Peterffy had hijacked the terminal's data line. For most traders, the terminal was just a screen and a keyboard, a way to type in orders one at a time.
+
+But Peterffy had wired it into his own computer, pulling live prices straight from the feed, running them through his algorithms, and sending trades back out through the same cable. The NASDAQ employee gave him one week to make it right. All trades, he insisted, had to be entered by a keyboard and typed one after another just like everyone else.
+
+And so, go back to his quote about Alice in Wonderland. He says, "On Wall Street, I feel like I'm Alice in Wonderland. Nothing makes sense. Everything is mixed up and different than I think it should be." And so, in Peterffy's view, he has NASDAQ trying to make his system worse. Listen to what he does here. This is This is probably the funniest thing that he ever does.
+
+This guy is so crazy. Peterffy and his team worked every night for a week. They mounted a camera above the terminal screen to read the prices, then built a frame of metal arms and tiny motors suspended above a keyboard. When the computer spotted a trade, signals fired through his invention and the metal fingers began to type like a mechanical spider. When the NASDAQ man returned, he found an office transformed. The suspicious silence was gone, replaced by the violent percussion of automated typing.
+
+Peterffy's creation attacked the keyboard in bursts. Ratat pause. Rattatat pause. Rattatat. Each sequence spelling out buy and sell orders faster than any human could think, let alone type. The employee watched in silence and then left without a word.
+
+He did not like this one bit, recalled Peterffy, who offered who offered to install a mannequin operator complete with moving arms. The system survived and despite a few hiccups, including a $3 million loss when a drafty door triggered phantom trades on a backup device, Timber Hill made $25 million that year and $50 million the following year. Remember, this is in the 80s. By the end of the decade, Peterffy's marketmaking network stretched from New York to Chicago to San Francisco, then overseas to Frankfurt, London, and Hong Kong. Goldman Sachs made repeated acquisition offers that climbed to as high as $900 million. Peterffy turned them all down.
+
+When pressed for his price, he said $3 billion. A quiet way of ending the conversation. He wasn't selling. He was building his most ambitious hack yet, a platform that would give ordinary investors the same technological advantages he had created for himself. In 1993, he launched Interactive Brokers. This is one of the craziest lines in the entire profile.
+
+For the better part of the 1990s, Interactive Brokers was an elegant solution to a problem that didn't yet exist. The infrastructure was ready. The technology was sophisticated, but the market, particularly in the United States, remained stubbornly analog. Around the turn of the millennium, the great automation of American exchanges began to accelerate. NASDAQ had been born electronic.
+
+But now, the most traditional bound exchanges were surrendering. Even the New York Stock Exchange was giving way to the hum of computer servers. Wall Street was becoming a screenbased business. The floor traders who had once mocked Pedroy's folded sheets and handheld computers found themselves staring into obsolescence. This worked to Peter's advantage. They knew that I was an honest business person and they needed a way to continue their business on a computer from their office.
+
+So they became our customers and that is how Interactive Brokers became the broker for professional traders. As Interactive Brokers began its ascent, Timber Hill entered in its twilight. The technological and analytical revolution that Peterffy had pioneered was evolving beyond his original vision to become a speed contest. By the mid200, market makers like Citadel were spending hundreds of millions of dollars on microwave towers and fiber optic cables in a bid to shave micros secondsonds off execution times. Timber Hill was left with their exhaust fumes. When I asked why someone who had spent his entire career pushing technological boundaries suddenly refused to push further, Peterffy first offered a practical explanation.
+
+I thought it would cost me billions of dollars, he said before something more honest emerged. I also felt that I knew everything there is to know about marketmaking. It was not interesting to me anymore. His eyes then brightened as he continued.
+
+But how to build the best platform for people to trade? That was a challenge. In May 2007, when Peterffy took Interactive Brokers public, Timber Hill still generated 80% of the company's revenue. The IPO wasn't about raising capital. He owned close to 100% of the business, having built it with Timber Hills cash flow. We needed advertising for Interactive Brokers, he said.
+
+I thought it would put the company's name in the public domain. And so when he says putting your company name in the public domain, he's talking about advertising. He's talking about marketing. And of course he's going to do it in his own way. Rather than pay the substantial fees demanded by investment banks, he chose a Dutch auction and hired an obscure firm to list 10% of his business. This saved him $80 million.
+
+It also meant no road show. He then kept building. By 2017, Interactive Brokers had so thoroughly eclipsed Timber Hill that Peter shut down the market-making operation entirely, ending a 40-year run that had once made it the world's largest options market maker. What remains is a tightly engineered machine, a pure play brokerage with 4 million customers, over 700 billion in client assets, and just 3,000 employees, most of them engineers. In 2024, it generated 3.7 billion in profits on 5.2 billion in revenue. The company he took public at a 12 billion valuation is now worth over 120 billion.
+
+The firm runs on Pedroy's original premise, automate everything. That ethos drives the business to charge fees so low that rivals no longer try to compete on price. Interactive Brokers remains the platform of choice for hedge funds and professional traders. What's the secret? I asked as our discussion wound down. It's all common sense, Peterffy said.
+
+Hard work and common sense is my story. I brought up Costco, a comparison that investors like to make. Both companies are built on the radical notion that you can make more money by charging less. Peterffy replied, I've never been to Costco, he said. I've never read a business book. In 2019, on his 75th birthday, he stepped down as CEO, but retirement is out of the question.
+
+He's 81, chairman of Interactive Brokers, still owns nearly 70% of the business, and said he's sort of running the sales and marketing department because nobody wants to do it. I really know nothing about it, he said. So, I'm learning as I go. When I asked him what he's most proud of, he thought for a moment. The money that we save people and getting markets to be more efficient. Then, Peterffy suddenly straightened.
+
+I hadn't checked the markets, he said, turning towards his screen. We're up a buck 44, he announced. Not bad. I stood up, him for the time, and let myself out of the house, doing the math in my head. During the three hours we talked, Peterffy had made 1.7 billion.
