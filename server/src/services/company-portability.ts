@@ -58,6 +58,7 @@ import {
 } from "@paperclipai/adapter-utils/server-utils";
 import { requireOpenCodeModelId } from "@paperclipai/adapter-opencode-local/server";
 import { findServerAdapter } from "../adapters/index.js";
+import { resolveGitBinary } from "@paperclipai/adapter-utils/git-binary";
 import { forbidden, notFound, unprocessable } from "../errors.js";
 import { ghFetch, gitHubApiBase, resolveRawGitHubUrl } from "./github-fetch.js";
 import type { StorageService } from "../storage/types.js";
@@ -1036,7 +1037,7 @@ function stripPortableProjectExecutionWorkspaceRefs(policy: Record<string, unkno
 }
 
 async function readGitOutput(cwd: string, args: string[]) {
-  const { stdout } = await execFileAsync("git", ["-C", cwd, ...args], { cwd });
+  const { stdout } = await execFileAsync(resolveGitBinary(), ["-C", cwd, ...args], { cwd });
   const trimmed = stdout.trim();
   return trimmed.length > 0 ? trimmed : null;
 }
@@ -2126,7 +2127,7 @@ function applySelectedFilesToSource(source: ResolvedSource, selectedFiles?: stri
 
 async function resolveBundledSkillsCommit() {
   if (!bundledSkillsCommitPromise) {
-    bundledSkillsCommitPromise = execFileAsync("git", ["rev-parse", "HEAD"], {
+    bundledSkillsCommitPromise = execFileAsync(resolveGitBinary(), ["rev-parse", "HEAD"], {
       cwd: process.cwd(),
       encoding: "utf8",
     })

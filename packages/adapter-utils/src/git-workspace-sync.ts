@@ -1,5 +1,6 @@
 import { randomUUID } from "node:crypto";
 import { execFile } from "node:child_process";
+import { resolveGitBinary } from "./git-binary.js";
 import { promises as fs } from "node:fs";
 import os from "node:os";
 import path from "node:path";
@@ -33,7 +34,7 @@ export async function runLocalGit(
 ): Promise<GitCommandResult> {
   return await new Promise<GitCommandResult>((resolve, reject) => {
     execFile(
-      "git",
+      resolveGitBinary(),
       ["-C", localDir, ...args],
       {
         timeout: options.timeout ?? 15_000,

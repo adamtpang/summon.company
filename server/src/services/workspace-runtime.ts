@@ -19,6 +19,7 @@ import {
 } from "@paperclipai/shared";
 import { and, desc, eq, inArray, ne } from "drizzle-orm";
 import { asNumber, asString, parseObject, renderTemplate } from "../adapters/utils.js";
+import { resolveGitBinary } from "@paperclipai/adapter-utils/git-binary";
 import { resolveHomeAwarePath } from "../home-paths.js";
 import {
   createLocalServiceKey,
@@ -539,7 +540,7 @@ async function executeProcess(input: {
 
 async function runGit(args: string[], cwd: string): Promise<string> {
   const proc = await executeProcess({
-    command: "git",
+    command: resolveGitBinary(),
     args,
     cwd,
   });
@@ -915,7 +916,7 @@ async function getGitWorktreeBranchAncestryVerdict(input: {
   if (!input.expectedHeadSha || !input.actualHeadSha) return "unknown";
 
   const proc = await executeProcess({
-    command: "git",
+    command: resolveGitBinary(),
     args: ["merge-base", "--is-ancestor", input.expectedHeadSha, input.actualHeadSha],
     cwd: input.repoRoot,
   }).catch(() => null);
@@ -2445,7 +2446,7 @@ async function recordGitOperation(
     metadata: input.metadata ?? null,
     run: async () => {
       const result = await executeProcess({
-        command: "git",
+        command: resolveGitBinary(),
         args: input.args,
         cwd: input.cwd,
       });

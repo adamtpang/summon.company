@@ -456,17 +456,13 @@ export function OnboardingWizard() {
       }
 
       if (agentId && !createdIssueRef) {
-        // The first task is the operating plan — it doesn't need the repo.
-        // A repo paired by URL has no local clone yet, and the run policy
-        // refuses to launch a project-linked task outside its project
-        // workspace ("expected a project workspace" — verified live). So a
-        // repo-paired company files the first task WITHOUT the project link;
-        // repo-linked work starts once the workspace has a clone (SUM-129).
+        // SUM-129 shipped: a repo paired by URL is cloned into a managed
+        // checkout on first run, so the first task links to its project again.
         const issue = await issuesApi.create(createdCompanyId, {
           title: DEFAULT_TASK_TITLE,
           description: DEFAULT_TASK_DESCRIPTION,
           assigneeAgentId: agentId,
-          ...(pairRepo || !projectId ? {} : { projectId }),
+          ...(projectId ? { projectId } : {}),
           status: "todo" as const,
         });
         setCreatedIssueRef(issue.identifier ?? issue.id);

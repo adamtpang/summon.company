@@ -84,6 +84,7 @@ import { companySkillService } from "./company-skills.js";
 import { budgetService, type BudgetEnforcementScope } from "./budgets.js";
 import { secretService, type MissingRuntimeBinding } from "./secrets.js";
 import { resolveDefaultAgentWorkspaceDir, resolveManagedProjectWorkspaceDir } from "../home-paths.js";
+import { resolveGitBinary } from "@paperclipai/adapter-utils/git-binary";
 import {
   buildHeartbeatRunIssueComment,
   HEARTBEAT_RUN_RESULT_OUTPUT_MAX_CHARS,
@@ -1331,9 +1332,15 @@ async function ensureManagedProjectWorkspace(input: {
   }
 
   try {
-    await execFile("git", ["clone", input.repoUrl, cwd], {
+    // --no-progress: checkout progress spam on stderr exceeded Node's default
+    // 1MB maxBuffer and killed a live clone at 21% (SUM-129 proof run). The
+    // raised maxBuffer is belt-and-braces for chatty remotes. Not a shallow
+    // clone on purpose: worktree reconciliation runs merge-base ancestry
+    // checks that shallow history would break.
+    await execFile(resolveGitBinary(), ["clone", "--no-progress", input.repoUrl, cwd], {
       env: sanitizeRuntimeServiceBaseEnv(process.env),
       timeout: MANAGED_WORKSPACE_GIT_CLONE_TIMEOUT_MS,
+      maxBuffer: 64 * 1024 * 1024,
     });
     return { cwd, warning: null };
   } catch (error) {
@@ -1425,7 +1432,7 @@ async function hasGitMetadata(cwd: string | null | undefined) {
 async function isGitCheckout(cwd: string | null | undefined) {
   const normalized = readNonEmptyString(cwd);
   if (!normalized) return false;
-  return execFile("git", ["rev-parse", "--show-toplevel"], { cwd: normalized })
+  return execFile(resolveGitBinary(), ["rev-parse", "--show-toplevel"], { cwd: normalized })
     .then((result) => Boolean(readNonEmptyString(result.stdout)))
     .catch(() => false);
 }
@@ -1440,7 +1447,7 @@ function sameResolvedPath(left: string | null | undefined, right: string | null 
 async function hasGitPushRemote(cwd: string | null | undefined) {
   const normalized = readNonEmptyString(cwd);
   if (!normalized) return false;
-  const remoteNames = await execFile("git", ["remote"], { cwd: normalized })
+  const remoteNames = await execFile(resolveGitBinary(), ["remote"], { cwd: normalized })
     .then((result) =>
       result.stdout
         .split(/\r?\n/)
@@ -1450,7 +1457,7 @@ async function hasGitPushRemote(cwd: string | null | undefined) {
     .catch(() => []);
 
   for (const remoteName of remoteNames) {
-    const pushUrl = await execFile("git", ["remote", "get-url", "--push", remoteName], { cwd: normalized })
+    const pushUrl = await execFile(resolveGitBinary(), ["remote", "get-url", "--push", remoteName], { cwd: normalized })
       .then((result) => readNonEmptyString(result.stdout))
       .catch(() => null);
     if (pushUrl) return true;
@@ -6918,6 +6925,14 @@ export function heartbeatService(db: Db, options: HeartbeatServiceOptions = {}) 
             projectCwd = managedWorkspace.cwd;
             managedWorkspaceWarning = managedWorkspace.warning;
           } catch (error) {
+            // Never swallow this silently: a failed managed clone is exactly
+            // why a paired repo "does nothing" (SUM-129 — the live failure was
+            // `spawn git ENOENT`, invisible because only the preferred
+            // workspace's error surfaced).
+            logger.warn(
+              { err: error, workspaceId: workspace.id, repoUrl: workspace.repoUrl, companyId: agent.companyId },
+              "managed project workspace preparation failed; skipping workspace candidate",
+            );
             if (preferredWorkspace?.id === workspace.id) {
               preferredWorkspaceWarning = error instanceof Error ? error.message : String(error);
             }

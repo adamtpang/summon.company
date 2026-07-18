@@ -25,6 +25,7 @@ import type {
 } from "@paperclipai/shared";
 import { deriveProjectUrlKey, WORKSPACE_OVERVIEW_LINKED_ISSUE_LIMIT } from "@paperclipai/shared";
 import { conflict, notFound, unprocessable } from "../errors.js";
+import { resolveGitBinary } from "@paperclipai/adapter-utils/git-binary";
 import {
   applyIssueExecutionPolicyTransition,
   normalizeIssueExecutionPolicy,
@@ -174,7 +175,7 @@ async function pathExists(value: string | null | undefined) {
 }
 
 async function runGit(args: string[], cwd: string) {
-  return await execFileAsync("git", ["-C", cwd, ...args], { cwd });
+  return await execFileAsync(resolveGitBinary(), ["-C", cwd, ...args], { cwd });
 }
 
 async function readGitStdout(args: string[], cwd: string): Promise<string | null> {
