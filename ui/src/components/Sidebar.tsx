@@ -8,8 +8,7 @@ import {
   Gauge,
   History,
   Search,
-  SquarePen,
-  Network,
+  SquarePen,
   Boxes,
   Repeat,
   Layers,
@@ -271,7 +270,10 @@ export function Sidebar() {
           <SidebarNavItem to="/formation" label="Formation" icon={UsersRound} />
           <SidebarNavItem to="/roadmap" label="Roadmap" icon={Map} />
           <SidebarNavItem to="/ai-sdr" label="AI SDR" icon={Send} />
-          <SidebarNavItem to="/org" label="Org" icon={Network} />
+          {/* "Org" (the reporting-tree chart) left the nav 2026-07-18 per the
+              deletion test: Formation is the department front door and links to
+              the chart inside it — two nav items for one concept was noise.
+              The /org route stays alive for those deep links. */}
           <SidebarNavItem to="/timeline" label="Timeline" icon={GanttChartSquare} />
           <SidebarNavItem to="/usage" label="Usage" icon={Gauge} />
           <SidebarNavItem to="/costs" label="Costs" icon={DollarSign} />

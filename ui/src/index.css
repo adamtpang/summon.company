@@ -78,6 +78,10 @@
   --card-foreground: #0c1428;
   --popover: #ffffff;
   --popover-foreground: #0c1428;
+  /* Liquid glass (DESIGN.md law 13): elevation surfaces ONLY — palette, modals,
+     deck card, toasts. Never data zones. Pair with backdrop-blur-xl. */
+  --glass-surface: rgba(255, 255, 255, 0.62);
+  --glass-border: rgba(12, 20, 40, 0.1);
   --primary: #0b5fff;
   --primary-foreground: #ffffff;
   --secondary: rgba(7, 31, 77, 0.06);
@@ -191,6 +195,8 @@
   --card-foreground: #eef2fa;
   --popover: #111b33;
   --popover-foreground: #eef2fa;
+  --glass-surface: rgba(17, 27, 51, 0.55);
+  --glass-border: rgba(238, 242, 250, 0.12);
   --primary: #5395ff;
   --primary-foreground: #0a1120;
   --secondary: rgba(255, 255, 255, 0.06);
