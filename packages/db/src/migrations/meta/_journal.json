@@ -1023,6 +1023,13 @@
       "when": 1783953514660,
       "tag": "0147_cost_event_status",
       "breakpoints": true
+    },
+    {
+      "idx": 148,
+      "version": "7",
+      "when": 1784348832619,
+      "tag": "0148_company_operating_mode",
+      "breakpoints": true
     }
   ]
 }

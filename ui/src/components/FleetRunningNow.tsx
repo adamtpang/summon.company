@@ -3,8 +3,11 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Link } from "@/lib/router";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { OctagonX, Play, Square } from "lucide-react";
+import { Hand, Moon, OctagonX, Play, Square } from "lucide-react";
+import { useCompany } from "../context/CompanyContext";
+import { companiesApi } from "../api/companies";
 import { fleetApi } from "../api/fleet";
+import { queryKeys } from "../lib/queryKeys";
 import { cn } from "../lib/utils";
 
 const FLEET_RUNNING_KEY = ["fleet", "running"] as const;
@@ -29,8 +32,21 @@ function elapsedLabel(iso: string | null): string {
  */
 export function FleetRunningNow() {
   const queryClient = useQueryClient();
+  const { selectedCompany } = useCompany();
+  const companyId = selectedCompany?.id;
+  const operatingMode = selectedCompany?.operatingMode;
   const [confirmingStopAll, setConfirmingStopAll] = useState(false);
+  const [confirmingAlwaysOn, setConfirmingAlwaysOn] = useState(false);
   const [lastSweep, setLastSweep] = useState<string | null>(null);
+
+  const setMode = useMutation({
+    mutationFn: (mode: "manual" | "always_on") =>
+      companiesApi.update(companyId!, { operatingMode: mode }),
+    onSuccess: () => {
+      setConfirmingAlwaysOn(false);
+      queryClient.invalidateQueries({ queryKey: queryKeys.companies.all });
+    },
+  });
 
   const { data, isLoading } = useQuery({
     queryKey: FLEET_RUNNING_KEY,
@@ -76,6 +92,58 @@ export function FleetRunningNow() {
           </span>
         </div>
         <div className="flex items-center gap-2">
+          {/* VIT-127: the operating-mode dial lives beside the kill switch —
+              Manual (nothing executes unpointed) is the default; switching to
+              24/7 is a spend decision, so it confirms. Back to Manual is the
+              safe direction and never confirms. */}
+          {companyId && operatingMode ? (
+            confirmingAlwaysOn ? (
+              <>
+                <span className="text-xs text-muted-foreground">
+                  Timers wake agents overnight; budget caps pause, never bill. Go 24/7?
+                </span>
+                <Button
+                  size="sm"
+                  className="h-7 px-2.5 text-xs"
+                  disabled={setMode.isPending}
+                  onClick={() => setMode.mutate("always_on")}
+                >
+                  {setMode.isPending ? "Switching…" : "Confirm 24/7"}
+                </Button>
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  className="h-7 px-2 text-xs"
+                  disabled={setMode.isPending}
+                  onClick={() => setConfirmingAlwaysOn(false)}
+                >
+                  Stay manual
+                </Button>
+              </>
+            ) : (
+              <Button
+                size="sm"
+                variant="outline"
+                className="h-7 px-2.5 text-xs"
+                disabled={setMode.isPending}
+                onClick={() =>
+                  operatingMode === "manual" ? setConfirmingAlwaysOn(true) : setMode.mutate("manual")
+                }
+              >
+                {operatingMode === "manual" ? (
+                  <>
+                    <Hand className="h-3.5 w-3.5 mr-1" />
+                    Manual mode
+                  </>
+                ) : (
+                  <>
+                    <Moon className="h-3.5 w-3.5 mr-1" />
+                    24/7 mode
+                  </>
+                )}
+              </Button>
+            )
+          ) : null}
           {confirmingStopAll ? (
             <>
               <span className="text-xs text-muted-foreground">

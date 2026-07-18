@@ -137,6 +137,7 @@ export function companyService(db: Db) {
     name: companies.name,
     description: companies.description,
     status: companies.status,
+    operatingMode: companies.operatingMode,
     issuePrefix: companies.issuePrefix,
     issueCounter: companies.issueCounter,
     budgetMonthlyCents: companies.budgetMonthlyCents,

@@ -14659,6 +14659,23 @@ export function heartbeatService(db: Db, options: HeartbeatServiceOptions = {}) 
 
     const policy = parseHeartbeatPolicy(agent);
 
+    // VIT-127 board operating doctrine: in Manual mode NOTHING executes
+    // unpointed. Timer wakes (heartbeats, the CEO self-diagnosis loop) are
+    // skipped at this single choke point; board-pointed work — assignments,
+    // comments, manual runs — always passes. Always-on re-enables timers,
+    // governed by the existing budget machinery (caps pause, never bill).
+    if (source === "timer") {
+      const [companyMode] = await db
+        .select({ operatingMode: companies.operatingMode })
+        .from(companies)
+        .where(eq(companies.id, agent.companyId))
+        .limit(1);
+      if ((companyMode?.operatingMode ?? "manual") !== "always_on") {
+        await writeSkippedRequest("operating_mode.manual");
+        return null;
+      }
+    }
+
     if (source === "timer" && !policy.enabled) {
       await writeSkippedRequest("heartbeat.disabled");
       return null;

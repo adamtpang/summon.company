@@ -7,6 +7,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { MemoryRouter } from "@/lib/router";
 import { FleetRunningNow } from "./FleetRunningNow";
 import { fleetApi } from "../api/fleet";
+import { companiesApi } from "../api/companies";
 
 vi.mock("../api/fleet", () => ({
   fleetApi: {
@@ -16,19 +17,29 @@ vi.mock("../api/fleet", () => ({
   },
 }));
 
-// The router's Link resolves company prefixes through CompanyContext; the
-// panel itself is company-agnostic, so a null selection is the honest mock.
+vi.mock("../api/companies", () => ({
+  companiesApi: {
+    update: vi.fn(),
+  },
+}));
+
+// Parameterizable company selection: null hides the mode toggle; a selected
+// company (with operatingMode) shows it. The router's Link also reads this.
+const companyState: { selectedCompany: Record<string, unknown> | null } = {
+  selectedCompany: null,
+};
 vi.mock("../context/CompanyContext", () => ({
   useCompany: () => ({
     companies: [],
-    selectedCompany: null,
-    selectedCompanyId: null,
+    selectedCompany: companyState.selectedCompany,
+    selectedCompanyId: (companyState.selectedCompany?.id as string) ?? null,
     setSelectedCompanyId: () => {},
     loading: false,
   }),
 }));
 
 const mockFleetApi = vi.mocked(fleetApi);
+const mockCompaniesApi = vi.mocked(companiesApi);
 
 function makeRun(overrides: Partial<Parameters<typeof Object.assign>[1]> = {}) {
   return {
@@ -87,6 +98,7 @@ function buttonByText(container: HTMLElement, text: string) {
 describe("FleetRunningNow", () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    companyState.selectedCompany = null;
   });
 
   it("lists live runs with agent, company, task, and a per-run stop", async () => {
@@ -142,5 +154,29 @@ describe("FleetRunningNow", () => {
     expect(mockFleetApi.stop).not.toHaveBeenCalled();
     expect(container.textContent).not.toContain("Confirm stop");
     await cleanup();
+  });
+
+  it("mode dial: going 24/7 confirms; back to manual never does (VIT-127)", async () => {
+    companyState.selectedCompany = { id: "company-1", operatingMode: "manual" };
+    mockFleetApi.running.mockResolvedValue({ runs: [], queuedWakeups: 0 });
+    mockCompaniesApi.update.mockResolvedValue({} as never);
+    const { container, cleanup } = await renderPanel();
+    await waitForText(container, "fleet is quiet");
+
+    // Manual -> 24/7 is a spend decision: arm, then confirm.
+    await act(async () => buttonByText(container, "Manual mode")!.click());
+    expect(mockCompaniesApi.update).not.toHaveBeenCalled();
+    expect(container.textContent).toContain("Go 24/7?");
+    await act(async () => buttonByText(container, "Confirm 24/7")!.click());
+    expect(mockCompaniesApi.update).toHaveBeenCalledWith("company-1", { operatingMode: "always_on" });
+    await cleanup();
+
+    // 24/7 -> manual is the safe direction: one click, no confirm.
+    companyState.selectedCompany = { id: "company-1", operatingMode: "always_on" };
+    const second = await renderPanel();
+    await waitForText(second.container, "fleet is quiet");
+    await act(async () => buttonByText(second.container, "24/7 mode")!.click());
+    expect(mockCompaniesApi.update).toHaveBeenCalledWith("company-1", { operatingMode: "manual" });
+    await second.cleanup();
   });
 });

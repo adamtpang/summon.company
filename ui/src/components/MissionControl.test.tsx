@@ -16,6 +16,17 @@ vi.mock("../api/fleet", () => ({
   },
 }));
 
+// FleetRunningNow reads the selected company for the VIT-127 mode dial.
+vi.mock("../context/CompanyContext", () => ({
+  useCompany: () => ({
+    companies: [],
+    selectedCompany: null,
+    selectedCompanyId: null,
+    setSelectedCompanyId: () => {},
+    loading: false,
+  }),
+}));
+
 vi.mock("@/lib/router", () => ({
   Link: ({ to, children, ...props }: { to: string; children: ReactNode }) => (
     <a href={to} {...props}>{children}</a>

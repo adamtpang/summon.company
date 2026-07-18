@@ -5,6 +5,8 @@ export interface Company {
   name: string;
   description: string | null;
   status: CompanyStatus;
+  /** VIT-127: "manual" = nothing executes unpointed; "always_on" = timer heartbeats allowed. */
+  operatingMode: "manual" | "always_on";
   pauseReason: PauseReason | null;
   pausedAt: Date | null;
   issuePrefix: string;

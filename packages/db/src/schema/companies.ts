@@ -7,6 +7,10 @@ export const companies = pgTable(
     name: text("name").notNull(),
     description: text("description"),
     status: text("status").notNull().default("active"),
+    // Board operating doctrine (VIT-127): "manual" = nothing executes unpointed
+    // (timer wakes are skipped; only board-pointed work runs). "always_on" =
+    // timer heartbeats allowed, governed by the budget machinery.
+    operatingMode: text("operating_mode").notNull().default("manual"),
     pauseReason: text("pause_reason"),
     pausedAt: timestamp("paused_at", { withTimezone: true }),
     issuePrefix: text("issue_prefix").notNull().default("PAP"),

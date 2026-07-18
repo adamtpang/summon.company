@@ -27,6 +27,8 @@ export const updateCompanySchema = createCompanySchema
   .partial()
   .extend({
     status: z.enum(COMPANY_STATUSES).optional(),
+    // VIT-127 board operating doctrine: manual = nothing executes unpointed.
+    operatingMode: z.enum(["manual", "always_on"]).optional(),
     spentMonthlyCents: z.number().int().nonnegative().optional(),
     requireBoardApprovalForNewAgents: z.boolean().optional(),
     feedbackDataSharingEnabled: z.boolean().optional(),

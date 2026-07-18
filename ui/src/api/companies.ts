@@ -31,6 +31,7 @@ export const companiesApi = {
         | "name"
         | "description"
         | "status"
+        | "operatingMode"
         | "budgetMonthlyCents"
         | "attachmentMaxBytes"
         | "requireBoardApprovalForNewAgents"
