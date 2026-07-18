@@ -72,14 +72,22 @@ One week where all seven hold at once, on real work:
 
 ## What ships next (one at a time)
 
-1. **First-run: name → connect your own Claude/Codex subscription → pair the GitHub
-   repo/org → done** (ticket VIT-128, now spec'd fuel-first). This is the customer's
-   first 60 seconds — Michael (Hawaii Tech Week) and Anton Kim (Regain/salomatic.com)
-   are the first two real prospects.
-2. **Wire Mission Control into /dashboard** (measure 6's missing piece).
-3. **Control room**: the kill switch (see everything running, stop it all in two
-   clicks), Manual vs 24/7 modes, CEO's three skills (surface → triage → route).
-4. Run the acceptance week.
+Status 2026-07-18 — the build list is DONE:
+1. ~~First-run wizard (fuel-first, repo pairing)~~ SHIPPED + proven live (d5bca219f;
+   clone-on-first-run fixed in 67098c29a).
+2. ~~Mission Control wired~~ — was already live; verified during the wizard test.
+3. ~~Control room~~ SHIPPED: kill switch + RUNNING NOW panel (280576ffb), Manual/24-7
+   modes with Manual as the product default (bc1532b5b), CEO Surface/Triage/Route
+   skill installed in the live CEO (534b4a8ac).
+
+What remains is CONTACT WITH REALITY, in order:
+1. **Founding offers out** to Anton (Regain — company staged, REG-1 blocked on his
+   repo URL) and Michael (Hawaii Tech Week — first answer: software org or not?).
+   SUM-137 is the top of the queue.
+2. **Run the acceptance week** (section above) as the dogfood while the first two
+   design partners onboard.
+3. Distribution engine only after both are live: Discord seeding (SUM-131),
+   KOL outreach (SUM-132), SEO lane (SUM-134).
 
 Deferred until after: personas polish, iOS, users lane, model-picker beyond the pit
 stop, leaderboard, AI SDR, deeper UI reduction runs.
