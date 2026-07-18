@@ -397,7 +397,7 @@ describe("Sidebar", () => {
     });
   });
 
-  it("places Roadmap in the Company section after Formation", async () => {
+  it("places Roadmap in the Company section after Org", async () => {
     mockInstanceSettingsApi.getExperimental.mockResolvedValue({ enableIsolatedWorkspaces: false });
     const root = await renderSidebar();
 
@@ -411,7 +411,7 @@ describe("Sidebar", () => {
     expect(roadmapLink?.getAttribute("href")).toBe("/roadmap");
 
     const companyText = companySection?.textContent ?? "";
-    expect(companyText.indexOf("Formation")).toBeLessThan(companyText.indexOf("Roadmap"));
+    expect(companyText.indexOf("Org")).toBeLessThan(companyText.indexOf("Roadmap"));
 
     flushSync(() => {
       root.unmount();

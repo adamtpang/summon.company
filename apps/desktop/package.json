@@ -1,7 +1,7 @@
 {
   "name": "vitals-desktop",
   "productName": "Vitals",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "private": true,
   "description": "Vitals desktop app: chromeless window + tray that attaches to (or starts) the local summon.company company OS server on 127.0.0.1:3100.",
   "main": "main.js",

@@ -174,12 +174,16 @@ export function MissionControl({
         </div>
       </section>
 
+      {/* Board naming (2026-07-18): the user-facing word is "Org" everywhere;
+          "Formation" stays as the internal doctrine/route name. */}
       <section aria-labelledby="formation-heading" className="space-y-3">
-        <SectionHeading id="formation-heading" icon={UsersRound} title="Formation" detail="Eight departments, one accountable employee each" to="/formation" />
+        <SectionHeading id="formation-heading" icon={UsersRound} title="Org" detail="Eight departments, one accountable employee each" to="/org" />
         <div className="grid gap-2 sm:grid-cols-2 xl:grid-cols-4">
           {formation.map((assignment) => {
             const agent = assignment.agent;
             const current = agent ? currentIssueByAgent.get(agent.id) ?? null : null;
+            // Open positions still route to /formation — the only surface with
+            // a staffing flow; /org is a read-only chart.
             return (
               <Link key={assignment.department.id} to={agent ? `/agents/${agent.id}` : "/formation"} className="group rounded-lg border border-border bg-card p-3 hover:bg-accent/40">
                 <div className="flex items-center justify-between gap-2">

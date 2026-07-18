@@ -6,6 +6,7 @@
 
 const { app, BrowserWindow, Tray, Menu, nativeImage, nativeTheme, dialog } = require('electron');
 const { spawn, execFile } = require('child_process');
+const fs = require('fs');
 const http = require('http');
 const path = require('path');
 
@@ -13,7 +14,7 @@ const SERVER_HOST = '127.0.0.1';
 const SERVER_PORT = 3100;
 const SERVER_URL = `http://${SERVER_HOST}:${SERVER_PORT}`;
 const HEALTH_URL = `${SERVER_URL}/api/health`;
-const APP_URL = `${SERVER_URL}/VIT`; // SPA handles routing; falls back to / on load failure
+const APP_URL = `${SERVER_URL}/`; // SPA routes itself to the last company; no hardcoded prefix
 const HEALTH_TIMEOUT_MS = 2000;
 const BOOT_POLL_INTERVAL_MS = 1000;
 const BOOT_POLL_MAX_TRIES = 120; // 120s
@@ -25,6 +26,36 @@ let serverProcess = null;
 let ownServer = false; // true only if WE spawned the server
 let isQuitting = false;
 let shutdownInProgress = false;
+
+// ---------------------------------------------------------------------------
+// Persisted appearance settings (zoom + theme survive relaunches)
+// ---------------------------------------------------------------------------
+// One JSON file in userData. Default zoom is one level up (~120%) — the board
+// asked for a larger default; Ctrl+0 still resets to 100% and that choice is
+// saved like any other.
+const SETTINGS_PATH = () => path.join(app.getPath('userData'), 'summon-settings.json');
+const DEFAULT_ZOOM_LEVEL = 1;
+let settings = { zoomLevel: DEFAULT_ZOOM_LEVEL, theme: 'light' };
+
+function loadSettings() {
+  try {
+    const raw = JSON.parse(fs.readFileSync(SETTINGS_PATH(), 'utf8'));
+    if (typeof raw.zoomLevel === 'number' && raw.zoomLevel >= -5 && raw.zoomLevel <= 5) {
+      settings.zoomLevel = raw.zoomLevel;
+    }
+    if (['light', 'dark', 'system'].includes(raw.theme)) settings.theme = raw.theme;
+  } catch {
+    // first run or unreadable file — defaults stand
+  }
+}
+
+function saveSettings() {
+  try {
+    fs.writeFileSync(SETTINGS_PATH(), JSON.stringify(settings, null, 2));
+  } catch {
+    // best-effort; never block the UI on a settings write
+  }
+}
 
 // ---------------------------------------------------------------------------
 // Single instance
@@ -128,7 +159,7 @@ function createMainWindow() {
     width: 1440,
     height: 900,
     autoHideMenuBar: true,
-    backgroundColor: '#F7FAFF',
+    backgroundColor: '#FFFFFF',
     title: 'Summon - Company OS',
     icon: path.join(__dirname, 'icon.ico'),
     show: true,
@@ -149,15 +180,28 @@ function createMainWindow() {
     if (input.type !== 'keyDown' || !(input.control || input.meta)) return;
     const wc = mainWindow.webContents;
     if (input.key === '=' || input.key === '+') {
-      wc.setZoomLevel(Math.min(wc.getZoomLevel() + 0.5, 5));
+      setZoom(Math.min(wc.getZoomLevel() + 0.5, 5));
       event.preventDefault();
     } else if (input.key === '-') {
-      wc.setZoomLevel(Math.max(wc.getZoomLevel() - 0.5, -5));
+      setZoom(Math.max(wc.getZoomLevel() - 0.5, -5));
       event.preventDefault();
     } else if (input.key === '0') {
-      wc.setZoomLevel(0);
+      setZoom(0);
       event.preventDefault();
     }
+  });
+
+  // Every zoom change persists, so the level survives relaunches.
+  function setZoom(level) {
+    mainWindow.webContents.setZoomLevel(level);
+    settings.zoomLevel = level;
+    saveSettings();
+  }
+
+  // Reapply the saved zoom on every load (splash → app included). Without this
+  // each navigation resets to Electron's default 100%.
+  mainWindow.webContents.on('did-finish-load', () => {
+    mainWindow.webContents.setZoomLevel(settings.zoomLevel);
   });
 
   // Close (X) hides to tray; real quit comes from the tray menu.
@@ -192,6 +236,8 @@ let currentTheme = 'light';
 
 async function setUiTheme(theme) {
   currentTheme = theme;
+  settings.theme = theme;
+  saveSettings();
   if (!mainWindow) return;
   try {
     await mainWindow.webContents.executeJavaScript(
@@ -278,18 +324,26 @@ function createTray() {
   };
   rebuildMenu();
 
-  tray.on('double-click', () => {
+  // Single left-click opens the window — on Windows the tray only fires
+  // 'double-click' unless 'click' is handled too, which is why pressing the
+  // small taskbar icon did nothing.
+  const openWindow = () => {
     if (mainWindow) {
+      if (mainWindow.isMinimized()) mainWindow.restore();
       mainWindow.show();
       mainWindow.focus();
     }
-  });
+  };
+  tray.on('click', openWindow);
+  tray.on('double-click', openWindow);
 }
 
 // ---------------------------------------------------------------------------
 // Boot
 // ---------------------------------------------------------------------------
 async function onReady() {
+  loadSettings();
+  currentTheme = settings.theme; // tray radio reflects the saved choice
   createMainWindow();
   createTray();
 

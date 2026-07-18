@@ -8,7 +8,7 @@ import {
   Gauge,
   History,
   Search,
-  SquarePen,
+  SquarePen,
   Boxes,
   Repeat,
   Layers,
@@ -267,13 +267,13 @@ export function Sidebar() {
         <SidebarAgents streamlined={streamlined} />
 
         <SidebarSection label="Company" collapsible={{ open: companyOpen, onOpenChange: setCompanyOpen }}>
-          <SidebarNavItem to="/formation" label="Formation" icon={UsersRound} />
+          {/* Board reversal (2026-07-18): Org IS the front door — the board
+              recognizes "Org", not the doctrine word "Formation". One nav item
+              per concept still holds; it's Org that survives the deletion test.
+              The /formation route stays alive for its deep links. */}
+          <SidebarNavItem to="/org" label="Org" icon={UsersRound} />
           <SidebarNavItem to="/roadmap" label="Roadmap" icon={Map} />
           <SidebarNavItem to="/ai-sdr" label="AI SDR" icon={Send} />
-          {/* "Org" (the reporting-tree chart) left the nav 2026-07-18 per the
-              deletion test: Formation is the department front door and links to
-              the chart inside it — two nav items for one concept was noise.
-              The /org route stays alive for those deep links. */}
           <SidebarNavItem to="/timeline" label="Timeline" icon={GanttChartSquare} />
           <SidebarNavItem to="/usage" label="Usage" icon={Gauge} />
           <SidebarNavItem to="/costs" label="Costs" icon={DollarSign} />
