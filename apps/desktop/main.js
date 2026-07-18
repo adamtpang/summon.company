@@ -141,6 +141,25 @@ function createMainWindow() {
   // Keep our title instead of the page's <title>
   mainWindow.on('page-title-updated', (e) => e.preventDefault());
 
+  // Zoom shortcuts. With no application menu there are no zoom roles, and
+  // Electron's default zoomIn accelerator ("CommandOrControl+Plus") never
+  // matches the unshifted = key anyway — so the board could zoom out but not
+  // back in. Handle it ourselves: Ctrl/Cmd + '='/'+' in, '-' out, '0' reset.
+  mainWindow.webContents.on('before-input-event', (event, input) => {
+    if (input.type !== 'keyDown' || !(input.control || input.meta)) return;
+    const wc = mainWindow.webContents;
+    if (input.key === '=' || input.key === '+') {
+      wc.setZoomLevel(Math.min(wc.getZoomLevel() + 0.5, 5));
+      event.preventDefault();
+    } else if (input.key === '-') {
+      wc.setZoomLevel(Math.max(wc.getZoomLevel() - 0.5, -5));
+      event.preventDefault();
+    } else if (input.key === '0') {
+      wc.setZoomLevel(0);
+      event.preventDefault();
+    }
+  });
+
   // Close (X) hides to tray; real quit comes from the tray menu.
   mainWindow.on('close', (e) => {
     if (!isQuitting) {
