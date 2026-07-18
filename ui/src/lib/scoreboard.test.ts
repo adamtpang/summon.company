@@ -9,6 +9,7 @@ import {
   sortScoreboardRows,
   toScoreboardRow,
   urgencyStarsFor,
+  tierFor,
 } from "./scoreboard";
 
 /** Minimal issue factory — only the fields the scoreboard reads. */
@@ -174,5 +175,19 @@ describe("buildScoreboard", () => {
       reviewNeededCount: 0,
       overallProgress: 0,
     });
+  });
+});
+
+describe("tierFor (VIT-113 ladder)", () => {
+  it("maps the star weight to S/A/B/C/D/F with a narrow S band", () => {
+    expect(tierFor(5, 5)).toBe("S");
+    expect(tierFor(5, 4)).toBe("S");
+    expect(tierFor(4, 4)).toBe("A");
+    expect(tierFor(4, 3)).toBe("B");
+    expect(tierFor(3, 3)).toBe("B");
+    expect(tierFor(3, 2)).toBe("C");
+    expect(tierFor(2, 2)).toBe("C");
+    expect(tierFor(2, 1)).toBe("D");
+    expect(tierFor(1, 1)).toBe("F");
   });
 });

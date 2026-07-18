@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "summon": {
+      "command": "node",
+      "args": ["scripts/summon-mcp-server.mjs"],
+      "env": {}
+    }
+  }
+}

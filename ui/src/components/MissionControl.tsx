@@ -232,6 +232,17 @@ export function MissionControl({
             topWork.map((row, index) => (
               <Link key={row.id} to={`/issues/${row.pathId}`} className="flex items-center gap-3 border-b border-border px-3 py-3 last:border-b-0 hover:bg-accent/40">
                 <span className="w-5 text-center text-xs font-medium tabular-nums text-muted-foreground">{index + 1}</span>
+                {/* Tier letter (VIT-113): S is the Thiel band — bold + primary;
+                    lower tiers stay quiet so S carries all the weight (law 4). */}
+                <span
+                  className={cn(
+                    "w-5 shrink-0 text-center text-sm font-semibold",
+                    row.tier === "S" ? "text-primary" : "text-muted-foreground",
+                  )}
+                  aria-label={`Tier ${row.tier}`}
+                >
+                  {row.tier}
+                </span>
                 <span className="min-w-0">
                   <span className="block truncate text-sm font-medium">{row.title}</span>
                   <span className="block text-xs text-muted-foreground">{row.identifier} · {row.progressLabel}</span>

@@ -19,6 +19,12 @@ import type { Issue, IssuePriority, IssueStatus } from "@paperclipai/shared";
  * All functions here are pure so they can be unit-tested without React.
  */
 
+/** Board tier ladder (VIT-113 lineage): S = the Thiel band ("if you could only
+ * do one thing"), F = shouldn't be on the board. Derived from the combined
+ * star weight until persisted score fields land — same honest-backfill rule
+ * as the stars themselves. */
+export type ScoreboardTier = "S" | "A" | "B" | "C" | "D" | "F";
+
 /** A single row in the priorities table, fully derived from an {@link Issue}. */
 export interface ScoreboardRow {
   id: string;
@@ -32,6 +38,7 @@ export interface ScoreboardRow {
   assigneeAgentId: string | null;
   importanceStars: number;
   urgencyStars: number;
+  tier: ScoreboardTier;
   progress: number;
   progressLabel: string;
   reviewNeeded: boolean;
@@ -96,6 +103,22 @@ export function urgencyStarsFor(issue: Pick<Issue, "priority" | "status" | "sche
   if (pressing) stars += 1;
   if (issue.status === "backlog") stars -= 1;
   return Math.max(1, Math.min(5, stars));
+}
+
+/**
+ * Tier from combined star weight (importance + urgency, range 2..10):
+ * 10-9 = S (drop everything), 8 = A, 7-6 = B, 5-4 = C, 3 = D, 2 = F.
+ * The S band is deliberately narrow — per the Thiel doctrine only a handful of
+ * tasks may ever be S, and one agent works one S-tier task at a time.
+ */
+export function tierFor(importanceStars: number, urgencyStars: number): ScoreboardTier {
+  const weight = importanceStars + urgencyStars;
+  if (weight >= 9) return "S";
+  if (weight >= 8) return "A";
+  if (weight >= 6) return "B";
+  if (weight >= 4) return "C";
+  if (weight >= 3) return "D";
+  return "F";
 }
 
 /**
@@ -164,6 +187,8 @@ function displayIdentifier(issue: Pick<Issue, "identifier" | "id">): string {
 /** Build one derived row from an issue. */
 export function toScoreboardRow(issue: Issue): ScoreboardRow {
   const { progress, label } = deriveProgress(issue);
+  const importanceStars = importanceStarsFor(issue.priority);
+  const urgencyStars = urgencyStarsFor(issue);
   return {
     id: issue.id,
     identifier: displayIdentifier(issue),
@@ -172,8 +197,9 @@ export function toScoreboardRow(issue: Issue): ScoreboardRow {
     status: issue.status,
     priority: issue.priority,
     assigneeAgentId: issue.assigneeAgentId,
-    importanceStars: importanceStarsFor(issue.priority),
-    urgencyStars: urgencyStarsFor(issue),
+    importanceStars,
+    urgencyStars,
+    tier: tierFor(importanceStars, urgencyStars),
     progress,
     progressLabel: label,
     reviewNeeded: isReviewNeeded(issue),
