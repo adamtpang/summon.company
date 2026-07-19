@@ -4,7 +4,7 @@
 // Owned mode:    server down -> spawn `paperclipai run`, show splash while it boots,
 //                and shut it down gracefully (taskkill tree, no /F first) on quit.
 
-const { app, BrowserWindow, Tray, Menu, nativeImage, nativeTheme, dialog } = require('electron');
+const { app, BrowserWindow, Tray, Menu, nativeImage, nativeTheme, dialog, ipcMain } = require('electron');
 const { spawn, execFile } = require('child_process');
 const fs = require('fs');
 const http = require('http');
@@ -162,11 +162,18 @@ function createMainWindow() {
     backgroundColor: '#FFFFFF',
     title: 'Summon - Company OS',
     icon: path.join(__dirname, 'icon.ico'),
-    show: true,
+    // Open maximized: create hidden, maximize, then show — no resize flash.
+    show: false,
     webPreferences: {
       contextIsolation: true,
       nodeIntegration: false,
+      preload: path.join(__dirname, 'preload.js'),
     },
+  });
+
+  mainWindow.once('ready-to-show', () => {
+    mainWindow.maximize();
+    mainWindow.show();
   });
 
   // Keep our title instead of the page's <title>
@@ -199,9 +206,29 @@ function createMainWindow() {
   }
 
   // Reapply the saved zoom on every load (splash → app included). Without this
-  // each navigation resets to Electron's default 100%.
+  // each navigation resets to Electron's default 100%. Also watch the web UI's
+  // own theme toggle (it flips the `dark` class on <html>) and report it back
+  // through the preload bridge so the native titlebar follows the app.
   mainWindow.webContents.on('did-finish-load', () => {
     mainWindow.webContents.setZoomLevel(settings.zoomLevel);
+    mainWindow.webContents
+      .executeJavaScript(
+        `(() => {
+          if (window.__summonThemeWatch || !window.summonDesktop) return;
+          window.__summonThemeWatch = true;
+          const report = () =>
+            window.summonDesktop.themeChanged(
+              document.documentElement.classList.contains('dark') ? 'dark' : 'light'
+            );
+          new MutationObserver(report).observe(document.documentElement, {
+            attributes: true,
+            attributeFilter: ['class'],
+          });
+          report();
+        })();`,
+        true
+      )
+      .catch(() => {});
   });
 
   // Close (X) hides to tray; real quit comes from the tray menu.
@@ -234,16 +261,31 @@ function createMainWindow() {
 // ---------------------------------------------------------------------------
 let currentTheme = 'light';
 
+// The web UI stores its theme under 'vitals.theme' (see ui/src/lib/
+// app-branding.ts — identifier, renaming it resets saved preferences). The
+// tray used to write 'paperclip.theme', which the UI never reads — that's why
+// the taskbar toggle did nothing.
+const UI_THEME_KEY = 'vitals.theme';
+
+// Keep the NATIVE window chrome (titlebar) on the app's theme, not the OS's.
+function applyNativeTheme(theme) {
+  nativeTheme.themeSource = theme === 'dark' ? 'dark' : theme === 'light' ? 'light' : 'system';
+}
+
 async function setUiTheme(theme) {
   currentTheme = theme;
   settings.theme = theme;
   saveSettings();
+  applyNativeTheme(theme);
   if (!mainWindow) return;
   try {
-    await mainWindow.webContents.executeJavaScript(
-      `localStorage.setItem('paperclip.theme', ${JSON.stringify(theme)}); location.reload();`,
-      true
-    );
+    // 'system': the UI has no OS-follow mode — clearing the key returns it to
+    // its light-first default; explicit light/dark write the key it reads.
+    const js =
+      theme === 'system'
+        ? `localStorage.removeItem(${JSON.stringify(UI_THEME_KEY)}); location.reload();`
+        : `localStorage.setItem(${JSON.stringify(UI_THEME_KEY)}, ${JSON.stringify(theme)}); location.reload();`;
+    await mainWindow.webContents.executeJavaScript(js, true);
   } catch {
     // Splash or a failed page has no UI localStorage to set; theme applies on next load.
   }
@@ -255,6 +297,26 @@ async function setUiTheme(theme) {
 // Monochrome Summon Circle glyph that follows the OS shell theme (VIT-36).
 // macOS gets a Template image (system tints it); Windows/Linux pick the white
 // glyph on dark shells and the ink glyph on light shells. icon.ico is the fallback.
+// The tray sits in the OS taskbar, whose light/dark comes from the SHELL theme
+// (SystemUsesLightTheme) — not from the app theme. Now that themeSource is
+// pinned to the app's theme, nativeTheme.shouldUseDarkColors reflects the APP,
+// so the taskbar shade must be read from the registry directly.
+function windowsShellUsesDark() {
+  try {
+    const out = require('child_process')
+      .execSync(
+        'reg query "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize" /v SystemUsesLightTheme',
+        { windowsHide: true }
+      )
+      .toString();
+    const m = out.match(/SystemUsesLightTheme\s+REG_DWORD\s+0x([0-9a-f]+)/i);
+    if (m) return parseInt(m[1], 16) === 0;
+  } catch {
+    // registry unreadable — fall back below
+  }
+  return nativeTheme.shouldUseDarkColors;
+}
+
 function trayIcon() {
   const trayDir = path.join(__dirname, 'assets', 'tray');
   try {
@@ -265,7 +327,7 @@ function trayIcon() {
         return img;
       }
     } else {
-      const file = nativeTheme.shouldUseDarkColors ? 'summon-tray-dark.ico' : 'summon-tray-light.ico';
+      const file = windowsShellUsesDark() ? 'summon-tray-dark.ico' : 'summon-tray-light.ico';
       const img = nativeImage.createFromPath(path.join(trayDir, file));
       if (!img.isEmpty()) return img;
     }
@@ -274,6 +336,10 @@ function trayIcon() {
   }
   return nativeImage.createFromPath(path.join(__dirname, 'icon.ico'));
 }
+
+// Rebuilds the tray context menu; assigned in createTray, callable from the
+// theme-sync IPC handler so the radio tracks in-app toggles.
+let refreshTrayMenu = () => {};
 
 function createTray() {
   tray = new Tray(trayIcon());
@@ -322,6 +388,7 @@ function createTray() {
     ]);
     tray.setContextMenu(menu);
   };
+  refreshTrayMenu = rebuildMenu;
   rebuildMenu();
 
   // Single left-click opens the window — on Windows the tray only fires
@@ -344,6 +411,20 @@ function createTray() {
 async function onReady() {
   loadSettings();
   currentTheme = settings.theme; // tray radio reflects the saved choice
+  applyNativeTheme(currentTheme); // titlebar matches the app from first paint
+
+  // In-app theme toggles arrive here via the preload bridge: keep the native
+  // chrome, the tray radio, and the saved setting in sync with the page.
+  ipcMain.on('summon:theme-changed', (_event, theme) => {
+    if (theme !== 'light' && theme !== 'dark') return;
+    if (currentTheme === theme) return;
+    currentTheme = theme;
+    settings.theme = theme;
+    saveSettings();
+    applyNativeTheme(theme);
+    refreshTrayMenu();
+  });
+
   createMainWindow();
   createTray();
 
