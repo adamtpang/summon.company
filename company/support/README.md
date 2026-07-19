@@ -6,7 +6,7 @@
 
 ## Agent chain
 
-- **Haven · Support** — layer 3, Grok 4.5 (`grok_local`)
+- **Haven · Support** — core-8 head, Claude Opus 4.8
 
 ## Working now (Thiel rule: one agent, ONE task)
 

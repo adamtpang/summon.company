@@ -6,15 +6,14 @@
 
 ## Agent chain
 
-- **Magnet · Sales** — layer 3, Grok 4.5 (`grok_local`)
+- **Magnet · Sales** — core-8 head, Claude Opus 4.8
 
 Named Magnet on purpose: pull, not push. Sales here means making the offer
 findable and frictionless, not chasing.
 
 ## Working now (Thiel rule: one agent, ONE task)
 
-SUM-132 — founding-influencer pipeline: 10 KOL partnerships. Blocked on the
-grok disposition gap (SUM-145).
+SUM-132 — founding-influencer pipeline: 10 KOL partnerships.
 
 ## Live offers
 

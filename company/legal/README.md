@@ -6,12 +6,12 @@
 
 ## Agent chain
 
-- **Shield · Legal** — layer 3, Grok 4.5 (`grok_local`)
+- **Shield · Legal** — core-8 head, Claude Opus 4.8
 
 ## Working now (Thiel rule: one agent, ONE task)
 
 SUM-151 — founding-offer terms: plain-language refund policy + minimal ToS for
-summon.company. Blocked on the grok disposition gap (SUM-145).
+summon.company.
 
 ## Standing rules
 

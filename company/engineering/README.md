@@ -6,8 +6,9 @@
 
 ## Agent chain
 
-- **Vector · CTO** — layer 2, Claude Opus 4.8
-- **Forge · Engineer** — layer 3, Grok 4.5 (`grok_local`)
+- **Vector · CTO** — core-8 head, Claude Opus 4.8
+- **Forge · Engineer** — subagent under Vector, Grok 4.5 (`grok_local`) —
+  the live testbed for the grok subagent tier (SUM-145)
 
 ## Working now (Thiel rule: one agent, ONE task)
 

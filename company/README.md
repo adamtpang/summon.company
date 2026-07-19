@@ -32,8 +32,10 @@ collisions; `company/` is the portable default.
 
 ## The model ladder
 
-CEO = Claude Fable 5 · layer 2 (C-suite) = Claude Opus 4.8 · layer 3
-(department workers) = Grok 4.5 via `grok_local` (free window).
+CEO = Claude Fable 5 · core-8 department heads = Claude Opus 4.8 · subagents
+under a department = Grok 4.5 via `grok_local` (free window). Each level down
+carries a lesser model; a subagent always reports into a department head
+(e.g. a fundraiser under Finance), never straight to the CEO.
 
 ## Standing doctrine
 
