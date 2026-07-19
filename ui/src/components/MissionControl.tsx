@@ -7,7 +7,7 @@ import { Card } from "@/components/ui/card";
 import { FleetRunningNow } from "./FleetRunningNow";
 import { buildFormationAssignments } from "../pages/Formation";
 import { buildRoadmapStages, selectRoadmapConstraint } from "../pages/Roadmap";
-import { buildScoreboard } from "../lib/scoreboard";
+import { buildScoreboard, deriveProgress } from "../lib/scoreboard";
 import { cn, formatCents } from "../lib/utils";
 
 interface MissionControlProps {
@@ -185,9 +185,12 @@ export function MissionControl({
                 </div>
                 <p className="mt-2 truncate text-sm font-semibold">{agent?.name ?? "Open position"}</p>
                 {current ? (
-                  <p className="mt-1 truncate text-xs text-muted-foreground">
-                    {current.identifier ?? current.id.slice(0, 8)} · {current.title}
-                  </p>
+                  <>
+                    <p className="mt-1 truncate text-xs text-muted-foreground">
+                      {current.identifier ?? current.id.slice(0, 8)} · {current.title}
+                    </p>
+                    <TaskProgress issue={current} className="mt-2" />
+                  </>
                 ) : !agent ? (
                   <p className="mt-1 truncate text-xs text-muted-foreground">Staff {assignment.department.name}</p>
                 ) : null}
@@ -204,23 +207,45 @@ export function MissionControl({
             <p className="p-4 text-sm text-muted-foreground">No company work is queued.</p>
           ) : (
             topWork.map((row) => (
-              <Link key={row.id} to={`/issues/${row.pathId}`} className="flex items-center gap-3 border-b border-border px-3 py-3 last:border-b-0 hover:bg-accent/40">
-                {/* Tier letter (VIT-113): S is the Thiel band — bold + primary;
-                    lower tiers stay quiet so S carries all the weight (law 4). */}
+              <Link key={row.id} to={`/issues/${row.pathId}`} className="block border-b border-border px-3 py-3 last:border-b-0 hover:bg-accent/40">
+                <span className="flex items-center gap-3">
+                  {/* Tier letter (VIT-113): S is the Thiel band — bold + primary;
+                      lower tiers stay quiet so S carries all the weight (law 4). */}
+                  <span
+                    className={cn(
+                      "w-5 shrink-0 text-center text-sm font-semibold",
+                      row.tier === "S" ? "text-primary" : "text-muted-foreground",
+                    )}
+                    aria-label={`Tier ${row.tier}`}
+                  >
+                    {row.tier}
+                  </span>
+                  <span className="min-w-0 flex-1">
+                    <span className="block truncate text-sm font-medium">{row.title}</span>
+                    <span className="block text-xs text-muted-foreground">{row.identifier} · {row.progressLabel}</span>
+                  </span>
+                  <span className="text-sm font-semibold tabular-nums">{row.importanceStars + row.urgencyStars}/10</span>
+                </span>
+                {/* Lifecycle progress (board ask 2026-07-18): the bar mirrors the
+                    derived ladder (todo 0 → woken 10 → run 25 → review 90 → done
+                    100) — control-plane evidence, never self-reported. A live run
+                    pulses so "running right now" reads at a glance. */}
                 <span
-                  className={cn(
-                    "w-5 shrink-0 text-center text-sm font-semibold",
-                    row.tier === "S" ? "text-primary" : "text-muted-foreground",
-                  )}
-                  aria-label={`Tier ${row.tier}`}
+                  className="mt-2 block h-1 overflow-hidden rounded-full bg-muted"
+                  role="progressbar"
+                  aria-label={`${row.identifier} progress`}
+                  aria-valuemin={0}
+                  aria-valuemax={100}
+                  aria-valuenow={row.progress}
                 >
-                  {row.tier}
+                  <span
+                    className={cn(
+                      "block h-full rounded-full bg-primary/80",
+                      row.progressLabel === "Run started" && "animate-pulse",
+                    )}
+                    style={{ width: `${Math.max(row.progress, 2)}%` }}
+                  />
                 </span>
-                <span className="min-w-0 flex-1">
-                  <span className="block truncate text-sm font-medium">{row.title}</span>
-                  <span className="block text-xs text-muted-foreground">{row.identifier} · {row.progressLabel}</span>
-                </span>
-                <span className="text-sm font-semibold tabular-nums">{row.importanceStars + row.urgencyStars}/10</span>
               </Link>
             ))
           )}
@@ -237,6 +262,27 @@ function HeroLink({ to, label, value, detail }: { to: string; label: string; val
       <p className="mt-3 truncate text-2xl font-semibold tracking-tight">{value}</p>
       <p className="mt-1 truncate text-xs text-muted-foreground">{detail}</p>
     </Link>
+  );
+}
+
+/** Lifecycle bar for a department card's current task — same derived ladder as
+    the queue rows; pulses while a run is live. */
+function TaskProgress({ issue, className }: { issue: Issue; className?: string }) {
+  const { progress, label } = deriveProgress(issue);
+  return (
+    <span
+      className={cn("block h-1 overflow-hidden rounded-full bg-muted", className)}
+      role="progressbar"
+      aria-label={`${issue.identifier ?? issue.id.slice(0, 8)} progress`}
+      aria-valuemin={0}
+      aria-valuemax={100}
+      aria-valuenow={progress}
+    >
+      <span
+        className={cn("block h-full rounded-full bg-primary/80", label === "Run started" && "animate-pulse")}
+        style={{ width: `${Math.max(progress, 2)}%` }}
+      />
+    </span>
   );
 }
 
