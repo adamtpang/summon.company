@@ -105,7 +105,7 @@ async function main() {
   const glyphSet = async (color) =>
     Promise.all(traySizes.map((s) => render(trayGlyph(color), s)));
   const white = await glyphSet('#FFFFFF'); // dark taskbars
-  const ink = await glyphSet('#0C1428'); // light taskbars
+  const ink = await glyphSet('#0A0A0A'); // light taskbars
   const black = await glyphSet('#000000'); // macOS template
   const trayDark = await pngToIco(white);
   const trayLight = await pngToIco(ink);

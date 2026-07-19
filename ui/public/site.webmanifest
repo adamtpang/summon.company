@@ -7,8 +7,8 @@
   "scope": "/",
   "display": "browser",
   "orientation": "any",
-  "theme_color": "#f7faff",
-  "background_color": "#f7faff",
+  "theme_color": "#ffffff",
+  "background_color": "#ffffff",
   "icons": [
     {
       "src": "/android-chrome-192x192.png",
