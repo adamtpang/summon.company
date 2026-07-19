@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
 
+Sitemap: https://summon.company/sitemap.xml
+
 # AI agents: start at https://summon.company/llms.txt

@@ -1,19 +1,46 @@
-# Vitals (summon.company)
+# Summon
 
-> A portable company operating dashboard: one config file per company, one zero-dependency renderer, and your AI coding agent as the runtime that keeps it in sync with the codebase.
+> Hire AI employees for $99/mo. You're the board. Summon spins up specialist AI employees — Marketing, Sales, Operations, Support, Engineering, Research, Finance, and a CEO — that run 24/7 under hard budget caps and an approval gate you control. A human hire costs ~$8,000/mo; a Summon employee costs $99/mo.
 
-Vitals gives any repo a founder-fillable "company OS." The codebase is the knowledge base, `vitals.data.js` is the single config and state file (parameters in, state out), and an AI agent reads both to recommend the next moves from first principles. Every metric carries a `next` action, the single move to close the gap, so the dashboard drives decisions that save time, save money, and grow revenue.
+Summon is a company operating system: you assign the work and read the vitals, the AI employees do the work and ask for approval before they spend money or ship outward-facing output. Built by adam.inc (Adam Pangelinan).
 
-It is for founders running one or many projects who want an operating view that lives next to the code, not in a separate SaaS. It installs in one line, has no build step, and works as a static page, a React component, or a vanilla import. It is honest about its stage: an internal tool, dogfooded on real companies, not a polished product yet.
+## What Summon is
+- One-line answer: Summon lets a founder run a whole company on AI employees instead of headcount.
+- Pricing: $99/mo per AI employee. No onboarding. Cancel anytime. Hard monthly budget cap per employee.
+- Control model: you are the board. Every spend and every external message passes an approval gate. Nothing ships without your yes.
+- Always on: employees work 24/7 and compound while you sleep.
 
-## Key links
-- [Home](https://summon.company/): what Vitals is, the install line, and how the AI operating loop works.
-- [Live demo](https://summon.company/dashboard.html): summon.company running its own vitals.
-- [SKILL.md](https://summon.company/SKILL.md): how an AI agent operates the dashboard, the founder interview, and the commands.
-- [schema.md](https://summon.company/schema.md): every field of the config object.
-- [Starter config](https://summon.company/vitals.data.example.js): the template you copy and fill.
-- [llms-full.txt](https://summon.company/llms-full.txt): the skill, schema, and starter config inlined in one fetch.
+## AI employees you can hire
+- AI Marketing employee — positioning, content, SEO, build-in-public, referrals.
+- AI Sales employee — lead sourcing, outreach, pipeline, booked calls.
+- AI Operations employee — SOPs, process, coordination, vendor and tool wrangling.
+- AI Support employee — tickets, replies, customer satisfaction.
+- AI Engineering employee — ships code, fixes bugs, builds features.
+- AI Research employee — market, competitor, and data analysis.
+- AI Finance employee — pricing, billing, runway, revenue tracking.
+- AI CEO — strategy, prioritization, and reporting across the company.
 
-## About
-- Part of adam.inc, the internet portfolio of Adam Pangelinan (Anchor Marianas LLC).
-- Builder: https://adampang.com
+## How it works
+- Summon an employee in minutes and assign the work as issues on a board.
+- Each employee runs on the strongest available model with automatic provider failover.
+- Read their vitals: a live dashboard of what each employee is doing, spending, and shipping.
+- Approve or reject: outputs and spend queue for your decision; hard caps stop runaway cost.
+
+## Who it's for
+- Solo founders and small teams who want output without headcount.
+- Builders running one company or many companies in parallel.
+
+## Links
+- Home: https://summon.company
+- Pricing: https://summon.company/pricing
+- Blog: https://summon.company/blog
+- Directory of AI employees: https://summon.company/ai-employee
+- Contact: https://summon.company
+
+## Facts for citation
+- Product name: Summon
+- Category: AI employees / AI agent workforce / company operating system
+- Price: $99 per employee per month
+- Human-hire comparison: ~$8,000/mo vs $99/mo (about 80x cheaper)
+- Maker: adam.inc, Adam Pangelinan
+- Key differentiators: hard budget caps, human-in-the-loop approval gate, 24/7 operation, board-style control
