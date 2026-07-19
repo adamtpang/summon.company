@@ -15,6 +15,7 @@ import {
 } from "../lib/recovery-display";
 import { StatusIcon } from "./StatusIcon";
 import { productivityReviewTriggerLabel } from "./ProductivityReviewBadge";
+import { importanceStarsFor, tierFor, urgencyStarsFor } from "../lib/scoreboard";
 import { hasAssignedBacklogBlocker } from "../lib/issue-blockers";
 import { ExternalObjectStatusSummary } from "./ExternalObjectStatusSummary";
 import { IssueAgeChip } from "./IssueAgeChip";
@@ -115,6 +116,24 @@ export function IssueRow({
   ) : null;
   const recoveryAction = issue.activeRecoveryAction ?? null;
   const recoveryIndicator = recoveryAction ? renderRecoveryChip(recoveryAction, selected) : null;
+  // Priority score on a red→green spectrum (board, 2026-07-19): the better the
+  // task the greener the number, S→F. Color IS data here (law 4) — the number
+  // is the two-factor weight the board already ranks by.
+  const importance = importanceStarsFor(issue.priority);
+  const urgency = urgencyStarsFor(issue);
+  const scoreWeight = importance + urgency;
+  const scoreTier = tierFor(importance, urgency);
+  const scoreChip = (
+    <span
+      className="shrink-0 text-xs font-semibold tabular-nums"
+      style={{ color: `var(--score-${scoreTier.toLowerCase()})` }}
+      title={`Tier ${scoreTier} · priority ${scoreWeight}/10 (importance ${importance} + urgency ${urgency})`}
+      aria-label={`Priority ${scoreWeight} of 10, tier ${scoreTier}`}
+      data-testid="issue-score-chip"
+    >
+      {scoreWeight}
+    </span>
+  );
   const parkedBlockerIndicator = hasAssignedBacklogBlocker(issue.blockedBy) ? (
     <Badge variant="outline"
       data-testid="issue-row-parked-blocker"
@@ -150,6 +169,7 @@ export function IssueRow({
     >
       <span className="flex shrink-0 items-center gap-1 pt-px sm:hidden">
         {mobileLeading ?? <StatusIcon status={issue.status} blockerAttention={issue.blockerAttention} size="md" className={selectedStatusClass} />}
+        {scoreChip}
         {productivityReviewIndicator}
         <IssueAgeChip issue={issue} />
         {parkedBlockerIndicator}
@@ -218,6 +238,8 @@ export function IssueRow({
               {recoveryIndicator}
             </>
           )}
+          {/* Outside the slot fallback so custom meta surfaces keep the score. */}
+          <span className="hidden sm:inline-flex">{scoreChip}</span>
           {mobileMeta ? (
             <>
               <span className="text-xs text-muted-foreground sm:hidden" aria-hidden="true">

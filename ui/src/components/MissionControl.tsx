@@ -224,7 +224,12 @@ export function MissionControl({
                     <span className="block truncate text-sm font-medium">{row.title}</span>
                     <span className="block text-xs text-muted-foreground">{row.identifier} · {row.progressLabel}</span>
                   </span>
-                  <span className="text-sm font-semibold tabular-nums">{row.importanceStars + row.urgencyStars}/10</span>
+                  <span
+                    className="text-sm font-semibold tabular-nums"
+                    style={{ color: `var(--score-${row.tier.toLowerCase()})` }}
+                  >
+                    {row.importanceStars + row.urgencyStars}/10
+                  </span>
                 </span>
                 {/* Lifecycle progress (board ask 2026-07-18): the bar mirrors the
                     derived ladder (todo 0 → woken 10 → run 25 → review 90 → done

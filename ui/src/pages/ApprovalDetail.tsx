@@ -9,7 +9,6 @@ import { queryKeys } from "../lib/queryKeys";
 import { StatusBadge } from "../components/StatusBadge";
 import { Identity } from "../components/Identity";
 import { approvalLabel, typeIcon, defaultTypeIcon, ApprovalPayloadRenderer } from "../components/ApprovalPayload";
-import { RiskGatedApprovalPanel, type RiskGatedApprovalPayload } from "../components/RiskGatedApprovalPanel";
 import { PageSkeleton } from "../components/PageSkeleton";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -27,7 +26,6 @@ export function ApprovalDetail() {
   const [commentBody, setCommentBody] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [showRawPayload, setShowRawPayload] = useState(false);
-  const [selfApprovalBlocked, setSelfApprovalBlocked] = useState(false);
 
   const { data: approval, isLoading } = useQuery({
     queryKey: queryKeys.approvals.detail(approvalId!),
@@ -105,23 +103,6 @@ export function ApprovalDetail() {
     onError: (err) => setError(err instanceof Error ? err.message : "Reject failed"),
   });
 
-  const decideGateMutation = useMutation({
-    mutationFn: (decision: "approved" | "rejected") => approvalsApi.decideGate(approvalId!, decision),
-    onSuccess: (_data, decision) => {
-      setError(null);
-      setSelfApprovalBlocked(false);
-      refresh();
-      if (decision === "approved") {
-        navigate(`/approvals/${approvalId}?resolved=approved`, { replace: true });
-      }
-    },
-    onError: (err) => {
-      const message = err instanceof Error ? err.message : "Decision failed";
-      setSelfApprovalBlocked(/separation of duties/i.test(message));
-      setError(message);
-    },
-  });
-
   const revisionMutation = useMutation({
     mutationFn: () => approvalsApi.requestRevision(approvalId!),
     onSuccess: () => {
@@ -167,10 +148,6 @@ export function ApprovalDetail() {
   const linkedAgentId = typeof payload.agentId === "string" ? payload.agentId : null;
   const isActionable = approval.status === "pending" || approval.status === "revision_requested";
   const isBudgetApproval = approval.type === "budget_override_required";
-  // Seam-tolerant read: the running (packaged) control plane can emit approval
-  // types the source union hasn't caught up to yet — compare as string so the
-  // page renders them instead of failing the build.
-  const isRiskGate = (approval.type as string) === "risk_gated_action";
   const TypeIcon = typeIcon[approval.type] ?? defaultTypeIcon;
   const showApprovedBanner = searchParams.get("resolved") === "approved" && approval.status === "approved";
   const primaryLinkedIssue = linkedIssues?.[0] ?? null;
@@ -242,19 +219,7 @@ export function ApprovalDetail() {
               />
             </div>
           )}
-          {isRiskGate ? (
-            <RiskGatedApprovalPanel
-              payload={payload as RiskGatedApprovalPayload}
-              actionable={isActionable}
-              onApprove={() => decideGateMutation.mutate("approved")}
-              onReject={() => decideGateMutation.mutate("rejected")}
-              approvePending={decideGateMutation.isPending}
-              rejectPending={decideGateMutation.isPending}
-              selfApprovalBlocked={selfApprovalBlocked}
-            />
-          ) : (
-            <ApprovalPayloadRenderer type={approval.type} payload={payload} />
-          )}
+          <ApprovalPayloadRenderer type={approval.type} payload={payload} />
           <button
             type="button"
             className="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground transition-colors mt-2"
@@ -296,7 +261,7 @@ export function ApprovalDetail() {
           </div>
         )}
         <div className="flex flex-wrap items-center gap-2">
-          {isActionable && !isBudgetApproval && !isRiskGate && (
+          {isActionable && !isBudgetApproval && (
             <>
               <Button
                 size="sm"
@@ -321,7 +286,7 @@ export function ApprovalDetail() {
               Resolve this budget stop from the budget controls on <Link to="/costs" className="underline underline-offset-2">/costs</Link>.
             </p>
           )}
-          {approval.status === "pending" && !isRiskGate && (
+          {approval.status === "pending" && (
             <Button
               size="sm"
               variant="outline"

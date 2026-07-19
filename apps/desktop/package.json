@@ -1,7 +1,7 @@
 {
   "name": "vitals-desktop",
   "productName": "Vitals",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "private": true,
   "description": "Vitals desktop app: chromeless window + tray that attaches to (or starts) the local summon.company company OS server on 127.0.0.1:3100.",
   "main": "main.js",
@@ -17,5 +17,16 @@
     "electron-builder": "^26.0.12",
     "png-to-ico": "^2.1.8",
     "sharp": "^0.33.5"
+  },
+  "build": {
+    "appId": "company.summon.desktop",
+    "productName": "Summon",
+    "win": {
+      "icon": "icon.ico"
+    },
+    "nsis": {
+      "oneClick": true,
+      "deleteAppDataOnUninstall": false
+    }
   }
 }

@@ -189,6 +189,16 @@
   --status-task-icon-blocked: var(--status-task-blocked);         /* #dc2626 both modes */
   --status-task-icon-cancelled: #52585d;
   --status-task-icon-in_queue: var(--status-task-in_progress);    /* blocked shape, blue */
+
+  /* Priority-score spectrum (board, 2026-07-19): the better the task the
+     greener the number, S→F. Data color, not chrome — pairs with the numeric
+     weight so color is never the only signal (law 5). AA against white. */
+  --score-s: #15803d;
+  --score-a: #4d7c0f;
+  --score-b: #a16207;
+  --score-c: #b45309;
+  --score-d: #c2410c;
+  --score-f: #b91c1c;
 }
 
 .dark {
@@ -200,6 +210,13 @@
   --popover-foreground: #f2f2f2;
   --glass-surface: rgba(20, 20, 20, 0.55);
   --glass-border: rgba(242, 242, 242, 0.12);
+  /* Score spectrum, dark: lifted for contrast on near-black. */
+  --score-s: #4ade80;
+  --score-a: #a3e635;
+  --score-b: #facc15;
+  --score-c: #fbbf24;
+  --score-d: #fb923c;
+  --score-f: #f87171;
   --primary: #fafafa;
   --primary-foreground: #0a0a0a;
   --secondary: rgba(255, 255, 255, 0.07);
