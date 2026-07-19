@@ -1,16 +1,7 @@
 import { useMemo } from "react";
 import type { Agent, DashboardSummary, Goal, Issue, Project } from "@paperclipai/shared";
 import type { MarketCapSnapshot } from "@paperclipai/shared/vitals-market-cap";
-import {
-  Activity,
-  ArrowRight,
-  CircleDollarSign,
-  Gauge,
-  ListChecks,
-  Network,
-  Route,
-  UsersRound,
-} from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Link } from "@/lib/router";
 import { Card } from "@/components/ui/card";
 import { FleetRunningNow } from "./FleetRunningNow";
@@ -43,6 +34,13 @@ function pct(value: number) {
   return Math.max(0, Math.min(100, Math.round(value)));
 }
 
+// Via-negativa pass (board, 2026-07-18; law 1 removals logged in the commit):
+// the Roadmap 8-card grid, the "Honest fallback" caption, the header tagline,
+// the eyebrow over the h1, per-section caption prose, heading + hero icons,
+// the queue rank column, the "proxy score" sublabel, and the ×8 "No open task
+// assigned" placeholders all failed the deletion test — none carried data or
+// an affordance the remaining elements lack. The binding-constraint card IS
+// the roadmap's dashboard presence; the full grid lives at /roadmap.
 export function MissionControl({
   summary,
   agents,
@@ -86,45 +84,33 @@ export function MissionControl({
   const cash = summary.costs.monthBudgetCents > 0 ? pct(summary.costs.monthUtilizationPercent) : 0;
 
   return (
-    <div data-testid="mission-control" className="space-y-6">
-      <section aria-labelledby="mission-control-heading" className="space-y-3">
-        <div className="flex flex-wrap items-end justify-between gap-3">
-          <div>
-            <p className="text-xs font-medium uppercase tracking-(--tracking-eyebrow) text-muted-foreground">
-              Company state
-            </p>
-            <h1 id="mission-control-heading" className="text-2xl font-semibold tracking-tight">
-              Mission Control
-            </h1>
-          </div>
-          <p className="text-xs text-muted-foreground">Control-plane evidence, not self-reporting</p>
-        </div>
+    <div data-testid="mission-control" className="space-y-8">
+      <section aria-labelledby="mission-control-heading" className="space-y-4">
+        <h1 id="mission-control-heading" className="text-2xl font-semibold tracking-tight">
+          Mission Control
+        </h1>
 
         <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
           <HeroLink
             to="/marketcap"
-            icon={CircleDollarSign}
             label="Market cap"
             value={marketCapSnapshot?.capProxyLabel ?? "Calculating…"}
             detail={marketCapSnapshot ? `ARR ${marketCapSnapshot.arrLabel} · stage ${marketCapSnapshot.stage.id}` : "Loading evidence"}
           />
           <HeroLink
             to="/issues"
-            icon={Activity}
             label="Execution"
             value={`${summary.agents.running} live`}
             detail={`${summary.tasks.inProgress} in progress · ${reliability}% run reliability`}
           />
           <HeroLink
             to="/usage"
-            icon={Gauge}
             label="Month spend"
             value={formatCents(summary.costs.monthSpendCents)}
-            detail={summary.costs.monthBudgetCents > 0 ? `${summary.costs.monthUtilizationPercent}% of budget` : "No company budget ceiling"}
+            detail={summary.costs.monthBudgetCents > 0 ? `${summary.costs.monthUtilizationPercent}% of budget` : "No budget ceiling"}
           />
           <HeroLink
             to="/decisions"
-            icon={ListChecks}
             label="Board decisions"
             value={String(decisionCount)}
             detail={decisionCount === 0 ? "Nothing waiting on the board" : "One-card deck ready"}
@@ -177,50 +163,34 @@ export function MissionControl({
       {/* Board naming (2026-07-18): the user-facing word is "Org" everywhere;
           "Formation" stays as the internal doctrine/route name. */}
       <section aria-labelledby="formation-heading" className="space-y-3">
-        <SectionHeading id="formation-heading" icon={UsersRound} title="Org" detail="Eight departments, one accountable employee each" to="/org" />
+        <SectionHeading id="formation-heading" title="Org" to="/org" />
         <div className="grid gap-2 sm:grid-cols-2 xl:grid-cols-4">
           {formation.map((assignment) => {
             const agent = assignment.agent;
             const current = agent ? currentIssueByAgent.get(agent.id) ?? null : null;
+            // Status text renders only when it deviates from calm (running /
+            // error / paused); a column of eight "idle"s is chrome, not signal.
+            const loudStatus = agent && agent.status !== "idle" && agent.status !== "active" ? agent.status : null;
             // Open positions still route to /formation — the only surface with
             // a staffing flow; /org is a read-only chart.
             return (
               <Link key={assignment.department.id} to={agent ? `/agents/${agent.id}` : "/formation"} className="group rounded-lg border border-border bg-card p-3 hover:bg-accent/40">
                 <div className="flex items-center justify-between gap-2">
                   <span className="text-xs font-medium uppercase tracking-(--tracking-eyebrow) text-muted-foreground">{assignment.department.name}</span>
-                  <span className={cn("text-xs capitalize", agent?.status === "running" ? "text-primary" : "text-muted-foreground")}>
-                    {agent?.status ?? "open"}
-                  </span>
+                  {loudStatus ? (
+                    <span className={cn("text-xs capitalize", loudStatus === "running" ? "text-primary" : "text-muted-foreground")}>
+                      {loudStatus}
+                    </span>
+                  ) : null}
                 </div>
                 <p className="mt-2 truncate text-sm font-semibold">{agent?.name ?? "Open position"}</p>
-                <p className="mt-1 line-clamp-2 min-h-10 text-xs text-muted-foreground">
-                  {current ? `${current.identifier ?? current.id.slice(0, 8)} · ${current.title}` : agent ? "No open task assigned" : `Staff ${assignment.department.name}`}
-                </p>
-              </Link>
-            );
-          })}
-        </div>
-      </section>
-
-      <section aria-labelledby="roadmap-heading" className="space-y-3">
-        <SectionHeading id="roadmap-heading" icon={Route} title="Roadmap" detail="Eight stages, constraint outlined" to="/roadmap" />
-        <div className="grid gap-2 lg:grid-cols-2">
-          {roadmap.map((assignment) => {
-            const isConstraint = assignment.stage.id === roadmapConstraint?.stage.id;
-            return (
-              <Link key={assignment.stage.id} to="/roadmap" className={cn("rounded-lg border bg-card p-3", isConstraint ? "border-primary" : "border-border")}>
-                <div className="flex items-center gap-3">
-                  <span className="flex size-7 shrink-0 items-center justify-center rounded-full border border-border text-xs font-semibold tabular-nums">{assignment.stage.sequence}</span>
-                  <div className="min-w-0 flex-1">
-                    <div className="flex items-center justify-between gap-2">
-                      <span className="truncate text-sm font-medium">{assignment.stage.title}</span>
-                      <span className={cn("text-xs tabular-nums", isConstraint ? "font-semibold text-primary" : "text-muted-foreground")}>{assignment.progress}%{isConstraint ? " · constraint" : ""}</span>
-                    </div>
-                    <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-muted" role="progressbar" aria-label={`${assignment.stage.title} progress`} aria-valuemin={0} aria-valuemax={100} aria-valuenow={assignment.progress}>
-                      <div className={cn("h-full rounded-full", isConstraint ? "bg-primary" : "bg-foreground/60")} style={{ width: `${assignment.progress}%` }} />
-                    </div>
-                  </div>
-                </div>
+                {current ? (
+                  <p className="mt-1 truncate text-xs text-muted-foreground">
+                    {current.identifier ?? current.id.slice(0, 8)} · {current.title}
+                  </p>
+                ) : !agent ? (
+                  <p className="mt-1 truncate text-xs text-muted-foreground">Staff {assignment.department.name}</p>
+                ) : null}
               </Link>
             );
           })}
@@ -228,14 +198,13 @@ export function MissionControl({
       </section>
 
       <section aria-labelledby="queue-heading" className="space-y-3">
-        <SectionHeading id="queue-heading" icon={Network} title="Task queue" detail="Top seven by logged importance + urgency proxy" to="/issues" />
+        <SectionHeading id="queue-heading" title="Task queue" to="/issues" />
         <Card className="block overflow-hidden py-0">
           {topWork.length === 0 ? (
             <p className="p-4 text-sm text-muted-foreground">No company work is queued.</p>
           ) : (
-            topWork.map((row, index) => (
+            topWork.map((row) => (
               <Link key={row.id} to={`/issues/${row.pathId}`} className="flex items-center gap-3 border-b border-border px-3 py-3 last:border-b-0 hover:bg-accent/40">
-                <span className="w-5 text-center text-xs font-medium tabular-nums text-muted-foreground">{index + 1}</span>
                 {/* Tier letter (VIT-113): S is the Thiel band — bold + primary;
                     lower tiers stay quiet so S carries all the weight (law 4). */}
                 <span
@@ -247,33 +216,24 @@ export function MissionControl({
                 >
                   {row.tier}
                 </span>
-                <span className="min-w-0">
+                <span className="min-w-0 flex-1">
                   <span className="block truncate text-sm font-medium">{row.title}</span>
                   <span className="block text-xs text-muted-foreground">{row.identifier} · {row.progressLabel}</span>
                 </span>
-                <span className="text-right">
-                  <span className="block text-sm font-semibold tabular-nums">{row.importanceStars + row.urgencyStars}/10</span>
-                  <span className="block text-xs text-muted-foreground">proxy score</span>
-                </span>
+                <span className="text-sm font-semibold tabular-nums">{row.importanceStars + row.urgencyStars}/10</span>
               </Link>
             ))
           )}
         </Card>
-        <p className="text-xs text-muted-foreground">
-          Honest fallback: this is the logged two-factor proxy until money, time, effort, and human-attention inputs are persisted for the full Summon Score.
-        </p>
       </section>
     </div>
   );
 }
 
-function HeroLink({ to, icon: Icon, label, value, detail }: { to: string; icon: typeof Activity; label: string; value: string; detail: string }) {
+function HeroLink({ to, label, value, detail }: { to: string; label: string; value: string; detail: string }) {
   return (
     <Link to={to} className="rounded-lg border border-border bg-card p-4 hover:bg-accent/40">
-      <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-(--tracking-eyebrow) text-muted-foreground">
-        <Icon className="size-4" aria-hidden="true" />
-        {label}
-      </div>
+      <p className="text-xs font-medium uppercase tracking-(--tracking-eyebrow) text-muted-foreground">{label}</p>
       <p className="mt-3 truncate text-2xl font-semibold tracking-tight">{value}</p>
       <p className="mt-1 truncate text-xs text-muted-foreground">{detail}</p>
     </Link>
@@ -294,13 +254,10 @@ function Pressure({ label, value, detail }: { label: string; value: number; deta
   );
 }
 
-function SectionHeading({ id, icon: Icon, title, detail, to }: { id: string; icon: typeof Activity; title: string; detail: string; to: string }) {
+function SectionHeading({ id, title, to }: { id: string; title: string; to: string }) {
   return (
-    <div className="flex flex-wrap items-end justify-between gap-2">
-      <div>
-        <h2 id={id} className="flex items-center gap-2 text-base font-semibold"><Icon className="size-4 text-muted-foreground" aria-hidden="true" />{title}</h2>
-        <p className="mt-0.5 text-xs text-muted-foreground">{detail}</p>
-      </div>
+    <div className="flex items-end justify-between gap-2">
+      <h2 id={id} className="text-base font-semibold">{title}</h2>
       <Link to={to} className="text-xs font-medium text-primary hover:underline">Open</Link>
     </div>
   );

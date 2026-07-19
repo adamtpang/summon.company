@@ -108,15 +108,18 @@ describe("MissionControl", () => {
     container.remove();
   });
 
-  it("answers company state in five evidence-backed zones", () => {
+  it("answers company state in four evidence-backed zones", () => {
     const text = container.textContent ?? "";
     expect(text).toContain("Mission Control");
     expect(text).toContain("option value only");
     expect(text).toContain("One binding constraint");
     expect(text).toContain("Engineering");
     expect(text).toContain("Legal");
-    expect(text).toContain("Eight stages, constraint outlined");
-    expect(text.match(/proxy score/g)).toHaveLength(7);
+    // Via-negativa pass (2026-07-18): the Roadmap 8-card grid and the
+    // "proxy score" caption failed the deletion test — the constraint card
+    // is the roadmap's dashboard presence, and the bare score reads alone.
+    expect(text).not.toContain("Eight stages, constraint outlined");
+    expect(text).not.toContain("proxy score");
     expect(container.querySelectorAll('a[href^="/issues/"]')).toHaveLength(7);
     expect(container.querySelector('a[href="/decisions"]')?.textContent).toContain("2");
   });
