@@ -1,8 +1,9 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   ArrowUpDown,
   Check,
+  CheckCheck,
   CheckCircle2,
   ChevronLeft,
   ChevronRight,
@@ -10,12 +11,15 @@ import {
   Inbox,
   Layers,
   ListFilter,
+  Loader2,
   Rows3,
 } from "lucide-react";
 import type { Agent, AttentionItem } from "@paperclipai/shared";
 import { useNavigate } from "@/lib/router";
 import { attentionApi } from "../api/attention";
 import { agentsApi } from "../api/agents";
+import { approvalsApi } from "../api/approvals";
+import { accessApi } from "../api/access";
 import { authApi } from "../api/auth";
 import { useCompany } from "../context/CompanyContext";
 import { useBreadcrumbs } from "../context/BreadcrumbContext";
@@ -114,6 +118,7 @@ export function WhatNeedsMe() {
   const { dismiss, snooze, restore } = useInboxDismissals(selectedCompanyId);
   const { pushToast } = useToastActions();
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   useEffect(() => {
     setBreadcrumbs([{ label: "Decisions" }]);
@@ -174,6 +179,55 @@ export function WhatNeedsMe() {
       ),
     [allItems, pendingHide, pendingRestore],
   );
+
+  // "Approve all" (board ask, 2026-07-18): one press drains every pending
+  // approval-shaped decision. Scope is deliberately the two kinds whose
+  // approve verb is a plain yes (approvals + join requests) — confirmations
+  // and reviews stay per-card, they encode real per-item judgment.
+  const approvables = useMemo(
+    () =>
+      activeItems.filter(
+        (item) =>
+          (item.sourceKind === "approval" || item.sourceKind === "join_request") &&
+          item.decisionVerbs.some((verb) => verb.id === "approve"),
+      ),
+    [activeItems],
+  );
+
+  const approveAll = useMutation({
+    mutationFn: async () => {
+      let approved = 0;
+      const failures: string[] = [];
+      // Sequential on purpose: approvals can create agents and fire follow-on
+      // work; a serial drain keeps the server-side ordering deterministic.
+      for (const item of approvables) {
+        try {
+          if (item.sourceKind === "approval") {
+            await approvalsApi.approve(item.subject.id);
+          } else {
+            await accessApi.approveJoinRequest(selectedCompanyId!, item.subject.id);
+          }
+          approved += 1;
+        } catch {
+          failures.push(item.subject.title ?? item.subject.id);
+        }
+      }
+      return { approved, failures };
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: queryKeys.attention(selectedCompanyId!) });
+      queryClient.invalidateQueries({ queryKey: queryKeys.approvals.list(selectedCompanyId!) });
+    },
+    onSuccess: ({ approved, failures }) => {
+      pushToast({
+        title: failures.length
+          ? `Approved ${approved}; ${failures.length} failed`
+          : `Approved ${approved} ${approved === 1 ? "decision" : "decisions"}`,
+        body: failures.length ? failures.slice(0, 3).join(" · ") : undefined,
+        tone: failures.length ? "error" : "success",
+      });
+    },
+  });
   const snoozedItems = useMemo(
     () =>
       allItems.filter(
@@ -458,6 +512,21 @@ export function WhatNeedsMe() {
             <span className="text-sm text-muted-foreground">
               {visibleCount} {visibleCount === 1 ? "decision" : "decisions"}
             </span>
+          )}
+          {approvables.length > 0 && (
+            <Button
+              type="button"
+              size="sm"
+              disabled={approveAll.isPending}
+              onClick={() => approveAll.mutate()}
+            >
+              {approveAll.isPending ? (
+                <Loader2 className="size-4 animate-spin" aria-hidden="true" />
+              ) : (
+                <CheckCheck className="size-4" aria-hidden="true" />
+              )}
+              Approve all ({approvables.length})
+            </Button>
           )}
           <div className="flex items-center rounded-md border border-border p-0.5" role="group" aria-label="Decision view">
             <Button

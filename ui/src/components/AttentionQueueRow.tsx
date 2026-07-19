@@ -345,7 +345,7 @@ export const AttentionQueueRow = memo(function AttentionQueueRow({
   );
 });
 
-type CompactDecisionAction = "accept" | "approve" | "reject" | "request_revision";
+type CompactDecisionAction = "accept" | "approve" | "reject" | "request_revision" | "retry";
 
 function compactDecisionAction(item: AttentionItem, verbId: string): CompactDecisionAction | null {
   if (item.sourceKind === "approval" && (verbId === "approve" || verbId === "reject" || verbId === "request_revision")) {
@@ -360,6 +360,11 @@ function compactDecisionAction(item: AttentionItem, verbId: string): CompactDeci
     && (verbId === "accept" || verbId === "reject")
   ) {
     return verbId;
+  }
+  // Board ask (2026-07-18): a failed run gets a one-press Retry in the row.
+  // The server already declares the verb; it needs a linked task to act on.
+  if (item.sourceKind === "failed_run" && verbId === "retry" && item.relatedIssue?.id) {
+    return "retry";
   }
   return null;
 }
@@ -402,6 +407,18 @@ function CompactDecisionActions({
         if (typeof issueId !== "string") throw new Error("Missing issue reference for this decision.");
         if (action === "accept") return issuesApi.acceptInteraction(issueId, item.subject.id);
         return issuesApi.rejectInteraction(issueId, item.subject.id);
+      }
+      if (item.sourceKind === "failed_run") {
+        const issueId = item.relatedIssue?.id;
+        if (!issueId) throw new Error("This run has no linked task to retry — open the run for options.");
+        // Retry = a board comment on the assigned task (reopen: true). Comment
+        // wakes are the one dispatch path the running control plane honors
+        // regardless of build seam — the assignee picks the task back up.
+        return issuesApi.addComment(
+          issueId,
+          `Retry requested from Decisions: the board pressed Retry on the failed run (${item.subject.id}). Pick this task back up and run it again.`,
+          true,
+        );
       }
       throw new Error("This decision must be completed from its detail view.");
     },
@@ -457,11 +474,13 @@ function CompactDecisionActions({
 
 function decisionLabel(action: CompactDecisionAction): string {
   if (action === "request_revision") return "sent for revision";
+  if (action === "retry") return "retry";
   if (action === "accept" || action === "approve") return "approved";
   return "rejected";
 }
 
 function compactDecisionSuccessLabel(sourceKind: AttentionItem["sourceKind"], action: CompactDecisionAction): string {
+  if (action === "retry") return "Retry requested — the agent will pick the task back up";
   if (sourceKind === "approval") return `Approval ${decisionLabel(action)}`;
   if (sourceKind === "join_request") return `Join request ${decisionLabel(action)}`;
   return action === "accept" ? "Confirmation accepted" : "Confirmation declined";
@@ -470,7 +489,7 @@ function compactDecisionSuccessLabel(sourceKind: AttentionItem["sourceKind"], ac
 function decisionVerbVariant(verb: AttentionItem["decisionVerbs"][number]): "default" | "outline" | "destructive" {
   const text = `${verb.label} ${verb.description ?? ""}`.toLowerCase();
   if (/\b(reject|decline|deny|delete|remove)\b/.test(text)) return "destructive";
-  if (/\b(accept|approve|confirm|apply)\b/.test(text)) return "default";
+  if (/\b(accept|approve|confirm|apply|retry)\b/.test(text)) return "default";
   return "outline";
 }
 
