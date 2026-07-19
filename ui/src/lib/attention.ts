@@ -270,7 +270,12 @@ export function attentionImageUrl(assetId: string): string {
  * the decisions-only number. `/inbox` keeps its own unread count untouched.
  */
 export function attentionBadgeCount(feed: AttentionFeed | null | undefined): number {
-  return feed?.items.length ?? 0;
+  // Budget alerts are WARNINGS, not decisions (board, 2026-07-19): they land
+  // in the feed as pings but never pressure the badge — the badge means
+  // "decisions waiting on you", and a budget warning asks for awareness, not
+  // a verdict. (Budget CAPS already act on their own: spend pauses, never
+  // bills.)
+  return feed?.items.filter((item) => item.sourceKind !== "budget_alert").length ?? 0;
 }
 
 // ---------------------------------------------------------------------------

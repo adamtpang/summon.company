@@ -432,6 +432,27 @@ export function WhatNeedsMe() {
     },
     [snooze],
   );
+
+  // Budget alerts are pings, not decisions (board, 2026-07-19): they land in
+  // the feed for awareness, stay visible for ~10s, then dismiss themselves —
+  // no verdict required from the board. Caps already enforce themselves
+  // (spend pauses, never bills), so the row's only job is to inform. The
+  // standard dismiss path is reused, so an Undo toast still offers a way to
+  // keep one around.
+  const autoDismissedBudgetIds = useRef<Set<string>>(new Set());
+  useEffect(() => {
+    const pings = activeItems.filter(
+      (item) => item.sourceKind === "budget_alert" && !autoDismissedBudgetIds.current.has(item.id),
+    );
+    if (pings.length === 0) return;
+    const timer = window.setTimeout(() => {
+      for (const item of pings) {
+        autoDismissedBudgetIds.current.add(item.id);
+        handleDismiss(item);
+      }
+    }, 10_000);
+    return () => window.clearTimeout(timer);
+  }, [activeItems, handleDismiss]);
   const handleRestore = useCallback(
     (item: AttentionItem) => {
       setPendingRestore((prev) => new Set(prev).add(item.id));
