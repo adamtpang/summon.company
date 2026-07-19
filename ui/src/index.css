@@ -663,6 +663,23 @@
   }
 }
 
+/* Accessibility (DESIGN.md law 13): honor the OS "Reduce Transparency" setting.
+   Glass is an ELEVATION signal, never a legibility dependency — when a user asks
+   for reduced transparency (macOS/iOS/Windows), every liquid-glass surface
+   collapses to its opaque popover fill so text contrast never rides on
+   translucency. Applies to the only law-13 surfaces (Cmd-K palette, modals,
+   sheets, popovers, dropdowns, deck card, toasts); data zones were never glass. */
+@media (prefers-reduced-transparency: reduce) {
+  :root {
+    --glass-surface: var(--popover);
+    --glass-border: var(--border);
+  }
+  .dark {
+    --glass-surface: var(--popover);
+    --glass-border: var(--border);
+  }
+}
+
 /* MDXEditor theme integration */
 .paperclip-mdxeditor-scope,
 .paperclip-mdxeditor {
