@@ -1,6 +1,6 @@
 # Marketing
 
-> Sells · hero archetype: Alex Hormozi
+> Sells · hero archetype: David Ogilvy
 
 **Owns:** Positioning, content, social, SEO, paid acquisition, and referrals.
 

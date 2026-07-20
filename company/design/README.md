@@ -1,6 +1,6 @@
 # Design
 
-> Builds · hero archetype: Jony Ive
+> Builds · hero archetype: Dieter Rams
 
 **Owns:** Brand identity, product experience, and the marketing website.
 

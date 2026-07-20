@@ -1,6 +1,6 @@
 # Sales
 
-> Sells · hero archetype: Ryan Serhant
+> Sells · hero archetype: Zig Ziglar
 
 **Owns:** Prospecting, outbound, qualification, pipeline, and closing.
 

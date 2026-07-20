@@ -1,6 +1,6 @@
 # Legal
 
-> Runs · open seat archetype
+> Runs · hero archetype: Cicero
 
 **Owns:** Incorporation, contracts, compliance, privacy, and risk.
 
