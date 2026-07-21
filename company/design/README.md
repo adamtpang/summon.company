@@ -6,7 +6,7 @@
 
 ## Agent chain
 
-- **Ink · Design Director** — layer 2, Claude Opus 4.8
+- **Ink · Design** — layer 2, Claude Opus 4.8
 
 ## Working now (Thiel rule: one agent, ONE task)
 
@@ -20,4 +20,4 @@ data).
 - Department knowledge lives here as files: DESIGN.md laws, the identity
   sources (`design/logo/`), tokens (`ui/src/index.css` is the single source of
   truth).
-- Escalation: agent → Sol · CEO → the board (Adam).
+- Escalation: agent → Sol · Cofounder → the board (Adam).

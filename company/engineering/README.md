@@ -6,7 +6,7 @@
 
 ## Agent chain
 
-- **Vector · CTO** — core-8 head, Claude Opus 4.8
+- **Vector · Engineering** — core-8 head, Claude Opus 4.8
 - **Forge · Engineer** — subagent under Vector, Grok 4.5 (`grok_local`) —
   the live testbed for the grok subagent tier (SUM-145)
 
@@ -23,5 +23,5 @@
   wakes the agent.
 - Department knowledge lives here as files; anything an agent should always
   know about engineering belongs in this folder.
-- Escalation: agent → Sol · CEO → the board (Adam). Blocked work surfaces in
+- Escalation: agent → Sol · Cofounder → the board (Adam). Blocked work surfaces in
   the Inbox with a disposition card.

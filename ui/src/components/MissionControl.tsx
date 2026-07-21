@@ -56,6 +56,13 @@ export function MissionControl({
     [agents, goals, issues, projects],
   );
   const roadmapConstraint = useMemo(() => selectRoadmapConstraint(roadmap), [roadmap]);
+  // Company lifespan at a glance (board, 2026-07-19): stage X of 8 + percent
+  // through the whole roadmap — the mean of the eight stages' evidence-derived
+  // progress. Same honest source as the constraint, never self-reported.
+  const overallRoadmapProgress = useMemo(
+    () => (roadmap.length ? Math.round(roadmap.reduce((sum, stage) => sum + stage.progress, 0) / roadmap.length) : 0),
+    [roadmap],
+  );
   const scoreboard = useMemo(() => buildScoreboard(issues), [issues]);
   const topWork = scoreboard.rows.slice(0, 7);
 
@@ -132,6 +139,11 @@ export function MissionControl({
                 <p className="mt-1 text-lg font-semibold">
                   {roadmapConstraint?.stage.title ?? "No open roadmap constraint"}
                 </p>
+                {roadmapConstraint ? (
+                  <p className="mt-0.5 text-xs text-muted-foreground">
+                    Stage {roadmapConstraint.stage.sequence} of 8 · company {overallRoadmapProgress}% through the roadmap
+                  </p>
+                ) : null}
                 <p className="mt-1 text-sm text-muted-foreground">
                   {roadmapConstraint
                     ? `${roadmapConstraint.ownerDepartment.name} owns the next stage at ${roadmapConstraint.progress}%.`

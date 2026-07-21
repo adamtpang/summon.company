@@ -25,4 +25,4 @@ SUM-132 — founding-influencer pipeline: 10 KOL partnerships.
 ## How to engage
 
 - In Summon: @Magnet in board chat, or assign a task.
-- Escalation: agent → Sol · CEO → the board (Adam).
+- Escalation: agent → Sol · Cofounder → the board (Adam).

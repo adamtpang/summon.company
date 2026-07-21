@@ -14,19 +14,19 @@ collisions; `company/` is the portable default.
 
 ## Leadership (outside the eight)
 
-- **Sol · CEO** — Claude Fable 5. Routes, decides, never holds tasks.
+- **Sol · Cofounder** — Claude Fable 5. The board's cofounder: routes, decides, never holds tasks.
   Surface → Triage → Route.
 - **Pulse · Diagnostician** — Opus 4.8, staff role. Reads the vitals, audits
   the board (currently: SUM-150, the blocked-backlog audit).
 
 ## Departments
 
-- [engineering](engineering/README.md) — Vector · CTO, Forge · Engineer
-- [design](design/README.md) — Ink · Design Director
-- [marketing](marketing/README.md) — Echo · CMO
+- [engineering](engineering/README.md) — Vector · Engineering, Forge · Engineer
+- [design](design/README.md) — Ink · Design
+- [marketing](marketing/README.md) — Echo · Marketing
 - [sales](sales/README.md) — Magnet · Sales
-- [finance](finance/README.md) — Ledger · CFO
-- [operations](operations/README.md) — Atlas · COO
+- [finance](finance/README.md) — Ledger · Finance
+- [operations](operations/README.md) — Atlas · Operations
 - [support](support/README.md) — Haven · Support
 - [legal](legal/README.md) — Shield · Legal
 

@@ -6,7 +6,7 @@
 
 ## Agent chain
 
-- **Echo · CMO** — layer 2, Claude Opus 4.8
+- **Echo · Marketing** — layer 2, Claude Opus 4.8
 
 ## Working now (Thiel rule: one agent, ONE task)
 
@@ -23,4 +23,4 @@ you" — quality cuts through AI slop.
 
 - In Summon: @Echo in board chat, or assign a task — assignment wakes the
   agent.
-- Escalation: agent → Sol · CEO → the board (Adam).
+- Escalation: agent → Sol · Cofounder → the board (Adam).

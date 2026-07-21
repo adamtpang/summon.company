@@ -17,4 +17,4 @@ meaningful task or none.
 ## How to engage
 
 - In Summon: @Haven in board chat, or assign a task.
-- Escalation: agent → Sol · CEO → the board (Adam).
+- Escalation: agent → Sol · Cofounder → the board (Adam).
