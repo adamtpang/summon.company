@@ -83,6 +83,8 @@ interface AttentionQueueRowProps {
   currentUserId?: string | null;
   userLabelMap?: ReadonlyMap<string, string> | null;
   selected?: boolean;
+  /** Surface override — the Decisions deck passes the law-13 glass here. */
+  className?: string;
 }
 
 /**
@@ -105,6 +107,7 @@ export const AttentionQueueRow = memo(function AttentionQueueRow({
   currentUserId,
   userLabelMap,
   selected = false,
+  className,
 }: AttentionQueueRowProps) {
   const meta = sourceMeta(item.sourceKind);
   const tone = attentionToneStyle(item);
@@ -154,6 +157,7 @@ export const AttentionQueueRow = memo(function AttentionQueueRow({
         "motion-safe:transition-[opacity,transform,border-color,background-color] motion-safe:duration-200 motion-safe:ease-out hover:border-border/80",
         isHidden && "bg-muted/30 opacity-80 hover:opacity-100",
         selected && "border-ring ring-1 ring-ring",
+        className,
       )}
       id={`attention-row-${item.id}`}
       data-attention-row

@@ -829,6 +829,9 @@ export function DecisionDeck({
           </Button>
         </div>
       </div>
+      {/* Law 13: the deck card is an elevation surface — ONE card floating
+          above the queue it came from — so it wears the liquid glass. The
+          list view's rows stay opaque; they ARE the context, not above it. */}
       <AttentionQueueRow
         item={item}
         companyId={companyId}
@@ -839,6 +842,7 @@ export function DecisionDeck({
         agentMap={agentMap}
         currentUserId={currentUserId}
         selected
+        className="bg-(--glass-surface) backdrop-blur-xl border-(--glass-border) shadow-lg"
       />
       <p className="text-center text-xs text-muted-foreground">
         J/K moves through the deck. Approve, accept, reject, or request revision on the card.
