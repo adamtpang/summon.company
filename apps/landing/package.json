@@ -24,5 +24,8 @@
   ],
   "keywords": ["vitals", "company-os", "dashboard", "founder", "operating-system", "kpi", "ai-agents"],
   "homepage": "https://summon.company",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@vercel/functions": "^2.0.0"
+  }
 }
