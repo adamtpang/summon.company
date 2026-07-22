@@ -1,0 +1,2869 @@
+{
+  "wireMagic": "pb3",
+  "pens": [ {
+  
+  } ],
+  "wsWinStyles": [ {
+  
+  } ],
+  "wpWinPositions": [ {
+  
+  } ],
+  "events": [ {
+    "tStartMs": 600,
+    "dDurationMs": 6360,
+    "segs": [ {
+      "utf8": "Cole's back on the Pod Cole what are we what are \nwe learning about today we are going to write with  "
+    } ]
+  }, {
+    "tStartMs": 6960,
+    "dDurationMs": 6360,
+    "segs": [ {
+      "utf8": "AI and I mean I mean that in the most literal \nsense we are going to write and we are going to  "
+    } ]
+  }, {
+    "tStartMs": 13320,
+    "dDurationMs": 6520,
+    "segs": [ {
+      "utf8": "do it with AI and so what I want to do is I want \nto share my screen and I want to go back and forth  "
+    } ]
+  }, {
+    "tStartMs": 19840,
+    "dDurationMs": 6120,
+    "segs": [ {
+      "utf8": "and show how I do this and also how I train other \nwriters to do this and by the end of this episode  "
+    } ]
+  }, {
+    "tStartMs": 25960,
+    "dDurationMs": 5320,
+    "segs": [ {
+      "utf8": "what are people going to get at a at a minimum \nyou will have a Baseline understanding of how  "
+    } ]
+  }, {
+    "tStartMs": 31280,
+    "dDurationMs": 8320,
+    "segs": [ {
+      "utf8": "to use Ai and writing and at a maximum uh you will \nhave a very clear framework for being able to use  "
+    } ]
+  }, {
+    "tStartMs": 39600,
+    "dDurationMs": 14720,
+    "segs": [ {
+      "utf8": "AI to produce very high quality long form [Music] \ncontent and why does that even matter I think the  "
+    } ]
+  }, {
+    "tStartMs": 54320,
+    "dDurationMs": 7560,
+    "segs": [ {
+      "utf8": "two biggest reasons is one when you understand \nhow these Frameworks work like so many people  "
+    } ]
+  }, {
+    "tStartMs": 61880,
+    "dDurationMs": 4720,
+    "segs": [ {
+      "utf8": "only think about how things work in an individual \nSilo so I'll give you an example like in all of  "
+    } ]
+  }, {
+    "tStartMs": 66600,
+    "dDurationMs": 7320,
+    "segs": [ {
+      "utf8": "our writing programs if I explain how to write a \na thread hook 99% of people will ask the follow-up  "
+    } ]
+  }, {
+    "tStartMs": 73920,
+    "dDurationMs": 7280,
+    "segs": [ {
+      "utf8": "question does this also work on LinkedIn or does \nthis also work for a real right and the answer is  "
+    } ]
+  }, {
+    "tStartMs": 81200,
+    "dDurationMs": 6320,
+    "segs": [ {
+      "utf8": "always yes but human beings do a terrible job of \nthinking orthogonally and it's like if you tell me  "
+    } ]
+  }, {
+    "tStartMs": 87520,
+    "dDurationMs": 5480,
+    "segs": [ {
+      "utf8": "this is how to write a Twitter thread hook I it's \nhard for the average person to Fathom how that  "
+    } ]
+  }, {
+    "tStartMs": 93000,
+    "dDurationMs": 4040,
+    "segs": [ {
+      "utf8": "gets played out across other things but it does \nand that's why these writing Frameworks and these  "
+    } ]
+  }, {
+    "tStartMs": 97040,
+    "dDurationMs": 4800,
+    "segs": [ {
+      "utf8": "skills are so powerful because once you understand \nthem once you can apply them to everything doesn't  "
+    } ]
+  }, {
+    "tStartMs": 101840,
+    "dDurationMs": 3600,
+    "segs": [ {
+      "utf8": "matter if you're writing an email or an article \nor a Twitter threat or a landing page right it's  "
+    } ]
+  }, {
+    "tStartMs": 105440,
+    "dDurationMs": 5680,
+    "segs": [ {
+      "utf8": "all it's all the same and then second is this is \nwhere the world's moving I I was just writing a  "
+    } ]
+  }, {
+    "tStartMs": 111120,
+    "dDurationMs": 7040,
+    "segs": [ {
+      "utf8": "piece this morning about um like different career \npaths that writers can take and the one that I was  "
+    } ]
+  }, {
+    "tStartMs": 118160,
+    "dDurationMs": 6360,
+    "segs": [ {
+      "utf8": "working on is the career path of a content writer \nand so often I hear I see it in my comments on my  "
+    } ]
+  }, {
+    "tStartMs": 124520,
+    "dDurationMs": 3680,
+    "segs": [ {
+      "utf8": "content like all day long is people saying you \nknow what's the point of even building these  "
+    } ]
+  }, {
+    "tStartMs": 128200,
+    "dDurationMs": 5200,
+    "segs": [ {
+      "utf8": "skills AI is just going to take all our jobs \nAI is g to remove all writers no one's going  "
+    } ]
+  }, {
+    "tStartMs": 133400,
+    "dDurationMs": 5480,
+    "segs": [ {
+      "utf8": "to need a writer anymore and that really fails \nto understand what's happening and the analogy  "
+    } ]
+  }, {
+    "tStartMs": 138880,
+    "dDurationMs": 6480,
+    "segs": [ {
+      "utf8": "that I always use is you know when Photoshop was \ninvented in 1990 if you can believe it was that  "
+    } ]
+  }, {
+    "tStartMs": 145360,
+    "dDurationMs": 8000,
+    "segs": [ {
+      "utf8": "long ago at this point that didn't ruin design \nit created a thousand times more designers right  "
+    } ]
+  }, {
+    "tStartMs": 153360,
+    "dDurationMs": 6560,
+    "segs": [ {
+      "utf8": "it created exponentially More Design in the world \nwhen Instagram launched in 2010 that didn't remove  "
+    } ]
+  }, {
+    "tStartMs": 159920,
+    "dDurationMs": 4640,
+    "segs": [ {
+      "utf8": "photographers it made everyone a photographer \nright it exponentially increased the amount of  "
+    } ]
+  }, {
+    "tStartMs": 164560,
+    "dDurationMs": 4600,
+    "segs": [ {
+      "utf8": "Photography in the world and chat PT and Claude \nand all these AI writing platforms are going to  "
+    } ]
+  }, {
+    "tStartMs": 169160,
+    "dDurationMs": 4920,
+    "segs": [ {
+      "utf8": "do the same exact thing they are going to make \neveryone a writer because it's reducing the  "
+    } ]
+  }, {
+    "tStartMs": 174080,
+    "dDurationMs": 6560,
+    "segs": [ {
+      "utf8": "barrier to entry and so if you pair that Trend \nwith the fact that 20 years ago people couldn't  "
+    } ]
+  }, {
+    "tStartMs": 180640,
+    "dDurationMs": 6800,
+    "segs": [ {
+      "utf8": "imagine what it meant to create content online if \nyou owned a a fax machine brand or a candy brand  "
+    } ]
+  }, {
+    "tStartMs": 187440,
+    "dDurationMs": 5040,
+    "segs": [ {
+      "utf8": "or a local spa right 20 years ago you were like \nwhat what does it even mean to create content well  "
+    } ]
+  }, {
+    "tStartMs": 192480,
+    "dDurationMs": 6080,
+    "segs": [ {
+      "utf8": "you want me to post pictures of my fax machine \non the internet right and now today every single  "
+    } ]
+  }, {
+    "tStartMs": 198560,
+    "dDurationMs": 5440,
+    "segs": [ {
+      "utf8": "business and every single individual understands \nI should probably create and share content online  "
+    } ]
+  }, {
+    "tStartMs": 204000,
+    "dDurationMs": 6000,
+    "segs": [ {
+      "utf8": "that's why Spas share pictures of their Spas \nright and so if you take those two things together  "
+    } ]
+  }, {
+    "tStartMs": 210000,
+    "dDurationMs": 6320,
+    "segs": [ {
+      "utf8": "you realize that quote unquote content branded \ncontent educational content is not ever going  "
+    } ]
+  }, {
+    "tStartMs": 216320,
+    "dDurationMs": 4920,
+    "segs": [ {
+      "utf8": "to go down it's only going to go up every single \nday more and more people more and more businesses  "
+    } ]
+  }, {
+    "tStartMs": 221240,
+    "dDurationMs": 7280,
+    "segs": [ {
+      "utf8": "want to create more and more content if you are \nconstrained as a human by 24 hours in a day or  "
+    } ]
+  }, {
+    "tStartMs": 228520,
+    "dDurationMs": 6280,
+    "segs": [ {
+      "utf8": "really like 8 to 12 working hours a day and seven \ndays a week well your productivity can only go  "
+    } ]
+  }, {
+    "tStartMs": 234800,
+    "dDurationMs": 6280,
+    "segs": [ {
+      "utf8": "so far you can only produce so much content in a \ngiven day or a given week so you add AI into the  "
+    } ]
+  }, {
+    "tStartMs": 241080,
+    "dDurationMs": 8600,
+    "segs": [ {
+      "utf8": "equation it's not that AI removes people's jobs AI \nbecomes the stress test of do you know how to use  "
+    } ]
+  }, {
+    "tStartMs": 249680,
+    "dDurationMs": 6080,
+    "segs": [ {
+      "utf8": "this to double triple quadruple your output if \nyes you will make even more money than you were  "
+    } ]
+  }, {
+    "tStartMs": 255760,
+    "dDurationMs": 5240,
+    "segs": [ {
+      "utf8": "making before because you are more valuable and \nif you don't know how to use this you become less  "
+    } ]
+  }, {
+    "tStartMs": 261000,
+    "dDurationMs": 7120,
+    "segs": [ {
+      "utf8": "valuable and people canate the two they think AI \nstole my job that's not what happened AI changed  "
+    } ]
+  }, {
+    "tStartMs": 268120,
+    "dDurationMs": 6080,
+    "segs": [ {
+      "utf8": "the barrier to entry and changed the Baseline \nskill level you failed to change with it and  "
+    } ]
+  }, {
+    "tStartMs": 274200,
+    "dDurationMs": 6280,
+    "segs": [ {
+      "utf8": "then AI says well you didn't change so you don't \nget the next opportunity which is like Darwinism  "
+    } ]
+  }, {
+    "tStartMs": 280480,
+    "dDurationMs": 5040,
+    "segs": [ {
+      "utf8": "at its finest right so everyone's sitting here \nthinking AI is ruining things and no it's it's  "
+    } ]
+  }, {
+    "tStartMs": 285520,
+    "dDurationMs": 5520,
+    "segs": [ {
+      "utf8": "changing things and you are failing to change with \nit so that's my little Preamble for what we're  "
+    } ]
+  }, {
+    "tStartMs": 291040,
+    "dDurationMs": 5600,
+    "segs": [ {
+      "utf8": "going to dig into that is why these things are so \nimportant what is a topic that you want to create  "
+    } ]
+  }, {
+    "tStartMs": 296640,
+    "dDurationMs": 6440,
+    "segs": [ {
+      "utf8": "a piece of content on 800w article you could also \npost it as a long form on X you could post it as  "
+    } ]
+  }, {
+    "tStartMs": 303080,
+    "dDurationMs": 5840,
+    "segs": [ {
+      "utf8": "a long form on LinkedIn if you want is there \nany topic you've been noodling on Yes actually  "
+    } ]
+  }, {
+    "tStartMs": 308920,
+    "dDurationMs": 12120,
+    "segs": [ {
+      "utf8": "so let me pull up my tweet ideas note um and see \nif there's something that's Half Baked okay well  "
+    } ]
+  }, {
+    "tStartMs": 321040,
+    "dDurationMs": 8600,
+    "segs": [ {
+      "utf8": "okay this is literally a half-baked idea okay so \nReed Hastings had a strange rule the founder of  "
+    } ]
+  }, {
+    "tStartMs": 330360,
+    "dDurationMs": 6240,
+    "segs": [ {
+      "utf8": "uh Netflix had a strange rule in Netflix's early \ndays no one was allowed to say Blockbuster in"
+    } ]
+  }, {
+    "tStartMs": 336600,
+    "dDurationMs": 12560,
+    "segs": [ {
+      "utf8": "meetings um because the reason why is um he he \nbasically didn't see them as a competitor he was  "
+    } ]
+  }, {
+    "tStartMs": 349160,
+    "dDurationMs": 6480,
+    "segs": [ {
+      "utf8": "like uh Netflix wasn't actually competing with \nBlockbuster they were competing with guilt and  "
+    } ]
+  }, {
+    "tStartMs": 355640,
+    "dDurationMs": 5720,
+    "segs": [ {
+      "utf8": "the reason why is um I if you remember like the \nlate fees that you used to get from Blockbuster  "
+    } ]
+  }, {
+    "tStartMs": 361360,
+    "dDurationMs": 6800,
+    "segs": [ {
+      "utf8": "people like felt bad about themselves like they \ncouldn't like handle basic adult responsibilities  "
+    } ]
+  }, {
+    "tStartMs": 368160,
+    "dDurationMs": 4920,
+    "segs": [ {
+      "utf8": "um so it was it was less about the $3 you had to \npay of late fees and more about like get your life  "
+    } ]
+  }, {
+    "tStartMs": 373080,
+    "dDurationMs": 6320,
+    "segs": [ {
+      "utf8": "together man um and then Netflix's whole idea was \nbasically like watch whatever you want whenever  "
+    } ]
+  }, {
+    "tStartMs": 379400,
+    "dDurationMs": 6200,
+    "segs": [ {
+      "utf8": "you want it I think there's a piece somewhere in \nthere okay so this is an amazing place to start  "
+    } ]
+  }, {
+    "tStartMs": 385600,
+    "dDurationMs": 5080,
+    "segs": [ {
+      "utf8": "because this is how most people begin the writing \nprocess they come up with some sort of seed of an  "
+    } ]
+  }, {
+    "tStartMs": 390680,
+    "dDurationMs": 7160,
+    "segs": [ {
+      "utf8": "idea and then it's hard to know where does this go \nright quick break in the Pod to tell you a little  "
+    } ]
+  }, {
+    "tStartMs": 397840,
+    "dDurationMs": 8720,
+    "segs": [ {
+      "utf8": "bit about startup Empire so startup Empire is my \nprivate membership where it's a bunch of people  "
+    } ]
+  }, {
+    "tStartMs": 406560,
+    "dDurationMs": 6680,
+    "segs": [ {
+      "utf8": "like me like you who want to build out their \nstartup ideas now they're looking for content to  "
+    } ]
+  }, {
+    "tStartMs": 413240,
+    "dDurationMs": 6400,
+    "segs": [ {
+      "utf8": "help accelerate that they're looking for potential \nco-founders they're looking for uh tutorials from  "
+    } ]
+  }, {
+    "tStartMs": 419640,
+    "dDurationMs": 4960,
+    "segs": [ {
+      "utf8": "people like me to come in and tell them how do you \ndo email marketing how do you build an audience  "
+    } ]
+  }, {
+    "tStartMs": 424600,
+    "dDurationMs": 6000,
+    "segs": [ {
+      "utf8": "how do you go viral on Twitter all these different \nthings that's exactly what startup Empire is and  "
+    } ]
+  }, {
+    "tStartMs": 430600,
+    "dDurationMs": 5880,
+    "segs": [ {
+      "utf8": "it's for people who want to start a startup but \nare looking for ideas or it's for people who have  "
+    } ]
+  }, {
+    "tStartMs": 436480,
+    "dDurationMs": 6520,
+    "segs": [ {
+      "utf8": "a startup but just they're not seeing the traction \nuh that they need so you can check out the link to  "
+    } ]
+  }, {
+    "tStartMs": 443000,
+    "dDurationMs": 6520,
+    "segs": [ {
+      "utf8": "Startup empire.co in the description and this is \nwhy something that I think is really important  "
+    } ]
+  }, {
+    "tStartMs": 449520,
+    "dDurationMs": 6880,
+    "segs": [ {
+      "utf8": "important in the context of us talking about AI \nis that people expect AI to automate and do things  "
+    } ]
+  }, {
+    "tStartMs": 456400,
+    "dDurationMs": 7200,
+    "segs": [ {
+      "utf8": "that they don't understand how to do themselves \nand so it is worth recognizing that you know AI is  "
+    } ]
+  }, {
+    "tStartMs": 463600,
+    "dDurationMs": 5520,
+    "segs": [ {
+      "utf8": "not a silver bullet in on some level you do have \nto have a baseline understanding of how the thing  "
+    } ]
+  }, {
+    "tStartMs": 469120,
+    "dDurationMs": 5800,
+    "segs": [ {
+      "utf8": "is supposed to work so that you can prompt AI in \norder to do it right it's no different than being  "
+    } ]
+  }, {
+    "tStartMs": 474920,
+    "dDurationMs": 4720,
+    "segs": [ {
+      "utf8": "a CEO and you hire an intern and you're like hey \nI want you to take this over if you ask the inter  "
+    } ]
+  }, {
+    "tStartMs": 479640,
+    "dDurationMs": 4600,
+    "segs": [ {
+      "utf8": "to take over a department that you've never even \nrun well how are you going to get the intern to  "
+    } ]
+  }, {
+    "tStartMs": 484240,
+    "dDurationMs": 8000,
+    "segs": [ {
+      "utf8": "do it right so here's the first framework when you \nhave a seed of an idea there's two ways of looking  "
+    } ]
+  }, {
+    "tStartMs": 492240,
+    "dDurationMs": 7280,
+    "segs": [ {
+      "utf8": "at this idea and this is the first decision to \nmake essentially for you Greg either this is an  "
+    } ]
+  }, {
+    "tStartMs": 499520,
+    "dDurationMs": 12920,
+    "segs": [ {
+      "utf8": "idea and this is one point within it or this is \none point within a different idea okay so either  "
+    } ]
+  }, {
+    "tStartMs": 512440,
+    "dDurationMs": 7720,
+    "segs": [ {
+      "utf8": "let's just spell this out really simply two types \nof ideas either this is the idea so this is about  "
+    } ]
+  }, {
+    "tStartMs": 520160,
+    "dDurationMs": 8800,
+    "segs": [ {
+      "utf8": "read Hastings strange rule during Netflix's \nearly days right either that that is going to  "
+    } ]
+  }, {
+    "tStartMs": 528960,
+    "dDurationMs": 10480,
+    "segs": [ {
+      "utf8": "be the piece this is the theme of the piece or \nthis little idea is a subo within a larger ID  "
+    } ]
+  }, {
+    "tStartMs": 540760,
+    "dDurationMs": 7520,
+    "segs": [ {
+      "utf8": "okay so what what might an example of that \nbe well very easy one would be um three CEOs  "
+    } ]
+  }, {
+    "tStartMs": 548280,
+    "dDurationMs": 7360,
+    "segs": [ {
+      "utf8": "who had strange rules at the beginning of \ntheir startup Journeys or something right  "
+    } ]
+  }, {
+    "tStartMs": 555640,
+    "dDurationMs": 6560,
+    "segs": [ {
+      "utf8": "so re becomes one of three not necessarily \nthe focal point okay yeah so this is this  "
+    } ]
+  }, {
+    "tStartMs": 562200,
+    "dDurationMs": 7160,
+    "segs": [ {
+      "utf8": "is the first decision to make do you have a \npreference do you want me to pick one yeah so  "
+    } ]
+  }, {
+    "tStartMs": 570480,
+    "dDurationMs": 7080,
+    "segs": [ {
+      "utf8": "I you know one of my niches is startup ideas \nso I like to post things that have a connection  "
+    } ]
+  }, {
+    "tStartMs": 577560,
+    "dDurationMs": 4760,
+    "segs": [ {
+      "utf8": "to Startup ideas like I can obviously there's a \nmillion people who can post about Reed Hastings  "
+    } ]
+  }, {
+    "tStartMs": 582320,
+    "dDurationMs": 6240,
+    "segs": [ {
+      "utf8": "and there weird rules but only some people can \npost about the ideas piece of it so I think that a  "
+    } ]
+  }, {
+    "tStartMs": 588560,
+    "dDurationMs": 6480,
+    "segs": [ {
+      "utf8": "subo could be sometimes the biggest opportunities \naren't in fixing problems they're in making people  "
+    } ]
+  }, {
+    "tStartMs": 595040,
+    "dDurationMs": 6760,
+    "segs": [ {
+      "utf8": "feel better about having them and that's kind \nof a prompt for people to come up with startup"
+    } ]
+  }, {
+    "tStartMs": 601800,
+    "dDurationMs": 11280,
+    "segs": [ {
+      "utf8": "ideas does that make sense yeah it does so this is \nwhere you know my my years as a ghost riter that  "
+    } ]
+  }, {
+    "tStartMs": 613080,
+    "dDurationMs": 5280,
+    "segs": [ {
+      "utf8": "part of my brain is kicking in right because if \nif we sort of change the lens for a moment let's  "
+    } ]
+  }, {
+    "tStartMs": 618360,
+    "dDurationMs": 4760,
+    "segs": [ {
+      "utf8": "pretend that what we're doing you are a client \nand I'm a ghost writer is very similar this is  "
+    } ]
+  }, {
+    "tStartMs": 623120,
+    "dDurationMs": 5240,
+    "segs": [ {
+      "utf8": "exactly what I would be doing with a client anyway \nright and you just said something really smart  "
+    } ]
+  }, {
+    "tStartMs": 628360,
+    "dDurationMs": 6840,
+    "segs": [ {
+      "utf8": "and so I go okay that's great I just don't know \nwhere to put that yet so think of it like a Lego  "
+    } ]
+  }, {
+    "tStartMs": 635200,
+    "dDurationMs": 4920,
+    "segs": [ {
+      "utf8": "block right you're like that's a really great \nLego block I just don't know where it fits yet  "
+    } ]
+  }, {
+    "tStartMs": 640120,
+    "dDurationMs": 6040,
+    "segs": [ {
+      "utf8": "okay so we we put that there now we've got some \nideas swirling around and in some way we can  "
+    } ]
+  }, {
+    "tStartMs": 646160,
+    "dDurationMs": 9520,
+    "segs": [ {
+      "utf8": "let's summarize sort of our our goals here our \ngoals are we want this piece to be um connected  "
+    } ]
+  }, {
+    "tStartMs": 655680,
+    "dDurationMs": 9120,
+    "segs": [ {
+      "utf8": "to Startup ideas we want this piece to in some \nway be actionable because a lot of the a lot of  "
+    } ]
+  }, {
+    "tStartMs": 664800,
+    "dDurationMs": 5720,
+    "segs": [ {
+      "utf8": "the value that you provide is like how to how to \nget started how to do something right and ideally  "
+    } ]
+  }, {
+    "tStartMs": 670520,
+    "dDurationMs": 8720,
+    "segs": [ {
+      "utf8": "we want this piece to be connected to our read \nHastings you know strange rule during Netflix's  "
+    } ]
+  }, {
+    "tStartMs": 679240,
+    "dDurationMs": 10480,
+    "segs": [ {
+      "utf8": "early days fair fair enough yeah absolutely it's \nfunny because like just you know sidebar when I  "
+    } ]
+  }, {
+    "tStartMs": 689720,
+    "dDurationMs": 9800,
+    "segs": [ {
+      "utf8": "write when I write words I I'm not as strategic \nabout writing I just kind of like brew coffee and  "
+    } ]
+  }, {
+    "tStartMs": 699520,
+    "dDurationMs": 6880,
+    "segs": [ {
+      "utf8": "then I I go but I feel like just talking out loud \nputting goals is probably a really smart thing to  "
+    } ]
+  }, {
+    "tStartMs": 706400,
+    "dDurationMs": 6480,
+    "segs": [ {
+      "utf8": "do when you're writing any piece yep yeah I mean \nit's so simple right the the majority of people  "
+    } ]
+  }, {
+    "tStartMs": 712880,
+    "dDurationMs": 5120,
+    "segs": [ {
+      "utf8": "don't have a talent problem they have a a thing \ncalled I don't want to practice and execute the  "
+    } ]
+  }, {
+    "tStartMs": 718000,
+    "dDurationMs": 5360,
+    "segs": [ {
+      "utf8": "basics and I would rather no offense drink a bunch \nof coffee close my eyes and hope that something  "
+    } ]
+  }, {
+    "tStartMs": 723360,
+    "dDurationMs": 4840,
+    "segs": [ {
+      "utf8": "smart comes out when I hit the keyboard right and \nthat's that's not a very reliable strategy you're  "
+    } ]
+  }, {
+    "tStartMs": 728200,
+    "dDurationMs": 5360,
+    "segs": [ {
+      "utf8": "you're good like one out of every 10 times so \nthat's why these Frameworks are so helpful so  "
+    } ]
+  }, {
+    "tStartMs": 733560,
+    "dDurationMs": 6400,
+    "segs": [ {
+      "utf8": "before like I know how to do all of this manually \nbut so I'm going to slow down and and do this in  "
+    } ]
+  }, {
+    "tStartMs": 739960,
+    "dDurationMs": 4680,
+    "segs": [ {
+      "utf8": "in stages so that even someone who's a complete \nbeginner and you don't understand and haven't  "
+    } ]
+  }, {
+    "tStartMs": 744640,
+    "dDurationMs": 4520,
+    "segs": [ {
+      "utf8": "internalized these Frameworks yet you you have \na starting place so whenever I'm coming up with  "
+    } ]
+  }, {
+    "tStartMs": 750600,
+    "dDurationMs": 5160,
+    "segs": [ {
+      "utf8": "um ideas and I'm trying to narrow down the idea \nof the thing that I want to write a really easy  "
+    } ]
+  }, {
+    "tStartMs": 755760,
+    "dDurationMs": 6680,
+    "segs": [ {
+      "utf8": "place to start is to take these goals and to plug \nthem into AI you could use Chad PT you could use  "
+    } ]
+  }, {
+    "tStartMs": 762440,
+    "dDurationMs": 5360,
+    "segs": [ {
+      "utf8": "Claude it really doesn't matter those are the two \nbig ones that I use most often and the whole point  "
+    } ]
+  }, {
+    "tStartMs": 767800,
+    "dDurationMs": 4800,
+    "segs": [ {
+      "utf8": "here is not really to to for the AI to start \nwriting yet what you want is you want it to  "
+    } ]
+  }, {
+    "tStartMs": 772600,
+    "dDurationMs": 8280,
+    "segs": [ {
+      "utf8": "feed you ideas right so how do you think about \nprompting AI I think there's let's just pause  "
+    } ]
+  }, {
+    "tStartMs": 780880,
+    "dDurationMs": 8240,
+    "segs": [ {
+      "utf8": "here there's two very different types of ways of \ninteracting with uh chpt clae any AI model one is  "
+    } ]
+  }, {
+    "tStartMs": 789120,
+    "dDurationMs": 6240,
+    "segs": [ {
+      "utf8": "conversationally so you're sort of chunking things \nout piece by piece and it's more of a dialogue and  "
+    } ]
+  }, {
+    "tStartMs": 795360,
+    "dDurationMs": 6280,
+    "segs": [ {
+      "utf8": "another is where you think through all of the \npotential situations and hypotheticals and you  "
+    } ]
+  }, {
+    "tStartMs": 801640,
+    "dDurationMs": 6840,
+    "segs": [ {
+      "utf8": "assemble a massive prompt that then you feed into \nthe AI model and it generates some sort of output  "
+    } ]
+  }, {
+    "tStartMs": 808480,
+    "dDurationMs": 5200,
+    "segs": [ {
+      "utf8": "and I think part part of where people go wrong is \na they don't realize that those are two different  "
+    } ]
+  }, {
+    "tStartMs": 813680,
+    "dDurationMs": 6640,
+    "segs": [ {
+      "utf8": "things and then B they sort of sit in the middle \nand it's like a half-baked prompt that's sort of  "
+    } ]
+  }, {
+    "tStartMs": 820320,
+    "dDurationMs": 4880,
+    "segs": [ {
+      "utf8": "mid conversation and then the AI is not giving \nit the output that they want so that's usually  "
+    } ]
+  }, {
+    "tStartMs": 825200,
+    "dDurationMs": 5960,
+    "segs": [ {
+      "utf8": "the problem that I see so here if we're starting \nto write something I start conversationally so I  "
+    } ]
+  }, {
+    "tStartMs": 831160,
+    "dDurationMs": 7600,
+    "segs": [ {
+      "utf8": "might say something like I'm going to take this \nI'm going to say I recently came up with an idea  "
+    } ]
+  }, {
+    "tStartMs": 838760,
+    "dDurationMs": 9920,
+    "segs": [ {
+      "utf8": "for an 800w article read Hastings had a strange \nrule where write that thing and then I go back  "
+    } ]
+  }, {
+    "tStartMs": 848680,
+    "dDurationMs": 8440,
+    "segs": [ {
+      "utf8": "and I take my goals and I'm like here are the \ngoals of the piece I want to write and I might  "
+    } ]
+  }, {
+    "tStartMs": 857120,
+    "dDurationMs": 8560,
+    "segs": [ {
+      "utf8": "give some extra context here because I have a \npodcast where I share startup ideas with you  "
+    } ]
+  }, {
+    "tStartMs": 865680,
+    "dDurationMs": 9640,
+    "segs": [ {
+      "utf8": "know entrepreneurial listeners because a lot \nof the value I provide is how to get started  "
+    } ]
+  }, {
+    "tStartMs": 875320,
+    "dDurationMs": 7120,
+    "segs": [ {
+      "utf8": "doing something entrepreneurial and want this \npiece to be connected to our read Hasting story  "
+    } ]
+  }, {
+    "tStartMs": 882440,
+    "dDurationMs": 9760,
+    "segs": [ {
+      "utf8": "can you please generate 20 potential headlines \nfor this sort of piece and under each headline  "
+    } ]
+  }, {
+    "tStartMs": 892200,
+    "dDurationMs": 6840,
+    "segs": [ {
+      "utf8": "list out three to five main points that \nwould make up the content of that piece"
+    } ]
+  }, {
+    "tStartMs": 901400,
+    "dDurationMs": 4880,
+    "segs": [ {
+      "utf8": "so all we're doing is we're basically saying \nhere's the little bit that we came up with now  "
+    } ]
+  }, {
+    "tStartMs": 906280,
+    "dDurationMs": 6520,
+    "segs": [ {
+      "utf8": "can you just start feeding me ideas so here \nthe reason that I ask for these bullets and  "
+    } ]
+  }, {
+    "tStartMs": 912800,
+    "dDurationMs": 7160,
+    "segs": [ {
+      "utf8": "these main points is because the thing that most \nwriters and most people who want to write don't  "
+    } ]
+  }, {
+    "tStartMs": 919960,
+    "dDurationMs": 7800,
+    "segs": [ {
+      "utf8": "realize is that many of the decisions get made \nbefore you start writing so if you start if you  "
+    } ]
+  }, {
+    "tStartMs": 927760,
+    "dDurationMs": 4920,
+    "segs": [ {
+      "utf8": "come up with an idea and your first thought is \nI should open a Google doc and I should start  "
+    } ]
+  }, {
+    "tStartMs": 932680,
+    "dDurationMs": 6600,
+    "segs": [ {
+      "utf8": "writing you've already failed you already did it \nwrong and the reason is because so many of these  "
+    } ]
+  }, {
+    "tStartMs": 939280,
+    "dDurationMs": 7840,
+    "segs": [ {
+      "utf8": "ideas you can you can come to the conclusions that \nyou need to before you begin the writing process  "
+    } ]
+  }, {
+    "tStartMs": 947120,
+    "dDurationMs": 6680,
+    "segs": [ {
+      "utf8": "and when you do that the writing is significantly \neasier it gets compounded with AI where not only  "
+    } ]
+  }, {
+    "tStartMs": 953800,
+    "dDurationMs": 6080,
+    "segs": [ {
+      "utf8": "does it get easier but now you can defer a lot \nof the lower leverage stuff to the technology so  "
+    } ]
+  }, {
+    "tStartMs": 959880,
+    "dDurationMs": 4040,
+    "segs": [ {
+      "utf8": "there's like a hierarchy and if you make the first \nmistake then you make all the mistakes under under  "
+    } ]
+  }, {
+    "tStartMs": 963920,
+    "dDurationMs": 7560,
+    "segs": [ {
+      "utf8": "it right so here's a like this is kind of cool \nstop saying Blockbuster why ignoring the obvious  "
+    } ]
+  }, {
+    "tStartMs": 971480,
+    "dDurationMs": 6080,
+    "segs": [ {
+      "utf8": "can accelerate your startup growth psychology of \nignoring the market leader right all of these why  "
+    } ]
+  }, {
+    "tStartMs": 977560,
+    "dDurationMs": 5320,
+    "segs": [ {
+      "utf8": "read Hastings Bann the word Blockbuster what it \nmeans for your startup yeah that actually better  "
+    } ]
+  }, {
+    "tStartMs": 982880,
+    "dDurationMs": 7840,
+    "segs": [ {
+      "utf8": "I like Banning like yeah that's powerful yep okay \nso I just want to pause and point out what are we  "
+    } ]
+  }, {
+    "tStartMs": 990720,
+    "dDurationMs": 8880,
+    "segs": [ {
+      "utf8": "doing right now what we are doing is we just \ndeferred the lower leverage task of come up  "
+    } ]
+  }, {
+    "tStartMs": 999600,
+    "dDurationMs": 7440,
+    "segs": [ {
+      "utf8": "with 20 different iterations now for everyone who \ndoesn't know this is the hierarchy of every single  "
+    } ]
+  }, {
+    "tStartMs": 1007040,
+    "dDurationMs": 8520,
+    "segs": [ {
+      "utf8": "magazine and Publishing House and newspaper okay \nthe editor or the editorinchief literally gives  "
+    } ]
+  }, {
+    "tStartMs": 1015560,
+    "dDurationMs": 6000,
+    "segs": [ {
+      "utf8": "the columnist or the writer this prompt in the \nform of hey come into my office and let's talk  "
+    } ]
+  }, {
+    "tStartMs": 1021560,
+    "dDurationMs": 7720,
+    "segs": [ {
+      "utf8": "about it right and then the lower writer listens \nand goes I better come back with 20 high quality  "
+    } ]
+  }, {
+    "tStartMs": 1029280,
+    "dDurationMs": 6600,
+    "segs": [ {
+      "utf8": "ideas okay so just so everyone we on the same page \nthis already happens it just happens between two  "
+    } ]
+  }, {
+    "tStartMs": 1035880,
+    "dDurationMs": 5960,
+    "segs": [ {
+      "utf8": "human beings right and all we're doing is we're \ngoing hey instead of me passing this along to my  "
+    } ]
+  }, {
+    "tStartMs": 1041840,
+    "dDurationMs": 7000,
+    "segs": [ {
+      "utf8": "junior columnist I'm going to feed this to chbt \nwhich means we just got to elevate ourselves  "
+    } ]
+  }, {
+    "tStartMs": 1049400,
+    "dDurationMs": 7080,
+    "segs": [ {
+      "utf8": "up to editor and chief where our primary value is \ntaste right so so we're looking through these and  "
+    } ]
+  }, {
+    "tStartMs": 1056480,
+    "dDurationMs": 4920,
+    "segs": [ {
+      "utf8": "you're like oh I actually really like the word ban \nand you have all the context as to why that word  "
+    } ]
+  }, {
+    "tStartMs": 1061400,
+    "dDurationMs": 5760,
+    "segs": [ {
+      "utf8": "works right oh ban implies conflict I think it'll \nmake for a better hook right like you have your  "
+    } ]
+  }, {
+    "tStartMs": 1067160,
+    "dDurationMs": 6520,
+    "segs": [ {
+      "utf8": "own taste and metrics for why this will work and \nthat's why you picked that one that's right it's  "
+    } ]
+  }, {
+    "tStartMs": 1073680,
+    "dDurationMs": 8480,
+    "segs": [ {
+      "utf8": "exactly it I will say in my mind I'm thinking like \nhow do I I create a piece of content that is going  "
+    } ]
+  }, {
+    "tStartMs": 1082160,
+    "dDurationMs": 10600,
+    "segs": [ {
+      "utf8": "to get shared a ton on X and so I I do have like a \nframework in just for the you know here's the type  "
+    } ]
+  }, {
+    "tStartMs": 1092760,
+    "dDurationMs": 9840,
+    "segs": [ {
+      "utf8": "of pieces that I think would work and bandn just \nreally like Reed Hastings a name that people know  "
+    } ]
+  }, {
+    "tStartMs": 1102600,
+    "dDurationMs": 6440,
+    "segs": [ {
+      "utf8": "you know Netflix a name that people know and and \nbanning the word Blockbuster invokes curiosity and  "
+    } ]
+  }, {
+    "tStartMs": 1109040,
+    "dDurationMs": 7640,
+    "segs": [ {
+      "utf8": "emotions like that to me has you know check check \ncheck all the ingredients of what could make for  "
+    } ]
+  }, {
+    "tStartMs": 1116680,
+    "dDurationMs": 7360,
+    "segs": [ {
+      "utf8": "a tweet that gets 10,000 likes yep okay so let's \nlet's actually we'll we'll take a small scenic  "
+    } ]
+  }, {
+    "tStartMs": 1124040,
+    "dDurationMs": 5480,
+    "segs": [ {
+      "utf8": "route detour here and let's play this out because \nthis is this is what I mean when I say when you  "
+    } ]
+  }, {
+    "tStartMs": 1129520,
+    "dDurationMs": 5200,
+    "segs": [ {
+      "utf8": "understand how these Frameworks work they work for \neverything and you can use them across any medium  "
+    } ]
+  }, {
+    "tStartMs": 1134720,
+    "dDurationMs": 6200,
+    "segs": [ {
+      "utf8": "so we're going to take this headline so so our \ntaste we elevated to editor in Chief of chpt for  "
+    } ]
+  }, {
+    "tStartMs": 1140920,
+    "dDurationMs": 6560,
+    "segs": [ {
+      "utf8": "the day so we're going to take this headline we're \ngoing to put it here and you go you know what I  "
+    } ]
+  }, {
+    "tStartMs": 1147480,
+    "dDurationMs": 4520,
+    "segs": [ {
+      "utf8": "actually as I'm thinking through this realize that \nI don't want this to be necessarily an article  "
+    } ]
+  }, {
+    "tStartMs": 1152000,
+    "dDurationMs": 4720,
+    "segs": [ {
+      "utf8": "maybe I want this to be a thread on Twitter now \nwe're going to come back to the article because  "
+    } ]
+  }, {
+    "tStartMs": 1156720,
+    "dDurationMs": 4840,
+    "segs": [ {
+      "utf8": "it's very easy to show how of these things work \nbut let's play this out as a thread hook for  "
+    } ]
+  }, {
+    "tStartMs": 1161560,
+    "dDurationMs": 7160,
+    "segs": [ {
+      "utf8": "example so Greg do you have a recent viral thread \nthat has a hook that you thought was awesome  "
+    } ]
+  }, {
+    "tStartMs": 1170120,
+    "dDurationMs": 3920,
+    "segs": [ {
+      "utf8": "yeah I I do I mean a lot of people didn't think \nit was awesome because I got a lot of negative  "
+    } ]
+  }, {
+    "tStartMs": 1174040,
+    "dDurationMs": 6520,
+    "segs": [ {
+      "utf8": "feedback but I think it got more than 50,000 \nlikes so okay great throw throw it over feed  "
+    } ]
+  }, {
+    "tStartMs": 1180560,
+    "dDurationMs": 9080,
+    "segs": [ {
+      "utf8": "it to me oh here it is okay not 50,000 likes \n44,000 but Elon Musk replied so that you know  "
+    } ]
+  }, {
+    "tStartMs": 1189640,
+    "dDurationMs": 6200,
+    "segs": [ {
+      "utf8": "that's cool that counts for something yeah do \nyou want me to yeah throw it in the chat here  "
+    } ]
+  }, {
+    "tStartMs": 1195840,
+    "dDurationMs": 9680,
+    "segs": [ {
+      "utf8": "we're going to pull this up this is basically \nthe hook yeah okay so here's the next thing  "
+    } ]
+  }, {
+    "tStartMs": 1205520,
+    "dDurationMs": 2720,
+    "segs": [ {
+      "utf8": "what we're going to do is we're going to \ntake this and we're going to treat it as  "
+    } ]
+  }, {
+    "tStartMs": 1208240,
+    "dDurationMs": 5760,
+    "segs": [ {
+      "utf8": "a template and then we're going to put this \nidea inside this template now whenever I show  "
+    } ]
+  }, {
+    "tStartMs": 1214000,
+    "dDurationMs": 8320,
+    "segs": [ {
+      "utf8": "people how to do this very often writers will \nsay back some version of a isn't that stealing  "
+    } ]
+  }, {
+    "tStartMs": 1222320,
+    "dDurationMs": 6320,
+    "segs": [ {
+      "utf8": "well for one you wrote the first one so no but \neven with other people isn't that stealing and  "
+    } ]
+  }, {
+    "tStartMs": 1229720,
+    "dDurationMs": 6480,
+    "segs": [ {
+      "utf8": "you're not stealing the content you are stealing \nthe architecture right so everybody's read the  "
+    } ]
+  }, {
+    "tStartMs": 1236200,
+    "dDurationMs": 5480,
+    "segs": [ {
+      "utf8": "what is it Austin Klein's book steal like an \nartist right this is what that means so you are  "
+    } ]
+  }, {
+    "tStartMs": 1241680,
+    "dDurationMs": 6360,
+    "segs": [ {
+      "utf8": "stealing the bones of the house but you're going \nto design it in a different way okay second is  "
+    } ]
+  }, {
+    "tStartMs": 1248040,
+    "dDurationMs": 6960,
+    "segs": [ {
+      "utf8": "often writers will say some version of well this \nisn't real writing like you're just you're just  "
+    } ]
+  }, {
+    "tStartMs": 1255000,
+    "dDurationMs": 6200,
+    "segs": [ {
+      "utf8": "taking something that works and then res swizzling \nit to which I have to slow down and explain you  "
+    } ]
+  }, {
+    "tStartMs": 1261200,
+    "dDurationMs": 4640,
+    "segs": [ {
+      "utf8": "don't realize that you are already doing this \nevery single time you sit down to write you  "
+    } ]
+  }, {
+    "tStartMs": 1265840,
+    "dDurationMs": 6040,
+    "segs": [ {
+      "utf8": "just call it intuition but what's really happening \nis every time you sit down to write your brain is  "
+    } ]
+  }, {
+    "tStartMs": 1271880,
+    "dDurationMs": 6200,
+    "segs": [ {
+      "utf8": "cycling through previous quote unquote templates \nthat you have seen work either something you've  "
+    } ]
+  }, {
+    "tStartMs": 1278080,
+    "dDurationMs": 5000,
+    "segs": [ {
+      "utf8": "read and were inspired by or something that you've \ndone already and you received a positive response  "
+    } ]
+  }, {
+    "tStartMs": 1283080,
+    "dDurationMs": 5080,
+    "segs": [ {
+      "utf8": "from you're like oh that hook worked last time my \nsubconscious is like maybe I should do that again  "
+    } ]
+  }, {
+    "tStartMs": 1288160,
+    "dDurationMs": 5680,
+    "segs": [ {
+      "utf8": "so this is already happening all we're doing is \nwe're just making this conscious okay so how do we  "
+    } ]
+  }, {
+    "tStartMs": 1293840,
+    "dDurationMs": 6160,
+    "segs": [ {
+      "utf8": "do this well you take the hook and some hooks if \nyou pull like it it might not be a perfect fit but  "
+    } ]
+  }, {
+    "tStartMs": 1300000,
+    "dDurationMs": 4720,
+    "segs": [ {
+      "utf8": "we'll do our best with with this one so here just \nhad a fascinating lunch with a 22-year-old stand  "
+    } ]
+  }, {
+    "tStartMs": 1304720,
+    "dDurationMs": 4040,
+    "segs": [ {
+      "utf8": "for grad smart kid perfect resume something felled \noff though he kept pausing mid-sentence searching  "
+    } ]
+  }, {
+    "tStartMs": 1308760,
+    "dDurationMs": 4520,
+    "segs": [ {
+      "utf8": "for words no complex work basic ones like his \nbrain was buffering finally asked if he was  "
+    } ]
+  }, {
+    "tStartMs": 1313280,
+    "dDurationMs": 6800,
+    "segs": [ {
+      "utf8": "okay his response floored me this is such a good \nhook man this is such a good hook okay so here we  "
+    } ]
+  }, {
+    "tStartMs": 1320080,
+    "dDurationMs": 3920,
+    "segs": [ {
+      "utf8": "might we might have to use a little creative \nstorytelling and I'm not going to sit here  "
+    } ]
+  }, {
+    "tStartMs": 1324000,
+    "dDurationMs": 7120,
+    "segs": [ {
+      "utf8": "and like look up the facts but we'll we'll get \napproximately correctly or correct so we'll go in  "
+    } ]
+  }, {
+    "tStartMs": 1331120,
+    "dDurationMs": 8600,
+    "segs": [ {
+      "utf8": "what year do we think this was 2002 1999 oh Reed \nHastings that was yeah let's say early yeah 2002  "
+    } ]
+  }, {
+    "tStartMs": 1339720,
+    "dDurationMs": 13520,
+    "segs": [ {
+      "utf8": "let's say okay in 2002 Reed Hastings had a meeting \nwith his Executives all smart people perfect"
+    } ]
+  }, {
+    "tStartMs": 1353240,
+    "dDurationMs": 7520,
+    "segs": [ {
+      "utf8": "resumés but something in the room that day felt"
+    } ]
+  }, {
+    "tStartMs": 1360760,
+    "dDurationMs": 9680,
+    "segs": [ {
+      "utf8": "off in the middle of the meeting \nread and just to show like how  "
+    } ]
+  }, {
+    "tStartMs": 1370440,
+    "dDurationMs": 4440,
+    "segs": [ {
+      "utf8": "close we're I'll try and stick to \nthis as much as possible searching  "
+    } ]
+  }, {
+    "tStartMs": 1374880,
+    "dDurationMs": 9840,
+    "segs": [ {
+      "utf8": "for Words read Hastings looked out the \nwindow and said we're Banning the word"
+    } ]
+  }, {
+    "tStartMs": 1384720,
+    "dDurationMs": 12880,
+    "segs": [ {
+      "utf8": "Blockbuster here's why right so not a perfect fit \nbut pretty close okay and to be clear we're we're  "
+    } ]
+  }, {
+    "tStartMs": 1397600,
+    "dDurationMs": 7000,
+    "segs": [ {
+      "utf8": "not saying makeup stories we're saying like you \nhave to fact check your stuff but you can copy  "
+    } ]
+  }, {
+    "tStartMs": 1404600,
+    "dDurationMs": 6280,
+    "segs": [ {
+      "utf8": "or be inspired by formats correct of course yeah \nyou don't steal the content you steal the format  "
+    } ]
+  }, {
+    "tStartMs": 1410880,
+    "dDurationMs": 10640,
+    "segs": [ {
+      "utf8": "yeah right and so here now here's the really \ncool part what is an AI model an AI model is  "
+    } ]
+  }, {
+    "tStartMs": 1421520,
+    "dDurationMs": 10720,
+    "segs": [ {
+      "utf8": "really just lots of examples of a scenario okay \nand so I love when like it's actually comical to  "
+    } ]
+  }, {
+    "tStartMs": 1432240,
+    "dDurationMs": 7600,
+    "segs": [ {
+      "utf8": "me when people say things like um I tried using \nAI but it just takes too long long to get an end  "
+    } ]
+  }, {
+    "tStartMs": 1439840,
+    "dDurationMs": 3840,
+    "segs": [ {
+      "utf8": "result you know and I'm sitting here and I'm \nlike I've been writing on the internet for 10  "
+    } ]
+  }, {
+    "tStartMs": 1443680,
+    "dDurationMs": 6360,
+    "segs": [ {
+      "utf8": "years I've written 8,000 articles on the internet \nright and you're frustrated that it's taking you  "
+    } ]
+  }, {
+    "tStartMs": 1450040,
+    "dDurationMs": 6840,
+    "segs": [ {
+      "utf8": "like three reps to get a end result right so what \nwhat you don't realize is that when you do this  "
+    } ]
+  }, {
+    "tStartMs": 1456880,
+    "dDurationMs": 8000,
+    "segs": [ {
+      "utf8": "one time so we took the original hook and then we \nmanually created a new version set a different way  "
+    } ]
+  }, {
+    "tStartMs": 1464880,
+    "dDurationMs": 7320,
+    "segs": [ {
+      "utf8": "you just created a mini model and so what you can \ndo and why it's so important to understand how to  "
+    } ]
+  }, {
+    "tStartMs": 1472200,
+    "dDurationMs": 5720,
+    "segs": [ {
+      "utf8": "do these things manually is because then we can \ntake this hook and this now this is what I would  "
+    } ]
+  }, {
+    "tStartMs": 1477920,
+    "dDurationMs": 8080,
+    "segs": [ {
+      "utf8": "do this is how you can keep working with chubbt so \nyou go it gives us this list your editor and chief  "
+    } ]
+  }, {
+    "tStartMs": 1486000,
+    "dDurationMs": 10280,
+    "segs": [ {
+      "utf8": "you go okay great this is the headline that I like \nthe most but I want to write this in the form of a  "
+    } ]
+  }, {
+    "tStartMs": 1496280,
+    "dDurationMs": 10240,
+    "segs": [ {
+      "utf8": "Twitter SLX thread let's start by writing a viral \nhook here's a hook I wrote recently that went  "
+    } ]
+  }, {
+    "tStartMs": 1506520,
+    "dDurationMs": 10560,
+    "segs": [ {
+      "utf8": "Mega viral we take this this is the first part of \ntraining our little model then we go now here's a  "
+    } ]
+  }, {
+    "tStartMs": 1517080,
+    "dDurationMs": 9560,
+    "segs": [ {
+      "utf8": "different version of that Viral hook based on \nthe headline that I picked that I think could  "
+    } ]
+  }, {
+    "tStartMs": 1526640,
+    "dDurationMs": 10160,
+    "segs": [ {
+      "utf8": "work and then we we take this we copy paste this \nand then we go now I'd like for you to come up  "
+    } ]
+  }, {
+    "tStartMs": 1536800,
+    "dDurationMs": 12320,
+    "segs": [ {
+      "utf8": "with five other variations of this same viral hook \nto increase the likelihood of people reading this  "
+    } ]
+  }, {
+    "tStartMs": 1549120,
+    "dDurationMs": 6920,
+    "segs": [ {
+      "utf8": "piece about read Hastings okay so what are what \nare we doing we're literally just saying here's  "
+    } ]
+  }, {
+    "tStartMs": 1556040,
+    "dDurationMs": 6560,
+    "segs": [ {
+      "utf8": "what I want to do here's example of the thing \nI sort of want to mirror and then you close the  "
+    } ]
+  }, {
+    "tStartMs": 1562600,
+    "dDurationMs": 7480,
+    "segs": [ {
+      "utf8": "loop by saying and here's my first try and when \nyou when you give it your first try it's you just  "
+    } ]
+  }, {
+    "tStartMs": 1570080,
+    "dDurationMs": 7160,
+    "segs": [ {
+      "utf8": "created this mini model that it now has something \nto learn off of right so here here's variation two  "
+    } ]
+  }, {
+    "tStartMs": 1577240,
+    "dDurationMs": 5080,
+    "segs": [ {
+      "utf8": "picture this a 2002 Netflix leadership meeting \nNBA Hot Shots top Engineers all eyes on read  "
+    } ]
+  }, {
+    "tStartMs": 1582320,
+    "dDurationMs": 6000,
+    "segs": [ {
+      "utf8": "Hastings that's a pretty great intro [ __ ] \nyeah you know but something that day felt off  "
+    } ]
+  }, {
+    "tStartMs": 1588320,
+    "dDurationMs": 3960,
+    "segs": [ {
+      "utf8": "like they were circling around the wrong problem \nthen Hastings spoke no one in this room will ever  "
+    } ]
+  }, {
+    "tStartMs": 1592280,
+    "dDurationMs": 7560,
+    "segs": [ {
+      "utf8": "say Blockbuster again here's why he demanded it \nthat's actually an even better hook right 100% the  "
+    } ]
+  }, {
+    "tStartMs": 1599840,
+    "dDurationMs": 6960,
+    "segs": [ {
+      "utf8": "reason the reason that this is so cool is because \nyou have to remove your own ego and be like who  "
+    } ]
+  }, {
+    "tStartMs": 1606800,
+    "dDurationMs": 6560,
+    "segs": [ {
+      "utf8": "cares that AI actually produced a better hook the \nreason it was able to was because I prompted it  "
+    } ]
+  }, {
+    "tStartMs": 1613360,
+    "dDurationMs": 6880,
+    "segs": [ {
+      "utf8": "the right way and that that fundamental piece is \nwhat is changing everything and either you get on  "
+    } ]
+  }, {
+    "tStartMs": 1620240,
+    "dDurationMs": 6280,
+    "segs": [ {
+      "utf8": "board with that and you become an orchestrator an \neditor and chief or you don't have a job anymore  "
+    } ]
+  }, {
+    "tStartMs": 1626520,
+    "dDurationMs": 3480,
+    "segs": [ {
+      "utf8": "right and it's self-inflicted because you could \nhave changed what we're doing right now is not  "
+    } ]
+  }, {
+    "tStartMs": 1630000,
+    "dDurationMs": 9400,
+    "segs": [ {
+      "utf8": "hard right yeah so pretty cool I want to I have a \ntactical question uh is there a reason like should  "
+    } ]
+  }, {
+    "tStartMs": 1639400,
+    "dDurationMs": 8880,
+    "segs": [ {
+      "utf8": "people do custom gpts or what do you think I \nthink that's sort of like saying um I don't  "
+    } ]
+  }, {
+    "tStartMs": 1648280,
+    "dDurationMs": 6520,
+    "segs": [ {
+      "utf8": "know how to drive yet should I go book a time \nat the Porsche track and learn how to drift  "
+    } ]
+  }, {
+    "tStartMs": 1654800,
+    "dDurationMs": 7920,
+    "segs": [ {
+      "utf8": "a highspeed 911 yeah like that's that's and \nand people have a miraculous ability to want  "
+    } ]
+  }, {
+    "tStartMs": 1662720,
+    "dDurationMs": 9240,
+    "segs": [ {
+      "utf8": "to solve problems they don't have yet you know \nlike the the Chach and Claude are so powerful  "
+    } ]
+  }, {
+    "tStartMs": 1671960,
+    "dDurationMs": 9720,
+    "segs": [ {
+      "utf8": "that you do not need much more than this for a \nlong time do you use custom GPS I've played with  "
+    } ]
+  }, {
+    "tStartMs": 1681680,
+    "dDurationMs": 5200,
+    "segs": [ {
+      "utf8": "them a tad but it's like I don't even it's it's \nnot even worth the effort for me yet yeah yeah  "
+    } ]
+  }, {
+    "tStartMs": 1686880,
+    "dDurationMs": 10680,
+    "segs": [ {
+      "utf8": "it doesn't solve a problem for me okay fair you \nknow okay so we that was our little detour about  "
+    } ]
+  }, {
+    "tStartMs": 1697560,
+    "dDurationMs": 5440,
+    "segs": [ {
+      "utf8": "um Twitter Twitter hooks okay but let's go back \nI'm just going to move these down here just so we  "
+    } ]
+  }, {
+    "tStartMs": 1703000,
+    "dDurationMs": 5120,
+    "segs": [ {
+      "utf8": "have them but let's go back to if we were to turn \nthis into an 800w article because I want to show  "
+    } ]
+  }, {
+    "tStartMs": 1708640,
+    "dDurationMs": 5560,
+    "segs": [ {
+      "utf8": "the the different levels and decisions that \ngo into you know you making the high leverage  "
+    } ]
+  }, {
+    "tStartMs": 1714200,
+    "dDurationMs": 7240,
+    "segs": [ {
+      "utf8": "decisions and then AI doing the lower leverage \nstuff so when you have a headline as a default  "
+    } ]
+  }, {
+    "tStartMs": 1721440,
+    "dDurationMs": 7640,
+    "segs": [ {
+      "utf8": "the the easiest container for creating content \nis to think in terms of chunks of three so the  "
+    } ]
+  }, {
+    "tStartMs": 1729080,
+    "dDurationMs": 5840,
+    "segs": [ {
+      "utf8": "average 800w article give or take and when \nwhen I say article like you can post it on  "
+    } ]
+  }, {
+    "tStartMs": 1734920,
+    "dDurationMs": 5320,
+    "segs": [ {
+      "utf8": "Twitter as long form you can post it on medium \nas an article posted on quora as an answer I  "
+    } ]
+  }, {
+    "tStartMs": 1740240,
+    "dDurationMs": 5200,
+    "segs": [ {
+      "utf8": "just mean generally that that that amount of \nwords right this is what it typically looks"
+    } ]
+  }, {
+    "tStartMs": 1745440,
+    "dDurationMs": 15480,
+    "segs": [ {
+      "utf8": "like you have your intro and then you have three \nmain sections now can you have five sections yes  "
+    } ]
+  }, {
+    "tStartMs": 1760920,
+    "dDurationMs": 6600,
+    "segs": [ {
+      "utf8": "could you have 50 SE sections sure if you wanted \nto right but generally speaking 800 words three  "
+    } ]
+  }, {
+    "tStartMs": 1767520,
+    "dDurationMs": 6880,
+    "segs": [ {
+      "utf8": "sections the first decision that needs to get \nmade are what are let's just you stick with  "
+    } ]
+  }, {
+    "tStartMs": 1774400,
+    "dDurationMs": 5320,
+    "segs": [ {
+      "utf8": "three here what are the three things that we are \ngoing to give the reader and this is something  "
+    } ]
+  }, {
+    "tStartMs": 1779720,
+    "dDurationMs": 9240,
+    "segs": [ {
+      "utf8": "that took me a really long time to understand is \nthat 90% of the value of a piece is the headline  "
+    } ]
+  }, {
+    "tStartMs": 1788960,
+    "dDurationMs": 7960,
+    "segs": [ {
+      "utf8": "and the quality of the three main points okay so \nI'll give you a really simple example let's let's  "
+    } ]
+  }, {
+    "tStartMs": 1796920,
+    "dDurationMs": 7240,
+    "segs": [ {
+      "utf8": "say the title was how to make your first million \ndoll or actually here here's a better one here how  "
+    } ]
+  }, {
+    "tStartMs": 1804160,
+    "dDurationMs": 11320,
+    "segs": [ {
+      "utf8": "to save a million in taxes in 2025 Let's Pretend \nThis was the headline of our piece and V1 is our  "
+    } ]
+  }, {
+    "tStartMs": 1815480,
+    "dDurationMs": 13560,
+    "segs": [ {
+      "utf8": "subheads were you got to learn about money you \nshould hire a CPA and don't be dumb okay let's  "
+    } ]
+  }, {
+    "tStartMs": 1829040,
+    "dDurationMs": 7440,
+    "segs": [ {
+      "utf8": "pretend that's V1 what so many writers fail to \nunderstand is that 90% of the value of the thing  "
+    } ]
+  }, {
+    "tStartMs": 1836480,
+    "dDurationMs": 9560,
+    "segs": [ {
+      "utf8": "gets evaluated just based on this so if you saw \nthis headline and then you clicked on this piece  "
+    } ]
+  }, {
+    "tStartMs": 1846040,
+    "dDurationMs": 4600,
+    "segs": [ {
+      "utf8": "and you skimmed these three subheads you would \nimmediately say to yourself This is worthless  "
+    } ]
+  }, {
+    "tStartMs": 1850640,
+    "dDurationMs": 7360,
+    "segs": [ {
+      "utf8": "and you would leave and all of that would happen \nin less than 2 seconds right the value equation  "
+    } ]
+  }, {
+    "tStartMs": 1858000,
+    "dDurationMs": 8280,
+    "segs": [ {
+      "utf8": "changes dramatically when these main points are \neven more specific even more tangible okay so  "
+    } ]
+  }, {
+    "tStartMs": 1866280,
+    "dDurationMs": 4960,
+    "segs": [ {
+      "utf8": "just and and I'm not going to sit here and stress \ntest this for for 10 uh different iterations but  "
+    } ]
+  }, {
+    "tStartMs": 1871240,
+    "dDurationMs": 7680,
+    "segs": [ {
+      "utf8": "just to show the example it would be something \nlike um if you aren't taking advantage of the  "
+    } ]
+  }, {
+    "tStartMs": 1878920,
+    "dDurationMs": 10160,
+    "segs": [ {
+      "utf8": "I'm sure there's some sort of loophole right Um \nthis can easily save you an extra 250k you know  "
+    } ]
+  }, {
+    "tStartMs": 1889080,
+    "dDurationMs": 9520,
+    "segs": [ {
+      "utf8": "you should be taking all money into a personal es \nCorp not an LLC and then subhead number three is  "
+    } ]
+  }, {
+    "tStartMs": 1898600,
+    "dDurationMs": 9320,
+    "segs": [ {
+      "utf8": "uh there's a program where you can buy Section 8 \nHousing and get paid dividends that you can write  "
+    } ]
+  }, {
+    "tStartMs": 1907920,
+    "dDurationMs": 10240,
+    "segs": [ {
+      "utf8": "off against your income okay so those three main \npoints for example are significantly more specific  "
+    } ]
+  }, {
+    "tStartMs": 1918160,
+    "dDurationMs": 5680,
+    "segs": [ {
+      "utf8": "and they are significantly more tangible and when \nyou see each main point inherently if you read  "
+    } ]
+  }, {
+    "tStartMs": 1923840,
+    "dDurationMs": 5880,
+    "segs": [ {
+      "utf8": "this you're like oh I've never heard of that \nloople which sells you on reading the actual  "
+    } ]
+  }, {
+    "tStartMs": 1929720,
+    "dDurationMs": 7040,
+    "segs": [ {
+      "utf8": "content and so if the main point if the title \ndoesn't promise you something that is worthwhile  "
+    } ]
+  }, {
+    "tStartMs": 1936760,
+    "dDurationMs": 4880,
+    "segs": [ {
+      "utf8": "and if the main points aren't tangible enough \nto to show that you're going to deliver on that  "
+    } ]
+  }, {
+    "tStartMs": 1941640,
+    "dDurationMs": 5080,
+    "segs": [ {
+      "utf8": "promise nobody reads the content and so instead \nyou have all these people that are sitting there  "
+    } ]
+  }, {
+    "tStartMs": 1946720,
+    "dDurationMs": 3320,
+    "segs": [ {
+      "utf8": "and they're like oh well I got to start writing \nand they start with the first word and they're  "
+    } ]
+  }, {
+    "tStartMs": 1950040,
+    "dDurationMs": 9120,
+    "segs": [ {
+      "utf8": "like this is how you save a million dollar no I \ndon't I don't like that I'm Gonna Save million  "
+    } ]
+  }, {
+    "tStartMs": 1959160,
+    "dDurationMs": 6520,
+    "segs": [ {
+      "utf8": "no I don't like that I'm here save a lot of money \nno I don't like that I don't like that adjective  "
+    } ]
+  }, {
+    "tStartMs": 1965680,
+    "dDurationMs": 5960,
+    "segs": [ {
+      "utf8": "wait I don't like any of this wait I shouldn't be \na writer like that's what most people do and they  "
+    } ]
+  }, {
+    "tStartMs": 1971640,
+    "dDurationMs": 5840,
+    "segs": [ {
+      "utf8": "don't even realize that they've they've dove into \nthe writing before they've made the most important  "
+    } ]
+  }, {
+    "tStartMs": 1977480,
+    "dDurationMs": 6680,
+    "segs": [ {
+      "utf8": "decision which is what's the promise and how Are \nyou delivering on the promise and the main points  "
+    } ]
+  }, {
+    "tStartMs": 1984160,
+    "dDurationMs": 7040,
+    "segs": [ {
+      "utf8": "does that make sense yeah feel like I've been \nit's it's interesting because I I'm just I'm doing  "
+    } ]
+  }, {
+    "tStartMs": 1991200,
+    "dDurationMs": 7680,
+    "segs": [ {
+      "utf8": "some self-reflection on myself you know I'm I'm a \ncowboy when it comes to writing um but I have been  "
+    } ]
+  }, {
+    "tStartMs": 1998880,
+    "dDurationMs": 11760,
+    "segs": [ {
+      "utf8": "doing a lot of this without knowing I'm doing it \nyep so sometimes sometimes it's into intuitive um  "
+    } ]
+  }, {
+    "tStartMs": 2010640,
+    "dDurationMs": 7560,
+    "segs": [ {
+      "utf8": "often times I will see that there's always people \nthat do a lot of these things accidentally or  "
+    } ]
+  }, {
+    "tStartMs": 2018200,
+    "dDurationMs": 5320,
+    "segs": [ {
+      "utf8": "they or they do them every once in a while and my \ngoal is to make them conscious so that as you're  "
+    } ]
+  }, {
+    "tStartMs": 2023520,
+    "dDurationMs": 3800,
+    "segs": [ {
+      "utf8": "writing you're sitting there and you're like this \nis the next thing this is the next thing exactly  "
+    } ]
+  }, {
+    "tStartMs": 2027320,
+    "dDurationMs": 6840,
+    "segs": [ {
+      "utf8": "right yeah well I think we were talking right \nbefore we started this you know I'm a new father  "
+    } ]
+  }, {
+    "tStartMs": 2034160,
+    "dDurationMs": 7760,
+    "segs": [ {
+      "utf8": "time means something different when you're a new \nparent like you basically want to you want to  "
+    } ]
+  }, {
+    "tStartMs": 2041920,
+    "dDurationMs": 6000,
+    "segs": [ {
+      "utf8": "optimize your time when it comes to like creating \nand producing in in a work setting so that you  "
+    } ]
+  }, {
+    "tStartMs": 2047920,
+    "dDurationMs": 8080,
+    "segs": [ {
+      "utf8": "could be completely present with your child and \nand support your family so I think that having  "
+    } ]
+  }, {
+    "tStartMs": 2056000,
+    "dDurationMs": 8440,
+    "segs": [ {
+      "utf8": "this is not only does the content end up becoming \nprobably a lot more interesting to read it also  "
+    } ]
+  }, {
+    "tStartMs": 2064440,
+    "dDurationMs": 6160,
+    "segs": [ {
+      "utf8": "shortens the it's a shortcut to to getting what \nyou end up you know I don't this this is going to  "
+    } ]
+  }, {
+    "tStartMs": 2070600,
+    "dDurationMs": 8800,
+    "segs": [ {
+      "utf8": "save me literally days weeks per year yeah it's no \ndifferent than when someone's like oh you know it  "
+    } ]
+  }, {
+    "tStartMs": 2079400,
+    "dDurationMs": 4480,
+    "segs": [ {
+      "utf8": "takes me five years to write a book well it's not \nbecause the book took you five years it's because  "
+    } ]
+  }, {
+    "tStartMs": 2083880,
+    "dDurationMs": 8080,
+    "segs": [ {
+      "utf8": "you had to make five years of mistakes in order to \nwrite it totally okay so you want to you want to  "
+    } ]
+  }, {
+    "tStartMs": 2091960,
+    "dDurationMs": 9400,
+    "segs": [ {
+      "utf8": "keep it pushing yeah we got like 15 20 minutes \nmax cool we got it we're going to compress it  "
+    } ]
+  }, {
+    "tStartMs": 2101360,
+    "dDurationMs": 5800,
+    "segs": [ {
+      "utf8": "in and then we can talk takeways so next I'm going \nto introduce my one of my favorite Frameworks that  "
+    } ]
+  }, {
+    "tStartMs": 2107160,
+    "dDurationMs": 8800,
+    "segs": [ {
+      "utf8": "I've ever come up with I call it the 10 magical \nways the 10 magical ways are you could reverse  "
+    } ]
+  }, {
+    "tStartMs": 2115960,
+    "dDurationMs": 7200,
+    "segs": [ {
+      "utf8": "engineer 99% of all non-fiction writing back into \nthese 10 ways and the reason that this little list  "
+    } ]
+  }, {
+    "tStartMs": 2123160,
+    "dDurationMs": 7120,
+    "segs": [ {
+      "utf8": "is so powerful is because it is the easiest way \nto remove any s of writers block that happens at  "
+    } ]
+  }, {
+    "tStartMs": 2130280,
+    "dDurationMs": 8440,
+    "segs": [ {
+      "utf8": "every single stage so the first way to use this is \nto look at the headline and this is a great hook  "
+    } ]
+  }, {
+    "tStartMs": 2138720,
+    "dDurationMs": 4720,
+    "segs": [ {
+      "utf8": "why read Hastings banned the word Blockbuster \nbut this is a pretty vague and what I like to  "
+    } ]
+  }, {
+    "tStartMs": 2143440,
+    "dDurationMs": 6000,
+    "segs": [ {
+      "utf8": "call intangible promise so and what it means for \nyour startup right it's like well what what it  "
+    } ]
+  }, {
+    "tStartMs": 2149440,
+    "dDurationMs": 4920,
+    "segs": [ {
+      "utf8": "means for my startup okay kind of interesting \nbut how can we make this more interesting or  "
+    } ]
+  }, {
+    "tStartMs": 2154360,
+    "dDurationMs": 7320,
+    "segs": [ {
+      "utf8": "more tangible and the question to ask is actually \nwhich of these 10 things am I going to give the  "
+    } ]
+  }, {
+    "tStartMs": 2161680,
+    "dDurationMs": 6960,
+    "segs": [ {
+      "utf8": "reader am I going to give them tips am I going \nto give them stats am I going to give them steps  "
+    } ]
+  }, {
+    "tStartMs": 2168640,
+    "dDurationMs": 6800,
+    "segs": [ {
+      "utf8": "am I going to give them lessons right so for \nexample you know and three lessons that can  "
+    } ]
+  }, {
+    "tStartMs": 2175440,
+    "dDurationMs": 12120,
+    "segs": [ {
+      "utf8": "be learned from the what's Netflix's market cap \nnow something stupid 361 billion okay 361 billion  "
+    } ]
+  }, {
+    "tStartMs": 2188440,
+    "dDurationMs": 8800,
+    "segs": [ {
+      "utf8": "we'll say streaming service okay why why did \nmy brain immediately go here because again  "
+    } ]
+  }, {
+    "tStartMs": 2197240,
+    "dDurationMs": 5760,
+    "segs": [ {
+      "utf8": "another framework big numbers in headlines big \nnumbers in hooks always perform well right yeah  "
+    } ]
+  }, {
+    "tStartMs": 2203000,
+    "dDurationMs": 6920,
+    "segs": [ {
+      "utf8": "so also like alliteration alliteration also \nworks like when you when you like probably  "
+    } ]
+  }, {
+    "tStartMs": 2209920,
+    "dDurationMs": 7600,
+    "segs": [ {
+      "utf8": "if I was writing this I would say why read \nHastings ban the word Blockbuster and three"
+    } ]
+  }, {
+    "tStartMs": 2218520,
+    "dDurationMs": 10040,
+    "segs": [ {
+      "utf8": "well no scratch that you can you can hear how too \nmuch alliteration then sounds like right exactly  "
+    } ]
+  }, {
+    "tStartMs": 2228560,
+    "dDurationMs": 5360,
+    "segs": [ {
+      "utf8": "I could hear your brain hearing it and deciding it \nwas a bad idea like I was gonna say like legendary  "
+    } ]
+  }, {
+    "tStartMs": 2233920,
+    "dDurationMs": 8080,
+    "segs": [ {
+      "utf8": "lessons or something like that you know it's like \nno let's just also concise and and clear works  "
+    } ]
+  }, {
+    "tStartMs": 2242000,
+    "dDurationMs": 5520,
+    "segs": [ {
+      "utf8": "really well for the internet yep exactly okay so \nhere's where things get really interesting and  "
+    } ]
+  }, {
+    "tStartMs": 2247520,
+    "dDurationMs": 6520,
+    "segs": [ {
+      "utf8": "and I think that this step that we are about to \ntalk about is the primary skill it is the primary  "
+    } ]
+  }, {
+    "tStartMs": 2254040,
+    "dDurationMs": 4800,
+    "segs": [ {
+      "utf8": "value okay so we use the 10 magical ways and we \nclarify what are we actually going to give the  "
+    } ]
+  }, {
+    "tStartMs": 2258840,
+    "dDurationMs": 6560,
+    "segs": [ {
+      "utf8": "reader we're going to give them three lessons it's \nvery simple okay if you don't have Clarity over  "
+    } ]
+  }, {
+    "tStartMs": 2265400,
+    "dDurationMs": 4640,
+    "segs": [ {
+      "utf8": "which thing you're giving the reader guess what \nthe reader's not going to know and if the reader  "
+    } ]
+  }, {
+    "tStartMs": 2270040,
+    "dDurationMs": 5880,
+    "segs": [ {
+      "utf8": "doesn't know they're not going to give you their \nattention Okay so you give them three lessons  "
+    } ]
+  }, {
+    "tStartMs": 2275920,
+    "dDurationMs": 8400,
+    "segs": [ {
+      "utf8": "now here's where it's so simple complicated if \nwe were to break this into sections what do we  "
+    } ]
+  }, {
+    "tStartMs": 2284320,
+    "dDurationMs": 6000,
+    "segs": [ {
+      "utf8": "think the three subheads are going to be you \nwant to take it you want to take a guess Greg  "
+    } ]
+  }, {
+    "tStartMs": 2290320,
+    "dDurationMs": 6240,
+    "segs": [ {
+      "utf8": "um what are you thinking well just generally \nlike the three subheads are going to share"
+    } ]
+  }, {
+    "tStartMs": 2296560,
+    "dDurationMs": 9440,
+    "segs": [ {
+      "utf8": "three lessons three lessons right it's so simple \nit's complicated right so this is lesson number  "
+    } ]
+  }, {
+    "tStartMs": 2306000,
+    "dDurationMs": 7360,
+    "segs": [ {
+      "utf8": "one this is lesson number two and this is lesson \nnumber three here's a very simple rule of thumb  "
+    } ]
+  }, {
+    "tStartMs": 2313360,
+    "dDurationMs": 5360,
+    "segs": [ {
+      "utf8": "if your subheads do not deliver clearly on \nthe promise in the headline the reader will  "
+    } ]
+  }, {
+    "tStartMs": 2318720,
+    "dDurationMs": 6080,
+    "segs": [ {
+      "utf8": "not take the time to figure it out okay so \nwhatever magical way is in the headline is  "
+    } ]
+  }, {
+    "tStartMs": 2324800,
+    "dDurationMs": 8440,
+    "segs": [ {
+      "utf8": "going to be the thing in the subheads okay now \nthe highest leverage decision about the entire  "
+    } ]
+  }, {
+    "tStartMs": 2333240,
+    "dDurationMs": 9360,
+    "segs": [ {
+      "utf8": "piece is what the three lessons are and this \nis what so many people misunderstand okay 90%  "
+    } ]
+  }, {
+    "tStartMs": 2342600,
+    "dDurationMs": 6520,
+    "segs": [ {
+      "utf8": "of the value is not in the writing it is in the \nfact that you said I'm going to give you three  "
+    } ]
+  }, {
+    "tStartMs": 2349120,
+    "dDurationMs": 12160,
+    "segs": [ {
+      "utf8": "lessons and if those three lessons are you got \nto work hard you got to out compete and you got  "
+    } ]
+  }, {
+    "tStartMs": 2361280,
+    "dDurationMs": 6440,
+    "segs": [ {
+      "utf8": "to care if those are the three lessons you wrote \na shitty piece doesn't matter how many beautiful  "
+    } ]
+  }, {
+    "tStartMs": 2367720,
+    "dDurationMs": 7240,
+    "segs": [ {
+      "utf8": "there are does matter clever your adjectives Else \nMatters right so editor and chief we got to come  "
+    } ]
+  }, {
+    "tStartMs": 2374960,
+    "dDurationMs": 7120,
+    "segs": [ {
+      "utf8": "up with the three lessons do we want to do we \nwant to come up with them or do we want Chach to  "
+    } ]
+  }, {
+    "tStartMs": 2382080,
+    "dDurationMs": 9720,
+    "segs": [ {
+      "utf8": "come up with them we can try and if we fail we can \nalways go to our AI overlords you know I think I  "
+    } ]
+  }, {
+    "tStartMs": 2391800,
+    "dDurationMs": 6920,
+    "segs": [ {
+      "utf8": "think that that is the best lens and point of view \nfor all of this I I think that you should always  "
+    } ]
+  }, {
+    "tStartMs": 2398720,
+    "dDurationMs": 7080,
+    "segs": [ {
+      "utf8": "try yourself first and then weigh it against what \nchat PT comes up with and then improve the quality  "
+    } ]
+  }, {
+    "tStartMs": 2405800,
+    "dDurationMs": 8760,
+    "segs": [ {
+      "utf8": "together that is why I don't defer the writing to \nAI I write with AI right so give me some lessons"
+    } ]
+  }, {
+    "tStartMs": 2414560,
+    "dDurationMs": 5160,
+    "segs": [ {
+      "utf8": "Greg and I'll help you improve \nthem if you just like say them  "
+    } ]
+  }, {
+    "tStartMs": 2419720,
+    "dDurationMs": 7600,
+    "segs": [ {
+      "utf8": "say things out loud as they come to \nyou so businesses built around guilt"
+    } ]
+  }, {
+    "tStartMs": 2428440,
+    "dDurationMs": 8680,
+    "segs": [ {
+      "utf8": "are yeah empower the customer not \nalienate them okay well we can talk  "
+    } ]
+  }, {
+    "tStartMs": 2437120,
+    "dDurationMs": 8840,
+    "segs": [ {
+      "utf8": "about convenience like you know big reason \nI think Netflix won was convenience so yeah  "
+    } ]
+  }, {
+    "tStartMs": 2445960,
+    "dDurationMs": 8080,
+    "segs": [ {
+      "utf8": "and every every founder should ban at \nleast one word in order to succeed which  "
+    } ]
+  }, {
+    "tStartMs": 2454040,
+    "dDurationMs": 4680,
+    "segs": [ {
+      "utf8": "is like if I was writing this piece I'd \nprobably lead with that because it's so"
+    } ]
+  }, {
+    "tStartMs": 2458720,
+    "dDurationMs": 9200,
+    "segs": [ {
+      "utf8": "spicy and the way I look at writing I'm curious \nwhat you think about this but I literally view  "
+    } ]
+  }, {
+    "tStartMs": 2467920,
+    "dDurationMs": 7960,
+    "segs": [ {
+      "utf8": "it as a funnel and I'm like okay at every single \nword I'm losing more and more people 100% 100%  "
+    } ]
+  }, {
+    "tStartMs": 2475880,
+    "dDurationMs": 3880,
+    "segs": [ {
+      "utf8": "so said differently my little framework \nfor that is whenever I'm coming up with  "
+    } ]
+  }, {
+    "tStartMs": 2479760,
+    "dDurationMs": 4040,
+    "segs": [ {
+      "utf8": "the main points of a piece doesn't matter if \nit's an email article Twitter thread doesn't  "
+    } ]
+  }, {
+    "tStartMs": 2483800,
+    "dDurationMs": 5840,
+    "segs": [ {
+      "utf8": "matter once I've come up with all the main \npoints I then stack rank them in the ones  "
+    } ]
+  }, {
+    "tStartMs": 2489640,
+    "dDurationMs": 6160,
+    "segs": [ {
+      "utf8": "that are most interesting or most compelling \nbecause inherently once you come up with them  "
+    } ]
+  }, {
+    "tStartMs": 2495800,
+    "dDurationMs": 5480,
+    "segs": [ {
+      "utf8": "usually there's one where you're like oh like \nwhat a great main point well you should make  "
+    } ]
+  }, {
+    "tStartMs": 2501280,
+    "dDurationMs": 8240,
+    "segs": [ {
+      "utf8": "that the first one right because that hooks \nthe person totally okay so cool so now what  "
+    } ]
+  }, {
+    "tStartMs": 2509520,
+    "dDurationMs": 7840,
+    "segs": [ {
+      "utf8": "do we do we take this we take our improved \nheadline and we go okay great so going back  "
+    } ]
+  }, {
+    "tStartMs": 2517360,
+    "dDurationMs": 10480,
+    "segs": [ {
+      "utf8": "back to writing this as an 800w article here's the \nheadline I came up with feed that into there we  "
+    } ]
+  }, {
+    "tStartMs": 2527840,
+    "dDurationMs": 11520,
+    "segs": [ {
+      "utf8": "go and here are the three lessons I came up with \nwe take these copy paste here then we say but I  "
+    } ]
+  }, {
+    "tStartMs": 2539360,
+    "dDurationMs": 8440,
+    "segs": [ {
+      "utf8": "want to stress test the quality of these lessons \ncan you please come up with five more batches of  "
+    } ]
+  }, {
+    "tStartMs": 2547800,
+    "dDurationMs": 12360,
+    "segs": [ {
+      "utf8": "three lessons related to this article headline so \nI can see if there are any other opportunities to"
+    } ]
+  }, {
+    "tStartMs": 2560160,
+    "dDurationMs": 8960,
+    "segs": [ {
+      "utf8": "improve chbt is thinking again I want \nto emphasize this process that we're  "
+    } ]
+  }, {
+    "tStartMs": 2569120,
+    "dDurationMs": 5600,
+    "segs": [ {
+      "utf8": "going through is exactly the process that an \neditor and Chief and a columnist go through  "
+    } ]
+  }, {
+    "tStartMs": 2574720,
+    "dDurationMs": 5600,
+    "segs": [ {
+      "utf8": "it's the same thing you're just deferring to \nsomeone else's brain or you could use the AI  "
+    } ]
+  }, {
+    "tStartMs": 2580320,
+    "dDurationMs": 8520,
+    "segs": [ {
+      "utf8": "brain right so here adopt a contrarian \nmindset treat frustration as a business"
+    } ]
+  }, {
+    "tStartMs": 2588840,
+    "dDurationMs": 12480,
+    "segs": [ {
+      "utf8": "opportunity okay batch three batch three number \none is is a problem yeah ignore the me too trap  "
+    } ]
+  }, {
+    "tStartMs": 2601320,
+    "dDurationMs": 10160,
+    "segs": [ {
+      "utf8": "you know so you gota like what what what AI \nthinks is me too and what you know we think is  "
+    } ]
+  }, {
+    "tStartMs": 2611480,
+    "dDurationMs": 5800,
+    "segs": [ {
+      "utf8": "me too might like I know what they're saying like \nme too but it could also read as like the me too  "
+    } ]
+  }, {
+    "tStartMs": 2617280,
+    "dDurationMs": 7320,
+    "segs": [ {
+      "utf8": "movement and it's like ignore the me too movement \ntrap it's like no that's no absolutely so again  "
+    } ]
+  }, {
+    "tStartMs": 2624600,
+    "dDurationMs": 7120,
+    "segs": [ {
+      "utf8": "great example of how AI gives a bunch of options \nbut your taste has the context to be like the risk  "
+    } ]
+  }, {
+    "tStartMs": 2631720,
+    "dDurationMs": 5440,
+    "segs": [ {
+      "utf8": "reward of me using that phrasing maybe isn't going \nto be as effective right you are editor and chief  "
+    } ]
+  }, {
+    "tStartMs": 2637160,
+    "dDurationMs": 6840,
+    "segs": [ {
+      "utf8": "little writing Pro tip for everyone a lot of \ntimes when people come up with subheads they  "
+    } ]
+  }, {
+    "tStartMs": 2644000,
+    "dDurationMs": 6080,
+    "segs": [ {
+      "utf8": "think the same way that AI does so they they \nthink in terms of like quippy main titles main  "
+    } ]
+  }, {
+    "tStartMs": 2650080,
+    "dDurationMs": 7240,
+    "segs": [ {
+      "utf8": "titles typically lean more clever you know not \nas clear and I've always found that the best uh  "
+    } ]
+  }, {
+    "tStartMs": 2657320,
+    "dDurationMs": 6440,
+    "segs": [ {
+      "utf8": "main points and subheads are actually more like \nsentences where you're literally just saying to  "
+    } ]
+  }, {
+    "tStartMs": 2663760,
+    "dDurationMs": 5160,
+    "segs": [ {
+      "utf8": "the reader you clicked on this title I'm going to \ngive you all the value in three sentences bolded  "
+    } ]
+  }, {
+    "tStartMs": 2668920,
+    "dDurationMs": 5640,
+    "segs": [ {
+      "utf8": "as subheads and whenever you do that you it's so \nmuch more likely that the person then gives each  "
+    } ]
+  }, {
+    "tStartMs": 2674560,
+    "dDurationMs": 5800,
+    "segs": [ {
+      "utf8": "section their attention versus if you give them \nsomething like more vague you know stay agile even  "
+    } ]
+  }, {
+    "tStartMs": 2680360,
+    "dDurationMs": 3840,
+    "segs": [ {
+      "utf8": "when growing they don't really know what they're \ngoing to get out of that section which means they  "
+    } ]
+  }, {
+    "tStartMs": 2684200,
+    "dDurationMs": 7280,
+    "segs": [ {
+      "utf8": "don't give it their attention right so here we \nactually like our output even more you know now  "
+    } ]
+  }, {
+    "tStartMs": 2691480,
+    "dDurationMs": 7360,
+    "segs": [ {
+      "utf8": "if I wanted to clarify this further I could say \nthese aren't bad but all all of these main points  "
+    } ]
+  }, {
+    "tStartMs": 2698840,
+    "dDurationMs": 12880,
+    "segs": [ {
+      "utf8": "are written as vague clever main points titles the \nones I came up with are in sentence format and are  "
+    } ]
+  }, {
+    "tStartMs": 2711720,
+    "dDurationMs": 7960,
+    "segs": [ {
+      "utf8": "much more tangible actionable can you please \ncome up with five more batches of three main  "
+    } ]
+  }, {
+    "tStartMs": 2719680,
+    "dDurationMs": 12640,
+    "segs": [ {
+      "utf8": "points that are written in sentence format and are \nas tangible actionable for the reader as possible  "
+    } ]
+  }, {
+    "tStartMs": 2732320,
+    "dDurationMs": 5720,
+    "segs": [ {
+      "utf8": "so this is where you're working with AI in that \nconversational format and we might not have time  "
+    } ]
+  }, {
+    "tStartMs": 2738040,
+    "dDurationMs": 5800,
+    "segs": [ {
+      "utf8": "to get to it so just to sort of skip skip to the \nanswer the reason why all this back and forth is  "
+    } ]
+  }, {
+    "tStartMs": 2743840,
+    "dDurationMs": 7520,
+    "segs": [ {
+      "utf8": "so important is because you don't realize that as \nyou're doing this you are creating all the Lego  "
+    } ]
+  }, {
+    "tStartMs": 2751360,
+    "dDurationMs": 6600,
+    "segs": [ {
+      "utf8": "blocks to go assemble the mega prompt so whenever \nwe create prompts for our paid newsletter WR with  "
+    } ]
+  }, {
+    "tStartMs": 2757960,
+    "dDurationMs": 7920,
+    "segs": [ {
+      "utf8": "AI for example all of them are the end result of \nthis sort of back and forth with chat gbt or or  "
+    } ]
+  }, {
+    "tStartMs": 2765880,
+    "dDurationMs": 5040,
+    "segs": [ {
+      "utf8": "back and forth with Claude right you're learning \nwhat works you're learning what yields the best  "
+    } ]
+  }, {
+    "tStartMs": 2770920,
+    "dDurationMs": 5320,
+    "segs": [ {
+      "utf8": "output and then you're basically going back \nthrough that entire conversation and then you  "
+    } ]
+  }, {
+    "tStartMs": 2776240,
+    "dDurationMs": 7760,
+    "segs": [ {
+      "utf8": "go now how can I skip to the end faster next time \nhow can I just compress all of this into into one  "
+    } ]
+  }, {
+    "tStartMs": 2784000,
+    "dDurationMs": 7400,
+    "segs": [ {
+      "utf8": "prompt right or one decision so so here these are \nmore actionable regularly map out your customer's  "
+    } ]
+  }, {
+    "tStartMs": 2791400,
+    "dDurationMs": 3400,
+    "segs": [ {
+      "utf8": "biggest frustrations like late fees then \neliminate those pain points your product stands  "
+    } ]
+  }, {
+    "tStartMs": 2794800,
+    "dDurationMs": 5920,
+    "segs": [ {
+      "utf8": "out on convenience that's actually a cool a cool \npoint I might consider putting that underneath  "
+    } ]
+  }, {
+    "tStartMs": 2800720,
+    "dDurationMs": 6440,
+    "segs": [ {
+      "utf8": "that main point right run a bandw experiment \nin which you exclude all direct competitor  "
+    } ]
+  }, {
+    "tStartMs": 2807160,
+    "dDurationMs": 5600,
+    "segs": [ {
+      "utf8": "names during strategic planning cool so you can \nsee how like this is improved and it's improved  "
+    } ]
+  }, {
+    "tStartMs": 2812760,
+    "dDurationMs": 4080,
+    "segs": [ {
+      "utf8": "because we know what to ask for and we know \nwhat to ask for because we've done it manually  "
+    } ]
+  }, {
+    "tStartMs": 2817880,
+    "dDurationMs": 4360,
+    "segs": [ {
+      "utf8": "so then just to close the loop and just to sort of \ncomplete this for everyone once you have the three  "
+    } ]
+  }, {
+    "tStartMs": 2822240,
+    "dDurationMs": 6120,
+    "segs": [ {
+      "utf8": "main points the next thing that you do and this is \nwhat completes the writing is you go back to the  "
+    } ]
+  }, {
+    "tStartMs": 2828360,
+    "dDurationMs": 5520,
+    "segs": [ {
+      "utf8": "10 magical ways and you go so what am I going to \ngive the reader in each one of these sections so  "
+    } ]
+  }, {
+    "tStartMs": 2833880,
+    "dDurationMs": 6520,
+    "segs": [ {
+      "utf8": "here lesson one every founder should ban one word \nmost closely to whatever so here we really like  "
+    } ]
+  }, {
+    "tStartMs": 2840400,
+    "dDurationMs": 6440,
+    "segs": [ {
+      "utf8": "the run a band words experiment so we put this \nhere how do we make this the most valuable we can  "
+    } ]
+  }, {
+    "tStartMs": 2847360,
+    "dDurationMs": 5600,
+    "segs": [ {
+      "utf8": "well we would explain to people the steps of \nrunning a bandw experiment right so here the  "
+    } ]
+  }, {
+    "tStartMs": 2852960,
+    "dDurationMs": 6200,
+    "segs": [ {
+      "utf8": "magical ways we're going to go with steps right \nconvenience can be a a product differentiator okay  "
+    } ]
+  }, {
+    "tStartMs": 2859160,
+    "dDurationMs": 4800,
+    "segs": [ {
+      "utf8": "well if I'm explaining that convenience can be a \nproduct differentiator what might make sense maybe  "
+    } ]
+  }, {
+    "tStartMs": 2863960,
+    "dDurationMs": 6680,
+    "segs": [ {
+      "utf8": "some stats might be interesting as to why conv \nlike proving that or maybe it's like examples of  "
+    } ]
+  }, {
+    "tStartMs": 2870640,
+    "dDurationMs": 6480,
+    "segs": [ {
+      "utf8": "other companies that have used um convenience in \norder to differentiate themselves right and then  "
+    } ]
+  }, {
+    "tStartMs": 2877120,
+    "dDurationMs": 3920,
+    "segs": [ {
+      "utf8": "lesson number three business is built around \nguilt empower the customer not alienate them  "
+    } ]
+  }, {
+    "tStartMs": 2881040,
+    "dDurationMs": 5240,
+    "segs": [ {
+      "utf8": "well whenever you're explaining something right \nmaybe here we need some like and here are you  "
+    } ]
+  }, {
+    "tStartMs": 2886280,
+    "dDurationMs": 7320,
+    "segs": [ {
+      "utf8": "know reasons why here's why that is right that's \nanother one of the 10 magical ways so this list is  "
+    } ]
+  }, {
+    "tStartMs": 2893600,
+    "dDurationMs": 4520,
+    "segs": [ {
+      "utf8": "insanely powerful because then you just go through \neach section and you go all right here lesson one  "
+    } ]
+  }, {
+    "tStartMs": 2898120,
+    "dDurationMs": 4320,
+    "segs": [ {
+      "utf8": "I'm going to give people steps on how to run a \nbandw experiment lesson number two I'm going to  "
+    } ]
+  }, {
+    "tStartMs": 2902440,
+    "dDurationMs": 4320,
+    "segs": [ {
+      "utf8": "give some stats to back up why this is a thing and \nI'm going to give a couple examples of other comp  "
+    } ]
+  }, {
+    "tStartMs": 2907320,
+    "dDurationMs": 4680,
+    "segs": [ {
+      "utf8": "that have done it and then lesson three businesses \nbuilt around guilt ow the customer not alienate  "
+    } ]
+  }, {
+    "tStartMs": 2912000,
+    "dDurationMs": 6600,
+    "segs": [ {
+      "utf8": "them here are a couple tangible reasons why we \nhaven't written a single like full paragraph or  "
+    } ]
+  }, {
+    "tStartMs": 2918600,
+    "dDurationMs": 7000,
+    "segs": [ {
+      "utf8": "anything and all the decisions are made right so \nnow when you sit down to right this isn't hard  "
+    } ]
+  }, {
+    "tStartMs": 2925600,
+    "dDurationMs": 4520,
+    "segs": [ {
+      "utf8": "you just go oh I fill this in in this section and \nso then if you were to bring that over to AI what  "
+    } ]
+  }, {
+    "tStartMs": 2930120,
+    "dDurationMs": 4920,
+    "segs": [ {
+      "utf8": "would you do you would literally just articulate \nwhat I just said and then it would come up with  "
+    } ]
+  }, {
+    "tStartMs": 2935040,
+    "dDurationMs": 4880,
+    "segs": [ {
+      "utf8": "a V1 and then you would run it back and do it \nagain you'd go Section by section you'd be like  "
+    } ]
+  }, {
+    "tStartMs": 2939920,
+    "dDurationMs": 6160,
+    "segs": [ {
+      "utf8": "lesson one I think those steps aren't tangible \nenough could you rewrite that in sentence form  "
+    } ]
+  }, {
+    "tStartMs": 2946080,
+    "dDurationMs": 7960,
+    "segs": [ {
+      "utf8": "right you are the editor and chief does chat GPT \nhave voice I forget yeah so like you can you can  "
+    } ]
+  }, {
+    "tStartMs": 2954040,
+    "dDurationMs": 10000,
+    "segs": [ {
+      "utf8": "even for some people writing is tough but uh yeah \nuse voice mode like just go and dictate it and and  "
+    } ]
+  }, {
+    "tStartMs": 2964040,
+    "dDurationMs": 8920,
+    "segs": [ {
+      "utf8": "this is okay so I just I want to end on a meta \na meta concept yes why is paying for education  "
+    } ]
+  }, {
+    "tStartMs": 2972960,
+    "dDurationMs": 8840,
+    "segs": [ {
+      "utf8": "so powerful and why is paying for education even \nmore powerful in the digital age take um ship 30  "
+    } ]
+  }, {
+    "tStartMs": 2981800,
+    "dDurationMs": 5360,
+    "segs": [ {
+      "utf8": "for 30 as an example our writing program in \nship 30 we basically have broken out I don't  "
+    } ]
+  }, {
+    "tStartMs": 2987160,
+    "dDurationMs": 4800,
+    "segs": [ {
+      "utf8": "know how many 30 40 50 different like little \nwriting Frameworks it's like when writing first  "
+    } ]
+  }, {
+    "tStartMs": 2991960,
+    "dDurationMs": 4680,
+    "segs": [ {
+      "utf8": "sentences do it like this when writing headlines \ndo it like this when formatting do it like this  "
+    } ]
+  }, {
+    "tStartMs": 2998040,
+    "dDurationMs": 7280,
+    "segs": [ {
+      "utf8": "and in the age of AI every time you buy a course \na book you listen to a talk and any sort of  "
+    } ]
+  }, {
+    "tStartMs": 3005320,
+    "dDurationMs": 6720,
+    "segs": [ {
+      "utf8": "Education you are not just learning what you are \ndoing is You are downloading that little framework  "
+    } ]
+  }, {
+    "tStartMs": 3012040,
+    "dDurationMs": 8120,
+    "segs": [ {
+      "utf8": "into your repository that you can then go leverage \nwith technology okay so there's actually no reason  "
+    } ]
+  }, {
+    "tStartMs": 3020160,
+    "dDurationMs": 5960,
+    "segs": [ {
+      "utf8": "why someone couldn't take ship 30 take out all \n30 of the different Frameworks that we give them  "
+    } ]
+  }, {
+    "tStartMs": 3026120,
+    "dDurationMs": 4680,
+    "segs": [ {
+      "utf8": "and then be ble to articulate to AI hey when we \nwrite first sentences we want them to be like  "
+    } ]
+  }, {
+    "tStartMs": 3030800,
+    "dDurationMs": 4600,
+    "segs": [ {
+      "utf8": "this when we write titles we want it to be like \nthis and you just increased your own productivity  "
+    } ]
+  }, {
+    "tStartMs": 3035400,
+    "dDurationMs": 7280,
+    "segs": [ {
+      "utf8": "and efficiency and quality of output by 100x for \nthe rest of your life and like ship 30 is a $350  "
+    } ]
+  }, {
+    "tStartMs": 3042680,
+    "dDurationMs": 7120,
+    "segs": [ {
+      "utf8": "course for example and once that clicked for \nme I was like oh so you're telling me that I  "
+    } ]
+  }, {
+    "tStartMs": 3049800,
+    "dDurationMs": 6040,
+    "segs": [ {
+      "utf8": "can basically just go spend a fraction of the \namount of money buying things that have taken  "
+    } ]
+  }, {
+    "tStartMs": 3055840,
+    "dDurationMs": 5360,
+    "segs": [ {
+      "utf8": "people it has taken me 12 years to learn how to \narticulate all of this 12 years and thousands  "
+    } ]
+  }, {
+    "tStartMs": 3061200,
+    "dDurationMs": 5640,
+    "segs": [ {
+      "utf8": "of Articles and thousands of everything right \nand you can literally just take it download it  "
+    } ]
+  }, {
+    "tStartMs": 3066840,
+    "dDurationMs": 4920,
+    "segs": [ {
+      "utf8": "into your brain and then articulate it to Ai and \nyield a very similar output yeah and that that  "
+    } ]
+  }, {
+    "tStartMs": 3071760,
+    "dDurationMs": 6200,
+    "segs": [ {
+      "utf8": "is why paying for education is so fascinating in \nthe digital world I mean paying for education or  "
+    } ]
+  }, {
+    "tStartMs": 3077960,
+    "dDurationMs": 5960,
+    "segs": [ {
+      "utf8": "it's also just education you know what I mean it's \nlike there's also free education like this is free  "
+    } ]
+  }, {
+    "tStartMs": 3083920,
+    "dDurationMs": 6760,
+    "segs": [ {
+      "utf8": "you know like all my pods are free someone could \ntheoretically like download all the Frameworks  "
+    } ]
+  }, {
+    "tStartMs": 3090680,
+    "dDurationMs": 8280,
+    "segs": [ {
+      "utf8": "and idea Generation stuff that we use and all of \na sudden you're an idea Pro you know what I mean  "
+    } ]
+  }, {
+    "tStartMs": 3098960,
+    "dDurationMs": 8240,
+    "segs": [ {
+      "utf8": "like using AI so I think your point is valid \nwhich is um well what is your point your point  "
+    } ]
+  }, {
+    "tStartMs": 3107200,
+    "dDurationMs": 7680,
+    "segs": [ {
+      "utf8": "is basically that your goal is to if you want \ndigital leverage you need to be an expert how  "
+    } ]
+  }, {
+    "tStartMs": 3114880,
+    "dDurationMs": 6880,
+    "segs": [ {
+      "utf8": "do you become an expert and gain yeah exactly \nyou level up and you can level up by educating  "
+    } ]
+  }, {
+    "tStartMs": 3121760,
+    "dDurationMs": 6080,
+    "segs": [ {
+      "utf8": "yourself downloading these Frameworks and then \nusing AI to take it to the N degree is what you're  "
+    } ]
+  }, {
+    "tStartMs": 3127840,
+    "dDurationMs": 6240,
+    "segs": [ {
+      "utf8": "basically saying which I totally agree with yep \nyeah said said in the most simple simplest way  "
+    } ]
+  }, {
+    "tStartMs": 3134080,
+    "dDurationMs": 6960,
+    "segs": [ {
+      "utf8": "it took me 12 years to figure out you know the \nsix proven single sentence openers for almost  "
+    } ]
+  }, {
+    "tStartMs": 3141040,
+    "dDurationMs": 8080,
+    "segs": [ {
+      "utf8": "all writing you could internalize that framework \nfrom me in four minutes and then you can take that  "
+    } ]
+  }, {
+    "tStartMs": 3149120,
+    "dDurationMs": 7440,
+    "segs": [ {
+      "utf8": "framework and then use it with AI for the rest of \nyour life the return on that is unbelievable and  "
+    } ]
+  }, {
+    "tStartMs": 3156560,
+    "dDurationMs": 4880,
+    "segs": [ {
+      "utf8": "this is also true for me like if I want to learn \nhow to do something and I go to you and I'm like  "
+    } ]
+  }, {
+    "tStartMs": 3161440,
+    "dDurationMs": 5240,
+    "segs": [ {
+      "utf8": "oh Greg's an expert in this thing just give me the \nfra I'll pay whatever for the framework because  "
+    } ]
+  }, {
+    "tStartMs": 3166680,
+    "dDurationMs": 5760,
+    "segs": [ {
+      "utf8": "now I know I I have it and I can go use it for \nthe rest of my life yeah I think it was Mr Beast  "
+    } ]
+  }, {
+    "tStartMs": 3172440,
+    "dDurationMs": 7520,
+    "segs": [ {
+      "utf8": "in his like leaked Playbook doc he had a section \nsay like higher Consultants did you see that yeah  "
+    } ]
+  }, {
+    "tStartMs": 3179960,
+    "dDurationMs": 7400,
+    "segs": [ {
+      "utf8": "I read it it was great yeah I think that you know \nthat was kind of like Mr beasts uh what he thought  "
+    } ]
+  }, {
+    "tStartMs": 3187360,
+    "dDurationMs": 5840,
+    "segs": [ {
+      "utf8": "too which is basically level up he's a big level \nup guy level up you know what he was missing was  "
+    } ]
+  }, {
+    "tStartMs": 3193200,
+    "dDurationMs": 6120,
+    "segs": [ {
+      "utf8": "the AI piece I think um but you know he's he's \ndone well for himself so I think he's doing okay  "
+    } ]
+  }, {
+    "tStartMs": 3199320,
+    "dDurationMs": 8520,
+    "segs": [ {
+      "utf8": "we we we'll give it to him yeah cool man so yeah \nwe cooked up a lot I you you under promised and  "
+    } ]
+  }, {
+    "tStartMs": 3207840,
+    "dDurationMs": 7040,
+    "segs": [ {
+      "utf8": "overd delivered just as I expected thank you for \nbeing so generous with your your time your brain  "
+    } ]
+  }, {
+    "tStartMs": 3214880,
+    "dDurationMs": 8080,
+    "segs": [ {
+      "utf8": "your Frameworks um and uh where could people learn \nmore about you and and some of the stuff you're up  "
+    } ]
+  }, {
+    "tStartMs": 3222960,
+    "dDurationMs": 4880,
+    "segs": [ {
+      "utf8": "to no they'll find me on the internet I'm not \nworried about it I just I would I'd talk about  "
+    } ]
+  }, {
+    "tStartMs": 3227840,
+    "dDurationMs": 6120,
+    "segs": [ {
+      "utf8": "this stuff for free all day like I love this stuff \nyeah well we'll include uh we'll include some of  "
+    } ]
+  }, {
+    "tStartMs": 3233960,
+    "dDurationMs": 6840,
+    "segs": [ {
+      "utf8": "the stuff where where people can find you in the \nshow notes uh and maybe what I'll do is I'll even  "
+    } ]
+  }, {
+    "tStartMs": 3240800,
+    "dDurationMs": 8880,
+    "segs": [ {
+      "utf8": "cook up some notes from this episode that people \ncan go and and access so that will be in the show  "
+    } ]
+  }, {
+    "tStartMs": 3249680,
+    "dDurationMs": 4760,
+    "segs": [ {
+      "utf8": "notes also I'll send you this doc that we were \nusing if you want to just share it as a PDF that's  "
+    } ]
+  }, {
+    "tStartMs": 3254440,
+    "dDurationMs": 8280,
+    "segs": [ {
+      "utf8": "fine that's great awesome all right my man I'll \nalways yeah dude I love I love our chats I love  "
+    } ]
+  }, {
+    "tStartMs": 3262720,
+    "dDurationMs": 8720,
+    "segs": [ {
+      "utf8": "our chats and um I got some writing to do yes you \ndo I'm waiting for the book it's true it's true I  "
+    } ]
+  }, {
+    "tStartMs": 3271440,
+    "dDurationMs": 5400,
+    "segs": [ {
+      "utf8": "need a book I need you know for those listening \nI I definitely want to write a book um and I've  "
+    } ]
+  }, {
+    "tStartMs": 3276840,
+    "dDurationMs": 8280,
+    "segs": [ {
+      "utf8": "talked to Cole about it um so one day folks one \nday well listen you have coold GPT here whenever  "
+    } ]
+  }, {
+    "tStartMs": 3285120,
+    "dDurationMs": 12200,
+    "segs": [ {
+      "utf8": "you need it thank you all right my man I'll \ncatch you later all right see you see you [Music]"
+    } ]
+  }, {
+    "tStartMs": 3300200,
+    "dDurationMs": 1640,
+    "segs": [ {
+      "utf8": "baby"
+    } ]
+  } ]
+}

@@ -1,0 +1,2401 @@
+{
+  "wireMagic": "pb3",
+  "pens": [ {
+  
+  } ],
+  "wsWinStyles": [ {
+  
+  } ],
+  "wpWinPositions": [ {
+  
+  } ],
+  "events": [ {
+    "tStartMs": 240,
+    "dDurationMs": 7120,
+    "segs": [ {
+      "utf8": "Look at these ads. They're made with 100% AI  and they're absolutely freaking. There's people   doing 100k a month, a million dollars a month or  more using amazing winning AI ads. So I hit up my   friend Roman and I asked him if he'd be willing  to come on the pod to share how people are making   millions of dollars a month with winning AI ads  and to give us the tips and tricks to actually   how to do this how to actually get the most out  of these platforms. Raman, welcome to the pod.   I appreciate you coming on. By the end of this  episode, what are people going to learn? Yeah,   so thank you for having me. We created one of the  leading softwares in AI ad generation. We launched   it 18 months ago since we grew to $7 million in  annual recurring revenue. So growing this past,   we saw so many examples of people  crushing it using AI to create ads.   So today I'm going to share the best techniques  that they are using and some cool examples of   people who are crushing it using AI. So today  you are going to be able to market any business   using AI with the best platform on the market to  do that. All right, let's get into it. Awesome,   let's do it. Okay, so we are now in Arcade's  AI, and the way the platform works is quite   straightforward. So we have this text box right  here where you can input a script and describe   what you want your AI actor to say, AI UGC,  user-generated content. So you can go here, type   your script. So for this example, I was working  on a script for Geolingo, the language learning   app that everyone knows. So I typed this script  right here. And by the way, to write the script,   I use this tool that we have built internally,  the hook generator. It's basically a tool that   uses Cloud in the background to generate cool  scripts and cool hooks using AI. Basically,   all you need to do is describe your product. some  Duolingo, a language learning app. You described   your product. I'm happy that this exists, right?  Because a big part of what makes a winning AI ad   or actually a winning ad in general is how good  the hook is, right? A hundred percent. I would   say everyone focuses on the written hook. So this  is probably 50% of the results. And also a super   important thing is the visual hook. what do we see  in the first second? And we will talk about that   in the future of this video because you can also,  with AI, create some crazy stuff to hook people's   attention very early on. They decide to scroll  on an ad in a millisecond, right? So you need   to hook them even visually before they listen  to the beginning of the script. But with this,   you can generate the first sentence. And I  think it generates very good hooks because   it was trained on so many hooks that we had in our  database. why did most people give up on learning   a new language? I think it's a very, very good  hook. So you can save multiple ones, save the ones   you really , delete the ones you don't , and just  start making a collection of hooks right here.   And then you can just copy paste them all and put  them into a Google Sheets. Then once you have your   hook, and I actually use the hook generator to get  this one that I really . True fact, most people   never stick with learning a new language. Once  I got that, I just wrote the rest of the script   using Cloud as well. And I got the script right  here that you can then use with an AI actor. So we   have this library of now over a thousand AI actors  that you can use, where you can use filters to   just find the perfect AI actor for your needs. So  you can filter on the gender, obviously the age,   and some cool situations this. You know, when you  are doing these UGC content, So for the audience,   you see user-generated content. It's content where  there is someone talking to the camera. When you   do this type of content, you will always want  to have a specific type of creators promote your   video, and they will be doing something specific.  So I don't know if you have an idea for a podcast   ad where you want people to be in a studio, a  nice setup where they talk about your product   in a nice configuration, you can just select the  podcast filter. If you have, for example, I saw on   your website the ID browser that you have, this  idea for pregnant women and this trend that was   growing. Maybe you have a product that targets  pregnant women and you want to have someone who   is pregnant in your video. Or maybe you want to  have a funny skit-style interview where someone   is talking from the side, if they are talking to  a friend. We got all sorts of filters that you   can use. If you have a fitness product, maybe you  might want to have people in the gym. You can play   with these filters or even with accessories that  they have. If you want them to have, let's say,   a laptop, for example, you can use that filter  and you will only see AI avatars talking next to   a laptop. You can select the emotions and even  the skin tone of the AI actor. And the beauty   of AI is now instead of just selecting one person  to talk in your video, you can just generate five   variations. And our most successful customers, and  that's really the first tip I really want to share   with your audience, our most successful customers,  they really go crazy about testing. They test   the hoops or every single script that they do  because now with AI, in a couple of minutes,   they can generate so many variations. They will  test different actors, different hoops, different   situations. And really the results can be  completely different when they do that properly.   So yeah, you will select an actor. You can see the  preview of the actor before you generate. And then   you can tweak the audio. We'll see all the details  of how we can optimize the results in a minute.   But you can tweak the audio. Click Generate, wait  a couple of seconds, and I already have this video   that was generated with the script for Duolingo,  and you get a result this. Here you go. Now   you get your video, and we'll talk about that as  well if you want, Greg, but you can then edit it,   remove the background, show your app, and most of  all, test a lot of different versions of the exact   same app. Sam Altman, the co-founder of OpenAI,  I just said that it is the era of the idea guy   and he is not wrong. I think that right now is an  incredible time to be building a startup. And if   you listen to this podcast, chances are you think  so, too. Now, I think that you can look at trends   to basically figure out what are the startup  ideas you should be building. So that's exactly   why I built idea browser dot com. Every single  day, you're going to get a free startup idea in   your inbox, and it's all backed by high-quality  data trends. How we do it, people always ask. We   use AI agents to go and search, what are people  looking for, and what are they screaming for in   terms of products that you should be building?  And then we hand it on a silver platter for you   to go check out. We do have a few paid plans  that, you know, take it to the next level,   give you more ideas, give you more AI agents and  more almost a chat GBT for ideas with it. But   you can start for free, ideabrowser.com. And if  you're listening to this, I highly recommend it.   So I'm seeing a trend right now with two types  of AI ads. And I think about it, you know,   from a spectrum. On one side of the spectrum,  you have extremely realistic ads. ad. And on the   other side of the spectrum, you have unrealistic  scroll stopping ads. And what I mean by that,   that is this morning I saw a gorilla, a talking  gorilla VO3 ad, I think. And there's also the Star   Wars. I don't know if you saw the Star Wars selfie  ads. So what you're saying, Roman, is basically   sometimes it makes sense to, Well, it makes sense  that the more the better because you're kind of   doing R\u0026D to find the winning ad that can get you  your CAC to LTV ratio in the place. But would you   agree that it's helpful to have, if you're selling  a pregnancy product, having maybe pregnancy women   as an actor, but also maybe some unrealistic,  funny, other types of scroll stomping videos   and then sort of testing them to see what works?  100%. So before creating our cards, I was actually   growing a mobile app studio and all I was doing  was testing a ton of ads every day. It was before   the age of AI but really the two criteria for us  to succeed was the creative volume so how many   new creatives did we produce every single week  that was the number one criteria and the second   one was the creative diversity and the diversity  is which type of creative do you test because if   you only test talking actors, for example,  these ones, or if you only test gorilla video,   at some point, your audience will kind of fatigue  and there is this concept called creative fatigue   in the world of paid advertising and people  will just stop engaging. So yeah, creative   diversity is super important and that's actually  our vision at Arcade. We think AI is completely   going to transform the way marketing teams create  content and we think that There is going to be   one platform where marketers create all sorts of  content and optimize for the results. So we have,   for example, you mentioned the Gorilla example.  We have a VO3 integration where you can actually   generate those Gorilla videos and you can actually  do more. I'm going to show you that in a second.   So to your point, you need to be testing both.  you need to be testing real UGC-style videos, more   creative stuff, and even other types of videos  that I can show you in the demo if you want. And   that being said, there are certain niches where we  see very good results for some reason with AI UGC,   and for some reason, it's just performing better  in these niches. I can show you some examples,   if you want, of successful customers who  are using archives and getting really,   really good results. And then I can show you how  you can use the archives to also regenerate those   less realistic videos, the Lego ones that we  see here that I'm going to show you in a minute   as well. Okay. Yeah one example of that is one  of our clients Codeway So it a mobile app studio   They own multiple apps and they launched this  app as you can see here on September 2024 so   actually less than 12 months ago And last month,  they made a million in revenue. And that's just,   by the way, the iOS app. They also have an Android  app. So they made in total more than 15 million in   revenue with this app, and that's all public data,  by the way. And when you look at their ads in the   Facebook ads library, is the Facebook ad library,  is this public library where you can see the ads   of any advertiser, you will see two things. One,  they test a ton of new ads every week. So if you   look at the total results, they have 500 active  ads because we filtered on active. Just yesterday,   they started a new ad. So if you just filter on ,  literally yesterday we are recording on July 22,   they were testing maybe five, 10 ads that we can  see right here for this single app and they have   multiple apps. And the thing that is interesting  about this page is they are testing a ton of ads,   but all of them are AI. This app was launched  literally nine months ago, and every single ad   that they tested was AI-generated using ArcAds,  and that's the whole marketing strategy that they   had for this app. They basically created ads using  ArcAds, and I can show you one of the ads that was   bringing the most results, and it's a very  realistic ad, but to your point, They test   some realistic concept, but they also test  these robot-style video ads where there   is someone talking. And by the way, as you can  see, they localize everything in every language,   which is also one of the nice things about AI.  You can now, instead of just targeting one geo,   if you want to have, I don't know even what  language this is, but if you want to have those   20, 50 languages in your ads on German, English,  Russian, et cetera, it will be a nightmare to find   creators in every single country. Now with AI,  you can just do that in every single country super   easily. So I use this tool called PPAds to track  impressions of ads. Again, that's public data. And   as you can see, this ad right here had 10 million  impressions. That was the most viral ad that they   had. And they combined the two worlds. They  had this realistic AI UGC at the bottom created   with ArcAd, and they combined that with a less  realistic video. And they basically made a video   about this person trying to learn a new language.  So yeah, again, if you wanted to have someone with   a Spanish accent talking and learning English, it  would be super time-concerning to produce that.   They literally produce that in a couple of seconds  and using AI. And by the way, I can show you very   quickly how you can do this kind of stuff, but  I'll pause here in case you have any question.   Now, dude, this is, keep going. This is the sauce  that I need. Perfect. So, yeah. So when you have   a script, I just click on Remix right here.  What this does is it will put the script in   the model right here to let me just reuse the same  script. And maybe I will get very good results   with this ad. So I want to try new variations  of this ad. I want to change maybe the hook. I   want to add additional actors. Or I want to change  the accents. and you can do that now with Archads   right here because you can go to the voiceover and  you can do two things. You can either use one of   our existing voices in our library. So let's say  you want to have a Spanish accent right here. You   will be able to say Spanish. You will have all of  these Spanish voices that we had and you can even   control the accent of these voices. Maybe you want  to do someone with a Spanish accent but from Latin   America to target the Latin Americans in the US.  You'll be able to do that. Or if you don't find   the perfect voice that you want in the library,  you can also connect with your 11labs account   right here and create your own voices using 11labs  and then have our AI actors use the same voices   in our cats. And that's a super powerful way  to create ads. Maybe I can show you some other   examples of people who are getting crazy results  with AI. And I'm going to show you in a minute   how we can do those more creative type of ads  we see right here. But some other cool examples   that I saw recently were I saw this niche blowing  up of micro learning. So basically those are apps   where you can learn about anything in a couple of  minutes. They summarize books, et cetera. and they   create tutorials for people to learn about a new  topic. And this ad right here, the AI actor that   we see in the background right here, was, again,  generated with archives. It has 100,000 likes.   No one is talking about the fact that it's AI in  the comments. It looks people are really engaging   with the content. Again, great example of a team  that scales super, super strongly strongly using   AI. And it was actually a whole trend and a whole  new market that was created around microlearning.   Because if you go back to the ad library again  and you search for the keyword microlearning,   you will find a ton of apps and websites that  are advertising with AI-generated actors.   And all of these guys are AI right here, the one  at the top and the one right here. all of these   are AI generated. With ArcGAD, this guy is in  our ArcGAD library and people are getting crazy   results in this niche because now they are able to  have someone being the face of what they want to   convey in the ad. And again, this was created with  ArcGAD. And yeah, if you Google for microlearning,   you will see in the Facebook ad library so  many examples of people crushing it with   AI actors. So again, it's As you can see, they  all test a ton of ads. So if we look at this one,   for example, Weiser, they didn't go and go to  Arcat and just made this one cool ad. They have   140 ads active again on July 21. Yesterday,  they tested at least five new ads. Again,   these people are crazy about testing iterations.  And when they find something that sticks,   they make a ton of different iterations using AI.  So I just want to hammer home one really important   point. So in the past, you would never create a  mobile app around micro learning. Why? Because   it costs you $2 million to build an app around  micro learning. And the total addressable market   might be $10 million a year, $15 million a year  for that particular niche. Now with Vibe Coding,   it's way cheaper to actually go and create these  micro SaaS or niche apps. So it opens up a huge   opportunity for people listening to actually go  and build these niche apps. At the same time,   now you don't need to hire an agency and spend  hundreds of thousands of dollars a month. You can   actually use arc ads and some of these tools  to actually, you know, get to a winning ad.   And that history ad that you showed, with the guy,  he looked he looked my history teacher. You know,   I think one of the reasons why it worked is it  felt my history teacher from high school was,   you know, giving, you know, doing this ad. and I  had no idea that it was AI. And I just think that   it's just interesting because what's going through  my mind, and I'm just taking furious notes,   is what are niches that look small that I can  actually go and create an app for relatively   not a lot of money? And at the same time, what  is an area where people are not doing AI ads   that I can go and kind of win the market?  and just spend money because ultimately,   you know, if I can create a vending machine where  I put in a dollar and a dollar 50 comes out,   then I'm fine putting $10 or a hundred dollars or  a thousand dollars because I'm, you know, I built   a vending machine. A thousand percent. So, you  know, it's funny because I recently stumbled upon   these 18 years old kids who says he's making 200 K  per month. and all he does is he sells services to   traditional businesses and helps them implement AI  to promote their business. So it's true for mobile   apps, but it's also very true for more traditional  business. And so he made this video that's a crazy   engagement, 150K views about how he uses Arcade to  basically promote his own services. So he creates   ads in this example right here, for example, He  created an ad from real estate agents and he told   them, hey guys, I sell AI services. So he created  the ads with Arcads to promote his own agency.   He obviously selected male, 50 years old, which  are not the typical UGC creators. If you were to   try to find on TikTok someone this and convince  them to make an ad for your service business,   it might be quite time consuming to find the right  person. but because we know senior people are such   in demand, we created a lot of models for AI UGC  50 plus in Arcades. So he created these ads in   Arcades to promote his services. He gets people  to book a call for five. He shows everything in   the video. You guys should check it out. It's  crazy. But he gets leads for his services for   $10 and then he sells them services where he says  them, okay, I'm going to get new business to you,   whatever, real estate business or painting  business or solar panel business. And then when   he sells that, he will use arcades to create the  ads for them. And he explained the whole system in   this YouTube video, and I think it's a crazy  opportunity because people don't really know yet   that much about this in these industries. Cool.  I'll include that video in the show notes for   people who I want to watch that. What else should  we cover today? Yeah, maybe one last example of   someone who is crushing it with Arcades. So there  is a guy who created this e-com product where it's   a book where your dad can answer a couple of  questions and basically tell his story so that   you can have some good memories of them And he  was making ads using archives Again he needed to   have a grandpa talking in a nice setup That would  probably be very hard to get without AI. And look   at this ad, 200,000 likes. That probably got a  couple of millions of views on this one single   ad. Love this. People are commenting super nice  stuff. And again, AI generates. So yeah, just   wanted to mention it works very well for apps. It  works very well for services, but it also works   for e-com. And maybe I can go back to Arcades  and show you more advanced stuff that people   can do to create these ads. Yeah. By the way, on  this, I'm pretty sure I saw this ad on TikTok. I   saw this as an ad on TikTok. So if you create, ,  this is so good that it could be organic content,   but it can also be an ad. So that's another  thing is, , you can use ads as organic content,   too. , why not, right? 100%. Yeah, we have so many  of our customers crushing it on TikTok shop. So,   you know, TikTok, now you can, , be paid to  create content to promote other products.   and that's a very good way to kickstart when you  don't have too much cash flow because you don't   even need to pay for the TikTok ads budget. All  you need is make good content and it's probably   the best way to learn how to make good content  because on Facebook ads, if you put budgets,   you will have views. But on TikTok, if your video  is not good, you would get literally 200 views   maximum. So it's probably the best way and the  cheapest way to learn how to create good content.   And actually some of our most active customers,  they created those TikTok accounts, and those are   literally 18 years old. They created these TikTok  accounts where they create content using AI,   and some of them are really crushing it. I might  have an example somewhere. Let me see if I can   find this one. Yeah, so we have this kid in Latin  America who is making TikTok videos organically,   purely, so no paid marketing at all. And so he  starts with kind of a very shocking crook about   the news. He's talking about the news the fires in  California. And so, yeah, this guy was generated   with archives for the non-Spanish speakers. So  basically he talks about the news. And then he   introduced a startup where he has an affiliate  link through the TikTok shop affiliate platform   to promote the product. and that he basically  took content from the brands that they went   to Shark Tank and he combined those into a video  and he made 1.1 million views purely organically.   And I think he made more than 30K from this one  video that was completely blowing up. So yeah,   organic is a very good usage. Obviously, most of  our users do pay ads because we focus on companies   and mostly they have budget and they can go and  spend on paid platforms, but you can also create   this kind of content using ArcEd. There's two  things I want to cover that's important for me   to cover before we go, which is I didn't know  that you can use VO3 within ArcEd, so I'd love   to understand how you can actually do that. And  the last thing I want to cover is, you know this   I want to the era I'm in is the vibe marketing  era and how do you automate as much as this is   possible so I'd love for you to tell me the best  ways I can automate some of my ads maybe using   tools Gumloop and stuff that 100% yeah let's do  that so by the way one of the best ways to create   a winning ad is to copy something that is already  getting good results So we are going to show you   exactly how you can automate that with tools  GAMLOOP, NA10, et cetera. But you can also do it   in a more manual way if you're not that technical.  We have this feature called Speech to Speech where   you can go and download an existing video from  a competitor. So for example, Bishred is this   massive brand that's spending hundreds of millions  in paid marketing and making hundreds of millions   in revenue creating ads. and they had this ad  where the hook is very powerful. I think the voice   is very good in the hook. So you can basically  go here and download this ad from extension   AdScan. Upload this ad as the audio in Arcades.  So instead of selecting text-to-speech, you can   do speech-to-speech and the AI voice will talk  in the exact same way as the audio you upload,   but with the actors that you have selected. And  the result is quite impressive. so a lot of people   complain that AI sometimes is the voice is not  perfect that's a very good way to actually improve   the voice using speech to speech and actually  getting people to read the same way a script that   they have identified doing well something also  important I wanted to show we always talk about   the hook the first sentence of the script but  what's very important as well is the visual hook   in a lot of top ads, you will see something quite  impressive visually at the beginning of the video   that will catch your attention. Dishred, again,  is pretty good at that. So they made this ad where   basically they recorded fake fat to show visually  what it looks to have, I don't know, 20 pounds of   fat. And they had this actor, they had to find  a way to get these brain- in the studio and they   had to generate that and it was probably very time  consuming to get that for the video. With Archive,   you can now also create your own AI actor from a  prompt. So you can basically say, I want to have   someone with a fitness influencer and is holding  brain- fat models. And I just did that right   here with our actor generator. and I generated the  exact same model fully from AI using a prompt. And   now I can have her say, you want to lose weight?  This is what 20 pounds of fat looks . And she can   be talking to the camera and hook people visually.  So that's definitely something I would recommend   people doing. You can also just go to another AI  tool and generate an image of someone you think   looks really well, looks really good. and create  your own custom avatar from an image that you   upload from MidJourney. So for example, this one  that you see right here, the one in the podcast,   I generated it from MidJourney. So I generated an  image of someone looking that in MidJourney. And   then I brought that into archives and I generated  an AI actor from this image. And by the way,   again, this was inspired from Bifred. I saw  these ads. They were running for quite a   long time. So I assumed it was doing well. and  basically I recreated, I screenshot did this,   I sent that to Claude or ChatGPT and I asked  them, describe what you see in the video. That   gave me a prompt. I used it as a prompt to make  journey and then I uploaded the image into Arcade   to create my own AI actor instead of using one  of the actors in the library that was available.   And obviously this actor is only available on my  account. You can do super creative concepts using   that and that's a very efficient way to use the  platform. But coming back to your point for VO3,   you probably saw this trend on Twitter where  you can do unboxing videos using VO3. And yeah,   I basically just use this prompt with our scenes  feature. Let's use this VO3 in the background   and recreated this unboxing video. And then I  thought, OK, what if I could do this for Lego   instead of Ikea? because, you know, IKEA, it's  an interesting concept for IKEA because at IKEA,   you create stuff. And Lego is also somewhere  where you create stuff. So I made this video   right here using the same prompt, basically, but  for Lego. And then here you go. You get a video of   a bunch of Legos being built. But then I thought,  okay, it would be nicer if it was in a nicer room,   a kid's room, actually. So I just clicked Remix  right here. It added the prompt automatically   to the bar here. and I changed a little bit the  description to have the video be in a kid's room.   And here you go. The limitation of VO3 is, you  know, you get those eight second videos, which   are nice, but when you want to do a marketing  campaign, you want a little bit more than that.   You might want to have something happening after  the end of this video. And we recently released   this feature called Extend. So basically what it  does is it lets you select a frame in the video.   So the frame where you want the next video to  start and uses that as the starting point for   a new video that's going to be generated. And  that's kind of insane because now once you have   these videos that you liked, you can just keep the  exact same consistency and generate the rest of   the video. What happens after that in the video?  And you can have a kid that was actually hidden   right here, join the scene and start playing  with the Lego. And then you can do it again,   click extend again. and maybe you want his little  sister to join the video. And then you can, again,   extend the video and the little sister is  joining the frame with perfect consistency.   So that's the same boy right here. And now  you have those three eight-second videos that   you can combine together and make a full video  production with perfect consistency. Insanity.   Yeah, that's really, really good. do you want me  to talk about automation? I do because it's a bit   of a black box for me. I've been playing with it,  but I'm just, I just, yeah, I want to hear from,   you know, from you just the best practices around  automation. Yeah, a hundred percent. So I think   you, you, you got the founder of Gumloop on the  podcast a couple of weeks ago. I really their   team and their tool. And I think he actually, in  this video, he explained very well what is a good   case for an automation. And an automation is when  you can clearly explain every single step of your   process, but it will be very time-consuming to  repeat them. So the way I think about automation   for arcads is I think about all the repetitive  stuff that I do when it comes to producing ads   and I see if I can automate these And one of the  most repetitive tasks of any marketer is to look   for inspiration, look at what the competitors  are doing, use that as inspiration to create new   content. So I created this automation in GameLoop,  I can show my screen and show you, where you can   basically input a keyword. So for us, for example,  I wanted to promote arcades, so create content   about AI UGC and about arcades on TikTok. So I  created this node right here that I connected to   a TikTok downloader that will basically take all  the videos that were posted on TikTok about these   keywords through the TikTok API, Downloading the  videos, transcribe them. So if there is someone   talking in the video, it gets what's being said in  the videos. And then brings that automatically to   ChatVPT with a quick description of my product.  So my product is, which is linked to this note   right here where I describe Arcade's AI ad maker.  So my product is Arcade's AI ad maker. Here is a   very good transcript of a TikTok video. So this is  the TikTok video that it's scraped from the TikTok   API. Write a similar script about my product. Make  sure to stick to the writing style to keep it very   similar to the transcript I provided, but make it  about my product. And then, and that's the beauty   of AI automation, I connected it to an Arcade  node. So if you search for AI video in Gumblup,   you will see that you have Arcade as one of the  nodes that you can connect. And it will basically   generate the script that is inspired from all  the videos that have been posted on TikTok and   that's ranked well on TikTok because the API will  automatically search for the highest view videos.   And it will generate videos that will be inspired  from winning videos automatically for me. That's   one very good example. I have a ton of use cases  and I can show you more. So that's one very good   example of how you can use Arcade's API to connect  with external sources of data to automatically   produce winning ads. And that's the advanced mode  of AI video generation, but that's very powerful.   Dude, can you show me more? Yeah, 100%. So I  really this one for TikTok because I think on   TikTok you'll find very good content. But I also  made an equivalent for Reddit. And I know you   are a fan of Reddit. I know you love Reddit.  so basically this one is a bit more complex,   the automation is a bit more complex so people  can reach out if they want to talk about how   to set this up on their own basically I created  this AI agent with GameLoop again sorry can you   make a full screen? yes right here you go, so it  will find the most popular posts on Reddit and   it will add them to a Google sheet, it will go  to Orcad, this was the previous user interface,   to generate different videos. And basically what  it takes is it collects the most, goes to the most   popular subreddit in your niche. It collects  the top questions, it feeds them to chat GPT,   it generates scripts from that, and it generates  videos using Orcad. So basically all you need is   an inspiration. For the previous example, the  inspiration was TikTok and AI to take this   inspiration and rewrite it in a way that will be  a good ad and then an API to generate the video,   which is ArcAds. It's pretty much always this.  Another example of that is scraping the ads   library. So in GameLoop they have a node where  the source of the data can be the Facebook ad   library. So you can actually download videos from  your competitors from their Facebook ad library,   send that to a Google sheet and then rewrite those  ads using AI. And that's also a very powerful way   to automate ad creation. You will find a lot  of them on my Twitter account if you want to   see more examples of that. Maybe one last one. So  all of these I just showed you were about taking   the transcript of an existing video and rewriting  the script to create a new video inspired from the   script. So basically what this will do is really,  it will complete the script of the talking actor.   So if we go back to Arcades, it will complete this  part of the text box right here. But sometimes you   want to recreate a video and what you need is  not really a script, you need a prompt. Let's   say you want to generate a video this, you  want this description of what's happening,   you don't want the voiceover of the video, right?  and if you want to do that, what you will need   to analyze is not the transcript of an existing  video, you will need to analyze the visual of an   existing video. And Gemini, you know, the Google  AI API lets you basically analyze existing videos   and tells you what's happening in the video.  Does that make sense? Yeah, absolutely. So you   can basically go to the ad library of a competitor  this, send the video to Gemini, and ask Gemini,   describe what you see in the video. Describe  what happens in these videos scene by scene.   And this will give you the prompt to generate  with our VO3 integration AI videos. and yeah,   let's say you need to have basketball players, you  will need a prompt to say, I want to generate a   basketball player and Gemino can give you this  prompt and then you can send that back to our   Sins mobile and complete automatically this part  of the script. What a crazy world we live in. It   is, yeah, so many every day I talk to an archives  customer who is making seven, eight figures using   these AI ads. And again, I learned about a new  super creative stuff. And sometimes the niche I   hear about, you will be surprised how niche and  how small they seem and how much money people   are making. I mean, I can give you other examples,  but yeah, it's crazy how people are getting insane   results with these ads. Yeah, and I think it's  worth noting that not everyone who's going to   use a tool ArcAds is going to crush it, right? And  that's why I want to have you on the pod. One of   the strategies that you're using here is copy what  works, maybe in a different niche, and then bring   it to your own niche. and then use all the tools'  advantages to get the most out of it to give your   chance the highest likelihood of success for the  AI ad, right? Versus starting from a blank slate,   trying to figure out, okay, which ad do I want  to create? What's the copy? It's just going to   be a lot harder to do that, and it's going to  require, frankly, just more money to figure out   what's working. 100%, yeah, that's probably a very  good way to start. Obviously, there is a lot of   money to be made by being the first one to come up  with a very original idea. It's much harder. Yeah,   totally. Yeah, it is much harder, but it is  doable. I don't want to say it's not doable.   And if you are the first one to come up with it,  there's huge advantages there. Definitely. But,   dude, I've been taking furious notes as you've  been doing this. so what I want to do actually   is I'm going to after this I'm going to go through  my notes I'm going to make my notes available for   download for anyone who wants my notes for how to  create winning AI ads we'll put the link in the   show notes and it'll Rafa our editor maybe can put  it on the screen right now so people can go and   download that my recommendation to people is they  believe in ads or not, go and create some ads and   maybe five ads, 10 ads, 15 ads, and just get used  to the tools. Get used to the tools. You've shown   your whole AI stack and software stack for how to  create winning ads. Get used to these tools. I'll   include the tools in my notes for people  to download. You can go to ArcAds. Roman,   can you provide me with a link? We'll put a link  in the show notes that people can go to try the   product and get your hands dirty. Stop listening  to us. Don't listen to another tutorial about how   to create a winning ad. Just get your hands dirty,  play with it, learn, take notes, and iterate from   there. That's my recommendation to people. Roman,  I have one last ask for you. The Gumloop workflows   that you shared, they looked really pretty and  they looked beautiful, but I know that creating   them takes time and trial and error. Would you be  willing to share those with me and I can include   them in my notes doc? Yeah, of course. I will send  you the links. Okay, cool. So I'll put that in   there for folks who want to be a bit more advanced  and automate some of their AI ads. That'll be in   there. That's the show. Thanks for listening.  If this has been helpful, please comment and   on this YouTube video. That's how I know how to  keep creating content for you. And also, I read   every single comment. And maybe, Roman, maybe you  can also check the comments, see what people are   saying, and reply to the most interesting ones.  Yeah, guys, send me your videos, send what you   are working on. I'll check the comments. Okay,  cool. Thanks, man. I really appreciate you coming   on and sharing some sauce. Also, by the way,  Roman did, I don't know if people picked up   on this. This might be the most important point  of the whole podcast. He did call Claude Claude,   and he does live in France, where Claude  originated from, the name. So I'm not crazy,   people. You are. Yeah, my cloud lovers, to the  comments, I will check you. Perfect. Thanks, man.\n"
+    } ]
+  }, {
+    "tStartMs": 7360,
+    "dDurationMs": 6160,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 13520,
+    "dDurationMs": 6240,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 19760,
+    "dDurationMs": 7440,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 27200,
+    "dDurationMs": 14240,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 41440,
+    "dDurationMs": 6480,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 47920,
+    "dDurationMs": 8160,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 56080,
+    "dDurationMs": 5360,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 61440,
+    "dDurationMs": 7040,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 69120,
+    "dDurationMs": 5920,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 75040,
+    "dDurationMs": 6560,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 81600,
+    "dDurationMs": 6880,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 88480,
+    "dDurationMs": 7600,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 96080,
+    "dDurationMs": 5440,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 101520,
+    "dDurationMs": 7520,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 109040,
+    "dDurationMs": 3920,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 112960,
+    "dDurationMs": 4720,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 117680,
+    "dDurationMs": 8640,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 126320,
+    "dDurationMs": 8080,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 134400,
+    "dDurationMs": 10720,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 145120,
+    "dDurationMs": 4880,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 150000,
+    "dDurationMs": 6400,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 156400,
+    "dDurationMs": 7600,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 164000,
+    "dDurationMs": 3760,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 167760,
+    "dDurationMs": 8080,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 175840,
+    "dDurationMs": 4960,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 180800,
+    "dDurationMs": 5200,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 186000,
+    "dDurationMs": 4000,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 190000,
+    "dDurationMs": 7280,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 197280,
+    "dDurationMs": 4560,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 201840,
+    "dDurationMs": 8400,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 210240,
+    "dDurationMs": 6320,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 216560,
+    "dDurationMs": 4160,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 220720,
+    "dDurationMs": 5280,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 226000,
+    "dDurationMs": 6560,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 232560,
+    "dDurationMs": 5840,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 238400,
+    "dDurationMs": 5200,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 243600,
+    "dDurationMs": 6880,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 250480,
+    "dDurationMs": 4400,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 254880,
+    "dDurationMs": 6640,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 261520,
+    "dDurationMs": 4400,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 265920,
+    "dDurationMs": 4480,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 270400,
+    "dDurationMs": 5920,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 276320,
+    "dDurationMs": 8480,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 284800,
+    "dDurationMs": 4080,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 288880,
+    "dDurationMs": 6480,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 295360,
+    "dDurationMs": 4880,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 300240,
+    "dDurationMs": 5840,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 306080,
+    "dDurationMs": 4160,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 310240,
+    "dDurationMs": 4960,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 315200,
+    "dDurationMs": 5280,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 320480,
+    "dDurationMs": 7040,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 327520,
+    "dDurationMs": 5600,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 333120,
+    "dDurationMs": 6400,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 339520,
+    "dDurationMs": 4480,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 344000,
+    "dDurationMs": 4560,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 348560,
+    "dDurationMs": 6400,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 354960,
+    "dDurationMs": 4720,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 359680,
+    "dDurationMs": 4560,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 364240,
+    "dDurationMs": 6400,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 370640,
+    "dDurationMs": 6480,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 377120,
+    "dDurationMs": 6480,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 383600,
+    "dDurationMs": 6800,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 390400,
+    "dDurationMs": 7360,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 397760,
+    "dDurationMs": 6160,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 403920,
+    "dDurationMs": 5840,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 409760,
+    "dDurationMs": 5360,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 415120,
+    "dDurationMs": 5920,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 421040,
+    "dDurationMs": 8160,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 429200,
+    "dDurationMs": 5600,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 434800,
+    "dDurationMs": 5760,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 440560,
+    "dDurationMs": 6320,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 446880,
+    "dDurationMs": 5920,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 452800,
+    "dDurationMs": 5360,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 459200,
+    "dDurationMs": 6400,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 465600,
+    "dDurationMs": 7440,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 473040,
+    "dDurationMs": 7520,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 480560,
+    "dDurationMs": 10560,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 491120,
+    "dDurationMs": 8240,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 499360,
+    "dDurationMs": 4480,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 503840,
+    "dDurationMs": 8800,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 512640,
+    "dDurationMs": 6880,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 519520,
+    "dDurationMs": 7680,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 527200,
+    "dDurationMs": 6720,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 533920,
+    "dDurationMs": 6880,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 540800,
+    "dDurationMs": 8000,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 548800,
+    "dDurationMs": 5040,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 553840,
+    "dDurationMs": 5760,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 559600,
+    "dDurationMs": 7200,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 566800,
+    "dDurationMs": 5360,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 572160,
+    "dDurationMs": 5600,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 577760,
+    "dDurationMs": 5600,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 583360,
+    "dDurationMs": 6560,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 589920,
+    "dDurationMs": 6800,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 596720,
+    "dDurationMs": 5680,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 602400,
+    "dDurationMs": 5040,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 607440,
+    "dDurationMs": 6560,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 614000,
+    "dDurationMs": 7920,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 621920,
+    "dDurationMs": 5360,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 627280,
+    "dDurationMs": 4720,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 632000,
+    "dDurationMs": 6320,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 638320,
+    "dDurationMs": 4880,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 643200,
+    "dDurationMs": 4720,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 647920,
+    "dDurationMs": 9040,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 656960,
+    "dDurationMs": 7360,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 664320,
+    "dDurationMs": 5440,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 669760,
+    "dDurationMs": 5520,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 675280,
+    "dDurationMs": 5840,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 681120,
+    "dDurationMs": 4640,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 685760,
+    "dDurationMs": 7040,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 692800,
+    "dDurationMs": 5600,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 698400,
+    "dDurationMs": 6080,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 704480,
+    "dDurationMs": 5760,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 710240,
+    "dDurationMs": 7920,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 718160,
+    "dDurationMs": 6560,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 724720,
+    "dDurationMs": 4960,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 729680,
+    "dDurationMs": 5600,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 735280,
+    "dDurationMs": 5760,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 741040,
+    "dDurationMs": 5840,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 746880,
+    "dDurationMs": 5200,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 752080,
+    "dDurationMs": 4480,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 756560,
+    "dDurationMs": 4880,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 761440,
+    "dDurationMs": 7760,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 769200,
+    "dDurationMs": 5360,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 774560,
+    "dDurationMs": 9440,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 784000,
+    "dDurationMs": 4640,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 788640,
+    "dDurationMs": 5360,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 794000,
+    "dDurationMs": 4320,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 798320,
+    "dDurationMs": 5600,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 803920,
+    "dDurationMs": 7360,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 811280,
+    "dDurationMs": 5520,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 816800,
+    "dDurationMs": 4560,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 821360,
+    "dDurationMs": 9200,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 830560,
+    "dDurationMs": 5920,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 836480,
+    "dDurationMs": 5680,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 842160,
+    "dDurationMs": 5200,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 847360,
+    "dDurationMs": 5840,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 853200,
+    "dDurationMs": 5280,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 858480,
+    "dDurationMs": 6400,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 864880,
+    "dDurationMs": 6080,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 870960,
+    "dDurationMs": 5520,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 876480,
+    "dDurationMs": 5920,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 882400,
+    "dDurationMs": 4800,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 887200,
+    "dDurationMs": 8880,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 896080,
+    "dDurationMs": 9280,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 905360,
+    "dDurationMs": 6240,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 911600,
+    "dDurationMs": 7360,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 918960,
+    "dDurationMs": 8560,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 927520,
+    "dDurationMs": 6640,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 934160,
+    "dDurationMs": 8240,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 942400,
+    "dDurationMs": 5280,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 947680,
+    "dDurationMs": 5680,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 953360,
+    "dDurationMs": 9920,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 963280,
+    "dDurationMs": 8000,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 971280,
+    "dDurationMs": 7120,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 978400,
+    "dDurationMs": 6560,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 985600,
+    "dDurationMs": 4720,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 990320,
+    "dDurationMs": 6960,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 997280,
+    "dDurationMs": 7440,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1004720,
+    "dDurationMs": 5200,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1009920,
+    "dDurationMs": 4720,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1014640,
+    "dDurationMs": 7600,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1022240,
+    "dDurationMs": 5360,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1028160,
+    "dDurationMs": 7680,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1035840,
+    "dDurationMs": 4560,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1040400,
+    "dDurationMs": 11280,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1051680,
+    "dDurationMs": 7840,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1059520,
+    "dDurationMs": 6080,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1065600,
+    "dDurationMs": 7280,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1072880,
+    "dDurationMs": 11040,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1083920,
+    "dDurationMs": 7840,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1091760,
+    "dDurationMs": 5120,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1096880,
+    "dDurationMs": 8880,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1105760,
+    "dDurationMs": 8160,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1113920,
+    "dDurationMs": 6000,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1119920,
+    "dDurationMs": 8400,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1128320,
+    "dDurationMs": 4400,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1132720,
+    "dDurationMs": 9280,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1142000,
+    "dDurationMs": 6720,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1148720,
+    "dDurationMs": 5440,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1155120,
+    "dDurationMs": 6400,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1161520,
+    "dDurationMs": 4880,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1166400,
+    "dDurationMs": 5680,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1172080,
+    "dDurationMs": 12160,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1184240,
+    "dDurationMs": 5600,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1189840,
+    "dDurationMs": 6240,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1196080,
+    "dDurationMs": 9280,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1205360,
+    "dDurationMs": 6480,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1211840,
+    "dDurationMs": 7840,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1220240,
+    "dDurationMs": 6240,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1226480,
+    "dDurationMs": 6160,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1232640,
+    "dDurationMs": 5680,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1238320,
+    "dDurationMs": 7920,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1246240,
+    "dDurationMs": 6160,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1252400,
+    "dDurationMs": 5520,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1258480,
+    "dDurationMs": 9200,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1267680,
+    "dDurationMs": 5760,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1273440,
+    "dDurationMs": 5840,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1279280,
+    "dDurationMs": 7840,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1287120,
+    "dDurationMs": 7120,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1294240,
+    "dDurationMs": 5360,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1299600,
+    "dDurationMs": 7600,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1307200,
+    "dDurationMs": 8240,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1315440,
+    "dDurationMs": 8640,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1324080,
+    "dDurationMs": 8800,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1332880,
+    "dDurationMs": 7120,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1340000,
+    "dDurationMs": 7680,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1347680,
+    "dDurationMs": 4080,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1351760,
+    "dDurationMs": 6160,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1357920,
+    "dDurationMs": 10560,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1368480,
+    "dDurationMs": 6560,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1375040,
+    "dDurationMs": 4880,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1379920,
+    "dDurationMs": 10000,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1389920,
+    "dDurationMs": 5920,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1395840,
+    "dDurationMs": 4240,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1400080,
+    "dDurationMs": 6480,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1406560,
+    "dDurationMs": 5040,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1411600,
+    "dDurationMs": 6400,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1418000,
+    "dDurationMs": 5040,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1423040,
+    "dDurationMs": 4640,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1427680,
+    "dDurationMs": 5120,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1432800,
+    "dDurationMs": 5760,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1438560,
+    "dDurationMs": 9440,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1448000,
+    "dDurationMs": 8320,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1456320,
+    "dDurationMs": 6880,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1463200,
+    "dDurationMs": 5520,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1468720,
+    "dDurationMs": 7920,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1476640,
+    "dDurationMs": 5600,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1482240,
+    "dDurationMs": 6880,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1489120,
+    "dDurationMs": 8160,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1497280,
+    "dDurationMs": 5280,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1502560,
+    "dDurationMs": 7680,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1510240,
+    "dDurationMs": 6960,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1517200,
+    "dDurationMs": 8800,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1526000,
+    "dDurationMs": 6880,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1532880,
+    "dDurationMs": 6160,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1539040,
+    "dDurationMs": 7040,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1546080,
+    "dDurationMs": 8480,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1554560,
+    "dDurationMs": 6400,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1560960,
+    "dDurationMs": 5600,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1566560,
+    "dDurationMs": 5200,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1571760,
+    "dDurationMs": 5680,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1578080,
+    "dDurationMs": 5760,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1583840,
+    "dDurationMs": 6800,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1590640,
+    "dDurationMs": 6320,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1596960,
+    "dDurationMs": 6880,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1603840,
+    "dDurationMs": 5920,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1609760,
+    "dDurationMs": 6640,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1616400,
+    "dDurationMs": 4400,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1620800,
+    "dDurationMs": 7040,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1627840,
+    "dDurationMs": 7760,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1635600,
+    "dDurationMs": 5840,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1642080,
+    "dDurationMs": 6640,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1648720,
+    "dDurationMs": 5600,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1655440,
+    "dDurationMs": 10000,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1665440,
+    "dDurationMs": 11840,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1677280,
+    "dDurationMs": 6640,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1683920,
+    "dDurationMs": 5840,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1689760,
+    "dDurationMs": 6720,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1696480,
+    "dDurationMs": 10800,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1707280,
+    "dDurationMs": 7520,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1714800,
+    "dDurationMs": 4960,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1719760,
+    "dDurationMs": 7040,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1726800,
+    "dDurationMs": 5760,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1732560,
+    "dDurationMs": 4880,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1737440,
+    "dDurationMs": 6800,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1744240,
+    "dDurationMs": 6240,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1750480,
+    "dDurationMs": 4000,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1754480,
+    "dDurationMs": 6240,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1760720,
+    "dDurationMs": 5680,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1766400,
+    "dDurationMs": 5440,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1771840,
+    "dDurationMs": 4960,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1776800,
+    "dDurationMs": 5440,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1782240,
+    "dDurationMs": 6640,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1790400,
+    "dDurationMs": 8800,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1799200,
+    "dDurationMs": 7440,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1807440,
+    "dDurationMs": 5760,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1813200,
+    "dDurationMs": 7120,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1820320,
+    "dDurationMs": 4160,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1824480,
+    "dDurationMs": 7040,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1831520,
+    "dDurationMs": 7440,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1838960,
+    "dDurationMs": 3920,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1842880,
+    "dDurationMs": 6400,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1849280,
+    "dDurationMs": 6640,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1855920,
+    "dDurationMs": 5040,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1860960,
+    "dDurationMs": 4880,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1865840,
+    "dDurationMs": 7040,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1872880,
+    "dDurationMs": 5360,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1878240,
+    "dDurationMs": 4800,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1883040,
+    "dDurationMs": 5120,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1888160,
+    "dDurationMs": 5440,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1893600,
+    "dDurationMs": 4720,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1898320,
+    "dDurationMs": 7760,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1906080,
+    "dDurationMs": 5360,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1911440,
+    "dDurationMs": 4960,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1916400,
+    "dDurationMs": 8000,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1925680,
+    "dDurationMs": 7040,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1932720,
+    "dDurationMs": 7680,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1940400,
+    "dDurationMs": 6560,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1946960,
+    "dDurationMs": 6720,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1953680,
+    "dDurationMs": 5840,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1959520,
+    "dDurationMs": 7360,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1966880,
+    "dDurationMs": 6960,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1973840,
+    "dDurationMs": 8480,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1982320,
+    "dDurationMs": 6720,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1989040,
+    "dDurationMs": 6480,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1995520,
+    "dDurationMs": 7520,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2003040,
+    "dDurationMs": 6160,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2009200,
+    "dDurationMs": 8320,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2017520,
+    "dDurationMs": 8000,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2025520,
+    "dDurationMs": 6240,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2031760,
+    "dDurationMs": 6560,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2038320,
+    "dDurationMs": 6560,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2044880,
+    "dDurationMs": 7760,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2052640,
+    "dDurationMs": 5200,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2058960,
+    "dDurationMs": 6320,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2065280,
+    "dDurationMs": 6080,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2071360,
+    "dDurationMs": 8160,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2079520,
+    "dDurationMs": 6800,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2086320,
+    "dDurationMs": 6880,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2093200,
+    "dDurationMs": 6160,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2099360,
+    "dDurationMs": 6080,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2105440,
+    "dDurationMs": 4560,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2110000,
+    "dDurationMs": 8080,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2118080,
+    "dDurationMs": 4960,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2123040,
+    "dDurationMs": 6320,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2129360,
+    "dDurationMs": 5040,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2134400,
+    "dDurationMs": 5760,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2140160,
+    "dDurationMs": 4720,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2144880,
+    "dDurationMs": 7360,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2152240,
+    "dDurationMs": 10320,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2162560,
+    "dDurationMs": 5040,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2167600,
+    "dDurationMs": 8560,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2176160,
+    "dDurationMs": 4080,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2180240,
+    "dDurationMs": 5600,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2185840,
+    "dDurationMs": 7440,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2193280,
+    "dDurationMs": 5520,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2198800,
+    "dDurationMs": 7520,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2206320,
+    "dDurationMs": 8800,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2215120,
+    "dDurationMs": 5840,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2220960,
+    "dDurationMs": 7600,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2228560,
+    "dDurationMs": 5120,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2233680,
+    "dDurationMs": 9120,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2242800,
+    "dDurationMs": 9120,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2251920,
+    "dDurationMs": 5280,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2257200,
+    "dDurationMs": 9040,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2266240,
+    "dDurationMs": 3680,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2269920,
+    "dDurationMs": 6880,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2276800,
+    "dDurationMs": 5600,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2282400,
+    "dDurationMs": 5440,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2287840,
+    "dDurationMs": 14480,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2302320,
+    "dDurationMs": 7040,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2309360,
+    "dDurationMs": 6640,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2316000,
+    "dDurationMs": 6240,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2322240,
+    "dDurationMs": 8560,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2330800,
+    "dDurationMs": 5200,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2336000,
+    "dDurationMs": 6720,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2343680,
+    "dDurationMs": 9920,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2353600,
+    "dDurationMs": 8800,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2362400,
+    "dDurationMs": 7040,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2369440,
+    "dDurationMs": 6800,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2376240,
+    "dDurationMs": 5440,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2381680,
+    "dDurationMs": 5760,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2387440,
+    "dDurationMs": 7440,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2394880,
+    "dDurationMs": 7520,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2402400,
+    "dDurationMs": 7040,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2409440,
+    "dDurationMs": 6960,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2416400,
+    "dDurationMs": 6000,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2422400,
+    "dDurationMs": 4320,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2426720,
+    "dDurationMs": 7120,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2433840,
+    "dDurationMs": 6720,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2440560,
+    "dDurationMs": 6800,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2448320,
+    "dDurationMs": 7440,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2456640,
+    "dDurationMs": 6880,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2463520,
+    "dDurationMs": 6720,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2470240,
+    "dDurationMs": 7680,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2477920,
+    "dDurationMs": 5680,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2483600,
+    "dDurationMs": 12880,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2496480,
+    "dDurationMs": 7120,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2503600,
+    "dDurationMs": 8480,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2512080,
+    "dDurationMs": 11040,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2523120,
+    "dDurationMs": 9280,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2532400,
+    "dDurationMs": 9360,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2541760,
+    "dDurationMs": 5440,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2547200,
+    "dDurationMs": 9120,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2556960,
+    "dDurationMs": 5360,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2562320,
+    "dDurationMs": 4960,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2567280,
+    "dDurationMs": 6640,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2573920,
+    "dDurationMs": 8080,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2582000,
+    "dDurationMs": 5360,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2587360,
+    "dDurationMs": 6320,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2593680,
+    "dDurationMs": 6160,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2599840,
+    "dDurationMs": 5600,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2605440,
+    "dDurationMs": 4880,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2610320,
+    "dDurationMs": 4640,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2614960,
+    "dDurationMs": 7200,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2622160,
+    "dDurationMs": 6720,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2628880,
+    "dDurationMs": 7920,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  } ]
+}

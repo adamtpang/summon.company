@@ -1030,6 +1030,13 @@
       "when": 1784348832619,
       "tag": "0148_company_operating_mode",
       "breakpoints": true
+    },
+    {
+      "idx": 149,
+      "version": "7",
+      "when": 1785196800000,
+      "tag": "0149_issue_outcomes",
+      "breakpoints": true
     }
   ]
 }

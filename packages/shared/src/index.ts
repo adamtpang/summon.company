@@ -892,6 +892,7 @@ export type {
   AgentWakeupRequest,
   InstanceSchedulerHeartbeatAgent,
   LiveEvent,
+  DashboardOutcomes,
   DashboardRunActivityDay,
   DashboardSummary,
   TimelineActorType,
@@ -1070,6 +1071,26 @@ export {
   parseIssueReferenceHref,
   type IssueReferenceMatch,
 } from "./issue-references.js";
+
+export {
+  extractFencedBlock,
+  extractOutcomeBlock,
+  parseOutcomeCore,
+  parseOutcomeReceipt,
+  outcomeTimeValueCents,
+  type OutcomeCore,
+  type OutcomeReceipt,
+  type OutcomeReceiptParseResult,
+} from "./outcome-receipt.js";
+
+export {
+  parseOutcomeForecast,
+  formatForecastLine,
+  summarizeForecastLevers,
+  humanizeDurationMinutes,
+  type OutcomeForecast,
+  type OutcomeForecastParseResult,
+} from "./outcome-forecast.js";
 
 export {
   anchorSnapshotToSelector,

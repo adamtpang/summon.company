@@ -1,0 +1,2233 @@
+{
+  "wireMagic": "pb3",
+  "pens": [ {
+  
+  } ],
+  "wsWinStyles": [ {
+  
+  } ],
+  "wpWinPositions": [ {
+  
+  } ],
+  "events": [ {
+    "tStartMs": 160,
+    "dDurationMs": 5200,
+    "segs": [ {
+      "utf8": "You might have heard of Vibe Marketing. Today \nI'm going to teach you exactly how to do it super  "
+    } ]
+  }, {
+    "tStartMs": 5360,
+    "dDurationMs": 7280,
+    "segs": [ {
+      "utf8": "simply using tools MCP, N8N, and Cloud. It's going \nto help you replace your entire marketing team  "
+    } ]
+  }, {
+    "tStartMs": 12640,
+    "dDurationMs": 5760,
+    "segs": [ {
+      "utf8": "with AI. And I know that sounds crazy, but I'm \ngoing to show you actually how to do it in a very,  "
+    } ]
+  }, {
+    "tStartMs": 18400,
+    "dDurationMs": 5520,
+    "segs": [ {
+      "utf8": "very simple way. You're going to enjoy this \nepisode. People who listen to this episode,  "
+    } ]
+  }, {
+    "tStartMs": 23920,
+    "dDurationMs": 6400,
+    "segs": [ {
+      "utf8": "I don't care if you're a designer or a developer \nor a copywriter or a marketer, you will learn some  "
+    } ]
+  }, {
+    "tStartMs": 30320,
+    "dDurationMs": 6800,
+    "segs": [ {
+      "utf8": "skills that'll help you make a lot of money coming \nup, help you automate a lot of your job, help you  "
+    } ]
+  }, {
+    "tStartMs": 37120,
+    "dDurationMs": 9120,
+    "segs": [ {
+      "utf8": "get customers. And we show you the exact plan for \nhow you can create a business from the arbitrage  "
+    } ]
+  }, {
+    "tStartMs": 46240,
+    "dDurationMs": 5920,
+    "segs": [ {
+      "utf8": "and the insights of using a lot of these AI tools. \nI couldn't be more excited for you to listen to  "
+    } ]
+  }, {
+    "tStartMs": 52160,
+    "dDurationMs": 6240,
+    "segs": [ {
+      "utf8": "this episode until the end, because I do believe \nthat a lot of lives will be change if you know  "
+    } ]
+  }, {
+    "tStartMs": 58400,
+    "dDurationMs": 18000,
+    "segs": [ {
+      "utf8": "how to use these tools. Enjoy the episode. This \nmight be our most requested Startup Ideas podcast.  "
+    } ]
+  }, {
+    "tStartMs": 76400,
+    "dDurationMs": 5920,
+    "segs": [ {
+      "utf8": "I did the video, and we talked a lot about some of \nyour ideas on Vibe Marketing, Introduction to Vibe  "
+    } ]
+  }, {
+    "tStartMs": 82320,
+    "dDurationMs": 5360,
+    "segs": [ {
+      "utf8": "Marketing. I brought on Mr. Vibe Marketing \nhimself, boring marketer. And what are we going  "
+    } ]
+  }, {
+    "tStartMs": 87680,
+    "dDurationMs": 7920,
+    "segs": [ {
+      "utf8": "to learn today? Well, I've been spending a lot of \ntime building workflows and sharing what I know  "
+    } ]
+  }, {
+    "tStartMs": 95600,
+    "dDurationMs": 5760,
+    "segs": [ {
+      "utf8": "about it with my social audience, community, and \nall that. And I think a lot of people believe that  "
+    } ]
+  }, {
+    "tStartMs": 101360,
+    "dDurationMs": 5680,
+    "segs": [ {
+      "utf8": "workflows have to be super, super complicated. \nMaybe you've seen a screenshot of a workflow and  "
+    } ]
+  }, {
+    "tStartMs": 107040,
+    "dDurationMs": 5120,
+    "segs": [ {
+      "utf8": "it's got a million different things happening. \nBut I'm going to actually show you that the most  "
+    } ]
+  }, {
+    "tStartMs": 112160,
+    "dDurationMs": 6320,
+    "segs": [ {
+      "utf8": "powerful workflow you can build is also the \nsimplest one. So by the end of this episode,  "
+    } ]
+  }, {
+    "tStartMs": 118480,
+    "dDurationMs": 3680,
+    "segs": [ {
+      "utf8": "what are people going to learn? Are they going \nto get an introduction to N8N? Are they going  "
+    } ]
+  }, {
+    "tStartMs": 122160,
+    "dDurationMs": 7120,
+    "segs": [ {
+      "utf8": "to understand how to build their first workflow? \nwhy should someone give their time to stick to  "
+    } ]
+  }, {
+    "tStartMs": 129280,
+    "dDurationMs": 4080,
+    "segs": [ {
+      "utf8": "the end of this? I think if you stick to the end, \nyou're going to get a glimpse of what the future  "
+    } ]
+  }, {
+    "tStartMs": 133360,
+    "dDurationMs": 4000,
+    "segs": [ {
+      "utf8": "of marketing actually looks . And it's going to \nbe very actionable. And I'm going to lead you  "
+    } ]
+  }, {
+    "tStartMs": 137360,
+    "dDurationMs": 8160,
+    "segs": [ {
+      "utf8": "through exactly how I would vibe market a product. \nCool. And my ask for you is I've played with N8N.  "
+    } ]
+  }, {
+    "tStartMs": 145520,
+    "dDurationMs": 6000,
+    "segs": [ {
+      "utf8": "It's a bit overwhelming for me. And I'd to see \na sample workflow so that I can basically just  "
+    } ]
+  }, {
+    "tStartMs": 151520,
+    "dDurationMs": 6240,
+    "segs": [ {
+      "utf8": "copy it and just implement it in my business. So \nthat's my ask for you. Let's get right into it.  "
+    } ]
+  }, {
+    "tStartMs": 157760,
+    "dDurationMs": 7520,
+    "segs": [ {
+      "utf8": "Sure. All right. So I said, there's a lot going \non about these workflows and what tools to use and  "
+    } ]
+  }, {
+    "tStartMs": 165280,
+    "dDurationMs": 4480,
+    "segs": [ {
+      "utf8": "things of that nature. So in the community that \nwe have, there's a lot of people that are , hey,  "
+    } ]
+  }, {
+    "tStartMs": 169760,
+    "dDurationMs": 6080,
+    "segs": [ {
+      "utf8": "how do I build my first workflow or where do I \neven start? So the two most common platforms that  "
+    } ]
+  }, {
+    "tStartMs": 175840,
+    "dDurationMs": 6240,
+    "segs": [ {
+      "utf8": "are out there that I typically recommend folks \ncheck out is either Gumloop or InnateIn. I to use  "
+    } ]
+  }, {
+    "tStartMs": 182080,
+    "dDurationMs": 5360,
+    "segs": [ {
+      "utf8": "InnateIn because I'm a little more on the advanced \nside and there's a little bit more flexibility  "
+    } ]
+  }, {
+    "tStartMs": 188240,
+    "dDurationMs": 5600,
+    "segs": [ {
+      "utf8": "what I'm about to show you here today. but you \nshould use it because you can automate a lot  "
+    } ]
+  }, {
+    "tStartMs": 193840,
+    "dDurationMs": 4640,
+    "segs": [ {
+      "utf8": "of the boring manual tasks that are in your \nbusiness. I use it for marketing specifically  "
+    } ]
+  }, {
+    "tStartMs": 198480,
+    "dDurationMs": 4720,
+    "segs": [ {
+      "utf8": "where there's a ton of manual stuff that you have \nto do. And once you automate it, you're kind of  "
+    } ]
+  }, {
+    "tStartMs": 203200,
+    "dDurationMs": 4800,
+    "segs": [ {
+      "utf8": "freed up to focus on more strategic or creative \nthings. And that's sort of the essence of what  "
+    } ]
+  }, {
+    "tStartMs": 208000,
+    "dDurationMs": 5360,
+    "segs": [ {
+      "utf8": "Vibe Marketing is all about. So what I thought I \nwould do is kind of show you a few things that I  "
+    } ]
+  }, {
+    "tStartMs": 213360,
+    "dDurationMs": 6160,
+    "segs": [ {
+      "utf8": "created this morning that if you were to try to \ndo it manually, it would take you at least two  "
+    } ]
+  }, {
+    "tStartMs": 219520,
+    "dDurationMs": 6320,
+    "segs": [ {
+      "utf8": "to three weeks of work to get it done. And I did \nit in about 30 minutes prior to hopping on this  "
+    } ]
+  }, {
+    "tStartMs": 225840,
+    "dDurationMs": 7200,
+    "segs": [ {
+      "utf8": "podcast. Sounds too good to be true, but I'll let \nyou, you know, you're one of my smartest friends,  "
+    } ]
+  }, {
+    "tStartMs": 233040,
+    "dDurationMs": 7120,
+    "segs": [ {
+      "utf8": "so I'd love to see it. Okay, cool. So one \nof the other common questions I get around,  "
+    } ]
+  }, {
+    "tStartMs": 240160,
+    "dDurationMs": 5840,
+    "segs": [ {
+      "utf8": "vibe marketing and building workflows is what \nworkflow should I build? I think people have this  "
+    } ]
+  }, {
+    "tStartMs": 246000,
+    "dDurationMs": 6560,
+    "segs": [ {
+      "utf8": "cold start problem. So we're also going to try \nto answer that as I walk you through this stuff.  "
+    } ]
+  }, {
+    "tStartMs": 252560,
+    "dDurationMs": 6320,
+    "segs": [ {
+      "utf8": "So the way that I to think about building my \nfirst vibe marketing workflow is I to understand  "
+    } ]
+  }, {
+    "tStartMs": 258880,
+    "dDurationMs": 6800,
+    "segs": [ {
+      "utf8": "where's the demand out there on the internet for \nmy product or my service. Now, the easiest way to  "
+    } ]
+  }, {
+    "tStartMs": 265680,
+    "dDurationMs": 5840,
+    "segs": [ {
+      "utf8": "find that is to do keyword research. This allows \nyou to understand what people are searching for  "
+    } ]
+  }, {
+    "tStartMs": 271520,
+    "dDurationMs": 5120,
+    "segs": [ {
+      "utf8": "on Google, how often they're searching it, \nand how much potential traffic you can get  "
+    } ]
+  }, {
+    "tStartMs": 276640,
+    "dDurationMs": 5120,
+    "segs": [ {
+      "utf8": "to your website if you rank and show up on \nthe results for that keyword. Now, you know,  "
+    } ]
+  }, {
+    "tStartMs": 281760,
+    "dDurationMs": 6080,
+    "segs": [ {
+      "utf8": "SEO and all that's changing. A lot of people \nare talking about how do I rank in LLMs or how  "
+    } ]
+  }, {
+    "tStartMs": 287840,
+    "dDurationMs": 6320,
+    "segs": [ {
+      "utf8": "do I show up in chat GPT if someone searches for a \nkeyword related to my product as well. And this is  "
+    } ]
+  }, {
+    "tStartMs": 294160,
+    "dDurationMs": 4080,
+    "segs": [ {
+      "utf8": "going to help to address that too. So I'm really \ngoing to walk you through how I would approach  "
+    } ]
+  }, {
+    "tStartMs": 298240,
+    "dDurationMs": 6000,
+    "segs": [ {
+      "utf8": "an organic growth system that's going to help you \nrank and get discovered, help you create content  "
+    } ]
+  }, {
+    "tStartMs": 304240,
+    "dDurationMs": 4560,
+    "segs": [ {
+      "utf8": "that's relevant for what your customers are \nlooking for, and then how you can look at it as  "
+    } ]
+  }, {
+    "tStartMs": 308800,
+    "dDurationMs": 6080,
+    "segs": [ {
+      "utf8": "sort of a continuous improvement process so that \nyou can go out and beat the competition. So when  "
+    } ]
+  }, {
+    "tStartMs": 314880,
+    "dDurationMs": 6240,
+    "segs": [ {
+      "utf8": "it comes to keyword research, you know, there's \na couple common tools that people use to do it.  "
+    } ]
+  }, {
+    "tStartMs": 321120,
+    "dDurationMs": 5680,
+    "segs": [ {
+      "utf8": "There's Ahrefs, there's SEMrush, there's a bunch \nof other ones. Now, if you've ever tried to log  "
+    } ]
+  }, {
+    "tStartMs": 326800,
+    "dDurationMs": 6080,
+    "segs": [ {
+      "utf8": "into one of these tools, it's very overwhelming. \nHave you ever tried to log into Ahrefs, Greg? Much  "
+    } ]
+  }, {
+    "tStartMs": 332880,
+    "dDurationMs": 5680,
+    "segs": [ {
+      "utf8": "to my chagrin. Okay. So you log in, there's a lot \nof different buttons, a lot of different things  "
+    } ]
+  }, {
+    "tStartMs": 338560,
+    "dDurationMs": 5760,
+    "segs": [ {
+      "utf8": "to click around on and stuff that. So I'm going to \nshow you sort of an end result and then I'm going  "
+    } ]
+  }, {
+    "tStartMs": 344320,
+    "dDurationMs": 7040,
+    "segs": [ {
+      "utf8": "to walk backwards. So what you're looking at right \nhere is a fully completed keyword research study  "
+    } ]
+  }, {
+    "tStartMs": 351360,
+    "dDurationMs": 7200,
+    "segs": [ {
+      "utf8": "that I did this morning. So, sorry, I just opened \nthat I did this morning. So what we're looking at  "
+    } ]
+  }, {
+    "tStartMs": 358560,
+    "dDurationMs": 6240,
+    "segs": [ {
+      "utf8": "here is 42 different keywords that Beehive, \na newsletter growth platform, could go and  "
+    } ]
+  }, {
+    "tStartMs": 364800,
+    "dDurationMs": 9280,
+    "segs": [ {
+      "utf8": "rank for. It's telling me that there's 14,580 \nmonthly traffic available for these keywords.  "
+    } ]
+  }, {
+    "tStartMs": 374080,
+    "dDurationMs": 5440,
+    "segs": [ {
+      "utf8": "It's telling me that there's about medium \ncompetition for these keywords. So I have  "
+    } ]
+  }, {
+    "tStartMs": 379520,
+    "dDurationMs": 6560,
+    "segs": [ {
+      "utf8": "opportunity to go and outrank the competitors. And \nthere's 20 high potential keywords specifically  "
+    } ]
+  }, {
+    "tStartMs": 386080,
+    "dDurationMs": 6720,
+    "segs": [ {
+      "utf8": "here. So what you see is there's various types of \nkeywords. There's informational keywords. These  "
+    } ]
+  }, {
+    "tStartMs": 392800,
+    "dDurationMs": 6560,
+    "segs": [ {
+      "utf8": "are , how do I start my first newsletter? There's \ncommercial keywords , what is the best newsletter  "
+    } ]
+  }, {
+    "tStartMs": 399360,
+    "dDurationMs": 5040,
+    "segs": [ {
+      "utf8": "platform for my business? And there's a couple \nother types as well. It's even showing me some  "
+    } ]
+  }, {
+    "tStartMs": 404400,
+    "dDurationMs": 5120,
+    "segs": [ {
+      "utf8": "of the competitors that are currently ranking \nfor those keywords out in the market. Okay,  "
+    } ]
+  }, {
+    "tStartMs": 409520,
+    "dDurationMs": 5520,
+    "segs": [ {
+      "utf8": "so the next thing is that it's giving me some \nkey insights and recommendations already. So  "
+    } ]
+  }, {
+    "tStartMs": 415040,
+    "dDurationMs": 5840,
+    "segs": [ {
+      "utf8": "it's telling me what type of content I need to go \nand create in order to rank for these keywords.  "
+    } ]
+  }, {
+    "tStartMs": 420880,
+    "dDurationMs": 5280,
+    "segs": [ {
+      "utf8": "So it's telling me to create comprehensive guides \naround newsletter creation, monetization, and even  "
+    } ]
+  }, {
+    "tStartMs": 426160,
+    "dDurationMs": 7200,
+    "segs": [ {
+      "utf8": "growth strategies. It's telling me how I can get a \ncompetitive edge versus the competition. So I need  "
+    } ]
+  }, {
+    "tStartMs": 433360,
+    "dDurationMs": 6160,
+    "segs": [ {
+      "utf8": "to analyze the gaps on how I'm different than sub \nstack, for example. And then it's giving me what  "
+    } ]
+  }, {
+    "tStartMs": 439520,
+    "dDurationMs": 5400,
+    "segs": [ {
+      "utf8": "the traffic opportunity actually is. So this is \njust the overview. And then if we go into the long  "
+    } ]
+  }, {
+    "tStartMs": 444920,
+    "dDurationMs": 6280,
+    "segs": [ {
+      "utf8": "tail recommendations, you can see that we have \na bunch of high quality, very targeted keywords  "
+    } ]
+  }, {
+    "tStartMs": 451200,
+    "dDurationMs": 7440,
+    "segs": [ {
+      "utf8": "that we can go after and try to rank for. Okay, \nso we've got examples newsletter platform for  "
+    } ]
+  }, {
+    "tStartMs": 458640,
+    "dDurationMs": 4720,
+    "segs": [ {
+      "utf8": "creators, email marketing software for writers, \nbest newsletter monetization tools. These are  "
+    } ]
+  }, {
+    "tStartMs": 463360,
+    "dDurationMs": 6880,
+    "segs": [ {
+      "utf8": "all things that folks are actively looking for \nonline. So if I click into these keywords, it's  "
+    } ]
+  }, {
+    "tStartMs": 470240,
+    "dDurationMs": 7920,
+    "segs": [ {
+      "utf8": "giving me the exact steps that I need to do to go \nand show up for this so that I can get the right  "
+    } ]
+  }, {
+    "tStartMs": 478160,
+    "dDurationMs": 5760,
+    "segs": [ {
+      "utf8": "type of traffic to my website. So it's telling \nme create in-depth guides, develop case studies,  "
+    } ]
+  }, {
+    "tStartMs": 483920,
+    "dDurationMs": 5680,
+    "segs": [ {
+      "utf8": "create comparison content with competitors, and \nthen build landing pages optimized for this term.  "
+    } ]
+  }, {
+    "tStartMs": 489600,
+    "dDurationMs": 5440,
+    "segs": [ {
+      "utf8": "All right. So I've got some information on \nwhere the demand is out there. And that's  "
+    } ]
+  }, {
+    "tStartMs": 495040,
+    "dDurationMs": 7120,
+    "segs": [ {
+      "utf8": "usually the place that I to start. Now, if you \nwere to build this out as a workflow in N8N,  "
+    } ]
+  }, {
+    "tStartMs": 502160,
+    "dDurationMs": 8160,
+    "segs": [ {
+      "utf8": "it would be very complex. You know, it would be , \nhey, go and, you know, access some sort of keyword  "
+    } ]
+  }, {
+    "tStartMs": 510320,
+    "dDurationMs": 5760,
+    "segs": [ {
+      "utf8": "database, categorize the keywords, go and look \nat competitors. And there would probably be , you  "
+    } ]
+  }, {
+    "tStartMs": 516080,
+    "dDurationMs": 7600,
+    "segs": [ {
+      "utf8": "know, 15 to 20 different, you know, nodes, which \nare, you know, different actions within a workflow  "
+    } ]
+  }, {
+    "tStartMs": 523680,
+    "dDurationMs": 5120,
+    "segs": [ {
+      "utf8": "in order to get this done. But I'm going to show \nyou how simple this can this can really be to get  "
+    } ]
+  }, {
+    "tStartMs": 528800,
+    "dDurationMs": 7920,
+    "segs": [ {
+      "utf8": "this type of output. I want to say one quick \nthing. Yeah. So we just quickly went over the  "
+    } ]
+  }, {
+    "tStartMs": 536720,
+    "dDurationMs": 9680,
+    "segs": [ {
+      "utf8": "exact plan around how to just siphon out 5, \n10, potentially up to 15,000 monthly traffic  "
+    } ]
+  }, {
+    "tStartMs": 546400,
+    "dDurationMs": 5200,
+    "segs": [ {
+      "utf8": "to a landing page. It's , build this guide. \nHere's what it should be, which is insane to  "
+    } ]
+  }, {
+    "tStartMs": 551600,
+    "dDurationMs": 5440,
+    "segs": [ {
+      "utf8": "think about. It's basically giving you the plan \naround how to actually build the thing. And then  "
+    } ]
+  }, {
+    "tStartMs": 557040,
+    "dDurationMs": 7520,
+    "segs": [ {
+      "utf8": "when you look at something beehive.com, so these \nare SaaS tools that will give you 10, 20, 30, 40,  "
+    } ]
+  }, {
+    "tStartMs": 564560,
+    "dDurationMs": 7120,
+    "segs": [ {
+      "utf8": "50 percent of revenue. You know, so I've done \na guide. I'll link it in the show notes around  "
+    } ]
+  }, {
+    "tStartMs": 571680,
+    "dDurationMs": 5680,
+    "segs": [ {
+      "utf8": "how to start an online directory, which sounds , \nby the way, the most boring business to start of  "
+    } ]
+  }, {
+    "tStartMs": 577360,
+    "dDurationMs": 8480,
+    "segs": [ {
+      "utf8": "all time. an online directory and teaching people \nand basically creating a list of top, let's say,  "
+    } ]
+  }, {
+    "tStartMs": 585840,
+    "dDurationMs": 6400,
+    "segs": [ {
+      "utf8": "email providers. But having affiliate links is \nprobably, and creating directories and creating  "
+    } ]
+  }, {
+    "tStartMs": 592240,
+    "dDurationMs": 5600,
+    "segs": [ {
+      "utf8": "guides around this sort of thing is probably \nthe easiest way to get started in this whole  "
+    } ]
+  }, {
+    "tStartMs": 597840,
+    "dDurationMs": 6240,
+    "segs": [ {
+      "utf8": "make money online space Yeah exactly I mean the \neasiest way to get started is to figure out how  "
+    } ]
+  }, {
+    "tStartMs": 604080,
+    "dDurationMs": 6800,
+    "segs": [ {
+      "utf8": "you can identify existing demand and analyze the \ncompetitors to see what they're not covering. And  "
+    } ]
+  }, {
+    "tStartMs": 610880,
+    "dDurationMs": 6160,
+    "segs": [ {
+      "utf8": "then that's your entry point right there. Cool. \nAll right. Okay. So this looks pretty complicated,  "
+    } ]
+  }, {
+    "tStartMs": 617040,
+    "dDurationMs": 4880,
+    "segs": [ {
+      "utf8": "right? it's got all kinds of recommendations. \nIt's got a bunch of keywords, all kinds of really  "
+    } ]
+  }, {
+    "tStartMs": 621920,
+    "dDurationMs": 5440,
+    "segs": [ {
+      "utf8": "good stuff. And I said, you might think that \nthis requires an incredibly complex workflow,  "
+    } ]
+  }, {
+    "tStartMs": 627360,
+    "dDurationMs": 6640,
+    "segs": [ {
+      "utf8": "but I'm going to show you how I arrived at this. \nSo I'm going to open up a Claude desktop. So  "
+    } ]
+  }, {
+    "tStartMs": 634000,
+    "dDurationMs": 7280,
+    "segs": [ {
+      "utf8": "you might think that there's a super complicated \nworkflow to find these opportunities and keywords  "
+    } ]
+  }, {
+    "tStartMs": 641280,
+    "dDurationMs": 6960,
+    "segs": [ {
+      "utf8": "out there. But I actually created that entire \ndashboard showing me my relevant keywords. If I'm  "
+    } ]
+  }, {
+    "tStartMs": 648240,
+    "dDurationMs": 7200,
+    "segs": [ {
+      "utf8": "Beehive with one prompt within Claude. So I said, \nfind me 20 long tail keywords, non-branded. That  "
+    } ]
+  }, {
+    "tStartMs": 655440,
+    "dDurationMs": 6480,
+    "segs": [ {
+      "utf8": "means I don't want it to be people searching \nfor Beehive for the domain Beehive.com. Now,  "
+    } ]
+  }, {
+    "tStartMs": 661920,
+    "dDurationMs": 6880,
+    "segs": [ {
+      "utf8": "if you were just using Claude out of the box, it \ncouldn't do that. Now, you might see that I have  "
+    } ]
+  }, {
+    "tStartMs": 668800,
+    "dDurationMs": 4720,
+    "segs": [ {
+      "utf8": "this little thing here called keyword tool. Do \nyou see that, Greg? Yeah, I don't know what I'm  "
+    } ]
+  }, {
+    "tStartMs": 673520,
+    "dDurationMs": 5120,
+    "segs": [ {
+      "utf8": "looking at, but I've never seen that. Okay, \ncool. Yeah. You've probably never seen that  "
+    } ]
+  }, {
+    "tStartMs": 678640,
+    "dDurationMs": 5840,
+    "segs": [ {
+      "utf8": "in Claude because it's not something that you \ncan just access within Claude. What this is, is  "
+    } ]
+  }, {
+    "tStartMs": 684480,
+    "dDurationMs": 9760,
+    "segs": [ {
+      "utf8": "this is an MCP integration. Okay. So I'm able to \naccess a tool that I created in N8N called Keyword  "
+    } ]
+  }, {
+    "tStartMs": 694240,
+    "dDurationMs": 8160,
+    "segs": [ {
+      "utf8": "Tool that's going through Ahrefs, all the data in \nAhrefs, and just pulling out the information that  "
+    } ]
+  }, {
+    "tStartMs": 702400,
+    "dDurationMs": 5840,
+    "segs": [ {
+      "utf8": "I need, which are these 20 high potential long \ntail keywords. So if you find Ahrefs confusing,  "
+    } ]
+  }, {
+    "tStartMs": 708240,
+    "dDurationMs": 4880,
+    "segs": [ {
+      "utf8": "if you find keyword research confusing, we're \nletting Claude do all the hard work of finding  "
+    } ]
+  }, {
+    "tStartMs": 713120,
+    "dDurationMs": 8480,
+    "segs": [ {
+      "utf8": "what keywords you need to focus on. I love it. \nOkay. So that alone, if you want to do manual  "
+    } ]
+  }, {
+    "tStartMs": 721600,
+    "dDurationMs": 7920,
+    "segs": [ {
+      "utf8": "keyword research and you're not a super search or \nSEO or digital marketing professional, that could  "
+    } ]
+  }, {
+    "tStartMs": 729520,
+    "dDurationMs": 6880,
+    "segs": [ {
+      "utf8": "take you 20, 30, 40 hours to go into a tool, to \nanalyze the keywords, to look at the competitors.  "
+    } ]
+  }, {
+    "tStartMs": 736400,
+    "dDurationMs": 7200,
+    "segs": [ {
+      "utf8": "And when I prompted Claude here, it returned these \nkeywords to me within 30 seconds. Yeah. Also,  "
+    } ]
+  }, {
+    "tStartMs": 743600,
+    "dDurationMs": 6560,
+    "segs": [ {
+      "utf8": "you could be spending 20, 30, 40 hours and still \nnot have the right keywords. Yeah, exactly. These  "
+    } ]
+  }, {
+    "tStartMs": 750160,
+    "dDurationMs": 7200,
+    "segs": [ {
+      "utf8": "are highly relevant. They're exactly the type of \nkeywords that I want to go after. And this alone  "
+    } ]
+  }, {
+    "tStartMs": 757360,
+    "dDurationMs": 7280,
+    "segs": [ {
+      "utf8": "is incredibly valuable. All right. I knew you'd \ngive this off. Okay, let's continue. All right. So  "
+    } ]
+  }, {
+    "tStartMs": 764640,
+    "dDurationMs": 5840,
+    "segs": [ {
+      "utf8": "we've got our keywords here with a prompt. and you \ncan see they're targeting the core functionality  "
+    } ]
+  }, {
+    "tStartMs": 770480,
+    "dDurationMs": 7200,
+    "segs": [ {
+      "utf8": "of Beehive as a newsletter platform while focusing \non specific user needs and use cases. So we're  "
+    } ]
+  }, {
+    "tStartMs": 777680,
+    "dDurationMs": 4560,
+    "segs": [ {
+      "utf8": "targeting keywords that have intent behind them. \nThese are the ones that, you know, once somebody  "
+    } ]
+  }, {
+    "tStartMs": 782240,
+    "dDurationMs": 5200,
+    "segs": [ {
+      "utf8": "clicks on a result and say chat GPT or on Google \nsearch, these folks are actually going to do  "
+    } ]
+  }, {
+    "tStartMs": 787440,
+    "dDurationMs": 6400,
+    "segs": [ {
+      "utf8": "something on your website. You know, not all \nsearch traffic or whatever is created equal.  "
+    } ]
+  }, {
+    "tStartMs": 793840,
+    "dDurationMs": 4240,
+    "segs": [ {
+      "utf8": "These are the type of visitors that are actually \ngoing to convert to your product or service,  "
+    } ]
+  }, {
+    "tStartMs": 798080,
+    "dDurationMs": 4080,
+    "segs": [ {
+      "utf8": "which is super, super important. Yeah, it's super \nimportant because there's a lot of people who  "
+    } ]
+  }, {
+    "tStartMs": 802160,
+    "dDurationMs": 5520,
+    "segs": [ {
+      "utf8": "are , yeah, I get a million visits a month to my \ndirectory or whatever, but it's low quality stuff,  "
+    } ]
+  }, {
+    "tStartMs": 807680,
+    "dDurationMs": 5520,
+    "segs": [ {
+      "utf8": "right? I'd rather have 10,000 high quality \nand just focus on those people. If they're  "
+    } ]
+  }, {
+    "tStartMs": 813200,
+    "dDurationMs": 6800,
+    "segs": [ {
+      "utf8": "going to convert at five to 10x, what with the \nothers? Exactly. So what I to do after I get the  "
+    } ]
+  }, {
+    "tStartMs": 820000,
+    "dDurationMs": 6240,
+    "segs": [ {
+      "utf8": "information here is I to create an interactive \nasset within Claude. So Claude has, you know,  "
+    } ]
+  }, {
+    "tStartMs": 826240,
+    "dDurationMs": 7280,
+    "segs": [ {
+      "utf8": "this artifact feature where it can basically code \nup a dashboard or a website for you. So after I  "
+    } ]
+  }, {
+    "tStartMs": 833520,
+    "dDurationMs": 6640,
+    "segs": [ {
+      "utf8": "got these initial keywords from my keyword tool, \nI asked Claude to create an interactive dashboard  "
+    } ]
+  }, {
+    "tStartMs": 840160,
+    "dDurationMs": 6480,
+    "segs": [ {
+      "utf8": "highlighting all these keyword opportunities. \nAnd that is what I'm showing you here.  "
+    } ]
+  }, {
+    "tStartMs": 847520,
+    "dDurationMs": 7440,
+    "segs": [ {
+      "utf8": "Wow. So you just prompted it that we'll share the \nprompts. We'll share some of this in a guide for  "
+    } ]
+  }, {
+    "tStartMs": 854960,
+    "dDurationMs": 4800,
+    "segs": [ {
+      "utf8": "people so that they can download this. It'll be \nin the show notes. But you just basically one  "
+    } ]
+  }, {
+    "tStartMs": 859760,
+    "dDurationMs": 5680,
+    "segs": [ {
+      "utf8": "prompted this. Yep, yep. Find the keywords, now \ncreate a dashboard. And, you know, Claude's really  "
+    } ]
+  }, {
+    "tStartMs": 865440,
+    "dDurationMs": 6800,
+    "segs": [ {
+      "utf8": "smart, so it didn't just list out all of those \nkeywords that we looked at after the first prompt.  "
+    } ]
+  }, {
+    "tStartMs": 872240,
+    "dDurationMs": 6400,
+    "segs": [ {
+      "utf8": "It actually went into Ahrefs, and it pulled the \npotential traffic that you can get, you know,  "
+    } ]
+  }, {
+    "tStartMs": 878640,
+    "dDurationMs": 6800,
+    "segs": [ {
+      "utf8": "from these keywords. It pulled the difficulty. \nIt pulled the search volume for each one of these  "
+    } ]
+  }, {
+    "tStartMs": 885440,
+    "dDurationMs": 6880,
+    "segs": [ {
+      "utf8": "various keywords. it pulled some information about \nthe competitors so this is all real data from  "
+    } ]
+  }, {
+    "tStartMs": 892320,
+    "dDurationMs": 6640,
+    "segs": [ {
+      "utf8": "hrefs crazy and just for we have a lot of people \nlisten on spotify and apple the startup ideas  "
+    } ]
+  }, {
+    "tStartMs": 898960,
+    "dDurationMs": 6000,
+    "segs": [ {
+      "utf8": "podcast can you just name you know for the people \nwho are not watching just name some of these  "
+    } ]
+  }, {
+    "tStartMs": 904960,
+    "dDurationMs": 9440,
+    "segs": [ {
+      "utf8": "keywords yeah absolutely so some of the keywords \nassuming i'm beehive a better question And if you  "
+    } ]
+  }, {
+    "tStartMs": 914400,
+    "dDurationMs": 6000,
+    "segs": [ {
+      "utf8": "were to pick one or two keywords on this list, \nwhat would you pick and why? Yeah, we'll get into  "
+    } ]
+  }, {
+    "tStartMs": 920400,
+    "dDurationMs": 6080,
+    "segs": [ {
+      "utf8": "that next. I would say how to grow newsletter \nsubscribers. It's got some decent volume,  "
+    } ]
+  }, {
+    "tStartMs": 926480,
+    "dDurationMs": 9520,
+    "segs": [ {
+      "utf8": "so 2,300 searches monthly. It's relevant at 89%, \nand then the difficulty isn't too bad. So I feel  "
+    } ]
+  }, {
+    "tStartMs": 936000,
+    "dDurationMs": 7840,
+    "segs": [ {
+      "utf8": "reasonably confident that I could go and rank for \nthat keyword with the right strategy. Cool. Okay.  "
+    } ]
+  }, {
+    "tStartMs": 943840,
+    "dDurationMs": 8000,
+    "segs": [ {
+      "utf8": "So we're going to go back to Claude and I'm going \nto talk about what step two is. So here, you know,  "
+    } ]
+  }, {
+    "tStartMs": 951840,
+    "dDurationMs": 6640,
+    "segs": [ {
+      "utf8": "here we have the keywords, okay? And now it's \n, this is great. We have keywords, but what do  "
+    } ]
+  }, {
+    "tStartMs": 958480,
+    "dDurationMs": 6640,
+    "segs": [ {
+      "utf8": "I do with them? So the thing that you want to do \nwith keywords is we want to start creating content  "
+    } ]
+  }, {
+    "tStartMs": 965120,
+    "dDurationMs": 5600,
+    "segs": [ {
+      "utf8": "around that search term so that we can attract the \nright people to our site. All right. So I'm going  "
+    } ]
+  }, {
+    "tStartMs": 970720,
+    "dDurationMs": 4160,
+    "segs": [ {
+      "utf8": "to go back to Claude and I'm just going to kind of \nwalk you through my workflow here. So we created  "
+    } ]
+  }, {
+    "tStartMs": 974880,
+    "dDurationMs": 6880,
+    "segs": [ {
+      "utf8": "that interactive artifact with the keyword data \nand insights. All right. We have some features  "
+    } ]
+  }, {
+    "tStartMs": 981760,
+    "dDurationMs": 7040,
+    "segs": [ {
+      "utf8": "where we can integrate some social search so we \ncan go and find , hey, based off this topic, what  "
+    } ]
+  }, {
+    "tStartMs": 988800,
+    "dDurationMs": 6640,
+    "segs": [ {
+      "utf8": "are some social posts that are also in and around \nthis too? So, you know, if you want to repurpose  "
+    } ]
+  }, {
+    "tStartMs": 995440,
+    "dDurationMs": 6480,
+    "segs": [ {
+      "utf8": "some content and create some social content, you \ncan do that, too. OK, after I found the keywords,  "
+    } ]
+  }, {
+    "tStartMs": 1001920,
+    "dDurationMs": 5920,
+    "segs": [ {
+      "utf8": "the next thing that I did is I had Claude \nbasically group those keywords into a few  "
+    } ]
+  }, {
+    "tStartMs": 1007840,
+    "dDurationMs": 5680,
+    "segs": [ {
+      "utf8": "key topics. So this one here is called newsletter \ngrowth and audience building. I thought that would  "
+    } ]
+  }, {
+    "tStartMs": 1013520,
+    "dDurationMs": 5520,
+    "segs": [ {
+      "utf8": "be pretty relevant to to your listeners. They're \nthinking about growing newsletters, growing their  "
+    } ]
+  }, {
+    "tStartMs": 1019040,
+    "dDurationMs": 5840,
+    "segs": [ {
+      "utf8": "audience. So we can dig into that one a little bit \nmore specifically. So what that is, is it's just  "
+    } ]
+  }, {
+    "tStartMs": 1024880,
+    "dDurationMs": 8800,
+    "segs": [ {
+      "utf8": "five keywords in one kind of topic that went and \nthat we researched that we can kind of talk about  "
+    } ]
+  }, {
+    "tStartMs": 1033680,
+    "dDurationMs": 6080,
+    "segs": [ {
+      "utf8": "in one group. Cool. All right. So newsletter \ngrowth and audience building. All right. So  "
+    } ]
+  }, {
+    "tStartMs": 1039760,
+    "dDurationMs": 6640,
+    "segs": [ {
+      "utf8": "now that we have newsletter growth and audience \nbuilding, I'm sending another prompt to Claude.  "
+    } ]
+  }, {
+    "tStartMs": 1046400,
+    "dDurationMs": 8720,
+    "segs": [ {
+      "utf8": "And this prompt is analyze the search results from \npage one and page two of Google for this cluster.  "
+    } ]
+  }, {
+    "tStartMs": 1055120,
+    "dDurationMs": 6880,
+    "segs": [ {
+      "utf8": "So what this is doing here is it's actually going \nout and it's scraping the Google results to see  "
+    } ]
+  }, {
+    "tStartMs": 1062000,
+    "dDurationMs": 7280,
+    "segs": [ {
+      "utf8": "what type of content is already out there for \nthis topic. Makes sense. Okay. So basically what  "
+    } ]
+  }, {
+    "tStartMs": 1069280,
+    "dDurationMs": 5680,
+    "segs": [ {
+      "utf8": "that's going to allow us to do is get a deeper \nunderstanding on what are our competitors that are  "
+    } ]
+  }, {
+    "tStartMs": 1074960,
+    "dDurationMs": 5200,
+    "segs": [ {
+      "utf8": "ranking for this keyword not addressing? So what \nare the gaps that are out there? So, you know,  "
+    } ]
+  }, {
+    "tStartMs": 1080160,
+    "dDurationMs": 6160,
+    "segs": [ {
+      "utf8": "what are the topics? What are the themes? What \nare the ways that I can add more value than the  "
+    } ]
+  }, {
+    "tStartMs": 1086320,
+    "dDurationMs": 5040,
+    "segs": [ {
+      "utf8": "competitors for people searching for this keyword? \nAll right. So some of the things that popped up  "
+    } ]
+  }, {
+    "tStartMs": 1092720,
+    "dDurationMs": 6240,
+    "segs": [ {
+      "utf8": "right now, the current content, it's talking \nabout basic audience acquisition tactics,  "
+    } ]
+  }, {
+    "tStartMs": 1098960,
+    "dDurationMs": 6320,
+    "segs": [ {
+      "utf8": "you know, general list building frameworks. \nIt's not really going into things data driven  "
+    } ]
+  }, {
+    "tStartMs": 1105280,
+    "dDurationMs": 5120,
+    "segs": [ {
+      "utf8": "growth benchmarks. So Claude is telling me \nthere's an opportunity to create deeper, more  "
+    } ]
+  }, {
+    "tStartMs": 1110400,
+    "dDurationMs": 6320,
+    "segs": [ {
+      "utf8": "comprehensive research than what the competitors \nare publishing that shows, you know, data points.  "
+    } ]
+  }, {
+    "tStartMs": 1116720,
+    "dDurationMs": 6640,
+    "segs": [ {
+      "utf8": "give me advanced segmentation strategies so we \ncan develop content on , how do I, you know,  "
+    } ]
+  }, {
+    "tStartMs": 1123360,
+    "dDurationMs": 5760,
+    "segs": [ {
+      "utf8": "segment different subscribers based on their \nmetrics? How do I trigger, you know, automations  "
+    } ]
+  }, {
+    "tStartMs": 1129120,
+    "dDurationMs": 6800,
+    "segs": [ {
+      "utf8": "within my email platform or something that? It's \nsaying that there's a gap in technical guidance,  "
+    } ]
+  }, {
+    "tStartMs": 1135920,
+    "dDurationMs": 8080,
+    "segs": [ {
+      "utf8": "how to, you know, coordinate this content across \nchannels to develop a comprehensive newsletter  "
+    } ]
+  }, {
+    "tStartMs": 1144000,
+    "dDurationMs": 6000,
+    "segs": [ {
+      "utf8": "and audience growth plan. And then it says that \nanother gap is people aren't really talking enough  "
+    } ]
+  }, {
+    "tStartMs": 1150000,
+    "dDurationMs": 5840,
+    "segs": [ {
+      "utf8": "about retention, which I find pretty interesting \ntoo. As someone who actually writes an email at  "
+    } ]
+  }, {
+    "tStartMs": 1155840,
+    "dDurationMs": 7520,
+    "segs": [ {
+      "utf8": "gregeisenberg.com, I can attest that this is \nthe content that I would click into and be  "
+    } ]
+  }, {
+    "tStartMs": 1163360,
+    "dDurationMs": 10640,
+    "segs": [ {
+      "utf8": "really interested in reading. Yep. Yep. So this \nisn't just an LLM making stuff up, right? It's  "
+    } ]
+  }, {
+    "tStartMs": 1174000,
+    "dDurationMs": 7440,
+    "segs": [ {
+      "utf8": "actually true. This is this makes sense. Yeah, \nthis is this is not just an LLM making it up,  "
+    } ]
+  }, {
+    "tStartMs": 1181440,
+    "dDurationMs": 7280,
+    "segs": [ {
+      "utf8": "because what we're doing with this MCP integration \nto the workflows and in it in is we're pumping all  "
+    } ]
+  }, {
+    "tStartMs": 1188720,
+    "dDurationMs": 7040,
+    "segs": [ {
+      "utf8": "of the right context into Claude here. You \nknow, so basing all of this around real data  "
+    } ]
+  }, {
+    "tStartMs": 1195760,
+    "dDurationMs": 5200,
+    "segs": [ {
+      "utf8": "that's out there. So there no hallucination It not \njust making things up around you know what they  "
+    } ]
+  }, {
+    "tStartMs": 1200960,
+    "dDurationMs": 6320,
+    "segs": [ {
+      "utf8": "might think people are interested in It actually \nunderstanding the demand so it finding the  "
+    } ]
+  }, {
+    "tStartMs": 1207280,
+    "dDurationMs": 6800,
+    "segs": [ {
+      "utf8": "keywords And then we selected a group of keywords, \nand we're , hey, go out there and read all of the  "
+    } ]
+  }, {
+    "tStartMs": 1214080,
+    "dDurationMs": 5280,
+    "segs": [ {
+      "utf8": "ranking articles, posts, and websites on the front \ntwo pages of Google and tell me exactly what's  "
+    } ]
+  }, {
+    "tStartMs": 1219360,
+    "dDurationMs": 7120,
+    "segs": [ {
+      "utf8": "missing. So this gives you such a targeted spear \nif you're a newsletter platform to know exactly  "
+    } ]
+  }, {
+    "tStartMs": 1226480,
+    "dDurationMs": 4880,
+    "segs": [ {
+      "utf8": "how you can go and attack the market. Okay, you're \nfiring me up now. Don't fire me up too much. It's  "
+    } ]
+  }, {
+    "tStartMs": 1231360,
+    "dDurationMs": 5920,
+    "segs": [ {
+      "utf8": "going to get better. It's going to get better. So \nwe've got these gaps. And the next thing that I  "
+    } ]
+  }, {
+    "tStartMs": 1237280,
+    "dDurationMs": 6560,
+    "segs": [ {
+      "utf8": "want to do after I identify all these gaps is I \nwant to know what content that I can create. So  "
+    } ]
+  }, {
+    "tStartMs": 1243840,
+    "dDurationMs": 5440,
+    "segs": [ {
+      "utf8": "I'm going to click back over to our artifacts \nbecause I created another really cool one. And  "
+    } ]
+  }, {
+    "tStartMs": 1249280,
+    "dDurationMs": 8080,
+    "segs": [ {
+      "utf8": "this is a 30-day newsletter growth and audience \nbuilding content dashboard. So this is that group  "
+    } ]
+  }, {
+    "tStartMs": 1257360,
+    "dDurationMs": 5520,
+    "segs": [ {
+      "utf8": "of keywords that I mentioned, okay, newsletter \ngrowth and audience building. So it's got about  "
+    } ]
+  }, {
+    "tStartMs": 1262880,
+    "dDurationMs": 6240,
+    "segs": [ {
+      "utf8": "five keywords in it. And basically I asked Claude \nto, you know, take a look at what's currently  "
+    } ]
+  }, {
+    "tStartMs": 1269120,
+    "dDurationMs": 5600,
+    "segs": [ {
+      "utf8": "ranking and all that. Now tell me exactly \nwhat kind of content I need to go and create  "
+    } ]
+  }, {
+    "tStartMs": 1274720,
+    "dDurationMs": 5200,
+    "segs": [ {
+      "utf8": "to dominate these search terms. So, you know, \nthere's no guesswork here. It's , this is what  "
+    } ]
+  }, {
+    "tStartMs": 1279920,
+    "dDurationMs": 7280,
+    "segs": [ {
+      "utf8": "you need to go and do. Here's day one. On Monday, \nyou need to go and create a blog post around the  "
+    } ]
+  }, {
+    "tStartMs": 1287200,
+    "dDurationMs": 6800,
+    "segs": [ {
+      "utf8": "newsletter growth roadmap, tailored strategies for \nevery stage, zero to 100,000 subscribers. It tells  "
+    } ]
+  }, {
+    "tStartMs": 1294000,
+    "dDurationMs": 8080,
+    "segs": [ {
+      "utf8": "me the keywords that, you know, this content piece \nis focused on. And then I had it include a content  "
+    } ]
+  }, {
+    "tStartMs": 1302080,
+    "dDurationMs": 8240,
+    "segs": [ {
+      "utf8": "brief so that I can create the perfect blog post \nfor this topic. So it's telling me exactly what  "
+    } ]
+  }, {
+    "tStartMs": 1310320,
+    "dDurationMs": 6720,
+    "segs": [ {
+      "utf8": "this brief is going to address. It's saying most \ncontent in this niche focuses on generic growth  "
+    } ]
+  }, {
+    "tStartMs": 1317040,
+    "dDurationMs": 6800,
+    "segs": [ {
+      "utf8": "tactics rather than stage specific strategies. \nIt's even got the primary audience, so newsletter  "
+    } ]
+  }, {
+    "tStartMs": 1323840,
+    "dDurationMs": 7200,
+    "segs": [ {
+      "utf8": "creators at all stages, beginner to advanced. and \nit's giving us kind of a comprehensive structure  "
+    } ]
+  }, {
+    "tStartMs": 1331600,
+    "dDurationMs": 4880,
+    "segs": [ {
+      "utf8": "in order to write this guide. But as vibe \nmarketers, we're not going to go write all this,  "
+    } ]
+  }, {
+    "tStartMs": 1336480,
+    "dDurationMs": 7680,
+    "segs": [ {
+      "utf8": "right? No, vibe marketers are the most boring \npeople, most lazy, boring people. Yeah, exactly.  "
+    } ]
+  }, {
+    "tStartMs": 1344160,
+    "dDurationMs": 4400,
+    "segs": [ {
+      "utf8": "And that's why we love them. That's why we love \nthem. That's it. So we're not going to go write  "
+    } ]
+  }, {
+    "tStartMs": 1348560,
+    "dDurationMs": 6000,
+    "segs": [ {
+      "utf8": "a blog post manually because if we wanted to do \nthat, that could take another 20 to 30 hours, you  "
+    } ]
+  }, {
+    "tStartMs": 1354560,
+    "dDurationMs": 5760,
+    "segs": [ {
+      "utf8": "know, to make it perfect, to go back and forth, to \nintegrate our brand voice, to do all that boring  "
+    } ]
+  }, {
+    "tStartMs": 1360320,
+    "dDurationMs": 4320,
+    "segs": [ {
+      "utf8": "stuff manually. Sounds a waste of time to me. \nSo how do we, how do we automate it? How do we  "
+    } ]
+  }, {
+    "tStartMs": 1364640,
+    "dDurationMs": 8080,
+    "segs": [ {
+      "utf8": "do it fast? I'm going to click this button, copy \nbrief. Okay. I'm going to open Claude. So after we  "
+    } ]
+  }, {
+    "tStartMs": 1372720,
+    "dDurationMs": 5360,
+    "segs": [ {
+      "utf8": "identified this brief, you know, we're of course \nnot going to manually write this. So I created  "
+    } ]
+  }, {
+    "tStartMs": 1378080,
+    "dDurationMs": 7440,
+    "segs": [ {
+      "utf8": "another prompt in Claude. So I have a brand voice \nthat I saved. You know, most folks using LLMs  "
+    } ]
+  }, {
+    "tStartMs": 1385520,
+    "dDurationMs": 6000,
+    "segs": [ {
+      "utf8": "probably have something to this effect where, you \nknow, when they're prompting ChatGPT or whatever,  "
+    } ]
+  }, {
+    "tStartMs": 1391520,
+    "dDurationMs": 4000,
+    "segs": [ {
+      "utf8": "they're kind of giving it your preferences \non how you want the content to come out.  "
+    } ]
+  }, {
+    "tStartMs": 1395520,
+    "dDurationMs": 6960,
+    "segs": [ {
+      "utf8": "So I have a little prompt here, use this brand \nvoice, and I copy and pasted the content brief  "
+    } ]
+  }, {
+    "tStartMs": 1402480,
+    "dDurationMs": 5680,
+    "segs": [ {
+      "utf8": "that I showed you from the tool. So this is \nexactly what we just went through, okay? And  "
+    } ]
+  }, {
+    "tStartMs": 1408160,
+    "dDurationMs": 9280,
+    "segs": [ {
+      "utf8": "now Claude is writing a complete search-optimized \nblog post for me based on that brief with my voice  "
+    } ]
+  }, {
+    "tStartMs": 1417440,
+    "dDurationMs": 8080,
+    "segs": [ {
+      "utf8": "foundation that I gave it. So it's going through, \n, every step. And I even have it pulled up here  "
+    } ]
+  }, {
+    "tStartMs": 1425520,
+    "dDurationMs": 6240,
+    "segs": [ {
+      "utf8": "as an artifact that we can kind of scroll through \nand look at. I mean, and when you say an artifact,  "
+    } ]
+  }, {
+    "tStartMs": 1431760,
+    "dDurationMs": 6240,
+    "segs": [ {
+      "utf8": "you're saying, , this looks a website to me. \nYeah. So Cloud generates artifacts. It can  "
+    } ]
+  }, {
+    "tStartMs": 1438000,
+    "dDurationMs": 6240,
+    "segs": [ {
+      "utf8": "generate dashboards. It can generate websites. So \nthis actually is a website that I created. So when  "
+    } ]
+  }, {
+    "tStartMs": 1444240,
+    "dDurationMs": 5440,
+    "segs": [ {
+      "utf8": "I said create an artifact, it just went in and \nit started coding this up. And I thought that,  "
+    } ]
+  }, {
+    "tStartMs": 1449680,
+    "dDurationMs": 6320,
+    "segs": [ {
+      "utf8": "hey, I might as well make it a little website to \npull up and show you versus scrolling through the  "
+    } ]
+  }, {
+    "tStartMs": 1456000,
+    "dDurationMs": 8240,
+    "segs": [ {
+      "utf8": "Cloud dashboard there. Cool. So, , I read this. I \nthink it reads great. It even has different areas  "
+    } ]
+  }, {
+    "tStartMs": 1464240,
+    "dDurationMs": 8880,
+    "segs": [ {
+      "utf8": "that I can, you know, utilize for hero images and \nstuff that. And we'll link this here, but I want  "
+    } ]
+  }, {
+    "tStartMs": 1473120,
+    "dDurationMs": 7840,
+    "segs": [ {
+      "utf8": "people to read through the level of detail. This \nis not AI slop. You know, when people are going  "
+    } ]
+  }, {
+    "tStartMs": 1480960,
+    "dDurationMs": 5760,
+    "segs": [ {
+      "utf8": "to ChatGPT or Claude or whatever, and they're , \nhey, write me a blog post for this topic. A lot  "
+    } ]
+  }, {
+    "tStartMs": 1486720,
+    "dDurationMs": 5280,
+    "segs": [ {
+      "utf8": "of times, you know, you do that and then you're \nsort of underwhelmed. , I'm sure you've been there  "
+    } ]
+  }, {
+    "tStartMs": 1492000,
+    "dDurationMs": 7440,
+    "segs": [ {
+      "utf8": "as well. Yeah, I mean, you almost feel bait and \nswitch. You're , I just gave 30 seconds of my time  "
+    } ]
+  }, {
+    "tStartMs": 1499440,
+    "dDurationMs": 6960,
+    "segs": [ {
+      "utf8": "to this, and I'm never getting that back. Yep. \nYep. So what I about this is, again, we're pumping  "
+    } ]
+  }, {
+    "tStartMs": 1506400,
+    "dDurationMs": 6400,
+    "segs": [ {
+      "utf8": "all of that context, that real information and \nreal data into cloud. So it's looked at, you know,  "
+    } ]
+  }, {
+    "tStartMs": 1512800,
+    "dDurationMs": 4640,
+    "segs": [ {
+      "utf8": "all the content that's out there. It understands \nthe keyword and the audience that we're trying to  "
+    } ]
+  }, {
+    "tStartMs": 1517440,
+    "dDurationMs": 8720,
+    "segs": [ {
+      "utf8": "reach. And it's using that information to create \na highly valuable piece of content here. Cool. So,  "
+    } ]
+  }, {
+    "tStartMs": 1526880,
+    "dDurationMs": 4480,
+    "segs": [ {
+      "utf8": "you know, let's say that you have your blog \ncreated and then you want to create some images,  "
+    } ]
+  }, {
+    "tStartMs": 1531360,
+    "dDurationMs": 7440,
+    "segs": [ {
+      "utf8": "too. You know, that's often something that takes \nsome time and it's manual or whatever. So another  "
+    } ]
+  }, {
+    "tStartMs": 1538800,
+    "dDurationMs": 7520,
+    "segs": [ {
+      "utf8": "neat thing that I did with this workflow is that \nI integrated ChatGPT's new image gen into it. So  "
+    } ]
+  }, {
+    "tStartMs": 1546320,
+    "dDurationMs": 7120,
+    "segs": [ {
+      "utf8": "you can just prompt Claude right there. Hey, based \noff of this article that we're trying to create,  "
+    } ]
+  }, {
+    "tStartMs": 1553440,
+    "dDurationMs": 4960,
+    "segs": [ {
+      "utf8": "make me an image that I can use for my hero image. \nSo that's done right there in the same place as  "
+    } ]
+  }, {
+    "tStartMs": 1558400,
+    "dDurationMs": 7200,
+    "segs": [ {
+      "utf8": "well. And it looks good. It looks really good. \nYeah, not bad at all. , you know, the challenge  "
+    } ]
+  }, {
+    "tStartMs": 1565600,
+    "dDurationMs": 6240,
+    "segs": [ {
+      "utf8": "here for a lot of marketers using these tools \nis that they're switching between, , you know,  "
+    } ]
+  }, {
+    "tStartMs": 1571840,
+    "dDurationMs": 6240,
+    "segs": [ {
+      "utf8": "10 different things. , their tabs open on their \nbrowser. , you know, they've got ChatGPT. They've  "
+    } ]
+  }, {
+    "tStartMs": 1578080,
+    "dDurationMs": 5440,
+    "segs": [ {
+      "utf8": "got Claude. They've got maybe some, , blogging \nplatform and a bunch of other, you know, SaaS  "
+    } ]
+  }, {
+    "tStartMs": 1583520,
+    "dDurationMs": 5920,
+    "segs": [ {
+      "utf8": "products. And what we're doing here is, , we're \nbuilding our own tools that we can use in one  "
+    } ]
+  }, {
+    "tStartMs": 1589440,
+    "dDurationMs": 5920,
+    "segs": [ {
+      "utf8": "simple place. And I spend a lot of time in Claude. \nSo being able to access these tools within where  "
+    } ]
+  }, {
+    "tStartMs": 1595360,
+    "dDurationMs": 6240,
+    "segs": [ {
+      "utf8": "I'm already working saves me a ton of time on, you \nknow, context switching back and forth between a  "
+    } ]
+  }, {
+    "tStartMs": 1601600,
+    "dDurationMs": 8400,
+    "segs": [ {
+      "utf8": "bunch of different stuff. I've done a tutorial \non what an MCP is. I'll link it also. And,  "
+    } ]
+  }, {
+    "tStartMs": 1610000,
+    "dDurationMs": 6480,
+    "segs": [ {
+      "utf8": "you know, but just quickly explain within the \ncontext of Vibe Marketing what an MCP is. Yeah,  "
+    } ]
+  }, {
+    "tStartMs": 1616480,
+    "dDurationMs": 7440,
+    "segs": [ {
+      "utf8": "I was thinking I figured this would come up. And \nthe easiest way that I can explain it is imagine  "
+    } ]
+  }, {
+    "tStartMs": 1623920,
+    "dDurationMs": 8240,
+    "segs": [ {
+      "utf8": "it's a two way radio between your LLM and a third \nparty piece of software. So what that means is  "
+    } ]
+  }, {
+    "tStartMs": 1632160,
+    "dDurationMs": 6320,
+    "segs": [ {
+      "utf8": "that within the chat interface of the LLM, I can \naccess data from this third-party tool, and then  "
+    } ]
+  }, {
+    "tStartMs": 1638480,
+    "dDurationMs": 6560,
+    "segs": [ {
+      "utf8": "I can send back data or I can send back commands \nto it as well. So it's enabling that communication  "
+    } ]
+  }, {
+    "tStartMs": 1645040,
+    "dDurationMs": 6320,
+    "segs": [ {
+      "utf8": "between my LLM and another piece of software. So \nwhat's the difference between an API and an MCP,  "
+    } ]
+  }, {
+    "tStartMs": 1651360,
+    "dDurationMs": 7600,
+    "segs": [ {
+      "utf8": "if that's the case? You know, to be honest, that's \nabove my pay grade as a Vibe marketer. So, , you  "
+    } ]
+  }, {
+    "tStartMs": 1658960,
+    "dDurationMs": 8240,
+    "segs": [ {
+      "utf8": "know, I'm using an API here to access, , Ahrefs \nwithin my keyword tool. And then I'm using an MCP  "
+    } ]
+  }, {
+    "tStartMs": 1667200,
+    "dDurationMs": 5600,
+    "segs": [ {
+      "utf8": "to make sure that that information is going \nback and forth smoothly between Claude and  "
+    } ]
+  }, {
+    "tStartMs": 1672800,
+    "dDurationMs": 6240,
+    "segs": [ {
+      "utf8": "between N8N. Yeah, I mean, the other thing, the \nreality is for 99% of people listening to this,  "
+    } ]
+  }, {
+    "tStartMs": 1679040,
+    "dDurationMs": 6000,
+    "segs": [ {
+      "utf8": "it doesn't matter. Yeah, it doesn't matter. And, \nyou know, again, I tell people this all the time,  "
+    } ]
+  }, {
+    "tStartMs": 1685040,
+    "dDurationMs": 6880,
+    "segs": [ {
+      "utf8": "but when I'm working in these tools, I'm not a \nI'm not an engineer. I'm not the world's foremost  "
+    } ]
+  }, {
+    "tStartMs": 1691920,
+    "dDurationMs": 7360,
+    "segs": [ {
+      "utf8": "automation expert, you know, to be honest, either. \nSo I've got Manus or Claude or, you know, GPT-03  "
+    } ]
+  }, {
+    "tStartMs": 1699280,
+    "dDurationMs": 6320,
+    "segs": [ {
+      "utf8": "or whatever open as my co-pilot guiding me through \nall this stuff for how to set it up. If I need  "
+    } ]
+  }, {
+    "tStartMs": 1705600,
+    "dDurationMs": 5120,
+    "segs": [ {
+      "utf8": "some code, I'm asking. So, you know, there's a lot \nthat you don't know and you can't know at all. So  "
+    } ]
+  }, {
+    "tStartMs": 1710720,
+    "dDurationMs": 4400,
+    "segs": [ {
+      "utf8": "you have to really lean into the AI tools as well, \nyou know, as you're kind of building things out,  "
+    } ]
+  }, {
+    "tStartMs": 1715120,
+    "dDurationMs": 6160,
+    "segs": [ {
+      "utf8": "tinkering and experimenting. Totally. Do I see \nvideo, Jen, here? Is that what I'm looking at? You  "
+    } ]
+  }, {
+    "tStartMs": 1721280,
+    "dDurationMs": 5920,
+    "segs": [ {
+      "utf8": "see video, Jen. I was testing that as well. So, \nyou know, one of the things about the modern state  "
+    } ]
+  }, {
+    "tStartMs": 1727200,
+    "dDurationMs": 7520,
+    "segs": [ {
+      "utf8": "of organic growth online is that, you know, a few \nyears ago, everyone was all about Google search,  "
+    } ]
+  }, {
+    "tStartMs": 1734720,
+    "dDurationMs": 5280,
+    "segs": [ {
+      "utf8": "you know. So everyone was just writing blog posts \nand things that. But if you look at search results  "
+    } ]
+  }, {
+    "tStartMs": 1740000,
+    "dDurationMs": 5680,
+    "segs": [ {
+      "utf8": "today or you look at, you know, results within \nChatGPT or an LLM, you see a lot of things from  "
+    } ]
+  }, {
+    "tStartMs": 1746240,
+    "dDurationMs": 6720,
+    "segs": [ {
+      "utf8": "Reddit or LinkedIn or X or, you know, YouTube, \nall these other channels where the content is  "
+    } ]
+  }, {
+    "tStartMs": 1752960,
+    "dDurationMs": 7600,
+    "segs": [ {
+      "utf8": "multi-format and multi-channel. Yeah. I mean, \nwhen you Google MCP, I'm pretty sure the first  "
+    } ]
+  }, {
+    "tStartMs": 1760560,
+    "dDurationMs": 6560,
+    "segs": [ {
+      "utf8": "result is a tutorial that I did. Right. With \nProfessor Ross Mick on MCPs, which is insane.  "
+    } ]
+  }, {
+    "tStartMs": 1767120,
+    "dDurationMs": 6160,
+    "segs": [ {
+      "utf8": "Yeah. Yeah. So, you know, there's a lot more \nsocial signals coming into play. So videos  "
+    } ]
+  }, {
+    "tStartMs": 1773280,
+    "dDurationMs": 6400,
+    "segs": [ {
+      "utf8": "from YouTube, again, threads from Reddit, things \nthat. So that's why I have image generation and  "
+    } ]
+  }, {
+    "tStartMs": 1779680,
+    "dDurationMs": 5520,
+    "segs": [ {
+      "utf8": "video generation here, because when you create \na blog post that's just not enough these days.  "
+    } ]
+  }, {
+    "tStartMs": 1785200,
+    "dDurationMs": 6000,
+    "segs": [ {
+      "utf8": "If you want to go and attack those gaps that we \ndiscovered, one of the major gaps that I always  "
+    } ]
+  }, {
+    "tStartMs": 1791200,
+    "dDurationMs": 5280,
+    "segs": [ {
+      "utf8": "find is that your competitors are very one track \nminded. They may have just created a blog post  "
+    } ]
+  }, {
+    "tStartMs": 1796480,
+    "dDurationMs": 6160,
+    "segs": [ {
+      "utf8": "about newsletter growth. They probably don have a \nshort form video They probably don have a post on  "
+    } ]
+  }, {
+    "tStartMs": 1802640,
+    "dDurationMs": 6560,
+    "segs": [ {
+      "utf8": "X a post on LinkedIn a thread on Reddit all about \nthat newsletter growth and audience building topic  "
+    } ]
+  }, {
+    "tStartMs": 1809200,
+    "dDurationMs": 5360,
+    "segs": [ {
+      "utf8": "that we already verified there's demand for. \nSo, you know, Google search is a great proxy  "
+    } ]
+  }, {
+    "tStartMs": 1814560,
+    "dDurationMs": 6400,
+    "segs": [ {
+      "utf8": "for all these other channels around what people \nare looking to engage with. And I believe that,  "
+    } ]
+  }, {
+    "tStartMs": 1820960,
+    "dDurationMs": 4640,
+    "segs": [ {
+      "utf8": "you know, in today's world, you have to be \neverywhere in all the formats in order to  "
+    } ]
+  }, {
+    "tStartMs": 1825600,
+    "dDurationMs": 4640,
+    "segs": [ {
+      "utf8": "kind of dominate the competition, especially \nif you're a startup. That's kind of the way  "
+    } ]
+  }, {
+    "tStartMs": 1830240,
+    "dDurationMs": 6320,
+    "segs": [ {
+      "utf8": "that you can enter into an established market \nand start siphoning off that traffic from the  "
+    } ]
+  }, {
+    "tStartMs": 1836560,
+    "dDurationMs": 12640,
+    "segs": [ {
+      "utf8": "main players. Absolutely. So that said, we've got \nour blog post. And then I went back to Claude and  "
+    } ]
+  }, {
+    "tStartMs": 1849200,
+    "dDurationMs": 8720,
+    "segs": [ {
+      "utf8": "I started to create some X threads and some other \ntypes of things too. So just for example, I said,  "
+    } ]
+  }, {
+    "tStartMs": 1857920,
+    "dDurationMs": 7520,
+    "segs": [ {
+      "utf8": "hey, based on this blog post, create a thread on \nX. And here it's got how I build a 1K subscriber  "
+    } ]
+  }, {
+    "tStartMs": 1865440,
+    "dDurationMs": 7360,
+    "segs": [ {
+      "utf8": "newsletter in 60 days with no ad spend. That's \na pretty good hook, right? Dude, someone , yeah,  "
+    } ]
+  }, {
+    "tStartMs": 1872800,
+    "dDurationMs": 7040,
+    "segs": [ {
+      "utf8": "I can't believe that. That's a really good hook. \nYeah, exactly. Most times you try to create an X  "
+    } ]
+  }, {
+    "tStartMs": 1879840,
+    "dDurationMs": 6160,
+    "segs": [ {
+      "utf8": "post or a LinkedIn post or whatever, it comes out \na blog post and it's just not done properly. So I  "
+    } ]
+  }, {
+    "tStartMs": 1886000,
+    "dDurationMs": 5120,
+    "segs": [ {
+      "utf8": "was , honestly, I was blown away by the initial \nquality of this just with one prompt right out  "
+    } ]
+  }, {
+    "tStartMs": 1891120,
+    "dDurationMs": 6720,
+    "segs": [ {
+      "utf8": "of the gate. So you can see it here. it's in this \nplan as well. It's got key insights thread from  "
+    } ]
+  }, {
+    "tStartMs": 1897840,
+    "dDurationMs": 6240,
+    "segs": [ {
+      "utf8": "each growth stage. So this is the brief. I did \nthe same thing that I did for the blog post. I  "
+    } ]
+  }, {
+    "tStartMs": 1904080,
+    "dDurationMs": 6080,
+    "segs": [ {
+      "utf8": "copied the brief. I took it into Claude. I said, \nhey, here's that voice foundation that we use for  "
+    } ]
+  }, {
+    "tStartMs": 1910160,
+    "dDurationMs": 6720,
+    "segs": [ {
+      "utf8": "the blog posts and boom, it one-shotted that \nthread for me. And if you wanted to move from,  "
+    } ]
+  }, {
+    "tStartMs": 1916880,
+    "dDurationMs": 5920,
+    "segs": [ {
+      "utf8": "you know, I'm trying not to say Claude on this, \non this episode, but there I'll say it, Claude.  "
+    } ]
+  }, {
+    "tStartMs": 1922800,
+    "dDurationMs": 7440,
+    "segs": [ {
+      "utf8": "If you, you know, if you're, if you want to move \nfrom, from Claude to Webflow or another tool, how,  "
+    } ]
+  }, {
+    "tStartMs": 1930240,
+    "dDurationMs": 7280,
+    "segs": [ {
+      "utf8": "you know, is that, are you thinking about that as \na vibe marketer? yeah how do you want to publish  "
+    } ]
+  }, {
+    "tStartMs": 1937520,
+    "dDurationMs": 6160,
+    "segs": [ {
+      "utf8": "this type of content on your website and things of \nthat nature yeah you know because it's cool that  "
+    } ]
+  }, {
+    "tStartMs": 1943680,
+    "dDurationMs": 5440,
+    "segs": [ {
+      "utf8": "it's on this artifact and it's cool I can share \nthat with my team and get feedback and stuff  "
+    } ]
+  }, {
+    "tStartMs": 1949120,
+    "dDurationMs": 9440,
+    "segs": [ {
+      "utf8": "that but eventually I'm going to want that on my \ndomain gregeismer.com slash you know article slash  "
+    } ]
+  }, {
+    "tStartMs": 1958560,
+    "dDurationMs": 6960,
+    "segs": [ {
+      "utf8": "newsletter right I'm thinking about it I haven't \ngotten there yet within Claude, I'm assuming I  "
+    } ]
+  }, {
+    "tStartMs": 1965520,
+    "dDurationMs": 8560,
+    "segs": [ {
+      "utf8": "might be able to create a tool that's similar to \nthe other ones here. And I said, this MCP server  "
+    } ]
+  }, {
+    "tStartMs": 1974080,
+    "dDurationMs": 5920,
+    "segs": [ {
+      "utf8": "trigger is kind of a two-way radio, you know, \nso I can pull data in, I can send commands and  "
+    } ]
+  }, {
+    "tStartMs": 1980000,
+    "dDurationMs": 8960,
+    "segs": [ {
+      "utf8": "things out. So as long as I can access the Webflow \nAPI, which I certainly can, I can send that blog,  "
+    } ]
+  }, {
+    "tStartMs": 1988960,
+    "dDurationMs": 6720,
+    "segs": [ {
+      "utf8": "you know, into my content management system \nor whatever. Now, I always recommend a little  "
+    } ]
+  }, {
+    "tStartMs": 1995680,
+    "dDurationMs": 5840,
+    "segs": [ {
+      "utf8": "bit of editing and tweaking. So once it's in \nWebflow, you might need to do a little formatting,  "
+    } ]
+  }, {
+    "tStartMs": 2001520,
+    "dDurationMs": 6080,
+    "segs": [ {
+      "utf8": "make sure it fits your design and stuff that. But \nend to end is coming. Eventually, this is going to  "
+    } ]
+  }, {
+    "tStartMs": 2007600,
+    "dDurationMs": 6080,
+    "segs": [ {
+      "utf8": "be fully automated where you enter your URL, it's \nfinding the keywords, it's creating cross-platform  "
+    } ]
+  }, {
+    "tStartMs": 2013680,
+    "dDurationMs": 5280,
+    "segs": [ {
+      "utf8": "content, and that's just publishing it for you. \nSo that's definitely in the future. I hear what  "
+    } ]
+  }, {
+    "tStartMs": 2018960,
+    "dDurationMs": 5440,
+    "segs": [ {
+      "utf8": "you're saying. You're saying basically , okay, \nyou're going to use AI to create this content.  "
+    } ]
+  }, {
+    "tStartMs": 2024400,
+    "dDurationMs": 4400,
+    "segs": [ {
+      "utf8": "You're going to want to review the content and \nedit the content potentially. You don't want to  "
+    } ]
+  }, {
+    "tStartMs": 2028800,
+    "dDurationMs": 12640,
+    "segs": [ {
+      "utf8": "just automatically put it up on a web flow because \nit might not be worth the risk of damaging your  "
+    } ]
+  }, {
+    "tStartMs": 2041440,
+    "dDurationMs": 6880,
+    "segs": [ {
+      "utf8": "brand or something that. Yeah. In our community, \nwe actually did a survey. Hey, what are some of  "
+    } ]
+  }, {
+    "tStartMs": 2048320,
+    "dDurationMs": 6160,
+    "segs": [ {
+      "utf8": "the biggest challenges that marketers are having \nwith AI. And one of the biggest challenges that  "
+    } ]
+  }, {
+    "tStartMs": 2054480,
+    "dDurationMs": 7920,
+    "segs": [ {
+      "utf8": "they're having is brand safety and keeping things \naligned toward their brand. So most marketers have  "
+    } ]
+  }, {
+    "tStartMs": 2062400,
+    "dDurationMs": 7200,
+    "segs": [ {
+      "utf8": "a human in the loop step. And, you know, when we \nbuild these types of automations out for clients,  "
+    } ]
+  }, {
+    "tStartMs": 2069600,
+    "dDurationMs": 5840,
+    "segs": [ {
+      "utf8": "they're very conscious of that. So, you know, we \nto integrate with Slack, for example. So let's say  "
+    } ]
+  }, {
+    "tStartMs": 2075440,
+    "dDurationMs": 8880,
+    "segs": [ {
+      "utf8": "that you have Claude set up and you have a system \nthis, once you get your draft in Claude, you say,  "
+    } ]
+  }, {
+    "tStartMs": 2084320,
+    "dDurationMs": 4320,
+    "segs": [ {
+      "utf8": "hey, send it to Slack, right? And then you have a \nshared channel with, I don't know, maybe you have  "
+    } ]
+  }, {
+    "tStartMs": 2088640,
+    "dDurationMs": 5760,
+    "segs": [ {
+      "utf8": "a marketing manager or a social media manager or \nsomething that. They can check it out and review  "
+    } ]
+  }, {
+    "tStartMs": 2094400,
+    "dDurationMs": 5040,
+    "segs": [ {
+      "utf8": "it right there and maybe give feedback for how \nyou can improve the prompts or something along  "
+    } ]
+  }, {
+    "tStartMs": 2099440,
+    "dDurationMs": 9520,
+    "segs": [ {
+      "utf8": "those lines. Cool. Yep. So, yeah, that's kind of \na completed, , end-to-end system. And just to show  "
+    } ]
+  }, {
+    "tStartMs": 2108960,
+    "dDurationMs": 7280,
+    "segs": [ {
+      "utf8": "you again, , how simple this is, I want to show \nyou, , what most people think that a workflow,  "
+    } ]
+  }, {
+    "tStartMs": 2116240,
+    "dDurationMs": 6640,
+    "segs": [ {
+      "utf8": "you know, looks in an innate in. So I'm just \ngoing to pop out of here, and I'm going to show  "
+    } ]
+  }, {
+    "tStartMs": 2122880,
+    "dDurationMs": 5280,
+    "segs": [ {
+      "utf8": "you one that, you know, might look a little more \ncomplicated that we're working on. So, you know,  "
+    } ]
+  }, {
+    "tStartMs": 2128160,
+    "dDurationMs": 6240,
+    "segs": [ {
+      "utf8": "you can imagine the first time you're popping \nup X and you see someone talk about a workflow,  "
+    } ]
+  }, {
+    "tStartMs": 2134400,
+    "dDurationMs": 5680,
+    "segs": [ {
+      "utf8": "you know, you see something this and it makes \nfor great content and it gets people interested  "
+    } ]
+  }, {
+    "tStartMs": 2140080,
+    "dDurationMs": 4880,
+    "segs": [ {
+      "utf8": "because it's so complicated and they think it must \nbe so, you know, special and useful. And while  "
+    } ]
+  }, {
+    "tStartMs": 2144960,
+    "dDurationMs": 6480,
+    "segs": [ {
+      "utf8": "these things are great, they're not the place \nto start. these simple ones are often the most  "
+    } ]
+  }, {
+    "tStartMs": 2151440,
+    "dDurationMs": 6800,
+    "segs": [ {
+      "utf8": "powerful. So you can see there's only four nodes \nhere for this entire workflow. and each of these  "
+    } ]
+  }, {
+    "tStartMs": 2158240,
+    "dDurationMs": 6000,
+    "segs": [ {
+      "utf8": "has a has a workflow too but it's literally you \nknow a couple steps so let me show you the keyword  "
+    } ]
+  }, {
+    "tStartMs": 2164240,
+    "dDurationMs": 9040,
+    "segs": [ {
+      "utf8": "tool one what that actually looks when you open \nit up and this is the beauty of mcp because again  "
+    } ]
+  }, {
+    "tStartMs": 2173280,
+    "dDurationMs": 6800,
+    "segs": [ {
+      "utf8": "you're not designing all this complicated logic \nin a workflow builder you're just saying hey pump  "
+    } ]
+  }, {
+    "tStartMs": 2180080,
+    "dDurationMs": 4960,
+    "segs": [ {
+      "utf8": "this data into clod and let clod figure out what \nto do with it. So all you're doing is connecting  "
+    } ]
+  }, {
+    "tStartMs": 2185040,
+    "dDurationMs": 5280,
+    "segs": [ {
+      "utf8": "with Ahrefs. You know, you have a little bit \nof code to say, hey, don't pull in all kinds of  "
+    } ]
+  }, {
+    "tStartMs": 2190320,
+    "dDurationMs": 5920,
+    "segs": [ {
+      "utf8": "other stuff on backlinks and things. I just want \nkeyword information. And then that's going into  "
+    } ]
+  }, {
+    "tStartMs": 2196240,
+    "dDurationMs": 5040,
+    "segs": [ {
+      "utf8": "Claude. And you're letting Claude find , what are \nthe best keywords? Can you group these together?  "
+    } ]
+  }, {
+    "tStartMs": 2201280,
+    "dDurationMs": 7280,
+    "segs": [ {
+      "utf8": "Can you tell me what to do with them? Crazy, \ndude. Yeah. So for me, this has been a total  "
+    } ]
+  }, {
+    "tStartMs": 2208560,
+    "dDurationMs": 6320,
+    "segs": [ {
+      "utf8": "game changer. And I think that, But I don't know, \nno one that I've seen is really thinking about  "
+    } ]
+  }, {
+    "tStartMs": 2215680,
+    "dDurationMs": 8400,
+    "segs": [ {
+      "utf8": "the simplicity of these types of workflows and \nhow easy it is to unlock that much value. Well,  "
+    } ]
+  }, {
+    "tStartMs": 2224080,
+    "dDurationMs": 6480,
+    "segs": [ {
+      "utf8": "dude, thank you for sharing the sauce. I know you \ncould have easily gatekept this, but you're me.  "
+    } ]
+  }, {
+    "tStartMs": 2230560,
+    "dDurationMs": 8400,
+    "segs": [ {
+      "utf8": "You to distribute the sauce. Highly recommend \nif you're not following The Boring Marketer on  "
+    } ]
+  }, {
+    "tStartMs": 2238960,
+    "dDurationMs": 8880,
+    "segs": [ {
+      "utf8": "X. he's giving away a lot of these workflows. You \nalso give away these workflows in your community  "
+    } ]
+  }, {
+    "tStartMs": 2247840,
+    "dDurationMs": 6080,
+    "segs": [ {
+      "utf8": "that you mentioned, if you want to just pull it \nup, right? Yes, sure. So yeah, the community has  "
+    } ]
+  }, {
+    "tStartMs": 2253920,
+    "dDurationMs": 8880,
+    "segs": [ {
+      "utf8": "been going crazy. In school, we've got, I think, \nclose to one and a half thousand members now.  "
+    } ]
+  }, {
+    "tStartMs": 2262800,
+    "dDurationMs": 5440,
+    "segs": [ {
+      "utf8": "And in Slack, we also have another community with \nabout another thousand people. So we have about  "
+    } ]
+  }, {
+    "tStartMs": 2268240,
+    "dDurationMs": 7760,
+    "segs": [ {
+      "utf8": "2,500 vibe marketers just working on this stuff \nevery single day. they're posting, you know,  "
+    } ]
+  }, {
+    "tStartMs": 2276000,
+    "dDurationMs": 5440,
+    "segs": [ {
+      "utf8": "questions, challenges they might be facing, \nsharing really, really interesting workflows.  "
+    } ]
+  }, {
+    "tStartMs": 2281440,
+    "dDurationMs": 4800,
+    "segs": [ {
+      "utf8": "I thought this one was great. It's a, it's one \nof the more complicated keyword research ones,  "
+    } ]
+  }, {
+    "tStartMs": 2286240,
+    "dDurationMs": 6400,
+    "segs": [ {
+      "utf8": "but it's amazing. So people are just giving \naway tons of value in here. And then, you know,  "
+    } ]
+  }, {
+    "tStartMs": 2292640,
+    "dDurationMs": 5520,
+    "segs": [ {
+      "utf8": "we launched a classroom to kind of help people \nwork through these step by step. And I'm going to  "
+    } ]
+  }, {
+    "tStartMs": 2298160,
+    "dDurationMs": 9040,
+    "segs": [ {
+      "utf8": "be making a MCP workflow live within our classroom \nhere too for our community to be able to set this  "
+    } ]
+  }, {
+    "tStartMs": 2307200,
+    "dDurationMs": 7200,
+    "segs": [ {
+      "utf8": "type of thing up and experiment with it as well. \nCool. And at boardmarketing.com, you also help  "
+    } ]
+  }, {
+    "tStartMs": 2314400,
+    "dDurationMs": 6240,
+    "segs": [ {
+      "utf8": "people with this stuff, right? Yeah. Yeah. \nSo we're basically doing vibe coding and vibe  "
+    } ]
+  }, {
+    "tStartMs": 2320640,
+    "dDurationMs": 5920,
+    "segs": [ {
+      "utf8": "marketing as a service now. So we're We're making \nthese very custom to businesses. We're identifying  "
+    } ]
+  }, {
+    "tStartMs": 2327120,
+    "dDurationMs": 4720,
+    "segs": [ {
+      "utf8": "where people are spending a lot of time manually, \nand we're helping them automate this stuff,  "
+    } ]
+  }, {
+    "tStartMs": 2331840,
+    "dDurationMs": 5920,
+    "segs": [ {
+      "utf8": "get out of the weeds so they can kind of vibe and \ntake advantage of all this. Cool. I'll include the  "
+    } ]
+  }, {
+    "tStartMs": 2337760,
+    "dDurationMs": 4880,
+    "segs": [ {
+      "utf8": "link in the show notes. Full disclosure, I'm \nan investor in the business. I believe in the  "
+    } ]
+  }, {
+    "tStartMs": 2342640,
+    "dDurationMs": 8640,
+    "segs": [ {
+      "utf8": "future of vibe marketing, so happy to put my \nmoney where my mouth is. Can I say your name,  "
+    } ]
+  }, {
+    "tStartMs": 2351280,
+    "dDurationMs": 4880,
+    "segs": [ {
+      "utf8": "James? Yeah, absolutely. Yeah, the cash out of \nthe bag now. I've been doing videos and stuff, so  "
+    } ]
+  }, {
+    "tStartMs": 2356160,
+    "dDurationMs": 6640,
+    "segs": [ {
+      "utf8": "people know I'm just not a diamond-headed boring \nmarketer anymore. Okay, cool. All right, so James,  "
+    } ]
+  }, {
+    "tStartMs": 2362800,
+    "dDurationMs": 6080,
+    "segs": [ {
+      "utf8": "thanks for coming on. I personally would love to \ndouble-click into more workflows. I think that  "
+    } ]
+  }, {
+    "tStartMs": 2368880,
+    "dDurationMs": 7200,
+    "segs": [ {
+      "utf8": "this is a bigger topic that needs more time, so \nif people got any value from this, please, please  "
+    } ]
+  }, {
+    "tStartMs": 2376080,
+    "dDurationMs": 5600,
+    "segs": [ {
+      "utf8": "let me know in the comment section. I only want to \ncreate content that you look at and you're , wow,  "
+    } ]
+  }, {
+    "tStartMs": 2381680,
+    "dDurationMs": 9760,
+    "segs": [ {
+      "utf8": "that was saucy. so thank you James for your time \nand you were generous with your sauce and I gotta  "
+    } ]
+  }, {
+    "tStartMs": 2391440,
+    "dDurationMs": 5840,
+    "segs": [ {
+      "utf8": "ask if you enjoyed this episode please it and \ncomment and subscribe, share it with your friends  "
+    } ]
+  }, {
+    "tStartMs": 2397280,
+    "dDurationMs": 6480,
+    "segs": [ {
+      "utf8": "and let's all get that sauce together James thanks \nagain, I'll see you next time Thanks for having me"
+    } ]
+  } ]
+}

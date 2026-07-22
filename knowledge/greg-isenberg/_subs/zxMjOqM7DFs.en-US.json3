@@ -1,0 +1,1873 @@
+{
+  "wireMagic": "pb3",
+  "pens": [ {
+  
+  } ],
+  "wsWinStyles": [ {
+  
+  } ],
+  "wpWinPositions": [ {
+  
+  } ],
+  "events": [ {
+    "tStartMs": 80,
+    "dDurationMs": 4960,
+    "segs": [ {
+      "utf8": "So you want to use Claude Code. You want to get \nthe most of it, but you don't know exactly how.  "
+    } ]
+  }, {
+    "tStartMs": 5040,
+    "dDurationMs": 5280,
+    "segs": [ {
+      "utf8": "This is a crash course, how to master Claude \nCode, and we explain it in the most simple  "
+    } ]
+  }, {
+    "tStartMs": 10320,
+    "dDurationMs": 5680,
+    "segs": [ {
+      "utf8": "way. There are thousands, literally thousands \nof other Claude Code tutorials on the internet,  "
+    } ]
+  }, {
+    "tStartMs": 16000,
+    "dDurationMs": 4400,
+    "segs": [ {
+      "utf8": "but there are none as simple as this. I \nbrought on Professor Ross Mike. He comes  "
+    } ]
+  }, {
+    "tStartMs": 20400,
+    "dDurationMs": 6240,
+    "segs": [ {
+      "utf8": "on and he shares it in the simplest way so that \nanyone could create jaw-dropping startups and  "
+    } ]
+  }, {
+    "tStartMs": 26640,
+    "dDurationMs": 5440,
+    "segs": [ {
+      "utf8": "software using Claude code. We're going to give \nyou the exact steps for how you can set it up,  "
+    } ]
+  }, {
+    "tStartMs": 32080,
+    "dDurationMs": 4480,
+    "segs": [ {
+      "utf8": "thinking about the beginner, how to think about \nthe terminal, how to think about prompting.  "
+    } ]
+  }, {
+    "tStartMs": 36560,
+    "dDurationMs": 4560,
+    "segs": [ {
+      "utf8": "But if you stick around to the end of this \nepisode, there's a tips and tricks section,  "
+    } ]
+  }, {
+    "tStartMs": 41120,
+    "dDurationMs": 5360,
+    "segs": [ {
+      "utf8": "which I think is super valuable. And \nI can't wait to see what you build.  "
+    } ]
+  }, {
+    "tStartMs": 54160,
+    "dDurationMs": 5920,
+    "segs": [ {
+      "utf8": "we got ross mike on the pod by the end of \nthis episode what are people going to learn  "
+    } ]
+  }, {
+    "tStartMs": 60080,
+    "dDurationMs": 4320,
+    "segs": [ {
+      "utf8": "hopefully you're going to not feel overwhelmed \nwith cloud code i know the terminal is scary  "
+    } ]
+  }, {
+    "tStartMs": 64400,
+    "dDurationMs": 5040,
+    "segs": [ {
+      "utf8": "and it's a big boogeyman but i'm going to give \nyou the blueprint how to use it i'm also going  "
+    } ]
+  }, {
+    "tStartMs": 69440,
+    "dDurationMs": 6560,
+    "segs": [ {
+      "utf8": "to share consider this the ultimate crash course \non how to use cloud code or any agent effectively  "
+    } ]
+  }, {
+    "tStartMs": 76000,
+    "dDurationMs": 6240,
+    "segs": [ {
+      "utf8": "Okay, let's get into it. So, I mean, the best \nway to start these episodes is with sharing our  "
+    } ]
+  }, {
+    "tStartMs": 82240,
+    "dDurationMs": 7760,
+    "segs": [ {
+      "utf8": "screen. So, when we think of building applications \nusing AI, using some sort of agent like CloudCode  "
+    } ]
+  }, {
+    "tStartMs": 90000,
+    "dDurationMs": 5520,
+    "segs": [ {
+      "utf8": "or OpenCode or Codex, whatever it is, there's \na couple of things that you always have to keep  "
+    } ]
+  }, {
+    "tStartMs": 95520,
+    "dDurationMs": 4720,
+    "segs": [ {
+      "utf8": "in mind. You know, the principles never really \nchange. One thing that it's important for us to  "
+    } ]
+  }, {
+    "tStartMs": 100240,
+    "dDurationMs": 6720,
+    "segs": [ {
+      "utf8": "understand is however good your inputs are will \ndictate how good your output is. We're getting to  "
+    } ]
+  }, {
+    "tStartMs": 106960,
+    "dDurationMs": 7760,
+    "segs": [ {
+      "utf8": "a point where the models are so freakishly good \nthat if you are producing quote-unquote slop,  "
+    } ]
+  }, {
+    "tStartMs": 114720,
+    "dDurationMs": 4640,
+    "segs": [ {
+      "utf8": "it's because you've given it slop. There was a \ntime where the models weren't good enough. There  "
+    } ]
+  }, {
+    "tStartMs": 119360,
+    "dDurationMs": 6240,
+    "segs": [ {
+      "utf8": "was a time where we had serious qualms and issues \nwith the quality of code the models gave us. But  "
+    } ]
+  }, {
+    "tStartMs": 125600,
+    "dDurationMs": 6160,
+    "segs": [ {
+      "utf8": "now we're starting to get to a point where even \nmyself, like I'm reviewing a lot more code than I  "
+    } ]
+  }, {
+    "tStartMs": 131760,
+    "dDurationMs": 6320,
+    "segs": [ {
+      "utf8": "write. And I never thought I'd be able to say that \nin the early months of 2026. So very important for  "
+    } ]
+  }, {
+    "tStartMs": 138080,
+    "dDurationMs": 5520,
+    "segs": [ {
+      "utf8": "us to understand our inputs, how good they are, \nhow precise they are, how articulate they are,  "
+    } ]
+  }, {
+    "tStartMs": 143600,
+    "dDurationMs": 5280,
+    "segs": [ {
+      "utf8": "are just as good as our outputs and will dictate \njust how good our outputs will be. And the way I  "
+    } ]
+  }, {
+    "tStartMs": 148880,
+    "dDurationMs": 4640,
+    "segs": [ {
+      "utf8": "want people to think about this is, Greg, is like \nimagine you were communicating this to a human,  "
+    } ]
+  }, {
+    "tStartMs": 153520,
+    "dDurationMs": 6800,
+    "segs": [ {
+      "utf8": "to a human engineer, right? If you give them \nsparse instructions and if anyone is in client  "
+    } ]
+  }, {
+    "tStartMs": 160320,
+    "dDurationMs": 5040,
+    "segs": [ {
+      "utf8": "work, you realize that most clients, they tell \nyou one thing, but you have to sort of extract  "
+    } ]
+  }, {
+    "tStartMs": 165360,
+    "dDurationMs": 6560,
+    "segs": [ {
+      "utf8": "the deeper thoughts of what it is they want. It's \nthe same way when we work with these agents, when  "
+    } ]
+  }, {
+    "tStartMs": 171920,
+    "dDurationMs": 6080,
+    "segs": [ {
+      "utf8": "we work with Cloud Code. We need to be really, \nreally precise with how we build our inputs. Now,  "
+    } ]
+  }, {
+    "tStartMs": 178000,
+    "dDurationMs": 7280,
+    "segs": [ {
+      "utf8": "what do I mean by inputs? What I mean is our \nPRDs or our to-do list or our plans, right? Like  "
+    } ]
+  }, {
+    "tStartMs": 185280,
+    "dDurationMs": 5360,
+    "segs": [ {
+      "utf8": "there's – people are giving you different names. \nIt doesn't really matter. It's all the same thing,  "
+    } ]
+  }, {
+    "tStartMs": 190640,
+    "dDurationMs": 5280,
+    "segs": [ {
+      "utf8": "right? And when we think of a PRD or when we think \nof a to-do list or when we think of a plan, I want  "
+    } ]
+  }, {
+    "tStartMs": 195920,
+    "dDurationMs": 6400,
+    "segs": [ {
+      "utf8": "us to think in such a way as this. Let's say I'm \ntrying to build this product, right? Let's say  "
+    } ]
+  }, {
+    "tStartMs": 202320,
+    "dDurationMs": 6080,
+    "segs": [ {
+      "utf8": "– I don't know, Greg, any product ideas that – \nDo you have product ideas? Yeah, that's actually  "
+    } ]
+  }, {
+    "tStartMs": 208400,
+    "dDurationMs": 10160,
+    "segs": [ {
+      "utf8": "the best person to ask, right? Let's say I go on \nIdealBrowser.com. I was just going to it. I was  "
+    } ]
+  }, {
+    "tStartMs": 218560,
+    "dDurationMs": 6160,
+    "segs": [ {
+      "utf8": "just going to it. Yeah, pick the idea of the day \nfrom Idea Browser. It says it's a diagnostic tool  "
+    } ]
+  }, {
+    "tStartMs": 224720,
+    "dDurationMs": 4640,
+    "segs": [ {
+      "utf8": "for appliance techs losing hundreds of repeat \nvisits. See, I have no idea what that means,  "
+    } ]
+  }, {
+    "tStartMs": 229360,
+    "dDurationMs": 5600,
+    "segs": [ {
+      "utf8": "but let's say I know what that means. Essentially, \nwhen thinking of this idea and looking to build  "
+    } ]
+  }, {
+    "tStartMs": 234960,
+    "dDurationMs": 6560,
+    "segs": [ {
+      "utf8": "this into a full-fledged product, Generally, the \nway you're going to think is, okay, if product X  "
+    } ]
+  }, {
+    "tStartMs": 241520,
+    "dDurationMs": 6720,
+    "segs": [ {
+      "utf8": "does Y, Z, A, B, and C, how I would reach that is \nI'm going to think of features, right? So let's  "
+    } ]
+  }, {
+    "tStartMs": 248240,
+    "dDurationMs": 7360,
+    "segs": [ {
+      "utf8": "say there's four core features to this application \nthat Greg just mentioned. And if I have these four  "
+    } ]
+  }, {
+    "tStartMs": 255600,
+    "dDurationMs": 7040,
+    "segs": [ {
+      "utf8": "features built out, we can safely assume that \nwe have said product, right? The way we are to  "
+    } ]
+  }, {
+    "tStartMs": 262640,
+    "dDurationMs": 6880,
+    "segs": [ {
+      "utf8": "design our PRDs to-do lists and plans is such that \nwe want the agent, the model, to build out all  "
+    } ]
+  }, {
+    "tStartMs": 269520,
+    "dDurationMs": 5840,
+    "segs": [ {
+      "utf8": "these features, right? Because all these features \nput together is our product. You see, a lot of  "
+    } ]
+  }, {
+    "tStartMs": 275360,
+    "dDurationMs": 6320,
+    "segs": [ {
+      "utf8": "times people will describe a product, not describe \nfeatures, and will be frustrated with AI. Like AI  "
+    } ]
+  }, {
+    "tStartMs": 281680,
+    "dDurationMs": 4640,
+    "segs": [ {
+      "utf8": "is supposed to magically know what you're thinking \nabout. By the way, Greg, am I making sense so far?  "
+    } ]
+  }, {
+    "tStartMs": 286960,
+    "dDurationMs": 6560,
+    "segs": [ {
+      "utf8": "100%. I'm with you. Yeah. So we really need to \nthink in features. But here's the cool part. When  "
+    } ]
+  }, {
+    "tStartMs": 293520,
+    "dDurationMs": 5520,
+    "segs": [ {
+      "utf8": "developing features, oftentimes the issue with \nmodels is like you'll develop a feature or like  "
+    } ]
+  }, {
+    "tStartMs": 299040,
+    "dDurationMs": 4400,
+    "segs": [ {
+      "utf8": "let's say the model develops a feature. We don't \nknow if it works. We don't know if it did it the  "
+    } ]
+  }, {
+    "tStartMs": 303440,
+    "dDurationMs": 4960,
+    "segs": [ {
+      "utf8": "right way. That's where with all the cool Ralph \nstuff that's happening, we can introduce tests.  "
+    } ]
+  }, {
+    "tStartMs": 308400,
+    "dDurationMs": 7520,
+    "segs": [ {
+      "utf8": "Right. So let's say the model, the agent builds \nfeature one. Before moving on to feature two,  "
+    } ]
+  }, {
+    "tStartMs": 315920,
+    "dDurationMs": 4320,
+    "segs": [ {
+      "utf8": "what I'm going to do is I'm going to get the \nmodel to write a test. If that test passes,  "
+    } ]
+  }, {
+    "tStartMs": 320240,
+    "dDurationMs": 4640,
+    "segs": [ {
+      "utf8": "then we'll work on the second feature. If that \ntest passes, we work on the third feature.  "
+    } ]
+  }, {
+    "tStartMs": 324880,
+    "dDurationMs": 7120,
+    "segs": [ {
+      "utf8": "So we're finally entering an era where you can \nreally build something serious with these models.  "
+    } ]
+  }, {
+    "tStartMs": 332000,
+    "dDurationMs": 6240,
+    "segs": [ {
+      "utf8": "So instead of telling you about just planning, \nwhy don't we do actual planning together? So I'm  "
+    } ]
+  }, {
+    "tStartMs": 338240,
+    "dDurationMs": 5680,
+    "segs": [ {
+      "utf8": "going to pop up my terminal. So I know everyone's \nafraid of the terminal, but in all honesty, if you  "
+    } ]
+  }, {
+    "tStartMs": 343920,
+    "dDurationMs": 5360,
+    "segs": [ {
+      "utf8": "don't know how to use a terminal, ask AI. It's the \nsimplest thing. And if not, you can even download  "
+    } ]
+  }, {
+    "tStartMs": 349280,
+    "dDurationMs": 5760,
+    "segs": [ {
+      "utf8": "the Cloud Code app and go on Code section, give \nit a specific folder you want to work on. and use  "
+    } ]
+  }, {
+    "tStartMs": 355040,
+    "dDurationMs": 4560,
+    "segs": [ {
+      "utf8": "the app. Like there's literally no excuse to \nnot use Cloud Code. If you're afraid, boohoo,  "
+    } ]
+  }, {
+    "tStartMs": 359600,
+    "dDurationMs": 5120,
+    "segs": [ {
+      "utf8": "just jump into use AI, you have all the tools. \nThat being said, I'm just going to type in Cloud,  "
+    } ]
+  }, {
+    "tStartMs": 364720,
+    "dDurationMs": 5440,
+    "segs": [ {
+      "utf8": "and we're going to have Cloud Code open. And \nusually how people plan is they'll click shift  "
+    } ]
+  }, {
+    "tStartMs": 370160,
+    "dDurationMs": 7120,
+    "segs": [ {
+      "utf8": "tab, right? And then you have plan mode on. \nAnd you can say, let's say, I want to build  "
+    } ]
+  }, {
+    "tStartMs": 378000,
+    "dDurationMs": 10320,
+    "segs": [ {
+      "utf8": "tick tock UGC generating app for my marketing \nagency. I see like these UGC apps everywhere.  "
+    } ]
+  }, {
+    "tStartMs": 389760,
+    "dDurationMs": 15920,
+    "segs": [ {
+      "utf8": "please help me create a plan, write this in the, \nin, PRD.md file. So this is how most people have  "
+    } ]
+  }, {
+    "tStartMs": 405680,
+    "dDurationMs": 6320,
+    "segs": [ {
+      "utf8": "planning set up, right? You'll tell Claude Code or \nCursor or whatever agent to do the plan for you,  "
+    } ]
+  }, {
+    "tStartMs": 412000,
+    "dDurationMs": 5520,
+    "segs": [ {
+      "utf8": "and you ask it to be in some file. And like it \nsays, it'd be happy to help you plan this out.  "
+    } ]
+  }, {
+    "tStartMs": 417520,
+    "dDurationMs": 5680,
+    "segs": [ {
+      "utf8": "And it'll ask you some questions, etc, etc. But \nI found that there's a better way to get an even  "
+    } ]
+  }, {
+    "tStartMs": 423200,
+    "dDurationMs": 6800,
+    "segs": [ {
+      "utf8": "more concise plan. And this way, it actually \ngets you to think a lot more about trade-offs,  "
+    } ]
+  }, {
+    "tStartMs": 430000,
+    "dDurationMs": 6080,
+    "segs": [ {
+      "utf8": "concerns, UI, UX decisions, because most of the \ntime you're sort of allowing the AI to have free  "
+    } ]
+  }, {
+    "tStartMs": 436080,
+    "dDurationMs": 4160,
+    "segs": [ {
+      "utf8": "reign over certain decisions, which I think will \nlead you with a finished product that you're  "
+    } ]
+  }, {
+    "tStartMs": 440240,
+    "dDurationMs": 6080,
+    "segs": [ {
+      "utf8": "not excited about. And that's invoking a special \ntool. I was going to show you guys the tweet, but  "
+    } ]
+  }, {
+    "tStartMs": 446320,
+    "dDurationMs": 6000,
+    "segs": [ {
+      "utf8": "unfortunately Twitter is down right now. But Cloud \nCode has a specific tool called Ask User Question  "
+    } ]
+  }, {
+    "tStartMs": 452320,
+    "dDurationMs": 6480,
+    "segs": [ {
+      "utf8": "Tool. And essentially what this tool does, it \nstarts to interview you about the specifics of  "
+    } ]
+  }, {
+    "tStartMs": 458800,
+    "dDurationMs": 5280,
+    "segs": [ {
+      "utf8": "your plan right so I'm gonna drop this prompt \nwhere it says read this plan file interview me  "
+    } ]
+  }, {
+    "tStartMs": 464080,
+    "dDurationMs": 5040,
+    "segs": [ {
+      "utf8": "in detail using the ask user question tool about \nliterally anything technical implementation UI  "
+    } ]
+  }, {
+    "tStartMs": 469120,
+    "dDurationMs": 7120,
+    "segs": [ {
+      "utf8": "UX concerns and trade I spelt implementation wrong \ndo not judge me And what this is going to do is it  "
+    } ]
+  }, {
+    "tStartMs": 476240,
+    "dDurationMs": 5360,
+    "segs": [ {
+      "utf8": "going to go past the plan that we have and start \nto ask us about my new details. So let's finish  "
+    } ]
+  }, {
+    "tStartMs": 481600,
+    "dDurationMs": 7680,
+    "segs": [ {
+      "utf8": "off this plan first. I'm just going to accept this \nis internal use. TechSack will use React. I just  "
+    } ]
+  }, {
+    "tStartMs": 489280,
+    "dDurationMs": 6080,
+    "segs": [ {
+      "utf8": "want core features. We'll submit answers. And then \nCloudCode, you'll see, might ask us a few more  "
+    } ]
+  }, {
+    "tStartMs": 495360,
+    "dDurationMs": 7600,
+    "segs": [ {
+      "utf8": "questions, but this will generally be the plan. \nRight. So it's not just the plan. It's the right  "
+    } ]
+  }, {
+    "tStartMs": 502960,
+    "dDurationMs": 5760,
+    "segs": [ {
+      "utf8": "plan, right? Like to what you were saying, like \ngo back, scroll back up here, the features and,  "
+    } ]
+  }, {
+    "tStartMs": 508720,
+    "dDurationMs": 6080,
+    "segs": [ {
+      "utf8": "yeah, the features and tests. Like the way I \nthink about this, and I don't know if you agree,  "
+    } ]
+  }, {
+    "tStartMs": 514800,
+    "dDurationMs": 5440,
+    "segs": [ {
+      "utf8": "is like if you ask Cloud Code to build you a car, \nit doesn't really know what a car is. It doesn't  "
+    } ]
+  }, {
+    "tStartMs": 520240,
+    "dDurationMs": 7600,
+    "segs": [ {
+      "utf8": "understand like you need a steering wheel and a \nradio and you need wheels. So the hard part is  "
+    } ]
+  }, {
+    "tStartMs": 527840,
+    "dDurationMs": 4960,
+    "segs": [ {
+      "utf8": "trying to figure out, is basically explaining \nwhat those things are in a really succinct  "
+    } ]
+  }, {
+    "tStartMs": 532800,
+    "dDurationMs": 5760,
+    "segs": [ {
+      "utf8": "and clear way. And that's what this interview is \nbasically doing. It's explaining each of them and  "
+    } ]
+  }, {
+    "tStartMs": 538560,
+    "dDurationMs": 4640,
+    "segs": [ {
+      "utf8": "then we're going to test each of those features. \nExactly. Like think of it this way, like a simple  "
+    } ]
+  }, {
+    "tStartMs": 543200,
+    "dDurationMs": 7040,
+    "segs": [ {
+      "utf8": "example. Let's say you ask the AI agent to build \nyou a specific feature, right? How is it going to  "
+    } ]
+  }, {
+    "tStartMs": 550240,
+    "dDurationMs": 4480,
+    "segs": [ {
+      "utf8": "present that specific feature? Did you want it \nin a dashboard? Did you want it to be a modal?  "
+    } ]
+  }, {
+    "tStartMs": 554720,
+    "dDurationMs": 4800,
+    "segs": [ {
+      "utf8": "Did it have to be a separate page? Like \nwhen you don't specify these minute details,  "
+    } ]
+  }, {
+    "tStartMs": 559520,
+    "dDurationMs": 4800,
+    "segs": [ {
+      "utf8": "it will make the assumption for you. And with \nRalph loops and all these type of things, like  "
+    } ]
+  }, {
+    "tStartMs": 564320,
+    "dDurationMs": 4960,
+    "segs": [ {
+      "utf8": "you might have a whole application built out and \nit's not exactly to the liking or the expectations  "
+    } ]
+  }, {
+    "tStartMs": 569280,
+    "dDurationMs": 7520,
+    "segs": [ {
+      "utf8": "you had. Right. So let me continue. I'll just make \nsome selections here just so we can move on and  "
+    } ]
+  }, {
+    "tStartMs": 576800,
+    "dDurationMs": 7120,
+    "segs": [ {
+      "utf8": "then hit submit. and then I'm going to pause this \nplanning here and then I'm going to paste this.  "
+    } ]
+  }, {
+    "tStartMs": 583920,
+    "dDurationMs": 6320,
+    "segs": [ {
+      "utf8": "I'm going to say read this plan file and I'm going \nto tag the plan file. It's called prd.md. We have  "
+    } ]
+  }, {
+    "tStartMs": 590240,
+    "dDurationMs": 5760,
+    "segs": [ {
+      "utf8": "that right here and I'm going to say interview \nme the details about this question or I don't  "
+    } ]
+  }, {
+    "tStartMs": 596000,
+    "dDurationMs": 6480,
+    "segs": [ {
+      "utf8": "even need to tag it because it has it in its \ncontext but I just want to show you how annoyingly  "
+    } ]
+  }, {
+    "tStartMs": 602480,
+    "dDurationMs": 6160,
+    "segs": [ {
+      "utf8": "annoying this is going to get meaning, it's going \nto keep asking me questions about said plan or  "
+    } ]
+  }, {
+    "tStartMs": 608640,
+    "dDurationMs": 6400,
+    "segs": [ {
+      "utf8": "said app idea. So notice how it says round \none core workflow and technical foundation,  "
+    } ]
+  }, {
+    "tStartMs": 615040,
+    "dDurationMs": 3760,
+    "segs": [ {
+      "utf8": "right? And some of the questions it might even \nask you are things that you might not know about  "
+    } ]
+  }, {
+    "tStartMs": 618800,
+    "dDurationMs": 3440,
+    "segs": [ {
+      "utf8": "because you're not technical. So what do I do \nwhen I don't know something, Greg? I'm going to  "
+    } ]
+  }, {
+    "tStartMs": 622240,
+    "dDurationMs": 4960,
+    "segs": [ {
+      "utf8": "copy this and I'm going to go to the chatbot of \nmy choice, whether it's Claw, ChatGVT, whatever,  "
+    } ]
+  }, {
+    "tStartMs": 627200,
+    "dDurationMs": 5600,
+    "segs": [ {
+      "utf8": "and I'm going to ask questions. So if you remember \nearlier, it asked me generic questions about the  "
+    } ]
+  }, {
+    "tStartMs": 632800,
+    "dDurationMs": 4720,
+    "segs": [ {
+      "utf8": "app. Now it's saying, what's your ideal workflow \nfor generating UGC video from start to finish?  "
+    } ]
+  }, {
+    "tStartMs": 638080,
+    "dDurationMs": 5280,
+    "segs": [ {
+      "utf8": "Like notice how the questions are even more \nspecific now. So it says linear step-by-step,  "
+    } ]
+  }, {
+    "tStartMs": 643360,
+    "dDurationMs": 6400,
+    "segs": [ {
+      "utf8": "template-based, batch processing, iterative, \nconversational. So let's say I select that  "
+    } ]
+  }, {
+    "tStartMs": 649760,
+    "dDurationMs": 5520,
+    "segs": [ {
+      "utf8": "and it says, how should the app handle Hagen API \ncosts and usage? So now it's talking about costs,  "
+    } ]
+  }, {
+    "tStartMs": 655280,
+    "dDurationMs": 5120,
+    "segs": [ {
+      "utf8": "right? Again, most of the times when you just have \na basic plan. This is not included in the plan,  "
+    } ]
+  }, {
+    "tStartMs": 660400,
+    "dDurationMs": 4960,
+    "segs": [ {
+      "utf8": "right? Let's say we want to have a hard, hard \nbudget. What database and hosting approach do  "
+    } ]
+  }, {
+    "tStartMs": 665360,
+    "dDurationMs": 4480,
+    "segs": [ {
+      "utf8": "you want to use? Most of you probably watching \nthis have no idea. So I can copy this over, go  "
+    } ]
+  }, {
+    "tStartMs": 669840,
+    "dDurationMs": 5120,
+    "segs": [ {
+      "utf8": "to chat GPT and ask what's the best decision. This \nis my current situation. And then you keep going,  "
+    } ]
+  }, {
+    "tStartMs": 674960,
+    "dDurationMs": 6160,
+    "segs": [ {
+      "utf8": "you keep going and you submit answers. So when \nyou use this ask user question tool, the questions  "
+    } ]
+  }, {
+    "tStartMs": 681120,
+    "dDurationMs": 5120,
+    "segs": [ {
+      "utf8": "become more granular. So it asked me about core \nworkflow and technical foundation. Now it's going  "
+    } ]
+  }, {
+    "tStartMs": 686240,
+    "dDurationMs": 6640,
+    "segs": [ {
+      "utf8": "to ask me about UI, UX, and script generation. If \nyou notice the first plan that it came up with,  "
+    } ]
+  }, {
+    "tStartMs": 692880,
+    "dDurationMs": 6160,
+    "segs": [ {
+      "utf8": "the default plan for Cloud Code, it was pretty \nbasic. Now it's asking me, okay, what AI do I want  "
+    } ]
+  }, {
+    "tStartMs": 699040,
+    "dDurationMs": 5360,
+    "segs": [ {
+      "utf8": "to use for the script generation? I'll use Cloud. \nWhat UI style aesthetic are you going for? Minimal  "
+    } ]
+  }, {
+    "tStartMs": 704400,
+    "dDurationMs": 6400,
+    "segs": [ {
+      "utf8": "clean, dashboard heavy, creative tool feel, chat \nfirst, right? So hopefully, Greg, I'm making sense  "
+    } ]
+  }, {
+    "tStartMs": 710800,
+    "dDurationMs": 7440,
+    "segs": [ {
+      "utf8": "with like how much more questions I'm being asked \nwhen I'm invoking this ask user question tool.  "
+    } ]
+  }, {
+    "tStartMs": 719280,
+    "dDurationMs": 7520,
+    "segs": [ {
+      "utf8": "Yeah, it makes complete sense. You're also going \nto use less tokens in the end, right? Yeah,  "
+    } ]
+  }, {
+    "tStartMs": 726800,
+    "dDurationMs": 5920,
+    "segs": [ {
+      "utf8": "because the thing is, the better your plan, the \nbetter your input, the better the initial set of  "
+    } ]
+  }, {
+    "tStartMs": 732720,
+    "dDurationMs": 6080,
+    "segs": [ {
+      "utf8": "documents that you give the model, the better \nthe outcome. And if the better the outcome,  "
+    } ]
+  }, {
+    "tStartMs": 738800,
+    "dDurationMs": 4720,
+    "segs": [ {
+      "utf8": "There's no back and forth, right? Most people will \nhave a Ralph's loop running. It'll be a basic plan  "
+    } ]
+  }, {
+    "tStartMs": 743520,
+    "dDurationMs": 4160,
+    "segs": [ {
+      "utf8": "and it'll do what you told it to do, but you \nweren't specific. So now you're going back and  "
+    } ]
+  }, {
+    "tStartMs": 747680,
+    "dDurationMs": 4240,
+    "segs": [ {
+      "utf8": "then maybe you're running another loop or you're \ngoing back and doing all these changes. But if you  "
+    } ]
+  }, {
+    "tStartMs": 751920,
+    "dDurationMs": 6960,
+    "segs": [ {
+      "utf8": "get it done right, if you invest the time in the \nplanning stage, I 100% believe you'll save a lot  "
+    } ]
+  }, {
+    "tStartMs": 758880,
+    "dDurationMs": 5680,
+    "segs": [ {
+      "utf8": "more money. And this will help you clear up a lot \nof ideas. For example, this idea that we just had,  "
+    } ]
+  }, {
+    "tStartMs": 764560,
+    "dDurationMs": 6480,
+    "segs": [ {
+      "utf8": "this TikTok UGC farm, how do we want it set \nup? Do we want it to be flat with search? Do  "
+    } ]
+  }, {
+    "tStartMs": 771040,
+    "dDurationMs": 6000,
+    "segs": [ {
+      "utf8": "we want it to be client campaign? There's a lot \nof like these minute details that you're not  "
+    } ]
+  }, {
+    "tStartMs": 777040,
+    "dDurationMs": 3920,
+    "segs": [ {
+      "utf8": "thinking about. And because you're not thinking \nabout it, you're allowing Cloud Code to make  "
+    } ]
+  }, {
+    "tStartMs": 780960,
+    "dDurationMs": 4880,
+    "segs": [ {
+      "utf8": "those assumptions for you. Right. Which at the \nend, after it's burnt through a ton of tokens,  "
+    } ]
+  }, {
+    "tStartMs": 785840,
+    "dDurationMs": 6480,
+    "segs": [ {
+      "utf8": "now you're going back to change. Right. We can \nsave so much headache if we do the proper planning  "
+    } ]
+  }, {
+    "tStartMs": 792320,
+    "dDurationMs": 8240,
+    "segs": [ {
+      "utf8": "from the beginning. And hopefully people see \nvalue in this ask user question tool. Make sure  "
+    } ]
+  }, {
+    "tStartMs": 800560,
+    "dDurationMs": 6720,
+    "segs": [ {
+      "utf8": "you specify it in your prompt. And hopefully, \nGreg, that made sense. It does. So I would say  "
+    } ]
+  }, {
+    "tStartMs": 807280,
+    "dDurationMs": 5680,
+    "segs": [ {
+      "utf8": "step number one for this Claude Crash Course is \nI would get good at planning. I would get really,  "
+    } ]
+  }, {
+    "tStartMs": 812960,
+    "dDurationMs": 5280,
+    "segs": [ {
+      "utf8": "really good at planning. I would get good at \ngenerating these. Like, look, it keeps on asking  "
+    } ]
+  }, {
+    "tStartMs": 818240,
+    "dDurationMs": 5120,
+    "segs": [ {
+      "utf8": "me questions. If you notice the very first plan \nthat we generated with Claude, it was two sets  "
+    } ]
+  }, {
+    "tStartMs": 823360,
+    "dDurationMs": 4480,
+    "segs": [ {
+      "utf8": "of questions and it was ready to build. But with \nthis, it's asking me, do I have basic avatars,  "
+    } ]
+  }, {
+    "tStartMs": 827840,
+    "dDurationMs": 5920,
+    "segs": [ {
+      "utf8": "custom avatars, multi-scene videos? How do I \nwant to handle storage? Do I want to download the  "
+    } ]
+  }, {
+    "tStartMs": 833760,
+    "dDurationMs": 6080,
+    "segs": [ {
+      "utf8": "videos instantly, cloud storage, external storage? \nLike there's so much to software engineering. And  "
+    } ]
+  }, {
+    "tStartMs": 839840,
+    "dDurationMs": 4080,
+    "segs": [ {
+      "utf8": "I think in our last video, someone shared this \non Twitter. I don't know if it was you or someone  "
+    } ]
+  }, {
+    "tStartMs": 843920,
+    "dDurationMs": 6640,
+    "segs": [ {
+      "utf8": "else. like software building personal software is \neasy but building software others are going to use  "
+    } ]
+  }, {
+    "tStartMs": 850560,
+    "dDurationMs": 6160,
+    "segs": [ {
+      "utf8": "is very very difficult and if you don't have the \naudacity or the decency to to set up a little time  "
+    } ]
+  }, {
+    "tStartMs": 856720,
+    "dDurationMs": 4800,
+    "segs": [ {
+      "utf8": "a little extra time to plan then i guarantee you \nwhatever you generate is going to be ai slop and  "
+    } ]
+  }, {
+    "tStartMs": 861520,
+    "dDurationMs": 5680,
+    "segs": [ {
+      "utf8": "you might blame the model but really the problem \nis you so invest in your plans spend time using  "
+    } ]
+  }, {
+    "tStartMs": 867200,
+    "dDurationMs": 7520,
+    "segs": [ {
+      "utf8": "planning. Don't use the generic plan mode that \ncursor or cloud code has. I would use cloud code  "
+    } ]
+  }, {
+    "tStartMs": 874720,
+    "dDurationMs": 5360,
+    "segs": [ {
+      "utf8": "and then I would specify the ask user question \ntool. It's going to continue to know you with  "
+    } ]
+  }, {
+    "tStartMs": 880080,
+    "dDurationMs": 5280,
+    "segs": [ {
+      "utf8": "questions like it keeps asking, right? Because \nuntil it knows exactly what it is you want,  "
+    } ]
+  }, {
+    "tStartMs": 885360,
+    "dDurationMs": 7360,
+    "segs": [ {
+      "utf8": "it won't start building. So I would say that's \nstep number one to building with cloud code. Step  "
+    } ]
+  }, {
+    "tStartMs": 892720,
+    "dDurationMs": 7040,
+    "segs": [ {
+      "utf8": "number two, and everyone's talking about Ralph and \nit's exciting, but I wouldn't use it. I wouldn't  "
+    } ]
+  }, {
+    "tStartMs": 899760,
+    "dDurationMs": 7120,
+    "segs": [ {
+      "utf8": "use Ralph. And the reason I wouldn't use Ralph if \nI was just starting out, Greg, is because how are  "
+    } ]
+  }, {
+    "tStartMs": 906880,
+    "dDurationMs": 8400,
+    "segs": [ {
+      "utf8": "you going to – like imagine this. Like imagine not \nknowing how to drive but then buying a Tesla for  "
+    } ]
+  }, {
+    "tStartMs": 915280,
+    "dDurationMs": 5440,
+    "segs": [ {
+      "utf8": "like the self-driving stuff. Like, cool in theory, \nbut maybe it's a great idea to know how to drive,  "
+    } ]
+  }, {
+    "tStartMs": 920720,
+    "dDurationMs": 5680,
+    "segs": [ {
+      "utf8": "how to steer, how to hit the corners, how to maybe \nyell at someone when they cut you off before you  "
+    } ]
+  }, {
+    "tStartMs": 926400,
+    "dDurationMs": 7840,
+    "segs": [ {
+      "utf8": "get the full automated version. I say this to say \nbecause when you get good at developing plans and  "
+    } ]
+  }, {
+    "tStartMs": 934240,
+    "dDurationMs": 6640,
+    "segs": [ {
+      "utf8": "then working with the AI to build each feature \nand testing each feature you start to develop the  "
+    } ]
+  }, {
+    "tStartMs": 940880,
+    "dDurationMs": 8000,
+    "segs": [ {
+      "utf8": "sense on product building on like you know even I \nheard someone called Vibe QA testing You get this  "
+    } ]
+  }, {
+    "tStartMs": 948880,
+    "dDurationMs": 5440,
+    "segs": [ {
+      "utf8": "sense by going one on one yourself And this is \nwhy a lot of people who were fighting with Cloud  "
+    } ]
+  }, {
+    "tStartMs": 954320,
+    "dDurationMs": 5280,
+    "segs": [ {
+      "utf8": "Code all these months are really, really good at \nusing it now because they spent the time building  "
+    } ]
+  }, {
+    "tStartMs": 959600,
+    "dDurationMs": 5440,
+    "segs": [ {
+      "utf8": "without using these crazy automation. So if you're \nusing Cloud Code for the first time or you're  "
+    } ]
+  }, {
+    "tStartMs": 965040,
+    "dDurationMs": 6320,
+    "segs": [ {
+      "utf8": "just getting into it, good plan, number one. And \nnumber two, get your reps in by not using Ralph.  "
+    } ]
+  }, {
+    "tStartMs": 971360,
+    "dDurationMs": 5200,
+    "segs": [ {
+      "utf8": "So develop the features one by one. Now that you \nhave your plan, you can literally tell Cloud Code,  "
+    } ]
+  }, {
+    "tStartMs": 976560,
+    "dDurationMs": 5360,
+    "segs": [ {
+      "utf8": "hey, OK, let's build the first feature. You know, \ngo ahead and do it. And then once the feature is  "
+    } ]
+  }, {
+    "tStartMs": 981920,
+    "dDurationMs": 5840,
+    "segs": [ {
+      "utf8": "done, you can test it or ask it. How can I test \nthis? How can I run this app? I wouldn't jump into  "
+    } ]
+  }, {
+    "tStartMs": 987760,
+    "dDurationMs": 9120,
+    "segs": [ {
+      "utf8": "using Ralph right away. Build without Ralph. \nBut let's say you've built these reps now and  "
+    } ]
+  }, {
+    "tStartMs": 996880,
+    "dDurationMs": 6480,
+    "segs": [ {
+      "utf8": "you're comfortable with Cloud Code. Now you hear \nabout all these things, skills, MCP, prompt.md,  "
+    } ]
+  }, {
+    "tStartMs": 1004000,
+    "dDurationMs": 8320,
+    "segs": [ {
+      "utf8": "agent.md. What else is there? Something.md. \nYou hear all these conventions, plugins. You  "
+    } ]
+  }, {
+    "tStartMs": 1012320,
+    "dDurationMs": 7200,
+    "segs": [ {
+      "utf8": "have Ralph, all these things. So what do I need to \nperfectly build something using CloudCode or any  "
+    } ]
+  }, {
+    "tStartMs": 1019520,
+    "dDurationMs": 6640,
+    "segs": [ {
+      "utf8": "agent? I'll be honest with you. Most of these \nthings are all the same. PromptMD and AgentMD  "
+    } ]
+  }, {
+    "tStartMs": 1026160,
+    "dDurationMs": 8640,
+    "segs": [ {
+      "utf8": "are just markdown files. Plugins are skills \nwith a little bit extra. What you need to build  "
+    } ]
+  }, {
+    "tStartMs": 1034800,
+    "dDurationMs": 6400,
+    "segs": [ {
+      "utf8": "successfully using these agents is, first of all, \nyou need a good plan, right, which are documents,  "
+    } ]
+  }, {
+    "tStartMs": 1041200,
+    "dDurationMs": 8480,
+    "segs": [ {
+      "utf8": "which is the PRD.MD we just generated. And then \nyou need to document the progress that's being  "
+    } ]
+  }, {
+    "tStartMs": 1049680,
+    "dDurationMs": 7200,
+    "segs": [ {
+      "utf8": "made. For anyone who's familiar with Ralph, you \nknow what I'm talking about. For those who aren't,  "
+    } ]
+  }, {
+    "tStartMs": 1056880,
+    "dDurationMs": 6080,
+    "segs": [ {
+      "utf8": "what's cool about a Ralph loop is as follows. A \nRalph loop is basically you have a list of things  "
+    } ]
+  }, {
+    "tStartMs": 1062960,
+    "dDurationMs": 8320,
+    "segs": [ {
+      "utf8": "that need to get done. The whatchamacallit, the \nPRD.MD or the plan. You give it to the AI model.  "
+    } ]
+  }, {
+    "tStartMs": 1071280,
+    "dDurationMs": 6000,
+    "segs": [ {
+      "utf8": "The model works on the first task. It finishes \nand then documents it in another file and then  "
+    } ]
+  }, {
+    "tStartMs": 1077280,
+    "dDurationMs": 7840,
+    "segs": [ {
+      "utf8": "it goes again and it stops until it's completed \nthe whole list. Now, this isn't anything special,  "
+    } ]
+  }, {
+    "tStartMs": 1085120,
+    "dDurationMs": 3760,
+    "segs": [ {
+      "utf8": "but the reason why it's now super powerful \nis because the models are getting so,  "
+    } ]
+  }, {
+    "tStartMs": 1088880,
+    "dDurationMs": 6800,
+    "segs": [ {
+      "utf8": "so good. But here is the issue. If you have \na terrible plan, if you have a terrible PRD,  "
+    } ]
+  }, {
+    "tStartMs": 1095680,
+    "dDurationMs": 4640,
+    "segs": [ {
+      "utf8": "this doesn't matter. You're just donating money \nto Anthropic and I wish you the best of luck if  "
+    } ]
+  }, {
+    "tStartMs": 1100320,
+    "dDurationMs": 4800,
+    "segs": [ {
+      "utf8": "that's what you want to do. But if you want \nto make sure that your tokens are not wasted,  "
+    } ]
+  }, {
+    "tStartMs": 1105120,
+    "dDurationMs": 8560,
+    "segs": [ {
+      "utf8": "you're going to invest in a good PRD.MD file or \na good plan file. Greg, am I making sense so far?  "
+    } ]
+  }, {
+    "tStartMs": 1113680,
+    "dDurationMs": 7280,
+    "segs": [ {
+      "utf8": "A hundred percent. OK. You're driving the point \nhome. Yes. So I'll talk a little bit about Ralph  "
+    } ]
+  }, {
+    "tStartMs": 1120960,
+    "dDurationMs": 7680,
+    "segs": [ {
+      "utf8": "now. So with Mr. Ralph Wiggum, how do we use this? \nNow, there's a lot of different iterations, like  "
+    } ]
+  }, {
+    "tStartMs": 1128640,
+    "dDurationMs": 4720,
+    "segs": [ {
+      "utf8": "people are coming with their own style. I'm going \nto share with you my Ralph setup in a second,  "
+    } ]
+  }, {
+    "tStartMs": 1133360,
+    "dDurationMs": 5680,
+    "segs": [ {
+      "utf8": "Greg. One thing I will say is Cloud Code has a \nplug-in, a Ralph Wiggum plug-in. I wouldn't use  "
+    } ]
+  }, {
+    "tStartMs": 1139040,
+    "dDurationMs": 5280,
+    "segs": [ {
+      "utf8": "that. And the reason I wouldn't use that is even \nthe person who invented the whole Ralph system  "
+    } ]
+  }, {
+    "tStartMs": 1144320,
+    "dDurationMs": 5840,
+    "segs": [ {
+      "utf8": "is against it. It's not the best use of Ralph. \nBut I just want to share this concept of how  "
+    } ]
+  }, {
+    "tStartMs": 1150160,
+    "dDurationMs": 6240,
+    "segs": [ {
+      "utf8": "Ralph works. It's essentially going to go through \nour plan, and it's going to build out each feature  "
+    } ]
+  }, {
+    "tStartMs": 1156400,
+    "dDurationMs": 7280,
+    "segs": [ {
+      "utf8": "step by step. and it's not going to stop until \nit's done. This is cool when your plan rocks.  "
+    } ]
+  }, {
+    "tStartMs": 1163680,
+    "dDurationMs": 7680,
+    "segs": [ {
+      "utf8": "If your plan sucks, then it's terrible. It \ndoesn't matter. Now, in terms of how to set up  "
+    } ]
+  }, {
+    "tStartMs": 1171360,
+    "dDurationMs": 6480,
+    "segs": [ {
+      "utf8": "Ralph Wiggum, I have my own setup and I don't want \nanyone to think I'm shilling my own setup for any  "
+    } ]
+  }, {
+    "tStartMs": 1177840,
+    "dDurationMs": 6400,
+    "segs": [ {
+      "utf8": "reason. But the reason why I built my own setup is \nthere's a couple of things my Ralph loop does. The  "
+    } ]
+  }, {
+    "tStartMs": 1184240,
+    "dDurationMs": 7120,
+    "segs": [ {
+      "utf8": "first thing is it makes sure that there's a plan, \na prd.md file, and there's a progress.txt file.  "
+    } ]
+  }, {
+    "tStartMs": 1191360,
+    "dDurationMs": 7040,
+    "segs": [ {
+      "utf8": "But it also, every feature it builds, it then \nwrites a test and it then lints. And basically  "
+    } ]
+  }, {
+    "tStartMs": 1198400,
+    "dDurationMs": 5040,
+    "segs": [ {
+      "utf8": "what this does is it makes sure that every feature \nthat's built actually works, right? Because  "
+    } ]
+  }, {
+    "tStartMs": 1203440,
+    "dDurationMs": 4320,
+    "segs": [ {
+      "utf8": "there's no point on working on feature two if \nfeature one doesn't work. If feature one doesn't  "
+    } ]
+  }, {
+    "tStartMs": 1207760,
+    "dDurationMs": 5040,
+    "segs": [ {
+      "utf8": "work, if the test fails, guess what the AI model \nis going to do? It's going to go back to working  "
+    } ]
+  }, {
+    "tStartMs": 1212800,
+    "dDurationMs": 6080,
+    "segs": [ {
+      "utf8": "on feature one. And once the test passes, we work \non feature two. And then once feature two test  "
+    } ]
+  }, {
+    "tStartMs": 1218880,
+    "dDurationMs": 5600,
+    "segs": [ {
+      "utf8": "passes, we work on features three. Right. All this \nis awesome. But I'm going to go back to the same  "
+    } ]
+  }, {
+    "tStartMs": 1224480,
+    "dDurationMs": 7600,
+    "segs": [ {
+      "utf8": "point. If your plan sucks, then the Ralph loop \nwon't matter. Now, in order to set up this loop,  "
+    } ]
+  }, {
+    "tStartMs": 1232080,
+    "dDurationMs": 6000,
+    "segs": [ {
+      "utf8": "you can find the get up here how to set it up. You \nhonestly, I'm not even going to explain it. Greg,  "
+    } ]
+  }, {
+    "tStartMs": 1238080,
+    "dDurationMs": 4720,
+    "segs": [ {
+      "utf8": "people can literally copy the link, pass it \nto Claude and then be like I want to run this  "
+    } ]
+  }, {
+    "tStartMs": 1242800,
+    "dDurationMs": 5680,
+    "segs": [ {
+      "utf8": "Ralph loop and it will tell you exactly what \nto do that's how good the models have become  "
+    } ]
+  }, {
+    "tStartMs": 1248480,
+    "dDurationMs": 7200,
+    "segs": [ {
+      "utf8": "but I'll show you an example of this running so \nI have a simple prd.md file it's nothing crazy  "
+    } ]
+  }, {
+    "tStartMs": 1255680,
+    "dDurationMs": 4400,
+    "segs": [ {
+      "utf8": "it's just to show you the point but basically \nthere are a couple tasks here I want to build  "
+    } ]
+  }, {
+    "tStartMs": 1260080,
+    "dDurationMs": 6160,
+    "segs": [ {
+      "utf8": "a basic server that has some basic endpoints and \nI just want to show you how my Ralph loop works.  "
+    } ]
+  }, {
+    "tStartMs": 1266240,
+    "dDurationMs": 6480,
+    "segs": [ {
+      "utf8": "So when I run this Ralph loop, and again, if you \ndon't know how to run this, you paste the GitHub  "
+    } ]
+  }, {
+    "tStartMs": 1272720,
+    "dDurationMs": 5840,
+    "segs": [ {
+      "utf8": "URL in CloudCode in your agent and ask it and it \nwill tell you how to do it. I have a few different  "
+    } ]
+  }, {
+    "tStartMs": 1278560,
+    "dDurationMs": 4800,
+    "segs": [ {
+      "utf8": "configurations. I can use open code if I want. I \ncan use codex if I want, but I'm just going to use  "
+    } ]
+  }, {
+    "tStartMs": 1283360,
+    "dDurationMs": 6080,
+    "segs": [ {
+      "utf8": "CloudCode and I'm just going to run the script. \nAnd basically what it's going to start doing is  "
+    } ]
+  }, {
+    "tStartMs": 1289440,
+    "dDurationMs": 7280,
+    "segs": [ {
+      "utf8": "it's going to start running through each task, \nas you can see, and it's going to update the PRD  "
+    } ]
+  }, {
+    "tStartMs": 1296720,
+    "dDurationMs": 5520,
+    "segs": [ {
+      "utf8": "and it's just going to continue to work. Now, I \ncan go and leave, right? I can go about my day,  "
+    } ]
+  }, {
+    "tStartMs": 1302240,
+    "dDurationMs": 8400,
+    "segs": [ {
+      "utf8": "hang with Greg and this loop will continue to \nwork. And I'm going to see that at some point,  "
+    } ]
+  }, {
+    "tStartMs": 1310640,
+    "dDurationMs": 4320,
+    "segs": [ {
+      "utf8": "whether it's five minutes, three minutes, 10 \nminutes, however long this is, this is going  "
+    } ]
+  }, {
+    "tStartMs": 1314960,
+    "dDurationMs": 5280,
+    "segs": [ {
+      "utf8": "to finish all the tasks. I'm going to have a \nworking product built and all this is cool,  "
+    } ]
+  }, {
+    "tStartMs": 1320240,
+    "dDurationMs": 8080,
+    "segs": [ {
+      "utf8": "but it doesn't matter if I'm going to go back to \nthe original document, if the plan isn't good.  "
+    } ]
+  }, {
+    "tStartMs": 1328320,
+    "dDurationMs": 5200,
+    "segs": [ {
+      "utf8": "Now, skills are great. MCPs are great. All these \ndifferent markdown files are great. You would do  "
+    } ]
+  }, {
+    "tStartMs": 1333520,
+    "dDurationMs": 10400,
+    "segs": [ {
+      "utf8": "yourself a serious service if your plan is good. \nSo the key to successfully building with CloudCode  "
+    } ]
+  }, {
+    "tStartMs": 1343920,
+    "dDurationMs": 5360,
+    "segs": [ {
+      "utf8": "is you have an absolutely great plan. And if \nyou use the ask user question tool, You will  "
+    } ]
+  }, {
+    "tStartMs": 1349280,
+    "dDurationMs": 5920,
+    "segs": [ {
+      "utf8": "spend so much time on the plan where it starts to \nget annoying. It doesn't get fun. But those of us  "
+    } ]
+  }, {
+    "tStartMs": 1355200,
+    "dDurationMs": 6960,
+    "segs": [ {
+      "utf8": "who focus on this will end up having better \noutputs. Let's continue. If you notice here,  "
+    } ]
+  }, {
+    "tStartMs": 1362160,
+    "dDurationMs": 5600,
+    "segs": [ {
+      "utf8": "my Ralph loop is continuing to go and it took care \nof the first task. I can see some files already  "
+    } ]
+  }, {
+    "tStartMs": 1367760,
+    "dDurationMs": 6320,
+    "segs": [ {
+      "utf8": "generated. If I go to the progress.txt file, you \ncan see, Greg, it started to make some progress.  "
+    } ]
+  }, {
+    "tStartMs": 1374080,
+    "dDurationMs": 4720,
+    "segs": [ {
+      "utf8": "It's documenting that. And this is just going to \ncontinue to work. This is just going to continue  "
+    } ]
+  }, {
+    "tStartMs": 1378800,
+    "dDurationMs": 4960,
+    "segs": [ {
+      "utf8": "to run. So people have different iterations. I \nknow the AmpCode people have their own iteration  "
+    } ]
+  }, {
+    "tStartMs": 1383760,
+    "dDurationMs": 4800,
+    "segs": [ {
+      "utf8": "and different people have their own iteration. It \ndoesn't really matter. Right. Someone's Ralph is  "
+    } ]
+  }, {
+    "tStartMs": 1388560,
+    "dDurationMs": 5280,
+    "segs": [ {
+      "utf8": "could be better. Someone's can be worse. Someone's \ngoing to be all of that is cool. But don't get  "
+    } ]
+  }, {
+    "tStartMs": 1393840,
+    "dDurationMs": 8080,
+    "segs": [ {
+      "utf8": "stuck in the weeds. The main sauce is how you can \narticulate perfectly in a beautiful presentation.  "
+    } ]
+  }, {
+    "tStartMs": 1401920,
+    "dDurationMs": 4880,
+    "segs": [ {
+      "utf8": "create the perfect input because if you create \nthe perfect input we have reached a point where  "
+    } ]
+  }, {
+    "tStartMs": 1406800,
+    "dDurationMs": 8080,
+    "segs": [ {
+      "utf8": "the models will give you perfect output so that \nmy main tip crash course for people use the ask  "
+    } ]
+  }, {
+    "tStartMs": 1414880,
+    "dDurationMs": 6000,
+    "segs": [ {
+      "utf8": "user question tool build without using Ralph And \nif you are going to use Ralph understand if your  "
+    } ]
+  }, {
+    "tStartMs": 1420880,
+    "dDurationMs": 4880,
+    "segs": [ {
+      "utf8": "plan sucks you just donating money to Anthropic \nAnd I think Anthropic has enough money that they  "
+    } ]
+  }, {
+    "tStartMs": 1425760,
+    "dDurationMs": 8000,
+    "segs": [ {
+      "utf8": "don't need your money being donated to them. Amen. \nAmen. Is there anything else people need to know,  "
+    } ]
+  }, {
+    "tStartMs": 1433760,
+    "dDurationMs": 5280,
+    "segs": [ {
+      "utf8": "like little tips and tricks? I notice, you \nknow, you're not using the Mac terminal,  "
+    } ]
+  }, {
+    "tStartMs": 1439040,
+    "dDurationMs": 6400,
+    "segs": [ {
+      "utf8": "you're using Ghosty. ghosty yes yes so honestly \nit's all preference right so like the terminal you  "
+    } ]
+  }, {
+    "tStartMs": 1445440,
+    "dDurationMs": 6880,
+    "segs": [ {
+      "utf8": "use and all this stuff is all preference here's \nwhat i would say like let's have a tips and tricks  "
+    } ]
+  }, {
+    "tStartMs": 1452320,
+    "dDurationMs": 9920,
+    "segs": [ {
+      "utf8": "list tips and tricks so first i would say is my \ngoodness spelling today first i would say is use  "
+    } ]
+  }, {
+    "tStartMs": 1462240,
+    "dDurationMs": 6400,
+    "segs": [ {
+      "utf8": "the ask what was the specific tool i just want to \nmake sure i don't forget ask user questions tool  "
+    } ]
+  }, {
+    "tStartMs": 1468640,
+    "dDurationMs": 4560,
+    "segs": [ {
+      "utf8": "Slept on. I don't know why no one's not talking \nabout it. It literally I saw the tweet from the  "
+    } ]
+  }, {
+    "tStartMs": 1473200,
+    "dDurationMs": 9920,
+    "segs": [ {
+      "utf8": "Anthropic team. Hundred percent. I would use that \nwhen planning. Number two, don't over obsess.  "
+    } ]
+  }, {
+    "tStartMs": 1483120,
+    "dDurationMs": 6720,
+    "segs": [ {
+      "utf8": "Obsess on MCP skills, et cetera, et cetera. I'm \nnot saying don't get into these. I'm not saying  "
+    } ]
+  }, {
+    "tStartMs": 1489840,
+    "dDurationMs": 6000,
+    "segs": [ {
+      "utf8": "don't read about them. I'm not saying don't use \nthem. But I can almost guarantee you these things  "
+    } ]
+  }, {
+    "tStartMs": 1495840,
+    "dDurationMs": 6160,
+    "segs": [ {
+      "utf8": "are not the reason why your product isn't working, \nright? Most of the time, it's your plan sucks,  "
+    } ]
+  }, {
+    "tStartMs": 1502000,
+    "dDurationMs": 10000,
+    "segs": [ {
+      "utf8": "right? That's number two. Number three, I would \nuse Ralph after I've built something without. And  "
+    } ]
+  }, {
+    "tStartMs": 1512000,
+    "dDurationMs": 4160,
+    "segs": [ {
+      "utf8": "the reason being is, again, listen, if you are a \nballer shot caller and you have all the money to  "
+    } ]
+  }, {
+    "tStartMs": 1516160,
+    "dDurationMs": 5360,
+    "segs": [ {
+      "utf8": "blow and you don't care and you want to donate \nmoney to Anthropic, go ahead and use Ralph. But  "
+    } ]
+  }, {
+    "tStartMs": 1521520,
+    "dDurationMs": 5360,
+    "segs": [ {
+      "utf8": "If we were to sit here eye to eye and you haven't \nbuilt anything, deployed anything, there isn't a  "
+    } ]
+  }, {
+    "tStartMs": 1526880,
+    "dDurationMs": 5840,
+    "segs": [ {
+      "utf8": "URL that I myself or Greg can click on that you've \nbuilt. You have no business using Ralph. You  "
+    } ]
+  }, {
+    "tStartMs": 1532720,
+    "dDurationMs": 6000,
+    "segs": [ {
+      "utf8": "literally have no business using Ralph. I would \nfirst get good at prompting and building something  "
+    } ]
+  }, {
+    "tStartMs": 1538720,
+    "dDurationMs": 5360,
+    "segs": [ {
+      "utf8": "using a plan, whether it's whatever AG1, Cloud \nCode, Open Code, whatever. Once you have something  "
+    } ]
+  }, {
+    "tStartMs": 1544080,
+    "dDurationMs": 7200,
+    "segs": [ {
+      "utf8": "deployed to Vercel or like there's a URL and we \ncan use it, then you can use Ralph. So number  "
+    } ]
+  }, {
+    "tStartMs": 1551280,
+    "dDurationMs": 8560,
+    "segs": [ {
+      "utf8": "four, this is a little in the weeds, but context \nis more important than ever. And a lot of times,  "
+    } ]
+  }, {
+    "tStartMs": 1559840,
+    "dDurationMs": 6000,
+    "segs": [ {
+      "utf8": "Cloud Code or even Cursor will tell you what \npercent of context has been used. I generally  "
+    } ]
+  }, {
+    "tStartMs": 1565840,
+    "dDurationMs": 7760,
+    "segs": [ {
+      "utf8": "wouldn't go over 50%, meaning like the Anthropic \nmodel, Opus 4.5 has a 200,000 token context limit.  "
+    } ]
+  }, {
+    "tStartMs": 1573600,
+    "dDurationMs": 6080,
+    "segs": [ {
+      "utf8": "The moment, in my opinion, you've got over 100,000 \ntokens, meaning you're using the same session. it  "
+    } ]
+  }, {
+    "tStartMs": 1579680,
+    "dDurationMs": 5040,
+    "segs": [ {
+      "utf8": "starts to sort of deteriorate that's when you have \npeople greg who say oh like i started off good but  "
+    } ]
+  }, {
+    "tStartMs": 1584720,
+    "dDurationMs": 5360,
+    "segs": [ {
+      "utf8": "it started going bad that's because you've filled \nit with so much context and the best way to think  "
+    } ]
+  }, {
+    "tStartMs": 1590080,
+    "dDurationMs": 5920,
+    "segs": [ {
+      "utf8": "about this is like yourself right like let's say \nwe went to some english class and or some you know  "
+    } ]
+  }, {
+    "tStartMs": 1596000,
+    "dDurationMs": 5840,
+    "segs": [ {
+      "utf8": "whatever class and the professor just kept dumping \ninformation information information at some point  "
+    } ]
+  }, {
+    "tStartMs": 1601840,
+    "dDurationMs": 4480,
+    "segs": [ {
+      "utf8": "we're going to feel overwhelmed and we're going \nto actually start forgetting stuff And I'm not  "
+    } ]
+  }, {
+    "tStartMs": 1606320,
+    "dDurationMs": 4800,
+    "segs": [ {
+      "utf8": "saying that's how the models work, but that's how \nthe models act. Right. So context is very much  "
+    } ]
+  }, {
+    "tStartMs": 1611120,
+    "dDurationMs": 6080,
+    "segs": [ {
+      "utf8": "important. The moment you see 50 percent or even \n40 percent, I would start a new session. And last  "
+    } ]
+  }, {
+    "tStartMs": 1617200,
+    "dDurationMs": 7200,
+    "segs": [ {
+      "utf8": "but not least, have audacity. And what I mean by \nthat is software development is starting to become  "
+    } ]
+  }, {
+    "tStartMs": 1624400,
+    "dDurationMs": 6080,
+    "segs": [ {
+      "utf8": "easy. The software engineering is very, very hard. \nAnd what do I mean by that? To architect software,  "
+    } ]
+  }, {
+    "tStartMs": 1630480,
+    "dDurationMs": 6080,
+    "segs": [ {
+      "utf8": "to make sure things are usable, to create great \nUX, UI. to have great taste, to make something  "
+    } ]
+  }, {
+    "tStartMs": 1636560,
+    "dDurationMs": 4960,
+    "segs": [ {
+      "utf8": "that people actually use requires time. And \nin order to spend time, it requires audacity.  "
+    } ]
+  }, {
+    "tStartMs": 1641520,
+    "dDurationMs": 5280,
+    "segs": [ {
+      "utf8": "I know the models are good and you can clone \na six billion dollar software. But if all of  "
+    } ]
+  }, {
+    "tStartMs": 1646800,
+    "dDurationMs": 4720,
+    "segs": [ {
+      "utf8": "us can do it now, what makes software different? \nI think thinking about those things and thinking  "
+    } ]
+  }, {
+    "tStartMs": 1651520,
+    "dDurationMs": 4800,
+    "segs": [ {
+      "utf8": "about the art of building products and building \nsomething that's tasteful is very, very important.  "
+    } ]
+  }, {
+    "tStartMs": 1656320,
+    "dDurationMs": 9920,
+    "segs": [ {
+      "utf8": "And I think anyone who uses these five tips should \nkick cheeks in 2025, 2026. Sorry. I agree on the  "
+    } ]
+  }, {
+    "tStartMs": 1666240,
+    "dDurationMs": 4880,
+    "segs": [ {
+      "utf8": "audacity thing. I think like it's for me, it's \nlike about creating scroll stopping software.  "
+    } ]
+  }, {
+    "tStartMs": 1671760,
+    "dDurationMs": 3760,
+    "segs": [ {
+      "utf8": "You know what I mean? Like there's so many \npeople and there's a lot of tutorials about this,  "
+    } ]
+  }, {
+    "tStartMs": 1675520,
+    "dDurationMs": 5600,
+    "segs": [ {
+      "utf8": "like cloning billion dollar software. You know, I \ncloned a four billion dollar software. Look at me.  "
+    } ]
+  }, {
+    "tStartMs": 1681120,
+    "dDurationMs": 8080,
+    "segs": [ {
+      "utf8": "But that's not the type of software that's going \nto work in 2026. Right. I saw this. Let me just  "
+    } ]
+  }, {
+    "tStartMs": 1689200,
+    "dDurationMs": 6560,
+    "segs": [ {
+      "utf8": "share it real quick. I saw this guy who created a \nrunning app based on how you're feeling. So it's  "
+    } ]
+  }, {
+    "tStartMs": 1695760,
+    "dDurationMs": 6400,
+    "segs": [ {
+      "utf8": "like, how are you feeling? Stressed, angry, and \nit's an AI-assisted running app that interprets  "
+    } ]
+  }, {
+    "tStartMs": 1702160,
+    "dDurationMs": 4800,
+    "segs": [ {
+      "utf8": "your current emotions to generate a personalized \nroute. And I just thought it was interesting.  "
+    } ]
+  }, {
+    "tStartMs": 1706960,
+    "dDurationMs": 6320,
+    "segs": [ {
+      "utf8": "You know what I mean? I'd never seen an app like \nthis. And I think that as you call it Audacity,  "
+    } ]
+  }, {
+    "tStartMs": 1713280,
+    "dDurationMs": 5840,
+    "segs": [ {
+      "utf8": "I think this is an audacious app, right? It's \nscroll-stopping. You haven't seen it before. So  "
+    } ]
+  }, {
+    "tStartMs": 1719120,
+    "dDurationMs": 8640,
+    "segs": [ {
+      "utf8": "I think push, you want to push Cloud Code to like \nget you to this basically. And this is why I'm  "
+    } ]
+  }, {
+    "tStartMs": 1727760,
+    "dDurationMs": 5680,
+    "segs": [ {
+      "utf8": "like so pro people not using Ralph if they haven't \nbuilt anything fully. Because like now we're,  "
+    } ]
+  }, {
+    "tStartMs": 1733440,
+    "dDurationMs": 4640,
+    "segs": [ {
+      "utf8": "people are getting to a point where they want the \nmodel to think for them, right? Where like if you  "
+    } ]
+  }, {
+    "tStartMs": 1738080,
+    "dDurationMs": 4320,
+    "segs": [ {
+      "utf8": "look at the app, you just shared the animations \nand how things were floating and like even the  "
+    } ]
+  }, {
+    "tStartMs": 1742400,
+    "dDurationMs": 4800,
+    "segs": [ {
+      "utf8": "colors used for the different emotions. Like that \nrequires thought, right? And that's what stops  "
+    } ]
+  }, {
+    "tStartMs": 1747200,
+    "dDurationMs": 5760,
+    "segs": [ {
+      "utf8": "people now. Like if building the AI chat interface \nis easy, what's going to make your app different?  "
+    } ]
+  }, {
+    "tStartMs": 1752960,
+    "dDurationMs": 4160,
+    "segs": [ {
+      "utf8": "I think a little bit of audacity, a little bit \nof thought and care and a little bit of taste  "
+    } ]
+  }, {
+    "tStartMs": 1757120,
+    "dDurationMs": 5440,
+    "segs": [ {
+      "utf8": "goes a long way nowadays. And more than the models \ngetting better because it's going to get easier.  "
+    } ]
+  }, {
+    "tStartMs": 1762560,
+    "dDurationMs": 4640,
+    "segs": [ {
+      "utf8": "It's going to get better. It's going to get \nfaster. But unfortunately, if you don't change,  "
+    } ]
+  }, {
+    "tStartMs": 1767200,
+    "dDurationMs": 4880,
+    "segs": [ {
+      "utf8": "then it doesn't all matter. Yeah. And don't \nbe afraid to use pen and paper like this. This  "
+    } ]
+  }, {
+    "tStartMs": 1772080,
+    "dDurationMs": 6080,
+    "segs": [ {
+      "utf8": "person literally just like started sketching out \nthe features. Yeah. Like how did this thing work?  "
+    } ]
+  }, {
+    "tStartMs": 1778160,
+    "dDurationMs": 5600,
+    "segs": [ {
+      "utf8": "Yeah. I love it. I love it. Right. And this \nis why the app, if I don't know the metrics,  "
+    } ]
+  }, {
+    "tStartMs": 1783760,
+    "dDurationMs": 4880,
+    "segs": [ {
+      "utf8": "but I'm willing to bet it's doing really, really \nwell because all this stuff matters. Like we could  "
+    } ]
+  }, {
+    "tStartMs": 1788640,
+    "dDurationMs": 5120,
+    "segs": [ {
+      "utf8": "clone something like this feature wise, but I'm \nwilling to bet like the feel, the animations,  "
+    } ]
+  }, {
+    "tStartMs": 1793760,
+    "dDurationMs": 7120,
+    "segs": [ {
+      "utf8": "the colors, we would not be able to get it \nexactly like this. 100% all right man thanks  "
+    } ]
+  }, {
+    "tStartMs": 1800880,
+    "dDurationMs": 5760,
+    "segs": [ {
+      "utf8": "for coming on you got me fired up I actually I \ndidn't know about that interview tool so thanks  "
+    } ]
+  }, {
+    "tStartMs": 1806640,
+    "dDurationMs": 5840,
+    "segs": [ {
+      "utf8": "for sharing that with me yeah just a heads up \nit will ask a lot of questions I shared it with  "
+    } ]
+  }, {
+    "tStartMs": 1812480,
+    "dDurationMs": 5040,
+    "segs": [ {
+      "utf8": "a couple friends and a couple people got annoyed \nbut it's worth it right especially if you wanted  "
+    } ]
+  }, {
+    "tStartMs": 1817520,
+    "dDurationMs": 7200,
+    "segs": [ {
+      "utf8": "to build something end-to-end or you're building \na very like like very minute detailed feature then  "
+    } ]
+  }, {
+    "tStartMs": 1824720,
+    "dDurationMs": 5200,
+    "segs": [ {
+      "utf8": "it's really really worth it i wouldn't use the \ngeneral plan personally so just a heads up but  "
+    } ]
+  }, {
+    "tStartMs": 1829920,
+    "dDurationMs": 5040,
+    "segs": [ {
+      "utf8": "it's really really worth it and i would love to \nhear people's feedback in the comments sounds good  "
+    } ]
+  }, {
+    "tStartMs": 1834960,
+    "dDurationMs": 6240,
+    "segs": [ {
+      "utf8": "we'll be in the comments you got to come back on \nin a few months or whenever people want you it's  "
+    } ]
+  }, {
+    "tStartMs": 1841200,
+    "dDurationMs": 5440,
+    "segs": [ {
+      "utf8": "always an absolute privilege to have you here \ni'll include links where you can follow and you  "
+    } ]
+  }, {
+    "tStartMs": 1846640,
+    "dDurationMs": 8960,
+    "segs": [ {
+      "utf8": "should follow monsieur rass mike his youtube \nchannel is x i'll include the link to ralphie  "
+    } ]
+  }, {
+    "tStartMs": 1855600,
+    "dDurationMs": 5440,
+    "segs": [ {
+      "utf8": "even though if you're a beginner don't even click \nthat link i i wouldn't like i know there's maybe  "
+    } ]
+  }, {
+    "tStartMs": 1861040,
+    "dDurationMs": 5200,
+    "segs": [ {
+      "utf8": "some degenerates who do but i highly suggest you \ndon't because if you haven't even built without  "
+    } ]
+  }, {
+    "tStartMs": 1866240,
+    "dDurationMs": 6240,
+    "segs": [ {
+      "utf8": "it then no point have some willpower folks come \non you know don't click the link but i'm putting  "
+    } ]
+  }, {
+    "tStartMs": 1872480,
+    "dDurationMs": 6320,
+    "segs": [ {
+      "utf8": "it in there because i want to see who's tempted \nand yeah thanks again for coming on i'll see you  "
+    } ]
+  }, {
+    "tStartMs": 1878800,
+    "dDurationMs": 3760,
+    "segs": [ {
+      "utf8": "i'm coming to toronto in april so let's hang out \nwe'll see we'll see each other then and again as  "
+    } ]
+  }, {
+    "tStartMs": 1882560,
+    "dDurationMs": 5280,
+    "segs": [ {
+      "utf8": "always it's a pleasure thank you so much you know \nfor bringing me on of course later have a good one"
+    } ]
+  } ]
+}

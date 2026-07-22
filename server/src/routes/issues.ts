@@ -13,6 +13,7 @@ import {
   issueComments,
   issueDocuments,
   issueExecutionDecisions,
+  issueOutcomes,
   issueRelations,
   issues as issueRows,
   issueWorkProducts,
@@ -62,6 +63,7 @@ import {
   isClosedIsolatedExecutionWorkspace,
   isUuidLike,
   normalizeIssueIdentifier as normalizeIssueReferenceIdentifier,
+  parseOutcomeReceipt,
   type CompactIssue,
   type CompanySearchQuery,
   type CompanySearchResponse,
@@ -10117,6 +10119,63 @@ export function issueRoutes(
 
       const becameDone = issueBeforeCommentDecision.status !== "done" && currentIssue.status === "done";
       if (becameDone) {
+        // Outcome receipt (SUM-162 / OUTCOME-RECEIPTS.md §1-2): when a closing
+        // comment carries a fenced ```outcome block, parse + validate it and
+        // persist the levers so Mission Control (SUM-158) can roll them up. A
+        // block that fails the honesty rules (no lever & not unmeasurable, or a
+        // missing method) is rejected loudly and NOT persisted — never break the
+        // completion flow over it.
+        try {
+          const receiptResult = parseOutcomeReceipt(req.body.body ?? "");
+          if (receiptResult.present && receiptResult.ok) {
+            const r = receiptResult.receipt;
+            await db
+              .insert(issueOutcomes)
+              .values({
+                companyId: currentIssue.companyId,
+                issueId: currentIssue.id,
+                commentId: comment.id,
+                authorAgentId: actor.agentId ?? null,
+                createdByRunId: actor.runId ?? null,
+                moneySavedCents: r.moneySavedCents,
+                timeSavedMinutes: r.timeSavedMinutes,
+                revenueMovedCents: r.revenueMovedCents,
+                riskAvoided: r.riskAvoided,
+                confidence: r.confidence,
+                method: r.method,
+                rawJson: r.raw,
+                completedAt: currentIssue.completedAt ?? null,
+              })
+              .onConflictDoUpdate({
+                target: issueOutcomes.issueId,
+                set: {
+                  commentId: comment.id,
+                  authorAgentId: actor.agentId ?? null,
+                  createdByRunId: actor.runId ?? null,
+                  moneySavedCents: r.moneySavedCents,
+                  timeSavedMinutes: r.timeSavedMinutes,
+                  revenueMovedCents: r.revenueMovedCents,
+                  riskAvoided: r.riskAvoided,
+                  confidence: r.confidence,
+                  method: r.method,
+                  rawJson: r.raw,
+                  completedAt: currentIssue.completedAt ?? null,
+                  updatedAt: new Date(),
+                },
+              });
+          } else if (receiptResult.present && !receiptResult.ok) {
+            logger.warn(
+              { issueId: currentIssue.id, commentId: comment.id, error: receiptResult.error },
+              "outcome receipt on closing comment failed validation; not persisted",
+            );
+          }
+        } catch (err) {
+          logger.warn(
+            { err, issueId: currentIssue.id, commentId: comment.id },
+            "failed to persist outcome receipt",
+          );
+        }
+
         const dependents = await svc.listWakeableBlockedDependents(currentIssue.id);
         for (const dependent of dependents) {
           await addDependencyResolvedWakeup({

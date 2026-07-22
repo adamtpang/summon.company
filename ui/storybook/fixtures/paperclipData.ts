@@ -1305,6 +1305,15 @@ export const storybookDashboardSummary: DashboardSummary = {
     { date: "2026-04-19", succeeded: 5, failed: 2, recovered: 6, other: 1, total: 14, failedByErrorCode: { process_lost: 2 } },
     { date: "2026-04-20", succeeded: 4, failed: 1, recovered: 3, other: 2, total: 10, failedByErrorCode: { process_lost: 1 } },
   ],
+  outcomes: {
+    receiptCount: 6,
+    unmeasurableCount: 3,
+    moneySavedCents: 48_000,
+    timeSavedMinutes: 690,
+    timeValueCents: 69_000,
+    revenueMovedCents: 120_000,
+    risksAvoided: 2,
+  },
 };
 
 export const storybookLiveRuns: LiveRunForIssue[] = [
