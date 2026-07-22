@@ -484,6 +484,7 @@ export function App() {
           <Route path="pipelines/:pipelineId/cases/:caseId" element={<UnprefixedBoardRedirect />} />
           <Route path="artifacts" element={<UnprefixedBoardRedirect />} />
           <Route path="decisions" element={<UnprefixedBoardRedirect />} />
+          <Route path="chat" element={<UnprefixedBoardRedirect />} />
           <Route path="u/:userSlug" element={<UnprefixedBoardRedirect />} />
           <Route path="skills/studio" element={<UnprefixedBoardRedirect />} />
           <Route path="skills/studio/new" element={<UnprefixedBoardRedirect />} />

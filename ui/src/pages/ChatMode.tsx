@@ -1,7 +1,10 @@
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { BoardChat } from "./BoardChat";
+import { buildRoadmapStages, selectRoadmapConstraint } from "./Roadmap";
 import { agentsApi } from "../api/agents";
+import { issuesApi } from "../api/issues";
+import { projectsApi } from "../api/projects";
 import { useCompany } from "../context/CompanyContext";
 import { useSidebar } from "../context/SidebarContext";
 import { queryKeys } from "../lib/queryKeys";
@@ -33,6 +36,28 @@ export function ChatMode() {
   const cofounder = agents?.find((a) => a.role === "ceo") ?? null;
   const monogram = (cofounder?.name ?? "S").slice(0, 1).toUpperCase();
 
+  // The game HUD (board, 2026-07-19: "like a video game with progression") —
+  // the company roadmap as the persistent progress strip above the thread.
+  // Same evidence engine as Mission Control; never self-reported.
+  const { data: issues } = useQuery({
+    queryKey: queryKeys.issues.list(selectedCompanyId!),
+    queryFn: () => issuesApi.list(selectedCompanyId!),
+    enabled: !!selectedCompanyId,
+  });
+  const { data: projects } = useQuery({
+    queryKey: queryKeys.projects.list(selectedCompanyId!),
+    queryFn: () => projectsApi.list(selectedCompanyId!),
+    enabled: !!selectedCompanyId,
+  });
+  const roadmap = useMemo(
+    () => buildRoadmapStages({ agents: agents ?? [], issues: issues ?? [], projects: projects ?? [], goals: [] }),
+    [agents, issues, projects],
+  );
+  const constraint = useMemo(() => selectRoadmapConstraint(roadmap), [roadmap]);
+  const overall = roadmap.length
+    ? Math.round(roadmap.reduce((sum, stage) => sum + stage.progress, 0) / roadmap.length)
+    : 0;
+
   return (
     <div className="mx-auto flex h-full min-h-0 max-w-3xl flex-col" data-testid="chat-mode">
       <header className="flex items-center gap-3 border-b border-border pb-3">
@@ -56,8 +81,27 @@ export function ChatMode() {
           beta
         </span>
       </header>
+      {/* Progression HUD: stage + percent, always in view while you play. */}
+      {constraint ? (
+        <div className="flex items-center gap-3 border-b border-border py-2">
+          <span className="shrink-0 text-xs font-medium tabular-nums text-muted-foreground">
+            Stage {constraint.stage.sequence}/8 · {constraint.stage.title}
+          </span>
+          <span
+            className="h-1 min-w-0 flex-1 overflow-hidden rounded-full bg-muted"
+            role="progressbar"
+            aria-label="Company roadmap progress"
+            aria-valuemin={0}
+            aria-valuemax={100}
+            aria-valuenow={overall}
+          >
+            <span className="block h-full rounded-full bg-primary/80" style={{ width: `${Math.max(overall, 2)}%` }} />
+          </span>
+          <span className="shrink-0 text-xs font-semibold tabular-nums">{overall}%</span>
+        </div>
+      ) : null}
       <p className="border-b border-border py-2 text-center text-xs text-muted-foreground">
-        Try: “status” · “what needs me” · “what's our bottleneck” · @Ink, @Magnet… to reach anyone
+        Try: “status” · “what needs me” · “what's our bottleneck” · @sales, @engineering, @Ink… to reach anyone
       </p>
       <div className="min-h-0 flex-1">
         <BoardChat />
