@@ -15,7 +15,6 @@ import { KeyboardShortcutsCheatsheet } from "./KeyboardShortcutsCheatsheet";
 import { ToastViewport } from "./ToastViewport";
 import { FeedbackWidget } from "./FeedbackWidget";
 import { MobileBottomNav } from "./MobileBottomNav";
-import { GlobalComposerDock } from "./GlobalComposerDock";
 import { WorktreeBanner } from "./WorktreeBanner";
 import { DevRestartBanner } from "./DevRestartBanner";
 import { StandaloneBrowserControls } from "./StandaloneBrowserControls";
@@ -623,7 +622,9 @@ export function Layout() {
             </main>
             <PropertiesPanel />
           </div>
-          <GlobalComposerDock mobile={isMobile} />
+          {/* The persistent bottom composer retired (board, 2026-07-19):
+              Chat (beta) is the one conversation surface; two chat inputs on
+              screen was duplicate chrome. */}
         </div>
       </div>
       {isMobile && <MobileBottomNav visible={mobileNavVisible} />}

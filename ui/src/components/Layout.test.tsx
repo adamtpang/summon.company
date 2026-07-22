@@ -107,6 +107,12 @@ vi.mock("./DevRestartBanner", () => ({
   DevRestartBanner: () => null,
 }));
 
+// Renders for real otherwise and needs the toast/company providers this
+// harness deliberately leaves out (it isolates Layout from its children).
+vi.mock("./FeedbackWidget", () => ({
+  FeedbackWidget: () => null,
+}));
+
 vi.mock("./SidebarAccountMenu", () => ({
   SidebarAccountMenu: () => <div>Account menu</div>,
 }));

@@ -110,7 +110,11 @@ function hasWelcome(container: HTMLElement) {
 }
 
 function hasChips(container: HTMLElement) {
-  return (container.textContent ?? "").includes("Draft a Company Brief");
+  // Chips are priority-driven now; with no issues mocked, the baseline
+  // "Status" chip is the one that always renders.
+  return [...container.querySelectorAll("button")].some(
+    (button) => button.textContent?.trim() === "Status",
+  );
 }
 
 describe("BoardChat staged typing intro", () => {

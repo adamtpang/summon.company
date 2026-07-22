@@ -74,7 +74,7 @@ export function ChatMode() {
           <p className="truncate text-sm font-semibold">{cofounder?.name ?? "Your cofounder"}</p>
           <p className="flex items-center gap-1.5 text-xs text-muted-foreground">
             <span className="inline-block size-1.5 rounded-full bg-(--status-task-done)" aria-hidden="true" />
-            online · the whole company answers here
+            online
           </p>
         </div>
         <span className="rounded-full border border-border px-2 py-0.5 text-(length:--text-nano) font-semibold uppercase tracking-(--tracking-eyebrow) text-muted-foreground">
@@ -100,9 +100,6 @@ export function ChatMode() {
           <span className="shrink-0 text-xs font-semibold tabular-nums">{overall}%</span>
         </div>
       ) : null}
-      <p className="border-b border-border py-2 text-center text-xs text-muted-foreground">
-        Try: “status” · “what needs me” · “what's our bottleneck” · @sales, @engineering, @Ink… to reach anyone
-      </p>
       <div className="min-h-0 flex-1">
         <BoardChat zenMode />
       </div>

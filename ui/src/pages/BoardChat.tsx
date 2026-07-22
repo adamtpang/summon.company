@@ -32,6 +32,7 @@ import {
   agentBubbleDateLabel,
 } from "../components/AgentBubbleActionRow";
 import { AgentIcon } from "../components/AgentIconPicker";
+import { buildScoreboard } from "../lib/scoreboard";
 import { cn, formatDateTime } from "../lib/utils";
 import type { FeedbackVoteValue } from "@paperclipai/shared";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -170,7 +171,7 @@ export function BoardChat({ zenMode = false }: { zenMode?: boolean } = {}) {
   const queryClient = useQueryClient();
 
   useEffect(() => {
-    setBreadcrumbs([{ label: "Conference Room" }]);
+    setBreadcrumbs([{ label: "Chat" }]);
   }, [setBreadcrumbs]);
 
   const splitContainerRef = useRef<HTMLDivElement>(null);
@@ -367,6 +368,38 @@ export function BoardChat({ zenMode = false }: { zenMode?: boolean } = {}) {
     queryFn: () => issuesApi.list(selectedCompanyId!),
     enabled: !!selectedCompanyId,
   });
+
+  // Choose-your-adventure chips (board, 2026-07-19): suggestions come from the
+  // company's REAL priorities, not canned prompts. Same evidence engine as the
+  // dashboard: the parked review, the top ranked task, the blocked pile.
+  const priorityChips = useMemo(() => {
+    const rows = buildScoreboard(issues ?? []).rows;
+    const topReview = rows.find((row) => row.reviewNeeded);
+    const topActive = rows.find(
+      (row) => !row.reviewNeeded && row.status !== "done" && row.status !== "cancelled",
+    );
+    const blockedCount = (issues ?? []).filter((issue) => issue.status === "blocked").length;
+    const chips: Array<{ label: string; prompt: string }> = [{ label: "Status", prompt: "status" }];
+    if (topReview) {
+      chips.push({
+        label: `Review ${topReview.identifier}`,
+        prompt: `Walk me through the ${topReview.identifier} review (${topReview.title}). What am I approving, and what happens after I do?`,
+      });
+    }
+    if (topActive) {
+      chips.push({
+        label: `${topActive.tier} · ${topActive.identifier}`,
+        prompt: `What should we do about ${topActive.identifier}: ${topActive.title}? Who runs it, and what does it move on the roadmap?`,
+      });
+    }
+    if (blockedCount > 0) {
+      chips.push({
+        label: `Unblock ${blockedCount}`,
+        prompt: "What is blocking us right now, and what single move clears the most?",
+      });
+    }
+    return chips;
+  }, [issues]);
 
   useEffect(() => {
     if (!issues) {
@@ -749,14 +782,16 @@ export function BoardChat({ zenMode = false }: { zenMode?: boolean } = {}) {
           )}
           style={innerWidth > 0 && containerWidth >= 2 * SPLIT_MIN_PANE_PX + SPLIT_DIVIDER_PX ? { width: leftPaneWidth } : undefined}
         >
-          <div className="relative flex shrink-0 items-center justify-between gap-2 px-4 py-3">
+          {/* Zen mode: ChatMode owns the header; this internal one would be
+              duplicate chrome, so it renders only in the classic surface. */}
+          {!zenMode && <div className="relative flex shrink-0 items-center justify-between gap-2 px-4 py-3">
             <div
               className="pointer-events-none absolute bottom-0 left-0 right-0 h-px bg-border"
               aria-hidden
             />
             <div className="min-w-0 flex-1">
               <h3 className="text-sm font-semibold">
-                {ceoAgent?.name ?? "Conference Room"}
+                {ceoAgent?.name ?? "Cofounder"}
               </h3>
               <p className="text-xs text-muted-foreground">
                 {selectedCompany?.name ?? "Your company"}
@@ -792,7 +827,7 @@ export function BoardChat({ zenMode = false }: { zenMode?: boolean } = {}) {
                 <TooltipContent side="bottom">new chat</TooltipContent>
               </Tooltip>
             </div>
-          </div>
+          </div>}
           {/* Messages — scroll viewport flush right so the scrollbar sits on the pane/divider edge */}
           <div className="relative min-h-0 min-w-0 flex-1">
           <div
@@ -821,24 +856,8 @@ export function BoardChat({ zenMode = false }: { zenMode?: boolean } = {}) {
                   (c) => !c.authorAgentId && c.authorUserId !== "board-concierge",
                 );
 
-                const chips: Array<{ label: string; prompt: string }> = [
-                  {
-                    label: "Draft a Company Brief",
-                    prompt: `Draft a one-page Company Brief for ${companyName} — include our mission, team roster, and first priorities.`,
-                  },
-                  {
-                    label: "Create a hiring plan",
-                    prompt: `Create a hiring plan for ${companyName}. List the next roles to hire, in priority order, with a short rationale for each.`,
-                  },
-                  {
-                    label: "Outline our first 30 days",
-                    prompt: `Outline our first 30 days. Break it into weekly priorities with who owns what.`,
-                  },
-                  {
-                    label: "Write an intro pitch",
-                    prompt: `Write a short intro pitch for ${companyName} that I could reuse for investors, customers, or recruits.`,
-                  },
-                ];
+                // Priority-driven, same list the composer chips use.
+                const chips = priorityChips;
 
                 return (
                   <>
@@ -1029,6 +1048,25 @@ export function BoardChat({ zenMode = false }: { zenMode?: boolean } = {}) {
                (mirrors IssueChatThread's composer dock). pointer-events pass through
                the fade so the scrollbar stays usable; the composer re-enables them. */}
           <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 bg-gradient-to-t from-background via-background/95 to-background/0 px-6 pt-6 pb-5">
+            {/* Zen mode keeps the adventure chips docked above the composer,
+                always current: the company's real priorities as tappable moves. */}
+            {zenMode && priorityChips.length > 0 && (
+              <div className="pointer-events-auto mb-2 flex flex-wrap gap-2">
+                {priorityChips.map((chip) => (
+                  <button
+                    key={chip.label}
+                    type="button"
+                    onClick={() => {
+                      setInput(chip.prompt);
+                      composerRef.current?.focus();
+                    }}
+                    className="rounded-full border border-border bg-card px-3 py-1.5 text-xs text-muted-foreground transition-colors duration-150 hover:bg-accent hover:text-foreground"
+                  >
+                    {chip.label}
+                  </button>
+                ))}
+              </div>
+            )}
             <ChatComposer
               ref={composerRef}
               value={input}

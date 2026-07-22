@@ -403,39 +403,11 @@ describe("Sidebar", () => {
     });
   });
 
-  it("shows the Conference Room nav item when conference room chat is enabled (PAP-137)", async () => {
+  it("keeps the Conference Room nav item retired even when the flag is on (Chat beta replaced it)", async () => {
     mockInstanceSettingsApi.getExperimental.mockResolvedValue({
       enableIsolatedWorkspaces: false,
       enableConferenceRoomChat: true,
     });
-    const root = await renderSidebar();
-
-    const link = [...container.querySelectorAll("nav a")].find(
-      (anchor) => anchor.textContent?.trim() === "Conference Room",
-    );
-    expect(link?.getAttribute("href")).toBe("/board-chat");
-
-    flushSync(() => {
-      root.unmount();
-    });
-  });
-
-  it("hides the Conference Room nav item when conference room chat is off (PAP-137)", async () => {
-    mockInstanceSettingsApi.getExperimental.mockResolvedValue({
-      enableIsolatedWorkspaces: false,
-      enableConferenceRoomChat: false,
-    });
-    const root = await renderSidebar();
-
-    expect(container.textContent).not.toContain("Conference Room");
-
-    flushSync(() => {
-      root.unmount();
-    });
-  });
-
-  it("does not flash the Conference Room item while experimental settings are loading (PAP-137)", async () => {
-    mockInstanceSettingsApi.getExperimental.mockImplementation(() => new Promise(() => {}));
     const root = await renderSidebar();
 
     expect(container.textContent).not.toContain("Conference Room");

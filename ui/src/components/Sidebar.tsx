@@ -19,7 +19,6 @@ import {
   PanelLeftClose,
   PanelLeftOpen,
   Pin,
-  MessagesSquare,
   MessageCircle,
   GanttChartSquare,
   UsersRound,
@@ -100,10 +99,9 @@ export function Sidebar() {
   // user-selectable. Kept as a constant so the classic branch below stays as a
   // documented reference until it is fully removed. Routes are unaffected.
   const streamlined = true;
-  // Conference Room Chat flag (PAP-136/PAP-137): the Conference Room nav item
-  // is a new surface, hidden entirely while the flag is off (same no-flash
-  // pattern as showWorkspacesLink above).
-  const conferenceRoomChatEnabled = experimentalSettings?.enableConferenceRoomChat === true;
+  // Conference Room nav item retired (board, 2026-07-19): Chat (beta) is the
+  // one conversation surface. The upstream PAP-136/PAP-137 flag and the
+  // /board-chat route stay intact; only the duplicate nav entry is gone.
 
   const pluginContext = {
     companyId: selectedCompanyId,
@@ -213,9 +211,6 @@ export function Sidebar() {
             badge={attentionCount}
             badgeLabel="decisions"
           />
-          {conferenceRoomChatEnabled ? (
-            <SidebarNavItem to="/board-chat" label="Conference Room" icon={MessagesSquare} />
-          ) : null}
         </div>
 
         <SidebarSection label="Work" collapsible={{ open: workOpen, onOpenChange: setWorkOpen }}>
