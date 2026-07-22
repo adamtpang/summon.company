@@ -6,7 +6,7 @@
 
 ## Agent chain
 
-- **Atlas · Operations** — layer 2, Claude Opus 4.8
+- **Operations** — layer 2, Claude Opus 4.8
 
 ## Working now (Thiel rule: one agent, ONE task)
 
@@ -23,5 +23,5 @@ community tooling.
 
 ## How to engage
 
-- In Summon: @Atlas in board chat, or assign a task.
-- Escalation: agent → Sol · Cofounder → the board (Adam).
+- In Summon: @operations in board chat, or assign a task.
+- Escalation: department → Cofounder → Adam (the CEO).

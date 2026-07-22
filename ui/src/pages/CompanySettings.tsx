@@ -13,6 +13,7 @@ import { queryKeys } from "../lib/queryKeys";
 import { Button } from "@/components/ui/button";
 import { Settings, CloudUpload, Download, Upload } from "lucide-react";
 import { CompanyPatternIcon } from "../components/CompanyPatternIcon";
+import { ThemeToggle } from "../components/ThemeToggle";
 import { CompanyModelPitStop } from "../components/CompanyModelPitStop";
 import {
   Field,
@@ -175,6 +176,21 @@ export function CompanySettings() {
       <div className="flex items-center gap-2">
         <Settings className="h-5 w-5 text-muted-foreground" />
         <h1 className="text-lg font-semibold">Company Settings</h1>
+      </div>
+
+      {/* Appearance (board, 2026-07-19): dark mode was only findable inside
+          the account dropdown; it belongs where anyone would look first. */}
+      <div className="space-y-4" data-testid="company-settings-appearance">
+        <div className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
+          Appearance
+        </div>
+        <div className="flex items-center justify-between rounded-md border border-border px-4 py-4">
+          <div>
+            <p className="text-sm font-medium">Theme</p>
+            <p className="text-xs text-muted-foreground">Light or dark. Saved on this device; the desktop app follows it.</p>
+          </div>
+          <ThemeToggle />
+        </div>
       </div>
 
       {/* General */}

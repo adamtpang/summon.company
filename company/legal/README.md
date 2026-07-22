@@ -6,7 +6,7 @@
 
 ## Agent chain
 
-- **Shield · Legal** — core-8 head, Claude Opus 4.8
+- **Legal** — core-8 head, Claude Opus 4.8
 
 ## Working now (Thiel rule: one agent, ONE task)
 
@@ -21,5 +21,5 @@ summon.company.
 
 ## How to engage
 
-- In Summon: @Shield in board chat, or assign a task.
-- Escalation: agent → Sol · Cofounder → the board (Adam).
+- In Summon: @legal in board chat, or assign a task.
+- Escalation: department → Cofounder → Adam (the CEO).

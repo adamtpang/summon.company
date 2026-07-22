@@ -111,6 +111,7 @@ function buildItem(overrides: Partial<AttentionItem> = {}): AttentionItem {
     project: null,
     workspace: null,
     detail: null,
+    forecast: null,
     dismissal: null,
     ...overrides,
   };
@@ -134,6 +135,45 @@ describe("AttentionQueueRow", () => {
     expect(el.textContent).toContain("Reject");
     // Inline rows show an expand chevron, not an "Open" deep-link.
     expect(el.textContent).not.toContain("Open");
+  });
+
+  it("quotes the pre-dispatch expected outcome when a forecast is present (§4)", () => {
+    const el = render(
+      <AttentionQueueRow
+        item={buildItem({
+          forecast: {
+            etaMinutes: 40,
+            moneySavedCents: null,
+            timeSavedMinutes: 60,
+            revenueMovedCents: null,
+            riskAvoided: null,
+            confidence: "estimated",
+            method: "2 outreach drafts @ 30 min each industry SDR baseline = 60 min.",
+          },
+        })}
+        companyId="c1"
+        expanded={false}
+        onToggleExpand={noop}
+        onDismiss={noop}
+      />,
+    );
+    expect(el.textContent).toContain("ETA ~40 min · Expect: ~1 h time saved (estimated)");
+    // The mandatory method rides the tooltip, not the visible line.
+    const line = el.querySelector("[data-attention-forecast]");
+    expect(line?.getAttribute("title")).toContain("industry SDR baseline");
+  });
+
+  it("shows no forecast line when none was authored", () => {
+    const el = render(
+      <AttentionQueueRow
+        item={buildItem()}
+        companyId="c1"
+        expanded={false}
+        onToggleExpand={noop}
+        onDismiss={noop}
+      />,
+    );
+    expect(el.querySelector("[data-attention-forecast]")).toBeNull();
   });
 
   it("does not inline a review — it deep-links instead", () => {

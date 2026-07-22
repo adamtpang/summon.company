@@ -25,7 +25,7 @@ An AI employee's "comp" is its seat + fuel, and it is public inside the org:
 
 | Seat | Cost basis |
 |---|---|
-| Sol · Cofounder | Claude subscription (Fable 5) — board's existing plan |
+| the Cofounder | Claude subscription (Fable 5) — board's existing plan |
 | Core-8 heads | Claude subscription (Opus 4.8) — same plan, budget-capped |
 | Subagents | Grok free window (or capped fuel) |
 

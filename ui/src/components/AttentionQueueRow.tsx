@@ -11,6 +11,7 @@ import {
   X,
 } from "lucide-react";
 import type { Agent, AttentionDetailImage, AttentionItem } from "@paperclipai/shared";
+import { formatForecastLine } from "@paperclipai/shared";
 import { Link } from "@/lib/router";
 import { accessApi } from "../api/access";
 import { approvalsApi } from "../api/approvals";
@@ -282,6 +283,20 @@ export const AttentionQueueRow = memo(function AttentionQueueRow({
             </span>
             <p className="mt-0.5 line-clamp-2 text-xs text-muted-foreground">{detailLine}</p>
           </div>
+
+          {/* Pre-dispatch expected outcome (OUTCOME-RECEIPTS.md §4): the card
+              reads "cost X, expect Y" before the work runs, in the same schema as
+              the completion receipt so promise and result can be compared. The
+              mandatory method rides the tooltip to keep the line compact. */}
+          {item.forecast && (
+            <p
+              className="text-(length:--text-nano) font-medium text-muted-foreground/90"
+              title={item.forecast.method}
+              data-attention-forecast="true"
+            >
+              {formatForecastLine(item.forecast)}
+            </p>
+          )}
 
           {/* Context row: project identity and evidence thumbnails move below the
               text so they never squeeze the headline on mobile. */}

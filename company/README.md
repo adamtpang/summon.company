@@ -14,21 +14,21 @@ collisions; `company/` is the portable default.
 
 ## Leadership (outside the eight)
 
-- **Sol · Cofounder** — Claude Fable 5. The board's cofounder: routes, decides, never holds tasks.
+- **the Cofounder** — Claude Fable 5. The board's cofounder: routes, decides, never holds tasks.
   Surface → Triage → Route.
-- **Pulse · Diagnostician** — Opus 4.8, staff role. Reads the vitals, audits
+- **the Diagnostician** — Opus 4.8, staff role. Reads the vitals, audits
   the board (currently: SUM-150, the blocked-backlog audit).
 
 ## Departments
 
-- [engineering](engineering/README.md) — Vector · Engineering, Forge · Engineer
-- [design](design/README.md) — Ink · Design
-- [marketing](marketing/README.md) — Echo · Marketing
-- [sales](sales/README.md) — Magnet · Sales
-- [finance](finance/README.md) — Ledger · Finance
-- [operations](operations/README.md) — Atlas · Operations
-- [support](support/README.md) — Haven · Support
-- [legal](legal/README.md) — Shield · Legal
+- [engineering](engineering/README.md) — Engineering, the Engineer subagent
+- [design](design/README.md) — Design
+- [marketing](marketing/README.md) — Marketing
+- [sales](sales/README.md) — Sales
+- [finance](finance/README.md) — Finance
+- [operations](operations/README.md) — Operations
+- [support](support/README.md) — Support
+- [legal](legal/README.md) — Legal
 
 ## The model ladder
 

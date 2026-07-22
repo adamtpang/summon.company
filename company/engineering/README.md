@@ -6,8 +6,8 @@
 
 ## Agent chain
 
-- **Vector · Engineering** — core-8 head, Claude Opus 4.8
-- **Forge · Engineer** — subagent under Vector, Grok 4.5 (`grok_local`) —
+- **Engineering** — core-8 head, Claude Opus 4.8
+- **the Engineer subagent** — subagent under Vector, Grok 4.5 (`grok_local`) —
   the live testbed for the grok subagent tier (SUM-145)
 
 ## Working now (Thiel rule: one agent, ONE task)
@@ -19,9 +19,9 @@
 
 ## How to engage
 
-- In Summon: @Forge or @Vector in board chat, or assign a task — assignment
+- In Summon: @engineering in board chat, or assign a task — assignment
   wakes the agent.
 - Department knowledge lives here as files; anything an agent should always
   know about engineering belongs in this folder.
-- Escalation: agent → Sol · Cofounder → the board (Adam). Blocked work surfaces in
+- Escalation: department → Cofounder → Adam (the CEO). Blocked work surfaces in
   the Inbox with a disposition card.

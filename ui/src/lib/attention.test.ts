@@ -49,6 +49,7 @@ function buildItem(overrides: Partial<AttentionItem> = {}): AttentionItem {
     project: null,
     workspace: null,
     detail: null,
+    forecast: null,
     dismissal: null,
     ...overrides,
   };

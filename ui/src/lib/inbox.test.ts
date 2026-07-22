@@ -305,6 +305,15 @@ const dashboard: DashboardSummary = {
     pausedProjects: 0,
   },
   runActivity: [],
+  outcomes: {
+    receiptCount: 0,
+    unmeasurableCount: 0,
+    moneySavedCents: 0,
+    timeSavedMinutes: 0,
+    timeValueCents: 0,
+    revenueMovedCents: 0,
+    risksAvoided: 0,
+  },
 };
 
 describe("inbox helpers", () => {

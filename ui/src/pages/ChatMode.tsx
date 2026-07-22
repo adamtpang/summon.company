@@ -104,7 +104,7 @@ export function ChatMode() {
         Try: “status” · “what needs me” · “what's our bottleneck” · @sales, @engineering, @Ink… to reach anyone
       </p>
       <div className="min-h-0 flex-1">
-        <BoardChat />
+        <BoardChat zenMode />
       </div>
     </div>
   );

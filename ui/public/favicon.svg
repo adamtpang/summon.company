@@ -7,8 +7,8 @@
             fill="none" stroke="#000" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
     </mask>
   </defs>
-  <rect width="64" height="64" rx="15" fill="#0A0A0A"/>
-  <circle cx="32" cy="32" r="21" fill="none" stroke="#FFFFFF" stroke-width="6" mask="url(#summon-favicon-gap)"/>
+  <rect width="64" height="64" rx="15" fill="#FFFFFF" stroke="#0A0A0A" stroke-opacity="0.16" stroke-width="2"/>
+  <circle cx="32" cy="32" r="21" fill="none" stroke="#0A0A0A" stroke-width="6" mask="url(#summon-favicon-gap)"/>
   <path d="M3 32 H20 L26 21 L33 44 L38 32 H61"
-        fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+        fill="none" stroke="#0A0A0A" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>

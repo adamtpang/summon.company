@@ -6,7 +6,7 @@
 
 ## Agent chain
 
-- **Ledger · Finance** — layer 2, Claude Opus 4.8
+- **Finance** — layer 2, Claude Opus 4.8
 
 ## Working now (Thiel rule: one agent, ONE task)
 
@@ -23,5 +23,5 @@ revenue grown.
 
 ## How to engage
 
-- In Summon: @Ledger in board chat, or assign a task.
-- Escalation: agent → Sol · Cofounder → the board (Adam).
+- In Summon: @finance in board chat, or assign a task.
+- Escalation: department → Cofounder → Adam (the CEO).

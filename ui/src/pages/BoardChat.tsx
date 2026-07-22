@@ -164,7 +164,7 @@ function BoardRightPane({
   );
 }
 
-export function BoardChat() {
+export function BoardChat({ zenMode = false }: { zenMode?: boolean } = {}) {
   const { selectedCompanyId, selectedCompany } = useCompany();
   const { setBreadcrumbs } = useBreadcrumbs();
   const queryClient = useQueryClient();
@@ -1050,7 +1050,7 @@ export function BoardChat() {
           role="separator"
           aria-orientation="vertical"
           aria-label="Resize board chat and agent feed"
-          className="group relative hidden w-3 shrink-0 cursor-col-resize bg-background md:flex"
+          className={zenMode ? "hidden" : "group relative hidden w-3 shrink-0 cursor-col-resize bg-background md:flex"}
           onMouseDown={handleSplitDragStart}
         >
           <div
@@ -1059,8 +1059,9 @@ export function BoardChat() {
           />
         </div>
 
-        {/* Right: Priorities scoreboard / Agent Feed — hidden on mobile */}
-        <div className="hidden md:flex md:min-h-0 md:min-w-0 md:flex-1">
+        {/* Right: Priorities scoreboard / Agent Feed — hidden on mobile, and
+            hidden entirely in chat zen mode (the thread IS the interface). */}
+        <div className={zenMode ? "hidden" : "hidden md:flex md:min-h-0 md:min-w-0 md:flex-1"}>
           <BoardRightPane
             view={rightPaneView}
             onViewChange={setRightPaneView}
@@ -1071,7 +1072,7 @@ export function BoardChat() {
       </div>
 
       {/* Mobile: floating companion toggle + sheet drawer */}
-      <div className="md:hidden">
+      <div className={zenMode ? "hidden" : "md:hidden"}>
         <Sheet open={mobileFeedOpen} onOpenChange={setMobileFeedOpen}>
           <SheetTrigger asChild>
             <Button

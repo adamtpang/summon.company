@@ -6,7 +6,7 @@
 
 ## Agent chain
 
-- **Haven · Support** — core-8 head, Claude Opus 4.8
+- **Support** — core-8 head, Claude Opus 4.8
 
 ## Working now (Thiel rule: one agent, ONE task)
 
@@ -16,5 +16,5 @@ meaningful task or none.
 
 ## How to engage
 
-- In Summon: @Haven in board chat, or assign a task.
-- Escalation: agent → Sol · Cofounder → the board (Adam).
+- In Summon: @support in board chat, or assign a task.
+- Escalation: department → Cofounder → Adam (the CEO).

@@ -6,7 +6,7 @@
 
 ## Agent chain
 
-- **Magnet · Sales** — core-8 head, Claude Opus 4.8
+- **Sales** — core-8 head, Claude Opus 4.8
 
 Named Magnet on purpose: pull, not push. Sales here means making the offer
 findable and frictionless, not chasing.
@@ -24,5 +24,5 @@ SUM-132 — founding-influencer pipeline: 10 KOL partnerships.
 
 ## How to engage
 
-- In Summon: @Magnet in board chat, or assign a task.
-- Escalation: agent → Sol · Cofounder → the board (Adam).
+- In Summon: @sales in board chat, or assign a task.
+- Escalation: department → Cofounder → Adam (the CEO).

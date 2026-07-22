@@ -6,7 +6,7 @@
 
 ## Agent chain
 
-- **Ink · Design** — layer 2, Claude Opus 4.8
+- **Design** — layer 2, Claude Opus 4.8
 
 ## Working now (Thiel rule: one agent, ONE task)
 
@@ -16,8 +16,8 @@ data).
 
 ## How to engage
 
-- In Summon: @Ink in board chat, or assign a task — assignment wakes the agent.
+- In Summon: @design in board chat, or assign a task — assignment wakes the agent.
 - Department knowledge lives here as files: DESIGN.md laws, the identity
   sources (`design/logo/`), tokens (`ui/src/index.css` is the single source of
   truth).
-- Escalation: agent → Sol · Cofounder → the board (Adam).
+- Escalation: department → Cofounder → Adam (the CEO).
