@@ -1,10 +1,12 @@
 import { Router } from "express";
 import { spawn } from "node:child_process";
 import fs from "node:fs";
+import os from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import type { Db } from "@paperclipai/db";
 import type { DeploymentMode } from "@paperclipai/shared";
+import { resolveCommandForLogs } from "../adapters/utils.js";
 import { instanceSettingsService, issueService } from "../services/index.js";
 import { assertCompanyAccess, getActorInfo } from "./authz.js";
 
@@ -247,9 +249,19 @@ export function boardChatRoutes(
       liveBoardChats -= 1;
     };
 
-    const proc = spawn("claude", args, {
+    // Resolve to an absolute path with the same PATH walker the fleet
+    // adapters use. A raw spawn("claude") relies on libuv's search, which a
+    // single malformed PATH entry can poison for every entry after it (the
+    // board's "assistant unavailable" bug, 2026-07-22, a quoted entry on the
+    // board machine). The JS walk shrugs off bad entries.
+    const claudeCommand = await resolveCommandForLogs("claude", os.tmpdir(), process.env);
+
+    const proc = spawn(claudeCommand, args, {
       stdio: ["pipe", "pipe", "pipe"],
-      cwd: "/tmp",
+      // A literal "/tmp" does not exist on Windows and makes spawn die with
+      // ENOENT before the CLI is even looked up. tmpdir() is right on every
+      // platform.
+      cwd: os.tmpdir(),
       env: {
         ...process.env,
         PAPERCLIP_API_URL: apiUrl,

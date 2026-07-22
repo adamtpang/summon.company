@@ -379,16 +379,19 @@ export function BoardChat({ zenMode = false }: { zenMode?: boolean } = {}) {
       (row) => !row.reviewNeeded && row.status !== "done" && row.status !== "cancelled",
     );
     const blockedCount = (issues ?? []).filter((issue) => issue.status === "blocked").length;
+    // A bare identifier means nothing to a human (board, 2026-07-22: "idk
+    // what VIT-115 means") — every chip carries the ticket's one-liner.
+    const brief = (title: string) => (title.length > 34 ? `${title.slice(0, 33).trimEnd()}…` : title);
     const chips: Array<{ label: string; prompt: string }> = [{ label: "Status", prompt: "status" }];
     if (topReview) {
       chips.push({
-        label: `Review ${topReview.identifier}`,
+        label: `Review ${topReview.identifier} · ${brief(topReview.title)}`,
         prompt: `Walk me through the ${topReview.identifier} review (${topReview.title}). What am I approving, and what happens after I do?`,
       });
     }
     if (topActive) {
       chips.push({
-        label: `${topActive.tier} · ${topActive.identifier}`,
+        label: `${topActive.tier} · ${topActive.identifier} · ${brief(topActive.title)}`,
         prompt: `What should we do about ${topActive.identifier}: ${topActive.title}? Who runs it, and what does it move on the roadmap?`,
       });
     }
@@ -768,7 +771,11 @@ export function BoardChat({ zenMode = false }: { zenMode?: boolean } = {}) {
   }
 
   return (
-    <div className="flex h-(--sz-calc-29) flex-col -m-6">
+    // Standalone route: escape main's p-6 with negative margins and grow by
+    // the same 3rem (the --sz-calc-29 trick). Embedded in ChatMode (zen), the
+    // parent box is already exact, and the negative top margin was pulling
+    // the thread up OVER the progression HUD (board, 2026-07-22).
+    <div className={cn("flex flex-col", zenMode ? "h-full min-h-0" : "h-(--sz-calc-29) -m-6")}>
       <div
         ref={splitContainerRef}
         className="flex min-h-0 min-w-0 flex-1 flex-row"
