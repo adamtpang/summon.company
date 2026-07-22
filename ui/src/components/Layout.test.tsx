@@ -296,7 +296,7 @@ describe("Layout", () => {
     });
   });
 
-  it("collapses atomically when the pointer is still over the sidebar (no re-peek) — PAP-10676", async () => {
+  it("collapses atomically when the pointer is still over the sidebar (no re-peek), PAP-10676", async () => {
     const root = createRoot(container);
     const queryClient = new QueryClient({ defaultOptions: { queries: { retry: false } } });
 

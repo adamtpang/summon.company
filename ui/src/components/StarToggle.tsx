@@ -74,7 +74,7 @@ export function StarToggle({
         aria-busy={pending ? "true" : undefined}
         disabled={pending}
         onClick={handleClick}
-        title={error ? "Couldn't save — retry" : undefined}
+        title={error ? "Couldn't save, retry" : undefined}
         className={cn(
           error
             ? "text-red-500 hover:text-red-500"
@@ -111,7 +111,7 @@ export function StarToggle({
       aria-busy={pending ? "true" : undefined}
       disabled={pending}
       onClick={handleClick}
-      title={error ? "Couldn't save — retry" : undefined}
+      title={error ? "Couldn't save, retry" : undefined}
       className={cn(
         "h-6 w-6 shrink-0",
         visible ? "opacity-100" : revealClassName ?? DEFAULT_ROW_REVEAL,

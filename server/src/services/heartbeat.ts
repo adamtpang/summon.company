@@ -5165,9 +5165,9 @@ export function heartbeatService(db: Db, options: HeartbeatServiceOptions = {}) 
   }) {
     const errorCode = planApprovalResumeFailureErrorCode(input.run);
     if (input.status === "retrying") {
-      return `Agent failed to resume after approval: \`${errorCode}\` — retrying (attempt ${input.attempt}/${input.maxAttempts})`;
+      return `Agent failed to resume after approval: \`${errorCode}\`, retrying (attempt ${input.attempt}/${input.maxAttempts})`;
     }
-    return `Agent failed to resume after approval: \`${errorCode}\` — needs attention`;
+    return `Agent failed to resume after approval: \`${errorCode}\`, needs attention`;
   }
 
   function buildPlanApprovalResumeFailureResult(input: {

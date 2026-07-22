@@ -1068,7 +1068,7 @@ function EnvironmentImageTemplatePanel({
                 className="text-xs text-destructive"
                 data-testid={`custom-image-template-out-of-sync-${environment.id}`}
               >
-                Not in use — the environment configuration changed since this image was
+                Not in use, the environment configuration changed since this image was
                 captured. Runs fall back to the base configuration until you capture a new
                 image.
               </div>

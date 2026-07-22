@@ -29,7 +29,7 @@ function RunCardRecoveryChip({ action }: { action: IssueRecoveryAction }) {
       data-recovery-state={state}
       role="status"
       aria-label={tone.label}
-      title={`${tone.label} — open the source task to act.`}
+      title={`${tone.label} - open the source task to act.`}
       className={cn(
         "gap-0.5 px-1.5 text-(length:--text-nano)",
         tone.className,

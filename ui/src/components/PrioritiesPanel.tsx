@@ -77,7 +77,7 @@ function ProgressCell({ value, label }: { value: number; label: string }) {
 
 function AgentCell({ agent }: { agent: Agent | null }) {
   if (!agent) {
-    return <span className="text-xs text-muted-foreground">—</span>;
+    return <span className="text-xs text-muted-foreground">·</span>;
   }
   return (
     <Tooltip>

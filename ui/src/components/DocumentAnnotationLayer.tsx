@@ -569,7 +569,7 @@ export function DocumentAnnotationLayer({
                   width: 16,
                   height: 16,
                 }}
-                title="Anchor moved — needs review"
+                title="Anchor moved, needs review"
               >
                 <AlertTriangle className="h-3 w-3" />
               </span>

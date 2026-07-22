@@ -72,11 +72,11 @@ const ACTIVATION_CATEGORIES: Array<{
 
 const FIXTURE_LABELS: Record<FixtureStateKey, string> = {
   "settings-pane": "1 · Settings → Cloud upstream pane (enabled)",
-  "connect-wizard": "2 · Connect wizard — remote URL entry + PKCE launch",
-  "schema-mismatch": "3 · Connect wizard — schema-mismatch hard block",
-  preview: "4 · Preview — conflicts, warnings, planned actions",
-  "preview-clean": "5 · Preview — clean run with no conflicts",
-  progress: "6 · Durable progress — mid-run from run events",
+  "connect-wizard": "2 · Connect wizard, remote URL entry + PKCE launch",
+  "schema-mismatch": "3 · Connect wizard, schema-mismatch hard block",
+  preview: "4 · Preview, conflicts, warnings, planned actions",
+  "preview-clean": "5 · Preview, clean run with no conflicts",
+  progress: "6 · Durable progress, mid-run from run events",
   retry: "7 · Retry without duplicating ledger entries",
   finish: "8 · Finish / activation checklist with run report",
 };
@@ -676,7 +676,7 @@ function failedRun(): CloudUpstreamRun {
         at: "2026-05-18T19:11:30.000Z",
         phase: "push",
         type: "failed",
-        message: "Apply rejected: cloud rejected chunk 4 of 6 (HTTP 502). Ledger entries from chunks 1–3 retained; chunk 4 not committed.",
+        message: "Apply rejected: cloud rejected chunk 4 of 6 (HTTP 502). Ledger entries from chunks 1-3 retained; chunk 4 not committed.",
       },
     ],
     targetUrl: "https://paperclip.paperclip.app/PC521D/dashboard",
@@ -714,7 +714,7 @@ function succeededRun(): CloudUpstreamRun {
         at: "2026-05-18T19:11:31.000Z",
         phase: "activate",
         type: "completed",
-        message: "Activation checklist pending operator approval — automations remain paused.",
+        message: "Activation checklist pending operator approval, automations remain paused.",
       },
     ],
     targetUrl: "https://paperclip.paperclip.app/PC521D/dashboard",
@@ -804,7 +804,7 @@ function buildFixture(state: FixtureStateKey): Fixture {
           { ...failedRun(), id: "run_9pYqXwVtSrQ" },
         ],
         notice: null,
-        actionError: "Push run failed. Review the events. Retry resumes from ledger checkpoint chunk-3 — chunks 1–3 will not be re-applied.",
+        actionError: "Push run failed. Review the events. Retry resumes from ledger checkpoint chunk-3, chunks 1-3 will not be re-applied.",
       };
     case "finish":
       return {

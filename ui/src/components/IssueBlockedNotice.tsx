@@ -37,7 +37,7 @@ function BlockerRecoveryIndicator({ action }: { action: IssueRecoveryAction }) {
       data-recovery-kind={action.kind}
       role="status"
       aria-label={label}
-      title={`${label} — open the source task to act.`}
+      title={`${label} - open the source task to act.`}
       className={`[&>svg]:size-2.5 gap-0.5 px-1.5 text-(length:--text-nano) ${tone.className}`}
     >
       <Icon className="h-2.5 w-2.5" aria-hidden />
@@ -310,7 +310,7 @@ function WaitingOnLiveWorkNotice({
               </div>
               <div className="min-w-0 pb-0.5">
                 <span className="inline-block rounded-md border border-dashed border-blue-300/70 px-2 py-1 text-xs text-blue-800 dark:border-blue-500/40 dark:text-blue-200">
-                  This task — resumes automatically when the chain is done
+                  This task, resumes automatically when the chain is done
                 </span>
               </div>
             </div>

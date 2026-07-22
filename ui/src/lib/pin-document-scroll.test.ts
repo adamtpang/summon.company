@@ -64,7 +64,7 @@ describe("pinDocumentScrollToZero", () => {
     cleanup();
   });
 
-  it("cleanup removes the listener — subsequent scroll events do not reset scrollTop", () => {
+  it("cleanup removes the listener, subsequent scroll events do not reset scrollTop", () => {
     const cleanup = pinDocumentScrollToZero();
     cleanup();
 

@@ -176,7 +176,7 @@ describe("AttentionQueueRow", () => {
     expect(el.querySelector("[data-attention-forecast]")).toBeNull();
   });
 
-  it("does not inline a review — it deep-links instead", () => {
+  it("does not inline a review, it deep-links instead", () => {
     const el = render(
       <AttentionQueueRow
         item={buildItem({
@@ -262,7 +262,7 @@ describe("AttentionQueueRow", () => {
     expect(onToggleExpand).toHaveBeenCalledWith(expect.objectContaining({ id: "a1" }));
   });
 
-  it("does not navigate on title click — the title is plain text, not a link", () => {
+  it("does not navigate on title click, the title is plain text, not a link", () => {
     render(
       <AttentionQueueRow
         item={buildItem()}
@@ -506,7 +506,7 @@ describe("AttentionQueueRow", () => {
     expect(thumbnailStack?.parentElement?.getAttribute("class")).toContain("items-center");
   });
 
-  it("is memoized — a parent re-render with identical props does not re-render the row", async () => {
+  it("is memoized, a parent re-render with identical props does not re-render the row", async () => {
     const { relativeTime } = await import("../lib/utils");
     const item = buildItem();
     let bump: () => void = () => {};

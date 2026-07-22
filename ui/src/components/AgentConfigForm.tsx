@@ -1994,7 +1994,7 @@ function CheapModelSection({
 }) {
   const placeholderHint = adapterDefaultModel
     ? `Adapter default · ${adapterDefaultModel}`
-    : "No adapter default — choose a cheaper model";
+    : "No adapter default, choose a cheaper model";
   return (
     <div className="rounded-md border border-border/70 bg-muted/20 p-3 space-y-3">
       <div className="flex items-center justify-between gap-3">
@@ -2025,7 +2025,7 @@ function CheapModelSection({
       ) : null}
       {enabled && !model && adapterDefaultModel ? (
         <p className="text-(length:--text-micro) text-muted-foreground">
-          No explicit cheap model selected — runtime falls back to <code>{adapterDefaultModel}</code>.
+          No explicit cheap model selected, runtime falls back to <code>{adapterDefaultModel}</code>.
         </p>
       ) : null}
       {enabled && !model && !adapterDefaultModel ? (

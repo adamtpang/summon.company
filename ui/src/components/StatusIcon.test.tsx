@@ -92,7 +92,7 @@ describe("StatusIcon", () => {
   });
 });
 
-describe("StatusIcon — glyph size (PAP-243a)", () => {
+describe("StatusIcon, glyph size (PAP-243a)", () => {
   it('forwards size="lg" as a 20px glyph', () => {
     const html = renderToStaticMarkup(<StatusIcon status="todo" size="lg" />);
     expect(html).toContain('width="20"');

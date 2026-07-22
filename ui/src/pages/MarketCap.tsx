@@ -238,7 +238,7 @@ export function MarketCap() {
         <h1 className="text-2xl font-semibold tracking-tight">Market cap</h1>
         <p className="mt-1 text-sm text-muted-foreground">
           The company&apos;s valuation, its levers, and the one binding lever right now.
-          Real data only — $0 shows as $0 (doc/MARKET-CAP-MODEL.md).
+          Real data only, $0 shows as $0 (doc/MARKET-CAP-MODEL.md).
         </p>
       </div>
       <MarketCapPanel companyId={selectedCompanyId} />

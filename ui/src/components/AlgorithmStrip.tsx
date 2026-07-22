@@ -52,7 +52,7 @@ export function AlgorithmStrip({
     <div
       data-testid="algorithm-strip"
       role="group"
-      aria-label="The Algorithm — five gates in order"
+      aria-label="The Algorithm, five gates in order"
       className={cn("overflow-x-auto rounded-lg border border-border", className)}
     >
       <ol className="flex min-w-max items-stretch">

@@ -96,7 +96,7 @@ describe("StarToggle", () => {
     await render(<StarToggle starred size="button" error resourceName="Alpha" onToggle={() => {}} />);
     const btn = button();
     expect(btn?.textContent).toContain("Retry star");
-    expect(btn?.getAttribute("title")).toBe("Couldn't save — retry");
+    expect(btn?.getAttribute("title")).toBe("Couldn't save, retry");
   });
 
   it("renders the labelled Star/Starred button variant", async () => {

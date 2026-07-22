@@ -228,7 +228,7 @@ describe("routingEcho", () => {
 
   it("explains the ambiguous fallback", () => {
     const d = resolveRouting({ text: "@nobody hi", roster: ROSTER, scopedCompanyId: "summon" });
-    expect(routingEcho(d)).toBe("Couldn't match that name — Summon CEO will route it.");
+    expect(routingEcho(d)).toBe("Couldn't match that name, Summon CEO will route it.");
   });
 });
 

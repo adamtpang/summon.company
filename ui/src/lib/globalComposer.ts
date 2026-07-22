@@ -167,7 +167,7 @@ export function matchMentions(roster: ComposerRoster, query: string, limit = 8):
         companyId: company.id,
         companyName: company.name,
         agent: null,
-        label: `${company.name} — CEO routes`,
+        label: `${company.name} - CEO routes`,
         handle: company.issuePrefix,
         score: companyScore,
       });
@@ -186,7 +186,7 @@ export function matchMentions(roster: ComposerRoster, query: string, limit = 8):
         companyId: company.id,
         companyName: company.name,
         agent,
-        label: `${agent.name} · ${agent.title ?? agent.role} — ${company.name}`,
+        label: `${agent.name} · ${agent.title ?? agent.role} · ${company.name}`,
         handle: agentHandle(company, agent),
         score: agent.role === "ceo" ? score + 2 : score,
       });
@@ -340,7 +340,7 @@ export function resolveRouting(ctx: ResolveContext): RoutingDecision {
 export function routingEcho(decision: RoutingDecision): string {
   const company = decision.companyName ?? "your company";
   if (decision.ambiguous) {
-    return `Couldn't match that name — ${company} CEO will route it.`;
+    return `Couldn't match that name, ${company} CEO will route it.`;
   }
   if (decision.targetKind === "agent" && decision.agent) {
     return `→ ${decision.agent.name} (${company}) picks this up.`;

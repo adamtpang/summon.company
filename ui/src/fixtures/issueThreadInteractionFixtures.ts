@@ -657,7 +657,7 @@ export const rejectedRequestCheckboxConfirmationInteraction =
     result: {
       version: 1,
       outcome: "rejected",
-      reason: "Don't delete anything yet — let me confirm with the data owner first.",
+      reason: "Don't delete anything yet, let me confirm with the data owner first.",
     },
   });
 
@@ -710,7 +710,7 @@ function createRequestItemVerdictsInteraction(
     kind: "request_item_verdicts",
     title: "Review 5 blog posts",
     summary:
-      "This task drafted five blog posts. Approve the ones that are ready and reject the rest with a reason — each decision fans out on its own.",
+      "This task drafted five blog posts. Approve the ones that are ready and reject the rest with a reason, each decision fans out on its own.",
     status: "pending",
     continuationPolicy: "wake_assignee",
     createdByAgentId: "agent-codex",
@@ -730,7 +730,7 @@ function createRequestItemVerdictsInteraction(
           id: "post-spring-recap",
           label: "Spring launch recap",
           description: "820 words · product marketing",
-          previewMarkdown: "**Spring launch recap** — a warm retrospective on the Q1 launch and what shipped.",
+          previewMarkdown: "**Spring launch recap**, a warm retrospective on the Q1 launch and what shipped.",
           href: "/PAP/issues/PAP-9001",
         },
         {
@@ -794,7 +794,7 @@ export const partialRequestItemVerdictsInteraction = createRequestItemVerdictsIn
       {
         id: "post-changelog-digest",
         verdict: "reject",
-        reason: "Tone is off-brand — too dry. Warm it up and re-submit.",
+        reason: "Tone is off-brand, too dry. Warm it up and re-submit.",
         resolvedByUserId: issueThreadInteractionFixtureMeta.currentUserId,
         resolvedAt: new Date("2026-04-20T15:08:00.000Z"),
       },
@@ -823,7 +823,7 @@ export const completeRequestItemVerdictsInteraction = createRequestItemVerdictsI
       {
         id: "post-changelog-digest",
         verdict: "reject",
-        reason: "Tone is off-brand — too dry. Warm it up and re-submit.",
+        reason: "Tone is off-brand, too dry. Warm it up and re-submit.",
         resolvedByUserId: issueThreadInteractionFixtureMeta.currentUserId,
         resolvedAt: new Date("2026-04-20T15:08:00.000Z"),
       },
@@ -872,7 +872,7 @@ export const supersededRequestItemVerdictsInteraction = createRequestItemVerdict
       {
         id: "post-changelog-digest",
         verdict: "reject",
-        reason: "Tone is off-brand — too dry. Warm it up and re-submit.",
+        reason: "Tone is off-brand, too dry. Warm it up and re-submit.",
         resolvedByUserId: issueThreadInteractionFixtureMeta.currentUserId,
         resolvedAt: new Date("2026-04-20T15:08:00.000Z"),
       },

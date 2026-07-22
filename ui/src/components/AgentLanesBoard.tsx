@@ -124,7 +124,7 @@ export function collectDependencyEdges(lanes: Lane[]): DependencyEdge[] {
         fromId: blocker.id,
         toId: issue.id,
         active: !TERMINAL_STATUSES.has(blocker.status),
-        label: `${blocker.identifier ?? blocker.id.slice(0, 8)} blocks ${issue.identifier ?? issue.id.slice(0, 8)} — serialization; kill it if the dependency isn't real`,
+        label: `${blocker.identifier ?? blocker.id.slice(0, 8)} blocks ${issue.identifier ?? issue.id.slice(0, 8)} - serialization; kill it if the dependency isn't real`,
       });
     }
   }
@@ -190,12 +190,11 @@ export function AgentLanesBoard({ issues, agents, liveIssueIds, issueLinkState }
     <div className="space-y-2" data-testid="agent-lanes-board">
       {edges.length > 0 ? (
         <p className="text-xs text-muted-foreground" data-testid="agent-lanes-serialization-note">
-          {activeEdgeCount} active {activeEdgeCount === 1 ? "dependency" : "dependencies"} drawn below —
-          serialization must justify itself.
+          {activeEdgeCount} active {activeEdgeCount === 1 ? "dependency" : "dependencies"} drawn below, serialization must justify itself.
         </p>
       ) : (
         <p className="text-xs text-muted-foreground" data-testid="agent-lanes-serialization-note">
-          No dependencies between open tasks — everything gestates in parallel.
+          No dependencies between open tasks, everything gestates in parallel.
         </p>
       )}
       <div ref={containerRef} className="relative rounded-lg border border-border">
@@ -233,7 +232,7 @@ export function AgentLanesBoard({ issues, agents, liveIssueIds, issueLinkState }
               </div>
               <div className="flex min-w-0 flex-1 flex-wrap gap-1.5">
                 {lane.issues.length === 0 ? (
-                  <span className="py-1 text-xs text-muted-foreground/60">No open work — this lane is free.</span>
+                  <span className="py-1 text-xs text-muted-foreground/60">No open work, this lane is free.</span>
                 ) : (
                   lane.issues.map((issue) => (
                     <LaneChip

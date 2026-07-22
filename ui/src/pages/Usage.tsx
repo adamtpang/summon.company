@@ -218,7 +218,7 @@ function ProviderUsagePanel({
                   ) : (
                     <div className="flex items-center justify-between gap-2 text-xs">
                       <span className="text-muted-foreground">{qw.label}</span>
-                      <span className="font-medium tabular-nums">{qw.valueLabel ?? "—"}</span>
+                      <span className="font-medium tabular-nums">{qw.valueLabel ?? "·"}</span>
                     </div>
                   )}
                   {alert?.forecastExhaustAt && (

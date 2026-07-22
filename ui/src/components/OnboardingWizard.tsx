@@ -606,7 +606,7 @@ export function OnboardingWizard() {
                     <div>
                       <h3 className="font-medium">Connect your fuel</h3>
                       <p className="text-xs text-muted-foreground">
-                        AI employees run on your own Claude or Codex subscription — the
+                        AI employees run on your own Claude or Codex subscription, the
                         same one you already use. No API keys.
                       </p>
                     </div>
@@ -625,7 +625,7 @@ export function OnboardingWizard() {
                                   ? `Connected via ${subscription}`
                                   : fuel.status === "checking"
                                     ? "Checking…"
-                                    : `Not connected — install: ${installHint}`}
+                                    : `Not connected, install: ${installHint}`}
                               </p>
                             </div>
                             {fuel.status === "checking" ? (
@@ -658,7 +658,7 @@ export function OnboardingWizard() {
                               <div className="mt-2 rounded-md border border-amber-300/60 bg-amber-50/40 px-2.5 py-2 space-y-1.5">
                                 <p className="text-(length:--text-micro) text-amber-900/90 leading-relaxed">
                                   Claude failed while <span className="font-mono">ANTHROPIC_API_KEY</span>{" "}
-                                  is set — the key overrides your subscription login.
+                                  is set, the key overrides your subscription login.
                                 </p>
                                 <Button
                                   size="sm"
@@ -684,7 +684,7 @@ export function OnboardingWizard() {
                     codexFuel.status !== "checking" &&
                     claudeFuel.status !== "idle" && (
                       <p className="text-(length:--text-micro) text-amber-700 dark:text-amber-400">
-                        No fuel connected yet. The company still gets created — employees
+                        No fuel connected yet. The company still gets created, employees
                         just can't run until one of these turns green.
                       </p>
                     )}
@@ -702,7 +702,7 @@ export function OnboardingWizard() {
                       <h3 className="font-medium">Pair the work</h3>
                       <p className="text-xs text-muted-foreground">
                         Paste a GitHub repo and it becomes the company's primary
-                        workspace — where your AI employees read and write.
+                        workspace, where your AI employees read and write.
                       </p>
                     </div>
                   </div>
@@ -732,7 +732,7 @@ export function OnboardingWizard() {
                     />
                     <p className="mt-1.5 text-(length:--text-micro) text-muted-foreground">
                       Whole-org pairing (pick several repos at once) needs GitHub sign-in
-                      and ships later — pasting any repo URL works today.
+                      and ships later, pasting any repo URL works today.
                     </p>
                   </div>
                 </div>

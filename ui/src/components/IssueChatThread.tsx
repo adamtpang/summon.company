@@ -4997,7 +4997,7 @@ export function IssueChatThread({
                           Legacy recovery task. Newer recovery actions live on the source task
                           {legacyRecoverySourceIssue.identifier ? (
                             <>
-                              {" — "}
+                              {" · "}
                               <Link
                                 to={legacyRecoverySourceIssue.href}
                                 className="underline-offset-2 hover:underline"
@@ -5006,7 +5006,7 @@ export function IssueChatThread({
                                 {legacyRecoverySourceIssue.title ? (
                                   <span className="text-muted-foreground">
                                     {" "}
-                                    — {legacyRecoverySourceIssue.title}
+                                    · {legacyRecoverySourceIssue.title}
                                   </span>
                                 ) : null}
                               </Link>

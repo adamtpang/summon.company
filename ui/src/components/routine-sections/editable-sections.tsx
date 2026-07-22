@@ -74,7 +74,7 @@ const signingModeDescriptions: Record<string, string> = {
   bearer: "Expect a shared bearer token in the Authorization header.",
   hmac_sha256: "Expect an HMAC SHA-256 signature over the request using the shared secret.",
   github_hmac: "Accept GitHub-style X-Hub-Signature-256 header (HMAC over raw body, no timestamp).",
-  none: "No authentication — the webhook URL itself acts as a shared secret.",
+  none: "No authentication, the webhook URL itself acts as a shared secret.",
 };
 const SIGNING_MODES_WITHOUT_REPLAY_WINDOW = new Set(["github_hmac", "none"]);
 
@@ -452,7 +452,7 @@ export function TriggersSection() {
                 {triggerKinds.map((kind) => (
                   <SelectItem key={kind} value={kind} disabled={kind === "webhook"}>
                     {kind}
-                    {kind === "webhook" ? " — COMING SOON" : ""}
+                    {kind === "webhook" ? " - COMING SOON" : ""}
                   </SelectItem>
                 ))}
               </SelectContent>
@@ -566,7 +566,7 @@ export function VariablesSection() {
       <div className="flex items-center gap-3 rounded-md border border-border bg-muted/20 px-4 py-3 text-xs">
         <span className="flex-1 text-muted-foreground">
           Variables are auto-detected from <code className="font-mono">{"{{placeholders}}"}</code> in
-          the title &amp; instructions. The variable name is read-only — rename by editing the
+          the title &amp; instructions. The variable name is read-only, rename by editing the
           placeholder.
         </span>
         <Button variant="secondary" size="sm" onClick={() => navigateToSection("overview")}>

@@ -725,7 +725,7 @@ export function TeamDetailPane({
               <TooltipTrigger asChild>
                 <span tabIndex={0}>{installButton}</span>
               </TooltipTrigger>
-              <TooltipContent>This team cannot be installed — the package manifest is invalid.</TooltipContent>
+              <TooltipContent>This team cannot be installed, the package manifest is invalid.</TooltipContent>
             </Tooltip>
           ) : !canInstall ? (
             <Tooltip>
@@ -1333,7 +1333,7 @@ function TeamInstallerDialog({
             needsScriptsConfirm && confirmScripts ? (
               <Button variant="destructive" onClick={submitInstall} disabled={installBlocked || previewMutation.isPending}>
                 <AlertTriangle className="h-4 w-4" />
-                Confirm — install with executables
+                Confirm, install with executables
               </Button>
             ) : (
               <Button onClick={submitInstall} disabled={installBlocked || previewMutation.isPending || !previewResult}>
@@ -2068,7 +2068,7 @@ export function TeamRow({
                 <ChevronUp className="h-3 w-3" />
               </span>
             </TooltipTrigger>
-            <TooltipContent>Update available — installed team is out of date</TooltipContent>
+            <TooltipContent>Update available, installed team is out of date</TooltipContent>
           </Tooltip>
         )}
         {risk !== "safe" && (

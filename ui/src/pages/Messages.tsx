@@ -82,18 +82,18 @@ export interface MessageDayGroup {
 export function buildInitialGreeting(agent: Pick<Agent, "name" | "title" | "status">): string {
   const presence = agentPresence(agent);
   const role = agent.title?.trim();
-  const intro = role ? `${agent.name} here — your ${role}.` : `${agent.name} here.`;
+  const intro = role ? `${agent.name} here, your ${role}.` : `${agent.name} here.`;
   switch (presence.key) {
     case "running":
       return `${intro} I'm mid-run right now, but message me anytime and I'll fold it into the work.`;
     case "paused":
-      return `${intro} I'm paused at the moment — resume me and I'll pick straight back up.`;
+      return `${intro} I'm paused at the moment, resume me and I'll pick straight back up.`;
     case "error":
       return `${intro} I hit a snag and could use a hand when you have a second.`;
     case "pending_approval":
       return `${intro} I'm waiting on your approval before I can start.`;
     default:
-      return `${intro} All clear — message me and I'll get on it.`;
+      return `${intro} All clear, message me and I'll get on it.`;
   }
 }
 
@@ -107,19 +107,19 @@ export function buildEmployeeReply(
   if (asksStatus) {
     switch (presence.key) {
       case "running":
-        return "Mid-run right now — heads-down on your work. I'll report back the second it lands.";
+        return "Mid-run right now, heads-down on your work. I'll report back the second it lands.";
       case "paused":
         return `I'm paused${agent.pauseReason ? ` (${agent.pauseReason})` : ""} right now. Resume me and I'll pick straight back up.`;
       case "error":
         return `I hit a snag and need a hand${agent.errorReason ? `: ${agent.errorReason}` : ""}.`;
       case "pending_approval":
-        return "Waiting on your approval before I can move — green-light me and I'll go.";
+        return "Waiting on your approval before I can move, green-light me and I'll go.";
       default:
         return "All clear on my end. Nothing blocking, ready for the next thing.";
     }
   }
   return presence.key === "running"
-    ? "Got it — I'm on a run right now, but I've noted this and I'll act on it."
+    ? "Got it, I'm on a run right now, but I've noted this and I'll act on it."
     : "Got it. On it.";
 }
 

@@ -129,7 +129,7 @@ function setWorktreeInstanceIdMeta(instanceId: string | null) {
   }
 }
 
-describe("InstanceExperimentalSettings — Conference Room Chat card (PAP-11233)", () => {
+describe("InstanceExperimentalSettings, Conference Room Chat card (PAP-11233)", () => {
   let container: HTMLDivElement;
   let root: Root | null = null;
   let currentExperimentalSettings: InstanceExperimentalSettingsPayload;

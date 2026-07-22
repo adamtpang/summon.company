@@ -72,7 +72,7 @@ describe("AssigneeChip", () => {
     expect(chip.textContent).toContain("QA");
   });
 
-  it("renders a user chip with '(you)' and a 'User' prefix — never an agent look", () => {
+  it("renders a user chip with '(you)' and a 'User' prefix, never an agent look", () => {
     const host = mount(<AssigneeChip assignee={{ agentId: null, userId: "user-board" }} resolvers={resolvers} />);
     const chip = host.querySelector<HTMLElement>("[data-testid='handoff-assignee-chip']")!;
     expect(chip.dataset.kind).toBe("user");

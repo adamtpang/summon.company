@@ -60,7 +60,7 @@ describe("coverageSummaryLabel", () => {
   });
 
   it("renders a dash when coverage is unknown", () => {
-    expect(coverageSummaryLabel(undefined)).toBe("—");
+    expect(coverageSummaryLabel(undefined)).toBe("·");
   });
 });
 

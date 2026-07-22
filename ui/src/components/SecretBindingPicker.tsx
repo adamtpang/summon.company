@@ -165,7 +165,7 @@ export function SecretBindingPicker({
             ) : null}
             {filteredSecrets.map((secret) => (
               <option key={secret.id} value={secret.id}>
-                {secret.name} — {describeSecret(secret)}
+                {secret.name} · {describeSecret(secret)}
               </option>
             ))}
           </select>

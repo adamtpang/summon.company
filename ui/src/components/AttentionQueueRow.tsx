@@ -429,7 +429,7 @@ function CompactDecisionActions({
       }
       if (item.sourceKind === "failed_run") {
         const issueId = item.relatedIssue?.id;
-        if (!issueId) throw new Error("This run has no linked task to retry — open the run for options.");
+        if (!issueId) throw new Error("This run has no linked task to retry, open the run for options.");
         // Retry = a board comment on the assigned task (reopen: true). Comment
         // wakes are the one dispatch path the running control plane honors
         // regardless of build seam — the assignee picks the task back up.
@@ -499,7 +499,7 @@ function decisionLabel(action: CompactDecisionAction): string {
 }
 
 function compactDecisionSuccessLabel(sourceKind: AttentionItem["sourceKind"], action: CompactDecisionAction): string {
-  if (action === "retry") return "Retry requested — the agent will pick the task back up";
+  if (action === "retry") return "Retry requested, the agent will pick the task back up";
   if (sourceKind === "approval") return `Approval ${decisionLabel(action)}`;
   if (sourceKind === "join_request") return `Join request ${decisionLabel(action)}`;
   return action === "accept" ? "Confirmation accepted" : "Confirmation declined";

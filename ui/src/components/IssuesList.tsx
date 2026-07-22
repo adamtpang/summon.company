@@ -1657,7 +1657,7 @@ export function IssuesList({
             <button
               className={`flex h-8 w-8 items-center justify-center transition-colors ${viewState.viewMode === "lanes" ? "bg-accent text-foreground" : "text-muted-foreground hover:text-foreground"}`}
               onClick={() => updateView({ viewMode: "lanes" })}
-              title="Lanes view — one lane per agent, dependencies drawn"
+              title="Lanes view, one lane per agent, dependencies drawn"
               aria-label="Lanes view"
               aria-pressed={viewState.viewMode === "lanes"}
             >

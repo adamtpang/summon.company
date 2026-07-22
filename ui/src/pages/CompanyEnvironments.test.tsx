@@ -376,7 +376,7 @@ function supportedDaytonaCapabilities() {
   };
 }
 
-describe("CompanyEnvironments — test provider button", () => {
+describe("CompanyEnvironments, test provider button", () => {
   let container: HTMLDivElement;
   let root: ReturnType<typeof createRoot> | null;
   let probeResolvers: Map<string, () => void>;
@@ -1301,7 +1301,7 @@ describe("CompanyEnvironments — test provider button", () => {
     await waitForAssertion(() => {
       const dialog = getEnvironmentFormPage()!;
       expect(dialog.textContent).toContain("Active template");
-      expect(dialog.textContent).toContain("Not in use — the environment configuration changed");
+      expect(dialog.textContent).toContain("Not in use, the environment configuration changed");
     });
   });
 

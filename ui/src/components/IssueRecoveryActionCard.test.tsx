@@ -157,7 +157,7 @@ describe("IssueRecoveryActionCard", () => {
     const node = render(
       <IssueRecoveryActionCard action={buildAction({ wakePolicy: null })} />,
     );
-    expect(node.textContent).toContain("—");
+    expect(node.textContent).toContain("·");
   });
 
   it("renders observe_only tone for active_run_watchdog", () => {

@@ -1,7 +1,7 @@
-// changelog builder — renders the public build log from real git history.
+// changelog builder, renders the public build log from real git history.
 // Run from apps/landing: `node build-changelog.mjs` → writes changelog.html.
 // The investor-update principle: timestamps + plain first lines, straight
-// from commits — progress you can audit, not narrative.
+// from commits, progress you can audit, not narrative.
 import { execSync } from "node:child_process";
 import fs from "node:fs";
 
@@ -16,7 +16,13 @@ for (const line of raw.split("\n")) {
   const idx = line.indexOf("|");
   if (idx < 0) continue;
   const date = line.slice(0, idx);
-  const subject = line.slice(idx + 1).trim();
+  // House style: no em dashes anywhere a reader sees, including old commits.
+  const subject = line
+    .slice(idx + 1)
+    .trim()
+    .replace(/(\d)\s*[—–]\s*(\d)/g, "$1-$2")
+    .replace(/\s+[—–]\s+/g, ", ")
+    .replace(/[—–]/g, "-");
   if (skip.test(subject)) continue;
   if (!days.has(date)) days.set(date, []);
   days.get(date).push(subject);
@@ -40,7 +46,7 @@ const html = `<!doctype html>
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Changelog — Summon</title>
+<title>Changelog · Summon</title>
 <meta name="description" content="The Summon build log: every day of progress, straight from the commits. Public, timestamped, auditable." />
 <style>
   :root { color-scheme: light; }
@@ -73,7 +79,7 @@ const html = `<!doctype html>
     <a href="/#founding" style="font-size:.9rem;">Become a founding member</a>
   </header>
   <h1>The build log</h1>
-  <p class="lede">Every day of progress, straight from the commits — public, timestamped, auditable.
+  <p class="lede">Every day of progress, straight from the commits, public, timestamped, auditable.
   The same update an investor would get, except it never stops shipping. Generated ${new Date().toISOString().slice(0, 10)}.</p>
 
 ${sections}

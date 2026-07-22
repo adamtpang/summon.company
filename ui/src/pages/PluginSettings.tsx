@@ -305,7 +305,7 @@ export function PluginSettings() {
                             </div>
                             <div className="flex justify-between">
                               <span className="text-muted-foreground">PID</span>
-                              <span className="font-mono text-xs">{dashboardData.worker.pid ?? "—"}</span>
+                              <span className="font-mono text-xs">{dashboardData.worker.pid ?? "·"}</span>
                             </div>
                             <div className="flex justify-between">
                               <span className="text-muted-foreground">Uptime</span>
@@ -1121,7 +1121,7 @@ function PluginConfigForm({ pluginId, schema, initialValues, isLoading, pluginSt
  * Format an uptime value (in milliseconds) to a human-readable string.
  */
 function formatUptime(uptimeMs: number | null): string {
-  if (uptimeMs == null) return "—";
+  if (uptimeMs == null) return "·";
   const totalSeconds = Math.floor(uptimeMs / 1000);
   if (totalSeconds < 60) return `${totalSeconds}s`;
   const minutes = Math.floor(totalSeconds / 60);

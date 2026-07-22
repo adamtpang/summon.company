@@ -73,7 +73,7 @@ const localEnvironmentDescriptor: EnvironmentDescriptor = {
 };
 
 const loadingEnvironmentDescriptor: EnvironmentDescriptor = {
-  label: "—",
+  label: "·",
   detail: "Loading environment",
   title: "Loading environment",
 };
@@ -821,7 +821,7 @@ function AgentMetaColumns({
           className="truncate font-mono text-xs text-muted-foreground"
           title={model ?? undefined}
         >
-          {model ?? "—"}
+          {model ?? "·"}
         </div>
         <div className="truncate font-mono text-(length:--text-micro) text-muted-foreground/70" title={adapterLabel}>
           {adapterLabel}
@@ -838,7 +838,7 @@ function AgentMetaColumns({
         </div>
       )}
       <span className="w-24 whitespace-nowrap text-right text-xs text-muted-foreground">
-        {agent.lastHeartbeatAt ? relativeTime(agent.lastHeartbeatAt) : "—"}
+        {agent.lastHeartbeatAt ? relativeTime(agent.lastHeartbeatAt) : "·"}
       </span>
     </>
   );

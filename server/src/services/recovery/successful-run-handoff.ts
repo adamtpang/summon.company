@@ -325,7 +325,7 @@ export function buildSuccessfulRunHandoffInstruction(input: {
     "1. Mark it `done` (scope complete) or `cancelled` (intentionally stopped).",
     "",
     "**Does someone else need to look at it?**",
-    "2. Move it to `in_review` with a real reviewer path — `executionState.currentParticipant`, a human owner via `assigneeUserId`, a pending issue-thread interaction, or a linked pending approval.",
+    "2. Move it to `in_review` with a real reviewer path, `executionState.currentParticipant`, a human owner via `assigneeUserId`, a pending issue-thread interaction, or a linked pending approval.",
     "",
     "**Can it not continue right now?**",
     "3. Mark it `blocked` with first-class blockers (`blockedByIssueIds`) or a clearly named unblock owner/action.",
@@ -333,7 +333,7 @@ export function buildSuccessfulRunHandoffInstruction(input: {
     "**Is there more work to do?**",
     `4. Either delegate follow-up work (create/link a follow-up issue and block this one on it, or close this issue if its scope is independently complete) or record an explicit continuation path with \`resumeIntent: true\`, \`resumeFromRunId: ${input.sourceRunId}\`, and a concrete next action. Do not perform the remaining source work in this recovery run; the follow-up/resume wake must use the normal model lane.`,
     "",
-    "Comments, document revisions, work-product writes, and continuation summaries are supporting evidence only — they do not satisfy this handoff unless the issue state/path also records one valid disposition. If this wake is status-only recovery, document or plan updates are not allowed.",
+    "Comments, document revisions, work-product writes, and continuation summaries are supporting evidence only, they do not satisfy this handoff unless the issue state/path also records one valid disposition. If this wake is status-only recovery, document or plan updates are not allowed.",
   ].join("\n");
 }
 

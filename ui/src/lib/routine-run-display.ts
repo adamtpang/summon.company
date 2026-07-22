@@ -7,7 +7,7 @@ import type { RoutineRunSummary, RoutineVariable } from "@paperclipai/shared";
 function formatVariableValue(value: unknown): string {
   if (typeof value === "string") return `"${value}"`;
   if (typeof value === "number" || typeof value === "boolean") return String(value);
-  if (value == null) return "—";
+  if (value == null) return "·";
   try {
     return JSON.stringify(value);
   } catch {

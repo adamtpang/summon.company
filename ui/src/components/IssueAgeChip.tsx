@@ -20,7 +20,7 @@ export function IssueAgeChip({ issue, className, nowMs }: IssueAgeChipProps) {
   if (!age) return null;
 
   const title = `${capitalize(age.stateLabel)} for ${age.compact}${
-    age.tier === "wrong" ? " — if a timeline is long, it's wrong" : ""
+    age.tier === "wrong" ? " - if a timeline is long, it's wrong" : ""
   }`;
 
   if (age.tier === "calm") {

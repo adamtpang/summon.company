@@ -1082,7 +1082,7 @@ export function WorkspaceFileBrowser({
               Load more from this folder
             </button>
           ) : (
-            <>Showing first {items.length} — refine the search to narrow.</>
+            <>Showing first {items.length} - refine the search to narrow.</>
           )}
         </div>
       ) : null}

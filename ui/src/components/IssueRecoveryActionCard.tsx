@@ -408,7 +408,7 @@ function BranchFacet({
         )}
       </div>
       <div className="mt-0.5 pl-5 font-mono text-(length:--text-micro) text-muted-foreground">
-        {shortSha ? `@ ${shortSha}` : "@ —"}
+        {shortSha ? `@ ${shortSha}` : "@ -"}
       </div>
     </div>
   );
@@ -468,7 +468,7 @@ function DivergenceDiagnosis({
           <span>
             Worktree claimed by{" "}
             <code className="font-mono text-foreground/90">{contentionLabel(divergence.contention)}</code>{" "}
-            {divergence.contention.hasActiveRun ? "(active run)" : "(claim held)"} — the lossless repair
+            {divergence.contention.hasActiveRun ? "(active run)" : "(claim held)"} - the lossless repair
             can&apos;t run while another workspace holds the live branch.
           </span>
         </p>
@@ -518,7 +518,7 @@ function BreakGlassOverride({
           className="border-red-400/60 text-red-700 hover:bg-red-500/10 dark:border-red-500/40 dark:text-red-300"
         >
           <OctagonAlert className="h-3.5 w-3.5" aria-hidden />
-          I&apos;ve verified this — reconcile anyway
+          I&apos;ve verified this, reconcile anyway
         </Button>
       </PopoverTrigger>
       <PopoverContent
@@ -567,7 +567,7 @@ function BreakGlassOverride({
         </dl>
         <div className="space-y-1">
           <Label htmlFor="recovery-breakglass-reason" className="text-(length:--text-micro) text-muted-foreground">
-            Reason <span className="text-red-600 dark:text-red-400">(required — recorded in the audit log)</span>
+            Reason <span className="text-red-600 dark:text-red-400">(required, recorded in the audit log)</span>
           </Label>
           <Textarea
             id="recovery-breakglass-reason"
@@ -638,7 +638,7 @@ function RepairWorkspace({
       ) : (
         <Wrench className="h-3.5 w-3.5" aria-hidden />
       )}
-      Repair workspace — quarantine changes &amp; restore branch
+      Repair workspace, quarantine changes &amp; restore branch
     </Button>
   );
   if (disabled) {
@@ -673,7 +673,7 @@ function RepairWorkspace({
             Repair workspace
           </div>
           <p className="text-xs leading-5 text-muted-foreground">
-            This is lossless — no reason required. Your uncommitted changes are committed onto a fresh
+            This is lossless, no reason required. Your uncommitted changes are committed onto a fresh
             rescue branch, then the recorded branch is restored so the task can resume. The live branch
             is left exactly as it is.
           </p>
@@ -792,7 +792,7 @@ function MetadataRow({
 }
 
 function MissingValue() {
-  return <span className="text-muted-foreground">—</span>;
+  return <span className="text-muted-foreground">·</span>;
 }
 
 function AgentLink({
@@ -986,7 +986,7 @@ export function IssueRecoveryActionCard({
     divergence !== null &&
     divergence.cleanliness === "dirty";
   const repairDisabledReason = repairContention
-    ? `Held by ${contentionLabel(repairContention)} — re-issue on an isolated workspace instead.`
+    ? `Held by ${contentionLabel(repairContention)} - re-issue on an isolated workspace instead.`
     : null;
   // When contended, the re-issue is the recommended path, so it takes the primary emphasis and a
   // "Recommended" hint while the repair button is disabled.
@@ -1055,7 +1055,7 @@ export function IssueRecoveryActionCard({
             ) : action.ownerType === "system" ? (
               <span className="font-medium">System</span>
             ) : (
-              <span className="text-muted-foreground">unassigned — pick one to wake them</span>
+              <span className="text-muted-foreground">unassigned, pick one to wake them</span>
             )}
             {action.returnOwnerAgentId ? (
               <>
@@ -1229,7 +1229,7 @@ export function IssueRecoveryActionCard({
                   <div className="flex items-center justify-between gap-2">
                     <dt className="text-muted-foreground">Recorded</dt>
                     <dd className="min-w-0 truncate font-mono text-foreground/80">
-                      {divergence.expectedBranch ?? "—"}
+                      {divergence.expectedBranch ?? "·"}
                     </dd>
                   </div>
                   {reissueVerdictBadge ? (

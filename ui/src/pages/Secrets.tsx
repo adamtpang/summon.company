@@ -238,9 +238,9 @@ function providerVaultFormFromConfig(config: CompanySecretProviderConfig): Provi
 }
 
 function formatRelative(value: Date | string | null | undefined): string {
-  if (!value) return "—";
+  if (!value) return "·";
   const date = typeof value === "string" ? new Date(value) : value;
-  if (Number.isNaN(date.getTime())) return "—";
+  if (Number.isNaN(date.getTime())) return "·";
   const diff = Date.now() - date.getTime();
   if (diff < 0) return date.toLocaleString();
   const seconds = Math.floor(diff / 1000);
@@ -2876,7 +2876,7 @@ function ImportFromVaultButton({
         className={cn("text-xs text-muted-foreground", className)}
         title="Configure an AWS provider vault to enable remote import"
       >
-        <Cloud className="h-3.5 w-3.5 mr-1" /> AWS vault disabled — manage
+        <Cloud className="h-3.5 w-3.5 mr-1" /> AWS vault disabled, manage
       </Button>
     );
   }
@@ -3505,7 +3505,7 @@ function UserSecretDetailsTab({
   return (
     <dl className="divide-y divide-border/60 text-xs">
       <DetailRow label="Description">
-        <span>{definition.description ?? <span className="text-muted-foreground">—</span>}</span>
+        <span>{definition.description ?? <span className="text-muted-foreground">·</span>}</span>
       </DetailRow>
       <DetailRow label="Provided by">Each user</DetailRow>
       <DetailRow label="Key">
@@ -3525,7 +3525,7 @@ function UserSecretDetailsTab({
       <DetailRow label="Created">{formatRelative(definition.createdAt)}</DetailRow>
       <DetailRow label="Updated">{formatRelative(definition.updatedAt)}</DetailRow>
       <DetailRow label="Usage guidance">
-        {definition.usageGuidance ?? <span className="text-muted-foreground">—</span>}
+        {definition.usageGuidance ?? <span className="text-muted-foreground">·</span>}
       </DetailRow>
       <div className="mt-3 rounded-md border border-violet-500/30 bg-violet-500/5 p-2 text-(length:--text-micro) text-violet-800 dark:text-violet-200">
         No value is stored on this admin row. Each member manages their own value under My secrets.
@@ -3631,7 +3631,7 @@ function SecretDetailsTab({
   return (
     <dl className="divide-y divide-border/60 text-xs">
       <DetailRow label="Description">
-        <span>{secret.description ?? <span className="text-muted-foreground">—</span>}</span>
+        <span>{secret.description ?? <span className="text-muted-foreground">·</span>}</span>
       </DetailRow>
       <DetailRow label="Provided by">Company</DetailRow>
       <DetailRow label="Custody">{modeLabel(secret.managedMode)}</DetailRow>
@@ -3641,7 +3641,7 @@ function SecretDetailsTab({
         {secret.externalRef ? (
           <span className="break-all font-mono">{secret.externalRef}</span>
         ) : (
-          <span className="text-muted-foreground">—</span>
+          <span className="text-muted-foreground">·</span>
         )}
       </DetailRow>
       <DetailRow label="Latest version">v{secret.latestVersion}</DetailRow>
@@ -3744,7 +3744,7 @@ function SecretEventsTab({
     staleTime: 60_000,
   });
   const userLabel = (userId: string | null): string => {
-    if (!userId) return "—";
+    if (!userId) return "·";
     const entry: CompanyUserDirectoryEntry | undefined = directory?.users.find(
       (u) => u.principalId === userId,
     );

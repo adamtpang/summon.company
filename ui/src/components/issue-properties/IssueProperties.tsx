@@ -1152,8 +1152,8 @@ export function IssueProperties({
             ? "Promoting scheduled retry"
             : scheduledRetryRetryNowSuccess
               ? retryNow.data?.outcome === "already_promoted"
-                ? "Already promoted — run starting"
-                : "Promoted — run starting"
+                ? "Already promoted, run starting"
+                : "Promoted, run starting"
               : scheduledRetryIsContinuation
                 ? "Pulls continuation forward immediately"
                 : "Pulls retry forward immediately"}

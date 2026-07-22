@@ -609,7 +609,7 @@ const SecretField = React.memo(({
           value={
             stringValue.length === 0
               ? ""
-              : `Sensitive — ${stringValue.length} characters hidden. Click the eye to reveal.`
+              : `Sensitive, ${stringValue.length} characters hidden. Click the eye to reveal.`
           }
           readOnly
           placeholder={String(defaultValue ?? "")}

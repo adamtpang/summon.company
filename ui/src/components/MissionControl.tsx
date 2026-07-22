@@ -97,7 +97,7 @@ export function MissionControl({
   const nextMove = decisionCount > 0
     ? {
         label: `Clear ${decisionCount} decision${decisionCount === 1 ? "" : "s"}`,
-        detail: "Approve, retry, or reject — one card at a time.",
+        detail: "Approve, retry, or reject, one card at a time.",
         to: "/decisions",
         cta: "Open the deck",
       }

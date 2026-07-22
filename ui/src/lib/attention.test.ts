@@ -238,7 +238,7 @@ describe("attentionDetailLine (§7)", () => {
     expect(line).not.toContain("tasks");
   });
 
-  it("renders a failed run as agent — reason", () => {
+  it("renders a failed run as agent, reason", () => {
     const line = attentionDetailLine(
       buildItem({
         sourceKind: "failed_run",

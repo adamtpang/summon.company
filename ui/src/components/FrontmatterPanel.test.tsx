@@ -77,7 +77,7 @@ describe("FrontmatterPanel", () => {
     return onChange;
   }
 
-  it("does not emit on mount — byte-identity round-trip is preserved when untouched", () => {
+  it("does not emit on mount, byte-identity round-trip is preserved when untouched", () => {
     const onChange = vi.fn();
     render({
       frontmatterText: "name: reflection-coach\ndescription: A helpful coach",

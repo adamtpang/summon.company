@@ -91,7 +91,7 @@ export function FeedbackWidget() {
         status: "todo",
         priority: rating <= 2 ? "high" : "medium",
         description:
-          `Weekly quality survey (support lane — route to Haven).\n\n` +
+          `Weekly quality survey (support lane, route to Haven).\n\n` +
           `Stars: ${rating}/5\n` +
           (rating < 5 ? `Why not a 5: ${why.trim() || "(no reason given)"}\n` : "Perfect score.\n") +
           `\nContext: ${window.location.pathname} · ${new Date().toISOString()} · in-app widget`,
@@ -102,7 +102,7 @@ export function FeedbackWidget() {
       setOpen(false);
       setRating(null);
       setWhy("");
-      pushToast({ title: "Thanks — feedback logged", tone: "success" });
+      pushToast({ title: "Thanks, feedback logged", tone: "success" });
     },
     onError: (error) => {
       pushToast({
@@ -168,7 +168,7 @@ export function FeedbackWidget() {
                   />
                 </button>
               ))}
-              <span className="ml-2 text-sm font-semibold tabular-nums">{rating ?? "–"}/5</span>
+              <span className="ml-2 text-sm font-semibold tabular-nums">{rating ?? "·"}/5</span>
             </div>
             {rating != null && rating < 5 ? (
               <Textarea

@@ -90,7 +90,7 @@ export function deriveAlgorithmGates(
         label: "Requirements",
         question: "Who requires this?",
         state: "attention",
-        detail: "No named owner — a requirement without a person is not a requirement",
+        detail: "No named owner, a requirement without a person is not a requirement",
       };
 
   const deleteGate: AlgorithmGate = cancelled
@@ -99,7 +99,7 @@ export function deriveAlgorithmGates(
         label: "Delete",
         question: "Should this exist?",
         state: "passed",
-        detail: "Deleted — the cheapest task is the one that doesn't exist",
+        detail: "Deleted, the cheapest task is the one that doesn't exist",
       }
     : waiting
       ? {
@@ -107,18 +107,18 @@ export function deriveAlgorithmGates(
           label: "Delete",
           question: "Should this exist?",
           state: "active",
-          detail: "Still cheap to delete — propose deletion if this shouldn't exist",
+          detail: "Still cheap to delete, propose deletion if this shouldn't exist",
         }
       : {
           key: "delete",
           label: "Delete",
           question: "Should this exist?",
           state: "passed",
-          detail: "Survived deletion review — work started",
+          detail: "Survived deletion review, work started",
         };
 
   const simplify: AlgorithmGate = cancelled
-    ? { key: "simplify", label: "Simplify", question: "What can be removed?", state: "pending", detail: "—" }
+    ? { key: "simplify", label: "Simplify", question: "What can be removed?", state: "pending", detail: "·" }
     : done || status === "in_review"
       ? { key: "simplify", label: "Simplify", question: "What can be removed?", state: "passed", detail: "Scope settled" }
       : started
@@ -127,7 +127,7 @@ export function deriveAlgorithmGates(
 
   let accelerate: AlgorithmGate;
   if (cancelled) {
-    accelerate = { key: "accelerate", label: "Accelerate", question: "Why is it slow?", state: "pending", detail: "—" };
+    accelerate = { key: "accelerate", label: "Accelerate", question: "Why is it slow?", state: "pending", detail: "·" };
   } else if (done) {
     accelerate = { key: "accelerate", label: "Accelerate", question: "Why is it slow?", state: "passed", detail: "Shipped" };
   } else if (started || status === "blocked") {
@@ -137,7 +137,7 @@ export function deriveAlgorithmGates(
         label: "Accelerate",
         question: "Why is it slow?",
         state: "attention",
-        detail: `${age.stateLabel} for ${age.compact} — if a timeline is long, it's wrong`,
+        detail: `${age.stateLabel} for ${age.compact} - if a timeline is long, it's wrong`,
       };
     } else {
       accelerate = {
@@ -158,7 +158,7 @@ export function deriveAlgorithmGates(
         label: "Automate",
         question: "Will this recur?",
         state: "active",
-        detail: "Done — if this recurs, make it a routine",
+        detail: "Done, if this recurs, make it a routine",
       }
     : {
         key: "automate",

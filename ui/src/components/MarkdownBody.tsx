@@ -165,7 +165,7 @@ function MarkdownExternalLink({
     : ` (${livenessLabel})`;
   const titleParts = [
     reference.displayTitle ?? `${displayKey} ${statusLabel}`,
-    `${displayKey} — ${statusLabel}${livenessSuffix}`,
+    `${displayKey} · ${statusLabel}${livenessSuffix}`,
   ];
   const title = titleParts.filter(Boolean).join(" · ");
   return (

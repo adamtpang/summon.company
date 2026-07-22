@@ -286,7 +286,7 @@ export const issueChatUxSubmittingComments: IssueChatComment[] = [
   }),
   createComment({
     id: "comment-submitting-pending",
-    body: "Looks good — go ahead and ship it when you're ready.",
+    body: "Looks good, go ahead and ship it when you're ready.",
     createdAt: new Date("2026-04-06T12:42:00.000Z"),
     updatedAt: new Date("2026-04-06T12:42:00.000Z"),
     clientId: "client-pending-1",
