@@ -8,6 +8,7 @@ const { app, BrowserWindow, Tray, Menu, nativeImage, nativeTheme, dialog, ipcMai
 const { spawn, execFile } = require('child_process');
 const fs = require('fs');
 const http = require('http');
+const os = require('os');
 const path = require('path');
 
 const SERVER_HOST = '127.0.0.1';
@@ -95,8 +96,24 @@ function checkHealth(timeoutMs = HEALTH_TIMEOUT_MS) {
 // ---------------------------------------------------------------------------
 // Server lifecycle (owned mode)
 // ---------------------------------------------------------------------------
+// The dev-seat rule (SUM-133 lineage, 2026-07-19): when this machine carries
+// the summon.company source repo, owned mode MUST start the SOURCE runtime —
+// spawning the npm-global `paperclipai run` here caused the all-day port
+// see-saw: source dies → this spawns the (older) packaged runtime → it serves
+// stale UI + misses source-only API routes → the board kills it → repeat.
+// Customer machines have no repo and keep the packaged path.
+const SOURCE_START_CMD = path.join(
+  os.homedir(),
+  'OneDrive',
+  'Aether',
+  'summon.company',
+  'scripts',
+  'start-summon.cmd'
+);
+
 function spawnServer() {
-  serverProcess = spawn('paperclipai run', [], {
+  const useSource = fs.existsSync(SOURCE_START_CMD);
+  serverProcess = spawn(useSource ? `"${SOURCE_START_CMD}"` : 'paperclipai run', [], {
     shell: true,
     detached: false,
     windowsHide: true,
