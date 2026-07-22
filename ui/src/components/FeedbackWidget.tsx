@@ -1,11 +1,10 @@
 import { useEffect, useMemo, useState } from "react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { MessageSquarePlus, Star } from "lucide-react";
-import { companiesApi } from "../api/companies";
+import { companiesListQueryOptions } from "../api/companies-query";
 import { issuesApi } from "../api/issues";
 import { useCompany } from "../context/CompanyContext";
 import { useToastActions } from "../context/ToastContext";
-import { queryKeys } from "../lib/queryKeys";
 import { cn } from "../lib/utils";
 import { Button } from "@/components/ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
@@ -58,17 +57,18 @@ export function FeedbackWidget() {
   const [hovered, setHovered] = useState<number | null>(null);
   const [why, setWhy] = useState("");
 
-  const { data: companies } = useQuery({
-    queryKey: queryKeys.companies.all,
-    queryFn: () => companiesApi.list(),
-  });
+  // The ["companies"] cache stores the WRAPPED shape {companies, unauthorized}
+  // (see companies-query.ts) — reading it any other way corrupts the shared
+  // cache and crashes boot. This widget shipped that exact bug once (the
+  // board's white screen, 2026-07-19); always consume the canonical options.
+  const { data: companiesResult } = useQuery(companiesListQueryOptions);
 
   // Feedback about Summon goes to the VENDOR board: the SUM flagship when this
   // instance carries it (the dogfood case), else the selected company.
   const vendorCompanyId = useMemo(() => {
-    const flagship = companies?.find((c) => c.issuePrefix === "SUM");
+    const flagship = companiesResult?.companies.find((c) => c.issuePrefix === "SUM");
     return flagship?.id ?? selectedCompanyId ?? null;
-  }, [companies, selectedCompanyId]);
+  }, [companiesResult, selectedCompanyId]);
 
   // Weekly self-open: once per ISO week, only when nothing was submitted yet.
   useEffect(() => {
