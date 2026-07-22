@@ -1,0 +1,641 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Changelog — Summon</title>
+<meta name="description" content="The Summon build log: every day of progress, straight from the commits. Public, timestamped, auditable." />
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #ffffff; color: #0a0a0a; font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; line-height: 1.6; font-size: 15px; }
+  .page { max-width: 44rem; margin: 0 auto; padding: 2.5rem 1.25rem 5rem; }
+  header.site { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 2rem; }
+  header.site a { display: inline-flex; align-items: center; gap: 0.6rem; color: inherit; text-decoration: none; font-weight: 600; }
+  h1 { font-size: 1.8rem; letter-spacing: -0.02em; margin: 0 0 0.25rem; }
+  .lede { color: #5a5a5a; margin: 0 0 2.5rem; }
+  h2 { font-size: 0.95rem; letter-spacing: 0.04em; text-transform: uppercase; color: #5a5a5a; margin: 2.25rem 0 0.5rem; padding-top: 1.25rem; border-top: 1px solid rgba(0,0,0,0.1); }
+  ul { margin: 0; padding-left: 1.1rem; }
+  li { margin: 0.35rem 0; }
+  a { color: #0a0a0a; }
+  @media (prefers-color-scheme: dark) {
+    body { background: #0a0a0a; color: #f2f2f2; }
+    .lede, h2 { color: #a3a3a3; }
+    h2 { border-color: rgba(255,255,255,0.14); }
+    a { color: #f2f2f2; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="site">
+    <a href="/" aria-label="Summon home">
+      <svg width="22" height="22" viewBox="0 0 32 32" aria-hidden="true"><defs><mask id="sg" maskUnits="userSpaceOnUse" x="0" y="0" width="32" height="32"><rect width="32" height="32" fill="#fff"/><path d="M1.5 16 H10 L13 10.5 L16.5 22 L19 16 H30.5" fill="none" stroke="#000" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/></mask></defs><rect width="32" height="32" rx="7.5" fill="#0A0A0A"/><circle cx="16" cy="16" r="10.5" fill="none" stroke="#FFFFFF" stroke-width="3" mask="url(#sg)"/><path d="M1.5 16 H10 L13 10.5 L16.5 22 L19 16 H30.5" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Summon
+    </a>
+    <a href="/#founding" style="font-size:.9rem;">Become a founding member</a>
+  </header>
+  <h1>The build log</h1>
+  <p class="lede">Every day of progress, straight from the commits — public, timestamped, auditable.
+  The same update an investor would get, except it never stops shipping. Generated 2026-07-22.</p>
+
+  <section>
+    <h2>July 22, 2026</h2>
+    <ul>
+      <li>fix: FeedbackWidget corrupted the shared companies cache — the board's white screen</li>
+      <li>ui: blank-screen boot guard — a white void may never be silent</li>
+      <li>offer doctrine: the ICP sentence, the autonomy line (free watches, paid sleeps), the named Anton offer</li>
+      <li>Landing: remove founder personal name from JSON-LD (match no-name site)</li>
+      <li>company: cap table + comp truth for humans, first-customers playbook for the sell-side</li>
+      <li>desktop 0.1.6: owned mode starts the SOURCE runtime on the dev seat (ends the port see-saw)</li>
+      <li>ruthless pass 2: the Next-move card leads, six nav items die, Pressure dies, hero halves</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>July 21, 2026</h2>
+    <ul>
+      <li>decisions: the deck card wears the liquid glass (law 13 complete)</li>
+      <li>org: simple titles (the core 8 wear their department name), Sol is the Cofounder, lifespan line on Mission Control</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>July 20, 2026</h2>
+    <ul>
+      <li>skills: /invoice — scope-aware Stripe invoice generator (Ledger's billing capability)</li>
+      <li>landing: Get Summon section (Windows exe release v0.1.5, terminal quickstart, phone via founding) + Bring-your-company import section (GitHub live; Notion/Obsidian/Drive/Stripe/Slack/Linear next; Acme-only demo context ships)</li>
+      <li>landing: /terms is live-ready — Shield's SUM-151 draft filled, rendered, linked</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>July 19, 2026</h2>
+    <ul>
+      <li>feedback loop + budget pings: the Vercel-style widget and warnings that clear themselves</li>
+      <li>skills: /summon — the Claude Code ↔ Summon bridge skill</li>
+      <li>tasks: priority score on a red→green spectrum + desktop icon actually embedded</li>
+      <li>company/: ladder refined — core-8 heads on Opus, subagents on Grok</li>
+      <li>mission control: lifecycle progress bars on every priority task + org cards</li>
+      <li>a11y: glass honors prefers-reduced-transparency (Ink's patch)</li>
+      <li>decisions: Retry on failed runs + one-press Approve all</li>
+      <li>design: DESIGN.md v1.0 (monochrome ruling + glass recipe) and the dashboard via-negativa pass</li>
+      <li>SUM-153: SEO machine-readable surface on summon.company</li>
+      <li>company/: the org as a folder — core-8 department context in the repo</li>
+      <li>desktop 0.1.4: open maximized, titlebar follows the app theme, fix dead tray theme toggle</li>
+      <li>brand: the mark goes monochrome — white glyph, near-black tile</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>July 18, 2026</h2>
+    <ul>
+      <li>ui+desktop: monochrome palette, Org as the front door, tray click + saved appearance</li>
+      <li>knowledge: check in the Senra/Founders corpus (48 episodes, ~810k words)</li>
+      <li>ui: liquid-glass elevation surfaces + retire the Org nav item</li>
+      <li>doc: how company knowledge is stored in Summon (knowledge/ convention)</li>
+      <li>desktop: 0.1.1 — ships the Ctrl+= zoom-in fix in the installed app</li>
+      <li>landing: wire the live founding ($49) and AI-employee ($99) Stripe links</li>
+      <li>landing: fuel-doctrine hero + founding-member band; desktop: fix Ctrl+= zoom-in</li>
+      <li>feat: Summon MCP server + S-F task tiers (board directives 2026-07-18)</li>
+      <li>doc: MVP build list done — what remains is contact with reality</li>
+      <li>feat: CEO control-room skill — Surface / Triage / Route (VIT-126)</li>
+      <li>feat: Manual / 24-7 operating modes — nothing executes unpointed (VIT-127)</li>
+      <li>feat: the board kill switch — RUNNING NOW panel + one-sweep stop everything (VIT-125)</li>
+      <li>fix: SUM-129 — URL-only paired repos clone on first run (two root causes)</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>July 17, 2026</h2>
+    <ul>
+      <li>brand: purge visible "paperclip" from server + engine copy; invisible server start</li>
+      <li>fix: backstop stops retry-flooding wakes at deliberately-benched agents</li>
+      <li>fix: company deletion cascade — 8 tables were missing or misordered</li>
+      <li>onboarding: 3-step fuel-first wizard + Windows agent-spawn fix (VIT-128, SUM-129 filed)</li>
+      <li>doc: MVP scoreboard in plain language — aligned framing, named measures</li>
+      <li>ops: one-click server start script — reboots were silently reverting to the old packaged app</li>
+      <li>design: admit glassmorphism as law 13 (elevation, never data) - v0.5</li>
+      <li>brand: rename user-facing copy to Summon (VIT-1)</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>July 16, 2026</h2>
+    <ul>
+      <li>design: elevate DESIGN.md to the command-center spine (v0.4) + research canon</li>
+      <li>cutover tooling: clone restore (COPY-aware, no psql needed) + migrate proof</li>
+      <li>db: pin migration .sql files to LF (.gitattributes)</li>
+      <li>pwa: restore display=browser (guarded product decision)</li>
+      <li>Run 6 (VIT-115): delete ux-labs storybook stories with their subjects</li>
+      <li>Run 6 (VIT-115, board-approved D15-D18): delete four orphaned UxLab pages</li>
+      <li>VIT-101: MarketCap binding-lever chips onto the type ladder (text-[10px] -&gt; --text-nano)</li>
+      <li>chore: remainder</li>
+      <li>desktop: icon + shell wip (final mark pending First Beat wiring in Run 6)</li>
+      <li>server+shared: reliability copy, quota states, market-cap model, consent gate tests</li>
+      <li>ui: source cures wip — composer, evidence inline, deck default, Mission Control, messages polish</li>
+      <li>doc: research pack (dashboards, platforms, Shopify OS, Elon, market cap, MVP crossover 80/20) + design evidence</li>
+      <li>board: operating scripts — approvals, census, triage, fleet control, verdicts</li>
+      <li>VIT-112: full one-screen Mission Control contact sheet (light+dark, real snapshot) + spec reconciled to BEST-DASHBOARDS research</li>
+      <li>VIT-43: propose/apply split — snapshot drift gate, live re-read wiring, founder protection</li>
+      <li>VIT-115: disposition script (slate comment + one-card confirmation + in_review)</li>
+      <li>VIT-115: via-negativa inventory + slate (delete 24 / demote 26 / keep 9) + before evidence</li>
+      <li>VIT-114: Anchor formation decision card - doc + board interaction script</li>
+      <li>VIT-114: core-8 by default - seed eight-department formation proposals + one staff_formation decision card</li>
+      <li>VIT-70: board scoreboard — star-rated priorities table beside chat</li>
+      <li>VIT-112: disposition script (comment + zone confirmation + in_review)</li>
+      <li>VIT-112: LIVE AGENT RUNS zone spec + light/dark contact sheet (board addition)</li>
+      <li>VIT-49: fallback model chains — auto-failover, auto-reprobe, board-notified</li>
+      <li>VIT-61: board disposition scripts (comment + confirmation + in_review)</li>
+      <li>VIT-61: Elon operating model in the UI — Algorithm gates, parallel lanes, time-in-state</li>
+      <li>VIT-103: ratified offer &amp; ICP — NORTH_STAR sentence + decision card</li>
+      <li>VIT-63: record board answers - founder steps pending, test-email requirement waived</li>
+      <li>VIT-101: market cap on the scoreboard - model, live snapshot, panel, lever regressions</li>
+      <li>VIT-40: make session resume observable — thread resume affordance</li>
+      <li>VIT-45: risk-rated async approval gate enforcement (Policy v1)</li>
+      <li>VIT-71: CEO self-diagnosis autopilot — vitals snapshot, anomaly rules, dedup filing</li>
+      <li>VIT-63: support inbox live — ImprovMX MX/SPF on both domains, hello@ footer link deployed</li>
+      <li>VIT-42: GOAT persona data model + governance-preserving injection</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>July 15, 2026</h2>
+    <ul>
+      <li>VIT-50: Mobbin pattern research — 18 adoptable patterns mapped to Summon surfaces</li>
+      <li>VIT-53: drop stale comment wakes on terminal issues at delivery time</li>
+      <li>VIT-51: board disposition scripts (comment + confirmation + in_review)</li>
+      <li>VIT-51: desktop IA extraction + board-review contact sheet (light/dark)</li>
+      <li>VIT-48: usage monitor — quota alert engine, board-feed alerts, /usage dashboard</li>
+      <li>VIT-41: Storybook story + light/dark screenshot evidence</li>
+      <li>VIT-41: WhatsApp-feel Messages surface (per-employee chat inbox)</li>
+      <li>NORTH_STAR: positioning (Claude is for codebases, Summon is for companies), mission (optimism.fun thesis operationalized), subscription fuel model</li>
+      <li>Desktop: Summon Blue icon, light splash, tray theme toggle (Light/Dark/System)</li>
+      <li>Desktop: rebrand shell to Summon; NSIS installer built (Phase 1)</li>
+      <li>Remove founder name from the site; Company Zero speaks for itself</li>
+      <li>Design system v2: light mode, Summon Blue, gradient washes (wise.design-bar quality)</li>
+      <li>Sweep em dashes from docs (house style: no em dashes)</li>
+      <li>Add the Summon design system: DESIGN_SYSTEM.md + design/tokens.css</li>
+      <li>Rebrand: vitals.run -&gt; summon.company; add NORTH_STAR + Electron desktop shell (Phase 1)</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>July 14, 2026</h2>
+    <ul>
+      <li>Sync-vitals-cross-agent-handoff</li>
+      <li>Add-vitals-company-formation-view</li>
+      <li>Prepare-vitals.run-monorepo-release</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>July 13, 2026</h2>
+    <ul>
+      <li>Fix stable release dry-run notes gate (#9334)</li>
+      <li>fix(ui): show source SHA for unreleased builds (#9508)</li>
+      <li>fix(adapters): record unpriced CLI usage (#9505)</li>
+      <li>perf(ci): balance general-server test shards by recorded suite duration (#9516)</li>
+      <li>fix(ui): experiments auto-recovery dialog leaves UI dimmed and locked after enabling (#9513)</li>
+      <li>fix: forward onSpawn to hermes and process adapters for PID persistence (#8722)</li>
+      <li>fix(ui): consolidate live/running blues; stop inbox unread badge indenting the row (#9383)</li>
+      <li>Add runtime asset build-gap guard</li>
+      <li>Redesign landing: clone 11x roster + EKG vital-signs motif; anchoring pricing; per-employee CTAs</li>
+      <li>Reposition vitals.run to the AI-employee company; per-employee hire cards + Stripe links</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>July 12, 2026</h2>
+    <ul>
+      <li>fix(ui): make mobile decision rows readable (#9472)</li>
+      <li>perf(ui): improve Decisions scrolling performance (#9468)</li>
+      <li>fix(adapters): inject execution contract once per fresh heartbeat (#9469)</li>
+      <li>fix(heartbeat): throttle redundant issue re-wakes (#9470)</li>
+      <li>fix(adapters): propagate ACP-lane usage and cost into spend telemetry (#9471)</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>July 11, 2026</h2>
+    <ul>
+      <li>feat(routines): gate scheduled runs on external activity (#9436)</li>
+      <li>fix(workspaces): persist readiness state and validate ports (#9408)</li>
+      <li>docs(skill): clarify workspace port-conflict recovery (#9407)</li>
+      <li>fix(ui): bound shared polling cache (#9406)</li>
+      <li>fix(ui): wrap company skill source paths (#9405)</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>July 10, 2026</h2>
+    <ul>
+      <li>feat(ui): add selection debug instrumentation (#9397)</li>
+      <li>feat(ui): use Lucide icons for task status glyphs (#9395)</li>
+      <li>[codex] Quiet packaged version fallback diagnostics (#9207)</li>
+      <li>fix(ui): detail the env unsaved-changes banner and guard against draft loss (#9391)</li>
+      <li>feat: run ACP sessions in sandbox execution targets (#9390)</li>
+      <li>fix(ui): make environment edit a routed page (#9386)</li>
+      <li>fix(ui): keep rendered markdown list markers visible (#9359)</li>
+      <li>feat: add attention queue and Decisions surface (#9380)</li>
+      <li>Fix Cody default model adapter test config (#9365)</li>
+      <li>Fix agent detail URL after agent rename (#9340)</li>
+      <li>fix(sandbox): keep custom-image snapshots applied to config tests, probes, and saves (#9385)</li>
+      <li>Ensure worktree execution starts only after activation (#9374)</li>
+      <li>Fix apiCompression corrupting and dropping Better Auth responses for gzip clients (#9381)</li>
+      <li>fix(adapter-utils): runChildProcess escalates to SIGKILL on liveness, not child.killed (#8598)</li>
+      <li>Enforce durable external-wait liveness (#9373)</li>
+      <li>fix(ui): keep issue threads from jumping to latest comment (#9354)</li>
+      <li>Fix agent sidebar liveness churn (#9358)</li>
+      <li>Revert "Fix default model adapter test config" (#9363)</li>
+      <li>Fix default model adapter test config (#9361)</li>
+      <li>Fix live run streaming text readability (#9330)</li>
+      <li>Fix Skill Studio markdown dirty tracking (#9356)</li>
+      <li>Update Codex adapter GPT-5.6 defaults (#9352)</li>
+      <li>Shorten skill frontmatter descriptions (#9353)</li>
+      <li>Avoid startup crash when Reflection Coach assets are missing (#9351)</li>
+      <li>Make plan-approval continuations durable after failed wakes (#9331)</li>
+      <li>Preserve built-in agent assets in server builds (#9339)</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>July 9, 2026</h2>
+    <ul>
+      <li>Enable sandbox environments for Grok local adapter (#9338)</li>
+      <li>Cases: experimental first-class case object (#9198)</li>
+      <li>fix(ui): use prose editor for markdown agent instructions (#9332)</li>
+      <li>feat(search): filters, sorting, operators &amp; command-palette parity (#9327)</li>
+      <li>[codex] Parallelize release verify workflow (#9168)</li>
+      <li>docs: point Paperclip docs links at docs.paperclip.ing (#9300)</li>
+      <li>fix(prompt): render exact branch name with backtick-safe fence in wake branch guard (#9326)</li>
+      <li>fix: repair dirty/foreign-branch execution worktrees (#9297)</li>
+      <li>feat(prompt): one-time execution-workspace branch guard in wake prompt (PAP-13326) (#9319)</li>
+      <li>Fix request storm polling and issue-list coalescing (#9190)</li>
+      <li>[codex] Polish operator UI work state details (#9320)</li>
+      <li>Fix skills routes to skip user secret resolution</li>
+      <li>[codex] Add built-in agents and Reflection Coach bundle (#9206)</li>
+      <li>fix(ui): inbox/task list parity, nesting alignment, hover perf, and routine detail polish (#9317)</li>
+      <li>fix(ui): keep agent names visible on mobile agents index (#9236)</li>
+      <li>chore(lockfile): refresh pnpm-lock.yaml (#9304)</li>
+      <li>Skill Studio: three-pane skill IDE with sandboxed test runs (#9241)</li>
+      <li>feat(models): add gpt-5.4-mini to Codex and OpenCode selection (and openai/gpt-5.5 to OpenCode) (#4357)</li>
+      <li>feat(ui): add waiting-on-live-work blocked notice (#9298)</li>
+      <li>Fix work timeline visible stats and kickoff attribution (#9271)</li>
+      <li>Require health readiness for Paperclip dev services (#9269)</li>
+      <li>Fail fast stalled Daytona Git network commands</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>July 8, 2026</h2>
+    <ul>
+      <li>chore: trigger Docker build-and-push for lockfile refresh (post #9252)</li>
+      <li>chore(lockfile): refresh pnpm-lock.yaml (#9252)</li>
+      <li>Harden environment deletion and expose delete blast radius (#9250)</li>
+      <li>feat(telemetry): document credential health retention (#9248)</li>
+      <li>Make ACP the default engine for local adapters (#9238)</li>
+      <li>docs: explain Codex and Claude credential ownership</li>
+      <li>chore: ignore materialized Paperclip runtime directory</li>
+      <li>feat(ui): design-system component convergence — Card/Badge adoption, multiplicative radius ladder, unified list surfaces (#9240)</li>
+      <li>fix(timeouts): raise sandbox wall-clock backstop to 4h and make acpx_local timeouts self-describing (#9232)</li>
+      <li>feat(skills): add company skill fork prechecks (#9235)</li>
+      <li>fix(server): clean heartbeat run scratch directories (#9234)</li>
+      <li>fix(server): avoid accepted-plan workspace branch freeze before child realization (#9233)</li>
+      <li>Reject projectless isolated git worktree tasks (#9231)</li>
+      <li>Fix resolved blocker wake reconciliation (#9229)</li>
+      <li>perf(release): batch npm registry version queries (#9202)</li>
+      <li>[codex] Improve work timeline activity story (#9222)</li>
+      <li>[codex] Document Storybook visual baseline platform lock (#9216)</li>
+      <li>[codex] Fix collapsed starred project indentation (#9215)</li>
+      <li>Add Vercel Analytics + adampang.com footer</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>July 7, 2026</h2>
+    <ul>
+      <li>fix: run restart recovery, workspace self-heal, quota-aware retries, failed-run metrics (#9183)</li>
+      <li>fix(server): use run.id for activity_log in heartbeat invoke/resume (#3424)</li>
+      <li>feat(recovery-card): W7 reconcile-forward + break-glass actions</li>
+      <li>[codex] Hide goals sidebar link behind experiment (#9189)</li>
+      <li>feat(ui): single-source design tokens, visual regression suite, and theme retune (#9134)</li>
+      <li>Add auto-forward execution workspace branch reconciliation (#9172)</li>
+      <li>Add execution workspace branch reconciliation route (#9170)</li>
+      <li>Fix annotation selection in routine editor (#9182)</li>
+      <li>build(deps): bump sharp from 0.35.2 to 0.35.3 (#9061)</li>
+      <li>build(deps-dev): bump rollup from 4.61.1 to 4.62.2 (#9070)</li>
+      <li>build(deps): upgrade lexical family to 0.46.0 and pin via overrides (fixes dual-version getType crash) (#9180)</li>
+      <li>fix: system-authored comments display as 'You' instead of 'Paperclip' (#6330)</li>
+      <li>fix(ui): pass company context to custom image setup (#9028)</li>
+      <li>build(deps): bump @tanstack/react-query from 5.90.21 to 5.101.2 (#9067)</li>
+      <li>build(deps): bump acpx from 0.11.2 to 0.12.0 (#9062)</li>
+      <li>build(deps-dev): bump @types/multer from 2.1.0 to 2.2.0 (#9065)</li>
+      <li>build(deps-dev): bump storybook from 10.4.2 to 10.4.6 (#9063)</li>
+      <li>build(deps): bump @radix-ui/react-slot from 1.2.4 to 1.3.0 (#9066)</li>
+      <li>build(deps): bump @zed-industries/codex-acp from 0.12.0 to 0.16.0 (#9068)</li>
+      <li>[codex] Suppress worktree heartbeat scheduling (#9163)</li>
+      <li>[codex] Isolate run JWTs by control-plane instance (#9162)</li>
+      <li>[codex] Surface AWS secret provider create errors (#9161)</li>
+      <li>docs(release): v2026.707.0 changelog (#9093)</li>
+      <li>[codex] Add optional Ramp skill (#9157)</li>
+      <li>[codex] Fix work timeline actor avatars (#9152)</li>
+      <li>[codex] Fix iOS inbox archive gestures (#9154)</li>
+      <li>Speed up issue detail payloads (#9125)</li>
+      <li>test: port pipelines tutorial e2e (#9149)</li>
+      <li>Deduplicate open watchdog review wakes (#9148)</li>
+      <li>Fix DB backup health alerts (#9147)</li>
+      <li>fix(db): repair responsible user migration timestamps (#9146)</li>
+      <li>fix(a11y): add tooltips and aria attributes to agent view toggle (#1937)</li>
+      <li>docs(spec): humans/permissions granularity is V1, not OOS (#6744)</li>
+      <li>fix(hermes): strip ANSI escape codes from terminal output in UI parsers (#8731)</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>July 6, 2026</h2>
+    <ul>
+      <li>feat(ui): recovery-card divergence diagnosis + one-click isolated re-issue</li>
+      <li>Add read-only issue subtree diagnostics endpoint (#9135)</li>
+      <li>Add branch incoherence containment (#9131)</li>
+      <li>Fix wake diagnostics low-trust identifier redaction (#9133)</li>
+      <li>Add read-only issue blocker diagnostics endpoint (#9114)</li>
+      <li>feat(db): add migration safety lint</li>
+      <li>fix(openclaw-gateway): bump adapter PROTOCOL_VERSION to 4 to match gateway (#5984)</li>
+      <li>Fail projectless git-worktree workspaces during heartbeat setup (#9118)</li>
+      <li>refactor(db): add migration authoring checklist (#9122)</li>
+      <li>Add workspace branch ancestry diagnostics (#9117)</li>
+      <li>fix(db): correct 0130 responsible-user backfill in place (inbox resurface) (#9111)</li>
+      <li>[codex] Polish operator issue workflow UI (#9091)</li>
+      <li>[codex] Enforce backend execution release gates (#9089)</li>
+      <li>[codex] Add heartbeat policy eval coverage (#9087)</li>
+      <li>[codex] Add starred resource sidebar controls (#9085)</li>
+      <li>fix(db): relocate slow 0126 issue-comment attribution backfill to fast idempotent 0132 (#9108)</li>
+      <li>Fix heartbeat run responsible user migration for identifier refs (#9107)</li>
+      <li>[codex] Deduplicate pipeline automation health warnings (#9090)</li>
+      <li>fix(server): report source-install version from git metadata (#9103)</li>
+      <li>[codex] Bundle UI webfonts with the app (#9020)</li>
+      <li>[codex] Add work timeline page (#8938)</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>July 5, 2026</h2>
+    <ul>
+      <li>fix: deduplicate adapter-agnostic config keys (#9058)</li>
+      <li>feat(secrets): add user-specific runtime secrets (#8825)</li>
+      <li>Add llms.txt for AI-agent discoverability</li>
+      <li>fix(agents): preserve skill selection when switching adapter type (#8975)</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>July 4, 2026</h2>
+    <ul>
+      <li>Fix inherited workspace reuse fallback (#8963)</li>
+      <li>Show heartbeat progress in run logs (#8965)</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>July 3, 2026</h2>
+    <ul>
+      <li>chore(lockfile): refresh pnpm-lock.yaml (#8957)</li>
+      <li>Add dependency wake reconciliation backstop (#8943)</li>
+      <li>Add browser SSH terminal for custom image setup (#8911)</li>
+      <li>[codex] Clean up issue properties pane (#8941)</li>
+      <li>Redesign environment variables editor (#8930)</li>
+      <li>Harden work timeline security filters (#8923)</li>
+      <li>Fix broken npx install: ship dashboard.html in the npm files whitelist</li>
+      <li>Make the site machine-readable for AI agents; add copy-paste agent prompt</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>July 2, 2026</h2>
+    <ul>
+      <li>Improve live agent feedback during sandboxed runs (#8915)</li>
+      <li>Normalize adapter display labels (#8913)</li>
+      <li>fix(workspace): restore clean branch drift on finalize (#8914)</li>
+      <li>fix(adapter-utils): improve sandbox restore failure diagnostics (#8903)</li>
+      <li>[codex] Include checkbox selections in continuation wakes (#8893)</li>
+      <li>Fix issue create response relation summaries (#8901)</li>
+      <li>[codex] remove Work Timeline page from navigation (#8882)</li>
+      <li>Add telemetry data contract docs (#8886)</li>
+      <li>PAP-12424 Work Timeline — Phase C: frontend Gantt page (Direction C) (#8880)</li>
+      <li>[codex] add company work timeline endpoint (#8875)</li>
+      <li>docs: add fresh Greptile head gate to check-pr</li>
+      <li>Show live descendant status in inbox rows (#8876)</li>
+      <li>refactor(a11y): issues view toggle aria attributes and goal tree expand buttons (#1939)</li>
+      <li>fix(a11y): add aria-pressed to date preset and day-of-week toggle buttons (#1913)</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>July 1, 2026</h2>
+    <ul>
+      <li>Scope environment custom images to instance environments (#8850)</li>
+      <li>Fix sandbox bridge credentials and stalled review recovery (#8844)</li>
+      <li>fix(issues): attribute agent-authored comments instead of rendering them as "Board" (#8833)</li>
+      <li>Emit interaction resolved telemetry (#8824)</li>
+      <li>Fix managed workspace branch coherence recovery (#8826)</li>
+      <li>Implement generated client telemetry types (#8818)</li>
+      <li>feat(gemini-local): add Gemini 3.1 Pro models to gemini-local adapter (#1602)</li>
+      <li>Expire ask-user questions superseded by comments (#8799)</li>
+      <li>Add branded OG social-preview image and wire up image meta tags</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>June 30, 2026</h2>
+    <ul>
+      <li>Refresh run config before reusing workspaces (#8797)</li>
+      <li>build(deps): bump acpx from 0.6.1 to 0.11.2 (#8741)</li>
+      <li>build(deps): bump @tailwindcss/typography from 0.5.19 to 0.5.20 (#8738)</li>
+      <li>build(deps): bump @pierre/diffs from 1.1.22 to 1.2.11 (#8744)</li>
+      <li>build(deps): bump multer from 2.1.1 to 2.2.0 (#8743)</li>
+      <li>build(deps): bump mermaid from 11.12.3 to 11.16.0 (#8740)</li>
+      <li>build(deps): bump sharp from 0.34.5 to 0.35.2 (#8739)</li>
+      <li>build(deps): bump @codemirror/state from 6.5.4 to 6.7.0 (#8736)</li>
+      <li>build(deps): bump dotenv from 17.3.1 to 17.4.2 (#8737)</li>
+      <li>build(deps): bump @aws-sdk/client-s3 from 3.1072.0 to 3.1075.0 (#8742)</li>
+      <li>build(deps): bump @agentclientprotocol/claude-agent-acp from 0.48.0 to 0.52.0 (#8745)</li>
+      <li>Add reusable sandbox custom images (#8794)</li>
+      <li>build(ui): drop redundant tsc type-check from ui build (#8781)</li>
+      <li>Fix sandboxed Claude and Codex probe behavior (#8775)</li>
+      <li>[codex] Update watchdog properties pane cache (#8786)</li>
+      <li>[codex] Unify issue media attachment gallery (#8785)</li>
+      <li>[codex] Add pipeline automation title templates (#8787)</li>
+      <li>Fix active heartbeat run reaping (#8776)</li>
+      <li>Add vitals.run landing page; make index.html the homepage, dashboard.html the shell</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>June 29, 2026</h2>
+    <ul>
+      <li>feat: project typeahead in ⌘K command palette (#8773)</li>
+      <li>[codex] Fix markdown contrast on accent bubbles (#8689)</li>
+      <li>Fix stale server info debug metadata (#8753)</li>
+      <li>[codex] Preserve plan review context in agent wakes (#8649)</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>June 28, 2026</h2>
+    <ul>
+      <li>refactor: revert X mention poller backend (#8709)</li>
+      <li>feat: add X mention poller backend (#8707)</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>June 26, 2026</h2>
+    <ul>
+      <li>Add v2026.626.0 release changelog (#8677)</li>
+      <li>fix(adapters/hermes-gateway): improve onboarding configuration (#8678)</li>
+      <li>[codex] Preselect vault when importing secrets (#8614)</li>
+      <li>Show agent environment metadata (#8671)</li>
+      <li>Add experimental server info debug view (#8676)</li>
+      <li>chore(lockfile): refresh pnpm-lock.yaml (#8673)</li>
+      <li>[codex] Add built-in Hermes adapters (#8543)</li>
+      <li>fix(cursor): coalesce streamed assistant text into prose blocks (#8544)</li>
+      <li>test(skills-catalog): cover packaged npm artifacts (#8661)</li>
+      <li>Move paperclip page skill internal (#8669)</li>
+      <li>Add Paperclip page publishing skill (#8664)</li>
+      <li>Sort workspace routines by name (#8666)</li>
+      <li>docs: expand capsule identicon prototyper guidance (#8665)</li>
+      <li>Fix generic URL rich object labels (#8662)</li>
+      <li>Add pipeline workflow primitives and operator UI (#7903)</li>
+      <li>Update company creation copy (#8653)</li>
+      <li>feat(routines): add date variable controls (#8655)</li>
+      <li>Add bundled Paperclip capsules skill</li>
+      <li>Add workspace file downloads</li>
+      <li>fix(claude-local): use direct 4.5 model aliases (#3800)</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>June 25, 2026</h2>
+    <ul>
+      <li>fix(ui): restore main-content scroll position on browser back/forward (#8636)</li>
+      <li>Fix UI detail regressions (#8613)</li>
+      <li>[codex] Add bounded workspace overview (#8627)</li>
+      <li>Test cheap model during agent config check (#8632)</li>
+      <li>Fix top-level secret ref binding sync (#8630)</li>
+      <li>[codex] Graduate experimental conference room defaults (#8628)</li>
+      <li>Add skill category editing in settings (#8615)</li>
+      <li>[codex] Gate skill mutations with skills:create permission (#8616)</li>
+      <li>feat(cli): surface plugin install target host + add `plugin target` (#8575)</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>June 24, 2026</h2>
+    <ul>
+      <li>Fix sandbox restore index drift (#8595)</li>
+      <li>Render sandbox runtime status in issue threads (#8594)</li>
+      <li>Add ephemeral sandbox runtime status plumbing (#8593)</li>
+      <li>feat: task status icons &amp; colors (#8580)</li>
+      <li>[codex] Improve reusable workspace selector search (#8597)</li>
+      <li>Exclude transient Codex home dirs from sandbox sync (#8581)</li>
+      <li>[codex] Fix local skill, secrets, and file viewer regressions (#8586)</li>
+      <li>Rebrand the library to Vitals (vitals.run): core, css, data, react, CLI, docs</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>June 23, 2026</h2>
+    <ul>
+      <li>perf(ci): build standalone public packages concurrently (#8567)</li>
+      <li>fix(openclaw-gateway): drop root paperclip params (#4416)</li>
+      <li>fix: default Daytona sandboxes to auto-archive so they leave the disk quota (#8561)</li>
+      <li>Fix Daytona resource overrides for image-backed sandboxes (#8564)</li>
+      <li>build(deps-dev): bump @storybook/addon-docs from 10.3.5 to 10.4.6 (#8466)</li>
+      <li>fix(deps): regenerate lockfile so react/react-dom resolve to 19.2.7 (repair #8557 merge) (#8559)</li>
+      <li>build(deps): align react-dom with react@19.2.7 (replaces dependabot #8471) (#8557)</li>
+      <li>build(deps): bump better-auth from 1.4.18 to 1.6.20 (#8464)</li>
+      <li>build(deps-dev): bump esbuild from 0.28.0 to 0.28.1 (#8470)</li>
+      <li>build(deps): bump tailwind-merge from 3.4.1 to 3.6.0 (#8465)</li>
+      <li>build(deps): bump @cursor/sdk from 1.0.18 to 1.0.19 (#8462)</li>
+      <li>build(deps): bump @codemirror/view from 6.39.15 to 6.43.1 (#8468)</li>
+      <li>build(deps): bump actions/checkout from 6 to 7 (#8461)</li>
+      <li>build(deps): bump @agentclientprotocol/claude-agent-acp from 0.47.0 to 0.48.0 (#8469)</li>
+      <li>build(deps): bump lucide-react from 0.574.0 to 0.577.0 (#8467)</li>
+      <li>build(deps): bump hermes-paperclip-adapter from 0.2.0 to 0.3.0 (#8463)</li>
+      <li>feat(control-plane): add annotation and workspace controls (#8229)</li>
+      <li>fix: upstream deployed document-comment, routine-annotation, workspace &amp; board-polling fixes (#8536)</li>
+      <li>External object references across issue surfaces (#8512)</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>June 22, 2026</h2>
+    <ul>
+      <li>feat: reuse Daytona sandbox leases (#8513)</li>
+      <li>fix: isolate remote Claude config from local credentials (#7676)</li>
+      <li>[codex] Fix mobile issue chat spacing (#8493)</li>
+      <li>Clean up agent config environment selector (#8504)</li>
+      <li>Make streamlined sidebar default to on (#8496)</li>
+      <li>[codex] Fix issue chat mention warning spacing (#8486)</li>
+      <li>[codex] Harden same-company CEO authorization (#8276)</li>
+      <li>docs: clarify plan task dependency handling (#8485)</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>June 21, 2026</h2>
+    <ul>
+      <li>fix(issues): ignore cancelled child blockers in attention (#7577)</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>June 20, 2026</h2>
+    <ul>
+      <li>fix(server): let codex_local agents inherit host Codex login by default (#8425)</li>
+      <li>Fix sandbox git publishing and large workspace uploads (#8422)</li>
+      <li>feat(skills): remove bundled paperclip-dev skill and retire required skill attribute (#7029)</li>
+      <li>codex_local adapter output inactivity monitor (#5017)</li>
+      <li>fix(workspace-runtime): base fresh worktrees on origin/master and refresh unstarted reuses (#8412)</li>
+      <li>fix(daytona): valid memory input in env config form + size presets (#8389)</li>
+      <li>docs: drop contributor screenshot requirement in favor of cutter.sh bot (#8409)</li>
+      <li>fix(codex-local): seed managed auth into isolated homes (#8403)</li>
+      <li>fix(ui): make adapter test button test only (#8405)</li>
+      <li>style(ui): simplify Company Environments screen copy (#8400)</li>
+      <li>Prefer loopback runtime API URL for local agents (#5102)</li>
+      <li>fix(claude-local): tolerate sandboxes whose Claude CLI lacks --effort (#8393)</li>
+      <li>feat(adapter-utils): add observable sandbox sync progress (#8395)</li>
+      <li>Remove adapter support matrix table from Company Environments (#8398)</li>
+      <li>fix(ui): move environment create/edit into a dialog (#8391)</li>
+      <li>fix(server): harden live events upgrade sockets (#8383)</li>
+      <li>fix: warn operators that experimental features may break (#8382)</li>
+      <li>refactor(environments): make execution environments instance-scoped (#8375)</li>
+      <li>fix: scope environments "Test provider" button to clicked row (#8380)</li>
+      <li>feat(adapter-claude-local): emit errorCode claude_refusal on stop_reason refusal (#8314)</li>
+      <li>Add heartbeat preflight budget caps (#8347)</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>June 19, 2026</h2>
+    <ul>
+      <li>refactor(ui): vertically center task status circle in task list (#8376)</li>
+      <li>Fix Gemini headless invocation stalls (#8368)</li>
+      <li>fix(recovery): convert review-parked continuations into dependency waits (#8371)</li>
+      <li>fix(ui): prevent mobile viewport horizontal scroll (#8370)</li>
+      <li>perf(ci): shard the general-server test lane across 3 runners (#8360)</li>
+      <li>fix(release): publish all remaining @paperclipai workspace packages from CI + guard unpublishable edges (#8365)</li>
+      <li>refactor: revert headless Chromium provisioning script (#8362)</li>
+      <li>chore(qa): add no-sudo headless Chromium provisioning script (#8349)</li>
+      <li>Fix mention-granted closed issue comments with resume intent (#8350)</li>
+      <li>fix(server): enforce read auth for single issue comments (#8346)</li>
+      <li>fix(server): enforce issue read for issue thread lists (#8331)</li>
+      <li>[codex] feat(watchdog): add task watchdog control plane (#8339)</li>
+      <li>fix(ui): fix blank page when creating an agent (#8336)</li>
+    </ul>
+  </section>
+
+</div>
+</body>
+</html>

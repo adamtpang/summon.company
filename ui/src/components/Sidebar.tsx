@@ -195,6 +195,7 @@ export function Sidebar() {
             );
           })()}
           <SidebarNavItem to="/dashboard" label="Dashboard" icon={LayoutDashboard} liveCount={liveRunCount} />
+          <SidebarNavItem to="/chat" label="Chat" icon={MessageCircle} textBadge="beta" />
           <SidebarNavItem to="/messages" label="Messages" icon={MessageCircle} />
           <SidebarNavItem
             to="/inbox"

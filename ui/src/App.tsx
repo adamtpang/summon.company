@@ -40,6 +40,7 @@ import { Activity } from "./pages/Activity";
 import { Inbox } from "./pages/Inbox";
 import { WhatNeedsMe } from "./pages/WhatNeedsMe";
 import { BoardChat } from "./pages/BoardChat";
+import { ChatMode } from "./pages/ChatMode";
 import { CompanySettings } from "./pages/CompanySettings";
 import { CompanyEnvironments } from "./pages/CompanyEnvironments";
 import { CloudUpstream } from "./pages/CloudUpstream";
@@ -229,6 +230,8 @@ function boardRoutes() {
         <Route path="board-chat" element={<BoardChat />} />
         <Route path="artifacts" element={<Artifacts />} />
       </Route>
+      {/* Chat mode (beta, board 2026-07-19): the company as a conversation. */}
+      <Route path="chat" element={<ChatMode />} />
       <Route path="decisions" element={<WhatNeedsMe />} />
       <Route path="inbox" element={<InboxRootRedirect />} />
       <Route path="inbox/mine" element={<Inbox />} />
