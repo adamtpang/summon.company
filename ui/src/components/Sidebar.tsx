@@ -222,7 +222,11 @@ export function Sidebar() {
           {showCases ? (
             <SidebarNavItem to="/cases" label="Cases" icon={Layers} textBadge="beta" />
           ) : null}
-          <SidebarNavItem to="/routines" label="Routines" icon={Repeat} />
+          {/* Ruthless pass (board, 2026-07-19; law 1 removals): Routines,
+              Artifacts, and Skills left the nav — power-user surfaces that
+              failed the five-second test against the product sentence
+              ("problems, triaged, assigned, next best move"). Their routes
+              stay alive; ⌘K reaches them by name. */}
           {showPipelines ? (
             <SidebarNavItem to="/pipelines" label="Pipelines" icon={GitBranch} />
           ) : null}
@@ -235,8 +239,6 @@ export function Sidebar() {
               aria-hidden="true"
             />
           ) : null}
-          <SidebarNavItem to="/artifacts" label="Artifacts" icon={Package} />
-          <SidebarNavItem to="/skills" label="Skills" icon={Boxes} />
           {showWorkspacesLink ? (
             <SidebarNavItem to="/workspaces" label="Workspaces" icon={GitBranch} />
           ) : null}
@@ -273,9 +275,9 @@ export function Sidebar() {
               The /formation route stays alive for its deep links. */}
           <SidebarNavItem to="/org" label="Org" icon={UsersRound} />
           <SidebarNavItem to="/roadmap" label="Roadmap" icon={Map} />
-          <SidebarNavItem to="/ai-sdr" label="AI SDR" icon={Send} />
-          <SidebarNavItem to="/timeline" label="Timeline" icon={GanttChartSquare} />
-          <SidebarNavItem to="/usage" label="Usage" icon={Gauge} />
+          {/* Ruthless pass (board, 2026-07-19): AI SDR (experimental surface),
+              Timeline (Activity covers history), and Usage (Costs is the money
+              truth) left the nav — routes alive, ⌘K reaches them. */}
           <SidebarNavItem to="/costs" label="Costs" icon={DollarSign} />
           <SidebarNavItem to="/activity" label="Activity" icon={History} />
           <SidebarNavItem to="/company/settings" label="Settings" icon={Settings} />

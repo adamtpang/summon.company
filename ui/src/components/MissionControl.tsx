@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import type { Agent, DashboardSummary, Goal, Issue, Project } from "@paperclipai/shared";
+import type { Agent, DashboardOutcomes, DashboardSummary, Goal, Issue, Project } from "@paperclipai/shared";
 import type { MarketCapSnapshot } from "@paperclipai/shared/vitals-market-cap";
 import { ArrowRight } from "lucide-react";
 import { Link } from "@/lib/router";
@@ -85,10 +85,37 @@ export function MissionControl({
     { all: 0, succeeded: 0 },
   );
   const reliability = runTotals.all > 0 ? pct((runTotals.succeeded / runTotals.all) * 100) : 0;
-  const enabledAgents = summary.agents.active + summary.agents.running + summary.agents.paused + summary.agents.error;
-  const capacity = enabledAgents > 0 ? pct((summary.agents.running / enabledAgents) * 100) : 0;
-  const demand = pct(summary.tasks.open * 10);
-  const cash = summary.costs.monthBudgetCents > 0 ? pct(summary.costs.monthUtilizationPercent) : 0;
+
+  // The next best move (board, 2026-07-19 — the product sentence made visual):
+  // ONE card, ONE action, computed from the same evidence everything else uses.
+  // Priority: decisions waiting on the board → reviews parked for sign-off →
+  // the top-ranked unassigned task → all clear.
+  const topReview = scoreboard.rows.find((row) => row.reviewNeeded);
+  const topUnassigned = scoreboard.rows.find(
+    (row) => !row.assigneeAgentId && row.status !== "done" && row.status !== "in_review" && !row.reviewNeeded,
+  );
+  const nextMove = decisionCount > 0
+    ? {
+        label: `Clear ${decisionCount} decision${decisionCount === 1 ? "" : "s"}`,
+        detail: "Approve, retry, or reject — one card at a time.",
+        to: "/decisions",
+        cta: "Open the deck",
+      }
+    : topReview
+      ? {
+          label: `Review ${topReview.identifier}`,
+          detail: topReview.title,
+          to: `/issues/${topReview.pathId}`,
+          cta: "Review it",
+        }
+      : topUnassigned
+        ? {
+            label: `Assign ${topUnassigned.identifier}`,
+            detail: `Tier ${topUnassigned.tier} · ${topUnassigned.title}`,
+            to: `/issues/${topUnassigned.pathId}`,
+            cta: "Assign it",
+          }
+        : null;
 
   return (
     <div data-testid="mission-control" className="space-y-8">
@@ -97,13 +124,35 @@ export function MissionControl({
           Mission Control
         </h1>
 
-        <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-          <HeroLink
-            to="/marketcap"
-            label="Market cap"
-            value={marketCapSnapshot?.capProxyLabel ?? "Calculating…"}
-            detail={marketCapSnapshot ? `ARR ${marketCapSnapshot.arrLabel} · stage ${marketCapSnapshot.stage.id}` : "Loading evidence"}
-          />
+        <Card data-testid="next-move" className="block p-5">
+          {nextMove ? (
+            <div className="flex flex-wrap items-center justify-between gap-4">
+              <div className="min-w-0">
+                <p className="text-xs font-medium uppercase tracking-(--tracking-eyebrow) text-muted-foreground">
+                  Your next move
+                </p>
+                <p className="mt-1 truncate text-xl font-semibold tracking-tight">{nextMove.label}</p>
+                <p className="mt-0.5 truncate text-sm text-muted-foreground">{nextMove.detail}</p>
+              </div>
+              <Link
+                to={nextMove.to}
+                className="inline-flex shrink-0 items-center gap-1.5 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90"
+              >
+                {nextMove.cta} <ArrowRight className="size-4" aria-hidden="true" />
+              </Link>
+            </div>
+          ) : (
+            <div>
+              <p className="text-xs font-medium uppercase tracking-(--tracking-eyebrow) text-muted-foreground">
+                Your next move
+              </p>
+              <p className="mt-1 text-xl font-semibold tracking-tight">All clear</p>
+              <p className="mt-0.5 text-sm text-muted-foreground">The fleet works; nothing waits on you.</p>
+            </div>
+          )}
+        </Card>
+
+        <div className="grid gap-3 sm:grid-cols-2">
           <HeroLink
             to="/issues"
             label="Execution"
@@ -111,16 +160,10 @@ export function MissionControl({
             detail={`${summary.tasks.inProgress} in progress · ${reliability}% run reliability`}
           />
           <HeroLink
-            to="/usage"
+            to="/costs"
             label="Month spend"
             value={formatCents(summary.costs.monthSpendCents)}
             detail={summary.costs.monthBudgetCents > 0 ? `${summary.costs.monthUtilizationPercent}% of budget` : "No budget ceiling"}
-          />
-          <HeroLink
-            to="/decisions"
-            label="Board decisions"
-            value={String(decisionCount)}
-            detail={decisionCount === 0 ? "Nothing waiting on the board" : "One-card deck ready"}
           />
         </div>
 
@@ -129,8 +172,18 @@ export function MissionControl({
             of it must never be more than two interactions away. */}
         <FleetRunningNow />
 
-        <div className="grid gap-3 lg:grid-cols-3">
-          <Card className="block p-4 lg:col-span-2">
+        {/* Outcomes (30d): the thesis number — what this company was WORTH this
+            month, sourced only from persisted receipts, never vibes. Zero
+            receipts reads "No receipts yet", never a fabricated $0 (OUTCOME-
+            RECEIPTS.md §3). Time-value dollars show as a parenthetical only and
+            are never added into the cash saved. */}
+        <OutcomesRollup outcomes={summary.outcomes} />
+
+        {/* Ruthless pass (board, 2026-07-19; law 1): the Pressure card died —
+            Demand duplicated the queue count, Capacity duplicated Running now,
+            Cash duplicated Month spend. The constraint now owns the row. */}
+        <div className="grid gap-3">
+          <Card className="block p-4">
             <div className="flex flex-wrap items-start justify-between gap-3">
               <div className="min-w-0">
                 <p className="text-xs font-medium uppercase tracking-(--tracking-eyebrow) text-muted-foreground">
@@ -159,15 +212,6 @@ export function MissionControl({
                 <div className="h-full rounded-full bg-primary" style={{ width: `${roadmapConstraint.progress}%` }} />
               </div>
             ) : null}
-          </Card>
-
-          <Card className="block p-4">
-            <p className="text-xs font-medium uppercase tracking-(--tracking-eyebrow) text-muted-foreground">Pressure</p>
-            <div className="mt-3 space-y-3">
-              <Pressure label="Demand" value={demand} detail={`${summary.tasks.open} open tasks`} />
-              <Pressure label="Capacity" value={capacity} detail={`${summary.agents.running}/${enabledAgents || 0} live`} />
-              <Pressure label="Cash" value={cash} detail={summary.costs.monthBudgetCents > 0 ? `${summary.costs.monthUtilizationPercent}% used` : "uncapped"} />
-            </div>
           </Card>
         </div>
       </section>
@@ -282,6 +326,55 @@ function HeroLink({ to, label, value, detail }: { to: string; label: string; val
   );
 }
 
+/** Format whole/near-whole hours cleanly: "12 h", "1.5 h", "0.5 h". */
+function formatHours(minutes: number): string {
+  const hours = minutes / 60;
+  const label = Number.isInteger(hours) ? String(hours) : hours.toFixed(1);
+  return `${label} h`;
+}
+
+// Outcomes (30d) rollup line — OUTCOME-RECEIPTS.md §3. Four levers stay in
+// separate figures; the $ @ $60/h is a parenthetical on hours, never folded
+// into cash saved. The "from k receipts · u unmeasurable" tail is the honest
+// denominator that makes the totals trustworthy; zero receipts reads "No
+// receipts yet" rather than a fabricated $0.
+function OutcomesRollup({ outcomes }: { outcomes: DashboardOutcomes }) {
+  const totalReceipts = outcomes.receiptCount + outcomes.unmeasurableCount;
+  return (
+    <Card className="block p-4">
+      <p className="text-xs font-medium uppercase tracking-(--tracking-eyebrow) text-muted-foreground">
+        Outcomes (30d)
+      </p>
+      {totalReceipts === 0 ? (
+        <p className="mt-3 text-sm text-muted-foreground">No receipts yet</p>
+      ) : (
+        <>
+          <div className="mt-3 flex flex-wrap items-baseline gap-x-4 gap-y-1 text-sm">
+            <span>
+              <span className="font-semibold">{formatCents(outcomes.moneySavedCents)}</span> saved
+            </span>
+            <span>
+              <span className="font-semibold">{formatHours(outcomes.timeSavedMinutes)}</span> saved{" "}
+              <span className="text-muted-foreground">(≈ {formatCents(outcomes.timeValueCents)} @ $60/h)</span>
+            </span>
+            <span>
+              <span className="font-semibold">{formatCents(outcomes.revenueMovedCents)}</span> revenue moved
+            </span>
+            <span>
+              <span className="font-semibold">{outcomes.risksAvoided}</span>{" "}
+              {outcomes.risksAvoided === 1 ? "risk avoided" : "risks avoided"}
+            </span>
+          </div>
+          <p className="mt-1.5 text-xs text-muted-foreground">
+            from {outcomes.receiptCount} {outcomes.receiptCount === 1 ? "receipt" : "receipts"} ·{" "}
+            {outcomes.unmeasurableCount} marked unmeasurable
+          </p>
+        </>
+      )}
+    </Card>
+  );
+}
+
 /** Lifecycle bar for a department card's current task — same derived ladder as
     the queue rows; pulses while a run is live. */
 function TaskProgress({ issue, className }: { issue: Issue; className?: string }) {
@@ -300,20 +393,6 @@ function TaskProgress({ issue, className }: { issue: Issue; className?: string }
         style={{ width: `${Math.max(progress, 2)}%` }}
       />
     </span>
-  );
-}
-
-function Pressure({ label, value, detail }: { label: string; value: number; detail: string }) {
-  return (
-    <div>
-      <div className="flex items-center justify-between gap-2 text-xs">
-        <span className="font-medium">{label}</span>
-        <span className="text-muted-foreground">{detail}</span>
-      </div>
-      <div className="mt-1 h-1.5 overflow-hidden rounded-full bg-muted" role="progressbar" aria-label={`${label} pressure`} aria-valuemin={0} aria-valuemax={100} aria-valuenow={value}>
-        <div className="h-full rounded-full bg-foreground/70" style={{ width: `${value}%` }} />
-      </div>
-    </div>
   );
 }
 

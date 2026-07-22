@@ -43,6 +43,15 @@ const summary: DashboardSummary = {
   runActivity: [
     { date: "2026-07-16", succeeded: 3, failed: 1, recovered: 1, other: 0, total: 5, failedByErrorCode: {} },
   ],
+  outcomes: {
+    receiptCount: 3,
+    unmeasurableCount: 2,
+    moneySavedCents: 12000,
+    timeSavedMinutes: 90,
+    timeValueCents: 9000,
+    revenueMovedCents: 50000,
+    risksAvoided: 1,
+  },
 };
 
 function issue(index: number): Issue {
@@ -111,7 +120,12 @@ describe("MissionControl", () => {
   it("answers company state in four evidence-backed zones", () => {
     const text = container.textContent ?? "";
     expect(text).toContain("Mission Control");
-    expect(text).toContain("option value only");
+    // Ruthless pass (2026-07-19): market cap + Pressure left the dashboard;
+    // the Next-move card leads (decisionCount=2 in this fixture → the deck).
+    expect(text).not.toContain("option value only");
+    expect(text).not.toContain("Pressure");
+    expect(text).toContain("Your next move");
+    expect(text).toContain("Clear 2 decisions");
     expect(text).toContain("One binding constraint");
     expect(text).toContain("Engineering");
     expect(text).toContain("Legal");
@@ -121,6 +135,24 @@ describe("MissionControl", () => {
     expect(text).not.toContain("Eight stages, constraint outlined");
     expect(text).not.toContain("proxy score");
     expect(container.querySelectorAll('a[href^="/issues/"]')).toHaveLength(7);
-    expect(container.querySelector('a[href="/decisions"]')?.textContent).toContain("2");
+    expect(container.querySelector('a[href="/decisions"]')).not.toBeNull();
+  });
+
+  it("renders the Outcomes (30d) rollup from receipts, with the honest denominator", () => {
+    const text = container.textContent ?? "";
+    expect(text).toContain("Outcomes (30d)");
+    // Four separate levers; money and revenue formatted as cents→dollars.
+    expect(text).toContain("$120.00");
+    expect(text).toContain("saved");
+    expect(text).toContain("1.5 h");
+    // Time value is a parenthetical @ $60/h, NEVER folded into money saved.
+    expect(text).toContain("(≈ $90.00 @ $60/h)");
+    expect(text).toContain("$500.00");
+    expect(text).toContain("revenue moved");
+    expect(text).toContain("1 risk avoided");
+    // The denominator that makes the total trustworthy.
+    expect(text).toContain("from 3 receipts");
+    expect(text).toContain("2 marked unmeasurable");
+    expect(text).not.toContain("No receipts yet");
   });
 });

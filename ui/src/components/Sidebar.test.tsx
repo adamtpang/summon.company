@@ -310,25 +310,16 @@ describe("Sidebar", () => {
     });
   });
 
-  it("shows Skills directly below Artifacts in Work", async () => {
+  it("keeps power-user surfaces out of the nav (ruthless pass 2026-07-19)", async () => {
     mockInstanceSettingsApi.getExperimental.mockResolvedValue({ enableIsolatedWorkspaces: false });
     const root = await renderSidebar();
 
-    const artifactsLink = [...container.querySelectorAll("a")].find(
-      (anchor) => anchor.textContent === "Artifacts",
-    );
-    expect(artifactsLink?.getAttribute("href")).toBe("/artifacts");
-
+    // Routines, Artifacts, Skills, AI SDR, Timeline, and Usage left the nav —
+    // routes stay alive, ⌘K reaches them; the nav must pass the 5-second test.
     const navText = container.querySelector("nav")?.textContent ?? "";
-    expect(navText).toContain("Artifacts");
-    expect(navText).toContain("Skills");
-    expect(navText.indexOf("Artifacts")).toBeLessThan(navText.indexOf("Skills"));
-
-    const sections = [...container.querySelectorAll("nav > div")];
-    const workSection = sections.find((section) => section.textContent?.startsWith("Work"));
-    const companySection = sections.find((section) => section.textContent?.startsWith("Company"));
-    expect(workSection?.textContent).toContain("Skills");
-    expect(companySection?.textContent).not.toContain("Skills");
+    for (const gone of ["Artifacts", "Skills", "Routines", "AI SDR", "Timeline", "Usage"]) {
+      expect(navText).not.toContain(gone);
+    }
 
     flushSync(() => {
       root.unmount();
@@ -371,27 +362,6 @@ describe("Sidebar", () => {
     const link = [...container.querySelectorAll("a")].find((anchor) => anchor.textContent === "Goals");
     expect(link?.getAttribute("href")).toBe("/goals");
 
-    const navText = container.querySelector("nav")?.textContent ?? "";
-    expect(navText.indexOf("Goals")).toBeLessThan(navText.indexOf("Artifacts"));
-
-    flushSync(() => {
-      root.unmount();
-    });
-  });
-
-  it("places Timeline in the Company section", async () => {
-    mockInstanceSettingsApi.getExperimental.mockResolvedValue({ enableIsolatedWorkspaces: false });
-    const root = await renderSidebar();
-
-    const sections = [...container.querySelectorAll("nav > div")];
-    const workSection = sections.find((section) => section.textContent?.startsWith("Work"));
-    const companySection = sections.find((section) => section.textContent?.startsWith("Company"));
-    expect(workSection?.textContent).not.toContain("Timeline");
-    expect(companySection?.textContent).toContain("Timeline");
-
-    const timelineLink = [...container.querySelectorAll("a")].find((anchor) => anchor.textContent === "Timeline");
-    expect(timelineLink?.getAttribute("href")).toBe("/timeline");
-
     flushSync(() => {
       root.unmount();
     });
@@ -418,21 +388,15 @@ describe("Sidebar", () => {
     });
   });
 
-  it("places AI SDR in the Company section after Roadmap", async () => {
+  it("keeps the Company section to the five-second set", async () => {
     mockInstanceSettingsApi.getExperimental.mockResolvedValue({ enableIsolatedWorkspaces: false });
     const root = await renderSidebar();
 
     const sections = [...container.querySelectorAll("nav > div")];
-    const workSection = sections.find((section) => section.textContent?.startsWith("Work"));
     const companySection = sections.find((section) => section.textContent?.startsWith("Company"));
-    expect(workSection?.textContent).not.toContain("AI SDR");
-    expect(companySection?.textContent).toContain("AI SDR");
-
-    const aiSdrLink = [...container.querySelectorAll("a")].find((anchor) => anchor.textContent === "AI SDR");
-    expect(aiSdrLink?.getAttribute("href")).toBe("/ai-sdr");
-
-    const companyText = companySection?.textContent ?? "";
-    expect(companyText.indexOf("Roadmap")).toBeLessThan(companyText.indexOf("AI SDR"));
+    for (const kept of ["Org", "Roadmap", "Costs", "Activity", "Settings"]) {
+      expect(companySection?.textContent).toContain(kept);
+    }
 
     flushSync(() => {
       root.unmount();
