@@ -38,6 +38,28 @@
         }
       })();
     </script>
+  
+    <script id="summon-boot-guard">
+      // Blank-screen guard (board, 2026-07-19): a white void is never allowed
+      // to be silent. If the app has not mounted within 12s, or a fatal error
+      // fires first, paint a plain diagnostic with a reload button.
+      (() => {
+        let fatal = null;
+        const remember = (m) => { if (!fatal) fatal = String(m).slice(0, 500); };
+        window.addEventListener('error', (e) => remember(e.message + ' @ ' + (e.filename || '') + ':' + (e.lineno || '')));
+        window.addEventListener('unhandledrejection', (e) => remember('unhandled rejection: ' + (e.reason && e.reason.message ? e.reason.message : e.reason)));
+        setTimeout(() => {
+          const root = document.getElementById('root');
+          if (root && root.children.length > 0) return;
+          document.body.innerHTML =
+            '<div style="font-family:ui-sans-serif,system-ui;max-width:34rem;margin:18vh auto;padding:0 1.5rem;color:#0a0a0a">' +
+            '<p style="font-size:1.25rem;font-weight:600;margin:0">Summon did not finish loading</p>' +
+            '<p style="color:#5a5a5a;margin:.5rem 0 1rem">' + (fatal ? 'Error: ' + fatal.replace(/</g, '&lt;') : 'Usually a stale page after an update — reload fixes it.') + '</p>' +
+            '<button onclick="location.reload(true)" style="background:#0a0a0a;color:#fff;border:0;border-radius:.5rem;padding:.6rem 1.2rem;font-size:.95rem;cursor:pointer">Reload</button>' +
+            '</div>';
+        }, 12000);
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>
