@@ -8,7 +8,7 @@
 // OIDC token (no API key stored anywhere). AI_GATEWAY_API_KEY env var is the
 // local-dev fallback.
 import { getVercelOidcToken } from "@vercel/functions/oidc";
-import { PRECEDENTS, CONSTRAINT_KEYS, STAGES, DEPARTMENTS } from "./_precedents.mjs";
+import { PRECEDENTS, CONSTRAINT_KEYS, STAGES, DEPARTMENTS, MODELS as BIZ_MODELS, MODEL_KEYS } from "./_precedents.mjs";
 
 export const config = { maxDuration: 60 };
 
@@ -44,6 +44,8 @@ function systemPrompt() {
       stageReason: "one sentence of evidence for the stage pick",
       constraint: "the one binding constraint, one sentence, specific to this business",
       constraintKey: "one of: " + CONSTRAINT_KEYS.join(", "),
+      businessModelKey: "one of: " + MODEL_KEYS.join(", "),
+      businessModelReason: "one sentence: why this model fits THIS business best; for idea-stage businesses weight the fastest path to a first paying customer (sell the outcome before building the machine)",
       department: "one of: " + DEPARTMENTS.join(", "),
       tasks: [
         "first task, concrete enough to start today",
@@ -56,10 +58,10 @@ function systemPrompt() {
   ].join("\n");
 }
 
-function extractJson(text) {
+function extractJson(text, model) {
   const start = text.indexOf("{");
   const end = text.lastIndexOf("}");
-  if (start < 0 || end <= start) throw new Error("no JSON in model reply");
+  if (start < 0 || end <= start) throw new Error("no JSON from " + model + ": " + JSON.stringify(text.slice(0, 140)));
   return JSON.parse(text.slice(start, end + 1));
 }
 
@@ -69,7 +71,7 @@ async function callGateway(token, model, input) {
     headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
     body: JSON.stringify({
       model,
-      max_tokens: 1200,
+      max_tokens: 3200,
       messages: [
         { role: "system", content: systemPrompt() },
         { role: "user", content: `Diagnose this business: ${input}` },
@@ -83,7 +85,14 @@ async function callGateway(token, model, input) {
     throw err;
   }
   const json = await res.json();
-  return json.choices?.[0]?.message?.content ?? "";
+  const content = json.choices?.[0]?.message?.content ?? "";
+  if (!content.trim()) {
+    // Thinking consumed the budget or the model stayed silent: try the next rung.
+    const err = new Error("empty content from " + model + " (finish: " + (json.choices?.[0]?.finish_reason ?? "?") + ")");
+    err.status = 429;
+    throw err;
+  }
+  return content;
 }
 
 export default async function handler(req, res) {
@@ -110,10 +119,11 @@ export default async function handler(req, res) {
   for (const model of MODELS) {
     try {
       const text = await callGateway(token, model, input);
-      const parsed = extractJson(text);
+      const parsed = extractJson(text, model);
       const key = CONSTRAINT_KEYS.includes(parsed.constraintKey) ? parsed.constraintKey : "focus";
       const stage = Math.min(8, Math.max(1, Number(parsed.stage) || 1));
       const department = DEPARTMENTS.includes(parsed.department) ? parsed.department : "Operations";
+      const modelKey = MODEL_KEYS.includes(parsed.businessModelKey) ? parsed.businessModelKey : "productized_service";
       return res.status(200).json({
         business: parsed.business,
         stage,
@@ -121,6 +131,7 @@ export default async function handler(req, res) {
         stageReason: parsed.stageReason,
         constraint: parsed.constraint,
         precedent: PRECEDENTS[key],
+        businessModel: { key: modelKey, ...BIZ_MODELS[modelKey], reason: parsed.businessModelReason },
         department,
         tasks: (parsed.tasks ?? []).slice(0, 3),
         vitalsMove: parsed.vitalsMove,

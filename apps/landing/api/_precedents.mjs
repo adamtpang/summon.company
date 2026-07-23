@@ -114,3 +114,61 @@ export const DEPARTMENTS = [
   "Support",
   "Legal",
 ];
+
+// Business-model library for the diagnosis engine. Sources: Alex Hormozi's
+// $100M Offers and $100M Leads, Brad Jacobs' How to Make a Few Billion
+// Dollars, and the founder corpus (knowledge/books/). Idea-stage picks weight
+// time-to-first-dollar per Hormozi: sell the outcome before building the
+// machine.
+export const MODELS = {
+  productized_service: {
+    name: "Productized service",
+    when: "You have a skill and no product yet: sell a fixed-scope outcome done for the client at a flat monthly price.",
+    firstMove: "Define one Grand Slam package (outcome, timeline, guarantee), price it premium, and sell it to five people this month via warm outreach.",
+    source: "$100M Offers: sell done-for-you at a premium first, productize later",
+  },
+  high_ticket_service: {
+    name: "High-ticket service",
+    when: "Few clients, a big painful problem, a provable outcome: charge thousands and back it with a guarantee.",
+    firstMove: "Write the value equation for one avatar (dream outcome, proof, speed, effort removed) and take three sales calls.",
+    source: "$100M Offers: the value equation and risk reversal",
+  },
+  saas: {
+    name: "Software subscription (SaaS)",
+    when: "A workflow you already deliver manually repeats identically across customers who have proven they will pay.",
+    firstMove: "Charge for the manual version now; only automate the steps customers already pay for.",
+    source: "Founder corpus: Jason Fried, your only competition is your costs",
+  },
+  content_audience: {
+    name: "Audience first (media)",
+    when: "Distribution is the product: build an audience on one platform and monetize with offers, affiliates, or ads later.",
+    firstMove: "Rule of 100: one hundred minutes of content or one hundred warm touches daily, for one hundred days, on ONE platform.",
+    source: "$100M Leads: the core four and the Rule of 100",
+  },
+  marketplace: {
+    name: "Marketplace",
+    when: "Two sides need each other and you can personally seed the supply side; the hardest cold start, chosen only when direct models fail.",
+    firstMove: "Broker ten transactions yourself before writing any software.",
+    source: "Founder corpus: Tony Xu, do the work yourself",
+  },
+  local_service: {
+    name: "Local service business",
+    when: "Geography-bound demand (trades, care, food): win on response speed and reputation, not technology.",
+    firstMove: "Claim the Google Business Profile, then Rule-of-100 warm and cold outreach inside the service area.",
+    source: "$100M Leads: warm and cold outreach before paid ads",
+  },
+  licensing: {
+    name: "License the system",
+    when: "Your playbook is proven and documented: sell the system to operators instead of running every unit yourself.",
+    firstMove: "Document the playbook as a checklist an outsider can run, then sell it to one operator with a revenue share.",
+    source: "$100M Offers arc: Hormozi's own endgame, service to licensing",
+  },
+  rollup: {
+    name: "Rollup (buy and integrate)",
+    when: "A fragmented industry, a big rising trend, and access to capital: acquire small operators and run one playbook.",
+    firstMove: "Pick the trend, list fifty acquirable operators, and buy the first at a fair price instead of a haggled one.",
+    source: "Brad Jacobs: high-quality M&A without imploding",
+  },
+};
+
+export const MODEL_KEYS = Object.keys(MODELS);

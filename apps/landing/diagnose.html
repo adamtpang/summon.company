@@ -36,6 +36,9 @@
   .btn { display: inline-flex; align-items: center; border-radius: 999px; padding: 0.65rem 1.3rem; font-weight: 600; text-decoration: none; }
   .btn-primary { background: #0a0a0a; color: #ffffff; }
   .btn-quiet { border: 1px solid rgba(0,0,0,0.2); color: #0a0a0a; }
+  .share-row { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; margin-top: 1rem; }
+  .share-btn { background: none; border: 1px solid rgba(0,0,0,0.2); color: #0a0a0a; border-radius: 999px; padding: 0.45rem 1rem; font: inherit; font-size: 0.85rem; font-weight: 600; cursor: pointer; }
+  .share-note { display: none; }
   .error { color: #b00020; margin-top: 1rem; display: none; }
   .muted { color: #5a5a5a; }
   @media (prefers-color-scheme: dark) {
@@ -45,6 +48,7 @@
     textarea:focus { outline-color: #f2f2f2; }
     button.go, .btn-primary { background: #f2f2f2; color: #0a0a0a; }
     .btn-quiet { border-color: rgba(255,255,255,0.25); color: #f2f2f2; }
+    .share-btn { border-color: rgba(255,255,255,0.25); color: #f2f2f2; }
     .card { border-color: rgba(255,255,255,0.14); }
     .bar { background: rgba(255,255,255,0.12); }
     .bar span { background: #f2f2f2; }
@@ -74,6 +78,7 @@
   <p class="error" id="error"></p>
 
   <section id="result" aria-live="polite">
+    <p class="eyebrow share-note" id="shared-note">Shared diagnosis · run your own above, free</p>
     <div class="card">
       <p class="eyebrow">Your business</p>
       <p id="r-business" style="margin:0"></p>
@@ -94,6 +99,13 @@
         <cite id="r-source"></cite>
       </blockquote>
     </div>
+    <div class="card" id="model-card">
+      <p class="eyebrow">Best business model</p>
+      <p class="constraint" id="r-model-name" style="font-size:1.05rem"></p>
+      <p class="muted" id="r-model-reason" style="margin:0.25rem 0 0"></p>
+      <p style="margin:0.6rem 0 0"><strong>First move:</strong> <span id="r-model-move"></span></p>
+      <p class="micro" id="r-model-source" style="margin-top:0.5rem"></p>
+    </div>
     <div class="card">
       <p class="eyebrow">The fix</p>
       <p style="margin:0 0 0.25rem"><strong id="r-dept"></strong> runs it first. First three tasks:</p>
@@ -105,6 +117,11 @@
         <a class="btn btn-quiet" href="https://cal.com/adamtpang">Talk it through, free</a>
       </div>
       <p class="micro">Already running Summon? Open your Chat tab and hand these three tasks to the department. Not yet? The summon button sends this diagnosis to us and we set your company up.</p>
+      <div class="share-row">
+        <span class="eyebrow" style="margin:0">Share it</span>
+        <button class="share-btn" id="copy-link" type="button">Copy link</button>
+        <button class="share-btn" id="copy-text" type="button">Copy as text</button>
+      </div>
     </div>
   </section>
 </div>
@@ -113,6 +130,97 @@
   const form = document.getElementById("form");
   const go = document.getElementById("go");
   const errorEl = document.getElementById("error");
+  let current = null;
+
+  // A diagnosis is a shareable artifact: the whole payload rides in the URL
+  // hash (base64url JSON), so a shared link renders instantly on any static
+  // host with no API call and no storage.
+  function encodeShare(d) {
+    const json = JSON.stringify(d);
+    const bytes = new TextEncoder().encode(json);
+    let bin = "";
+    for (const b of bytes) bin += String.fromCharCode(b);
+    return btoa(bin).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+  }
+
+  function decodeShare(hash) {
+    const b64 = hash.replace(/-/g, "+").replace(/_/g, "/");
+    const bin = atob(b64);
+    const bytes = Uint8Array.from(bin, (c) => c.charCodeAt(0));
+    return JSON.parse(new TextDecoder().decode(bytes));
+  }
+
+  function shareText(d) {
+    const lines = [
+      "Free 60-second business diagnosis, from 48 founder case studies:",
+      "",
+      d.business,
+      "Stage " + d.stage + " of 8: " + d.stageName,
+      "The one constraint: " + d.constraint,
+      "Precedent: " + d.precedent.lesson + " (" + d.precedent.founder + ", " + d.precedent.company + ")",
+    ];
+    if (d.businessModel) lines.push("Best business model: " + d.businessModel.name + ". First move: " + d.businessModel.firstMove);
+    lines.push("The fix: " + d.department + " goes first.");
+    (d.tasks || []).forEach((t, i) => lines.push((i + 1) + ". " + t));
+    lines.push("", "Get yours free: https://summon.company/diagnose");
+    return lines.join("\n");
+  }
+
+  function wireCopy(btn, getValue) {
+    btn.addEventListener("click", async () => {
+      if (!current) return;
+      try {
+        await navigator.clipboard.writeText(getValue());
+        const label = btn.textContent;
+        btn.textContent = "Copied";
+        setTimeout(() => { btn.textContent = label; }, 1500);
+      } catch (err) {
+        btn.textContent = "Copy failed";
+      }
+    });
+  }
+
+  wireCopy(document.getElementById("copy-link"), () =>
+    location.origin + location.pathname + "#d=" + encodeShare(current));
+  wireCopy(document.getElementById("copy-text"), () => shareText(current));
+
+  function render(d, { shared = false } = {}) {
+    current = d;
+    document.getElementById("shared-note").style.display = shared ? "block" : "none";
+    document.getElementById("r-business").textContent = d.business;
+    document.getElementById("r-stage").textContent = "Stage " + d.stage + " of 8 · " + d.stageName;
+    document.getElementById("r-bar").style.width = Math.max(6, Math.round((d.stage / 8) * 100)) + "%";
+    document.getElementById("r-stage-reason").textContent = d.stageReason;
+    document.getElementById("r-constraint").textContent = d.constraint;
+    document.getElementById("r-precedent").textContent = d.precedent.lesson;
+    document.getElementById("r-source").textContent = d.precedent.founder + ", " + d.precedent.company + " · " + d.precedent.source;
+    const modelCard = document.getElementById("model-card");
+    if (d.businessModel) {
+      modelCard.style.display = "block";
+      document.getElementById("r-model-name").textContent = d.businessModel.name;
+      document.getElementById("r-model-reason").textContent = d.businessModel.reason || d.businessModel.when;
+      document.getElementById("r-model-move").textContent = d.businessModel.firstMove;
+      document.getElementById("r-model-source").textContent = "Source: " + d.businessModel.source;
+    } else {
+      modelCard.style.display = "none";
+    }
+    document.getElementById("r-dept").textContent = d.department;
+    const tasks = document.getElementById("r-tasks");
+    tasks.innerHTML = "";
+    for (const t of d.tasks) {
+      const li = document.createElement("li");
+      li.textContent = t;
+      tasks.appendChild(li);
+    }
+    document.getElementById("r-vitals").textContent = d.vitalsMove;
+    const summonBtn = document.getElementById("r-summon");
+    summonBtn.textContent = "Summon " + d.department + " to fix this";
+    const body = "My business: " + d.business + "%0D%0AConstraint: " + encodeURIComponent(d.constraint) + "%0D%0ADepartment: " + d.department + "%0D%0ATasks:%0D%0A1. " + encodeURIComponent(d.tasks[0] || "") + "%0D%0A2. " + encodeURIComponent(d.tasks[1] || "") + "%0D%0A3. " + encodeURIComponent(d.tasks[2] || "") + "%0D%0A%0D%0ASet me up.";
+    summonBtn.href = "mailto:adamtpang@gmail.com?subject=" + encodeURIComponent("Summon " + d.department + " for my company") + "&body=" + body;
+    document.getElementById("result").style.display = "block";
+    document.getElementById("result").scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
     const input = document.getElementById("input").value.trim();
@@ -128,28 +236,8 @@
       });
       const d = await res.json();
       if (!res.ok) throw new Error(d.error || "Something went wrong.");
-      document.getElementById("r-business").textContent = d.business;
-      document.getElementById("r-stage").textContent = "Stage " + d.stage + " of 8 · " + d.stageName;
-      document.getElementById("r-bar").style.width = Math.max(6, Math.round((d.stage / 8) * 100)) + "%";
-      document.getElementById("r-stage-reason").textContent = d.stageReason;
-      document.getElementById("r-constraint").textContent = d.constraint;
-      document.getElementById("r-precedent").textContent = d.precedent.lesson;
-      document.getElementById("r-source").textContent = d.precedent.founder + ", " + d.precedent.company + " · " + d.precedent.source;
-      document.getElementById("r-dept").textContent = d.department;
-      const tasks = document.getElementById("r-tasks");
-      tasks.innerHTML = "";
-      for (const t of d.tasks) {
-        const li = document.createElement("li");
-        li.textContent = t;
-        tasks.appendChild(li);
-      }
-      document.getElementById("r-vitals").textContent = d.vitalsMove;
-      const summonBtn = document.getElementById("r-summon");
-      summonBtn.textContent = "Summon " + d.department + " to fix this";
-      const body = "My business: " + d.business + "%0D%0AConstraint: " + encodeURIComponent(d.constraint) + "%0D%0ADepartment: " + d.department + "%0D%0ATasks:%0D%0A1. " + encodeURIComponent(d.tasks[0] || "") + "%0D%0A2. " + encodeURIComponent(d.tasks[1] || "") + "%0D%0A3. " + encodeURIComponent(d.tasks[2] || "") + "%0D%0A%0D%0ASet me up.";
-      summonBtn.href = "mailto:adamtpang@gmail.com?subject=" + encodeURIComponent("Summon " + d.department + " for my company") + "&body=" + body;
-      document.getElementById("result").style.display = "block";
-      document.getElementById("result").scrollIntoView({ behavior: "smooth", block: "start" });
+      render(d);
+      history.replaceState(null, "", "#d=" + encodeShare(d));
     } catch (err) {
       errorEl.textContent = err.message;
       errorEl.style.display = "block";
@@ -158,6 +246,20 @@
       go.textContent = "Diagnose";
     }
   });
+
+  // A shared link opens straight to the artifact.
+  (function renderFromHash() {
+    const m = location.hash.match(/^#d=(.+)$/);
+    if (!m) return;
+    try {
+      const d = decodeShare(m[1]);
+      if (!d || !d.business || !d.constraint || !d.precedent) return;
+      d.tasks = Array.isArray(d.tasks) ? d.tasks : [];
+      render(d, { shared: true });
+    } catch (err) {
+      // A bad or truncated link just falls back to the empty form.
+    }
+  })();
 </script>
 </body>
 </html>
