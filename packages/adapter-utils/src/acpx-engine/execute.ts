@@ -1274,7 +1274,7 @@ async function buildRuntime(input: {
   };
 }
 
-function sessionConfigOptions(prepared: AcpxPreparedRuntime): Array<{ key: string; value: string }> {
+export function sessionConfigOptions(prepared: AcpxPreparedRuntime): Array<{ key: string; value: string }> {
   const options: Array<{ key: string; value: string }> = [];
   // Model for the claude agent is pre-set via ANTHROPIC_MODEL env var at
   // startup; skip set_config_option to avoid ACP-server model-name validation
@@ -1282,7 +1282,15 @@ function sessionConfigOptions(prepared: AcpxPreparedRuntime): Array<{ key: strin
   if (prepared.requestedModel && prepared.acpxAgent !== "claude") {
     options.push({ key: "model", value: prepared.requestedModel });
   }
-  if (prepared.requestedThinkingEffort) {
+  // Reasoning-effort control is adapter-specific. Codex exposes `reasoning_effort`,
+  // but the claude ACP server advertises only agent/mode/model and hard-rejects a
+  // set_config_option for `effort`, which fails the whole run
+  // (acpx_session_config_failed). The cheap model profile carries effort:low, so a
+  // claude cheap-profile run would otherwise inherit an option the backend
+  // structurally cannot accept. Best part is no part: never emit `effort` for the
+  // claude agent instead of relying on runtime introspection/exception recovery in
+  // applySessionConfigOptions to skip it after the doomed request.
+  if (prepared.requestedThinkingEffort && prepared.acpxAgent !== "claude") {
     options.push({
       key: prepared.acpxAgent === "codex" ? "reasoning_effort" : "effort",
       value: prepared.requestedThinkingEffort,
