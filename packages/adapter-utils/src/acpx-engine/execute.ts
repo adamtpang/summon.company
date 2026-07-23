@@ -1297,6 +1297,27 @@ function sessionConfigOptions(prepared: AcpxPreparedRuntime): Array<{ key: strin
   return options;
 }
 
+// Read the config-option keys the live ACP session actually advertises. Returns
+// null when the runtime cannot introspect capabilities or the session does not
+// advertise a specific option set — in that case the ACPX runtime itself is
+// lenient (it only rejects a set_config_option for an option the session
+// explicitly advertised without), so we attempt the set and let the runtime
+// decide. When a non-empty set is advertised we honor it exactly.
+async function resolveAdvertisedConfigOptionKeys(
+  runtime: AcpRuntime,
+  handle: AcpRuntimeHandle,
+): Promise<Set<string> | null> {
+  if (!runtime.getCapabilities) return null;
+  try {
+    const capabilities = await runtime.getCapabilities({ handle });
+    const keys = capabilities?.configOptionKeys;
+    if (!Array.isArray(keys) || keys.length === 0) return null;
+    return new Set(keys.filter((key): key is string => typeof key === "string" && key.trim().length > 0));
+  } catch {
+    return null;
+  }
+}
+
 async function applySessionConfigOptions(input: {
   runtime: AcpRuntime;
   handle: AcpRuntimeHandle;
@@ -1311,7 +1332,21 @@ async function applySessionConfigOptions(input: {
     await input.onLog("stderr", `[summon] ${message}\n`);
     throw new Error(message);
   }
+  // Only push options the session advertises. The claude ACP server advertises
+  // agent/mode/model but not `effort`, and set_config_option for an
+  // unadvertised option throws a hard ACP_BACKEND_UNSUPPORTED_CONTROL that would
+  // otherwise fail the whole run. Skip-with-log keeps the run alive at the
+  // backend's default effort and surfaces one actionable recovery step.
+  const advertised = await resolveAdvertisedConfigOptionKeys(input.runtime, input.handle);
   for (const option of options) {
+    if (advertised && !advertised.has(option.key)) {
+      const supportedText = [...advertised].sort().join(", ") || "none";
+      await input.onLog(
+        "stdout",
+        `[summon] Skipped ACPX ${input.prepared.acpxAgent} config ${option.key}=${option.value}; session advertises only: ${supportedText}. Upgrade the agent CLI/runtime to restore ${option.key} control.\n`,
+      );
+      continue;
+    }
     await input.runtime.setConfigOption({
       handle: input.handle,
       key: option.key,

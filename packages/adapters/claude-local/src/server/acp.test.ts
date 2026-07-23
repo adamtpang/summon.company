@@ -61,6 +61,9 @@ class FakeRuntime {
   closeInputs: Array<{ handle: FakeRuntimeHandle; reason: string; discardPersistentState?: boolean }> = [];
   setConfigInputs: Array<{ handle: FakeRuntimeHandle; key: string; value: string }> = [];
   ensureCount = 0;
+  // When set, getCapabilities advertises exactly these config-option keys so a
+  // test can reproduce a backend that does not support e.g. `effort`.
+  advertisedConfigOptionKeys: string[] | null = null;
 
   constructor(
     readonly options: FakeRuntimeOptions,
@@ -117,7 +120,9 @@ class FakeRuntime {
   }
 
   getCapabilities() {
-    return { controls: [] };
+    return this.advertisedConfigOptionKeys
+      ? { controls: [], configOptionKeys: this.advertisedConfigOptionKeys }
+      : { controls: [] };
   }
 
   getStatus() {
@@ -419,6 +424,43 @@ describe("claude_local ACP lane", () => {
     const settings = JSON.parse(await fs.readFile(path.join(root, ".claude", "settings.local.json"), "utf8"));
     expect(settings.permissions.defaultMode).toBe("default");
     expect(settings.permissions.allow).toEqual(expect.arrayContaining(["Bash(curl:*)", "Bash(env)"]));
+  });
+
+  it("skips an unadvertised effort config option instead of failing the run", async () => {
+    const root = await makeTempRoot("paperclip-claude-acp-effort-skip-");
+    const runtimes: FakeRuntime[] = [];
+    const logs: Array<{ stream: string; text: string }> = [];
+    const execute = createClaudeAcpExecutor({
+      createRuntime: (options: FakeRuntimeOptions) => {
+        const runtime = new FakeRuntime(options);
+        // Real claude-agent-acp sessions advertise agent/mode/model but not
+        // `effort`; setting effort would throw ACP_BACKEND_UNSUPPORTED_CONTROL.
+        runtime.advertisedConfigOptionKeys = ["agent", "mode", "model"];
+        runtimes.push(runtime);
+        return runtime as never;
+      },
+    });
+
+    const result = await execute(buildContext(root, {
+      config: {
+        engine: "acp",
+        cwd: root,
+        stateDir: path.join(root, "state"),
+        model: "claude-opus-4-7",
+        effort: "high",
+        promptTemplate: "Do the assigned work.",
+      },
+      onLog: async (stream: string, text: string) => {
+        logs.push({ stream, text });
+      },
+    }));
+
+    expect(result.exitCode).toBe(0);
+    // effort must be dropped (not sent) since the session does not advertise it.
+    expect(runtimes[0]?.setConfigInputs.map((input) => input.key)).not.toContain("effort");
+    const logText = logs.map((entry) => entry.text).join("");
+    expect(logText).toContain("Skipped ACPX claude config effort=high");
+    expect(logText).toContain("session advertises only: agent, mode, model");
   });
 
   it("resumes compatible ACP sessions on later Claude ACP runs", async () => {
