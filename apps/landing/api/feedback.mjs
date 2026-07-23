@@ -86,6 +86,25 @@ function dedupeMarker(instanceId, week) {
   return `[fb:${instanceId}:${week}]`;
 }
 
+// ---- shared-secret guard (SUM-192, item 1) ----------------------------------
+// Optional. When FEEDBACK_INTAKE_TOKEN is set, the widget must send a matching
+// X-Feedback-Token header or the submission is rejected 401. This is a spam
+// speed-bump, not real auth: the token ships in the customer's client bundle so
+// anyone inspecting the app can read it. Honest framing, same as the rate limit.
+// The durable bound on ticket volume is still the per-instance+week dedup below.
+// Unset = open intake (backward compatible with SUM-190 deploys).
+function tokenOk(req) {
+  const expected = process.env.FEEDBACK_INTAKE_TOKEN?.trim();
+  if (!expected) return true; // no token configured -> open intake
+  const got = String(req.headers?.["x-feedback-token"] ?? "").trim();
+  if (got.length !== expected.length) return false;
+  // Length-guarded constant-ish compare; token is client-embedded so this is
+  // belt-and-suspenders, not a defense against a determined attacker.
+  let diff = 0;
+  for (let i = 0; i < expected.length; i += 1) diff |= got.charCodeAt(i) ^ expected.charCodeAt(i);
+  return diff === 0;
+}
+
 async function findExistingTicket(base, companyId, marker) {
   // The board carries little traffic; scan the open issues and match the marker
   // embedded in the title. Closed weeks are intentionally not reopened.
@@ -160,12 +179,15 @@ async function appendDigest(base, issueId, { rating, why, week, context }) {
 export default async function handler(req, res) {
   // Widgets on customer instances post cross-origin.
   res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, X-Feedback-Token");
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
   if (req.method === "OPTIONS") return res.status(204).end();
   if (req.method !== "POST") {
     return res.status(405).json({ error: "POST {instanceId, rating, why, week, context}" });
   }
+
+  // Optional shared-secret: reject before we touch the board or spend a lambda.
+  if (!tokenOk(req)) return res.status(401).json({ error: "Invalid or missing feedback token." });
 
   // Fail-closed: without board credentials we accept nothing (never silently drop).
   const base = apiBase();

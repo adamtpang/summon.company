@@ -165,6 +165,45 @@ test("second submission for the same instance+week appends a digest comment", as
   assert.match(comment.body.body, /much better now/);
 });
 
+test("shared-secret: mismatched token is rejected 401 before touching the board", async () => {
+  configureBoard();
+  process.env.FEEDBACK_INTAKE_TOKEN = "s3cret-token";
+  const calls = stubFetch([
+    { match: (u, m) => m === "GET" && u.includes("/issues?"), json: [] },
+    { match: (u, m) => m === "POST" && u.endsWith("/issues"), status: 201, json: { id: "x" } },
+  ]);
+  const { req, res } = mockReqRes("POST", { instanceId: "tok", rating: 3, week: "2026-W29" });
+  req.headers["x-feedback-token"] = "wrong";
+  await handler(req, res);
+  assert.equal(res.statusCode, 401);
+  assert.equal(calls.length, 0, "no board call is made for a bad token");
+});
+
+test("shared-secret: matching token is accepted and files the ticket", async () => {
+  configureBoard();
+  process.env.FEEDBACK_INTAKE_TOKEN = "s3cret-token";
+  stubFetch([
+    { match: (u, m) => m === "GET" && u.includes("/issues?"), json: [] },
+    { match: (u, m) => m === "POST" && u.endsWith("/issues"), status: 201, json: { id: "issue-tok" } },
+  ]);
+  const { req, res } = mockReqRes("POST", { instanceId: "tok2", rating: 3, week: "2026-W29" });
+  req.headers["x-feedback-token"] = "s3cret-token";
+  await handler(req, res);
+  assert.equal(res.statusCode, 201);
+});
+
+test("shared-secret: unset token keeps intake open (backward compatible)", async () => {
+  configureBoard();
+  delete process.env.FEEDBACK_INTAKE_TOKEN;
+  stubFetch([
+    { match: (u, m) => m === "GET" && u.includes("/issues?"), json: [] },
+    { match: (u, m) => m === "POST" && u.endsWith("/issues"), status: 201, json: { id: "issue-open" } },
+  ]);
+  const { req, res } = mockReqRes("POST", { instanceId: "open", rating: 4, week: "2026-W29" });
+  await handler(req, res);
+  assert.equal(res.statusCode, 201);
+});
+
 test("rate limit trips after the per-instance window budget", async () => {
   configureBoard();
   stubFetch([

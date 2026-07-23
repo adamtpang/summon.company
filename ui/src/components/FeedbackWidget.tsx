@@ -39,6 +39,8 @@ const HOSTED_FEEDBACK_ENDPOINT = import.meta.env.VITE_FEEDBACK_ENDPOINT?.trim() 
 const FEEDBACK_INSTANCE_ID =
   import.meta.env.VITE_FEEDBACK_INSTANCE_ID?.trim() ||
   (typeof window !== "undefined" ? window.location.host : "unknown");
+/** Optional shared-secret the hosted intake checks (SUM-192). Unset = open intake. */
+const HOSTED_FEEDBACK_TOKEN = import.meta.env.VITE_FEEDBACK_TOKEN?.trim() || "";
 
 /** ISO-8601 week id, e.g. "2026-W29" — stable across reloads for the nag gate. */
 export function isoWeekId(now: Date = new Date()): string {
@@ -110,7 +112,10 @@ export function FeedbackWidget() {
       if (HOSTED_FEEDBACK_ENDPOINT) {
         const res = await fetch(HOSTED_FEEDBACK_ENDPOINT, {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+            ...(HOSTED_FEEDBACK_TOKEN ? { "X-Feedback-Token": HOSTED_FEEDBACK_TOKEN } : {}),
+          },
           body: JSON.stringify({
             instanceId: FEEDBACK_INSTANCE_ID,
             rating,
