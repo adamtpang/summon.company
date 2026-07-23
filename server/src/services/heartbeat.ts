@@ -5037,6 +5037,49 @@ export function resolveHeartbeatSchedulingSuppression(
   return { suppressed: false, reason: null };
 }
 
+/**
+ * Decide whether a heartbeat timer wake is due for one agent on this scheduler tick.
+ *
+ * Two modes, selected purely by whether `phaseOffsetSec` is configured:
+ *
+ * - `phaseOffsetSec == null` (default, unchanged behavior): drift-based cadence. Fire once
+ *   a full `intervalSec` has elapsed since the last wake (`lastHeartbeatAt ?? createdAt`).
+ *   Event-driven wakes reset that baseline, so the wall-clock phase jitters over time.
+ *
+ * - `phaseOffsetSec` set: deterministic, epoch-anchored phase grid. Scheduled wakes land at
+ *   wall-clock times `t` where `(floor(t/1000) - phaseOffsetSec)` is a multiple of
+ *   `intervalSec`, i.e. `t ≡ phaseOffsetSec (mod intervalSec)` in seconds since the Unix
+ *   epoch. This is independent of `lastHeartbeatAt` drift, so two agents given offsets that
+ *   are `intervalSec/N` apart wake `intervalSec/N` apart on the wall clock and never collide
+ *   on the same tick. `lastHeartbeatAt` is still consulted, but only to mark which grid slots
+ *   are already covered: a wake fires once per grid boundary crossed since the last wake, so
+ *   an event wake that just fired still suppresses the boundary it landed on.
+ *
+ * Anchoring to the epoch (not `createdAt`) is deliberate: it makes `phaseOffsetSec` the agent's
+ * literal wall-clock phase, so the operations backfill can use clean evenly-spaced values
+ * (0, interval/N, 2·interval/N, …) without having to cancel out each agent's creation phase.
+ */
+export function computeHeartbeatTimerDue(input: {
+  now: number;
+  intervalSec: number;
+  phaseOffsetSec: number | null;
+  lastHeartbeatAt: number | null;
+  createdAt: number;
+}): boolean {
+  const { now, intervalSec } = input;
+  if (intervalSec <= 0) return false;
+  const intervalMs = intervalSec * 1000;
+  const reference = input.lastHeartbeatAt ?? input.createdAt;
+
+  if (input.phaseOffsetSec === null) {
+    return now - reference >= intervalMs;
+  }
+
+  const phaseMs = (((input.phaseOffsetSec % intervalSec) + intervalSec) % intervalSec) * 1000;
+  const slotAt = (t: number) => Math.floor((t - phaseMs) / intervalMs);
+  return slotAt(now) > slotAt(reference);
+}
+
 export function heartbeatService(db: Db, options: HeartbeatServiceOptions = {}) {
   const instanceSettings = instanceSettingsService(db);
   const getCurrentUserRedactionOptions = async () => ({
@@ -9736,6 +9779,9 @@ export function heartbeatService(db: Db, options: HeartbeatServiceOptions = {}) 
     return {
       enabled: asBoolean(heartbeat.enabled, false),
       intervalSec: Math.max(0, asNumber(heartbeat.intervalSec, 0)),
+      phaseOffsetSec: normalizeOptionalNonNegativeInteger(
+        heartbeat.phaseOffsetSec ?? heartbeat.phaseOffset ?? heartbeat.wakePhaseOffsetSec,
+      ),
       wakeOnDemand: asBoolean(heartbeat.wakeOnDemand ?? heartbeat.wakeOnAssignment ?? heartbeat.wakeOnOnDemand ?? heartbeat.wakeOnAutomation, true),
       maxConcurrentRuns: normalizeMaxConcurrentRuns(heartbeat.maxConcurrentRuns),
       skipTimerWhenNoActionableWork: asBoolean(
@@ -16341,9 +16387,14 @@ export function heartbeatService(db: Db, options: HeartbeatServiceOptions = {}) 
         }
 
         checked += 1;
-        const baseline = new Date(agent.lastHeartbeatAt ?? agent.createdAt).getTime();
-        const elapsedMs = now.getTime() - baseline;
-        if (elapsedMs < policy.intervalSec * 1000) continue;
+        const due = computeHeartbeatTimerDue({
+          now: now.getTime(),
+          intervalSec: policy.intervalSec,
+          phaseOffsetSec: policy.phaseOffsetSec,
+          lastHeartbeatAt: agent.lastHeartbeatAt ? new Date(agent.lastHeartbeatAt).getTime() : null,
+          createdAt: new Date(agent.createdAt).getTime(),
+        });
+        if (!due) continue;
 
         const run = await enqueueWakeup(agent.id, {
           source: "timer",
