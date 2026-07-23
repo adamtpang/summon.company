@@ -3,7 +3,10 @@
 // issue_tree_hold_members.issue_identifier is the one denormalized copy.
 import { createRequire } from "node:module";
 
-const require2 = createRequire("C:/Users/adamp/OneDrive/Aether/summon.company/server/package.json");
+// pnpm keeps the postgres driver under packages/db (its direct dependent),
+// so resolve from there, with the repo root as fallback.
+const dbPkg = new URL("../../packages/db/package.json", import.meta.url);
+const require2 = createRequire(dbPkg);
 const postgres = require2("postgres");
 
 const sql = postgres("postgres://paperclip:paperclip@127.0.0.1:54329/paperclip", { max: 1 });
