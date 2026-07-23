@@ -75,6 +75,8 @@ import {
 } from "../components/IssueColumns";
 import { IssueFiltersPopover } from "../components/IssueFiltersPopover";
 import { IssueRow } from "../components/IssueRow";
+import { InboxScoreChips } from "../components/IssueColumns";
+import { deriveInboxScore, sortIssuesByInboxScore } from "../lib/scoreboard";
 import { BlockedInboxView } from "../components/BlockedInboxView";
 import { SwipeToArchive } from "../components/SwipeToArchive";
 
@@ -173,7 +175,7 @@ const INBOX_HEARTBEAT_RUN_LIMIT = 200;
 const INBOX_ISSUE_LIST_LIMIT = 500;
 const INBOX_HOT_PATH_STALE_MS = 30_000;
 
-export { InboxIssueMetaLeading, InboxIssueTrailingColumns } from "../components/IssueColumns";
+export { InboxIssueMetaLeading, InboxIssueTrailingColumns, InboxScoreChips } from "../components/IssueColumns";
 export { IssueGroupHeader as InboxGroupHeader } from "../components/IssueGroupHeader";
 type SectionKey =
   | "work_items"
@@ -1055,9 +1057,11 @@ export function Inbox() {
   }, [agents, currentUserId, mineIssues, touchedIssues]);
   const issuesToRender = useMemo(
     () => {
-      if (tab === "mine") return visibleMineIssues;
-      if (tab === "unread") return unreadTouchedIssues;
-      return visibleTouchedIssues;
+      // SUM-148: rank the inbox by tier then four-input score before it flows
+      // into work items and grouping, so the highest-leverage tasks lead.
+      if (tab === "mine") return sortIssuesByInboxScore(visibleMineIssues);
+      if (tab === "unread") return sortIssuesByInboxScore(unreadTouchedIssues);
+      return sortIssuesByInboxScore(visibleTouchedIssues);
     },
     [tab, visibleMineIssues, visibleTouchedIssues, unreadTouchedIssues],
   );
@@ -1067,6 +1071,36 @@ export function Inbox() {
     for (const agent of agents ?? []) map.set(agent.id, agent.name);
     return map;
   }, [agents]);
+
+  // SUM-148 routing: resolve a route's short agent key (e.g. "Forge") to a live
+  // agent id by matching the start of the agent's display name. Case-insensitive
+  // so "forge · engineer" still resolves. Null when no such agent is hired.
+  const resolveRoutedAgentId = useCallback(
+    (agentNameKey: string | null): string | null => {
+      if (!agentNameKey) return null;
+      const key = agentNameKey.toLowerCase();
+      for (const agent of agents ?? []) {
+        const name = agent.name.trim().toLowerCase();
+        if (name === key || name.startsWith(`${key} `) || name.startsWith(`${key}·`) || name.startsWith(`${key} ·`)) {
+          return agent.id;
+        }
+      }
+      return null;
+    },
+    [agents],
+  );
+
+  const dispatchIssueMutation = useMutation({
+    mutationFn: ({ issueId, agentId }: { issueId: string; agentId: string }) =>
+      issuesApi.update(issueId, { assigneeAgentId: agentId }),
+    onSuccess: () => {
+      // ["issues", companyId] prefix-matches every inbox issue query.
+      void queryClient.invalidateQueries({ queryKey: queryKeys.issues.list(selectedCompanyId!) });
+    },
+    onError: (error) => {
+      setActionError(error instanceof Error ? error.message : "Failed to dispatch task.");
+    },
+  });
 
   const issueById = useMemo(() => {
     const map = new Map<string, Issue>();
@@ -2585,6 +2619,22 @@ export function Inbox() {
                             showIdentifier={visibleIssueColumnSet.has("id") && availableIssueColumnSet.has("id")}
                             statusSlot={rowStatusIcon}
                           />
+                          {(() => {
+                            // SUM-148: tier chip + work-type tag + one-click dispatch.
+                            const route = deriveInboxScore(issue).route;
+                            const routedAgentId = resolveRoutedAgentId(route?.agentNameKey ?? null);
+                            return (
+                              <InboxScoreChips
+                                issue={issue}
+                                route={route}
+                                routedAgentId={routedAgentId}
+                                onDispatch={(agentId) =>
+                                  dispatchIssueMutation.mutate({ issueId: issue.id, agentId })
+                                }
+                                dispatchPending={dispatchIssueMutation.isPending}
+                              />
+                            );
+                          })()}
                         </>
                       }
                       titleSuffix={hasChildren && !isExpanded && depth === 0 ? (
