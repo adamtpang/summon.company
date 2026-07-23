@@ -1853,6 +1853,21 @@ export {
 } from "./quota-alerts.js";
 
 export {
+  CADENCE_HOT_INTERVAL_SEC,
+  CADENCE_RECENT_INTERVAL_SEC,
+  CADENCE_RECENT_MAX_AGE_DAYS,
+  CADENCE_STALE_INTERVAL_SEC,
+  cadenceIntervalSec,
+  cadenceLabel,
+  parseCadenceTier,
+  resolveWorkItemCadence,
+  type AttentionCadence,
+  type AttentionCadenceSource,
+  type AttentionCadenceTier,
+  type WorkItemCadenceInput,
+} from "./attention-cadence.js";
+
+export {
   FAILOVER_TRIGGERS,
   classifyProviderProbeError,
   describeModelChainShift,
