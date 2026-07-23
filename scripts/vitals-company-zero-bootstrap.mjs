@@ -59,39 +59,39 @@ const codexCheapModel = {
 const claudeCheapModel = {
   enabled: true,
   label: "Cheap Claude",
-  adapterConfig: { model: "claude-sonnet-4-6", effort: "low" },
-};
-const commonRuntime = {
-  heartbeat: { enabled: false, maxConcurrentRuns: 1 },
-  modelProfiles: { cheap: codexCheapModel },
-};
-const ceoRuntime = {
-  heartbeat: {
-    enabled: true,
-    intervalSec: 1800,
-    wakeOnDemand: true,
-    cooldownSec: 60,
-    maxConcurrentRuns: 1,
-  },
-  modelProfiles: { cheap: codexCheapModel },
+  adapterConfig: { model: "claude-haiku-4-5", effort: "low" },
 };
 
-function ceoRuntimeFor(agent) {
-  const existingRuntime = agent.runtimeConfig ?? {};
+// SUM-220: the cheap profile MUST match the agent's adapter. A gpt-5.5 cheap
+// profile on a claude_local agent is instant-fail poison — the claude adapter
+// cannot run gpt-5.5, so any run that resolves `cheap` dies in ~4s. Never
+// hard-code the cheap model into a shared runtime object; resolve it from the
+// adapter every time an agent runtimeConfig is built.
+function cheapModelForAdapter(adapterType) {
+  if (adapterType === "claude_local") return claudeCheapModel;
+  if (adapterType === "codex_local") return codexCheapModel;
+  return null;
+}
+
+const commonHeartbeat = { enabled: false, maxConcurrentRuns: 1 };
+const ceoHeartbeat = {
+  enabled: true,
+  intervalSec: 1800,
+  wakeOnDemand: true,
+  cooldownSec: 60,
+  maxConcurrentRuns: 1,
+};
+
+// Build an agent runtimeConfig whose cheap profile always matches the agent
+// adapter. Pass the adapterType the agent will actually run on (the one being
+// applied in the same patch), not a stale value.
+function runtimeConfigFor(adapterType, heartbeat, existingRuntime = {}) {
   const existingProfiles = existingRuntime.modelProfiles ?? {};
-  const providerCheapModel = agent.adapterType === "claude_local"
-    ? claudeCheapModel
-    : agent.adapterType === "codex_local"
-      ? codexCheapModel
-      : null;
+  const cheap = cheapModelForAdapter(adapterType);
   const modelProfiles = { ...existingProfiles };
-  if (providerCheapModel) modelProfiles.cheap = providerCheapModel;
+  if (cheap) modelProfiles.cheap = cheap;
   else delete modelProfiles.cheap;
-  return {
-    ...existingRuntime,
-    heartbeat: ceoRuntime.heartbeat,
-    modelProfiles,
-  };
+  return { ...existingRuntime, heartbeat, modelProfiles };
 }
 
 const agentInstructions = {
@@ -386,12 +386,19 @@ async function main() {
     }
     const isCeo = agent.name === "Vitals CEO";
     const preserveCeoAdapter = isCeo && agent.adapterType !== "codex_local";
+    const nextAdapterType = preserveCeoAdapter ? agent.adapterType : "codex_local";
     const patch = {
-      adapterType: preserveCeoAdapter ? agent.adapterType : "codex_local",
+      adapterType: nextAdapterType,
       adapterConfig: preserveCeoAdapter
         ? agent.adapterConfig
         : { ...(agent.adapterConfig ?? {}), ...strongModel },
-      runtimeConfig: isCeo ? ceoRuntimeFor(agent) : commonRuntime,
+      // Resolve the cheap profile from the adapter the agent will actually run on
+      // (nextAdapterType), never a shared object — see SUM-220.
+      runtimeConfig: runtimeConfigFor(
+        nextAdapterType,
+        isCeo ? ceoHeartbeat : commonHeartbeat,
+        agent.runtimeConfig ?? {},
+      ),
       budgetMonthlyCents: agent.name === "Vitals CEO" ? 3000 : 1000,
       metadata: {
         ...(agent.metadata ?? {}),
@@ -452,7 +459,7 @@ async function main() {
       "Company setup, standardization checklist, workspaces, skills, budgets, approvals, operating cadence, and import readiness.",
     adapterType: "codex_local",
     adapterConfig: strongModel,
-    runtimeConfig: commonRuntime,
+    runtimeConfig: runtimeConfigFor("codex_local", commonHeartbeat),
     budgetMonthlyCents: 1000,
     desiredSkills: resolveSkillRefs([
       "operations",
@@ -485,7 +492,7 @@ async function main() {
       "Brand identity, design system, landing page, product UX, responsive implementation, accessibility, and visual verification.",
     adapterType: "codex_local",
     adapterConfig: strongModel,
-    runtimeConfig: commonRuntime,
+    runtimeConfig: runtimeConfigFor("codex_local", commonHeartbeat),
     budgetMonthlyCents: 1000,
     desiredSkills: resolveSkillRefs([
       "brand-design",
@@ -523,7 +530,7 @@ async function main() {
       "Whole-company diagnosis, constraint ranking, evidence gathering, task dispatch, verification, and impact measurement.",
     adapterType: "codex_local",
     adapterConfig: strongModel,
-    runtimeConfig: commonRuntime,
+    runtimeConfig: runtimeConfigFor("codex_local", commonHeartbeat),
     budgetMonthlyCents: 1000,
     desiredSkills: resolveSkillRefs([
       "cofounder",
