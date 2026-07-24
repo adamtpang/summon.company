@@ -1,0 +1,12 @@
+{
+  "name": "Client display name (appears on the invoice)",
+  "email": "billing@client.com",
+  "customerId": "cus_... (optional: pins the exact Stripe customer, skips email search)",
+  "due": 7,
+  "currency": "usd",
+  "memo": "Default memo line shown under the invoice header (optional)",
+  "footer": "Default footer: guarantee, terms link, contact (optional)",
+  "items": {
+    "preset-name": { "description": "Line item text the client recognizes", "cents": 50000 }
+  }
+}

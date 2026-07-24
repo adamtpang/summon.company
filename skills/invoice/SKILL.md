@@ -62,15 +62,30 @@ invoice for the work on X", "send <client> an invoice".
    approval via URL, show the link, wait for Adam to say he approved, then
    re-call with the approval_token.
 
-## Fallback script (no MCP in session)
+## Fallback script and modular client profiles
 
 ```bash
+node ~/.claude/skills/invoice/scripts/invoice.mjs --client joe --preset ambassadorship
 node ~/.claude/skills/invoice/scripts/invoice.mjs \
   --name "<client>" --email <email> \
   --item "<Line item one>=<cents>" --item "<Line item two>=<cents>" \
   --desc "<one-line scope summary>" --due 14
 ```
+
+**Client profiles** live in `clients/<slug>.json` (see `clients/_template.json`):
+name, email, pinned Stripe `customerId`, default terms, memo, footer, and a
+map of named line-item presets. `--client <slug>` loads the profile,
+`--preset <name>` pulls a preset line, and every flag overrides the profile.
+One JSON file per client is the customization surface: new client, new file.
+Current profiles: `joe` (Quantus, net 7), `anton` (Regain, founding footer).
 `--dry` prints the plan without touching Stripe. `--send` only on the word.
+
+## Pre-mint gate
+
+Before minting a FIRST invoice for a new client or a new offer, run
+/offer-check (the Grand Slam and value-equation gate). GO means mint; FIX
+means repair the offer first. Recurring re-bills of an already-checked offer
+skip the gate. Adam can override with an explicit "skip the check".
 
 ## Rules (hard)
 
