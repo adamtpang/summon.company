@@ -28,6 +28,7 @@ Book PDFs stay out of git (summon.guide convention); distillations live in [`boo
 - **$100M Offers** (Alex Hormozi) - value equation, Grand Slam Offer construction, premium pricing. [`books/100m-offers.md`](books/100m-offers.md)
 - **$100M Leads** (Alex Hormozi) - core four advertising, Rule of 100, lead getters. [`books/100m-leads.md`](books/100m-leads.md)
 - **How to Make a Few Billion Dollars** (Brad Jacobs) - big trends, disciplined M&A, electric meetings. [`books/how-to-make-a-few-billion-dollars.md`](books/how-to-make-a-few-billion-dollars.md)
+- **The Book of Elon** (Eric Jorgenson) - The Algorithm, first principles, effectiveness before efficiency. [`books/the-book-of-elon.md`](books/the-book-of-elon.md)
 
 ## Channel slots ready for import (youchop.app)
 - **Alex Hormozi** (@AlexHormozi) - slot scaffolded at [`alex-hormozi/`](alex-hormozi/INDEX.md), runbook in its `_pipeline/`. Not yet imported.
