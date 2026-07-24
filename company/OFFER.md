@@ -65,3 +65,35 @@ The landing may speak broadly; every OFFER is named for one person's problem.
 One design partner = one named use case (Anton = the remediation program,
 Michael = event ops). New segments earn a named offer only after a receipt
 exists in that segment.
+
+## The gates (added 2026-07-24: no offer is sent without passing /offer)
+
+Every deal, this one included, passes the grand slam deal desk
+(`skills/offer/SKILL.md`) before it goes out:
+
+1. **Value equation.** Dream outcome in the lead's words · a receipt behind
+   every claim · a visible win inside 7 days · an embarrassingly short list
+   of things the lead must do.
+2. **Spread.** Conservative yearly value of the outcome ≥ 10x the price.
+   Under 10x: raise value or cut scope; a price cut is the last resort.
+3. **Budget.** The price maps to a budget line the lead already has (a
+   contractor, a hire, an agency, tools). No budget evidence: walk, or free
+   tier until receipts build the case. Never discount into a budget that
+   does not exist.
+4. **Verdict.** GO ships. FIX names the one weakest lever. WALK says so
+   plainly.
+
+### The Anton offer, through the gates
+
+- Dream outcome: his register worked nightly per his own wave plan. Passes.
+- Likelihood: dogfood receipts plus the any-month refund. Passes once
+  checklist item 2 (second-company proof) is done, which is already the
+  pre-send rule above.
+- Time delay: a review queue of finished work on morning one. Passes.
+- Effort: his only jobs are approve or reject. Passes.
+- Spread: $392/mo against a $5-12k/mo contractor anchor is a 12x to 30x
+  spread. Passes.
+- **Budget: the open item.** The anchor assumes contractor money exists;
+  nothing here confirms what Anton actually spends on the program today.
+  Before the send, ask the money question ("what is this costing you per
+  month right now?") and name the budget line the $392 comes from.
