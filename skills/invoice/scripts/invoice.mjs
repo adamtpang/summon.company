@@ -21,15 +21,18 @@ import os from "node:os";
 import path from "node:path";
 
 const args = process.argv.slice(2);
-const opt = { items: [], due: 14, currency: "usd", send: false, dry: false };
+const opt = { items: [], presets: [], send: false, dry: false };
 for (let i = 0; i < args.length; i++) {
   const a = args[i];
   const next = () => args[++i];
-  if (a === "--name") opt.name = next();
+  if (a === "--client") opt.client = next();
+  else if (a === "--preset") opt.presets.push(next());
+  else if (a === "--name") opt.name = next();
   else if (a === "--email") opt.email = next();
   else if (a === "--item") opt.items.push(next());
   else if (a === "--amount") opt.amount = next();
   else if (a === "--desc") opt.desc = next();
+  else if (a === "--footer") opt.footer = next();
   else if (a === "--due") opt.due = Number(next());
   else if (a === "--currency") opt.currency = next();
   else if (a === "--env") opt.envPath = next();
@@ -37,8 +40,12 @@ for (let i = 0; i < args.length; i++) {
   else if (a === "--dry") opt.dry = true;
   else if (a === "--help" || a === "-h") {
     console.log(
-      "invoice.mjs --name <client> --email <email> (--item \"Description=cents\")+ | --amount <cents> " +
-        "[--desc <scope summary>] [--due <days=14>] [--currency usd] [--env <path>] [--send] [--dry]",
+      "invoice.mjs [--client <slug>] [--preset <name>]* --name <client> --email <email> " +
+        "(--item \"Description=cents\")+ | --amount <cents> [--desc <memo>] [--footer <text>] " +
+        "[--due <days>] [--currency usd] [--env <path>] [--send] [--dry]\n\n" +
+        "--client loads clients/<slug>.json (terms, footer, memo, customer id, item\n" +
+        "presets). Flags always override the profile. --preset pulls a named line\n" +
+        "item from the profile's items map.",
     );
     process.exit(0);
   }
@@ -49,7 +56,35 @@ function fail(msg) {
   process.exit(1);
 }
 
-if (!opt.name || !opt.email) fail("--name and --email are required");
+// Modular per-client profiles: clients/<slug>.json next to this skill.
+// Profile fields fill anything the flags left unset; flags always win.
+const skillDir = path.dirname(new URL(import.meta.url).pathname.replace(/^\/(\w:)/, "$1"));
+let profile = null;
+if (opt.client) {
+  const profilePath = path.join(skillDir, "..", "clients", opt.client + ".json");
+  try {
+    profile = JSON.parse(fs.readFileSync(profilePath, "utf8"));
+  } catch (e) {
+    fail(`no client profile at ${profilePath} (${e.message})`);
+  }
+  opt.name ??= profile.name;
+  opt.email ??= profile.email;
+  opt.due ??= profile.due;
+  opt.currency ??= profile.currency;
+  opt.desc ??= profile.memo;
+  opt.footer ??= profile.footer;
+  for (const presetName of opt.presets) {
+    const preset = profile.items?.[presetName];
+    if (!preset) fail(`profile "${opt.client}" has no item preset "${presetName}" (has: ${Object.keys(profile.items ?? {}).join(", ") || "none"})`);
+    opt.items.push(`${preset.description}=${preset.cents}`);
+  }
+} else if (opt.presets.length) {
+  fail("--preset requires --client");
+}
+opt.due ??= 14;
+opt.currency ??= "usd";
+
+if (!opt.name || !opt.email) fail("--name and --email are required (directly or via --client profile)");
 if (opt.items.length === 0 && !opt.amount) fail("provide --item \"Description=cents\" (repeatable) or --amount <cents>");
 if (opt.items.length === 0) opt.items.push((opt.desc ?? "Professional services") + "=" + opt.amount);
 
@@ -87,9 +122,10 @@ const dollars = (c) => "$" + (c / 100).toFixed(2);
 
 if (opt.dry) {
   console.log("DRY RUN — no Stripe calls made. Plan:");
+  if (profile) console.log(`0. client profile: ${opt.client} (${profile.customerId ?? "find by email"})`);
   console.log(`1. find-or-create customer: ${opt.name} <${opt.email}>`);
   for (const l of lines) console.log(`2. invoice item: "${l.description}" ${dollars(l.cents)}`);
-  console.log(`3. create invoice: collection_method=send_invoice, days_until_due=${opt.due}` + (opt.desc ? `, memo="${opt.desc}"` : ""));
+  console.log(`3. create invoice: collection_method=send_invoice, days_until_due=${opt.due}` + (opt.desc ? `, memo="${opt.desc}"` : "") + (opt.footer ? `, footer="${opt.footer.slice(0, 40)}..."` : ""));
   console.log(`4. finalize -> hosted pay link + PDF. TOTAL ${dollars(totalCents)} ${opt.currency.toUpperCase()}`);
   console.log(opt.send ? "5. SEND via Stripe email (outward!)" : "5. no send — Adam delivers the link himself");
   process.exit(0);
@@ -120,10 +156,16 @@ async function stripeGet(pathname) {
   return json;
 }
 
-// 1. Find or create the customer by email.
-const found = await stripeGet(`/customers/search?query=${encodeURIComponent(`email:'${opt.email}'`)}`);
-const customer = found.data?.[0] ?? (await stripe("/customers", { name: opt.name, email: opt.email }));
-console.log(`customer: ${customer.id} (${found.data?.length ? "existing" : "created"})`);
+// 1. Use the profile's pinned customer id, else find or create by email.
+let customer;
+if (profile?.customerId) {
+  customer = await stripeGet(`/customers/${profile.customerId}`);
+  console.log(`customer: ${customer.id} (pinned by profile)`);
+} else {
+  const found = await stripeGet(`/customers/search?query=${encodeURIComponent(`email:'${opt.email}'`)}`);
+  customer = found.data?.[0] ?? (await stripe("/customers", { name: opt.name, email: opt.email }));
+  console.log(`customer: ${customer.id} (${found.data?.length ? "existing" : "created"})`);
+}
 
 // 2. Create the invoice FIRST (send_invoice + due days), then attach items to it.
 const invoiceParams = {
@@ -134,6 +176,7 @@ const invoiceParams = {
   currency: opt.currency,
 };
 if (opt.desc) invoiceParams.description = opt.desc;
+if (opt.footer) invoiceParams.footer = opt.footer;
 const invoice = await stripe("/invoices", invoiceParams);
 console.log(`invoice: ${invoice.id} (draft)`);
 

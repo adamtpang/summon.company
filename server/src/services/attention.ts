@@ -34,9 +34,11 @@ import type {
   AttentionSourceKind,
   AttentionSubject,
   AttentionWorkspaceRef,
+  OutcomeForecast,
 } from "@paperclipai/shared";
 import {
   evaluateQuotaAlerts,
+  parseOutcomeForecast,
   quotaAlertDedupKey,
   quotaProviderLabel,
 } from "@paperclipai/shared";
@@ -317,10 +319,11 @@ function decisionVerbs(...verbs: AttentionDecisionVerb[]): AttentionDecisionVerb
   return verbs;
 }
 
-type CreateAttentionItemInput = Omit<AttentionItem, "id" | "dismissalKey" | "rank" | "dismissal" | "project" | "workspace" | "detail"> & {
+type CreateAttentionItemInput = Omit<AttentionItem, "id" | "dismissalKey" | "rank" | "dismissal" | "project" | "workspace" | "detail" | "forecast"> & {
   project?: AttentionProjectRef | null;
   workspace?: AttentionWorkspaceRef | null;
   detail?: AttentionItemDetail | null;
+  forecast?: OutcomeForecast | null;
 };
 
 function createItem(input: CreateAttentionItemInput): AttentionItem {
@@ -332,8 +335,24 @@ function createItem(input: CreateAttentionItemInput): AttentionItem {
     project: input.project ?? null,
     workspace: input.workspace ?? null,
     detail: input.detail ?? null,
+    forecast: input.forecast ?? null,
     rank: 0,
   };
+}
+
+/**
+ * First valid pre-dispatch ```forecast block found across the candidate texts,
+ * or `null` (OUTCOME-RECEIPTS.md §4). Additive + null-safe: a card only quotes an
+ * expected outcome once a proposer authored one — the pipeline lights up at the
+ * VIT-14 cutover, and an invalid block is dropped silently rather than shown.
+ */
+function readForecast(...candidates: Array<string | null | undefined>): OutcomeForecast | null {
+  for (const text of candidates) {
+    if (!text) continue;
+    const parsed = parseOutcomeForecast(text);
+    if (parsed.present && parsed.ok) return parsed.forecast;
+  }
+  return null;
 }
 
 function compareAttentionItems(left: AttentionItem, right: AttentionItem) {
@@ -719,6 +738,9 @@ export function attentionService(db: Db) {
           relatedIssue: issue ? issueSubject(prefix, issue) : null,
           ...issueContext(issue),
           detail,
+          // Pre-dispatch "expect Y": a proposer may embed a ```forecast block in
+          // the interaction's summary/title so the card reads cost X, expect Y.
+          forecast: readForecast(interaction.summary, interaction.title),
         }));
       }
 

@@ -67,6 +67,23 @@ describe("isClaudeTransientUpstreamError", () => {
     );
   });
 
+  it("auto-resumes the exact production session-limit failure (middot, :MM, positive-offset IANA zone)", () => {
+    // Regression for the failure that killed heartbeat run 92d545d0 and stalled
+    // the always-on runtime (VIT-14): the CLI emitted "You've hit your session
+    // limit · resets 4:50pm (Asia/Singapore)" with a middle-dot separator,
+    // minutes, and a UTC+8 zone. It must classify as provider_quota (not a
+    // generic transient backoff) and resume at the provider's stated reset
+    // instant so the retry does not fire early and burn another blocked attempt.
+    const now = new Date("2026-07-16T07:00:00.000Z"); // 15:00 in Asia/Singapore
+    const errorMessage = "You've hit your session limit · resets 4:50pm (Asia/Singapore)";
+
+    expect(isClaudeProviderQuotaError({ errorMessage })).toBe(true);
+    expect(isClaudeTransientUpstreamError({ errorMessage })).toBe(false);
+    expect(extractClaudeRetryNotBefore({ errorMessage }, now)?.toISOString()).toBe(
+      "2026-07-16T08:50:00.000Z", // 16:50 Asia/Singapore (UTC+8)
+    );
+  });
+
   it("classifies Anthropic API rate_limit_error and overloaded_error as transient", () => {
     expect(
       isClaudeTransientUpstreamError({

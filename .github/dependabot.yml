@@ -1,14 +1,29 @@
 version: 2
 updates:
+  # One grouped PR a month, not a dozen a week. Board ruling 2026-07-25:
+  # twelve open bumps generated more review load and CI minutes than the
+  # updates were worth. Grouping collapses them into a single reviewable PR.
   - package-ecosystem: npm
     directory: "/"
     schedule:
-      interval: weekly
+      interval: monthly
       day: monday
       time: "06:00"
-    open-pull-requests-limit: 10
+    open-pull-requests-limit: 2
     labels:
       - "dependencies"
+    groups:
+      minor-and-patch:
+        applies-to: version-updates
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
+      security:
+        applies-to: security-updates
+        patterns:
+          - "*"
     ignore:
       # Ignore major version bumps — review those manually
       - dependency-name: "*"
@@ -17,7 +32,13 @@ updates:
   - package-ecosystem: github-actions
     directory: "/"
     schedule:
-      interval: weekly
+      interval: monthly
       day: monday
       time: "06:00"
-    open-pull-requests-limit: 5
+    open-pull-requests-limit: 1
+    labels:
+      - "dependencies"
+    groups:
+      actions:
+        patterns:
+          - "*"

@@ -1,4 +1,4 @@
-import type { Issue, IssuePriority, IssueStatus } from "@paperclipai/shared";
+import type { Issue, IssueLabel, IssuePriority, IssueStatus } from "@paperclipai/shared";
 
 /**
  * Board scoreboard derivations (VIT-70).
@@ -267,5 +267,402 @@ export function buildScoreboard(issues: Issue[]): Scoreboard {
       reviewNeededCount: rows.filter((r) => r.reviewNeeded).length,
       overallProgress: weightSum > 0 ? Math.round(weightedProgress / weightSum) : 0,
     },
+  };
+}
+
+/* ------------------------------------------------------------------------- *
+ * SUM-148 — four-input Inbox scoring, work-type tags, and agent routing.
+ *
+ * The board asked for every inbox task to carry IMPORTANCE, URGENCY, TIME
+ * involved, and MONEY involved; a tier letter; a work-type tag; and a routed
+ * agent. Importance and urgency already have honest backfills above. The two
+ * genuinely new inputs (time, money) plus the work-type tag have no proxy on
+ * the issue lifecycle — they are human triage judgments.
+ *
+ * First-principles choice (SUM-148): rather than a cross-package DB migration
+ * for two new columns, we persist these judgments in the EXISTING label system,
+ * which is already durable AND board-editable ("board can override"). The CEO
+ * triage skill writes namespaced labels; the board overrides by editing labels.
+ * Nothing here is self-reported by a run — a human/CEO wrote the label.
+ *
+ * Label conventions (case-insensitive, `namespace:value`, bare fallback too):
+ *   time:xs|s|m|l|xl     — time involved (xs = minutes, xl = weeks)
+ *   money:xs|s|m|l|xl    — money involved (xs = negligible, xl = company-making)
+ *   dept:<work-type>     — work type; a bare label named after a department also
+ *                          counts, so "engineering" or "dept:engineering" both work.
+ *
+ * All functions stay pure so they unit-test without React, matching the file.
+ * ------------------------------------------------------------------------- */
+
+/** The eight work-type buckets the board triages into. */
+export type WorkTypeTag =
+  | "engineering"
+  | "design"
+  | "marketing"
+  | "sales"
+  | "finance"
+  | "ops"
+  | "legal"
+  | "support";
+
+const TIME_LABEL_PREFIX = "time:";
+const MONEY_LABEL_PREFIX = "money:";
+const DEPT_LABEL_PREFIX = "dept:";
+
+/** t-shirt size token -> 1..5 stars. xs is the smallest, xl the largest. */
+const SIZE_STARS: Record<string, number> = { xs: 1, s: 2, m: 3, l: 4, xl: 5 };
+
+/** Neutral star value used when the board has not tagged the input yet. */
+const NEUTRAL_STARS = 3;
+
+/** Accept a few common synonyms so triage labels don't have to be exact. */
+const WORK_TYPE_ALIASES: Record<string, WorkTypeTag> = {
+  engineering: "engineering",
+  eng: "engineering",
+  dev: "engineering",
+  design: "design",
+  ux: "design",
+  marketing: "marketing",
+  growth: "marketing",
+  sales: "sales",
+  finance: "finance",
+  fin: "finance",
+  ops: "ops",
+  operations: "ops",
+  legal: "legal",
+  support: "support",
+};
+
+/**
+ * The responsible AI employee per work type (SUM-148 routing table). The board
+ * named seven department agents; `agentNameKey` is matched against the live
+ * company agent roster by the UI to resolve a real id for one-click dispatch.
+ * `legal` has no dedicated agent yet, so it routes to null (board dispatches).
+ */
+export interface WorkTypeRoute {
+  workType: WorkTypeTag;
+  department: string;
+  /** First-name key to match against `agent.name`; null when unrouted. */
+  agentNameKey: string | null;
+}
+
+const ROUTES: Record<WorkTypeTag, WorkTypeRoute> = {
+  engineering: { workType: "engineering", department: "Engineering", agentNameKey: "Forge" },
+  design: { workType: "design", department: "Design", agentNameKey: "Ink" },
+  marketing: { workType: "marketing", department: "Marketing", agentNameKey: "Echo" },
+  sales: { workType: "sales", department: "Sales", agentNameKey: "Vector" },
+  finance: { workType: "finance", department: "Finance", agentNameKey: "Ledger" },
+  ops: { workType: "ops", department: "Operations", agentNameKey: "Atlas" },
+  support: { workType: "support", department: "Support", agentNameKey: "Pulse" },
+  legal: { workType: "legal", department: "Legal", agentNameKey: null },
+};
+
+/** Lower-cased label names for an issue, from either compact or full payloads. */
+function labelNames(issue: Pick<Issue, "labels">): string[] {
+  return (issue.labels ?? []).map((l: IssueLabel) => l.name.trim().toLowerCase());
+}
+
+/** Read a `prefix:size` label (e.g. `time:l`) into 1..5 stars, neutral if absent. */
+function sizeStarsFromLabels(names: string[], prefix: string): number {
+  for (const name of names) {
+    if (!name.startsWith(prefix)) continue;
+    const token = name.slice(prefix.length).trim();
+    if (token in SIZE_STARS) return SIZE_STARS[token];
+  }
+  return NEUTRAL_STARS;
+}
+
+/**
+ * TIME involved as 1..5 stars (xs=1 quick, xl=5 heavy). More stars means MORE
+ * time, which is a COST — {@link tierForFour} treats it as effort, not value.
+ * Honest backfill: neutral until the board tags `time:<size>`.
+ */
+export function timeInvolvedStarsFor(issue: Pick<Issue, "labels">): number {
+  return sizeStarsFromLabels(labelNames(issue), TIME_LABEL_PREFIX);
+}
+
+/**
+ * MONEY involved as 1..5 stars (xs=1 negligible, xl=5 company-making). More
+ * stars means more money at stake, which pulls the tier UP. Neutral until the
+ * board tags `money:<size>`.
+ */
+export function moneyInvolvedStarsFor(issue: Pick<Issue, "labels">): number {
+  return sizeStarsFromLabels(labelNames(issue), MONEY_LABEL_PREFIX);
+}
+
+/**
+ * Resolve the work-type tag from labels: a `dept:<x>` label wins, else the
+ * first bare label whose name matches a known department (or synonym). Returns
+ * null when the board has not tagged a work type yet.
+ */
+export function workTypeTagFor(issue: Pick<Issue, "labels">): WorkTypeTag | null {
+  const names = labelNames(issue);
+  for (const name of names) {
+    if (name.startsWith(DEPT_LABEL_PREFIX)) {
+      const token = name.slice(DEPT_LABEL_PREFIX.length).trim();
+      if (token in WORK_TYPE_ALIASES) return WORK_TYPE_ALIASES[token];
+    }
+  }
+  for (const name of names) {
+    if (name in WORK_TYPE_ALIASES) return WORK_TYPE_ALIASES[name];
+  }
+  return null;
+}
+
+/** The routing target for a work type, or null when untagged. */
+export function routeFor(workType: WorkTypeTag | null): WorkTypeRoute | null {
+  return workType ? ROUTES[workType] : null;
+}
+
+/**
+ * Four-input tier. Importance, urgency, and money are VALUE (pull the tier up);
+ * time is EFFORT (pulls it down), so the score rewards high-value quick wins and
+ * penalizes heavy lifts. Each input is 1..5; we invert time as `6 - time` so all
+ * four terms read "more is better", giving a 4..20 band:
+ *
+ *   >=18 S · >=15 A · >=12 B · >=9 C · >=6 D · else F
+ *
+ * The S band stays narrow (needs near-max value at low effort) per the Thiel
+ * doctrine already encoded in {@link tierFor}.
+ */
+export function tierForFour(
+  importanceStars: number,
+  urgencyStars: number,
+  timeStars: number,
+  moneyStars: number,
+): ScoreboardTier {
+  const score = importanceStars + urgencyStars + moneyStars + (6 - timeStars);
+  if (score >= 18) return "S";
+  if (score >= 15) return "A";
+  if (score >= 12) return "B";
+  if (score >= 9) return "C";
+  if (score >= 6) return "D";
+  return "F";
+}
+
+/** One inbox item's full four-input score, tier, tag, and route — all derived. */
+export interface InboxScore {
+  importanceStars: number;
+  urgencyStars: number;
+  timeStars: number;
+  moneyStars: number;
+  tier: ScoreboardTier;
+  /** Ordering weight: value up, effort down (matches {@link tierForFour}). */
+  score: number;
+  workType: WorkTypeTag | null;
+  route: WorkTypeRoute | null;
+}
+
+/** Derive the complete four-input Inbox score for one issue. */
+export function deriveInboxScore(issue: Issue): InboxScore {
+  const importanceStars = importanceStarsFor(issue.priority);
+  const urgencyStars = urgencyStarsFor(issue);
+  const timeStars = timeInvolvedStarsFor(issue);
+  const moneyStars = moneyInvolvedStarsFor(issue);
+  const workType = workTypeTagFor(issue);
+  return {
+    importanceStars,
+    urgencyStars,
+    timeStars,
+    moneyStars,
+    tier: tierForFour(importanceStars, urgencyStars, timeStars, moneyStars),
+    score: importanceStars + urgencyStars + moneyStars + (6 - timeStars),
+    workType,
+    route: routeFor(workType),
+  };
+}
+
+/** Tier rank for ordering — S is highest (0), F lowest. */
+const TIER_RANK: Record<ScoreboardTier, number> = { S: 0, A: 1, B: 2, C: 3, D: 4, F: 5 };
+
+export function tierRank(tier: ScoreboardTier): number {
+  return TIER_RANK[tier];
+}
+
+/**
+ * Rank inbox issues by tier first, then by four-input score descending, then by
+ * title — the "rank-ordered in S-F tiers" the board asked for. Pure and stable.
+ */
+export function sortIssuesByInboxScore(issues: Issue[]): Issue[] {
+  return [...issues]
+    .map((issue) => ({ issue, s: deriveInboxScore(issue) }))
+    .sort((a, b) => {
+      const tierDelta = tierRank(a.s.tier) - tierRank(b.s.tier);
+      if (tierDelta !== 0) return tierDelta;
+      if (a.s.score !== b.s.score) return b.s.score - a.s.score;
+      return a.issue.title.localeCompare(b.issue.title);
+    })
+    .map((entry) => entry.issue);
+}
+
+/* ------------------------------------------------------------------------- *
+ * SUM-229 — win-condition progress for the Factory Floor dish cards.
+ *
+ * The board's rule: every dish shows a PROGRESS BAR toward its WIN CONDITION,
+ * and progress must be EARNED, never vibes. Two honest sources, in order:
+ *
+ *   1. A declared win condition — a markdown task list ("- [ ]" / "- [x]") the
+ *      agent writes into the issue description or plan and checks off as each
+ *      acceptance criterion is met. Progress = criteria checked / total. This is
+ *      the real signal and needs no schema change: the checkboxes already live
+ *      in text the agent edits as it works.
+ *   2. Where no checklist exists yet, a COARSE ladder from lifecycle state alone
+ *      (the board's numbers): queued 5, assigned 15, cooking 55, plated 90,
+ *      done 100 — and a blocked dish shows its blocker instead of a bar.
+ *
+ * Pure, so the parser and the ladder unit-test without React.
+ * ------------------------------------------------------------------------- */
+
+/** One acceptance criterion parsed from a markdown task list. */
+export interface WinConditionItem {
+  text: string;
+  checked: boolean;
+}
+
+/** Matches a GitHub-style task line: "- [ ] do a thing" / "* [x] done". */
+const TASK_ITEM_RE = /^[ \t]*[-*][ \t]+\[([ xX])\][ \t]+(.+?)[ \t]*$/;
+
+/**
+ * Parse a markdown task list into win-condition items. Only genuine checkbox
+ * lines count — prose and plain bullets are ignored, so a stray "-" never reads
+ * as an unmet criterion.
+ */
+export function parseWinConditionItems(text: string | null | undefined): WinConditionItem[] {
+  if (!text) return [];
+  const items: WinConditionItem[] = [];
+  for (const line of text.split(/\r?\n/)) {
+    const match = TASK_ITEM_RE.exec(line);
+    if (!match) continue;
+    items.push({ text: match[2].trim(), checked: match[1].toLowerCase() === "x" });
+  }
+  return items;
+}
+
+export type WinConditionMode = "checklist" | "coarse" | "blocked";
+
+export interface WinConditionProgress {
+  mode: WinConditionMode;
+  /** 0..100; a real target for checklist/coarse, last-reached stage for blocked. */
+  progress: number;
+  items: WinConditionItem[];
+  checkedCount: number;
+  totalCount: number;
+  /** "3/5 criteria" for a checklist, else the coarse state name / "Blocked". */
+  label: string;
+  /** Human blocker line when mode === "blocked", else null. */
+  blocker: string | null;
+}
+
+/**
+ * The board's coarse ladder, used only when a dish has NOT declared a checklist:
+ * queued 5 · assigned 15 · cooking 55 · plated 90 · done 100. "Cooking" needs a
+ * live burner (passed in) — an in-progress dish with no live run is only
+ * "assigned", so the bar never overstates a stalled ticket.
+ */
+export function coarseDishProgress(
+  issue: Pick<Issue, "status" | "assigneeAgentId">,
+  cooking: boolean,
+): { progress: number; label: string } {
+  switch (issue.status) {
+    case "done":
+      return { progress: 100, label: "Done" };
+    case "in_review":
+      return { progress: 90, label: "Plated" };
+    case "cancelled":
+      return { progress: 0, label: "Cancelled" };
+    case "in_progress":
+      return cooking
+        ? { progress: 55, label: "Cooking" }
+        : { progress: 15, label: "Assigned" };
+    default:
+      return issue.assigneeAgentId
+        ? { progress: 15, label: "Assigned" }
+        : { progress: 5, label: "Queued" };
+  }
+}
+
+/** Short, human blocker lines from the inbox-attention reason codes. */
+const BLOCKED_REASON_LABEL: Record<string, string> = {
+  blocked_by_unassigned_issue: "Waiting on an unassigned blocker",
+  blocked_by_assigned_backlog_issue: "Blocker still in backlog",
+  blocked_by_uninvokable_assignee: "Blocker's assignee can't run",
+  blocked_by_cancelled_issue: "Blocked by a cancelled issue",
+  blocked_chain_stalled: "Blocker chain stalled",
+  invalid_review_participant: "Review has no valid participant",
+  in_review_without_action_path: "In review with no action path",
+  missing_successful_run_disposition: "Run finished, needs disposition",
+  pending_board_decision: "Awaiting a board decision",
+  pending_user_decision: "Awaiting a user decision",
+  external_owner_action: "Waiting on an external owner",
+  open_recovery_issue: "Open recovery issue",
+};
+
+/**
+ * The most specific blocker line available: the inbox-attention action (with its
+ * owner) when the engine computed one, else a humanized reason code, else a
+ * plain "Blocked". Never invents detail the payload doesn't carry.
+ */
+export function dishBlockerText(issue: Pick<Issue, "blockedInboxAttention">): string {
+  const att = issue.blockedInboxAttention;
+  if (!att) return "Blocked";
+  const action = att.action?.label?.trim();
+  if (action) {
+    const owner = att.owner?.label?.trim();
+    return owner ? `${action} · ${owner}` : action;
+  }
+  return BLOCKED_REASON_LABEL[att.reason] ?? "Blocked";
+}
+
+/**
+ * Resolve a dish's win-condition progress. Blocked dishes short-circuit to the
+ * blocker. Otherwise a declared checklist (>= 2 criteria, matching the board's
+ * "2-6 items") wins and progress is the checked fraction; a done dish reads 100
+ * even mid-checklist. With no checklist we fall back to the coarse ladder.
+ *
+ * `extraText` lets the detail drawer fold the plan document in alongside the
+ * description; a card passes only the description it already holds.
+ */
+export function deriveWinCondition(
+  issue: Pick<Issue, "status" | "description" | "assigneeAgentId" | "blockedInboxAttention">,
+  opts: { cooking: boolean; extraText?: string | null } = { cooking: false },
+): WinConditionProgress {
+  if (issue.status === "blocked") {
+    return {
+      mode: "blocked",
+      progress: 25,
+      items: [],
+      checkedCount: 0,
+      totalCount: 0,
+      label: "Blocked",
+      blocker: dishBlockerText(issue),
+    };
+  }
+
+  const source = [issue.description, opts.extraText].filter(Boolean).join("\n\n");
+  const items = parseWinConditionItems(source);
+  if (items.length >= 2) {
+    const checkedCount = items.filter((i) => i.checked).length;
+    const progress =
+      issue.status === "done" ? 100 : Math.round((checkedCount / items.length) * 100);
+    return {
+      mode: "checklist",
+      progress,
+      items,
+      checkedCount,
+      totalCount: items.length,
+      label: `${checkedCount}/${items.length} criteria`,
+      blocker: null,
+    };
+  }
+
+  const coarse = coarseDishProgress(issue, opts.cooking);
+  return {
+    mode: "coarse",
+    progress: coarse.progress,
+    items: [],
+    checkedCount: 0,
+    totalCount: 0,
+    label: coarse.label,
+    blocker: null,
   };
 }

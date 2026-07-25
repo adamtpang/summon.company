@@ -1,11 +1,21 @@
 import { and, eq, gte, sql } from "drizzle-orm";
 import type { Db } from "@paperclipai/db";
-import { agents, approvals, companies, costEvents, heartbeatRuns, issues } from "@paperclipai/db";
+import {
+  agents,
+  approvals,
+  companies,
+  costEvents,
+  heartbeatRuns,
+  issueOutcomes,
+  issues,
+} from "@paperclipai/db";
+import { outcomeTimeValueCents } from "@paperclipai/shared";
 import { notFound } from "../errors.js";
 import { budgetService } from "./budgets.js";
 import { visibleIssueCondition } from "./issue-visibility.js";
 
 const DASHBOARD_RUN_ACTIVITY_DAYS = 14;
+const OUTCOMES_ROLLUP_DAYS = 30;
 
 function formatUtcDateKey(date: Date): string {
   return date.toISOString().slice(0, 10);
@@ -173,6 +183,45 @@ export function dashboardService(db: Db) {
         bucket.total += count;
       }
 
+      // Outcomes (30d) rollup — sourced ONLY from persisted receipts on tasks
+      // completed within the window (OUTCOME-RECEIPTS.md §3). A single indexed
+      // scan over (company_id, completed_at); the numeric levers are summed only
+      // over measured/estimated receipts, while `unmeasurable` receipts are
+      // counted separately as the honest denominator. GUARDRAIL: time-value
+      // dollars are computed off timeSavedMinutes below and kept out of money.
+      const outcomesStart = new Date(now.getTime() - OUTCOMES_ROLLUP_DAYS * 24 * 60 * 60 * 1000);
+      const outcomeRows = (await db.execute(sql`
+        SELECT
+          coalesce(sum(money_saved_cents) FILTER (WHERE confidence <> 'unmeasurable'), 0)::double precision AS money_saved_cents,
+          coalesce(sum(time_saved_minutes) FILTER (WHERE confidence <> 'unmeasurable'), 0)::double precision AS time_saved_minutes,
+          coalesce(sum(revenue_moved_cents) FILTER (WHERE confidence <> 'unmeasurable'), 0)::double precision AS revenue_moved_cents,
+          count(*) FILTER (WHERE risk_avoided IS NOT NULL)::double precision AS risks_avoided,
+          count(*) FILTER (WHERE confidence <> 'unmeasurable')::double precision AS receipt_count,
+          count(*) FILTER (WHERE confidence = 'unmeasurable')::double precision AS unmeasurable_count
+        FROM ${issueOutcomes}
+        WHERE company_id = ${companyId}
+          AND completed_at IS NOT NULL
+          AND completed_at >= ${outcomesStart.toISOString()}::timestamptz
+      `)) as unknown as Iterable<{
+        money_saved_cents: number | string;
+        time_saved_minutes: number | string;
+        revenue_moved_cents: number | string;
+        risks_avoided: number | string;
+        receipt_count: number | string;
+        unmeasurable_count: number | string;
+      }>;
+      const outcomeRow = Array.from(outcomeRows)[0];
+      const timeSavedMinutes = Number(outcomeRow?.time_saved_minutes ?? 0);
+      const outcomes = {
+        receiptCount: Number(outcomeRow?.receipt_count ?? 0),
+        unmeasurableCount: Number(outcomeRow?.unmeasurable_count ?? 0),
+        moneySavedCents: Number(outcomeRow?.money_saved_cents ?? 0),
+        timeSavedMinutes,
+        timeValueCents: outcomeTimeValueCents(timeSavedMinutes),
+        revenueMovedCents: Number(outcomeRow?.revenue_moved_cents ?? 0),
+        risksAvoided: Number(outcomeRow?.risks_avoided ?? 0),
+      };
+
       const utilization =
         company.budgetMonthlyCents > 0
           ? (monthSpendCents / company.budgetMonthlyCents) * 100
@@ -201,6 +250,7 @@ export function dashboardService(db: Db) {
           pausedProjects: budgetOverview.pausedProjectCount,
         },
         runActivity: Array.from(runActivity.values()),
+        outcomes,
       };
     },
   };

@@ -1,3 +1,6 @@
+<!-- BEGIN:grok-chat-continuation -->
+Grok chat continuation: read `GROK_CONTINUE_FROM_CLAUDE.md` and/or `GROK_CONTINUE_FROM_CODEX.md` when resuming in Grok. Refresh with `node .grok/sync-to-grok.js` from Aether root.
+<!-- END:grok-chat-continuation -->
 # AGENTS.md
 
 <!-- BEGIN:claude-chat-continuation -->

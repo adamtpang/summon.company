@@ -19,9 +19,28 @@ import { Textarea } from "@/components/ui/textarea";
  *
  * Weekly cadence: if no submission this ISO week, the popover self-opens once
  * (one prompt per week, never more). localStorage keys carry the state.
+ *
+ * Vendor vs customer routing (SUM-190): on the vendor's own instance the
+ * submission files a support task on the local SUM board. On a CUSTOMER
+ * instance there is no local vendor board to reach, so when
+ * VITE_FEEDBACK_ENDPOINT is configured the SAME submission POSTs to the hosted
+ * intake (feedback.summon.company / apps/landing/api/feedback.mjs) instead,
+ * which files the ticket on the vendor's SUM board routed to Haven.
  */
 const SUBMITTED_WEEK_KEY = "summon.feedback.lastSubmittedWeek";
 const PROMPTED_WEEK_KEY = "summon.feedback.lastPromptedWeek";
+
+/**
+ * When set, this instance is a customer (not the vendor): submissions go to the
+ * hosted intake endpoint rather than the local board. Empty/unset = vendor.
+ */
+const HOSTED_FEEDBACK_ENDPOINT = import.meta.env.VITE_FEEDBACK_ENDPOINT?.trim() || "";
+/** Opaque id the hosted endpoint dedupes on; host is a safe, PII-free default. */
+const FEEDBACK_INSTANCE_ID =
+  import.meta.env.VITE_FEEDBACK_INSTANCE_ID?.trim() ||
+  (typeof window !== "undefined" ? window.location.host : "unknown");
+/** Optional shared-secret the hosted intake checks (SUM-192). Unset = open intake. */
+const HOSTED_FEEDBACK_TOKEN = import.meta.env.VITE_FEEDBACK_TOKEN?.trim() || "";
 
 /** ISO-8601 week id, e.g. "2026-W29" — stable across reloads for the nag gate. */
 export function isoWeekId(now: Date = new Date()): string {
@@ -84,8 +103,36 @@ export function FeedbackWidget() {
 
   const submit = useMutation({
     mutationFn: async () => {
-      if (vendorCompanyId == null || rating == null) throw new Error("Pick a star rating first.");
+      if (rating == null) throw new Error("Pick a star rating first.");
       const week = isoWeekId();
+      const context = `${window.location.pathname} · ${new Date().toISOString()} · in-app widget`;
+
+      // Customer instance: POST the survey to the hosted vendor intake, which
+      // dedupes per instance+week and files the ticket on the SUM board.
+      if (HOSTED_FEEDBACK_ENDPOINT) {
+        const res = await fetch(HOSTED_FEEDBACK_ENDPOINT, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            ...(HOSTED_FEEDBACK_TOKEN ? { "X-Feedback-Token": HOSTED_FEEDBACK_TOKEN } : {}),
+          },
+          body: JSON.stringify({
+            instanceId: FEEDBACK_INSTANCE_ID,
+            rating,
+            why: rating < 5 ? why.trim() : "",
+            week,
+            context,
+          }),
+        });
+        if (!res.ok) {
+          const detail = await res.json().catch(() => null);
+          throw new Error(detail?.error || `Feedback intake returned ${res.status}.`);
+        }
+        return res.json();
+      }
+
+      // Vendor instance: file the support task directly on the local SUM board.
+      if (vendorCompanyId == null) throw new Error("No board available to receive feedback.");
       return issuesApi.create(vendorCompanyId, {
         title: `Customer feedback: ${rating}/5 (${week})`,
         status: "todo",
@@ -94,7 +141,7 @@ export function FeedbackWidget() {
           `Weekly quality survey (support lane, route to Haven).\n\n` +
           `Stars: ${rating}/5\n` +
           (rating < 5 ? `Why not a 5: ${why.trim() || "(no reason given)"}\n` : "Perfect score.\n") +
-          `\nContext: ${window.location.pathname} · ${new Date().toISOString()} · in-app widget`,
+          `\nContext: ${context}`,
       });
     },
     onSuccess: () => {

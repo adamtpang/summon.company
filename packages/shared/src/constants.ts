@@ -1323,3 +1323,35 @@ export const PLUGIN_BRIDGE_ERROR_CODES = [
   "UNKNOWN",
 ] as const;
 export type PluginBridgeErrorCode = (typeof PLUGIN_BRIDGE_ERROR_CODES)[number];
+
+/**
+ * Outcome receipts — the finance standard for what a completed task was WORTH.
+ *
+ * @see doc/finance/OUTCOME-RECEIPTS.md (Vitals CFO, SUM-143) §1–2. Governs the
+ * fenced ```outcome json block carried by every closing/completion comment.
+ */
+
+/**
+ * Confidence tiers operationalizing the 11x rule. `unmeasurable` is a
+ * first-class answer, not a failure — it protects the credibility of every
+ * `measured`/`estimated` number next to it. @see OUTCOME-RECEIPTS.md §1.
+ */
+export const OUTCOME_CONFIDENCE_TIERS = ["measured", "estimated", "unmeasurable"] as const;
+export type OutcomeConfidence = (typeof OUTCOME_CONFIDENCE_TIERS)[number];
+
+/** The four levers a completed task can move. Most tasks move exactly one. */
+export const OUTCOME_LEVER_KEYS = [
+  "moneySavedCents",
+  "timeSavedMinutes",
+  "revenueMovedCents",
+  "riskAvoided",
+] as const;
+export type OutcomeLeverKey = (typeof OUTCOME_LEVER_KEYS)[number];
+
+/**
+ * The single documented time→money rate: $60.00/hour = 100¢/minute (loaded
+ * knowledge-worker rate). GUARDRAIL: time-value dollars are NEVER merged into
+ * moneySavedCents — they are reported as a separate parenthetical line so the
+ * cash total stays defensible. @see OUTCOME-RECEIPTS.md §2 "Time → money".
+ */
+export const OUTCOME_TIME_VALUE_CENTS_PER_MINUTE = 100;

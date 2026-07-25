@@ -1,4 +1,5 @@
 import type { InboxDismissalKind } from "./inbox-dismissal.js";
+import type { OutcomeForecast } from "../outcome-forecast.js";
 
 export type AttentionSourceKind =
   | "approval"
@@ -166,6 +167,13 @@ export interface AttentionItem {
   project: AttentionProjectRef | null;
   workspace: AttentionWorkspaceRef | null;
   detail: AttentionItemDetail | null;
+  /**
+   * Pre-dispatch expected outcome (OUTCOME-RECEIPTS.md §4) — the "cost X, expect
+   * Y" promise a decision card quotes before the work runs, in the SAME schema as
+   * the completion receipt so promise and result can be compared. `null` when no
+   * forecast was authored (the data pipeline lights up at the VIT-14 cutover).
+   */
+  forecast: OutcomeForecast | null;
 }
 
 export interface AttentionFeed {

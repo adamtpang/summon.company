@@ -1,0 +1,2227 @@
+{
+  "wireMagic": "pb3",
+  "pens": [ {
+  
+  } ],
+  "wsWinStyles": [ {
+  
+  } ],
+  "wpWinPositions": [ {
+  
+  } ],
+  "events": [ {
+    "tStartMs": 320,
+    "dDurationMs": 8000,
+    "segs": [ {
+      "utf8": "what if AI agents could replace some of your \nteam well they can i brought on Flo who's the  "
+    } ]
+  }, {
+    "tStartMs": 8320,
+    "dDurationMs": 9200,
+    "segs": [ {
+      "utf8": "CEO of Lindy.AI probably the number one AI agent \nplatform and he shows us how to do agent swarms  "
+    } ]
+  }, {
+    "tStartMs": 17520,
+    "dDurationMs": 7280,
+    "segs": [ {
+      "utf8": "the big new thing with uh AI agents where you \nhave multiple agents going after these problems  "
+    } ]
+  }, {
+    "tStartMs": 24800,
+    "dDurationMs": 5040,
+    "segs": [ {
+      "utf8": "now we go through a bunch of different job \nresponsibilities and how to actually set  "
+    } ]
+  }, {
+    "tStartMs": 29840,
+    "dDurationMs": 7360,
+    "segs": [ {
+      "utf8": "up these agents forms and AI agents so \nthat they become AI employees for your  "
+    } ]
+  }, {
+    "tStartMs": 37200,
+    "dDurationMs": 11360,
+    "segs": [ {
+      "utf8": "business enjoy the episode and I can't \nwait to see what you end up building"
+    } ]
+  }, {
+    "tStartMs": 55280,
+    "dDurationMs": 8240,
+    "segs": [ {
+      "utf8": "flo is back on the pod the AI agent god that's \nwhat I call him um Flo if people stick around  "
+    } ]
+  }, {
+    "tStartMs": 63520,
+    "dDurationMs": 5520,
+    "segs": [ {
+      "utf8": "to the end of this episode what are they going to \nlearn what are they going to get out of this they  "
+    } ]
+  }, {
+    "tStartMs": 69040,
+    "dDurationMs": 5520,
+    "segs": [ {
+      "utf8": "are going to learn that you can create agents \na lot faster than you think you can and you  "
+    } ]
+  }, {
+    "tStartMs": 74560,
+    "dDurationMs": 5200,
+    "segs": [ {
+      "utf8": "can automate half your business in like half \na day and you can create your first agent in  "
+    } ]
+  }, {
+    "tStartMs": 79760,
+    "dDurationMs": 6320,
+    "segs": [ {
+      "utf8": "10 minutes and you're gonna show us how to \ndo that yeah that's the goal okay so let's  "
+    } ]
+  }, {
+    "tStartMs": 86080,
+    "dDurationMs": 9120,
+    "segs": [ {
+      "utf8": "let's get to it cool um let me share my screen \nreal quick okay uh well for quick introduction  "
+    } ]
+  }, {
+    "tStartMs": 95200,
+    "dDurationMs": 5040,
+    "segs": [ {
+      "utf8": "um Flo I'm the founder of Lindy you can think of \nus as like the the Zapier of AI we're building a  "
+    } ]
+  }, {
+    "tStartMs": 100240,
+    "dDurationMs": 5600,
+    "segs": [ {
+      "utf8": "no code platform for you to build your your own \nAI agents um this is I've already been here on  "
+    } ]
+  }, {
+    "tStartMs": 105840,
+    "dDurationMs": 5440,
+    "segs": [ {
+      "utf8": "the podcast thanks Craig for having me again uh \nthis is the the last time we we chatted and I'm  "
+    } ]
+  }, {
+    "tStartMs": 111280,
+    "dDurationMs": 5360,
+    "segs": [ {
+      "utf8": "going to use this later as an example for to \nshow Lindy's web scraping abilities because  "
+    } ]
+  }, {
+    "tStartMs": 116640,
+    "dDurationMs": 5040,
+    "segs": [ {
+      "utf8": "we we released that last week thousands of web \nscrapers 4,000 of them in fact and so one of  "
+    } ]
+  }, {
+    "tStartMs": 121680,
+    "dDurationMs": 7840,
+    "segs": [ {
+      "utf8": "the web scrapers is Lindy now has the ability to \nscrape uh YouTube comments um so I'll just start  "
+    } ]
+  }, {
+    "tStartMs": 129520,
+    "dDurationMs": 6080,
+    "segs": [ {
+      "utf8": "with like just a super quick introduction and a \nsuper super simple use case for Lindy which is  "
+    } ]
+  }, {
+    "tStartMs": 135600,
+    "dDurationMs": 5120,
+    "segs": [ {
+      "utf8": "uh meeting recording and note takingaking so I \nmean this is probably like the most universal use  "
+    } ]
+  }, {
+    "tStartMs": 140720,
+    "dDurationMs": 4640,
+    "segs": [ {
+      "utf8": "case like everyone's in meetings all day and this \nis the simplest meeting recorder you can build on  "
+    } ]
+  }, {
+    "tStartMs": 145360,
+    "dDurationMs": 5040,
+    "segs": [ {
+      "utf8": "Lindy it's like hey when a calendar event begins \nyou record the meeting and then you summarize the  "
+    } ]
+  }, {
+    "tStartMs": 150400,
+    "dDurationMs": 4400,
+    "segs": [ {
+      "utf8": "meeting that's it obviously little by little you \nadd up and add up and add them more to it and I'll  "
+    } ]
+  }, {
+    "tStartMs": 154800,
+    "dDurationMs": 3840,
+    "segs": [ {
+      "utf8": "show you my meeting recorder this is my actual \nmeeting recorded or that I that I live with all  "
+    } ]
+  }, {
+    "tStartMs": 158640,
+    "dDurationMs": 4960,
+    "segs": [ {
+      "utf8": "day and this is actually like a a small part of it \nlike it just keeps going and going and going um so  "
+    } ]
+  }, {
+    "tStartMs": 163600,
+    "dDurationMs": 4480,
+    "segs": [ {
+      "utf8": "in a way that's the beauty of it is like you keep \nadding to it and then it becomes irreplaceable  "
+    } ]
+  }, {
+    "tStartMs": 168080,
+    "dDurationMs": 6080,
+    "segs": [ {
+      "utf8": "so I mean one example that this meeting recorder \ndoes here is it uh adds the meeting notes to a  "
+    } ]
+  }, {
+    "tStartMs": 174160,
+    "dDurationMs": 5920,
+    "segs": [ {
+      "utf8": "Google doc and if I have already met with this \nperson before it looks on my Google drive for  "
+    } ]
+  }, {
+    "tStartMs": 180080,
+    "dDurationMs": 6960,
+    "segs": [ {
+      "utf8": "these notes and it adds the notes to the existing \nGoogle doc that I have for this person uh it was  "
+    } ]
+  }, {
+    "tStartMs": 187040,
+    "dDurationMs": 5280,
+    "segs": [ {
+      "utf8": "actually super useful just yesterday we just on \nboarded our first head of marketing and he asked  "
+    } ]
+  }, {
+    "tStartMs": 192320,
+    "dDurationMs": 4720,
+    "segs": [ {
+      "utf8": "me for context like my relationship context with \nsome marketing agencies that we're working with  "
+    } ]
+  }, {
+    "tStartMs": 197040,
+    "dDurationMs": 3360,
+    "segs": [ {
+      "utf8": "and I just had to like dig up the Google Docs and \nI could send him a Google doc and I'm like this  "
+    } ]
+  }, {
+    "tStartMs": 200400,
+    "dDurationMs": 5120,
+    "segs": [ {
+      "utf8": "is everything we've ever talked about with this \nperson and it worked it just works just works  "
+    } ]
+  }, {
+    "tStartMs": 205520,
+    "dDurationMs": 4560,
+    "segs": [ {
+      "utf8": "um and then the beauty of it is since it's an \nagent so when you look at it like this like this  "
+    } ]
+  }, {
+    "tStartMs": 210080,
+    "dDurationMs": 5040,
+    "segs": [ {
+      "utf8": "is where it sort of looks like Zapier it sort of \nlooks like a workflow under the hood though it's  "
+    } ]
+  }, {
+    "tStartMs": 215120,
+    "dDurationMs": 7520,
+    "segs": [ {
+      "utf8": "an agent and so what it means is that I'll show \nyou for example this update document step here um  "
+    } ]
+  }, {
+    "tStartMs": 222640,
+    "dDurationMs": 7760,
+    "segs": [ {
+      "utf8": "I can literally just speak to this step in English \nso each field here for this step is just a prompt  "
+    } ]
+  }, {
+    "tStartMs": 230400,
+    "dDurationMs": 4080,
+    "segs": [ {
+      "utf8": "so here for example I'm like hey which document \nshould you update well the document you found  "
+    } ]
+  }, {
+    "tStartMs": 234480,
+    "dDurationMs": 4800,
+    "segs": [ {
+      "utf8": "previously that contains my note for this person \nwhat content should I put in the document and here  "
+    } ]
+  }, {
+    "tStartMs": 239280,
+    "dDurationMs": 5360,
+    "segs": [ {
+      "utf8": "I can just be like summarize the meeting you just \nhad in bullet points so I don't need to have like  "
+    } ]
+  }, {
+    "tStartMs": 244640,
+    "dDurationMs": 5440,
+    "segs": [ {
+      "utf8": "a separate step for AI like the thing is AI you're \nbasically telling an AI to go through a sequence  "
+    } ]
+  }, {
+    "tStartMs": 250080,
+    "dDurationMs": 5600,
+    "segs": [ {
+      "utf8": "of steps but these these steps are not islands \nlike they would be for like a workflow automation  "
+    } ]
+  }, {
+    "tStartMs": 255680,
+    "dDurationMs": 7120,
+    "segs": [ {
+      "utf8": "platform like Zapier and I think what's cool about \nthis is I mean if you if you dial this and and you  "
+    } ]
+  }, {
+    "tStartMs": 262800,
+    "dDurationMs": 6960,
+    "segs": [ {
+      "utf8": "you do this correctly there's no mistakes that's \nright if anything it's it if you made a mistake  "
+    } ]
+  }, {
+    "tStartMs": 269760,
+    "dDurationMs": 6320,
+    "segs": [ {
+      "utf8": "it recovers from it like very often I'm actually \nsurprised you can create your agentworkflow and  "
+    } ]
+  }, {
+    "tStartMs": 276080,
+    "dDurationMs": 4000,
+    "segs": [ {
+      "utf8": "set up the steps and never configure them you \nliterally don't even tell it what to do i'll  "
+    } ]
+  }, {
+    "tStartMs": 280080,
+    "dDurationMs": 5920,
+    "segs": [ {
+      "utf8": "actually give you an example right now um I'm \ngoing to create a Lindy start from scratch and  "
+    } ]
+  }, {
+    "tStartMs": 286000,
+    "dDurationMs": 4160,
+    "segs": [ {
+      "utf8": "I'm going to tell her so the trigger here is just \nme chatting with it it's just like an agent that  "
+    } ]
+  }, {
+    "tStartMs": 290160,
+    "dDurationMs": 5440,
+    "segs": [ {
+      "utf8": "I can chat with and I'm going to use the the \nYouTube video example so YouTube here so this  "
+    } ]
+  }, {
+    "tStartMs": 295600,
+    "dDurationMs": 5760,
+    "segs": [ {
+      "utf8": "is an example of all the scrapers we just we just \nadded thousands and thousands of integrations in  "
+    } ]
+  }, {
+    "tStartMs": 301360,
+    "dDurationMs": 5520,
+    "segs": [ {
+      "utf8": "scrapers we're like by far the top AI agents right \nnow in terms of number of integrations um so I'm  "
+    } ]
+  }, {
+    "tStartMs": 306880,
+    "dDurationMs": 6480,
+    "segs": [ {
+      "utf8": "going to do YouTube comments by URL and after \nthe results are available I'm going to just let  "
+    } ]
+  }, {
+    "tStartMs": 313360,
+    "dDurationMs": 4720,
+    "segs": [ {
+      "utf8": "it have a conversation with me so I'm I'm going to \nleave it like this and I'm literally going to do  "
+    } ]
+  }, {
+    "tStartMs": 318080,
+    "dDurationMs": 5120,
+    "segs": [ {
+      "utf8": "nothing i'm I'm not telling it what to do i'm not \ntelling it I just this is it this is the you know  "
+    } ]
+  }, {
+    "tStartMs": 323200,
+    "dDurationMs": 5600,
+    "segs": [ {
+      "utf8": "the different steps that you that you follow and \nI'm going to grab this uh link from the last time  "
+    } ]
+  }, {
+    "tStartMs": 328800,
+    "dDurationMs": 7520,
+    "segs": [ {
+      "utf8": "we chatted now I think there you go and I'm going \nto just send it to the video so I got roasted in  "
+    } ]
+  }, {
+    "tStartMs": 336320,
+    "dDurationMs": 7680,
+    "segs": [ {
+      "utf8": "the comment because partly because my accent \nthink it's it's racist and it is a sick accent  "
+    } ]
+  }, {
+    "tStartMs": 344000,
+    "dDurationMs": 5280,
+    "segs": [ {
+      "utf8": "um and look I did not tell it what to do it's just \nlike all right it's getting the YouTube comments  "
+    } ]
+  }, {
+    "tStartMs": 349280,
+    "dDurationMs": 7520,
+    "segs": [ {
+      "utf8": "i think this creeping takes about a minute dude \nby the way I get roasted all the time for calling  "
+    } ]
+  }, {
+    "tStartMs": 356800,
+    "dDurationMs": 14320,
+    "segs": [ {
+      "utf8": "Claude Clo yeah how How should you call it is \nit I agree i agree is it a Canadian thing well  "
+    } ]
+  }, {
+    "tStartMs": 371120,
+    "dDurationMs": 7840,
+    "segs": [ {
+      "utf8": "in French you call it clo right yeah you know so \nbut people make fun of me all right well back back  "
+    } ]
+  }, {
+    "tStartMs": 378960,
+    "dDurationMs": 5280,
+    "segs": [ {
+      "utf8": "to uh Lindy all right uh I mean right here I you \ncan see I didn't tell it what to do it just like  "
+    } ]
+  }, {
+    "tStartMs": 384240,
+    "dDurationMs": 5680,
+    "segs": [ {
+      "utf8": "got the com comments and hey one viewer noted a \npotential business opportunity startup ID set up  "
+    } ]
+  }, {
+    "tStartMs": 389920,
+    "dDurationMs": 5760,
+    "segs": [ {
+      "utf8": "Lindy's flow as a service we actually do have \nuh if you go to I think it's lindy.ai/service  "
+    } ]
+  }, {
+    "tStartMs": 395680,
+    "dDurationMs": 4880,
+    "segs": [ {
+      "utf8": "partners we have like dozens of of companies that \nmake a living through just building lindies for  "
+    } ]
+  }, {
+    "tStartMs": 400560,
+    "dDurationMs": 3200,
+    "segs": [ {
+      "utf8": "customers like fact that's a lot i didn't even \nknow there was so many of them i think it's like  "
+    } ]
+  }, {
+    "tStartMs": 403760,
+    "dDurationMs": 6720,
+    "segs": [ {
+      "utf8": "50 or something more than that um yeah you can see \nI didn't have to tell it what to do to go back to  "
+    } ]
+  }, {
+    "tStartMs": 410480,
+    "dDurationMs": 6560,
+    "segs": [ {
+      "utf8": "the meeting recording example and again that's a \ndifference between um a a a workflow and an agent  "
+    } ]
+  }, {
+    "tStartMs": 417040,
+    "dDurationMs": 4960,
+    "segs": [ {
+      "utf8": "is like agents really like to chat so you can just \nchat with it at any time so I'm going to go here  "
+    } ]
+  }, {
+    "tStartMs": 422000,
+    "dDurationMs": 13280,
+    "segs": [ {
+      "utf8": "what's an example of a of a of a meeting I can \nshow you um I had a reference check with someone  "
+    } ]
+  }, {
+    "tStartMs": 435280,
+    "dDurationMs": 7360,
+    "segs": [ {
+      "utf8": "um yeah so I can just chat and be like \"What did \nthe candidate say about moving to SF?\" And I can't  "
+    } ]
+  }, {
+    "tStartMs": 442640,
+    "dDurationMs": 3360,
+    "segs": [ {
+      "utf8": "tell you i mean I use this all day i think I have \nreally bad memory because I'm in meetings all  "
+    } ]
+  }, {
+    "tStartMs": 446000,
+    "dDurationMs": 5600,
+    "segs": [ {
+      "utf8": "day and so I just use this as like I call it my \nexocortex it's like my my brain outside my brain  "
+    } ]
+  }, {
+    "tStartMs": 451600,
+    "dDurationMs": 6480,
+    "segs": [ {
+      "utf8": "and it just like replies to questions for me yeah \ni also I I find my memory has been getting worse  "
+    } ]
+  }, {
+    "tStartMs": 458080,
+    "dDurationMs": 8080,
+    "segs": [ {
+      "utf8": "too as I'm relying more and more on technology \nto basically fulfill things so uh this is helpful  "
+    } ]
+  }, {
+    "tStartMs": 466160,
+    "dDurationMs": 6480,
+    "segs": [ {
+      "utf8": "yeah yeah so all day I just asked you these \nquestions and let's wait for it to reply right  "
+    } ]
+  }, {
+    "tStartMs": 472640,
+    "dDurationMs": 6960,
+    "segs": [ {
+      "utf8": "here he's currently based again we're going to \nhave to change his name and and blur it out uh but  "
+    } ]
+  }, {
+    "tStartMs": 479600,
+    "dDurationMs": 6800,
+    "segs": [ {
+      "utf8": "he is interested in our new office and and so on \nand so forth um so I I think the meeting recording  "
+    } ]
+  }, {
+    "tStartMs": 486400,
+    "dDurationMs": 6240,
+    "segs": [ {
+      "utf8": "is probably one of the most universal use cases \nuh meeting scheduling is a close second basically  "
+    } ]
+  }, {
+    "tStartMs": 492640,
+    "dDurationMs": 6080,
+    "segs": [ {
+      "utf8": "the entire executive assistant stack like I just \nI haven't replaced my executive assistant but I  "
+    } ]
+  }, {
+    "tStartMs": 498720,
+    "dDurationMs": 5920,
+    "segs": [ {
+      "utf8": "think I replaced like 70% of of what she does with \nLindy i mean executive assistants they take notes  "
+    } ]
+  }, {
+    "tStartMs": 504640,
+    "dDurationMs": 4160,
+    "segs": [ {
+      "utf8": "during your meetings they schedule your meetings \nthey prepare you for your meetings uh they make  "
+    } ]
+  }, {
+    "tStartMs": 508800,
+    "dDurationMs": 4160,
+    "segs": [ {
+      "utf8": "restaurant reservations i have this Lindy chief \nof staff here so Lindy can make phone calls oh  "
+    } ]
+  }, {
+    "tStartMs": 512960,
+    "dDurationMs": 4800,
+    "segs": [ {
+      "utf8": "the most hilarious thing happened just yesterday \nactually I asked her to make a phone call for  "
+    } ]
+  }, {
+    "tStartMs": 517760,
+    "dDurationMs": 4880,
+    "segs": [ {
+      "utf8": "uh to make a reservation for like a date night \nwith my girlfriend and I was like \"Hey make a  "
+    } ]
+  }, {
+    "tStartMs": 522640,
+    "dDurationMs": 4080,
+    "segs": [ {
+      "utf8": "reservation at Flower and Water it's like a super \ngood restaurant in San Francisco tonight for two  "
+    } ]
+  }, {
+    "tStartMs": 526720,
+    "dDurationMs": 6240,
+    "segs": [ {
+      "utf8": "people at 8:00 p.m can go as early as 7:30 or 9:00 \np.m.\" And I didn't give her the number of flour  "
+    } ]
+  }, {
+    "tStartMs": 532960,
+    "dDurationMs": 4880,
+    "segs": [ {
+      "utf8": "and water so she went to Perplexity to look for \nthe number she found a number and then she made  "
+    } ]
+  }, {
+    "tStartMs": 537840,
+    "dDurationMs": 4640,
+    "segs": [ {
+      "utf8": "a phone call and then the really thing the really \nfunny things that happened is I didn't realize but  "
+    } ]
+  }, {
+    "tStartMs": 542480,
+    "dDurationMs": 6240,
+    "segs": [ {
+      "utf8": "this restaurant actually also uses an AI agent to \npick up the phone so after I listened to the call  "
+    } ]
+  }, {
+    "tStartMs": 548720,
+    "dDurationMs": 7120,
+    "segs": [ {
+      "utf8": "and I was like wait a minute this was also an AI \nagent hi it's Arena at Flower and Water just so  "
+    } ]
+  }, {
+    "tStartMs": 555840,
+    "dDurationMs": 5280,
+    "segs": [ {
+      "utf8": "you know I'm taking notes on this call to share \nwith the team how can I help you hi Arena i'm  "
+    } ]
+  }, {
+    "tStartMs": 561120,
+    "dDurationMs": 5200,
+    "segs": [ {
+      "utf8": "calling to make a dinner reservation tonight for \ntwo people we're looking for 8:00 p.m but we're  "
+    } ]
+  }, {
+    "tStartMs": 566320,
+    "dDurationMs": 6720,
+    "segs": [ {
+      "utf8": "flexible and the agents just and in the end I had \na reservation so it's it's crazy like it's already  "
+    } ]
+  }, {
+    "tStartMs": 573040,
+    "dDurationMs": 6000,
+    "segs": [ {
+      "utf8": "happening where AI agents are currently working \ntogether yeah and by the way Flower and Water I  "
+    } ]
+  }, {
+    "tStartMs": 579040,
+    "dDurationMs": 6480,
+    "segs": [ {
+      "utf8": "think uh Johnny Ies from Apple and I think maybe \neven Steve Jobs one of their favorite restaurants  "
+    } ]
+  }, {
+    "tStartMs": 585520,
+    "dDurationMs": 6160,
+    "segs": [ {
+      "utf8": "so this is like a hard restaurant to get into \nand the fact that this happened is is amazing  "
+    } ]
+  }, {
+    "tStartMs": 591680,
+    "dDurationMs": 6160,
+    "segs": [ {
+      "utf8": "yeah yeah uh it's funny the first time I demoed \nthis feature I used it to because I literally  "
+    } ]
+  }, {
+    "tStartMs": 597840,
+    "dDurationMs": 4800,
+    "segs": [ {
+      "utf8": "the the team had just coded it in like half a \nweek and I was like \"All right demo time let  "
+    } ]
+  }, {
+    "tStartMs": 602640,
+    "dDurationMs": 4320,
+    "segs": [ {
+      "utf8": "me just ask you to like cancel my flight to Paris \nthat have scheduled next week and it worked first  "
+    } ]
+  }, {
+    "tStartMs": 606960,
+    "dDurationMs": 6400,
+    "segs": [ {
+      "utf8": "shot and she canceled my flight.\" I was like \"No \nI didn't expect it to work.\" Um yeah so you know  "
+    } ]
+  }, {
+    "tStartMs": 613360,
+    "dDurationMs": 6800,
+    "segs": [ {
+      "utf8": "like phone call like reservations meeting prep is \na pretty big one i have this Lindy here and this  "
+    } ]
+  }, {
+    "tStartMs": 620160,
+    "dDurationMs": 5760,
+    "segs": [ {
+      "utf8": "is actually using the the feature that we just \nreleased last week which we call agent swarms  "
+    } ]
+  }, {
+    "tStartMs": 625920,
+    "dDurationMs": 5760,
+    "segs": [ {
+      "utf8": "and while you bring that up what is an agent \nswarm that's a good question an agent swarm is  "
+    } ]
+  }, {
+    "tStartMs": 631680,
+    "dDurationMs": 7200,
+    "segs": [ {
+      "utf8": "the ability to send a list of things to do to to \nan AI agent and for this AI agent to do all these  "
+    } ]
+  }, {
+    "tStartMs": 638880,
+    "dDurationMs": 5440,
+    "segs": [ {
+      "utf8": "things reliably quickly and in parallel because AI \nagents are awesome and they're and they're super  "
+    } ]
+  }, {
+    "tStartMs": 644320,
+    "dDurationMs": 7040,
+    "segs": [ {
+      "utf8": "powerful but over long-term like longtime horizons \nthey fail they lose coherence and so for example  "
+    } ]
+  }, {
+    "tStartMs": 651360,
+    "dDurationMs": 5360,
+    "segs": [ {
+      "utf8": "if you give an AI agent a list of things like \nhey take these 500 people and send personalized  "
+    } ]
+  }, {
+    "tStartMs": 656720,
+    "dDurationMs": 5920,
+    "segs": [ {
+      "utf8": "outreach to them like personalized lead outreach \nis a very big use case for AI agents it's first  "
+    } ]
+  }, {
+    "tStartMs": 662640,
+    "dDurationMs": 6640,
+    "segs": [ {
+      "utf8": "of all it's going to take forever it's going to be \npretty expensive and the by the 200th lead it may  "
+    } ]
+  }, {
+    "tStartMs": 669280,
+    "dDurationMs": 6240,
+    "segs": [ {
+      "utf8": "fail it may just become unreliable if you use \nan agent swarm instead it's going to basically  "
+    } ]
+  }, {
+    "tStartMs": 675520,
+    "dDurationMs": 4960,
+    "segs": [ {
+      "utf8": "you know like in the matrix you have like a agent \nSmith that duplicates himself it's like the agent  "
+    } ]
+  }, {
+    "tStartMs": 680480,
+    "dDurationMs": 5280,
+    "segs": [ {
+      "utf8": "smith thing like the agent is going to duplicate \nhimself and send one copy of itself to each lead  "
+    } ]
+  }, {
+    "tStartMs": 685760,
+    "dDurationMs": 5920,
+    "segs": [ {
+      "utf8": "yeah so this meeting prep here uses it's actually \nit's funny if it's a swarm of swarms so what I do  "
+    } ]
+  }, {
+    "tStartMs": 691680,
+    "dDurationMs": 5680,
+    "segs": [ {
+      "utf8": "is every morning you wake up you check my meetings \nfor the day and then you deploy an agent swarm  "
+    } ]
+  }, {
+    "tStartMs": 697360,
+    "dDurationMs": 6400,
+    "segs": [ {
+      "utf8": "for each meeting that I have and then inside this \nswarm you deploy another swarm for every attendee  "
+    } ]
+  }, {
+    "tStartMs": 703760,
+    "dDurationMs": 4880,
+    "segs": [ {
+      "utf8": "of every meeting that I have and then this is \nreally cool because this Lindy actually uses  "
+    } ]
+  }, {
+    "tStartMs": 708640,
+    "dDurationMs": 6080,
+    "segs": [ {
+      "utf8": "the meeting notes that the other Lindy brings \ntogether that I just mentioned so she looks in  "
+    } ]
+  }, {
+    "tStartMs": 714720,
+    "dDurationMs": 6080,
+    "segs": [ {
+      "utf8": "the Google Drive folder that contains all of my \nmeeting notes that Lindy creates and then she gets  "
+    } ]
+  }, {
+    "tStartMs": 720800,
+    "dDurationMs": 5280,
+    "segs": [ {
+      "utf8": "my notes for this meeting and then she search for \nmy emails with this person she looks up for their  "
+    } ]
+  }, {
+    "tStartMs": 726080,
+    "dDurationMs": 9280,
+    "segs": [ {
+      "utf8": "LinkedIn on Google and then she sends me a digest \nby email so you can see here every morning let's"
+    } ]
+  }, {
+    "tStartMs": 735360,
+    "dDurationMs": 9200,
+    "segs": [ {
+      "utf8": "see right here again we may have to like uh \nblur out some of these but I just receive these  "
+    } ]
+  }, {
+    "tStartMs": 744560,
+    "dDurationMs": 5120,
+    "segs": [ {
+      "utf8": "digest every morning of everything and and it's \npretty detailed like so for example I have this  "
+    } ]
+  }, {
+    "tStartMs": 749680,
+    "dDurationMs": 4160,
+    "segs": [ {
+      "utf8": "uh this dinner tonight it's like a founder dinner \nwhere like people talk about their struggles and  "
+    } ]
+  }, {
+    "tStartMs": 753840,
+    "dDurationMs": 4880,
+    "segs": [ {
+      "utf8": "there's like a bunch of of really senior executive \ncoaches and they've sent us an email beforehand  "
+    } ]
+  }, {
+    "tStartMs": 758720,
+    "dDurationMs": 5520,
+    "segs": [ {
+      "utf8": "and they're like \"Hey you have to come prepared \nwith a challenge that you want to discuss.\" And  "
+    } ]
+  }, {
+    "tStartMs": 764240,
+    "dDurationMs": 3680,
+    "segs": [ {
+      "utf8": "so this Lindy here found it and so now you know \nit's like \"Ah right like I need before this dinner  "
+    } ]
+  }, {
+    "tStartMs": 767920,
+    "dDurationMs": 6160,
+    "segs": [ {
+      "utf8": "tonight I need to come prepared with a challenge \nto discuss.\" I was I was really impressed because  "
+    } ]
+  }, {
+    "tStartMs": 774080,
+    "dDurationMs": 8960,
+    "segs": [ {
+      "utf8": "right before we hopped onto this podcast you said \n\"Hey by the way I picked up that Sure MV7 mic.\"  "
+    } ]
+  }, {
+    "tStartMs": 783040,
+    "dDurationMs": 5920,
+    "segs": [ {
+      "utf8": "And I was like I was like \"There's no way this \nguy is going to remember to buy this mic.\" Cuz I  "
+    } ]
+  }, {
+    "tStartMs": 788960,
+    "dDurationMs": 5200,
+    "segs": [ {
+      "utf8": "remember when I had you on the first time the mic \nwasn't really great and people were complaining  "
+    } ]
+  }, {
+    "tStartMs": 794160,
+    "dDurationMs": 4560,
+    "segs": [ {
+      "utf8": "and it was the first thing you told me and then \nwhen you when I when you you know I just see right  "
+    } ]
+  }, {
+    "tStartMs": 798720,
+    "dDurationMs": 7680,
+    "segs": [ {
+      "utf8": "now in the meeting prep it says use good audio \nequipment sure MV7 you got me that's my dirty  "
+    } ]
+  }, {
+    "tStartMs": 806400,
+    "dDurationMs": 5120,
+    "segs": [ {
+      "utf8": "secret that's how you know yeah no 100% it's it's \nI mean half my life runs on this right now it's  "
+    } ]
+  }, {
+    "tStartMs": 811520,
+    "dDurationMs": 5040,
+    "segs": [ {
+      "utf8": "just like same for the meeting scheduling i'll \nshow you my my meeting scheduleuler here um so  "
+    } ]
+  }, {
+    "tStartMs": 816560,
+    "dDurationMs": 5920,
+    "segs": [ {
+      "utf8": "and it works exactly the same as an AI as a human \nassistant does which is people reach out to me by  "
+    } ]
+  }, {
+    "tStartMs": 822480,
+    "dDurationMs": 3360,
+    "segs": [ {
+      "utf8": "email they're like flow I'd love to chat or you \nknow maybe it's like a job interview or anything  "
+    } ]
+  }, {
+    "tStartMs": 825840,
+    "dDurationMs": 5680,
+    "segs": [ {
+      "utf8": "like that that like a candidate I'm interviewing \nand all I do is I have given this Flindy her own  "
+    } ]
+  }, {
+    "tStartMs": 831520,
+    "dDurationMs": 6080,
+    "segs": [ {
+      "utf8": "email address and all I do is I CC her I'm like \nsounds good I'd love to chat will help us find  "
+    } ]
+  }, {
+    "tStartMs": 837600,
+    "dDurationMs": 6560,
+    "segs": [ {
+      "utf8": "time and so you can see here this happened just \nthis morning um I was introduced by a recruiter  "
+    } ]
+  }, {
+    "tStartMs": 844160,
+    "dDurationMs": 5040,
+    "segs": [ {
+      "utf8": "to a candidate and I'm like thank you KG great \nto meet you Brian I would love to chat plus Lindy  "
+    } ]
+  }, {
+    "tStartMs": 849200,
+    "dDurationMs": 4560,
+    "segs": [ {
+      "utf8": "will help us find some time and you can see here \nI literally also added would you like to meet in  "
+    } ]
+  }, {
+    "tStartMs": 853760,
+    "dDurationMs": 5520,
+    "segs": [ {
+      "utf8": "person at the office and here Lindy looked at my \ncalendar she found available times she sent the  "
+    } ]
+  }, {
+    "tStartMs": 859280,
+    "dDurationMs": 6640,
+    "segs": [ {
+      "utf8": "times by email then he responded \"Yep in person \non Monday works.\" So she sent the calendar invite  "
+    } ]
+  }, {
+    "tStartMs": 865920,
+    "dDurationMs": 5120,
+    "segs": [ {
+      "utf8": "and you can see in the calendar invite right here \nshe puts the address of the office right here and  "
+    } ]
+  }, {
+    "tStartMs": 871040,
+    "dDurationMs": 6320,
+    "segs": [ {
+      "utf8": "then she sent this uh confirmation she's like \"All \nright we'll meet at 1:30 at 1841 Market Street.\"  "
+    } ]
+  }, {
+    "tStartMs": 877360,
+    "dDurationMs": 4240,
+    "segs": [ {
+      "utf8": "This is like you're setting off like a million \nlight bulbs in my head right now because what I'm  "
+    } ]
+  }, {
+    "tStartMs": 881600,
+    "dDurationMs": 6560,
+    "segs": [ {
+      "utf8": "doing is I'm thinking what are all the tasks \nin my business that are recurring like this  "
+    } ]
+  }, {
+    "tStartMs": 888160,
+    "dDurationMs": 7120,
+    "segs": [ {
+      "utf8": "like what what you're showing me right now my EA \ndoes this um my EA does this so like what do you  "
+    } ]
+  }, {
+    "tStartMs": 895280,
+    "dDurationMs": 6960,
+    "segs": [ {
+      "utf8": "recommend to people should they should they take \nstock of all the recurring tasks and then see if  "
+    } ]
+  }, {
+    "tStartMs": 902240,
+    "dDurationMs": 5520,
+    "segs": [ {
+      "utf8": "that you know Lindy's can do it i think so so what \nI do recommend to people is actually to start with  "
+    } ]
+  }, {
+    "tStartMs": 907760,
+    "dDurationMs": 4720,
+    "segs": [ {
+      "utf8": "these like personal assistance use cases because \nit's just so easy and everybody can use a meeting  "
+    } ]
+  }, {
+    "tStartMs": 912480,
+    "dDurationMs": 4640,
+    "segs": [ {
+      "utf8": "scheduleuler everybody can use a meeting prep \neverybody can use a meeting recorder and so just  "
+    } ]
+  }, {
+    "tStartMs": 917120,
+    "dDurationMs": 5360,
+    "segs": [ {
+      "utf8": "like you know dip your toes in the water like that \nlike just like get the reps put a W on the board  "
+    } ]
+  }, {
+    "tStartMs": 922480,
+    "dDurationMs": 4480,
+    "segs": [ {
+      "utf8": "and you can on board to this in like five minutes \nit's like super easy we've got templates here  "
+    } ]
+  }, {
+    "tStartMs": 926960,
+    "dDurationMs": 4240,
+    "segs": [ {
+      "utf8": "we've got like hundreds of templates if you go to \nthe the home tab here there's a bunch of lindies  "
+    } ]
+  }, {
+    "tStartMs": 931200,
+    "dDurationMs": 4960,
+    "segs": [ {
+      "utf8": "that are pre-created and these ones we literally \nadvertise them at the top because like we call it  "
+    } ]
+  }, {
+    "tStartMs": 936160,
+    "dDurationMs": 4320,
+    "segs": [ {
+      "utf8": "like the personal assistant starter pack it's \njust like everybody can use these things and  "
+    } ]
+  }, {
+    "tStartMs": 940480,
+    "dDurationMs": 4480,
+    "segs": [ {
+      "utf8": "then little by little once you understand how the \nplatform works which it's really pretty easy then  "
+    } ]
+  }, {
+    "tStartMs": 944960,
+    "dDurationMs": 4080,
+    "segs": [ {
+      "utf8": "you're going to very rapidly like to your exactly \nwhat you said like a light bulb is going to go off  "
+    } ]
+  }, {
+    "tStartMs": 949040,
+    "dDurationMs": 4480,
+    "segs": [ {
+      "utf8": "and you're like and you're going to be like oh my \ngod like this can be used for everything so I'll  "
+    } ]
+  }, {
+    "tStartMs": 953520,
+    "dDurationMs": 4480,
+    "segs": [ {
+      "utf8": "give a more complex example and what do you think \nlike should we just like build a Lindy live right  "
+    } ]
+  }, {
+    "tStartMs": 958000,
+    "dDurationMs": 6960,
+    "segs": [ {
+      "utf8": "now yeah why not let's do it uh let me build I \nspend a ton of time recruiting right now so I'm  "
+    } ]
+  }, {
+    "tStartMs": 964960,
+    "dDurationMs": 6800,
+    "segs": [ {
+      "utf8": "going to create a Lindy recruiter so I'm going \nto make her chat with Lindy i'm going to make it  "
+    } ]
+  }, {
+    "tStartMs": 971760,
+    "dDurationMs": 5360,
+    "segs": [ {
+      "utf8": "um when I chat with it I'm going to just give it \na list just criteria of what I'm looking for and  "
+    } ]
+  }, {
+    "tStartMs": 977120,
+    "dDurationMs": 4880,
+    "segs": [ {
+      "utf8": "then I'm going to use the search for people action \nso we have like a ton of prospecting integrations  "
+    } ]
+  }, {
+    "tStartMs": 982000,
+    "dDurationMs": 5600,
+    "segs": [ {
+      "utf8": "because like prospecting is one of our top use \ncases and then uh I'm going to make it enter an AI  "
+    } ]
+  }, {
+    "tStartMs": 987600,
+    "dDurationMs": 7280,
+    "segs": [ {
+      "utf8": "agent and I'm going to tell it um show me the list \nof people you found and ask me which ones to reach  "
+    } ]
+  }, {
+    "tStartMs": 994880,
+    "dDurationMs": 5600,
+    "segs": [ {
+      "utf8": "out to and again that's where it's an AI agent i \ndon't need to like you know divide up the array  "
+    } ]
+  }, {
+    "tStartMs": 1000480,
+    "dDurationMs": 5360,
+    "segs": [ {
+      "utf8": "or the list of people it found or to format it i \njust I'm speaking to my agent and the agent saw  "
+    } ]
+  }, {
+    "tStartMs": 1005840,
+    "dDurationMs": 4400,
+    "segs": [ {
+      "utf8": "the people it's like the same agent that's moving \nfrom step to step to step and here I'm going to  "
+    } ]
+  }, {
+    "tStartMs": 1010240,
+    "dDurationMs": 9040,
+    "segs": [ {
+      "utf8": "give this step and exit conditions like once I've \ntold you which ones to reach out to then you enter  "
+    } ]
+  }, {
+    "tStartMs": 1019280,
+    "dDurationMs": 6400,
+    "segs": [ {
+      "utf8": "uh a swarm and I'm not even going to tell it what \nitems to swarm through i I think it's just going  "
+    } ]
+  }, {
+    "tStartMs": 1025680,
+    "dDurationMs": 6560,
+    "segs": [ {
+      "utf8": "to be smart enough to figure it out and I'm going \nto make it uh research this person on perplexity  "
+    } ]
+  }, {
+    "tStartMs": 1032240,
+    "dDurationMs": 11680,
+    "segs": [ {
+      "utf8": "so search proplexity so uh research this person on \nperplexity and then I'm going to make it send an  "
+    } ]
+  }, {
+    "tStartMs": 1043920,
+    "dDurationMs": 8480,
+    "segs": [ {
+      "utf8": "email to this person so and from my email uh send \nemail and I'm just going to make it I'm going to  "
+    } ]
+  }, {
+    "tStartMs": 1052400,
+    "dDurationMs": 4160,
+    "segs": [ {
+      "utf8": "prompt it here i could just also write like a \nliteral value we have this setting here that's  "
+    } ]
+  }, {
+    "tStartMs": 1056560,
+    "dDurationMs": 5120,
+    "segs": [ {
+      "utf8": "like set manually so I could just here type my \nemail uh but here I'm just going to be prompt  "
+    } ]
+  }, {
+    "tStartMs": 1061680,
+    "dDurationMs": 8240,
+    "segs": [ {
+      "utf8": "AI and it's like reach out to join lindy.ai um \nthat's it i'm just gonna do this for now and in  "
+    } ]
+  }, {
+    "tStartMs": 1069920,
+    "dDurationMs": 5920,
+    "segs": [ {
+      "utf8": "one click you can insert a human in the loop so \nI can be like ask for confirmation and that's it  "
+    } ]
+  }, {
+    "tStartMs": 1075840,
+    "dDurationMs": 6160,
+    "segs": [ {
+      "utf8": "right here it's going to ask me for confirmation \nwhen should people have a human in the loop and  "
+    } ]
+  }, {
+    "tStartMs": 1082000,
+    "dDurationMs": 7360,
+    "segs": [ {
+      "utf8": "when shouldn't they have a human in the loop great \nquestion if a if an AI agent could embarrass you  "
+    } ]
+  }, {
+    "tStartMs": 1089360,
+    "dDurationMs": 4880,
+    "segs": [ {
+      "utf8": "you should probably insert a human in the loop at \nleast in the beginning for the first few cycles  "
+    } ]
+  }, {
+    "tStartMs": 1094240,
+    "dDurationMs": 4560,
+    "segs": [ {
+      "utf8": "and you're going to work on it it's the same thing \nas training a human it's like you just think of it  "
+    } ]
+  }, {
+    "tStartMs": 1098800,
+    "dDurationMs": 4080,
+    "segs": [ {
+      "utf8": "as like you just on boarded an intern and like \nyou don't at first you're kind of on their back  "
+    } ]
+  }, {
+    "tStartMs": 1102880,
+    "dDurationMs": 4960,
+    "segs": [ {
+      "utf8": "you kind of watch what they're doing that's how \nyou think of it and soon we're we're building a  "
+    } ]
+  }, {
+    "tStartMs": 1107840,
+    "dDurationMs": 5680,
+    "segs": [ {
+      "utf8": "feature right now that's making it so that uh \nthe agent can learn from your feedback so as  "
+    } ]
+  }, {
+    "tStartMs": 1113520,
+    "dDurationMs": 5200,
+    "segs": [ {
+      "utf8": "you insert a human in the loop if you correct it \nlittle by little it's going to learn um that is it  "
+    } ]
+  }, {
+    "tStartMs": 1118720,
+    "dDurationMs": 5280,
+    "segs": [ {
+      "utf8": "right here I have like an MVP recruiter i'm going \nto rename her and just call her the recruiter  "
+    } ]
+  }, {
+    "tStartMs": 1124000,
+    "dDurationMs": 4240,
+    "segs": [ {
+      "utf8": "that's it i've got I've got a small recruiter \nand again that's the beauty of it is like you  "
+    } ]
+  }, {
+    "tStartMs": 1128240,
+    "dDurationMs": 5120,
+    "segs": [ {
+      "utf8": "start small like this took me two minutes and then \nyou add to it and add to it and add to it so for  "
+    } ]
+  }, {
+    "tStartMs": 1133360,
+    "dDurationMs": 4880,
+    "segs": [ {
+      "utf8": "example here I could make it send reminders like \nif the person doesn't reply I could make it send  "
+    } ]
+  }, {
+    "tStartMs": 1138240,
+    "dDurationMs": 5600,
+    "segs": [ {
+      "utf8": "two four five reminders right uh and actually \nI'm going to add a last step here so it's like  "
+    } ]
+  }, {
+    "tStartMs": 1143840,
+    "dDurationMs": 8240,
+    "segs": [ {
+      "utf8": "hey I've reached that to everyone um I'm going to \nstart here and I'm going to be like I want to hire  "
+    } ]
+  }, {
+    "tStartMs": 1152080,
+    "dDurationMs": 7760,
+    "segs": [ {
+      "utf8": "like find me five account executives uh working \nat what's a good what's a good place to hire from  "
+    } ]
+  }, {
+    "tStartMs": 1159840,
+    "dDurationMs": 6880,
+    "segs": [ {
+      "utf8": "account executives hubspot yeah um actually I'm \nrealizing I think this was set yeah okay this is  "
+    } ]
+  }, {
+    "tStartMs": 1166720,
+    "dDurationMs": 7280,
+    "segs": [ {
+      "utf8": "beautiful all right we don't recommend poaching \nfrom HubSpot but we don't we don't condone it  "
+    } ]
+  }, {
+    "tStartMs": 1174000,
+    "dDurationMs": 10800,
+    "segs": [ {
+      "utf8": "either are you are you a HubSpot partner um no \nokay good um okay reach out to every to everyone  "
+    } ]
+  }, {
+    "tStartMs": 1184800,
+    "dDurationMs": 8720,
+    "segs": [ {
+      "utf8": "who doesn't have enterprise or corporate in their \ntitle i think that's literally two people and here  "
+    } ]
+  }, {
+    "tStartMs": 1193520,
+    "dDurationMs": 6880,
+    "segs": [ {
+      "utf8": "it's going to start swarming over basically the \ntwo people that I gave it right here so you see  "
+    } ]
+  }, {
+    "tStartMs": 1200400,
+    "dDurationMs": 5360,
+    "segs": [ {
+      "utf8": "I didn't configure the swarm it's just like smart \nenough to figure it out here and now if I expand  "
+    } ]
+  }, {
+    "tStartMs": 1205760,
+    "dDurationMs": 4720,
+    "segs": [ {
+      "utf8": "this task here I can see the subtasks that are \npart of the swarm and so what it's doing here is  "
+    } ]
+  }, {
+    "tStartMs": 1210480,
+    "dDurationMs": 4800,
+    "segs": [ {
+      "utf8": "it's searching complexity for this person and it's \nit's going to be AI slap you know like by default  "
+    } ]
+  }, {
+    "tStartMs": 1215280,
+    "dDurationMs": 4480,
+    "segs": [ {
+      "utf8": "AI AI just writes AI slap so like I would need to \nprompt it more i would need to give it examples  "
+    } ]
+  }, {
+    "tStartMs": 1219760,
+    "dDurationMs": 5200,
+    "segs": [ {
+      "utf8": "but boom i hope this email finds you well i'm \nreaching at because I came across your profile and  "
+    } ]
+  }, {
+    "tStartMs": 1224960,
+    "dDurationMs": 4560,
+    "segs": [ {
+      "utf8": "I mean right here I just gave it to two profiles \nbut I could have said like 200 and that's that's  "
+    } ]
+  }, {
+    "tStartMs": 1229520,
+    "dDurationMs": 3760,
+    "segs": [ {
+      "utf8": "basically how we recruit like we're pretty good \nat recruiting and it's very cost effective and  "
+    } ]
+  }, {
+    "tStartMs": 1233280,
+    "dDurationMs": 5520,
+    "segs": [ {
+      "utf8": "we just use this all day and this could be used \nfor well you know recruiting if you think about  "
+    } ]
+  }, {
+    "tStartMs": 1238800,
+    "dDurationMs": 5360,
+    "segs": [ {
+      "utf8": "what recruiting is it's about making it's about \nclosing it's really closing deals at the end of  "
+    } ]
+  }, {
+    "tStartMs": 1244160,
+    "dDurationMs": 6800,
+    "segs": [ {
+      "utf8": "the day right so this could be applied to I mean \nyou mentioned sales prospecting this is in a way  "
+    } ]
+  }, {
+    "tStartMs": 1250960,
+    "dDurationMs": 6880,
+    "segs": [ {
+      "utf8": "is like sales process 100% 100% you can also like \nupload CSVs here so if you have a bunch of leads  "
+    } ]
+  }, {
+    "tStartMs": 1257840,
+    "dDurationMs": 3680,
+    "segs": [ {
+      "utf8": "from another platform so Lindy can generate \nher own leads but there's also a lot of other  "
+    } ]
+  }, {
+    "tStartMs": 1261520,
+    "dDurationMs": 5200,
+    "segs": [ {
+      "utf8": "platforms that you may want to use to do that and \nso I have we also use it for sales prospecting so  "
+    } ]
+  }, {
+    "tStartMs": 1266720,
+    "dDurationMs": 10080,
+    "segs": [ {
+      "utf8": "if you look at we have this sales outreacher Lindy \nhere and I have a CSV right here i'll open it can  "
+    } ]
+  }, {
+    "tStartMs": 1276800,
+    "dDurationMs": 6320,
+    "segs": [ {
+      "utf8": "Google Chrome open CSVs i cannot i also have it \nin a Google sheet so Unicorn Founders it's like a  "
+    } ]
+  }, {
+    "tStartMs": 1283120,
+    "dDurationMs": 6240,
+    "segs": [ {
+      "utf8": "list so this one Google Sheets here is 20 unicorn \nfounders but um let me see if this is the right  "
+    } ]
+  }, {
+    "tStartMs": 1289360,
+    "dDurationMs": 7120,
+    "segs": [ {
+      "utf8": "sales outreacher yeah um I'm just going to delete \nto begin what one of the things I noticed by the  "
+    } ]
+  }, {
+    "tStartMs": 1296480,
+    "dDurationMs": 7360,
+    "segs": [ {
+      "utf8": "way is that uh 3.5 is default selected should \npeople keep that default or should they change  "
+    } ]
+  }, {
+    "tStartMs": 1303840,
+    "dDurationMs": 7360,
+    "segs": [ {
+      "utf8": "it i think you should keep it i think that's like \na great default um basically start with cloud and  "
+    } ]
+  }, {
+    "tStartMs": 1311200,
+    "dDurationMs": 7040,
+    "segs": [ {
+      "utf8": "then if you find your agent is too dumb graduate \nto we've got Gemini we've got 01 o1 is is really  "
+    } ]
+  }, {
+    "tStartMs": 1318240,
+    "dDurationMs": 8080,
+    "segs": [ {
+      "utf8": "good it's really expensive but it's really good um \nI use 01 for research tasks um and if your agent  "
+    } ]
+  }, {
+    "tStartMs": 1326320,
+    "dDurationMs": 7440,
+    "segs": [ {
+      "utf8": "is too expensive use Gemini Flash and most of the \ntime Cloud does a good job and Gemini Flash does a  "
+    } ]
+  }, {
+    "tStartMs": 1333760,
+    "dDurationMs": 5520,
+    "segs": [ {
+      "utf8": "good job yeah so right here I just I mean you can \nsee it took me in the time I spent to answer this  "
+    } ]
+  }, {
+    "tStartMs": 1339280,
+    "dDurationMs": 6880,
+    "segs": [ {
+      "utf8": "question i just reached out to 20 unicorn founders \nabout about what we do and it's actually uh  "
+    } ]
+  }, {
+    "tStartMs": 1346160,
+    "dDurationMs": 4880,
+    "segs": [ {
+      "utf8": "personalized right so here it's it's reaching out \nto the founder of Epic like team Swinny and it's  "
+    } ]
+  }, {
+    "tStartMs": 1351040,
+    "dDurationMs": 6720,
+    "segs": [ {
+      "utf8": "like hey like this is how we Lindy can help you uh \nstreamline developer support manage and organize  "
+    } ]
+  }, {
+    "tStartMs": 1357760,
+    "dDurationMs": 5120,
+    "segs": [ {
+      "utf8": "data from your free games program an epic first \nrun initiative so it's it's really super super  "
+    } ]
+  }, {
+    "tStartMs": 1362880,
+    "dDurationMs": 5360,
+    "segs": [ {
+      "utf8": "customizable and super personalized that's why I \nwanted this is why I wanted to have you on the pod  "
+    } ]
+  }, {
+    "tStartMs": 1368240,
+    "dDurationMs": 8400,
+    "segs": [ {
+      "utf8": "again i saw that you were well it was right after \nthe the announcement of the swarms and just I I  "
+    } ]
+  }, {
+    "tStartMs": 1376640,
+    "dDurationMs": 5360,
+    "segs": [ {
+      "utf8": "think that you know what it's important for people \nto realize is that this can take a small team of  "
+    } ]
+  }, {
+    "tStartMs": 1382000,
+    "dDurationMs": 7280,
+    "segs": [ {
+      "utf8": "1 2 3 5 people and make them feel like 20 30 40 \n50 people and there's an arbitrage moment that  "
+    } ]
+  }, {
+    "tStartMs": 1389280,
+    "dDurationMs": 4800,
+    "segs": [ {
+      "utf8": "is happening not everyone i mean maybe in our \nworld we're all like \"Yeah AI agents AI swarms  "
+    } ]
+  }, {
+    "tStartMs": 1394080,
+    "dDurationMs": 6080,
+    "segs": [ {
+      "utf8": "everyone knows what this is right?\" Making jokes \nabout Claude and Clude no we're we're so we're so  "
+    } ]
+  }, {
+    "tStartMs": 1400160,
+    "dDurationMs": 6800,
+    "segs": [ {
+      "utf8": "early in this and if you're if you're listening to \nthis um it's all just about like getting your feet  "
+    } ]
+  }, {
+    "tStartMs": 1406960,
+    "dDurationMs": 5680,
+    "segs": [ {
+      "utf8": "Yeah and your hands dirty and starting to create \nsome of these things and just seeing it work in  "
+    } ]
+  }, {
+    "tStartMs": 1412640,
+    "dDurationMs": 6240,
+    "segs": [ {
+      "utf8": "action there is a huge gap right now between what \nis possible and what people are actually doing  "
+    } ]
+  }, {
+    "tStartMs": 1418880,
+    "dDurationMs": 4000,
+    "segs": [ {
+      "utf8": "there's there's a huge arbitrage and you can \nsee it because the companies that are actually  "
+    } ]
+  }, {
+    "tStartMs": 1422880,
+    "dDurationMs": 6720,
+    "segs": [ {
+      "utf8": "exploiting this arbitrage are blowing up i mean uh \nthere's this startup called Arcades they're like  "
+    } ]
+  }, {
+    "tStartMs": 1429600,
+    "dDurationMs": 6080,
+    "segs": [ {
+      "utf8": "this is like an AI ad generator and reportedly \nthey reached like $5 million in AR in like a  "
+    } ]
+  }, {
+    "tStartMs": 1435680,
+    "dDurationMs": 3840,
+    "segs": [ {
+      "utf8": "couple of months with I think like eight people \nlike seven or eight people or something like that  "
+    } ]
+  }, {
+    "tStartMs": 1439520,
+    "dDurationMs": 6960,
+    "segs": [ {
+      "utf8": "you may you may know this yeah I know it because \ndude it's hilarious i had the founder on the pod  "
+    } ]
+  }, {
+    "tStartMs": 1446480,
+    "dDurationMs": 7520,
+    "segs": [ {
+      "utf8": "a while ago awesome guy and awesome technology and \nthen like two weeks and I I speak to him on X all  "
+    } ]
+  }, {
+    "tStartMs": 1454000,
+    "dDurationMs": 6400,
+    "segs": [ {
+      "utf8": "the time and then two weeks later I get an email \nfrom his team being like \"Hey like it was like a  "
+    } ]
+  }, {
+    "tStartMs": 1460400,
+    "dDurationMs": 5760,
+    "segs": [ {
+      "utf8": "creator outreach email.\" And he was like \"Hey like \nwe'd love to partner with you and do like a paid  "
+    } ]
+  }, {
+    "tStartMs": 1466160,
+    "dDurationMs": 6960,
+    "segs": [ {
+      "utf8": "promotion or do like something with you or give \nyou free access to the product.\" And I messaged  "
+    } ]
+  }, {
+    "tStartMs": 1473120,
+    "dDurationMs": 5600,
+    "segs": [ {
+      "utf8": "the founder and I was like \"Dude oh and it said \nit was him right it said it was him and I was  "
+    } ]
+  }, {
+    "tStartMs": 1478720,
+    "dDurationMs": 4240,
+    "segs": [ {
+      "utf8": "like why are you texting me this and he's like he \nstarted laughing and he was like oh no no no that  "
+    } ]
+  }, {
+    "tStartMs": 1482960,
+    "dDurationMs": 5120,
+    "segs": [ {
+      "utf8": "you know he was probably using Lindy you know I \nyou know I can't I can't speak for who's using  "
+    } ]
+  }, {
+    "tStartMs": 1488080,
+    "dDurationMs": 6160,
+    "segs": [ {
+      "utf8": "us but I will say this example I just gave of the \nrestaurant reservations it's also happening for  "
+    } ]
+  }, {
+    "tStartMs": 1494240,
+    "dDurationMs": 5760,
+    "segs": [ {
+      "utf8": "outreach like that where we are increasingly we \nhave cut multiple times Lindy's talk to Lindy's  "
+    } ]
+  }, {
+    "tStartMs": 1500000,
+    "dDurationMs": 4880,
+    "segs": [ {
+      "utf8": "from like different customers so this influencer \noutreach use case is actually a pretty big one  "
+    } ]
+  }, {
+    "tStartMs": 1504880,
+    "dDurationMs": 4480,
+    "segs": [ {
+      "utf8": "and we have I can't say who but we I wish I could \nsay who because it's pretty cool it's a very big  "
+    } ]
+  }, {
+    "tStartMs": 1509360,
+    "dDurationMs": 8800,
+    "segs": [ {
+      "utf8": "YouTuber who uh is using us um and um he uh so he \nit's actually not him it's his agent he's using us  "
+    } ]
+  }, {
+    "tStartMs": 1518160,
+    "dDurationMs": 5040,
+    "segs": [ {
+      "utf8": "because this guy receives so many emails all day \nfrom like random brands who are offering him to  "
+    } ]
+  }, {
+    "tStartMs": 1523200,
+    "dDurationMs": 5920,
+    "segs": [ {
+      "utf8": "partner and it's just it's a deluge right and like \nless than 1% of them he wants to work with so his  "
+    } ]
+  }, {
+    "tStartMs": 1529120,
+    "dDurationMs": 4960,
+    "segs": [ {
+      "utf8": "agent has deployed a Lindy to help him like filter \nand like negotiate deals and all of that stuff  "
+    } ]
+  }, {
+    "tStartMs": 1534080,
+    "dDurationMs": 4960,
+    "segs": [ {
+      "utf8": "we have another customer who's like a famous \njewelry brand who uses a lot of influencer  "
+    } ]
+  }, {
+    "tStartMs": 1539040,
+    "dDurationMs": 4720,
+    "segs": [ {
+      "utf8": "marketing and they have also deployed a Lindy \nto find influencers on Tik Tok and Instagram  "
+    } ]
+  }, {
+    "tStartMs": 1543760,
+    "dDurationMs": 6320,
+    "segs": [ {
+      "utf8": "and YouTube and find their contact information and \nreach out to them and offer them partnerships and  "
+    } ]
+  }, {
+    "tStartMs": 1550080,
+    "dDurationMs": 4160,
+    "segs": [ {
+      "utf8": "when we signed that customer I was like we need \nto create a reminder to check a month from now  "
+    } ]
+  }, {
+    "tStartMs": 1554240,
+    "dDurationMs": 4400,
+    "segs": [ {
+      "utf8": "if that if if his Lindy ducked to his Lindy and \nsure enough we checked a month later and they had  "
+    } ]
+  }, {
+    "tStartMs": 1558640,
+    "dDurationMs": 6320,
+    "segs": [ {
+      "utf8": "they had crossed paths i love it um would you be \nable to go back to the template section and the  "
+    } ]
+  }, {
+    "tStartMs": 1564960,
+    "dDurationMs": 7600,
+    "segs": [ {
+      "utf8": "reason why is I want to scan through some of these \njust to get people's minds primed for the types of  "
+    } ]
+  }, {
+    "tStartMs": 1572560,
+    "dDurationMs": 7760,
+    "segs": [ {
+      "utf8": "stuff that you can use yeah let me open the full \nlist of templates here uh you know lead enrichment  "
+    } ]
+  }, {
+    "tStartMs": 1580320,
+    "dDurationMs": 5520,
+    "segs": [ {
+      "utf8": "lead qualification customer support like and and \ncustomer support over everything because we just  "
+    } ]
+  }, {
+    "tStartMs": 1585840,
+    "dDurationMs": 5280,
+    "segs": [ {
+      "utf8": "released last week like 1,600 integrations like \nagain we're by far right now the top AI agent  "
+    } ]
+  }, {
+    "tStartMs": 1591120,
+    "dDurationMs": 6160,
+    "segs": [ {
+      "utf8": "platform in terms of number of integrations and \nso wherever your customer support exists if it's  "
+    } ]
+  }, {
+    "tStartMs": 1597280,
+    "dDurationMs": 4800,
+    "segs": [ {
+      "utf8": "like Telegram or Slack or WhatsApp or Zenesk \nor Intercom like you name it like we can we  "
+    } ]
+  }, {
+    "tStartMs": 1602080,
+    "dDurationMs": 6000,
+    "segs": [ {
+      "utf8": "can automate your customer support over over these \nplatforms um the focus group here is is a really  "
+    } ]
+  }, {
+    "tStartMs": 1608080,
+    "dDurationMs": 6240,
+    "segs": [ {
+      "utf8": "interesting use case because LLMs are not super \ngood at reasoning but they are really good at  "
+    } ]
+  }, {
+    "tStartMs": 1614320,
+    "dDurationMs": 5040,
+    "segs": [ {
+      "utf8": "pretending to be human because that's that's what \nthey are right they've been trained on on so much  "
+    } ]
+  }, {
+    "tStartMs": 1619360,
+    "dDurationMs": 6160,
+    "segs": [ {
+      "utf8": "text that's human written and there's actually \na lot of papers that find that the answers that  "
+    } ]
+  }, {
+    "tStartMs": 1625520,
+    "dDurationMs": 5440,
+    "segs": [ {
+      "utf8": "LLM give you are actually very correlated to what \nto the answers that a human would have given you  "
+    } ]
+  }, {
+    "tStartMs": 1630960,
+    "dDurationMs": 5120,
+    "segs": [ {
+      "utf8": "so if you ask like do you like this or that like \nLLM are actually doing a very reasonable job at  "
+    } ]
+  }, {
+    "tStartMs": 1636080,
+    "dDurationMs": 6000,
+    "segs": [ {
+      "utf8": "at emulating a human and so that means that you \ncan like marketing companies and like big firms  "
+    } ]
+  }, {
+    "tStartMs": 1642080,
+    "dDurationMs": 6480,
+    "segs": [ {
+      "utf8": "they spend fortunes on focus groups and we use it \nourselves as well like we've created a lindy that  "
+    } ]
+  }, {
+    "tStartMs": 1648560,
+    "dDurationMs": 5200,
+    "segs": [ {
+      "utf8": "simulates our user so we've prompted it to be like \nhey these are the different personas of users we  "
+    } ]
+  }, {
+    "tStartMs": 1653760,
+    "dDurationMs": 4320,
+    "segs": [ {
+      "utf8": "have and we talk to it all day like what do you \nthink of this what do you think of that like how  "
+    } ]
+  }, {
+    "tStartMs": 1658080,
+    "dDurationMs": 4560,
+    "segs": [ {
+      "utf8": "do how is this lending on you and it's it's I \nwould say it's 80% as good as like an actual  "
+    } ]
+  }, {
+    "tStartMs": 1662640,
+    "dDurationMs": 6560,
+    "segs": [ {
+      "utf8": "focus group in an actual user research session but \nit cost you like 10 cents instead of $1,000 dude  "
+    } ]
+  }, {
+    "tStartMs": 1669200,
+    "dDurationMs": 5840,
+    "segs": [ {
+      "utf8": "that's so interesting i uh I talk a lot about \non the channel just this idea of like building  "
+    } ]
+  }, {
+    "tStartMs": 1675040,
+    "dDurationMs": 4000,
+    "segs": [ {
+      "utf8": "community- based businesses and community based \nproducts where it's like you're building a product  "
+    } ]
+  }, {
+    "tStartMs": 1679040,
+    "dDurationMs": 8000,
+    "segs": [ {
+      "utf8": "for a community and I never thought of it like \nthis but a virtual community right like so coming  "
+    } ]
+  }, {
+    "tStartMs": 1687040,
+    "dDurationMs": 4800,
+    "segs": [ {
+      "utf8": "up with an idea for like vibe coding something \ncoming up with a product for something starting a  "
+    } ]
+  }, {
+    "tStartMs": 1691840,
+    "dDurationMs": 6560,
+    "segs": [ {
+      "utf8": "social account and then getting feedback on your \nbusiness idea and what you're trying to do from  "
+    } ]
+  }, {
+    "tStartMs": 1698400,
+    "dDurationMs": 5440,
+    "segs": [ {
+      "utf8": "your virtual community yeah you know I actually \nthink that's the next step for right now like Bolt  "
+    } ]
+  }, {
+    "tStartMs": 1703840,
+    "dDurationMs": 4480,
+    "segs": [ {
+      "utf8": "and Lovable and all of these companies are really \nblowing up these like prompt to app platforms are  "
+    } ]
+  }, {
+    "tStartMs": 1708320,
+    "dDurationMs": 4400,
+    "segs": [ {
+      "utf8": "really blowing up i think that's going to be the \nnext step for them where it's like you build the  "
+    } ]
+  }, {
+    "tStartMs": 1712720,
+    "dDurationMs": 7200,
+    "segs": [ {
+      "utf8": "MVP of your app and then it sends it to a thousand \nvirtual users and and they use it and like 5  "
+    } ]
+  }, {
+    "tStartMs": 1719920,
+    "dDurationMs": 4560,
+    "segs": [ {
+      "utf8": "minutes later you've got feedback from a thousand \npeople and then you just rinse and repeat and you  "
+    } ]
+  }, {
+    "tStartMs": 1724480,
+    "dDurationMs": 5520,
+    "segs": [ {
+      "utf8": "let this running for a day and by the end of the \nday you've got an an app that's been iterated on  "
+    } ]
+  }, {
+    "tStartMs": 1730000,
+    "dDurationMs": 6240,
+    "segs": [ {
+      "utf8": "for like the equivalent of a year right uh this \none I I love it's it's my Elon Lindy so what it  "
+    } ]
+  }, {
+    "tStartMs": 1736240,
+    "dDurationMs": 5200,
+    "segs": [ {
+      "utf8": "does is uh it actually uses both the phone call \ncapability we have and the swarm capability we  "
+    } ]
+  }, {
+    "tStartMs": 1741440,
+    "dDurationMs": 6160,
+    "segs": [ {
+      "utf8": "have so you give it a list of your team and every \nweek it makes a phone call to each teammate for  "
+    } ]
+  }, {
+    "tStartMs": 1747600,
+    "dDurationMs": 5040,
+    "segs": [ {
+      "utf8": "a sort of virtual standup and it asks them like \nwhat did you get done this week uh it's actually  "
+    } ]
+  }, {
+    "tStartMs": 1752640,
+    "dDurationMs": 3920,
+    "segs": [ {
+      "utf8": "funny because I forgot I had this running and I \nI received a phone call like a couple of weeks  "
+    } ]
+  }, {
+    "tStartMs": 1756560,
+    "dDurationMs": 4720,
+    "segs": [ {
+      "utf8": "ago from my Lindy and I was like oh like it's my \nLindy phone number is in my contacts and I'm like  "
+    } ]
+  }, {
+    "tStartMs": 1761280,
+    "dDurationMs": 3680,
+    "segs": [ {
+      "utf8": "oh my Lindy's calling me what's going on so I pick \nup the phone i'm like \"Hey.\" And and she's like  "
+    } ]
+  }, {
+    "tStartMs": 1764960,
+    "dDurationMs": 4000,
+    "segs": [ {
+      "utf8": "\"Hey Floyd it's Lindy.\" I'm like \"Okay what do you \nwant?\" And she's like \"What did you get done this  "
+    } ]
+  }, {
+    "tStartMs": 1768960,
+    "dDurationMs": 7200,
+    "segs": [ {
+      "utf8": "week?\" [ __ ] you um yeah so the Elani is really \ncool and then it sends you a report with a summary  "
+    } ]
+  }, {
+    "tStartMs": 1776160,
+    "dDurationMs": 4800,
+    "segs": [ {
+      "utf8": "of what your entire team has told you so this is \nactually right now being deployed by one of our  "
+    } ]
+  }, {
+    "tStartMs": 1780960,
+    "dDurationMs": 4960,
+    "segs": [ {
+      "utf8": "customers like a thousand plus employees and every \nweek it's just like a thousand people receive a  "
+    } ]
+  }, {
+    "tStartMs": 1785920,
+    "dDurationMs": 4960,
+    "segs": [ {
+      "utf8": "phone call and then the CEO receives a report with \nlike what everybody in the company is doing it's  "
+    } ]
+  }, {
+    "tStartMs": 1790880,
+    "dDurationMs": 8000,
+    "segs": [ {
+      "utf8": "basically replacing the middle management layer \nof the company very cool dude this is crazy you've  "
+    } ]
+  }, {
+    "tStartMs": 1798880,
+    "dDurationMs": 5920,
+    "segs": [ {
+      "utf8": "come I think you were on the pod like 6 months \nago almost and the integrations and just seeing  "
+    } ]
+  }, {
+    "tStartMs": 1804800,
+    "dDurationMs": 5840,
+    "segs": [ {
+      "utf8": "all these templates like it's crazy how much has \nchanged it is moving fast for sure the team has  "
+    } ]
+  }, {
+    "tStartMs": 1810640,
+    "dDurationMs": 5520,
+    "segs": [ {
+      "utf8": "been cranking um I'll give one last example I \nguess of of a Lindy that I really like which  "
+    } ]
+  }, {
+    "tStartMs": 1816160,
+    "dDurationMs": 5440,
+    "segs": [ {
+      "utf8": "is the the competitive analysis Lindy um I think \nthis is another thing that can be very useful to  "
+    } ]
+  }, {
+    "tStartMs": 1821600,
+    "dDurationMs": 8000,
+    "segs": [ {
+      "utf8": "pretty much any company um I have it right here \nuh competitive tracker um so you can see it's  "
+    } ]
+  }, {
+    "tStartMs": 1829600,
+    "dDurationMs": 8240,
+    "segs": [ {
+      "utf8": "funny it's got the the poop emoji here as an icon \num what it does is uh it wakes up every month it  "
+    } ]
+  }, {
+    "tStartMs": 1837840,
+    "dDurationMs": 4320,
+    "segs": [ {
+      "utf8": "gets the list of competitors from this spreadsheet \nlike you can just like keep a spreadsheet with the  "
+    } ]
+  }, {
+    "tStartMs": 1842160,
+    "dDurationMs": 5440,
+    "segs": [ {
+      "utf8": "competitors that you're keeping tabs on and then \nit deploys a swarm for each competitor and for  "
+    } ]
+  }, {
+    "tStartMs": 1847600,
+    "dDurationMs": 4640,
+    "segs": [ {
+      "utf8": "each competitor it looks up whatever information \nyou want the employee count the traffic estimates  "
+    } ]
+  }, {
+    "tStartMs": 1852240,
+    "dDurationMs": 5600,
+    "segs": [ {
+      "utf8": "the recent news whether they've raised the money \nwhether they're hiring any anything you want and  "
+    } ]
+  }, {
+    "tStartMs": 1857840,
+    "dDurationMs": 3920,
+    "segs": [ {
+      "utf8": "then it does a couple of interesting things which \nis one it sends you a report with like hey like  "
+    } ]
+  }, {
+    "tStartMs": 1861760,
+    "dDurationMs": 6720,
+    "segs": [ {
+      "utf8": "these are the competitors who are putting ahead \nand it logs all of that in a spreadsheet and so  "
+    } ]
+  }, {
+    "tStartMs": 1868480,
+    "dDurationMs": 3920,
+    "segs": [ {
+      "utf8": "you can see here this is just an example \nspreadsheet where I've I've entered three  "
+    } ]
+  }, {
+    "tStartMs": 1872400,
+    "dDurationMs": 5280,
+    "segs": [ {
+      "utf8": "competitors like Brex Mercury and RAM they're like \nfinancial companies and here it's logging all of  "
+    } ]
+  }, {
+    "tStartMs": 1877680,
+    "dDurationMs": 5200,
+    "segs": [ {
+      "utf8": "this data here in this in this other tab and then \nI've set up this other sheet on the spreadsheet  "
+    } ]
+  }, {
+    "tStartMs": 1882880,
+    "dDurationMs": 5760,
+    "segs": [ {
+      "utf8": "that's like telling me it's like a table it shows \nme for each competitor for every month how have  "
+    } ]
+  }, {
+    "tStartMs": 1888640,
+    "dDurationMs": 5920,
+    "segs": [ {
+      "utf8": "their employees count trending how have their \nmonthly website visits trended their valuation  "
+    } ]
+  }, {
+    "tStartMs": 1894560,
+    "dDurationMs": 6800,
+    "segs": [ {
+      "utf8": "and so on and so forth and again I mean you can \nsee it's it's pretty simple it's like nine steps  "
+    } ]
+  }, {
+    "tStartMs": 1901360,
+    "dDurationMs": 7840,
+    "segs": [ {
+      "utf8": "or something like that and we have a template for \nit that's really cool yeah it's also um you know  "
+    } ]
+  }, {
+    "tStartMs": 1909200,
+    "dDurationMs": 4320,
+    "segs": [ {
+      "utf8": "when it comes to building a startup and looking \nat competition like you you really don't want  "
+    } ]
+  }, {
+    "tStartMs": 1913520,
+    "dDurationMs": 4560,
+    "segs": [ {
+      "utf8": "to be like going to their websites every day and \nletting them get in your head so having something  "
+    } ]
+  }, {
+    "tStartMs": 1918080,
+    "dDurationMs": 8000,
+    "segs": [ {
+      "utf8": "like this feels a bit more sober yes one one \nthing I have liked actually doing uh this is  "
+    } ]
+  }, {
+    "tStartMs": 1926080,
+    "dDurationMs": 5600,
+    "segs": [ {
+      "utf8": "actually from before we had swarms um if you're on \nTwitter or on Product Hunt or whatever you get the  "
+    } ]
+  }, {
+    "tStartMs": 1931680,
+    "dDurationMs": 5200,
+    "segs": [ {
+      "utf8": "feeling that everyone is their mother is working \non AI agents so you get a new announcement maybe  "
+    } ]
+  }, {
+    "tStartMs": 1936880,
+    "dDurationMs": 4880,
+    "segs": [ {
+      "utf8": "every day at this point like twice a week you get \nlike a new major announcement and so at first as a  "
+    } ]
+  }, {
+    "tStartMs": 1941760,
+    "dDurationMs": 5120,
+    "segs": [ {
+      "utf8": "founder you know I was like I wouldn't say I was \ngetting demoralized by it but it was like [ __ ]  "
+    } ]
+  }, {
+    "tStartMs": 1946880,
+    "dDurationMs": 4160,
+    "segs": [ {
+      "utf8": "like this is this is heavy competition like this \nis going to be a hot space right and so what I  "
+    } ]
+  }, {
+    "tStartMs": 1951040,
+    "dDurationMs": 4160,
+    "segs": [ {
+      "utf8": "did is I set up a Lindy that's like I could just \nsend her these announcements and then I would be  "
+    } ]
+  }, {
+    "tStartMs": 1955200,
+    "dDurationMs": 4880,
+    "segs": [ {
+      "utf8": "like in six months tell me where these guys are \nand in 12 months tell me where these guys are and  "
+    } ]
+  }, {
+    "tStartMs": 1960080,
+    "dDurationMs": 7120,
+    "segs": [ {
+      "utf8": "one thing that it's really taught me is 90% of \nthe time they're nowhere so it's really trained  "
+    } ]
+  }, {
+    "tStartMs": 1967200,
+    "dDurationMs": 4080,
+    "segs": [ {
+      "utf8": "me like that now when I see a computer I'm like \nyeah look it doesn't it's like the folks that I  "
+    } ]
+  }, {
+    "tStartMs": 1971280,
+    "dDurationMs": 7200,
+    "segs": [ {
+      "utf8": "would worry about 12 months ago don't exist today \nso 90% of the time it doesn't matter i love it all  "
+    } ]
+  }, {
+    "tStartMs": 1978480,
+    "dDurationMs": 5520,
+    "segs": [ {
+      "utf8": "right is there anything else you wanted to cover \num let me think i Okay I'll show one last example  "
+    } ]
+  }, {
+    "tStartMs": 1984000,
+    "dDurationMs": 7520,
+    "segs": [ {
+      "utf8": "that the contra is showing is my my CRM manager \nso I have this Lindy that helps me um manage my  "
+    } ]
+  }, {
+    "tStartMs": 1991520,
+    "dDurationMs": 6080,
+    "segs": [ {
+      "utf8": "my my network and so I every so often I talk to \nher and I'm like \"Hey I just met this guy he's  "
+    } ]
+  }, {
+    "tStartMs": 1997600,
+    "dDurationMs": 7200,
+    "segs": [ {
+      "utf8": "awesome i really wanted to stay stay in touch with \nwith him.\" So um I'll show you an example here um  "
+    } ]
+  }, {
+    "tStartMs": 2004800,
+    "dDurationMs": 5840,
+    "segs": [ {
+      "utf8": "well we're going to have to we're going to have to \nblur it out but uh I edit this guy like hey like  "
+    } ]
+  }, {
+    "tStartMs": 2010640,
+    "dDurationMs": 5440,
+    "segs": [ {
+      "utf8": "this guy is is awesome you know apparently he's \nthe best that other guy has ever worked with addit  "
+    } ]
+  }, {
+    "tStartMs": 2016080,
+    "dDurationMs": 3760,
+    "segs": [ {
+      "utf8": "him to a spreadsheet another really cool thing is \nthat I can talk to this Lindy and I can be like  "
+    } ]
+  }, {
+    "tStartMs": 2019840,
+    "dDurationMs": 7280,
+    "segs": [ {
+      "utf8": "hey who should I hit up when I'm in New York or \nwho are like really good salespeople that I know  "
+    } ]
+  }, {
+    "tStartMs": 2027120,
+    "dDurationMs": 6400,
+    "segs": [ {
+      "utf8": "and then it finds me a list and then this Lindy I \nactually also made her observe my inbox and notice  "
+    } ]
+  }, {
+    "tStartMs": 2033520,
+    "dDurationMs": 5600,
+    "segs": [ {
+      "utf8": "when I have booked a flight which by the way soon \nis going to be a Lindy booking flights for me and  "
+    } ]
+  }, {
+    "tStartMs": 2039120,
+    "dDurationMs": 5280,
+    "segs": [ {
+      "utf8": "so she she sees when I booked a flight because \nI receive an email confirmation and she's like  "
+    } ]
+  }, {
+    "tStartMs": 2044400,
+    "dDurationMs": 4480,
+    "segs": [ {
+      "utf8": "and I can I can actually show you because right \nnow I'm going to to New York so she's like \"Hey  "
+    } ]
+  }, {
+    "tStartMs": 2048880,
+    "dDurationMs": 4880,
+    "segs": [ {
+      "utf8": "like you're going to New York.\" This is just \nlike a test email I sent to myself and she's  "
+    } ]
+  }, {
+    "tStartMs": 2053760,
+    "dDurationMs": 4480,
+    "segs": [ {
+      "utf8": "looking in my CRM and she's like \"Hey these are \nthe contacts that you should meet up when you're  "
+    } ]
+  }, {
+    "tStartMs": 2058240,
+    "dDurationMs": 7440,
+    "segs": [ {
+      "utf8": "going to New York.\" That's so smart you know what \nI usually do which is like dumb but whenever I'm  "
+    } ]
+  }, {
+    "tStartMs": 2065680,
+    "dDurationMs": 4240,
+    "segs": [ {
+      "utf8": "doing something like this I'll go onto my Twitter \naccount and just see who I'm following and be like  "
+    } ]
+  }, {
+    "tStartMs": 2069920,
+    "dDurationMs": 4880,
+    "segs": [ {
+      "utf8": "\"Oh yeah Flo's in San Francisco.\" and reach out \nbut it's like obviously not the best way to do  "
+    } ]
+  }, {
+    "tStartMs": 2074800,
+    "dDurationMs": 4000,
+    "segs": [ {
+      "utf8": "that the problem is too few people are on Twitter \nwhich I don't understand i feel like everybody  "
+    } ]
+  }, {
+    "tStartMs": 2078800,
+    "dDurationMs": 5760,
+    "segs": [ {
+      "utf8": "should be on Twitter it's like such a boon but \ntoo few people are on Twitter that's right and  "
+    } ]
+  }, {
+    "tStartMs": 2084560,
+    "dDurationMs": 7040,
+    "segs": [ {
+      "utf8": "LinkedIn is gar is kind of garbage let's be real \nno 100% yeah it's not your real network this has  "
+    } ]
+  }, {
+    "tStartMs": 2091600,
+    "dDurationMs": 8880,
+    "segs": [ {
+      "utf8": "been great uh Flo I'm going to put together a \na document that people can download that can  "
+    } ]
+  }, {
+    "tStartMs": 2100480,
+    "dDurationMs": 7920,
+    "segs": [ {
+      "utf8": "help them set up their first agents maybe some \nbest practices just some notes on how to do it  "
+    } ]
+  }, {
+    "tStartMs": 2108400,
+    "dDurationMs": 7920,
+    "segs": [ {
+      "utf8": "um people can go and grab that that'll be in the \ncomment section and in the show notes and is there  "
+    } ]
+  }, {
+    "tStartMs": 2116320,
+    "dDurationMs": 6720,
+    "segs": [ {
+      "utf8": "is there one thing you want to leave people with \ni will create a custom signup link for you if you  "
+    } ]
+  }, {
+    "tStartMs": 2123040,
+    "dDurationMs": 6240,
+    "segs": [ {
+      "utf8": "go to lindy.ai/greg i'll create a signup link so \nthat people get a a 50% discount and they get like  "
+    } ]
+  }, {
+    "tStartMs": 2129280,
+    "dDurationMs": 8480,
+    "segs": [ {
+      "utf8": "a longer free trial great so I'll include that in \nthe show notes in the pin comment um appreciate  "
+    } ]
+  }, {
+    "tStartMs": 2137760,
+    "dDurationMs": 6400,
+    "segs": [ {
+      "utf8": "that Flo and um why I think it's important that \npeople start doing this is like don't listen to  "
+    } ]
+  }, {
+    "tStartMs": 2144160,
+    "dDurationMs": 3840,
+    "segs": [ {
+      "utf8": "us anymore you know what are you doing listening \nto us at this point right like go and get your  "
+    } ]
+  }, {
+    "tStartMs": 2148000,
+    "dDurationMs": 6080,
+    "segs": [ {
+      "utf8": "hands dirty yeah the frontier has really rushed \nforward so much right now it's it's it's like we  "
+    } ]
+  }, {
+    "tStartMs": 2154080,
+    "dDurationMs": 4320,
+    "segs": [ {
+      "utf8": "had computers and everybody was still using the \nfax machine and just like computers arrived all  "
+    } ]
+  }, {
+    "tStartMs": 2158400,
+    "dDurationMs": 3520,
+    "segs": [ {
+      "utf8": "of a sudden because innovation is accelerating \nand people are still using fax machines and  "
+    } ]
+  }, {
+    "tStartMs": 2161920,
+    "dDurationMs": 4400,
+    "segs": [ {
+      "utf8": "I'm like this is people don't understand right \nnow what's what's happening it's cool dude it's  "
+    } ]
+  }, {
+    "tStartMs": 2166320,
+    "dDurationMs": 4560,
+    "segs": [ {
+      "utf8": "really cool thanks for sharing it with us yeah \nthanks a lot Greg i'll see you around see you"
+    } ]
+  } ]
+}

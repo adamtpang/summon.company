@@ -15,6 +15,7 @@ import {
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { formatAssigneeUserLabel } from "../lib/assignees";
 import type { InboxIssueColumn } from "../lib/inbox";
+import { deriveInboxScore, type ScoreboardTier, type WorkTypeRoute } from "../lib/scoreboard";
 import { cn } from "../lib/utils";
 import { timeAgo } from "../lib/timeAgo";
 import { Identity } from "./Identity";
@@ -134,6 +135,111 @@ export function IssueColumnPicker({
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
+  );
+}
+
+/**
+ * SUM-148 — tier chip + work-type tag + one-click routing for an inbox row.
+ *
+ * Color IS data here (monochrome law): only the S tier carries the primary hue;
+ * A..F step down a grayscale emphasis ramp. The tag and route chips are neutral
+ * outline. Routing suggests; the board dispatches (manual mode stays sovereign),
+ * so dispatch is an explicit one-click button, never an automatic reassignment.
+ */
+const TIER_CHIP_CLASS: Record<ScoreboardTier, string> = {
+  S: "bg-primary text-primary-foreground border-transparent",
+  A: "bg-foreground text-background border-transparent",
+  B: "bg-foreground/70 text-background border-transparent",
+  C: "bg-muted text-foreground border-border",
+  D: "bg-transparent text-muted-foreground border-border",
+  F: "bg-transparent text-muted-foreground/60 border-border/60",
+};
+
+export function InboxScoreChips({
+  issue,
+  route,
+  routedAgentId,
+  onDispatch,
+  dispatchPending = false,
+}: {
+  issue: Issue;
+  /** The routing target derived for this issue's work type, or null if untagged. */
+  route: WorkTypeRoute | null;
+  /** Live agent id matching the route's agentNameKey, or null if none is hired. */
+  routedAgentId: string | null;
+  /** One-click dispatch handler; assigns the issue to `routedAgentId`. */
+  onDispatch?: (agentId: string) => void;
+  dispatchPending?: boolean;
+}) {
+  const score = deriveInboxScore(issue);
+  const tier = score.tier;
+  const tagLabel = route?.department ?? null;
+  const routeKey = route?.agentNameKey ?? null;
+  const alreadyRouted = !!routedAgentId && issue.assigneeAgentId === routedAgentId;
+
+  return (
+    <span className="hidden shrink-0 items-center gap-1 sm:inline-flex">
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <span
+            className={cn(
+              "inline-flex h-4 min-w-4 items-center justify-center rounded border px-1 text-(length:--text-nano) font-semibold leading-none",
+              TIER_CHIP_CLASS[tier],
+            )}
+            aria-label={`Tier ${tier}`}
+          >
+            {tier}
+          </span>
+        </TooltipTrigger>
+        <TooltipContent side="top" sideOffset={6}>
+          <span className="font-mono text-xs">
+            {`Tier ${tier} · importance ${score.importanceStars} · urgency ${score.urgencyStars} · time ${score.timeStars} · money ${score.moneyStars}`}
+          </span>
+        </TooltipContent>
+      </Tooltip>
+
+      {tagLabel ? (
+        <Badge
+          variant="outline"
+          className="border-border bg-transparent px-1.5 py-0 text-(length:--text-nano) font-medium text-muted-foreground"
+        >
+          {tagLabel}
+        </Badge>
+      ) : null}
+
+      {routeKey ? (
+        alreadyRouted ? (
+          <span className="text-(length:--text-nano) font-medium text-muted-foreground">
+            {`→ ${routeKey}`}
+          </span>
+        ) : routedAgentId && onDispatch ? (
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <button
+                type="button"
+                disabled={dispatchPending}
+                onClick={(event) => {
+                  event.preventDefault();
+                  event.stopPropagation();
+                  onDispatch(routedAgentId);
+                }}
+                className="inline-flex items-center rounded border border-border px-1 text-(length:--text-nano) font-medium text-muted-foreground transition-colors hover:border-foreground/40 hover:text-foreground disabled:opacity-40"
+              >
+                {`→ ${routeKey}`}
+              </button>
+            </TooltipTrigger>
+            <TooltipContent side="top" sideOffset={6}>{`Dispatch to ${routeKey}`}</TooltipContent>
+          </Tooltip>
+        ) : (
+          <span
+            className="text-(length:--text-nano) font-medium text-muted-foreground/70"
+            title={`No ${route?.department ?? ""} agent hired yet`}
+          >
+            {`${routeKey}?`}
+          </span>
+        )
+      ) : null}
+    </span>
   );
 }
 

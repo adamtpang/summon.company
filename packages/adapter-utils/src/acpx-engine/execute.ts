@@ -1274,7 +1274,7 @@ async function buildRuntime(input: {
   };
 }
 
-function sessionConfigOptions(prepared: AcpxPreparedRuntime): Array<{ key: string; value: string }> {
+export function sessionConfigOptions(prepared: AcpxPreparedRuntime): Array<{ key: string; value: string }> {
   const options: Array<{ key: string; value: string }> = [];
   // Model for the claude agent is pre-set via ANTHROPIC_MODEL env var at
   // startup; skip set_config_option to avoid ACP-server model-name validation
@@ -1282,7 +1282,15 @@ function sessionConfigOptions(prepared: AcpxPreparedRuntime): Array<{ key: strin
   if (prepared.requestedModel && prepared.acpxAgent !== "claude") {
     options.push({ key: "model", value: prepared.requestedModel });
   }
-  if (prepared.requestedThinkingEffort) {
+  // Reasoning-effort control is adapter-specific. Codex exposes `reasoning_effort`,
+  // but the claude ACP server advertises only agent/mode/model and hard-rejects a
+  // set_config_option for `effort`, which fails the whole run
+  // (acpx_session_config_failed). The cheap model profile carries effort:low, so a
+  // claude cheap-profile run would otherwise inherit an option the backend
+  // structurally cannot accept. Best part is no part: never emit `effort` for the
+  // claude agent instead of relying on runtime introspection/exception recovery in
+  // applySessionConfigOptions to skip it after the doomed request.
+  if (prepared.requestedThinkingEffort && prepared.acpxAgent !== "claude") {
     options.push({
       key: prepared.acpxAgent === "codex" ? "reasoning_effort" : "effort",
       value: prepared.requestedThinkingEffort,
@@ -1295,6 +1303,27 @@ function sessionConfigOptions(prepared: AcpxPreparedRuntime): Array<{ key: strin
     );
   }
   return options;
+}
+
+// Read the config-option keys the live ACP session actually advertises. Returns
+// null when the runtime cannot introspect capabilities or the session does not
+// advertise a specific option set — in that case the ACPX runtime itself is
+// lenient (it only rejects a set_config_option for an option the session
+// explicitly advertised without), so we attempt the set and let the runtime
+// decide. When a non-empty set is advertised we honor it exactly.
+async function resolveAdvertisedConfigOptionKeys(
+  runtime: AcpRuntime,
+  handle: AcpRuntimeHandle,
+): Promise<Set<string> | null> {
+  if (!runtime.getCapabilities) return null;
+  try {
+    const capabilities = await runtime.getCapabilities({ handle });
+    const keys = capabilities?.configOptionKeys;
+    if (!Array.isArray(keys) || keys.length === 0) return null;
+    return new Set(keys.filter((key): key is string => typeof key === "string" && key.trim().length > 0));
+  } catch {
+    return null;
+  }
 }
 
 async function applySessionConfigOptions(input: {
@@ -1311,17 +1340,71 @@ async function applySessionConfigOptions(input: {
     await input.onLog("stderr", `[summon] ${message}\n`);
     throw new Error(message);
   }
+  // Only push options the session advertises. The claude ACP server advertises
+  // agent/mode/model but not `effort`, and set_config_option for an
+  // unadvertised option throws a hard ACP_BACKEND_UNSUPPORTED_CONTROL that would
+  // otherwise fail the whole run. Skip-with-log keeps the run alive at the
+  // backend's default effort and surfaces one actionable recovery step.
+  const advertised = await resolveAdvertisedConfigOptionKeys(input.runtime, input.handle);
   for (const option of options) {
-    await input.runtime.setConfigOption({
-      handle: input.handle,
-      key: option.key,
-      value: option.value,
-    });
+    if (advertised && !advertised.has(option.key)) {
+      await logSkippedConfigOption(input, option, advertised);
+      continue;
+    }
+    try {
+      await input.runtime.setConfigOption({
+        handle: input.handle,
+        key: option.key,
+        value: option.value,
+      });
+    } catch (error) {
+      // Not every ACPX runtime advertises its config keys: some return
+      // getCapabilities() without configOptionKeys, so the pre-filter above
+      // sees `advertised === null` and cannot know `effort` is unsupported.
+      // The backend then hard-rejects set_config_option with
+      // ACP_BACKEND_UNSUPPORTED_CONTROL, which — before this catch — aborted
+      // the whole heartbeat as acpx_session_config_failed. Treat that specific
+      // rejection as a skip-with-log (run continues at the backend's default
+      // effort) and rethrow anything else so real config faults still surface.
+      if (!isUnsupportedConfigOptionError(error)) throw error;
+      await logSkippedConfigOption(input, option, advertised);
+      continue;
+    }
     await input.onLog(
       "stdout",
       `[summon] Applied ACPX ${input.prepared.acpxAgent} config ${option.key}=${option.value}\n`,
     );
   }
+}
+
+async function logSkippedConfigOption(
+  input: {
+    prepared: AcpxPreparedRuntime;
+    onLog: AdapterExecutionContext["onLog"];
+  },
+  option: { key: string; value: string },
+  advertised: Set<string> | null,
+): Promise<void> {
+  const supportedText = advertised && advertised.size > 0 ? [...advertised].sort().join(", ") : "none";
+  await input.onLog(
+    "stdout",
+    `[summon] Skipped ACPX ${input.prepared.acpxAgent} config ${option.key}=${option.value}; session advertises only: ${supportedText}. Upgrade the agent CLI/runtime to restore ${option.key} control.\n`,
+  );
+}
+
+// True when the ACPX backend rejected a set_config_option because the live
+// session does not support that option. Matches both the structured error code
+// and the human-readable message the runtime emits, since not every runtime
+// build sets a machine-readable `code`.
+function isUnsupportedConfigOptionError(error: unknown): boolean {
+  if (!error) return false;
+  const code =
+    typeof error === "object" && error !== null && "code" in error
+      ? String((error as { code?: unknown }).code ?? "")
+      : "";
+  if (code.toUpperCase().includes("UNSUPPORTED_CONTROL")) return true;
+  const message = error instanceof Error ? error.message : String(error);
+  return /unsupported_control/i.test(message) || /does not advertise config option/i.test(message);
 }
 
 async function cleanupRemoteBridges(prepared: AcpxPreparedRuntime): Promise<void> {

@@ -36,7 +36,12 @@ S/A-tier tasks. One screen, no prose walls. End with the single next move.
 2. Create the company (name from the repo/product, 3-letter issue prefix),
    pair the repo/org URL, and pull identity: GitHub owner avatar →
    `logoUrl` (`https://github.com/<owner>.png`), description, homepage.
-3. Proceed to STANDARDIZE. New companies start in `manual` operating mode —
+3. **Place it on the roadmap** (doc/COMPANY-ROADMAP.md): 8 stages, Initial
+   idea → Found it → Identity → Build → Distribute → Launch → Operate and
+   close → Scale. Position = the lowest stage whose exit evidence is
+   unproven; that stage holds the constraint candidate. Evidence only,
+   never vibes.
+4. Proceed to STANDARDIZE. New companies start in `manual` operating mode —
    nothing executes unpointed.
 
 ### STANDARDIZE — apply the org standard (the core of this skill)
@@ -44,14 +49,23 @@ Every company gets the same shape. Idempotent: check before creating.
 
 1. **Core-8 org chart** — exactly eight departments: engineering, design,
    marketing, sales, finance, operations, support, legal. (Product is NOT a
-   9th — the CEO owns product strategy.) Hire via
-   `POST /companies/:id/agent-hires` (then approve the returned approval —
-   the board's chat instruction IS the approval), one head per department.
-2. **Named agents** — short, functional-evocative names, format
-   `Name · Role` (reference set: Sol·CEO, Vector·CTO, Forge·Engineer,
-   Ledger·CFO, Echo·CMO, Ink·Design, Atlas·COO, Magnet·Sales,
-   Haven·Support, Shield·Legal, Pulse·Diagnostician). Pick names in the same
-   register for new companies.
+   9th — the CEO owns product strategy.) ADOPT BEFORE CREATING: company
+   creation auto-seeds a default department set, and a second staffing pass
+   produces "Engineering 2" duplicates (the Sellsniper SELA incident,
+   2026-07-25). First LIST existing agents; wire and rename what is already
+   there; create only what is missing. Also check for an existing company
+   with the same repo before creating one — a second onboarding must adopt,
+   never duplicate (the SEL/SELA double-ticker incident).
+2. **Plain function names ONLY, no C-suite naming** (board rulings
+   2026-07-19 and 2026-07-25): the org is exactly 9 seats: Cofounder,
+   Support, Operations, Legal, Finance, Engineering, Design, Sales,
+   Marketing. That's it. Names AND titles are the plain department word:
+   never CEO/CTO/CMO/CFO/COO titles, never "Head of X", NO invented first
+   names (Sol, Atlas, Vector, Qubit and the rest are retired; personas
+   return only as unlockable characters, SUM-196). The internal `role`
+   field (ceo, cto...) is upstream plumbing and stays; naming is display.
+   "Reflection Coach" is upstream built-in machinery, not an org seat:
+   leave it alone, never count it in the 9.
 3. **Model ladder** — CEO = `claude-fable-5`; core-8 department heads =
    `opus`; subagents under a department = `grok_local` (free Grok window).
    A subagent always reports into a head (a fundraiser under Finance), never
@@ -82,7 +96,10 @@ Run the whole-company diagnosis, then route:
    the board touches revenue or the binding constraint, say so — that IS the
    diagnosis.
 3. **Constraint** — name ONE binding limit (theory of constraints; the
-   roadmap's lowest incomplete stage usually holds it). Everything else waits.
+   roadmap's lowest unproven stage holds it, see doc/COMPANY-ROADMAP.md).
+   Everything else waits.
+   Before any routed task is executed, the department runs /elon-algo on
+   it: question, delete, optimize, accelerate, automate, in order.
 4. **Route** — Thiel rule: one agent, ONE task. S-tier first, matched to the
    right department head. Assignment wakes the agent (that's the dispatch).
    Board-only work (sending offers, signing, paying) is listed for Adam,

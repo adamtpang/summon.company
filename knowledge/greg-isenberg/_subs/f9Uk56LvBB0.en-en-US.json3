@@ -1,0 +1,2233 @@
+{
+  "wireMagic": "pb3",
+  "pens": [ {
+  
+  } ],
+  "wsWinStyles": [ {
+  
+  } ],
+  "wpWinPositions": [ {
+  
+  } ],
+  "events": [ {
+    "tStartMs": 160,
+    "dDurationMs": 5200,
+    "segs": [ {
+      "utf8": "You might have heard of Vibe Marketing. Today  I'm going to teach you exactly how to do it super   simply using tools MCP, N8N, and Cloud. It's going  to help you replace your entire marketing team   with AI. And I know that sounds crazy, but I'm  going to show you actually how to do it in a very,   very simple way. You're going to enjoy this  episode. People who listen to this episode,   I don't care if you're a designer or a developer  or a copywriter or a marketer, you will learn some   skills that'll help you make a lot of money coming  up, help you automate a lot of your job, help you   get customers. And we show you the exact plan for  how you can create a business from the arbitrage   and the insights of using a lot of these AI tools.  I couldn't be more excited for you to listen to   this episode until the end, because I do believe  that a lot of lives will be change if you know   how to use these tools. Enjoy the episode. This  might be our most requested Startup Ideas podcast.   I did the video, and we talked a lot about some of  your ideas on Vibe Marketing, Introduction to Vibe   Marketing. I brought on Mr. Vibe Marketing  himself, boring marketer. And what are we going   to learn today? Well, I've been spending a lot of  time building workflows and sharing what I know   about it with my social audience, community, and  all that. And I think a lot of people believe that   workflows have to be super, super complicated.  Maybe you've seen a screenshot of a workflow and   it's got a million different things happening.  But I'm going to actually show you that the most   powerful workflow you can build is also the  simplest one. So by the end of this episode,   what are people going to learn? Are they going  to get an introduction to N8N? Are they going   to understand how to build their first workflow?  why should someone give their time to stick to   the end of this? I think if you stick to the end,  you're going to get a glimpse of what the future   of marketing actually looks . And it's going to  be very actionable. And I'm going to lead you   through exactly how I would vibe market a product.  Cool. And my ask for you is I've played with N8N.   It's a bit overwhelming for me. And I'd to see  a sample workflow so that I can basically just   copy it and just implement it in my business. So  that's my ask for you. Let's get right into it.   Sure. All right. So I said, there's a lot going  on about these workflows and what tools to use and   things of that nature. So in the community that  we have, there's a lot of people that are , hey,   how do I build my first workflow or where do I  even start? So the two most common platforms that   are out there that I typically recommend folks  check out is either Gumloop or InnateIn. I to use   InnateIn because I'm a little more on the advanced  side and there's a little bit more flexibility   what I'm about to show you here today. but you  should use it because you can automate a lot   of the boring manual tasks that are in your  business. I use it for marketing specifically   where there's a ton of manual stuff that you have  to do. And once you automate it, you're kind of   freed up to focus on more strategic or creative  things. And that's sort of the essence of what   Vibe Marketing is all about. So what I thought I  would do is kind of show you a few things that I   created this morning that if you were to try to  do it manually, it would take you at least two   to three weeks of work to get it done. And I did  it in about 30 minutes prior to hopping on this   podcast. Sounds too good to be true, but I'll let  you, you know, you're one of my smartest friends,   so I'd love to see it. Okay, cool. So one  of the other common questions I get around,   vibe marketing and building workflows is what  workflow should I build? I think people have this   cold start problem. So we're also going to try  to answer that as I walk you through this stuff.   So the way that I to think about building my  first vibe marketing workflow is I to understand   where's the demand out there on the internet for  my product or my service. Now, the easiest way to   find that is to do keyword research. This allows  you to understand what people are searching for   on Google, how often they're searching it,  and how much potential traffic you can get   to your website if you rank and show up on  the results for that keyword. Now, you know,   SEO and all that's changing. A lot of people  are talking about how do I rank in LLMs or how   do I show up in chat GPT if someone searches for a  keyword related to my product as well. And this is   going to help to address that too. So I'm really  going to walk you through how I would approach   an organic growth system that's going to help you  rank and get discovered, help you create content   that's relevant for what your customers are  looking for, and then how you can look at it as   sort of a continuous improvement process so that  you can go out and beat the competition. So when   it comes to keyword research, you know, there's  a couple common tools that people use to do it.   There's Ahrefs, there's SEMrush, there's a bunch  of other ones. Now, if you've ever tried to log   into one of these tools, it's very overwhelming.  Have you ever tried to log into Ahrefs, Greg? Much   to my chagrin. Okay. So you log in, there's a lot  of different buttons, a lot of different things   to click around on and stuff that. So I'm going to  show you sort of an end result and then I'm going   to walk backwards. So what you're looking at right  here is a fully completed keyword research study   that I did this morning. So, sorry, I just opened  that I did this morning. So what we're looking at   here is 42 different keywords that Beehive,  a newsletter growth platform, could go and   rank for. It's telling me that there's 14,580  monthly traffic available for these keywords.   It's telling me that there's about medium  competition for these keywords. So I have   opportunity to go and outrank the competitors. And  there's 20 high potential keywords specifically   here. So what you see is there's various types of  keywords. There's informational keywords. These   are , how do I start my first newsletter? There's  commercial keywords , what is the best newsletter   platform for my business? And there's a couple  other types as well. It's even showing me some   of the competitors that are currently ranking  for those keywords out in the market. Okay,   so the next thing is that it's giving me some  key insights and recommendations already. So   it's telling me what type of content I need to go  and create in order to rank for these keywords.   So it's telling me to create comprehensive guides  around newsletter creation, monetization, and even   growth strategies. It's telling me how I can get a  competitive edge versus the competition. So I need   to analyze the gaps on how I'm different than sub  stack, for example. And then it's giving me what   the traffic opportunity actually is. So this is  just the overview. And then if we go into the long   tail recommendations, you can see that we have  a bunch of high quality, very targeted keywords   that we can go after and try to rank for. Okay,  so we've got examples newsletter platform for   creators, email marketing software for writers,  best newsletter monetization tools. These are   all things that folks are actively looking for  online. So if I click into these keywords, it's   giving me the exact steps that I need to do to go  and show up for this so that I can get the right   type of traffic to my website. So it's telling  me create in-depth guides, develop case studies,   create comparison content with competitors, and  then build landing pages optimized for this term.   All right. So I've got some information on  where the demand is out there. And that's   usually the place that I to start. Now, if you  were to build this out as a workflow in N8N,   it would be very complex. You know, it would be ,  hey, go and, you know, access some sort of keyword   database, categorize the keywords, go and look  at competitors. And there would probably be , you   know, 15 to 20 different, you know, nodes, which  are, you know, different actions within a workflow   in order to get this done. But I'm going to show  you how simple this can this can really be to get   this type of output. I want to say one quick  thing. Yeah. So we just quickly went over the   exact plan around how to just siphon out 5,  10, potentially up to 15,000 monthly traffic   to a landing page. It's , build this guide.  Here's what it should be, which is insane to   think about. It's basically giving you the plan  around how to actually build the thing. And then   when you look at something beehive.com, so these  are SaaS tools that will give you 10, 20, 30, 40,   50 percent of revenue. You know, so I've done  a guide. I'll link it in the show notes around   how to start an online directory, which sounds ,  by the way, the most boring business to start of   all time. an online directory and teaching people  and basically creating a list of top, let's say,   email providers. But having affiliate links is  probably, and creating directories and creating   guides around this sort of thing is probably  the easiest way to get started in this whole   make money online space Yeah exactly I mean the  easiest way to get started is to figure out how   you can identify existing demand and analyze the  competitors to see what they're not covering. And   then that's your entry point right there. Cool.  All right. Okay. So this looks pretty complicated,   right? it's got all kinds of recommendations.  It's got a bunch of keywords, all kinds of really   good stuff. And I said, you might think that  this requires an incredibly complex workflow,   but I'm going to show you how I arrived at this.  So I'm going to open up a Claude desktop. So   you might think that there's a super complicated  workflow to find these opportunities and keywords   out there. But I actually created that entire  dashboard showing me my relevant keywords. If I'm   Beehive with one prompt within Claude. So I said,  find me 20 long tail keywords, non-branded. That   means I don't want it to be people searching  for Beehive for the domain Beehive.com. Now,   if you were just using Claude out of the box, it  couldn't do that. Now, you might see that I have   this little thing here called keyword tool. Do  you see that, Greg? Yeah, I don't know what I'm   looking at, but I've never seen that. Okay,  cool. Yeah. You've probably never seen that   in Claude because it's not something that you  can just access within Claude. What this is, is   this is an MCP integration. Okay. So I'm able to  access a tool that I created in N8N called Keyword   Tool that's going through Ahrefs, all the data in  Ahrefs, and just pulling out the information that   I need, which are these 20 high potential long  tail keywords. So if you find Ahrefs confusing,   if you find keyword research confusing, we're  letting Claude do all the hard work of finding   what keywords you need to focus on. I love it.  Okay. So that alone, if you want to do manual   keyword research and you're not a super search or  SEO or digital marketing professional, that could   take you 20, 30, 40 hours to go into a tool, to  analyze the keywords, to look at the competitors.   And when I prompted Claude here, it returned these  keywords to me within 30 seconds. Yeah. Also,   you could be spending 20, 30, 40 hours and still  not have the right keywords. Yeah, exactly. These   are highly relevant. They're exactly the type of  keywords that I want to go after. And this alone   is incredibly valuable. All right. I knew you'd  give this off. Okay, let's continue. All right. So   we've got our keywords here with a prompt. and you  can see they're targeting the core functionality   of Beehive as a newsletter platform while focusing  on specific user needs and use cases. So we're   targeting keywords that have intent behind them.  These are the ones that, you know, once somebody   clicks on a result and say chat GPT or on Google  search, these folks are actually going to do   something on your website. You know, not all  search traffic or whatever is created equal.   These are the type of visitors that are actually  going to convert to your product or service,   which is super, super important. Yeah, it's super  important because there's a lot of people who   are , yeah, I get a million visits a month to my  directory or whatever, but it's low quality stuff,   right? I'd rather have 10,000 high quality  and just focus on those people. If they're   going to convert at five to 10x, what with the  others? Exactly. So what I to do after I get the   information here is I to create an interactive  asset within Claude. So Claude has, you know,   this artifact feature where it can basically code  up a dashboard or a website for you. So after I   got these initial keywords from my keyword tool,  I asked Claude to create an interactive dashboard   highlighting all these keyword opportunities.  And that is what I'm showing you here.   Wow. So you just prompted it that we'll share the  prompts. We'll share some of this in a guide for   people so that they can download this. It'll be  in the show notes. But you just basically one   prompted this. Yep, yep. Find the keywords, now  create a dashboard. And, you know, Claude's really   smart, so it didn't just list out all of those  keywords that we looked at after the first prompt.   It actually went into Ahrefs, and it pulled the  potential traffic that you can get, you know,   from these keywords. It pulled the difficulty.  It pulled the search volume for each one of these   various keywords. it pulled some information about  the competitors so this is all real data from   hrefs crazy and just for we have a lot of people  listen on spotify and apple the startup ideas   podcast can you just name you know for the people  who are not watching just name some of these   keywords yeah absolutely so some of the keywords  assuming i'm beehive a better question And if you   were to pick one or two keywords on this list,  what would you pick and why? Yeah, we'll get into   that next. I would say how to grow newsletter  subscribers. It's got some decent volume,   so 2,300 searches monthly. It's relevant at 89%,  and then the difficulty isn't too bad. So I feel   reasonably confident that I could go and rank for  that keyword with the right strategy. Cool. Okay.   So we're going to go back to Claude and I'm going  to talk about what step two is. So here, you know,   here we have the keywords, okay? And now it's  , this is great. We have keywords, but what do   I do with them? So the thing that you want to do  with keywords is we want to start creating content   around that search term so that we can attract the  right people to our site. All right. So I'm going   to go back to Claude and I'm just going to kind of  walk you through my workflow here. So we created   that interactive artifact with the keyword data  and insights. All right. We have some features   where we can integrate some social search so we  can go and find , hey, based off this topic, what   are some social posts that are also in and around  this too? So, you know, if you want to repurpose   some content and create some social content, you  can do that, too. OK, after I found the keywords,   the next thing that I did is I had Claude  basically group those keywords into a few   key topics. So this one here is called newsletter  growth and audience building. I thought that would   be pretty relevant to to your listeners. They're  thinking about growing newsletters, growing their   audience. So we can dig into that one a little bit  more specifically. So what that is, is it's just   five keywords in one kind of topic that went and  that we researched that we can kind of talk about   in one group. Cool. All right. So newsletter  growth and audience building. All right. So   now that we have newsletter growth and audience  building, I'm sending another prompt to Claude.   And this prompt is analyze the search results from  page one and page two of Google for this cluster.   So what this is doing here is it's actually going  out and it's scraping the Google results to see   what type of content is already out there for  this topic. Makes sense. Okay. So basically what   that's going to allow us to do is get a deeper  understanding on what are our competitors that are   ranking for this keyword not addressing? So what  are the gaps that are out there? So, you know,   what are the topics? What are the themes? What  are the ways that I can add more value than the   competitors for people searching for this keyword?  All right. So some of the things that popped up   right now, the current content, it's talking  about basic audience acquisition tactics,   you know, general list building frameworks.  It's not really going into things data driven   growth benchmarks. So Claude is telling me  there's an opportunity to create deeper, more   comprehensive research than what the competitors  are publishing that shows, you know, data points.   give me advanced segmentation strategies so we  can develop content on , how do I, you know,   segment different subscribers based on their  metrics? How do I trigger, you know, automations   within my email platform or something that? It's  saying that there's a gap in technical guidance,   how to, you know, coordinate this content across  channels to develop a comprehensive newsletter   and audience growth plan. And then it says that  another gap is people aren't really talking enough   about retention, which I find pretty interesting  too. As someone who actually writes an email at   gregeisenberg.com, I can attest that this is  the content that I would click into and be   really interested in reading. Yep. Yep. So this  isn't just an LLM making stuff up, right? It's   actually true. This is this makes sense. Yeah,  this is this is not just an LLM making it up,   because what we're doing with this MCP integration  to the workflows and in it in is we're pumping all   of the right context into Claude here. You  know, so basing all of this around real data   that's out there. So there no hallucination It not  just making things up around you know what they   might think people are interested in It actually  understanding the demand so it finding the   keywords And then we selected a group of keywords,  and we're , hey, go out there and read all of the   ranking articles, posts, and websites on the front  two pages of Google and tell me exactly what's   missing. So this gives you such a targeted spear  if you're a newsletter platform to know exactly   how you can go and attack the market. Okay, you're  firing me up now. Don't fire me up too much. It's   going to get better. It's going to get better. So  we've got these gaps. And the next thing that I   want to do after I identify all these gaps is I  want to know what content that I can create. So   I'm going to click back over to our artifacts  because I created another really cool one. And   this is a 30-day newsletter growth and audience  building content dashboard. So this is that group   of keywords that I mentioned, okay, newsletter  growth and audience building. So it's got about   five keywords in it. And basically I asked Claude  to, you know, take a look at what's currently   ranking and all that. Now tell me exactly  what kind of content I need to go and create   to dominate these search terms. So, you know,  there's no guesswork here. It's , this is what   you need to go and do. Here's day one. On Monday,  you need to go and create a blog post around the   newsletter growth roadmap, tailored strategies for  every stage, zero to 100,000 subscribers. It tells   me the keywords that, you know, this content piece  is focused on. And then I had it include a content   brief so that I can create the perfect blog post  for this topic. So it's telling me exactly what   this brief is going to address. It's saying most  content in this niche focuses on generic growth   tactics rather than stage specific strategies.  It's even got the primary audience, so newsletter   creators at all stages, beginner to advanced. and  it's giving us kind of a comprehensive structure   in order to write this guide. But as vibe  marketers, we're not going to go write all this,   right? No, vibe marketers are the most boring  people, most lazy, boring people. Yeah, exactly.   And that's why we love them. That's why we love  them. That's it. So we're not going to go write   a blog post manually because if we wanted to do  that, that could take another 20 to 30 hours, you   know, to make it perfect, to go back and forth, to  integrate our brand voice, to do all that boring   stuff manually. Sounds a waste of time to me.  So how do we, how do we automate it? How do we   do it fast? I'm going to click this button, copy  brief. Okay. I'm going to open Claude. So after we   identified this brief, you know, we're of course  not going to manually write this. So I created   another prompt in Claude. So I have a brand voice  that I saved. You know, most folks using LLMs   probably have something to this effect where, you  know, when they're prompting ChatGPT or whatever,   they're kind of giving it your preferences  on how you want the content to come out.   So I have a little prompt here, use this brand  voice, and I copy and pasted the content brief   that I showed you from the tool. So this is  exactly what we just went through, okay? And   now Claude is writing a complete search-optimized  blog post for me based on that brief with my voice   foundation that I gave it. So it's going through,  , every step. And I even have it pulled up here   as an artifact that we can kind of scroll through  and look at. I mean, and when you say an artifact,   you're saying, , this looks a website to me.  Yeah. So Cloud generates artifacts. It can   generate dashboards. It can generate websites. So  this actually is a website that I created. So when   I said create an artifact, it just went in and  it started coding this up. And I thought that,   hey, I might as well make it a little website to  pull up and show you versus scrolling through the   Cloud dashboard there. Cool. So, , I read this. I  think it reads great. It even has different areas   that I can, you know, utilize for hero images and  stuff that. And we'll link this here, but I want   people to read through the level of detail. This  is not AI slop. You know, when people are going   to ChatGPT or Claude or whatever, and they're ,  hey, write me a blog post for this topic. A lot   of times, you know, you do that and then you're  sort of underwhelmed. , I'm sure you've been there   as well. Yeah, I mean, you almost feel bait and  switch. You're , I just gave 30 seconds of my time   to this, and I'm never getting that back. Yep.  Yep. So what I about this is, again, we're pumping   all of that context, that real information and  real data into cloud. So it's looked at, you know,   all the content that's out there. It understands  the keyword and the audience that we're trying to   reach. And it's using that information to create  a highly valuable piece of content here. Cool. So,   you know, let's say that you have your blog  created and then you want to create some images,   too. You know, that's often something that takes  some time and it's manual or whatever. So another   neat thing that I did with this workflow is that  I integrated ChatGPT's new image gen into it. So   you can just prompt Claude right there. Hey, based  off of this article that we're trying to create,   make me an image that I can use for my hero image.  So that's done right there in the same place as   well. And it looks good. It looks really good.  Yeah, not bad at all. , you know, the challenge   here for a lot of marketers using these tools  is that they're switching between, , you know,   10 different things. , their tabs open on their  browser. , you know, they've got ChatGPT. They've   got Claude. They've got maybe some, , blogging  platform and a bunch of other, you know, SaaS   products. And what we're doing here is, , we're  building our own tools that we can use in one   simple place. And I spend a lot of time in Claude.  So being able to access these tools within where   I'm already working saves me a ton of time on, you  know, context switching back and forth between a   bunch of different stuff. I've done a tutorial  on what an MCP is. I'll link it also. And,   you know, but just quickly explain within the  context of Vibe Marketing what an MCP is. Yeah,   I was thinking I figured this would come up. And  the easiest way that I can explain it is imagine   it's a two way radio between your LLM and a third  party piece of software. So what that means is   that within the chat interface of the LLM, I can  access data from this third-party tool, and then   I can send back data or I can send back commands  to it as well. So it's enabling that communication   between my LLM and another piece of software. So  what's the difference between an API and an MCP,   if that's the case? You know, to be honest, that's  above my pay grade as a Vibe marketer. So, , you   know, I'm using an API here to access, , Ahrefs  within my keyword tool. And then I'm using an MCP   to make sure that that information is going  back and forth smoothly between Claude and   between N8N. Yeah, I mean, the other thing, the  reality is for 99% of people listening to this,   it doesn't matter. Yeah, it doesn't matter. And,  you know, again, I tell people this all the time,   but when I'm working in these tools, I'm not a  I'm not an engineer. I'm not the world's foremost   automation expert, you know, to be honest, either.  So I've got Manus or Claude or, you know, GPT-03   or whatever open as my co-pilot guiding me through  all this stuff for how to set it up. If I need   some code, I'm asking. So, you know, there's a lot  that you don't know and you can't know at all. So   you have to really lean into the AI tools as well,  you know, as you're kind of building things out,   tinkering and experimenting. Totally. Do I see  video, Jen, here? Is that what I'm looking at? You   see video, Jen. I was testing that as well. So,  you know, one of the things about the modern state   of organic growth online is that, you know, a few  years ago, everyone was all about Google search,   you know. So everyone was just writing blog posts  and things that. But if you look at search results   today or you look at, you know, results within  ChatGPT or an LLM, you see a lot of things from   Reddit or LinkedIn or X or, you know, YouTube,  all these other channels where the content is   multi-format and multi-channel. Yeah. I mean,  when you Google MCP, I'm pretty sure the first   result is a tutorial that I did. Right. With  Professor Ross Mick on MCPs, which is insane.   Yeah. Yeah. So, you know, there's a lot more  social signals coming into play. So videos   from YouTube, again, threads from Reddit, things  that. So that's why I have image generation and   video generation here, because when you create  a blog post that's just not enough these days.   If you want to go and attack those gaps that we  discovered, one of the major gaps that I always   find is that your competitors are very one track  minded. They may have just created a blog post   about newsletter growth. They probably don have a  short form video They probably don have a post on   X a post on LinkedIn a thread on Reddit all about  that newsletter growth and audience building topic   that we already verified there's demand for.  So, you know, Google search is a great proxy   for all these other channels around what people  are looking to engage with. And I believe that,   you know, in today's world, you have to be  everywhere in all the formats in order to   kind of dominate the competition, especially  if you're a startup. That's kind of the way   that you can enter into an established market  and start siphoning off that traffic from the   main players. Absolutely. So that said, we've got  our blog post. And then I went back to Claude and   I started to create some X threads and some other  types of things too. So just for example, I said,   hey, based on this blog post, create a thread on  X. And here it's got how I build a 1K subscriber   newsletter in 60 days with no ad spend. That's  a pretty good hook, right? Dude, someone , yeah,   I can't believe that. That's a really good hook.  Yeah, exactly. Most times you try to create an X   post or a LinkedIn post or whatever, it comes out  a blog post and it's just not done properly. So I   was , honestly, I was blown away by the initial  quality of this just with one prompt right out   of the gate. So you can see it here. it's in this  plan as well. It's got key insights thread from   each growth stage. So this is the brief. I did  the same thing that I did for the blog post. I   copied the brief. I took it into Claude. I said,  hey, here's that voice foundation that we use for   the blog posts and boom, it one-shotted that  thread for me. And if you wanted to move from,   you know, I'm trying not to say Claude on this,  on this episode, but there I'll say it, Claude.   If you, you know, if you're, if you want to move  from, from Claude to Webflow or another tool, how,   you know, is that, are you thinking about that as  a vibe marketer? yeah how do you want to publish   this type of content on your website and things of  that nature yeah you know because it's cool that   it's on this artifact and it's cool I can share  that with my team and get feedback and stuff   that but eventually I'm going to want that on my  domain gregeismer.com slash you know article slash   newsletter right I'm thinking about it I haven't  gotten there yet within Claude, I'm assuming I   might be able to create a tool that's similar to  the other ones here. And I said, this MCP server   trigger is kind of a two-way radio, you know,  so I can pull data in, I can send commands and   things out. So as long as I can access the Webflow  API, which I certainly can, I can send that blog,   you know, into my content management system  or whatever. Now, I always recommend a little   bit of editing and tweaking. So once it's in  Webflow, you might need to do a little formatting,   make sure it fits your design and stuff that. But  end to end is coming. Eventually, this is going to   be fully automated where you enter your URL, it's  finding the keywords, it's creating cross-platform   content, and that's just publishing it for you.  So that's definitely in the future. I hear what   you're saying. You're saying basically , okay,  you're going to use AI to create this content.   You're going to want to review the content and  edit the content potentially. You don't want to   just automatically put it up on a web flow because  it might not be worth the risk of damaging your   brand or something that. Yeah. In our community,  we actually did a survey. Hey, what are some of   the biggest challenges that marketers are having  with AI. And one of the biggest challenges that   they're having is brand safety and keeping things  aligned toward their brand. So most marketers have   a human in the loop step. And, you know, when we  build these types of automations out for clients,   they're very conscious of that. So, you know, we  to integrate with Slack, for example. So let's say   that you have Claude set up and you have a system  this, once you get your draft in Claude, you say,   hey, send it to Slack, right? And then you have a  shared channel with, I don't know, maybe you have   a marketing manager or a social media manager or  something that. They can check it out and review   it right there and maybe give feedback for how  you can improve the prompts or something along   those lines. Cool. Yep. So, yeah, that's kind of  a completed, , end-to-end system. And just to show   you again, , how simple this is, I want to show  you, , what most people think that a workflow,   you know, looks in an innate in. So I'm just  going to pop out of here, and I'm going to show   you one that, you know, might look a little more  complicated that we're working on. So, you know,   you can imagine the first time you're popping  up X and you see someone talk about a workflow,   you know, you see something this and it makes  for great content and it gets people interested   because it's so complicated and they think it must  be so, you know, special and useful. And while   these things are great, they're not the place  to start. these simple ones are often the most   powerful. So you can see there's only four nodes  here for this entire workflow. and each of these   has a has a workflow too but it's literally you  know a couple steps so let me show you the keyword   tool one what that actually looks when you open  it up and this is the beauty of mcp because again   you're not designing all this complicated logic  in a workflow builder you're just saying hey pump   this data into clod and let clod figure out what  to do with it. So all you're doing is connecting   with Ahrefs. You know, you have a little bit  of code to say, hey, don't pull in all kinds of   other stuff on backlinks and things. I just want  keyword information. And then that's going into   Claude. And you're letting Claude find , what are  the best keywords? Can you group these together?   Can you tell me what to do with them? Crazy,  dude. Yeah. So for me, this has been a total   game changer. And I think that, But I don't know,  no one that I've seen is really thinking about   the simplicity of these types of workflows and  how easy it is to unlock that much value. Well,   dude, thank you for sharing the sauce. I know you  could have easily gatekept this, but you're me.   You to distribute the sauce. Highly recommend  if you're not following The Boring Marketer on   X. he's giving away a lot of these workflows. You  also give away these workflows in your community   that you mentioned, if you want to just pull it  up, right? Yes, sure. So yeah, the community has   been going crazy. In school, we've got, I think,  close to one and a half thousand members now.   And in Slack, we also have another community with  about another thousand people. So we have about   2,500 vibe marketers just working on this stuff  every single day. they're posting, you know,   questions, challenges they might be facing,  sharing really, really interesting workflows.   I thought this one was great. It's a, it's one  of the more complicated keyword research ones,   but it's amazing. So people are just giving  away tons of value in here. And then, you know,   we launched a classroom to kind of help people  work through these step by step. And I'm going to   be making a MCP workflow live within our classroom  here too for our community to be able to set this   type of thing up and experiment with it as well.  Cool. And at boardmarketing.com, you also help   people with this stuff, right? Yeah. Yeah.  So we're basically doing vibe coding and vibe   marketing as a service now. So we're We're making  these very custom to businesses. We're identifying   where people are spending a lot of time manually,  and we're helping them automate this stuff,   get out of the weeds so they can kind of vibe and  take advantage of all this. Cool. I'll include the   link in the show notes. Full disclosure, I'm  an investor in the business. I believe in the   future of vibe marketing, so happy to put my  money where my mouth is. Can I say your name,   James? Yeah, absolutely. Yeah, the cash out of  the bag now. I've been doing videos and stuff, so   people know I'm just not a diamond-headed boring  marketer anymore. Okay, cool. All right, so James,   thanks for coming on. I personally would love to  double-click into more workflows. I think that   this is a bigger topic that needs more time, so  if people got any value from this, please, please   let me know in the comment section. I only want to  create content that you look at and you're , wow,   that was saucy. so thank you James for your time  and you were generous with your sauce and I gotta   ask if you enjoyed this episode please it and  comment and subscribe, share it with your friends   and let's all get that sauce together James thanks  again, I'll see you next time Thanks for having me\n"
+    } ]
+  }, {
+    "tStartMs": 5360,
+    "dDurationMs": 7280,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 12640,
+    "dDurationMs": 5760,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 18400,
+    "dDurationMs": 5520,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 23920,
+    "dDurationMs": 6400,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 30320,
+    "dDurationMs": 6800,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 37120,
+    "dDurationMs": 9120,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 46240,
+    "dDurationMs": 5920,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 52160,
+    "dDurationMs": 6240,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 58400,
+    "dDurationMs": 18000,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 76400,
+    "dDurationMs": 5920,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 82320,
+    "dDurationMs": 5360,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 87680,
+    "dDurationMs": 7920,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 95600,
+    "dDurationMs": 5760,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 101360,
+    "dDurationMs": 5680,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 107040,
+    "dDurationMs": 5120,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 112160,
+    "dDurationMs": 6320,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 118480,
+    "dDurationMs": 3680,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 122160,
+    "dDurationMs": 7120,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 129280,
+    "dDurationMs": 4080,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 133360,
+    "dDurationMs": 4000,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 137360,
+    "dDurationMs": 8160,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 145520,
+    "dDurationMs": 6000,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 151520,
+    "dDurationMs": 6240,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 157760,
+    "dDurationMs": 7520,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 165280,
+    "dDurationMs": 4480,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 169760,
+    "dDurationMs": 6080,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 175840,
+    "dDurationMs": 6240,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 182080,
+    "dDurationMs": 5360,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 188240,
+    "dDurationMs": 5600,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 193840,
+    "dDurationMs": 4640,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 198480,
+    "dDurationMs": 4720,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 203200,
+    "dDurationMs": 4800,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 208000,
+    "dDurationMs": 5360,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 213360,
+    "dDurationMs": 6160,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 219520,
+    "dDurationMs": 6320,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 225840,
+    "dDurationMs": 7200,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 233040,
+    "dDurationMs": 7120,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 240160,
+    "dDurationMs": 5840,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 246000,
+    "dDurationMs": 6560,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 252560,
+    "dDurationMs": 6320,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 258880,
+    "dDurationMs": 6800,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 265680,
+    "dDurationMs": 5840,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 271520,
+    "dDurationMs": 5120,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 276640,
+    "dDurationMs": 5120,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 281760,
+    "dDurationMs": 6080,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 287840,
+    "dDurationMs": 6320,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 294160,
+    "dDurationMs": 4080,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 298240,
+    "dDurationMs": 6000,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 304240,
+    "dDurationMs": 4560,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 308800,
+    "dDurationMs": 6080,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 314880,
+    "dDurationMs": 6240,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 321120,
+    "dDurationMs": 5680,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 326800,
+    "dDurationMs": 6080,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 332880,
+    "dDurationMs": 5680,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 338560,
+    "dDurationMs": 5760,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 344320,
+    "dDurationMs": 7040,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 351360,
+    "dDurationMs": 7200,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 358560,
+    "dDurationMs": 6240,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 364800,
+    "dDurationMs": 9280,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 374080,
+    "dDurationMs": 5440,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 379520,
+    "dDurationMs": 6560,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 386080,
+    "dDurationMs": 6720,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 392800,
+    "dDurationMs": 6560,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 399360,
+    "dDurationMs": 5040,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 404400,
+    "dDurationMs": 5120,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 409520,
+    "dDurationMs": 5520,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 415040,
+    "dDurationMs": 5840,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 420880,
+    "dDurationMs": 5280,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 426160,
+    "dDurationMs": 7200,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 433360,
+    "dDurationMs": 6160,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 439520,
+    "dDurationMs": 5400,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 444920,
+    "dDurationMs": 6280,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 451200,
+    "dDurationMs": 7440,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 458640,
+    "dDurationMs": 4720,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 463360,
+    "dDurationMs": 6880,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 470240,
+    "dDurationMs": 7920,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 478160,
+    "dDurationMs": 5760,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 483920,
+    "dDurationMs": 5680,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 489600,
+    "dDurationMs": 5440,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 495040,
+    "dDurationMs": 7120,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 502160,
+    "dDurationMs": 8160,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 510320,
+    "dDurationMs": 5760,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 516080,
+    "dDurationMs": 7600,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 523680,
+    "dDurationMs": 5120,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 528800,
+    "dDurationMs": 7920,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 536720,
+    "dDurationMs": 9680,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 546400,
+    "dDurationMs": 5200,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 551600,
+    "dDurationMs": 5440,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 557040,
+    "dDurationMs": 7520,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 564560,
+    "dDurationMs": 7120,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 571680,
+    "dDurationMs": 5680,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 577360,
+    "dDurationMs": 8480,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 585840,
+    "dDurationMs": 6400,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 592240,
+    "dDurationMs": 5600,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 597840,
+    "dDurationMs": 6240,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 604080,
+    "dDurationMs": 6800,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 610880,
+    "dDurationMs": 6160,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 617040,
+    "dDurationMs": 4880,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 621920,
+    "dDurationMs": 5440,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 627360,
+    "dDurationMs": 6640,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 634000,
+    "dDurationMs": 7280,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 641280,
+    "dDurationMs": 6960,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 648240,
+    "dDurationMs": 7200,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 655440,
+    "dDurationMs": 6480,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 661920,
+    "dDurationMs": 6880,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 668800,
+    "dDurationMs": 4720,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 673520,
+    "dDurationMs": 5120,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 678640,
+    "dDurationMs": 5840,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 684480,
+    "dDurationMs": 9760,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 694240,
+    "dDurationMs": 8160,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 702400,
+    "dDurationMs": 5840,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 708240,
+    "dDurationMs": 4880,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 713120,
+    "dDurationMs": 8480,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 721600,
+    "dDurationMs": 7920,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 729520,
+    "dDurationMs": 6880,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 736400,
+    "dDurationMs": 7200,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 743600,
+    "dDurationMs": 6560,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 750160,
+    "dDurationMs": 7200,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 757360,
+    "dDurationMs": 7280,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 764640,
+    "dDurationMs": 5840,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 770480,
+    "dDurationMs": 7200,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 777680,
+    "dDurationMs": 4560,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 782240,
+    "dDurationMs": 5200,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 787440,
+    "dDurationMs": 6400,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 793840,
+    "dDurationMs": 4240,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 798080,
+    "dDurationMs": 4080,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 802160,
+    "dDurationMs": 5520,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 807680,
+    "dDurationMs": 5520,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 813200,
+    "dDurationMs": 6800,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 820000,
+    "dDurationMs": 6240,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 826240,
+    "dDurationMs": 7280,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 833520,
+    "dDurationMs": 6640,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 840160,
+    "dDurationMs": 6480,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 847520,
+    "dDurationMs": 7440,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 854960,
+    "dDurationMs": 4800,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 859760,
+    "dDurationMs": 5680,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 865440,
+    "dDurationMs": 6800,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 872240,
+    "dDurationMs": 6400,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 878640,
+    "dDurationMs": 6800,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 885440,
+    "dDurationMs": 6880,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 892320,
+    "dDurationMs": 6640,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 898960,
+    "dDurationMs": 6000,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 904960,
+    "dDurationMs": 9440,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 914400,
+    "dDurationMs": 6000,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 920400,
+    "dDurationMs": 6080,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 926480,
+    "dDurationMs": 9520,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 936000,
+    "dDurationMs": 7840,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 943840,
+    "dDurationMs": 8000,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 951840,
+    "dDurationMs": 6640,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 958480,
+    "dDurationMs": 6640,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 965120,
+    "dDurationMs": 5600,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 970720,
+    "dDurationMs": 4160,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 974880,
+    "dDurationMs": 6880,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 981760,
+    "dDurationMs": 7040,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 988800,
+    "dDurationMs": 6640,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 995440,
+    "dDurationMs": 6480,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1001920,
+    "dDurationMs": 5920,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1007840,
+    "dDurationMs": 5680,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1013520,
+    "dDurationMs": 5520,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1019040,
+    "dDurationMs": 5840,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1024880,
+    "dDurationMs": 8800,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1033680,
+    "dDurationMs": 6080,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1039760,
+    "dDurationMs": 6640,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1046400,
+    "dDurationMs": 8720,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1055120,
+    "dDurationMs": 6880,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1062000,
+    "dDurationMs": 7280,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1069280,
+    "dDurationMs": 5680,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1074960,
+    "dDurationMs": 5200,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1080160,
+    "dDurationMs": 6160,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1086320,
+    "dDurationMs": 5040,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1092720,
+    "dDurationMs": 6240,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1098960,
+    "dDurationMs": 6320,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1105280,
+    "dDurationMs": 5120,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1110400,
+    "dDurationMs": 6320,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1116720,
+    "dDurationMs": 6640,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1123360,
+    "dDurationMs": 5760,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1129120,
+    "dDurationMs": 6800,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1135920,
+    "dDurationMs": 8080,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1144000,
+    "dDurationMs": 6000,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1150000,
+    "dDurationMs": 5840,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1155840,
+    "dDurationMs": 7520,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1163360,
+    "dDurationMs": 10640,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1174000,
+    "dDurationMs": 7440,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1181440,
+    "dDurationMs": 7280,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1188720,
+    "dDurationMs": 7040,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1195760,
+    "dDurationMs": 5200,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1200960,
+    "dDurationMs": 6320,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1207280,
+    "dDurationMs": 6800,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1214080,
+    "dDurationMs": 5280,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1219360,
+    "dDurationMs": 7120,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1226480,
+    "dDurationMs": 4880,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1231360,
+    "dDurationMs": 5920,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1237280,
+    "dDurationMs": 6560,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1243840,
+    "dDurationMs": 5440,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1249280,
+    "dDurationMs": 8080,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1257360,
+    "dDurationMs": 5520,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1262880,
+    "dDurationMs": 6240,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1269120,
+    "dDurationMs": 5600,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1274720,
+    "dDurationMs": 5200,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1279920,
+    "dDurationMs": 7280,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1287200,
+    "dDurationMs": 6800,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1294000,
+    "dDurationMs": 8080,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1302080,
+    "dDurationMs": 8240,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1310320,
+    "dDurationMs": 6720,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1317040,
+    "dDurationMs": 6800,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1323840,
+    "dDurationMs": 7200,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1331600,
+    "dDurationMs": 4880,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1336480,
+    "dDurationMs": 7680,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1344160,
+    "dDurationMs": 4400,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1348560,
+    "dDurationMs": 6000,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1354560,
+    "dDurationMs": 5760,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1360320,
+    "dDurationMs": 4320,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1364640,
+    "dDurationMs": 8080,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1372720,
+    "dDurationMs": 5360,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1378080,
+    "dDurationMs": 7440,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1385520,
+    "dDurationMs": 6000,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1391520,
+    "dDurationMs": 4000,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1395520,
+    "dDurationMs": 6960,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1402480,
+    "dDurationMs": 5680,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1408160,
+    "dDurationMs": 9280,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1417440,
+    "dDurationMs": 8080,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1425520,
+    "dDurationMs": 6240,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1431760,
+    "dDurationMs": 6240,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1438000,
+    "dDurationMs": 6240,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1444240,
+    "dDurationMs": 5440,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1449680,
+    "dDurationMs": 6320,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1456000,
+    "dDurationMs": 8240,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1464240,
+    "dDurationMs": 8880,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1473120,
+    "dDurationMs": 7840,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1480960,
+    "dDurationMs": 5760,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1486720,
+    "dDurationMs": 5280,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1492000,
+    "dDurationMs": 7440,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1499440,
+    "dDurationMs": 6960,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1506400,
+    "dDurationMs": 6400,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1512800,
+    "dDurationMs": 4640,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1517440,
+    "dDurationMs": 8720,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1526880,
+    "dDurationMs": 4480,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1531360,
+    "dDurationMs": 7440,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1538800,
+    "dDurationMs": 7520,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1546320,
+    "dDurationMs": 7120,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1553440,
+    "dDurationMs": 4960,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1558400,
+    "dDurationMs": 7200,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1565600,
+    "dDurationMs": 6240,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1571840,
+    "dDurationMs": 6240,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1578080,
+    "dDurationMs": 5440,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1583520,
+    "dDurationMs": 5920,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1589440,
+    "dDurationMs": 5920,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1595360,
+    "dDurationMs": 6240,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1601600,
+    "dDurationMs": 8400,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1610000,
+    "dDurationMs": 6480,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1616480,
+    "dDurationMs": 7440,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1623920,
+    "dDurationMs": 8240,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1632160,
+    "dDurationMs": 6320,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1638480,
+    "dDurationMs": 6560,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1645040,
+    "dDurationMs": 6320,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1651360,
+    "dDurationMs": 7600,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1658960,
+    "dDurationMs": 8240,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1667200,
+    "dDurationMs": 5600,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1672800,
+    "dDurationMs": 6240,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1679040,
+    "dDurationMs": 6000,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1685040,
+    "dDurationMs": 6880,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1691920,
+    "dDurationMs": 7360,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1699280,
+    "dDurationMs": 6320,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1705600,
+    "dDurationMs": 5120,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1710720,
+    "dDurationMs": 4400,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1715120,
+    "dDurationMs": 6160,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1721280,
+    "dDurationMs": 5920,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1727200,
+    "dDurationMs": 7520,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1734720,
+    "dDurationMs": 5280,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1740000,
+    "dDurationMs": 5680,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1746240,
+    "dDurationMs": 6720,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1752960,
+    "dDurationMs": 7600,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1760560,
+    "dDurationMs": 6560,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1767120,
+    "dDurationMs": 6160,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1773280,
+    "dDurationMs": 6400,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1779680,
+    "dDurationMs": 5520,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1785200,
+    "dDurationMs": 6000,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1791200,
+    "dDurationMs": 5280,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1796480,
+    "dDurationMs": 6160,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1802640,
+    "dDurationMs": 6560,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1809200,
+    "dDurationMs": 5360,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1814560,
+    "dDurationMs": 6400,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1820960,
+    "dDurationMs": 4640,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1825600,
+    "dDurationMs": 4640,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1830240,
+    "dDurationMs": 6320,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1836560,
+    "dDurationMs": 12640,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1849200,
+    "dDurationMs": 8720,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1857920,
+    "dDurationMs": 7520,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1865440,
+    "dDurationMs": 7360,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1872800,
+    "dDurationMs": 7040,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1879840,
+    "dDurationMs": 6160,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1886000,
+    "dDurationMs": 5120,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1891120,
+    "dDurationMs": 6720,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1897840,
+    "dDurationMs": 6240,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1904080,
+    "dDurationMs": 6080,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1910160,
+    "dDurationMs": 6720,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1916880,
+    "dDurationMs": 5920,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1922800,
+    "dDurationMs": 7440,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1930240,
+    "dDurationMs": 7280,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1937520,
+    "dDurationMs": 6160,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1943680,
+    "dDurationMs": 5440,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1949120,
+    "dDurationMs": 9440,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1958560,
+    "dDurationMs": 6960,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1965520,
+    "dDurationMs": 8560,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1974080,
+    "dDurationMs": 5920,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1980000,
+    "dDurationMs": 8960,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1988960,
+    "dDurationMs": 6720,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1995680,
+    "dDurationMs": 5840,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2001520,
+    "dDurationMs": 6080,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2007600,
+    "dDurationMs": 6080,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2013680,
+    "dDurationMs": 5280,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2018960,
+    "dDurationMs": 5440,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2024400,
+    "dDurationMs": 4400,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2028800,
+    "dDurationMs": 12640,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2041440,
+    "dDurationMs": 6880,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2048320,
+    "dDurationMs": 6160,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2054480,
+    "dDurationMs": 7920,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2062400,
+    "dDurationMs": 7200,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2069600,
+    "dDurationMs": 5840,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2075440,
+    "dDurationMs": 8880,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2084320,
+    "dDurationMs": 4320,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2088640,
+    "dDurationMs": 5760,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2094400,
+    "dDurationMs": 5040,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2099440,
+    "dDurationMs": 9520,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2108960,
+    "dDurationMs": 7280,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2116240,
+    "dDurationMs": 6640,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2122880,
+    "dDurationMs": 5280,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2128160,
+    "dDurationMs": 6240,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2134400,
+    "dDurationMs": 5680,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2140080,
+    "dDurationMs": 4880,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2144960,
+    "dDurationMs": 6480,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2151440,
+    "dDurationMs": 6800,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2158240,
+    "dDurationMs": 6000,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2164240,
+    "dDurationMs": 9040,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2173280,
+    "dDurationMs": 6800,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2180080,
+    "dDurationMs": 4960,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2185040,
+    "dDurationMs": 5280,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2190320,
+    "dDurationMs": 5920,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2196240,
+    "dDurationMs": 5040,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2201280,
+    "dDurationMs": 7280,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2208560,
+    "dDurationMs": 6320,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2215680,
+    "dDurationMs": 8400,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2224080,
+    "dDurationMs": 6480,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2230560,
+    "dDurationMs": 8400,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2238960,
+    "dDurationMs": 8880,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2247840,
+    "dDurationMs": 6080,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2253920,
+    "dDurationMs": 8880,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2262800,
+    "dDurationMs": 5440,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2268240,
+    "dDurationMs": 7760,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2276000,
+    "dDurationMs": 5440,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2281440,
+    "dDurationMs": 4800,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2286240,
+    "dDurationMs": 6400,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2292640,
+    "dDurationMs": 5520,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2298160,
+    "dDurationMs": 9040,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2307200,
+    "dDurationMs": 7200,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2314400,
+    "dDurationMs": 6240,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2320640,
+    "dDurationMs": 5920,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2327120,
+    "dDurationMs": 4720,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2331840,
+    "dDurationMs": 5920,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2337760,
+    "dDurationMs": 4880,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2342640,
+    "dDurationMs": 8640,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2351280,
+    "dDurationMs": 4880,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2356160,
+    "dDurationMs": 6640,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2362800,
+    "dDurationMs": 6080,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2368880,
+    "dDurationMs": 7200,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2376080,
+    "dDurationMs": 5600,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2381680,
+    "dDurationMs": 9760,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2391440,
+    "dDurationMs": 5840,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2397280,
+    "dDurationMs": 6480,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  } ]
+}

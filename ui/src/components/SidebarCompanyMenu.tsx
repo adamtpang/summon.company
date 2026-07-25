@@ -116,14 +116,9 @@ function SortableCompanyItem({
         >
           <GripVertical className="size-4" aria-hidden="true" />
         </button>
-      ) : (
-        <>
-          <span className="shrink-0 rounded bg-muted px-1.5 py-0.5 font-mono text-(length:--text-nano) text-muted-foreground">
-            {company.issuePrefix}
-          </span>
-          {isSelected ? <Check className="size-4 text-muted-foreground" /> : null}
-        </>
-      )}
+      ) : isSelected ? (
+        <Check className="size-4 text-muted-foreground" />
+      ) : null}
     </DropdownMenuItem>
   );
 }

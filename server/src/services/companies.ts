@@ -30,6 +30,7 @@ import {
   documents,
   routines,
   budgetIncidents,
+  budgetPolicies,
   feedbackVotes,
   issueExecutionDecisions,
   issueInboxArchives,
@@ -469,6 +470,7 @@ export function companyService(db: Db) {
         await tx.delete(budgetIncidents).where(eq(budgetIncidents.companyId, id));
         await tx.delete(issueComments).where(eq(issueComments.companyId, id));
         await tx.delete(financeEvents).where(eq(financeEvents.companyId, id));
+        await tx.delete(budgetPolicies).where(eq(budgetPolicies.companyId, id));
         await tx.delete(approvalComments).where(eq(approvalComments.companyId, id));
         await tx.delete(approvals).where(eq(approvals.companyId, id));
         await tx.delete(companySecrets).where(eq(companySecrets.companyId, id));

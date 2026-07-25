@@ -1,0 +1,3841 @@
+{
+  "wireMagic": "pb3",
+  "pens": [ {
+  
+  } ],
+  "wsWinStyles": [ {
+  
+  } ],
+  "wpWinPositions": [ {
+  
+  } ],
+  "events": [ {
+    "tStartMs": 15500,
+    "dDurationMs": 1000,
+    "segs": [ {
+      "utf8": "Greg: Dave Rogenmoser. Is that how I pronounce\nyour name?"
+    } ]
+  }, {
+    "tStartMs": 16500,
+    "dDurationMs": 11860,
+    "segs": [ {
+      "utf8": "Dave: Yeah, you just took the shot. I love\nthat. And you nailed it,"
+    } ]
+  }, {
+    "tStartMs": 28360,
+    "dDurationMs": 6690,
+    "segs": [ {
+      "utf8": "Greg: I'm a founder. You're a founder. We're\nconfident people. We take shots. We're not"
+    } ]
+  }, {
+    "tStartMs": 35050,
+    "dDurationMs": 1000,
+    "segs": [ {
+      "utf8": "sure we're gonna score, but we take shots."
+    } ]
+  }, {
+    "tStartMs": 36050,
+    "dDurationMs": 1000,
+    "segs": [ {
+      "utf8": "Dave: Yeah. I love it. You didn't even ask\nme before we ai tools. You just . You just"
+    } ]
+  }, {
+    "tStartMs": 37050,
+    "dDurationMs": 1000,
+    "segs": [ {
+      "utf8": "Greg: when for it. Just when for it."
+    } ]
+  }, {
+    "tStartMs": 38050,
+    "dDurationMs": 1000,
+    "segs": [ {
+      "utf8": "Dave: That's good."
+    } ]
+  }, {
+    "tStartMs": 39050,
+    "dDurationMs": 1000,
+    "segs": [ {
+      "utf8": "Greg: First, a quick intro about you. You're\na co-founder. Jasper ai which is really, in"
+    } ]
+  }, {
+    "tStartMs": 40050,
+    "dDurationMs": 7990,
+    "segs": [ {
+      "utf8": "my opinion, one of the leading AI companies\nbillion dollar plus valuation. really interesting"
+    } ]
+  }, {
+    "tStartMs": 48040,
+    "dDurationMs": 6710,
+    "segs": [ {
+      "utf8": "story because it, it's come from what I understand,\nsome pivots and zig and zag, and people might"
+    } ]
+  }, {
+    "tStartMs": 54750,
+    "dDurationMs": 10680,
+    "segs": [ {
+      "utf8": "see it as an overnight success, but it's zigged\nand zagged, and I wanted to start off by,"
+    } ]
+  }, {
+    "tStartMs": 65430,
+    "dDurationMs": 2590,
+    "segs": [ {
+      "utf8": "Asking you how you're feeling."
+    } ]
+  }, {
+    "tStartMs": 68020,
+    "dDurationMs": 7139,
+    "segs": [ {
+      "utf8": "because the world of AI has exploded especially\nover the last few months, but even more so"
+    } ]
+  }, {
+    "tStartMs": 75159,
+    "dDurationMs": 3750,
+    "segs": [ {
+      "utf8": "over the last few weeks. How is Dave doing?"
+    } ]
+  }, {
+    "tStartMs": 78909,
+    "dDurationMs": 7890,
+    "segs": [ {
+      "utf8": "Dave: I am feeling good. I think, yeah, there's\na lot happening and I would say in December,"
+    } ]
+  }, {
+    "tStartMs": 86799,
+    "dDurationMs": 7430,
+    "segs": [ {
+      "utf8": "right now it's March 20th, in December. I\nwas just paying way too much attention to"
+    } ]
+  }, {
+    "tStartMs": 94229,
+    "dDurationMs": 6121,
+    "segs": [ {
+      "utf8": "Twitter and way too much attention to all\nthe noise. And that got really distracting."
+    } ]
+  }, {
+    "tStartMs": 100350,
+    "dDurationMs": 6559,
+    "segs": [ {
+      "utf8": "And I think, I've always had just a very small\nteam or some, me and my two co-founders, and"
+    } ]
+  }, {
+    "tStartMs": 106909,
+    "dDurationMs": 5021,
+    "segs": [ {
+      "utf8": "so if you ever you get the earth to do something\nor you cease this competitor, do something,"
+    } ]
+  }, {
+    "tStartMs": 111930,
+    "dDurationMs": 4120,
+    "segs": [ {
+      "utf8": "you gotta strike back or whatever the thing\nis, it's just been very easy to say I'm gonna"
+    } ]
+  }, {
+    "tStartMs": 116050,
+    "dDurationMs": 2110,
+    "segs": [ {
+      "utf8": "go deep into myself."
+    } ]
+  }, {
+    "tStartMs": 118160,
+    "dDurationMs": 4020,
+    "segs": [ {
+      "utf8": "and I'm gonna go make this thing happen and\nI'm gonna work extra if I need to, or if I'm"
+    } ]
+  }, {
+    "tStartMs": 122180,
+    "dDurationMs": 4720,
+    "segs": [ {
+      "utf8": "gonna get more focused, I'm gonna be more\nscrappy or whatever. And now, again, we see"
+    } ]
+  }, {
+    "tStartMs": 126900,
+    "dDurationMs": 4950,
+    "segs": [ {
+      "utf8": "this, a lot of stuff happening in the market.\nI think it's important to stay away from the"
+    } ]
+  }, {
+    "tStartMs": 131850,
+    "dDurationMs": 3330,
+    "segs": [ {
+      "utf8": "noise. Be aware of it, but mostly just execute\nthe strategy."
+    } ]
+  }, {
+    "tStartMs": 135180,
+    "dDurationMs": 6450,
+    "segs": [ {
+      "utf8": "But now I've got a team of 200 people that\nI'm learning to help get into that zone and"
+    } ]
+  }, {
+    "tStartMs": 141630,
+    "dDurationMs": 4580,
+    "segs": [ {
+      "utf8": "I can't just go make this happen on my own\nanymore. I've gotta be a leader and I've gotta"
+    } ]
+  }, {
+    "tStartMs": 146210,
+    "dDurationMs": 3060,
+    "segs": [ {
+      "utf8": "learn to delegate and I've gotta learn to\nempower other people and believe in other"
+    } ]
+  }, {
+    "tStartMs": 149270,
+    "dDurationMs": 5670,
+    "segs": [ {
+      "utf8": "people. So it's this brand new skillset that\nI'm learning as a leader, where my old tools"
+    } ]
+  }, {
+    "tStartMs": 154940,
+    "dDurationMs": 3950,
+    "segs": [ {
+      "utf8": "that have been effective, are not gonna get\nthe job done, right now."
+    } ]
+  }, {
+    "tStartMs": 158890,
+    "dDurationMs": 4850,
+    "segs": [ {
+      "utf8": "But I've got a bunch of really great people\nthat work at Jasper that I really believe"
+    } ]
+  }, {
+    "tStartMs": 163740,
+    "dDurationMs": 9210,
+    "segs": [ {
+      "utf8": "in. And I think if I do my job well then they'll\nsucceed and we'll build a lot of cool stuff."
+    } ]
+  }, {
+    "tStartMs": 172950,
+    "dDurationMs": 13950,
+    "segs": [ {
+      "utf8": "Greg: how much noise should people pay attention\nto? Because you don't wanna be, in a silo,"
+    } ]
+  }, {
+    "tStartMs": 186900,
+    "dDurationMs": 6501,
+    "segs": [ {
+      "utf8": "coming up with ideas and a strategy. But you\nalso don't wanna be like glued to. , product"
+    } ]
+  }, {
+    "tStartMs": 193401,
+    "dDurationMs": 4049,
+    "segs": [ {
+      "utf8": "hunt 24 7 or whatever it is. So how do you\nthink about that?"
+    } ]
+  }, {
+    "tStartMs": 197450,
+    "dDurationMs": 6030,
+    "segs": [ {
+      "utf8": "Dave: I think you gotta ask like, where's\nthe noise coming from? The first year of Jasper."
+    } ]
+  }, {
+    "tStartMs": 203480,
+    "dDurationMs": 5839,
+    "segs": [ {
+      "utf8": "There was a lot of noise, but it was all inside\nof our Facebook group and our community, and"
+    } ]
+  }, {
+    "tStartMs": 209319,
+    "dDurationMs": 4012,
+    "segs": [ {
+      "utf8": "it was so noisy and it was crazy and it was\nfun. But these are all of our customers, and"
+    } ]
+  }, {
+    "tStartMs": 213331,
+    "dDurationMs": 4619,
+    "segs": [ {
+      "utf8": "so like I'm just talking to them every single\nday, like all day, every day."
+    } ]
+  }, {
+    "tStartMs": 217950,
+    "dDurationMs": 6039,
+    "segs": [ {
+      "utf8": "Riffing, laughing, making memes, building\ncool stuff. And it was wild. But it's like"
+    } ]
+  }, {
+    "tStartMs": 223989,
+    "dDurationMs": 3981,
+    "segs": [ {
+      "utf8": "those are our customers. And so that noise\nmatters a great amount. And I would say it's"
+    } ]
+  }, {
+    "tStartMs": 227970,
+    "dDurationMs": 5331,
+    "segs": [ {
+      "utf8": "not noise. That's signal. And you should be\npaying deeply attention to the things that"
+    } ]
+  }, {
+    "tStartMs": 233301,
+    "dDurationMs": 1889,
+    "segs": [ {
+      "utf8": "your customers are saying and engaging with\nthem."
+    } ]
+  }, {
+    "tStartMs": 235190,
+    "dDurationMs": 4519,
+    "segs": [ {
+      "utf8": "And I really didn't care at all about the\noutside world. I wasn't. I probably didn't"
+    } ]
+  }, {
+    "tStartMs": 239709,
+    "dDurationMs": 5980,
+    "segs": [ {
+      "utf8": "tweet at all that year. I didn't do anything,\nbut just the customers, was my like social"
+    } ]
+  }, {
+    "tStartMs": 245689,
+    "dDurationMs": 7160,
+    "segs": [ {
+      "utf8": "social network. And that was really good.\nAnd yet, if I hadn't been on Twitter six months"
+    } ]
+  }, {
+    "tStartMs": 252849,
+    "dDurationMs": 3480,
+    "segs": [ {
+      "utf8": "before we launched Jasper, I wouldn't have\nseen G P T three come out."
+    } ]
+  }, {
+    "tStartMs": 256329,
+    "dDurationMs": 4060,
+    "segs": [ {
+      "utf8": "And I wouldn't have seen some of the cool\ndemos and I wouldn't have thought, I think"
+    } ]
+  }, {
+    "tStartMs": 260389,
+    "dDurationMs": 4671,
+    "segs": [ {
+      "utf8": "we could do that for marketing content. Like\nthat sounds pretty cool. And I think it's"
+    } ]
+  }, {
+    "tStartMs": 265060,
+    "dDurationMs": 6970,
+    "segs": [ {
+      "utf8": "a balance. I think. Yeah, you've gotta. Be\nin the know, but I think it's very rare, like"
+    } ]
+  }, {
+    "tStartMs": 272030,
+    "dDurationMs": 4880,
+    "segs": [ {
+      "utf8": "on a day-to-day basis, it's rare that any,\nI would miss anything on Twitter, if I didn't"
+    } ]
+  }, {
+    "tStartMs": 276910,
+    "dDurationMs": 4620,
+    "segs": [ {
+      "utf8": "log in Twitter, whenever you get your news\nfrom tomorrow or product time, there's probably"
+    } ]
+  }, {
+    "tStartMs": 281530,
+    "dDurationMs": 3470,
+    "segs": [ {
+      "utf8": "nothing I'm gonna miss. And if anything's\nbig enough that it's should really dramatically"
+    } ]
+  }, {
+    "tStartMs": 285000,
+    "dDurationMs": 5370,
+    "segs": [ {
+      "utf8": "change my life for our strategy, like it will\ncome to me or it will be there in a week and"
+    } ]
+  }, {
+    "tStartMs": 290370,
+    "dDurationMs": 4970,
+    "segs": [ {
+      "utf8": "it will like surface And I think those things\nare like important to recognize that the minutia"
+    } ]
+  }, {
+    "tStartMs": 295340,
+    "dDurationMs": 1240,
+    "segs": [ {
+      "utf8": "is mostly distraction."
+    } ]
+  }, {
+    "tStartMs": 296580,
+    "dDurationMs": 4480,
+    "segs": [ {
+      "utf8": "You, you should see the bigger things, but\nit's rare that you'll need to be engaged in"
+    } ]
+  }, {
+    "tStartMs": 301060,
+    "dDurationMs": 4960,
+    "segs": [ {
+      "utf8": "the fray day in and day out to see those things.\nYou should see 'em on a little bit wider time"
+    } ]
+  }, {
+    "tStartMs": 306020,
+    "dDurationMs": 4459,
+    "segs": [ {
+      "utf8": "horizon."
+    } ]
+  }, {
+    "tStartMs": 310479,
+    "dDurationMs": 9560,
+    "segs": [ {
+      "utf8": "Greg: I was one of those people who used to\nbe glued to Twitter, glued to all these, websites"
+    } ]
+  }, {
+    "tStartMs": 320039,
+    "dDurationMs": 8331,
+    "segs": [ {
+      "utf8": "that are pushing you, what's happening. And\nwhat ended up happening was I was reacting"
+    } ]
+  }, {
+    "tStartMs": 328370,
+    "dDurationMs": 6730,
+    "segs": [ {
+      "utf8": "a lot. I was playing like a lot of defense\ninstead of offense."
+    } ]
+  }, {
+    "tStartMs": 335100,
+    "dDurationMs": 8340,
+    "segs": [ {
+      "utf8": "And I think while there's benefits to react,\nlike you could time things more interesting."
+    } ]
+  }, {
+    "tStartMs": 343440,
+    "dDurationMs": 6000,
+    "segs": [ {
+      "utf8": "There's some growth hacks that you can do\nyou understand like the zeitgeist a little"
+    } ]
+  }, {
+    "tStartMs": 349440,
+    "dDurationMs": 8140,
+    "segs": [ {
+      "utf8": "bit more. what's been helpful for me is just\ncarving out, once, twice a week where you"
+    } ]
+  }, {
+    "tStartMs": 357580,
+    "dDurationMs": 4739,
+    "segs": [ {
+      "utf8": "can just go through all the content and write\nsome notes on it and be like, okay, this is"
+    } ]
+  }, {
+    "tStartMs": 362319,
+    "dDurationMs": 3651,
+    "segs": [ {
+      "utf8": "what happened this week and this is what it\nmeans for me."
+    } ]
+  }, {
+    "tStartMs": 365970,
+    "dDurationMs": 8180,
+    "segs": [ {
+      "utf8": "Dave: Totally. I'm not methodical enough to\nstructure it quite like that, but for me,"
+    } ]
+  }, {
+    "tStartMs": 374150,
+    "dDurationMs": 6720,
+    "segs": [ {
+      "utf8": "yeah, it's I don't have Twitter on my phone\nanymore. And because it'd be hard for me to"
+    } ]
+  }, {
+    "tStartMs": 380870,
+    "dDurationMs": 4870,
+    "segs": [ {
+      "utf8": "likeactually react well, like on my phone,\nso it's if I'm on my computer, I can like,"
+    } ]
+  }, {
+    "tStartMs": 385740,
+    "dDurationMs": 4230,
+    "segs": [ {
+      "utf8": "Take, take some quick notes or ping the right\nperson on slack or like whatever. But if I'm"
+    } ]
+  }, {
+    "tStartMs": 389970,
+    "dDurationMs": 5569,
+    "segs": [ {
+      "utf8": "on my phone, I'm just gonna be like, distracted\nwith like my family distracted, they're probably"
+    } ]
+  }, {
+    "tStartMs": 395539,
+    "dDurationMs": 4100,
+    "segs": [ {
+      "utf8": "like overreact to something, not get it to\nthe right person, like a thoughtful way and"
+    } ]
+  }, {
+    "tStartMs": 399639,
+    "dDurationMs": 1471,
+    "segs": [ {
+      "utf8": "it's just gonna go poorly."
+    } ]
+  }, {
+    "tStartMs": 401110,
+    "dDurationMs": 5260,
+    "segs": [ {
+      "utf8": "So I think, I still synthesize a lot of it,\nbut I really try not to react on anything,"
+    } ]
+  }, {
+    "tStartMs": 406370,
+    "dDurationMs": 4311,
+    "segs": [ {
+      "utf8": "too quickly. And I just tell our team like,\nHey, listen, like our strategy, we've got"
+    } ]
+  }, {
+    "tStartMs": 410681,
+    "dDurationMs": 4970,
+    "segs": [ {
+      "utf8": "a great strategy. We've got the things that\nwe know we need to do in the next three. If"
+    } ]
+  }, {
+    "tStartMs": 415651,
+    "dDurationMs": 5279,
+    "segs": [ {
+      "utf8": "we do those things, I think we can all agree\nthat's gonna be really great for us."
+    } ]
+  }, {
+    "tStartMs": 420930,
+    "dDurationMs": 3820,
+    "segs": [ {
+      "utf8": "And if we don't do those things, that's gonna\nbe really bad. And right now, the biggest"
+    } ]
+  }, {
+    "tStartMs": 424750,
+    "dDurationMs": 5120,
+    "segs": [ {
+      "utf8": "reason we wouldn't do those things is because\nwe're all caught up and knee jerky and going"
+    } ]
+  }, {
+    "tStartMs": 429870,
+    "dDurationMs": 6299,
+    "segs": [ {
+      "utf8": "crazy about the stuff that we're seeing. And\nunless anything you're seeing. Pokes a hole"
+    } ]
+  }, {
+    "tStartMs": 436169,
+    "dDurationMs": 1441,
+    "segs": [ {
+      "utf8": "in some part of our strategy."
+    } ]
+  }, {
+    "tStartMs": 437610,
+    "dDurationMs": 3630,
+    "segs": [ {
+      "utf8": "Like I'd love to talk about that and we should\nreconsider that. Like obviously, like the"
+    } ]
+  }, {
+    "tStartMs": 441240,
+    "dDurationMs": 5321,
+    "segs": [ {
+      "utf8": "strategy should always be flexible and available\nto update. But if you're not saying that and"
+    } ]
+  }, {
+    "tStartMs": 446561,
+    "dDurationMs": 3399,
+    "segs": [ {
+      "utf8": "you're just worried about this thing that\nsomebody else is doing, then the best thing"
+    } ]
+  }, {
+    "tStartMs": 449960,
+    "dDurationMs": 3660,
+    "segs": [ {
+      "utf8": "we can do is get back to work and go and execute\non our plan."
+    } ]
+  }, {
+    "tStartMs": 453620,
+    "dDurationMs": 4419,
+    "segs": [ {
+      "utf8": "Greg: What you're saying is it's the Warren\nBuffet model, which is like Warren Buffet"
+    } ]
+  }, {
+    "tStartMs": 458039,
+    "dDurationMs": 7721,
+    "segs": [ {
+      "utf8": "doesn't check the. Of stocks that he owns.\nHe checks in periodically and he is, has a"
+    } ]
+  }, {
+    "tStartMs": 465760,
+    "dDurationMs": 8820,
+    "segs": [ {
+      "utf8": "thesis for why he buys, sees candies or Coca-Cola.\nAnd just because like people decide that they"
+    } ]
+  }, {
+    "tStartMs": 474580,
+    "dDurationMs": 3649,
+    "segs": [ {
+      "utf8": "Pepsi one day doesn't mean he's not, a disbeliever\nin Coke."
+    } ]
+  }, {
+    "tStartMs": 478229,
+    "dDurationMs": 6590,
+    "segs": [ {
+      "utf8": "Dave: Yep. Yeah, there's no price change that\nwould cause him. Go back on the reason that"
+    } ]
+  }, {
+    "tStartMs": 484819,
+    "dDurationMs": 5280,
+    "segs": [ {
+      "utf8": "he bought candy and that they've got great\ndistribution, a great brand, and people like"
+    } ]
+  }, {
+    "tStartMs": 490099,
+    "dDurationMs": 4521,
+    "segs": [ {
+      "utf8": "chocolate. And they like chocolate on, on\nevery Christmas, every single year forever."
+    } ]
+  }, {
+    "tStartMs": 494620,
+    "dDurationMs": 2060,
+    "segs": [ {
+      "utf8": "So it's yeah, like none of those things change."
+    } ]
+  }, {
+    "tStartMs": 496680,
+    "dDurationMs": 3299,
+    "segs": [ {
+      "utf8": "And yeah, I think that's a good way of putting\nit. Like it's just very rare that like on"
+    } ]
+  }, {
+    "tStartMs": 499979,
+    "dDurationMs": 8381,
+    "segs": [ {
+      "utf8": "a daily cadence, we need big updates to what\nwe're doing. And if I see it, like I try to."
+    } ]
+  }, {
+    "tStartMs": 508360,
+    "dDurationMs": 3119,
+    "segs": [ {
+      "utf8": "Tone it all down and zen out a little bit\nbefore I go to my team about it, where I'm"
+    } ]
+  }, {
+    "tStartMs": 511479,
+    "dDurationMs": 3472,
+    "segs": [ {
+      "utf8": "not the guy just like firing off tweets to\nmy team, being like, what do you think of"
+    } ]
+  }, {
+    "tStartMs": 514951,
+    "dDurationMs": 1000,
+    "segs": [ {
+      "utf8": "this?"
+    } ]
+  }, {
+    "tStartMs": 515951,
+    "dDurationMs": 3948,
+    "segs": [ {
+      "utf8": "What do you think of this? Like I try to like\nreally synthesize it and more I'm asking like,"
+    } ]
+  }, {
+    "tStartMs": 519899,
+    "dDurationMs": 4401,
+    "segs": [ {
+      "utf8": "Hey, how have you made progress on that thing\nthat we talked about and how's that metric"
+    } ]
+  }, {
+    "tStartMs": 524300,
+    "dDurationMs": 2060,
+    "segs": [ {
+      "utf8": "doing? And it's more internal stuff."
+    } ]
+  }, {
+    "tStartMs": 526360,
+    "dDurationMs": 7750,
+    "segs": [ {
+      "utf8": "Greg: I hate when investors do this, when\nthey'll send you a, like a competitor product"
+    } ]
+  }, {
+    "tStartMs": 534110,
+    "dDurationMs": 6659,
+    "segs": [ {
+      "utf8": "and it's it comes out and it's first of all,\nyou know that the product exists. Like you"
+    } ]
+  }, {
+    "tStartMs": 540769,
+    "dDurationMs": 5021,
+    "segs": [ {
+      "utf8": "don't need to tell me that it exists. They\nsend you an email and it's just like the link,"
+    } ]
+  }, {
+    "tStartMs": 545790,
+    "dDurationMs": 1000,
+    "segs": [ {
+      "utf8": "like end of message."
+    } ]
+  }, {
+    "tStartMs": 546790,
+    "dDurationMs": 5860,
+    "segs": [ {
+      "utf8": "Dave: And it's 24 hours after they launched\nit and it's it's like I have seen everything"
+    } ]
+  }, {
+    "tStartMs": 552650,
+    "dDurationMs": 7410,
+    "segs": [ {
+      "utf8": "about this in an hour, like lev 24 hours,\nbut you come across it and say, see this?"
+    } ]
+  }, {
+    "tStartMs": 560060,
+    "dDurationMs": 3200,
+    "segs": [ {
+      "utf8": "Greg: See this seeing, seeing this question\nmark."
+    } ]
+  }, {
+    "tStartMs": 563260,
+    "dDurationMs": 2139,
+    "segs": [ {
+      "utf8": "Dave: Or just question mark in the subject."
+    } ]
+  }, {
+    "tStartMs": 565399,
+    "dDurationMs": 1000,
+    "segs": [ {
+      "utf8": "Greg: Yeah."
+    } ]
+  }, {
+    "tStartMs": 566399,
+    "dDurationMs": 2881,
+    "segs": [ {
+      "utf8": "Dave: Is this good or bad?"
+    } ]
+  }, {
+    "tStartMs": 569280,
+    "dDurationMs": 1300,
+    "segs": [ {
+      "utf8": "Greg: yeah,"
+    } ]
+  }, {
+    "tStartMs": 570580,
+    "dDurationMs": 2640,
+    "segs": [ {
+      "utf8": "I got this reply, I got this."
+    } ]
+  }, {
+    "tStartMs": 573220,
+    "dDurationMs": 2110,
+    "segs": [ {
+      "utf8": "That's end of message."
+    } ]
+  }, {
+    "tStartMs": 575330,
+    "dDurationMs": 1060,
+    "segs": [ {
+      "utf8": "Dave: Yeah."
+    } ]
+  }, {
+    "tStartMs": 576390,
+    "dDurationMs": 5100,
+    "segs": [ {
+      "utf8": "Every now and then I will get something from\nan investor that I have not seen that actually"
+    } ]
+  }, {
+    "tStartMs": 581490,
+    "dDurationMs": 4849,
+    "segs": [ {
+      "utf8": "is helpful. So I don't full stop, try to stop\nit, cuz every now and then it comes through."
+    } ]
+  }, {
+    "tStartMs": 586339,
+    "dDurationMs": 4551,
+    "segs": [ {
+      "utf8": "But I'm like, okay, this is mostly just a\nlittle bit of noise, I get it. They're just"
+    } ]
+  }, {
+    "tStartMs": 590890,
+    "dDurationMs": 1660,
+    "segs": [ {
+      "utf8": "trying to be helpful."
+    } ]
+  }, {
+    "tStartMs": 592550,
+    "dDurationMs": 10219,
+    "segs": [ {
+      "utf8": "Greg: do you have any stories around your\nmost helpful investor or least helpful investor"
+    } ]
+  }, {
+    "tStartMs": 602769,
+    "dDurationMs": 2211,
+    "segs": [ {
+      "utf8": "that you can share?"
+    } ]
+  }, {
+    "tStartMs": 604980,
+    "dDurationMs": 7030,
+    "segs": [ {
+      "utf8": "Dave: I've got a lot of really great investors.\nWe raised our series A like end of last summer"
+    } ]
+  }, {
+    "tStartMs": 612010,
+    "dDurationMs": 4770,
+    "segs": [ {
+      "utf8": "and we had, five or six kind of the bigger\nfirms come in there and they've all been really"
+    } ]
+  }, {
+    "tStartMs": 616780,
+    "dDurationMs": 5130,
+    "segs": [ {
+      "utf8": "helpful. So I really like working with all\nthem. One that stands out is working with"
+    } ]
+  }, {
+    "tStartMs": 621910,
+    "dDurationMs": 4850,
+    "segs": [ {
+      "utf8": "code two. I think this was like right before\nthey invested, which took a pretty good time"
+    } ]
+  }, {
+    "tStartMs": 626760,
+    "dDurationMs": 4270,
+    "segs": [ {
+      "utf8": "to get your favors from investors. Like they're\ngoing outta their way to lend you over. And"
+    } ]
+  }, {
+    "tStartMs": 631030,
+    "dDurationMs": 5070,
+    "segs": [ {
+      "utf8": "they sent me nema. They were like, Hey, we\ngot this meeting with Mark Zuckerberg, and"
+    } ]
+  }, {
+    "tStartMs": 636100,
+    "dDurationMs": 3730,
+    "segs": [ {
+      "utf8": "it was formal. It was like, mark Zuckerberg,\nfounder of Facebook"
+    } ]
+  }, {
+    "tStartMs": 639830,
+    "dDurationMs": 1000,
+    "segs": [ {
+      "utf8": "It's yeah, I"
+    } ]
+  }, {
+    "tStartMs": 640830,
+    "dDurationMs": 1000,
+    "segs": [ {
+      "utf8": "Greg: It's dude, I know"
+    } ]
+  }, {
+    "tStartMs": 641830,
+    "dDurationMs": 4569,
+    "segs": [ {
+      "utf8": "Dave: Yeah, you could have just called him,\nZuck and obviously I would've known but yeah."
+    } ]
+  }, {
+    "tStartMs": 646399,
+    "dDurationMs": 4380,
+    "segs": [ {
+      "utf8": "And then got this like little round table,\nlike an AI round table with me and four other"
+    } ]
+  }, {
+    "tStartMs": 650779,
+    "dDurationMs": 4271,
+    "segs": [ {
+      "utf8": "founders that were in ai and then him, it\nwas just kinda asking questions and it was"
+    } ]
+  }, {
+    "tStartMs": 655050,
+    "dDurationMs": 1620,
+    "segs": [ {
+      "utf8": "just like a really cool time."
+    } ]
+  }, {
+    "tStartMs": 656670,
+    "dDurationMs": 4990,
+    "segs": [ {
+      "utf8": "And that was like, like those are. Nice to\njust get like meaningful connections. They've"
+    } ]
+  }, {
+    "tStartMs": 661660,
+    "dDurationMs": 2970,
+    "segs": [ {
+      "utf8": "also done a really good job of connecting\nme with other founders that are in MySpace."
+    } ]
+  }, {
+    "tStartMs": 664630,
+    "dDurationMs": 5570,
+    "segs": [ {
+      "utf8": "It can just be like lonely going at it, especially\nin an industry like this where it's changing"
+    } ]
+  }, {
+    "tStartMs": 670200,
+    "dDurationMs": 5070,
+    "segs": [ {
+      "utf8": "so quickly and it's like always trying to\nstay top of mind on what's happening out there."
+    } ]
+  }, {
+    "tStartMs": 675270,
+    "dDurationMs": 4230,
+    "segs": [ {
+      "utf8": "Like I've got now several like close friends\nthat are AI founders that Code two has connected"
+    } ]
+  }, {
+    "tStartMs": 679500,
+    "dDurationMs": 6329,
+    "segs": [ {
+      "utf8": "me with. So I don't think VCs lean in enough\non the community of their founders. and it's"
+    } ]
+  }, {
+    "tStartMs": 685829,
+    "dDurationMs": 4130,
+    "segs": [ {
+      "utf8": "so easy. They don't have to do anything. They\ndon't have to be the smart people or come"
+    } ]
+  }, {
+    "tStartMs": 689959,
+    "dDurationMs": 3771,
+    "segs": [ {
+      "utf8": "up with the connection to Mark Zuckerberg\njust introduce us to a few people and help"
+    } ]
+  }, {
+    "tStartMs": 693730,
+    "dDurationMs": 3789,
+    "segs": [ {
+      "utf8": "get us into a group."
+    } ]
+  }, {
+    "tStartMs": 697519,
+    "dDurationMs": 28130,
+    "segs": [ {
+      "utf8": "But I think all of them have been really helpful"
+    } ]
+  }, {
+    "tStartMs": 725649,
+    "dDurationMs": 19101,
+    "segs": [ {
+      "utf8": "and great to work with."
+    } ]
+  }, {
+    "tStartMs": 744750,
+    "dDurationMs": 14139,
+    "segs": [ {
+      "utf8": "Greg: So we're entering a hype cycle in ai,\nin the sense of there's a lot of attention."
+    } ]
+  }, {
+    "tStartMs": 758889,
+    "dDurationMs": 8500,
+    "segs": [ {
+      "utf8": "It's mainstream. it's everywhere. I was in\nan Uber yesterday and. , the guy was talking"
+    } ]
+  }, {
+    "tStartMs": 767389,
+    "dDurationMs": 7440,
+    "segs": [ {
+      "utf8": "to me about chat, G p T. So to me that's like\nthe Uber test. If you're a taxi driver or"
+    } ]
+  }, {
+    "tStartMs": 774829,
+    "dDurationMs": 3871,
+    "segs": [ {
+      "utf8": "Uber starts talking about it, you're like,\nokay, we're here."
+    } ]
+  }, {
+    "tStartMs": 778700,
+    "dDurationMs": 2090,
+    "segs": [ {
+      "utf8": "Dave: We're here."
+    } ]
+  }, {
+    "tStartMs": 780790,
+    "dDurationMs": 8640,
+    "segs": [ {
+      "utf8": "Greg: what do you see the biggest problems\nthat we're gonna solve using ai? And what,"
+    } ]
+  }, {
+    "tStartMs": 789430,
+    "dDurationMs": 1230,
+    "segs": [ {
+      "utf8": "what makes you excited?"
+    } ]
+  }, {
+    "tStartMs": 790660,
+    "dDurationMs": 6380,
+    "segs": [ {
+      "utf8": "Dave: Yeah, and I think in regard to the hype\ncycle, it's not clear to me what would stop,"
+    } ]
+  }, {
+    "tStartMs": 797040,
+    "dDurationMs": 6370,
+    "segs": [ {
+      "utf8": "cause I've kinda asked myself, is this kind\nof a bubble? And with Bitcoin, what stops"
+    } ]
+  }, {
+    "tStartMs": 803410,
+    "dDurationMs": 5039,
+    "segs": [ {
+      "utf8": "it? Is it. Crashes. Like that's obviously\na could happen at some point and all the web"
+    } ]
+  }, {
+    "tStartMs": 808449,
+    "dDurationMs": 2811,
+    "segs": [ {
+      "utf8": "three people, Bitcoin people will stop talking\nfor a couple years."
+    } ]
+  }, {
+    "tStartMs": 811260,
+    "dDurationMs": 6080,
+    "segs": [ {
+      "utf8": "And y I think back then, like chatbots in\nlike 2017, it was like this big thing and"
+    } ]
+  }, {
+    "tStartMs": 817340,
+    "dDurationMs": 4010,
+    "segs": [ {
+      "utf8": "we're all hyped about it. I was trying to\nbuild on it and it was like all the rage and"
+    } ]
+  }, {
+    "tStartMs": 821350,
+    "dDurationMs": 4989,
+    "segs": [ {
+      "utf8": "then it just never really was helpful. And\nso it faded off, that. And I think that would"
+    } ]
+  }, {
+    "tStartMs": 826339,
+    "dDurationMs": 6281,
+    "segs": [ {
+      "utf8": "be what would cause, the hype cycle to end\nhere if it never really was that helpful."
+    } ]
+  }, {
+    "tStartMs": 832620,
+    "dDurationMs": 4640,
+    "segs": [ {
+      "utf8": "It doesn't appear that, On the horizon at\nall, and it seems like we're actually just"
+    } ]
+  }, {
+    "tStartMs": 837260,
+    "dDurationMs": 2180,
+    "segs": [ {
+      "utf8": "scratching the surface and it's gonna be far\nmore helpful."
+    } ]
+  }, {
+    "tStartMs": 839440,
+    "dDurationMs": 5940,
+    "segs": [ {
+      "utf8": "Greg: That's not the case, right? So I agree\nwith you. I think back in 2017, like we all"
+    } ]
+  }, {
+    "tStartMs": 845380,
+    "dDurationMs": 3390,
+    "segs": [ {
+      "utf8": "tried a bunch of those chatbots and they all\nsucked."
+    } ]
+  }, {
+    "tStartMs": 848770,
+    "dDurationMs": 1030,
+    "segs": [ {
+      "utf8": "Dave: yep."
+    } ]
+  }, {
+    "tStartMs": 849800,
+    "dDurationMs": 6210,
+    "segs": [ {
+      "utf8": "Greg: But like now, like people the reason\nwhy there's so much virality with AI-based"
+    } ]
+  }, {
+    "tStartMs": 856010,
+    "dDurationMs": 4610,
+    "segs": [ {
+      "utf8": "products is because people are trying it out\nand it's real."
+    } ]
+  }, {
+    "tStartMs": 860620,
+    "dDurationMs": 5990,
+    "segs": [ {
+      "utf8": "Dave: It's magic. No, I totally agree. And\nso yeah, I think that we're still very early"
+    } ]
+  }, {
+    "tStartMs": 866610,
+    "dDurationMs": 4779,
+    "segs": [ {
+      "utf8": "days and figuring out like, what is this gonna\ndo? Like a bunch of just copywriting tools"
+    } ]
+  }, {
+    "tStartMs": 871389,
+    "dDurationMs": 4880,
+    "segs": [ {
+      "utf8": "pop up and we're past that stage where it\nseemed like everyone thought that generated"
+    } ]
+  }, {
+    "tStartMs": 876269,
+    "dDurationMs": 2221,
+    "segs": [ {
+      "utf8": "AI was only copywriting tools."
+    } ]
+  }, {
+    "tStartMs": 878490,
+    "dDurationMs": 4080,
+    "segs": [ {
+      "utf8": "And now we're starting to get into hey, these\ncan talk to each other and they can connect."
+    } ]
+  }, {
+    "tStartMs": 882570,
+    "dDurationMs": 6860,
+    "segs": [ {
+      "utf8": "And I think you're gonna see more tools that.\nDo work for you and not just like generate"
+    } ]
+  }, {
+    "tStartMs": 889430,
+    "dDurationMs": 5430,
+    "segs": [ {
+      "utf8": "text, but the interface would be more natural\nlanguage on the front end where you're telling"
+    } ]
+  }, {
+    "tStartMs": 894860,
+    "dDurationMs": 4529,
+    "segs": [ {
+      "utf8": "an app to do something and then now you know\nit's going and booking an Airbnb room for"
+    } ]
+  }, {
+    "tStartMs": 899389,
+    "dDurationMs": 3781,
+    "segs": [ {
+      "utf8": "you and then asking you, Hey, do you want,\ntwo rooms or three rooms?"
+    } ]
+  }, {
+    "tStartMs": 903170,
+    "dDurationMs": 7080,
+    "segs": [ {
+      "utf8": "It's doing that or you're saying, Hey, Add\nGreg into my Salesforce contact list and send"
+    } ]
+  }, {
+    "tStartMs": 910250,
+    "dDurationMs": 5009,
+    "segs": [ {
+      "utf8": "him a follow up email, and then it's able\nto go and connect multiple tools together."
+    } ]
+  }, {
+    "tStartMs": 915259,
+    "dDurationMs": 6421,
+    "segs": [ {
+      "utf8": "To go and do that. I think that is going to\nbe insanely powerful just to see tools working"
+    } ]
+  }, {
+    "tStartMs": 921680,
+    "dDurationMs": 5909,
+    "segs": [ {
+      "utf8": "for you. Or let's say you're like, Hey, create\nthis Chrome extension and like right now,"
+    } ]
+  }, {
+    "tStartMs": 927589,
+    "dDurationMs": 4581,
+    "segs": [ {
+      "utf8": "it'll generate the text and the code and you\nhave to copy it and you've gotta go, run it"
+    } ]
+  }, {
+    "tStartMs": 932170,
+    "dDurationMs": 1000,
+    "segs": [ {
+      "utf8": "and all of that."
+    } ]
+  }, {
+    "tStartMs": 933170,
+    "dDurationMs": 4740,
+    "segs": [ {
+      "utf8": "We're like, it might be able to go. Spin up\nthe thing for you, the Chrome extension and"
+    } ]
+  }, {
+    "tStartMs": 937910,
+    "dDurationMs": 4099,
+    "segs": [ {
+      "utf8": "get you like halfway there. So I think like\nyou're just gonna see it not only like generating"
+    } ]
+  }, {
+    "tStartMs": 942009,
+    "dDurationMs": 4880,
+    "segs": [ {
+      "utf8": "text, but then going and doing part of the\njob for you. And then you come in at a little"
+    } ]
+  }, {
+    "tStartMs": 946889,
+    "dDurationMs": 3950,
+    "segs": [ {
+      "utf8": "bit later stage to help edit and curate and\nmake sure it's on track."
+    } ]
+  }, {
+    "tStartMs": 950839,
+    "dDurationMs": 3181,
+    "segs": [ {
+      "utf8": "and I think that's super exciting. I also\nthink that there's a, there's like right now"
+    } ]
+  }, {
+    "tStartMs": 954020,
+    "dDurationMs": 5870,
+    "segs": [ {
+      "utf8": "it's not affected the physical world at. That's\njust all on your computer, but I think again,"
+    } ]
+  }, {
+    "tStartMs": 959890,
+    "dDurationMs": 4809,
+    "segs": [ {
+      "utf8": "it's what, like Alexa or Siri trying, the\nsmart home iott it's like, again, it's like"
+    } ]
+  }, {
+    "tStartMs": 964699,
+    "dDurationMs": 1941,
+    "segs": [ {
+      "utf8": "the chatbot thing."
+    } ]
+  }, {
+    "tStartMs": 966640,
+    "dDurationMs": 7080,
+    "segs": [ {
+      "utf8": "It's cool, we get it. Like my house is not\niott you don't really use that stuff that"
+    } ]
+  }, {
+    "tStartMs": 973720,
+    "dDurationMs": 5470,
+    "segs": [ {
+      "utf8": "much. But I think we might be close to where\nyou actually could say Hey, turn on, the lights"
+    } ]
+  }, {
+    "tStartMs": 979190,
+    "dDurationMs": 4980,
+    "segs": [ {
+      "utf8": "for, we, we got a company coming over for\na fire. And it's it goes and like figures"
+    } ]
+  }, {
+    "tStartMs": 984170,
+    "dDurationMs": 4150,
+    "segs": [ {
+      "utf8": "out the right music for that and it turns\nthe right lights on and it lights the pilot"
+    } ]
+  }, {
+    "tStartMs": 988320,
+    "dDurationMs": 1000,
+    "segs": [ {
+      "utf8": "light."
+    } ]
+  }, {
+    "tStartMs": 989320,
+    "dDurationMs": 3009,
+    "segs": [ {
+      "utf8": "Like whatever those things are like I think\nthat we could actually be entering a phase"
+    } ]
+  }, {
+    "tStartMs": 992329,
+    "dDurationMs": 6051,
+    "segs": [ {
+      "utf8": "where Iott is helpful and not just a Saturday\nof you setting up a bunch of Bluetooth devices"
+    } ]
+  }, {
+    "tStartMs": 998380,
+    "dDurationMs": 1240,
+    "segs": [ {
+      "utf8": "that you never end up using."
+    } ]
+  }, {
+    "tStartMs": 999620,
+    "dDurationMs": 3760,
+    "segs": [ {
+      "utf8": "Greg: So I want to talk about consumer, like\nthe consumer experiences, but first I wanna"
+    } ]
+  }, {
+    "tStartMs": 1003380,
+    "dDurationMs": 8709,
+    "segs": [ {
+      "utf8": "talk about the, business context to ai. . Today\na very small percentage of my workflow is"
+    } ]
+  }, {
+    "tStartMs": 1012089,
+    "dDurationMs": 13611,
+    "segs": [ {
+      "utf8": "AI enhanced. that's changing, but it's small\nrelative. So maybe it's 5%, 3%, over the next"
+    } ]
+  }, {
+    "tStartMs": 1025700,
+    "dDurationMs": 1770,
+    "segs": [ {
+      "utf8": "five years."
+    } ]
+  }, {
+    "tStartMs": 1027470,
+    "dDurationMs": 9949,
+    "segs": [ {
+      "utf8": "What percentage AI enhanced workflows do you\nsee, the modern day white collar worker?"
+    } ]
+  }, {
+    "tStartMs": 1037419,
+    "dDurationMs": 9630,
+    "segs": [ {
+      "utf8": "Dave: I'd say over 90%, maybe 95%. And in\nmany ways it'll just be like using tools."
+    } ]
+  }, {
+    "tStartMs": 1047049,
+    "dDurationMs": 6370,
+    "segs": [ {
+      "utf8": "It won't be this, oh my gosh, I used AI in\nmy workflow here. It'll just be. The new generation"
+    } ]
+  }, {
+    "tStartMs": 1053419,
+    "dDurationMs": 4791,
+    "segs": [ {
+      "utf8": "will be confused at what it means to like,\nnot use AI in the workflow. And it doesn't"
+    } ]
+  }, {
+    "tStartMs": 1058210,
+    "dDurationMs": 2340,
+    "segs": [ {
+      "utf8": "mean that you'll only have 5% of your job\nto do."
+    } ]
+  }, {
+    "tStartMs": 1060550,
+    "dDurationMs": 6710,
+    "segs": [ {
+      "utf8": "It just means that you'll be able to sit on\ntop of a mountain of AI generated or AI assisted"
+    } ]
+  }, {
+    "tStartMs": 1067260,
+    "dDurationMs": 7490,
+    "segs": [ {
+      "utf8": "work and context and summarization and idea\ngeneration and filtering and, all of those"
+    } ]
+  }, {
+    "tStartMs": 1074750,
+    "dDurationMs": 4720,
+    "segs": [ {
+      "utf8": "things. It'll be like having just a really\nincredible assistant or team of assistants"
+    } ]
+  }, {
+    "tStartMs": 1079470,
+    "dDurationMs": 5360,
+    "segs": [ {
+      "utf8": "working for you. That just helps you be more\nproductive and work on the stuff that you"
+    } ]
+  }, {
+    "tStartMs": 1084830,
+    "dDurationMs": 1090,
+    "segs": [ {
+      "utf8": "wanna work on more."
+    } ]
+  }, {
+    "tStartMs": 1085920,
+    "dDurationMs": 7639,
+    "segs": [ {
+      "utf8": "But I, I think it'll be a very large percentage\nof our time or work will be affected by ai."
+    } ]
+  }, {
+    "tStartMs": 1093559,
+    "dDurationMs": 11291,
+    "segs": [ {
+      "utf8": "Greg: and for people who. Wanna stay ahead\nand who really want to, leverage these tools?"
+    } ]
+  }, {
+    "tStartMs": 1104850,
+    "dDurationMs": 6370,
+    "segs": [ {
+      "utf8": "What kind of advice do you have for people\nwho might not feel super confident in these"
+    } ]
+  }, {
+    "tStartMs": 1111220,
+    "dDurationMs": 4190,
+    "segs": [ {
+      "utf8": "tools right now to get up to speed?"
+    } ]
+  }, {
+    "tStartMs": 1115410,
+    "dDurationMs": 5450,
+    "segs": [ {
+      "utf8": "Dave: Yeah, I think if you're just curious\nand willing to play with them, some people"
+    } ]
+  }, {
+    "tStartMs": 1120860,
+    "dDurationMs": 6110,
+    "segs": [ {
+      "utf8": "are in the anti tool phase, which I don't\nthink is gonna go. That just never goes well"
+    } ]
+  }, {
+    "tStartMs": 1126970,
+    "dDurationMs": 6780,
+    "segs": [ {
+      "utf8": "to be anti-technology, historically. So I\nthink just be open to it and curious and willing"
+    } ]
+  }, {
+    "tStartMs": 1133750,
+    "dDurationMs": 2360,
+    "segs": [ {
+      "utf8": "to play with it."
+    } ]
+  }, {
+    "tStartMs": 1136110,
+    "dDurationMs": 3780,
+    "segs": [ {
+      "utf8": "The best tools are gonna come to you and they're\ngonna be delightful to use. And you've got"
+    } ]
+  }, {
+    "tStartMs": 1139890,
+    "dDurationMs": 5050,
+    "segs": [ {
+      "utf8": "great teams that are thinking about how to\novercome. The uncertainty that you have around"
+    } ]
+  }, {
+    "tStartMs": 1144940,
+    "dDurationMs": 5359,
+    "segs": [ {
+      "utf8": "using these tools. And so I don't think there's\na ton of work to be done for most consumers."
+    } ]
+  }, {
+    "tStartMs": 1150299,
+    "dDurationMs": 4241,
+    "segs": [ {
+      "utf8": "You just keep, you just wait for the tools\nto get better and be excited about adopting"
+    } ]
+  }, {
+    "tStartMs": 1154540,
+    "dDurationMs": 1120,
+    "segs": [ {
+      "utf8": "them early."
+    } ]
+  }, {
+    "tStartMs": 1155660,
+    "dDurationMs": 4720,
+    "segs": [ {
+      "utf8": "But I think there's also just a mindset shift,\nand I find myself struggling with this sometimes"
+    } ]
+  }, {
+    "tStartMs": 1160380,
+    "dDurationMs": 6850,
+    "segs": [ {
+      "utf8": "too, where. Just thinking about using AI to\ndo tasks is a new idea. And obviously I think"
+    } ]
+  }, {
+    "tStartMs": 1167230,
+    "dDurationMs": 5610,
+    "segs": [ {
+      "utf8": "about it like all day, every day running Jasper,\nwhen I'm responding to an email, it's still"
+    } ]
+  }, {
+    "tStartMs": 1172840,
+    "dDurationMs": 6069,
+    "segs": [ {
+      "utf8": "not, it's probably not my first nature to\njust respond with ai."
+    } ]
+  }, {
+    "tStartMs": 1178909,
+    "dDurationMs": 6181,
+    "segs": [ {
+      "utf8": "and have that help. And it's when I open up\nSlack, like it's not my nature to use Slack"
+    } ]
+  }, {
+    "tStartMs": 1185090,
+    "dDurationMs": 3930,
+    "segs": [ {
+      "utf8": "to sum or Louisiana to summarize the threads\nand like see the high level stuff. And so"
+    } ]
+  }, {
+    "tStartMs": 1189020,
+    "dDurationMs": 3670,
+    "segs": [ {
+      "utf8": "there's still just like a mindset shift that's\ngonna take years and years of people like"
+    } ]
+  }, {
+    "tStartMs": 1192690,
+    "dDurationMs": 2070,
+    "segs": [ {
+      "utf8": "relearning how to do things."
+    } ]
+  }, {
+    "tStartMs": 1194760,
+    "dDurationMs": 4510,
+    "segs": [ {
+      "utf8": "That is not easy to overcome that I found."
+    } ]
+  }, {
+    "tStartMs": 1199270,
+    "dDurationMs": 6570,
+    "segs": [ {
+      "utf8": "Greg: what's been helpful for me is to just\nset up time, like on the weekends and nights"
+    } ]
+  }, {
+    "tStartMs": 1205840,
+    "dDurationMs": 6199,
+    "segs": [ {
+      "utf8": "to just be like, all right, I'm just gonna\nplay with this. I'm gonna play with this tool,"
+    } ]
+  }, {
+    "tStartMs": 1212039,
+    "dDurationMs": 5901,
+    "segs": [ {
+      "utf8": "just get my hands dirty. I think watching\nYouTube videos, I'm listening to podcasts"
+    } ]
+  }, {
+    "tStartMs": 1217940,
+    "dDurationMs": 1330,
+    "segs": [ {
+      "utf8": "are sweet cuz."
+    } ]
+  }, {
+    "tStartMs": 1219270,
+    "dDurationMs": 5550,
+    "segs": [ {
+      "utf8": "thanks for listening. But there's something\nabout just actually like pressing buttons"
+    } ]
+  }, {
+    "tStartMs": 1224820,
+    "dDurationMs": 5900,
+    "segs": [ {
+      "utf8": "and like stuff happening. Stuff happens in\nyour mind, like connections are being made"
+    } ]
+  }, {
+    "tStartMs": 1230720,
+    "dDurationMs": 4100,
+    "segs": [ {
+      "utf8": "that next time you're writing that email you're\nlike, yeah, I think differently now."
+    } ]
+  }, {
+    "tStartMs": 1234820,
+    "dDurationMs": 5680,
+    "segs": [ {
+      "utf8": "Dave: Yep. I agree. Yeah. Finding just time\nto play and just thinking of it like play,"
+    } ]
+  }, {
+    "tStartMs": 1240500,
+    "dDurationMs": 5350,
+    "segs": [ {
+      "utf8": "disconnect yourself from the outcome and just\nthink, I'm just gonna get a feel for this."
+    } ]
+  }, {
+    "tStartMs": 1245850,
+    "dDurationMs": 5990,
+    "segs": [ {
+      "utf8": "Like this past weekend I spent probably a\nsix hours. Nights and during nap time, we've"
+    } ]
+  }, {
+    "tStartMs": 1251840,
+    "dDurationMs": 6520,
+    "segs": [ {
+      "utf8": "got three little boys like trying to make\na AI generated children's book, or AI says"
+    } ]
+  }, {
+    "tStartMs": 1258360,
+    "dDurationMs": 2200,
+    "segs": [ {
+      "utf8": "children's book for my boys that has three\nboys."
+    } ]
+  }, {
+    "tStartMs": 1260560,
+    "dDurationMs": 4510,
+    "segs": [ {
+      "utf8": "And I'm using like Jasper Art and I'm using\nMid Journey and I'm like playing around with"
+    } ]
+  }, {
+    "tStartMs": 1265070,
+    "dDurationMs": 5460,
+    "segs": [ {
+      "utf8": "like how to get the imagery right. And I'm\nusing Jasper, Chad, and Jasper to write, the"
+    } ]
+  }, {
+    "tStartMs": 1270530,
+    "dDurationMs": 6350,
+    "segs": [ {
+      "utf8": "actual like script. And I'm like inside Canva,\nlike designing like the pages and it was just,"
+    } ]
+  }, {
+    "tStartMs": 1276880,
+    "dDurationMs": 1830,
+    "segs": [ {
+      "utf8": "it reminded me of."
+    } ]
+  }, {
+    "tStartMs": 1278710,
+    "dDurationMs": 3970,
+    "segs": [ {
+      "utf8": "Early days building, like how fun that can\nbe and like I learned so much just trying"
+    } ]
+  }, {
+    "tStartMs": 1282680,
+    "dDurationMs": 5350,
+    "segs": [ {
+      "utf8": "to build this thing. What I also learned was\nit's still very hard to do what I was trying"
+    } ]
+  }, {
+    "tStartMs": 1288030,
+    "dDurationMs": 5920,
+    "segs": [ {
+      "utf8": "to do. And as magical as all this is, and\nas cool as the demos on Twitter are, like,"
+    } ]
+  }, {
+    "tStartMs": 1293950,
+    "dDurationMs": 1990,
+    "segs": [ {
+      "utf8": "you get in there and you're like, okay, cool."
+    } ]
+  }, {
+    "tStartMs": 1295940,
+    "dDurationMs": 5450,
+    "segs": [ {
+      "utf8": "This is super magical and like we've got a\nways to go. I think as a builder that's exciting"
+    } ]
+  }, {
+    "tStartMs": 1301390,
+    "dDurationMs": 1850,
+    "segs": [ {
+      "utf8": "to go try to fill more of that gap."
+    } ]
+  }, {
+    "tStartMs": 1303240,
+    "dDurationMs": 8490,
+    "segs": [ {
+      "utf8": "Greg: could you, discuss some of the problems\nthat Jasper is trying to solve? Because it's"
+    } ]
+  }, {
+    "tStartMs": 1311730,
+    "dDurationMs": 5870,
+    "segs": [ {
+      "utf8": "really it's a suite of products at this point\nwith a lot of problems that it's trying to"
+    } ]
+  }, {
+    "tStartMs": 1317600,
+    "dDurationMs": 4800,
+    "segs": [ {
+      "utf8": "solve. So can you just for people not familiar,\njust run through it and why you're excited"
+    } ]
+  }, {
+    "tStartMs": 1322400,
+    "dDurationMs": 1000,
+    "segs": [ {
+      "utf8": "about it."
+    } ]
+  }, {
+    "tStartMs": 1323400,
+    "dDurationMs": 5280,
+    "segs": [ {
+      "utf8": "Dave: Yeah, so we launched as a Facebook ad\ngeneration tool and we were generating ad"
+    } ]
+  }, {
+    "tStartMs": 1328680,
+    "dDurationMs": 5350,
+    "segs": [ {
+      "utf8": "copy for Facebook ads, just the text. And\nit was like simple as one or two lines. And"
+    } ]
+  }, {
+    "tStartMs": 1334030,
+    "dDurationMs": 5670,
+    "segs": [ {
+      "utf8": "that quickly pivoted and, or I guess evolved\ninto like blog posts, emails, social media"
+    } ]
+  }, {
+    "tStartMs": 1339700,
+    "dDurationMs": 9670,
+    "segs": [ {
+      "utf8": "copy for freelancers and solopreneurs and\nsmall marketing agencies, things like that."
+    } ]
+  }, {
+    "tStartMs": 1349370,
+    "dDurationMs": 7640,
+    "segs": [ {
+      "utf8": "and, been that focus with a long tail of people\njust playing around with like lots of stuff"
+    } ]
+  }, {
+    "tStartMs": 1357010,
+    "dDurationMs": 7061,
+    "segs": [ {
+      "utf8": "there. and we knew that like that generalized\ntake would end someday and it would be like"
+    } ]
+  }, {
+    "tStartMs": 1364071,
+    "dDurationMs": 4708,
+    "segs": [ {
+      "utf8": "a lot harder to be this generalist tool. But\nwe were just like exploring that while we"
+    } ]
+  }, {
+    "tStartMs": 1368779,
+    "dDurationMs": 1231,
+    "segs": [ {
+      "utf8": "had that opportunity."
+    } ]
+  }, {
+    "tStartMs": 1370010,
+    "dDurationMs": 5080,
+    "segs": [ {
+      "utf8": "And then I think Che J p D came out and I\nthink it's a really great. and it it solved"
+    } ]
+  }, {
+    "tStartMs": 1375090,
+    "dDurationMs": 8199,
+    "segs": [ {
+      "utf8": "a lot of the generalist tinker problems pretty\nwell. And what it did for us was it really"
+    } ]
+  }, {
+    "tStartMs": 1383289,
+    "dDurationMs": 4781,
+    "segs": [ {
+      "utf8": "focused our company into thinking again, if\nthe generalist tool is gonna be this like"
+    } ]
+  }, {
+    "tStartMs": 1388070,
+    "dDurationMs": 5239,
+    "segs": [ {
+      "utf8": "cheaper free thing that does a pretty good\njob then what can we build?"
+    } ]
+  }, {
+    "tStartMs": 1393309,
+    "dDurationMs": 3360,
+    "segs": [ {
+      "utf8": "What should we focus on that, that will not\nsolve? And so it really got us focused on"
+    } ]
+  }, {
+    "tStartMs": 1396669,
+    "dDurationMs": 4750,
+    "segs": [ {
+      "utf8": "marketing teams. We looked at our data and\nwe saw people that had two or more seats."
+    } ]
+  }, {
+    "tStartMs": 1401419,
+    "dDurationMs": 5101,
+    "segs": [ {
+      "utf8": "We're way happier, way more successful with\nthe product. It, we saw an opportunity to"
+    } ]
+  }, {
+    "tStartMs": 1406520,
+    "dDurationMs": 3289,
+    "segs": [ {
+      "utf8": "move up market as well and we're gonna keep\nserving the prosumers."
+    } ]
+  }, {
+    "tStartMs": 1409809,
+    "dDurationMs": 5311,
+    "segs": [ {
+      "utf8": "And if, again, if you love our tools and love\nthe workflows and you need the team collaboration"
+    } ]
+  }, {
+    "tStartMs": 1415120,
+    "dDurationMs": 4540,
+    "segs": [ {
+      "utf8": "and all of that, then you're gonna be happy\nthere. But there's a blue ocean for like mid-market"
+    } ]
+  }, {
+    "tStartMs": 1419660,
+    "dDurationMs": 3230,
+    "segs": [ {
+      "utf8": "enterprise marketing teams as well. And so\nfor us, like we're just trying to help marketing"
+    } ]
+  }, {
+    "tStartMs": 1422890,
+    "dDurationMs": 6880,
+    "segs": [ {
+      "utf8": "teams at, small, medium sized companies do\ngreat."
+    } ]
+  }, {
+    "tStartMs": 1429770,
+    "dDurationMs": 5580,
+    "segs": [ {
+      "utf8": "And that often means a lot of texts and a\nlot of, generation around campaigns and ad"
+    } ]
+  }, {
+    "tStartMs": 1435350,
+    "dDurationMs": 5199,
+    "segs": [ {
+      "utf8": "copy and blog posts and all of that. But it\noften also means imagery and you need, Facebook"
+    } ]
+  }, {
+    "tStartMs": 1440549,
+    "dDurationMs": 4760,
+    "segs": [ {
+      "utf8": "ad images and blog post images and all of\nthat. And now we're just trying to tackle"
+    } ]
+  }, {
+    "tStartMs": 1445309,
+    "dDurationMs": 6291,
+    "segs": [ {
+      "utf8": "like the image generation and the text generation\nto generate great campaigns."
+    } ]
+  }, {
+    "tStartMs": 1451600,
+    "dDurationMs": 5900,
+    "segs": [ {
+      "utf8": "And that's something that, a more generalist\ntool is not gonna go as deep on for marketing."
+    } ]
+  }, {
+    "tStartMs": 1457500,
+    "dDurationMs": 7090,
+    "segs": [ {
+      "utf8": "Greg: that story with what you just said.\nI call that the tip of the iceberg product"
+    } ]
+  }, {
+    "tStartMs": 1464590,
+    "dDurationMs": 6280,
+    "segs": [ {
+      "utf8": "framework, which is you ai tools off with\nthis tip of the iceberg, small quote, unquote"
+    } ]
+  }, {
+    "tStartMs": 1470870,
+    "dDurationMs": 8080,
+    "segs": [ {
+      "utf8": "idea. , you had a small idea fixing a problem,\nbut it was just like a very small sliver of"
+    } ]
+  }, {
+    "tStartMs": 1478950,
+    "dDurationMs": 1949,
+    "segs": [ {
+      "utf8": "someone's day."
+    } ]
+  }, {
+    "tStartMs": 1480899,
+    "dDurationMs": 8061,
+    "segs": [ {
+      "utf8": "And then from there you just, went deeper\nand deeper. you actually expanded a little"
+    } ]
+  }, {
+    "tStartMs": 1488960,
+    "dDurationMs": 6170,
+    "segs": [ {
+      "utf8": "bit. Your audience. But it's all, it's always\nbeen marketers. At the end of the day the"
+    } ]
+  }, {
+    "tStartMs": 1495130,
+    "dDurationMs": 3130,
+    "segs": [ {
+      "utf8": "type of marketer has changed, but you've just\ngone deeper, deeper and deeper."
+    } ]
+  }, {
+    "tStartMs": 1498260,
+    "dDurationMs": 6001,
+    "segs": [ {
+      "utf8": "And I guess, the bet, like if I'm a VC in\nJasper, the bet is basically that, when I"
+    } ]
+  }, {
+    "tStartMs": 1504261,
+    "dDurationMs": 6869,
+    "segs": [ {
+      "utf8": "think of doing anything marketing related,\nJasper's helping me achieve it."
+    } ]
+  }, {
+    "tStartMs": 1511130,
+    "dDurationMs": 5060,
+    "segs": [ {
+      "utf8": "Dave: Yeah, totally. And I think that's the\nonly way to start. And I think people get"
+    } ]
+  }, {
+    "tStartMs": 1516190,
+    "dDurationMs": 4690,
+    "segs": [ {
+      "utf8": "psyched out about total addressable market\nand things like this, and so they're like,"
+    } ]
+  }, {
+    "tStartMs": 1520880,
+    "dDurationMs": 7270,
+    "segs": [ {
+      "utf8": "oh, the Facebook ad copy market is not big\nenough. And it's one, it might be, but two"
+    } ]
+  }, {
+    "tStartMs": 1528150,
+    "dDurationMs": 1320,
+    "segs": [ {
+      "utf8": "yeah, it doesn't matter."
+    } ]
+  }, {
+    "tStartMs": 1529470,
+    "dDurationMs": 4610,
+    "segs": [ {
+      "utf8": "That's all just that's how you get ai tools\nand that's how you even just mentally. Pair"
+    } ]
+  }, {
+    "tStartMs": 1534080,
+    "dDurationMs": 6969,
+    "segs": [ {
+      "utf8": "down the problem enough to go try and solve\nit. And you can always expand from there and,"
+    } ]
+  }, {
+    "tStartMs": 1541049,
+    "dDurationMs": 4781,
+    "segs": [ {
+      "utf8": "but you're only gonna be able to expand with\nthe insights that you learned from that initial"
+    } ]
+  }, {
+    "tStartMs": 1545830,
+    "dDurationMs": 3400,
+    "segs": [ {
+      "utf8": "product. And I think you can see yourself\npulled by the market."
+    } ]
+  }, {
+    "tStartMs": 1549230,
+    "dDurationMs": 4829,
+    "segs": [ {
+      "utf8": "For example, we've got all these templates\nin our product that all of them are like little"
+    } ]
+  }, {
+    "tStartMs": 1554059,
+    "dDurationMs": 4360,
+    "segs": [ {
+      "utf8": "bets that we. and we don't know which ones\nare gonna do really well. We don't know which"
+    } ]
+  }, {
+    "tStartMs": 1558419,
+    "dDurationMs": 6601,
+    "segs": [ {
+      "utf8": "ones are gonna do poorly. We've got obviously\nlike paragraph generators and we've got a"
+    } ]
+  }, {
+    "tStartMs": 1565020,
+    "dDurationMs": 3550,
+    "segs": [ {
+      "utf8": "review responder that helps businesses like\nrespond to reviews."
+    } ]
+  }, {
+    "tStartMs": 1568570,
+    "dDurationMs": 3609,
+    "segs": [ {
+      "utf8": "You like paste in the review from Yelp and\nit writes like a a response that you could"
+    } ]
+  }, {
+    "tStartMs": 1572179,
+    "dDurationMs": 5261,
+    "segs": [ {
+      "utf8": "tweak a little bit and send back out. But\nthen we would have things like a real estate"
+    } ]
+  }, {
+    "tStartMs": 1577440,
+    "dDurationMs": 5880,
+    "segs": [ {
+      "utf8": "listing generator. and that was a bed. It\nwas like we've got some real at realtors in"
+    } ]
+  }, {
+    "tStartMs": 1583320,
+    "dDurationMs": 3670,
+    "segs": [ {
+      "utf8": "here. We're hearing that they they really\nhate writing these things."
+    } ]
+  }, {
+    "tStartMs": 1586990,
+    "dDurationMs": 4470,
+    "segs": [ {
+      "utf8": "Like maybe there's a big real estate business\nthat Jasper has the opportunity to go into."
+    } ]
+  }, {
+    "tStartMs": 1591460,
+    "dDurationMs": 5089,
+    "segs": [ {
+      "utf8": "So we launched that thing and like never really\nsaw it pick up a ton of traction or take off."
+    } ]
+  }, {
+    "tStartMs": 1596549,
+    "dDurationMs": 4551,
+    "segs": [ {
+      "utf8": "And but if it had we might've pivoted and\nsaid, oh, we're gonna go niche down this thing"
+    } ]
+  }, {
+    "tStartMs": 1601100,
+    "dDurationMs": 4209,
+    "segs": [ {
+      "utf8": "here, but the only way to actually figure\nthat out is to get the product."
+    } ]
+  }, {
+    "tStartMs": 1605309,
+    "dDurationMs": 7891,
+    "segs": [ {
+      "utf8": "Greg: Yeah. Especially because number one,\nreal estate agents might not be asking for"
+    } ]
+  }, {
+    "tStartMs": 1613200,
+    "dDurationMs": 7310,
+    "segs": [ {
+      "utf8": "a tool like that, so if you build it, it might\ntake off or they might be asking for it and"
+    } ]
+  }, {
+    "tStartMs": 1620510,
+    "dDurationMs": 5160,
+    "segs": [ {
+      "utf8": "then you build it and then they're like, no\nthis is not at all what I want, but if you"
+    } ]
+  }, {
+    "tStartMs": 1625670,
+    "dDurationMs": 3930,
+    "segs": [ {
+      "utf8": "actually change X, Y, and Z, that's really\nwhat I want."
+    } ]
+  }, {
+    "tStartMs": 1629600,
+    "dDurationMs": 5920,
+    "segs": [ {
+      "utf8": "Dave: And there's a good chance, there's probably\na great Jasper for real estate, business out"
+    } ]
+  }, {
+    "tStartMs": 1635520,
+    "dDurationMs": 2880,
+    "segs": [ {
+      "utf8": "there. There's a good chance that we just\ndidn't solve it with that one little template"
+    } ]
+  }, {
+    "tStartMs": 1638400,
+    "dDurationMs": 4070,
+    "segs": [ {
+      "utf8": "and one little try, like in the way that they\nwanted it to. But still, like we're always"
+    } ]
+  }, {
+    "tStartMs": 1642470,
+    "dDurationMs": 5030,
+    "segs": [ {
+      "utf8": "placing these bets and like trying to get\npulled by the market rather than forcing our"
+    } ]
+  }, {
+    "tStartMs": 1647500,
+    "dDurationMs": 29049,
+    "segs": [ {
+      "utf8": "way into something."
+    } ]
+  }, {
+    "tStartMs": 1676549,
+    "dDurationMs": 23061,
+    "segs": [ {
+      "utf8": "Greg: what are some non-obvious spaces in\nAI that you think products could be built?"
+    } ]
+  }, {
+    "tStartMs": 1699610,
+    "dDurationMs": 6080,
+    "segs": [ {
+      "utf8": "I think there's a lot of ideas that people\nhave that. in AI that are coming out daily"
+    } ]
+  }, {
+    "tStartMs": 1705690,
+    "dDurationMs": 9350,
+    "segs": [ {
+      "utf8": "that are just like really obvious and, what's\nsomething either you've seen recently that"
+    } ]
+  }, {
+    "tStartMs": 1715040,
+    "dDurationMs": 3210,
+    "segs": [ {
+      "utf8": "you're like, wow, this is really cool, or\nsomething that it doesn't even exist, that"
+    } ]
+  }, {
+    "tStartMs": 1718250,
+    "dDurationMs": 1340,
+    "segs": [ {
+      "utf8": "you're like, I wish someone built."
+    } ]
+  }, {
+    "tStartMs": 1719590,
+    "dDurationMs": 1000,
+    "segs": [ {
+      "utf8": "Built it."
+    } ]
+  }, {
+    "tStartMs": 1720590,
+    "dDurationMs": 7030,
+    "segs": [ {
+      "utf8": "Dave: I think the non-obvious thing. That\ngenerates more non-obvious things is talking"
+    } ]
+  }, {
+    "tStartMs": 1727620,
+    "dDurationMs": 7770,
+    "segs": [ {
+      "utf8": "to customers"
+    } ]
+  }, {
+    "tStartMs": 1735390,
+    "dDurationMs": 10200,
+    "segs": [ {
+      "utf8": "I \nwas talking to somebody about how I would"
+    } ]
+  }, {
+    "tStartMs": 1745590,
+    "dDurationMs": 6670,
+    "segs": [ {
+      "utf8": "maybe solve to like use ai like in like a,\nLaw firm. They're like, oh, would you make"
+    } ]
+  }, {
+    "tStartMs": 1752260,
+    "dDurationMs": 5200,
+    "segs": [ {
+      "utf8": "like copyright for lawyers? and I was like,\nno. I don't know what I would make. I would,"
+    } ]
+  }, {
+    "tStartMs": 1757460,
+    "dDurationMs": 3310,
+    "segs": [ {
+      "utf8": "I probably wouldn't make copywriting for lawyers.\nMaybe that's a big problem for them. But I"
+    } ]
+  }, {
+    "tStartMs": 1760770,
+    "dDurationMs": 4980,
+    "segs": [ {
+      "utf8": "would probably go talk to 20 lawyers and ask\nabout their day and ask about their workflows"
+    } ]
+  }, {
+    "tStartMs": 1765750,
+    "dDurationMs": 4320,
+    "segs": [ {
+      "utf8": "and what's painful, what's hard, and what's\nexpensive and what's time consuming, like"
+    } ]
+  }, {
+    "tStartMs": 1770070,
+    "dDurationMs": 1000,
+    "segs": [ {
+      "utf8": "all those things."
+    } ]
+  }, {
+    "tStartMs": 1771070,
+    "dDurationMs": 5910,
+    "segs": [ {
+      "utf8": "And that would give me some non-obvious idea\nthat like, you couldn't get. Without being"
+    } ]
+  }, {
+    "tStartMs": 1776980,
+    "dDurationMs": 4400,
+    "segs": [ {
+      "utf8": "a lawyer or talking to a bunch of lawyers\nthat I think a lot of the people building"
+    } ]
+  }, {
+    "tStartMs": 1781380,
+    "dDurationMs": 6419,
+    "segs": [ {
+      "utf8": "generative AI are just entirely skipping,\ntrying to find some insight out of thin air."
+    } ]
+  }, {
+    "tStartMs": 1787799,
+    "dDurationMs": 4591,
+    "segs": [ {
+      "utf8": "And so I think, again it's not that hard to\ndo."
+    } ]
+  }, {
+    "tStartMs": 1792390,
+    "dDurationMs": 4110,
+    "segs": [ {
+      "utf8": "It's a little bit painful, but it's actually\nreally interesting to talk to people when"
+    } ]
+  }, {
+    "tStartMs": 1796500,
+    "dDurationMs": 3600,
+    "segs": [ {
+      "utf8": "you can solve their problems and like they're\nlooking to use, Hey, could you solve this"
+    } ]
+  }, {
+    "tStartMs": 1800100,
+    "dDurationMs": 3949,
+    "segs": [ {
+      "utf8": "thing for me? And you actually can, so it's\nlike a pretty like, powerful thing to go into"
+    } ]
+  }, {
+    "tStartMs": 1804049,
+    "dDurationMs": 1350,
+    "segs": [ {
+      "utf8": "those kinds of conversations."
+    } ]
+  }, {
+    "tStartMs": 1805399,
+    "dDurationMs": 4160,
+    "segs": [ {
+      "utf8": "But those would be the things. So yeah I don't\nhave like specific non-obvious thing. I would"
+    } ]
+  }, {
+    "tStartMs": 1809559,
+    "dDurationMs": 6600,
+    "segs": [ {
+      "utf8": "just say, go talk to customers and you'll.\nIP of sorts, like you'll have insights that"
+    } ]
+  }, {
+    "tStartMs": 1816159,
+    "dDurationMs": 4981,
+    "segs": [ {
+      "utf8": "nobody else in the world has. From talking\nto those people, that will probably turn into,"
+    } ]
+  }, {
+    "tStartMs": 1821140,
+    "dDurationMs": 3240,
+    "segs": [ {
+      "utf8": "at least the seeds of some really great product\nideas."
+    } ]
+  }, {
+    "tStartMs": 1824380,
+    "dDurationMs": 8470,
+    "segs": [ {
+      "utf8": "Greg: you've got 75,000 members in your Facebook\ngroup. Could you talk about the role of the"
+    } ]
+  }, {
+    "tStartMs": 1832850,
+    "dDurationMs": 7500,
+    "segs": [ {
+      "utf8": "community? As you've grown, like Walk us through\nthat"
+    } ]
+  }, {
+    "tStartMs": 1840350,
+    "dDurationMs": 6060,
+    "segs": [ {
+      "utf8": "Dave: it ai tools with, so I ran like communities\nand like past businesses and we'd have a,"
+    } ]
+  }, {
+    "tStartMs": 1846410,
+    "dDurationMs": 5130,
+    "segs": [ {
+      "utf8": "we used to run all these courses and coaching\nprograms and so you'd pump everyone into a"
+    } ]
+  }, {
+    "tStartMs": 1851540,
+    "dDurationMs": 5030,
+    "segs": [ {
+      "utf8": "community. And so I like learned like the\nmuscle of community. Back then when we ai"
+    } ]
+  }, {
+    "tStartMs": 1856570,
+    "dDurationMs": 4760,
+    "segs": [ {
+      "utf8": "tools Jasper, all we wanted to do was have\nfun and that was our."
+    } ]
+  }, {
+    "tStartMs": 1861330,
+    "dDurationMs": 4690,
+    "segs": [ {
+      "utf8": "and it sounds lame, but we had just had a\ncouple hard years at the previous company,"
+    } ]
+  }, {
+    "tStartMs": 1866020,
+    "dDurationMs": 2860,
+    "segs": [ {
+      "utf8": "we'd laid off some of the team. We were just\nburnt out and we're like, you know what? We're"
+    } ]
+  }, {
+    "tStartMs": 1868880,
+    "dDurationMs": 4509,
+    "segs": [ {
+      "utf8": "gonna do this and we're just gonna have a\nlot of fun and we're gonna do fun stuff in"
+    } ]
+  }, {
+    "tStartMs": 1873389,
+    "dDurationMs": 3881,
+    "segs": [ {
+      "utf8": "our community. I'm gonna interact with my\ncommunity in some really fun way."
+    } ]
+  }, {
+    "tStartMs": 1877270,
+    "dDurationMs": 4060,
+    "segs": [ {
+      "utf8": "This was like during all the web three stuff.\nSo you saw some just like very like casual"
+    } ]
+  }, {
+    "tStartMs": 1881330,
+    "dDurationMs": 5819,
+    "segs": [ {
+      "utf8": "community type. Relationships forming where\nit wasn't all stuffy and b2b and it was memes."
+    } ]
+  }, {
+    "tStartMs": 1887149,
+    "dDurationMs": 4672,
+    "segs": [ {
+      "utf8": "There was funny videos and there was like\ninsider jokes and all this stuff. And I just"
+    } ]
+  }, {
+    "tStartMs": 1891821,
+    "dDurationMs": 4728,
+    "segs": [ {
+      "utf8": "kinda treated our Facebook group, like a group\ntext with the boys and turns out that's a"
+    } ]
+  }, {
+    "tStartMs": 1896549,
+    "dDurationMs": 2551,
+    "segs": [ {
+      "utf8": "really great way to relate to people."
+    } ]
+  }, {
+    "tStartMs": 1899100,
+    "dDurationMs": 5000,
+    "segs": [ {
+      "utf8": "and I was just me and I would just take pictures\nof me with my son just doing something stupid"
+    } ]
+  }, {
+    "tStartMs": 1904100,
+    "dDurationMs": 5330,
+    "segs": [ {
+      "utf8": "and I would, make fun, get a little chippy\nwith some of the members sometimes. And again,"
+    } ]
+  }, {
+    "tStartMs": 1909430,
+    "dDurationMs": 3969,
+    "segs": [ {
+      "utf8": "just in a joking way and they would make fun\nof me something, and it was just this like"
+    } ]
+  }, {
+    "tStartMs": 1913399,
+    "dDurationMs": 2371,
+    "segs": [ {
+      "utf8": "really fun thing."
+    } ]
+  }, {
+    "tStartMs": 1915770,
+    "dDurationMs": 4509,
+    "segs": [ {
+      "utf8": "And when people joined they like felt that\nand it felt like this different kind of company"
+    } ]
+  }, {
+    "tStartMs": 1920279,
+    "dDurationMs": 3421,
+    "segs": [ {
+      "utf8": "and like that fund showed up in our product.\nIt showed up, our community showed up everywhere."
+    } ]
+  }, {
+    "tStartMs": 1923700,
+    "dDurationMs": 5320,
+    "segs": [ {
+      "utf8": "So I think like early days, people. Join and\njust sit in the community cuz they really"
+    } ]
+  }, {
+    "tStartMs": 1929020,
+    "dDurationMs": 2889,
+    "segs": [ {
+      "utf8": "loved the community, even if they weren't\nbuying the product yet or whatever."
+    } ]
+  }, {
+    "tStartMs": 1931909,
+    "dDurationMs": 3701,
+    "segs": [ {
+      "utf8": "But they were just like, this is fun and I\nwanna be a part of something that's got life"
+    } ]
+  }, {
+    "tStartMs": 1935610,
+    "dDurationMs": 6189,
+    "segs": [ {
+      "utf8": "in it. And I think over time, communities\ngrow and it's been a love, I wouldn't say"
+    } ]
+  }, {
+    "tStartMs": 1941799,
+    "dDurationMs": 4771,
+    "segs": [ {
+      "utf8": "hate, but a love stress affair for me in the\ncommunity because you get your first thousand"
+    } ]
+  }, {
+    "tStartMs": 1946570,
+    "dDurationMs": 1219,
+    "segs": [ {
+      "utf8": "people and they all know each other."
+    } ]
+  }, {
+    "tStartMs": 1947789,
+    "dDurationMs": 3651,
+    "segs": [ {
+      "utf8": "Then you grow to 10,000 and all those thousand\ncomplain about how it's, oh, it's different"
+    } ]
+  }, {
+    "tStartMs": 1951440,
+    "dDurationMs": 7619,
+    "segs": [ {
+      "utf8": "than it once was and it's not the same. And\nthere's always maybe bent towards communities,"
+    } ]
+  }, {
+    "tStartMs": 1959059,
+    "dDurationMs": 4210,
+    "segs": [ {
+      "utf8": "turning into support channels. And if I looked\nat that community right now, I'd probably"
+    } ]
+  }, {
+    "tStartMs": 1963269,
+    "dDurationMs": 2441,
+    "segs": [ {
+      "utf8": "see a bunch of like help tickets and stuff\nlike that."
+    } ]
+  }, {
+    "tStartMs": 1965710,
+    "dDurationMs": 5240,
+    "segs": [ {
+      "utf8": "That isn't really what we want the community\nto be about. But I think it's just been interesting"
+    } ]
+  }, {
+    "tStartMs": 1970950,
+    "dDurationMs": 7420,
+    "segs": [ {
+      "utf8": "to see how powerful a community can be and\nalso how hard it is to scale the leadership"
+    } ]
+  }, {
+    "tStartMs": 1978370,
+    "dDurationMs": 4870,
+    "segs": [ {
+      "utf8": "of a community. and it's been difficult for\nme to figure out how to get more Daves to"
+    } ]
+  }, {
+    "tStartMs": 1983240,
+    "dDurationMs": 4750,
+    "segs": [ {
+      "utf8": "go in there and help lead it either internal\nlike Jasper employees or just empower other"
+    } ]
+  }, {
+    "tStartMs": 1987990,
+    "dDurationMs": 1830,
+    "segs": [ {
+      "utf8": "community members to go be a Dave."
+    } ]
+  }, {
+    "tStartMs": 1989820,
+    "dDurationMs": 4430,
+    "segs": [ {
+      "utf8": "And maybe the answer is you can't get more\nDaves like there's only one Dave and you don't"
+    } ]
+  }, {
+    "tStartMs": 1994250,
+    "dDurationMs": 5630,
+    "segs": [ {
+      "utf8": "need more Daves. But I certainly see the community\nlike Thrive when I'm really involved and,"
+    } ]
+  }, {
+    "tStartMs": 1999880,
+    "dDurationMs": 3530,
+    "segs": [ {
+      "utf8": "start to get a little flat when I step out\nof it for a bit."
+    } ]
+  }, {
+    "tStartMs": 2003410,
+    "dDurationMs": 6300,
+    "segs": [ {
+      "utf8": "Greg: Yeah. I think you know, community. I\nsay that community is like, it's like hosting"
+    } ]
+  }, {
+    "tStartMs": 2009710,
+    "dDurationMs": 6790,
+    "segs": [ {
+      "utf8": "a party, right? So if you have like a house\nparty, let's say you need the right music,"
+    } ]
+  }, {
+    "tStartMs": 2016500,
+    "dDurationMs": 3590,
+    "segs": [ {
+      "utf8": "you need the right food, you need to start\nat the right time. You need to curate the"
+    } ]
+  }, {
+    "tStartMs": 2020090,
+    "dDurationMs": 6469,
+    "segs": [ {
+      "utf8": "right people. There needs to be enough space,\nbut not too much space."
+    } ]
+  }, {
+    "tStartMs": 2026559,
+    "dDurationMs": 13051,
+    "segs": [ {
+      "utf8": "I love this quote Around Studio 54. Studio\n54 was a dictatorship at the door, but a democracy"
+    } ]
+  }, {
+    "tStartMs": 2039610,
+    "dDurationMs": 1569,
+    "segs": [ {
+      "utf8": "on the dance floor."
+    } ]
+  }, {
+    "tStartMs": 2041179,
+    "dDurationMs": 1230,
+    "segs": [ {
+      "utf8": "Dave: That's awesome."
+    } ]
+  }, {
+    "tStartMs": 2042409,
+    "dDurationMs": 5191,
+    "segs": [ {
+      "utf8": "Greg: And that's how I think about building\ncommunity. And I, right before this call,"
+    } ]
+  }, {
+    "tStartMs": 2047600,
+    "dDurationMs": 5519,
+    "segs": [ {
+      "utf8": "I applied to join your Facebook group and\nI'm still waiting to hear back, it's a dictatorship"
+    } ]
+  }, {
+    "tStartMs": 2053119,
+    "dDurationMs": 1010,
+    "segs": [ {
+      "utf8": "at the door."
+    } ]
+  }, {
+    "tStartMs": 2054129,
+    "dDurationMs": 6841,
+    "segs": [ {
+      "utf8": "And hopefully My hope as a community member\nin your community is that, there are leaders"
+    } ]
+  }, {
+    "tStartMs": 2060970,
+    "dDurationMs": 5419,
+    "segs": [ {
+      "utf8": "like you that could bring me to the food I\nlike, bring me to the music I like, bring"
+    } ]
+  }, {
+    "tStartMs": 2066389,
+    "dDurationMs": 6171,
+    "segs": [ {
+      "utf8": "me to the people I like. And that's really\nthe role of a leader. And what people really"
+    } ]
+  }, {
+    "tStartMs": 2072560,
+    "dDurationMs": 10010,
+    "segs": [ {
+      "utf8": "miss is that by doing that and by earning\nthat trust and confidence like it's just good"
+    } ]
+  }, {
+    "tStartMs": 2082570,
+    "dDurationMs": 1000,
+    "segs": [ {
+      "utf8": "business."
+    } ]
+  }, {
+    "tStartMs": 2083570,
+    "dDurationMs": 6700,
+    "segs": [ {
+      "utf8": "Dave: Yep. People love it. When I'm engaged\nin there, people inevitably, I cannot believe"
+    } ]
+  }, {
+    "tStartMs": 2090270,
+    "dDurationMs": 4460,
+    "segs": [ {
+      "utf8": "that. Like you're in there talking to people\nand like honestly when we raised our series"
+    } ]
+  }, {
+    "tStartMs": 2094730,
+    "dDurationMs": 6470,
+    "segs": [ {
+      "utf8": "A, that was like a big thing. Investors always\nsaid maybe like more than our, like numbers"
+    } ]
+  }, {
+    "tStartMs": 2101200,
+    "dDurationMs": 1000,
+    "segs": [ {
+      "utf8": "or whatever."
+    } ]
+  }, {
+    "tStartMs": 2102200,
+    "dDurationMs": 5399,
+    "segs": [ {
+      "utf8": "It's just man, Dave is so engaged in the community.\nThat's really powerful and it's a great way"
+    } ]
+  }, {
+    "tStartMs": 2107599,
+    "dDurationMs": 4591,
+    "segs": [ {
+      "utf8": "to keep a bead on the customers and see what\nthey say and get new product ideas. And so"
+    } ]
+  }, {
+    "tStartMs": 2112190,
+    "dDurationMs": 5140,
+    "segs": [ {
+      "utf8": "it. Again, it's not easy. It does take it\nout of me when like things get a little too"
+    } ]
+  }, {
+    "tStartMs": 2117330,
+    "dDurationMs": 4990,
+    "segs": [ {
+      "utf8": "crazy or people get a little grumpy, or, the\ncommunity can turn into a mob."
+    } ]
+  }, {
+    "tStartMs": 2122320,
+    "dDurationMs": 5240,
+    "segs": [ {
+      "utf8": "At times if you get like a really engaged\ncommunity, like there's some like mob like"
+    } ]
+  }, {
+    "tStartMs": 2127560,
+    "dDurationMs": 4250,
+    "segs": [ {
+      "utf8": "mentality there that you've gotta navigate,\nbut it is such a powerful thing."
+    } ]
+  }, {
+    "tStartMs": 2131810,
+    "dDurationMs": 7039,
+    "segs": [ {
+      "utf8": "Greg: So we run a community in a business\ncalled, you probably need a robot.com and"
+    } ]
+  }, {
+    "tStartMs": 2138849,
+    "dDurationMs": 5491,
+    "segs": [ {
+      "utf8": "it's a, it's like a free community for people\nwho try to boost. Their productivity using"
+    } ]
+  }, {
+    "tStartMs": 2144340,
+    "dDurationMs": 3620,
+    "segs": [ {
+      "utf8": "ai. There's, I think about 20, 20 plus thousand,\n25,000 members."
+    } ]
+  }, {
+    "tStartMs": 2147960,
+    "dDurationMs": 1580,
+    "segs": [ {
+      "utf8": "Dave: That's awesome."
+    } ]
+  }, {
+    "tStartMs": 2149540,
+    "dDurationMs": 6690,
+    "segs": [ {
+      "utf8": "Greg: right before I, I just I came on, I\nasked them, Hey, I'm about to record a podcast"
+    } ]
+  }, {
+    "tStartMs": 2156230,
+    "dDurationMs": 1770,
+    "segs": [ {
+      "utf8": "with Dave, the founder of Jasper ai."
+    } ]
+  }, {
+    "tStartMs": 2158000,
+    "dDurationMs": 3270,
+    "segs": [ {
+      "utf8": "Got any questions for him? So I've got a couple\nquestions."
+    } ]
+  }, {
+    "tStartMs": 2161270,
+    "dDurationMs": 1020,
+    "segs": [ {
+      "utf8": "Dave: Okay."
+    } ]
+  }, {
+    "tStartMs": 2162290,
+    "dDurationMs": 6160,
+    "segs": [ {
+      "utf8": "Greg: I got from Karen. Is there any AI with\nJasper that can help me in transforming data"
+    } ]
+  }, {
+    "tStartMs": 2168450,
+    "dDurationMs": 1130,
+    "segs": [ {
+      "utf8": "from survey?"
+    } ]
+  }, {
+    "tStartMs": 2169580,
+    "dDurationMs": 5440,
+    "segs": [ {
+      "utf8": "Dave: I'd have to look at the actual use case,\nbut you could probably, this is fun about"
+    } ]
+  }, {
+    "tStartMs": 2175020,
+    "dDurationMs": 3610,
+    "segs": [ {
+      "utf8": "communities. It's oh, like that's an interesting\nthing. Like again, like maybe there's a whole"
+    } ]
+  }, {
+    "tStartMs": 2178630,
+    "dDurationMs": 5660,
+    "segs": [ {
+      "utf8": "business there outta that one little question.\nAnd I'd have to dig in and actually look at"
+    } ]
+  }, {
+    "tStartMs": 2184290,
+    "dDurationMs": 2150,
+    "segs": [ {
+      "utf8": "it, but I'd probably take the data from surveys."
+    } ]
+  }, {
+    "tStartMs": 2186440,
+    "dDurationMs": 2970,
+    "segs": [ {
+      "utf8": "You could probably like copy and just paste\nit real quick out of a spreadsheet and throw"
+    } ]
+  }, {
+    "tStartMs": 2189410,
+    "dDurationMs": 6270,
+    "segs": [ {
+      "utf8": "it in Jasper chat or a document and say, Hey,\nsummarize this and gimme. Insights from it."
+    } ]
+  }, {
+    "tStartMs": 2195680,
+    "dDurationMs": 6800,
+    "segs": [ {
+      "utf8": "Or you could take all of that and you could\nsay, write Facebook ad copy, about the above."
+    } ]
+  }, {
+    "tStartMs": 2202480,
+    "dDurationMs": 5340,
+    "segs": [ {
+      "utf8": "And I think so much of great marketing is\njust taking things that users have said and"
+    } ]
+  }, {
+    "tStartMs": 2207820,
+    "dDurationMs": 2570,
+    "segs": [ {
+      "utf8": "like turning that into copy and saying it\nback to them."
+    } ]
+  }, {
+    "tStartMs": 2210390,
+    "dDurationMs": 3459,
+    "segs": [ {
+      "utf8": "So I don't know. I have to look at the use\ncase, it's very likely we could take some"
+    } ]
+  }, {
+    "tStartMs": 2213849,
+    "dDurationMs": 3291,
+    "segs": [ {
+      "utf8": "data and go and get insights from it using\nJasper."
+    } ]
+  }, {
+    "tStartMs": 2217140,
+    "dDurationMs": 4750,
+    "segs": [ {
+      "utf8": "Greg: Dave is secretly like writing this down\nas a product idea and after this call he is"
+    } ]
+  }, {
+    "tStartMs": 2221890,
+    "dDurationMs": 2179,
+    "segs": [ {
+      "utf8": "gonna be like, Hey guys we gotta go build\nthis. This is a"
+    } ]
+  }, {
+    "tStartMs": 2224069,
+    "dDurationMs": 4731,
+    "segs": [ {
+      "utf8": "Dave: got. I got a new one. I got a new one.\nHot off the press. Yes."
+    } ]
+  }, {
+    "tStartMs": 2228800,
+    "dDurationMs": 7420,
+    "segs": [ {
+      "utf8": "Greg: but it's a hundred percent like a big\nidea, like voice of customer is what, survey"
+    } ]
+  }, {
+    "tStartMs": 2236220,
+    "dDurationMs": 1000,
+    "segs": [ {
+      "utf8": "data basically."
+    } ]
+  }, {
+    "tStartMs": 2237220,
+    "dDurationMs": 1000,
+    "segs": [ {
+      "utf8": "Dave: Yep."
+    } ]
+  }, {
+    "tStartMs": 2238220,
+    "dDurationMs": 5460,
+    "segs": [ {
+      "utf8": "Greg: is a really big business. It's actually\na multi-billion dollar business, in, and it's"
+    } ]
+  }, {
+    "tStartMs": 2243680,
+    "dDurationMs": 7990,
+    "segs": [ {
+      "utf8": "really important the way I think about Voice\nof Customer is if you think about like Google"
+    } ]
+  }, {
+    "tStartMs": 2251670,
+    "dDurationMs": 6000,
+    "segs": [ {
+      "utf8": "Analytics or Amplitude or whatever, that's,\njust data, like numbers, like you don't really"
+    } ]
+  }, {
+    "tStartMs": 2257670,
+    "dDurationMs": 1689,
+    "segs": [ {
+      "utf8": "get a full picture."
+    } ]
+  }, {
+    "tStartMs": 2259359,
+    "dDurationMs": 12861,
+    "segs": [ {
+      "utf8": "It's if you had a Google Analytics for a Walmart,\ntracking data, let's say, what would it say"
+    } ]
+  }, {
+    "tStartMs": 2272220,
+    "dDurationMs": 5750,
+    "segs": [ {
+      "utf8": "if I walked in, let's say I'd go in, I walked\naround for 45 minutes, I'd check out for $200."
+    } ]
+  }, {
+    "tStartMs": 2277970,
+    "dDurationMs": 6300,
+    "segs": [ {
+      "utf8": "Google Analytics for Walmart would be like,\ngreat, amazing guy walks in, spends $200."
+    } ]
+  }, {
+    "tStartMs": 2284270,
+    "dDurationMs": 6740,
+    "segs": [ {
+      "utf8": "That's more than our average size. Our average\ncart size is $45. That's amazing. . What it"
+    } ]
+  }, {
+    "tStartMs": 2291010,
+    "dDurationMs": 5340,
+    "segs": [ {
+      "utf8": "isn't telling you is that I spent 45 minutes\ncuz I couldn't find what I was looking for,"
+    } ]
+  }, {
+    "tStartMs": 2296350,
+    "dDurationMs": 9200,
+    "segs": [ {
+      "utf8": "and actually my budget was $500, but I couldn't\nspend it. So if I could do voice of customer,"
+    } ]
+  }, {
+    "tStartMs": 2305550,
+    "dDurationMs": 6590,
+    "segs": [ {
+      "utf8": "get survey data and then use AI to basically\ngenerate insights, to help make my product"
+    } ]
+  }, {
+    "tStartMs": 2312140,
+    "dDurationMs": 4080,
+    "segs": [ {
+      "utf8": "better that's a huge."
+    } ]
+  }, {
+    "tStartMs": 2316220,
+    "dDurationMs": 6940,
+    "segs": [ {
+      "utf8": "Dave: Yep. Like what you lose. I think there's\npower. like the individual customer. And again"
+    } ]
+  }, {
+    "tStartMs": 2323160,
+    "dDurationMs": 5820,
+    "segs": [ {
+      "utf8": "if you if we lose the ability to do that and\nall we're doing is synthesizing and aggregating"
+    } ]
+  }, {
+    "tStartMs": 2328980,
+    "dDurationMs": 6570,
+    "segs": [ {
+      "utf8": "all customer comments and all customer, questions\ninto this one thing, I think you lose something"
+    } ]
+  }, {
+    "tStartMs": 2335550,
+    "dDurationMs": 1000,
+    "segs": [ {
+      "utf8": "there."
+    } ]
+  }, {
+    "tStartMs": 2336550,
+    "dDurationMs": 2870,
+    "segs": [ {
+      "utf8": "But I think it'll just take discipline on\nthe people that are building products to,"
+    } ]
+  }, {
+    "tStartMs": 2339420,
+    "dDurationMs": 7470,
+    "segs": [ {
+      "utf8": "or anybody at the company had to go past the\naggregate summarized ai. Insight packet and"
+    } ]
+  }, {
+    "tStartMs": 2346890,
+    "dDurationMs": 3520,
+    "segs": [ {
+      "utf8": "say, oh no, I'm gonna go talk to that gal\nthat just said that, and I'm gonna go figure"
+    } ]
+  }, {
+    "tStartMs": 2350410,
+    "dDurationMs": 3980,
+    "segs": [ {
+      "utf8": "out what she's trying to do. And there's a\nlot of gold in having those conversations."
+    } ]
+  }, {
+    "tStartMs": 2354390,
+    "dDurationMs": 7380,
+    "segs": [ {
+      "utf8": "Greg: Love that. Next question from Merkel.\nHow do you think about Moat and Jasper ai?"
+    } ]
+  }, {
+    "tStartMs": 2361770,
+    "dDurationMs": 2940,
+    "segs": [ {
+      "utf8": "Could you give us a little more insight into\nthat?"
+    } ]
+  }, {
+    "tStartMs": 2364710,
+    "dDurationMs": 7850,
+    "segs": [ {
+      "utf8": "Dave: Yeah, I think defensibility everywhere\nthat businesses can pick up. I don't know,"
+    } ]
+  }, {
+    "tStartMs": 2372560,
+    "dDurationMs": 11289,
+    "segs": [ {
+      "utf8": "both in B2B and in AI in particular, like\nif there's anything that's incredibly durable"
+    } ]
+  }, {
+    "tStartMs": 2383849,
+    "dDurationMs": 7351,
+    "segs": [ {
+      "utf8": "it's not like the models themselves are these\nsuper. Intensive, durable things, they'll"
+    } ]
+  }, {
+    "tStartMs": 2391200,
+    "dDurationMs": 2840,
+    "segs": [ {
+      "utf8": "probably be more commoditized over time."
+    } ]
+  }, {
+    "tStartMs": 2394040,
+    "dDurationMs": 4230,
+    "segs": [ {
+      "utf8": "The app layer, same thing. I don't think we\ncould just stop building on Jasper and it"
+    } ]
+  }, {
+    "tStartMs": 2398270,
+    "dDurationMs": 4540,
+    "segs": [ {
+      "utf8": "would be this great company, over time, just\ncause we have this like durable mode. I think"
+    } ]
+  }, {
+    "tStartMs": 2402810,
+    "dDurationMs": 4059,
+    "segs": [ {
+      "utf8": "there's obviously a lot of product that you\ncan build that just building great product"
+    } ]
+  }, {
+    "tStartMs": 2406869,
+    "dDurationMs": 3011,
+    "segs": [ {
+      "utf8": "that solves user needs, is defensible."
+    } ]
+  }, {
+    "tStartMs": 2409880,
+    "dDurationMs": 5260,
+    "segs": [ {
+      "utf8": "We've got a lot of great data. That we collect\nand that we can use to go fine tune and train"
+    } ]
+  }, {
+    "tStartMs": 2415140,
+    "dDurationMs": 5420,
+    "segs": [ {
+      "utf8": "and perhaps even build like our own large\nlanguage models someday. That can make our"
+    } ]
+  }, {
+    "tStartMs": 2420560,
+    "dDurationMs": 5750,
+    "segs": [ {
+      "utf8": "output different and better for our users\nthan any other product would be. And so we"
+    } ]
+  }, {
+    "tStartMs": 2426310,
+    "dDurationMs": 1750,
+    "segs": [ {
+      "utf8": "get value out of that."
+    } ]
+  }, {
+    "tStartMs": 2428060,
+    "dDurationMs": 8750,
+    "segs": [ {
+      "utf8": "I think distribution, partnerships, brand,\ncommunity Talent internal organizational rigor,"
+    } ]
+  }, {
+    "tStartMs": 2436810,
+    "dDurationMs": 5870,
+    "segs": [ {
+      "utf8": "like all of these things matter and are hard\nto do. And I think all of them, add up to,"
+    } ]
+  }, {
+    "tStartMs": 2442680,
+    "dDurationMs": 4150,
+    "segs": [ {
+      "utf8": "something that's really hard for someone to\ncompete with. but I don't think we've got"
+    } ]
+  }, {
+    "tStartMs": 2446830,
+    "dDurationMs": 5900,
+    "segs": [ {
+      "utf8": "some silver bullet, even the data stuff, which\nis probably the most like compelling or at"
+    } ]
+  }, {
+    "tStartMs": 2452730,
+    "dDurationMs": 2480,
+    "segs": [ {
+      "utf8": "least the mote, the most mote like thing."
+    } ]
+  }, {
+    "tStartMs": 2455210,
+    "dDurationMs": 3909,
+    "segs": [ {
+      "utf8": "When people gonna hear that, they go yeah,\nthat there's a mote there. Like even that"
+    } ]
+  }, {
+    "tStartMs": 2459119,
+    "dDurationMs": 5771,
+    "segs": [ {
+      "utf8": "I think is dubious long term. If there's a\nton of value there, as the models get smarter"
+    } ]
+  }, {
+    "tStartMs": 2464890,
+    "dDurationMs": 2970,
+    "segs": [ {
+      "utf8": "and smarter, you might not get a lot of value\noff fine tuning, but that's probably a long"
+    } ]
+  }, {
+    "tStartMs": 2467860,
+    "dDurationMs": 5170,
+    "segs": [ {
+      "utf8": "ways out. But anyway, I think all of these\ncombined creates a pretty durable business,"
+    } ]
+  }, {
+    "tStartMs": 2473030,
+    "dDurationMs": 3150,
+    "segs": [ {
+      "utf8": "but a lot of it just comes down to execution."
+    } ]
+  }, {
+    "tStartMs": 2476180,
+    "dDurationMs": 9020,
+    "segs": [ {
+      "utf8": "Greg: I also think design and UX plays a role\nin it. If you can create the experience that's."
+    } ]
+  }, {
+    "tStartMs": 2485200,
+    "dDurationMs": 3440,
+    "segs": [ {
+      "utf8": "easiest to use. Most fun to use, there's value."
+    } ]
+  }, {
+    "tStartMs": 2488640,
+    "dDurationMs": 3820,
+    "segs": [ {
+      "utf8": "Dave: Yeah. And like, all these are really\nhard things. When I think about my day and"
+    } ]
+  }, {
+    "tStartMs": 2492460,
+    "dDurationMs": 5109,
+    "segs": [ {
+      "utf8": "my week and it's Monday, like my week ahead\nis filled with me doing a bunch of really"
+    } ]
+  }, {
+    "tStartMs": 2497569,
+    "dDurationMs": 7241,
+    "segs": [ {
+      "utf8": "hard things that, I'm not particularly good\nat. And many of them, it's a grind. It's it's"
+    } ]
+  }, {
+    "tStartMs": 2504810,
+    "dDurationMs": 1959,
+    "segs": [ {
+      "utf8": "hard to hire great people, learn how to do\nthat."
+    } ]
+  }, {
+    "tStartMs": 2506769,
+    "dDurationMs": 5111,
+    "segs": [ {
+      "utf8": "It's hard to retain great talent. It's hard\nto do great UX in ui. And so like, all these"
+    } ]
+  }, {
+    "tStartMs": 2511880,
+    "dDurationMs": 5979,
+    "segs": [ {
+      "utf8": "are hard things. And then there's hard things.\nThere's, somewhat of a mote. Now whether it."
+    } ]
+  }, {
+    "tStartMs": 2517859,
+    "dDurationMs": 5381,
+    "segs": [ {
+      "utf8": "Structurally durable over a decade is a whole\ndifferent thing. But yeah, I think I think"
+    } ]
+  }, {
+    "tStartMs": 2523240,
+    "dDurationMs": 4020,
+    "segs": [ {
+      "utf8": "a lot of people sit around and talk about\nmoats and they matter, but I think in like"
+    } ]
+  }, {
+    "tStartMs": 2527260,
+    "dDurationMs": 4530,
+    "segs": [ {
+      "utf8": "B2B or like most tech companies don't really\nhave these systemic moats that they're building"
+    } ]
+  }, {
+    "tStartMs": 2531790,
+    "dDurationMs": 1000,
+    "segs": [ {
+      "utf8": "on top of,"
+    } ]
+  }, {
+    "tStartMs": 2532790,
+    "dDurationMs": 6799,
+    "segs": [ {
+      "utf8": "Greg: Two more questions, and I think you're\ngonna like these. If you were. Sam Altman,"
+    } ]
+  }, {
+    "tStartMs": 2539589,
+    "dDurationMs": 2721,
+    "segs": [ {
+      "utf8": "what would you do differently?"
+    } ]
+  }, {
+    "tStartMs": 2542310,
+    "dDurationMs": 16200,
+    "segs": [ {
+      "utf8": "Dave: I haven't thought about that. I think\nthey're doing a really good job. I think he's"
+    } ]
+  }, {
+    "tStartMs": 2558510,
+    "dDurationMs": 3750,
+    "segs": [ {
+      "utf8": "a very thoughtful person and I think, really\nmeans what he says."
+    } ]
+  }, {
+    "tStartMs": 2562260,
+    "dDurationMs": 6530,
+    "segs": [ {
+      "utf8": "I don't think he's got like ulterior motives.\nI think at least the kind of pr around and"
+    } ]
+  }, {
+    "tStartMs": 2568790,
+    "dDurationMs": 8020,
+    "segs": [ {
+      "utf8": "calms around. Them being open, but increasingly\nmore closed, definitely causes a rift in the"
+    } ]
+  }, {
+    "tStartMs": 2576810,
+    "dDurationMs": 3970,
+    "segs": [ {
+      "utf8": "developer communities and AI communities.\nAnd I think there's a world where open AI"
+    } ]
+  }, {
+    "tStartMs": 2580780,
+    "dDurationMs": 7250,
+    "segs": [ {
+      "utf8": "could be this bad guy that's aligned with\nMicrosoft and it's a Apple 1982 commercial,"
+    } ]
+  }, {
+    "tStartMs": 2588030,
+    "dDurationMs": 4770,
+    "segs": [ {
+      "utf8": "again, where, you know, somebody needs to\nbreak us free from all of that."
+    } ]
+  }, {
+    "tStartMs": 2592800,
+    "dDurationMs": 3970,
+    "segs": [ {
+      "utf8": "I don't think that's their intention, and\nI don't think that's them now, but I think"
+    } ]
+  }, {
+    "tStartMs": 2596770,
+    "dDurationMs": 8010,
+    "segs": [ {
+      "utf8": "maybe like getting a little bit ahead of that\nbuilding great. brand equity around the openness"
+    } ]
+  }, {
+    "tStartMs": 2604780,
+    "dDurationMs": 6130,
+    "segs": [ {
+      "utf8": "as well would go a long way, I think."
+    } ]
+  }, {
+    "tStartMs": 2610910,
+    "dDurationMs": 9230,
+    "segs": [ {
+      "utf8": "Greg: what would you do if you were Mark Zuckerberg\nand you wanted to leverage the power of AI"
+    } ]
+  }, {
+    "tStartMs": 2620140,
+    "dDurationMs": 4670,
+    "segs": [ {
+      "utf8": "into their suite of products? How would you\nbe doing it differently?"
+    } ]
+  }, {
+    "tStartMs": 2624810,
+    "dDurationMs": 6221,
+    "segs": [ {
+      "utf8": "Dave: I think they are doing this. I would\ndo a hard pivot away from the metaverse, and"
+    } ]
+  }, {
+    "tStartMs": 2631031,
+    "dDurationMs": 3219,
+    "segs": [ {
+      "utf8": "that's painful. And not that I don't think\nthat'll even be a thing. I just think it's"
+    } ]
+  }, {
+    "tStartMs": 2634250,
+    "dDurationMs": 4770,
+    "segs": [ {
+      "utf8": "early and you've got this thing in front of\nyou that's so clearly here that I think you"
+    } ]
+  }, {
+    "tStartMs": 2639020,
+    "dDurationMs": 6150,
+    "segs": [ {
+      "utf8": "could, they could still be the first by a\nlong shot to the Metaverse by waiting five"
+    } ]
+  }, {
+    "tStartMs": 2645170,
+    "dDurationMs": 2110,
+    "segs": [ {
+      "utf8": "more years."
+    } ]
+  }, {
+    "tStartMs": 2647280,
+    "dDurationMs": 1000,
+    "segs": [ {
+      "utf8": "So I would do."
+    } ]
+  }, {
+    "tStartMs": 2648280,
+    "dDurationMs": 4710,
+    "segs": [ {
+      "utf8": "Greg: The metaverse is basically chatbots\nin 2017."
+    } ]
+  }, {
+    "tStartMs": 2652990,
+    "dDurationMs": 5960,
+    "segs": [ {
+      "utf8": "Dave: Yeah exactly. It was like a false start\nagain. You're not gonna be last if you like."
+    } ]
+  }, {
+    "tStartMs": 2658950,
+    "dDurationMs": 5220,
+    "segs": [ {
+      "utf8": "It's not happening any time in the next, couple\nyears at least. So yeah, and obviously I think"
+    } ]
+  }, {
+    "tStartMs": 2664170,
+    "dDurationMs": 4580,
+    "segs": [ {
+      "utf8": "the generative AI actually plays a big role\nthere. And so I think you're still like building"
+    } ]
+  }, {
+    "tStartMs": 2668750,
+    "dDurationMs": 3589,
+    "segs": [ {
+      "utf8": "tools that can help you get there if that's\nhis end goal."
+    } ]
+  }, {
+    "tStartMs": 2672339,
+    "dDurationMs": 6451,
+    "segs": [ {
+      "utf8": "But yeah, I think I would pivot big parts\nof the company to figure out from first principles."
+    } ]
+  }, {
+    "tStartMs": 2678790,
+    "dDurationMs": 4210,
+    "segs": [ {
+      "utf8": "What they could do with this. And that's what's\nhard I think, for everyone. But I think for"
+    } ]
+  }, {
+    "tStartMs": 2683000,
+    "dDurationMs": 6710,
+    "segs": [ {
+      "utf8": "incumbents too, to step back to first principles\nand think what would Facebook be if these"
+    } ]
+  }, {
+    "tStartMs": 2689710,
+    "dDurationMs": 2520,
+    "segs": [ {
+      "utf8": "existed back when we first ai tools?"
+    } ]
+  }, {
+    "tStartMs": 2692230,
+    "dDurationMs": 3339,
+    "segs": [ {
+      "utf8": "And not just trying to build on the existing\ninfrastructure of the company, but really"
+    } ]
+  }, {
+    "tStartMs": 2695569,
+    "dDurationMs": 3861,
+    "segs": [ {
+      "utf8": "step back and think broadly. Obviously they\nhad, there's ways they can integrate it into"
+    } ]
+  }, {
+    "tStartMs": 2699430,
+    "dDurationMs": 4100,
+    "segs": [ {
+      "utf8": "their platform to help write posts and, all\nof that stuff. But there's probably some like"
+    } ]
+  }, {
+    "tStartMs": 2703530,
+    "dDurationMs": 2150,
+    "segs": [ {
+      "utf8": "big business ideas that can."
+    } ]
+  }, {
+    "tStartMs": 2705680,
+    "dDurationMs": 3919,
+    "segs": [ {
+      "utf8": "With it as well. That would really be powerful\nif they just thought from first principles,"
+    } ]
+  }, {
+    "tStartMs": 2709599,
+    "dDurationMs": 8071,
+    "segs": [ {
+      "utf8": "Greg: If Instagram becomes 99% AI generated,\ndo we lose the magic of that platform?"
+    } ]
+  }, {
+    "tStartMs": 2717670,
+    "dDurationMs": 1000,
+    "segs": [ {
+      "utf8": "Dave: I"
+    } ]
+  }, {
+    "tStartMs": 2718670,
+    "dDurationMs": 1100,
+    "segs": [ {
+      "utf8": "Greg: too mu put"
+    } ]
+  }, {
+    "tStartMs": 2719770,
+    "dDurationMs": 2460,
+    "segs": [ {
+      "utf8": "Dave: I don't know how much. Yeah,"
+    } ]
+  }, {
+    "tStartMs": 2722230,
+    "dDurationMs": 4260,
+    "segs": [ {
+      "utf8": "Greg: too much magic. AI magic a bad thing."
+    } ]
+  }, {
+    "tStartMs": 2726490,
+    "dDurationMs": 5960,
+    "segs": [ {
+      "utf8": "Dave: I know. I do wonder how much we care\nabout. like knowing that something is from"
+    } ]
+  }, {
+    "tStartMs": 2732450,
+    "dDurationMs": 5750,
+    "segs": [ {
+      "utf8": "a real person like I don't find my, someone's\nHey, this Twitter thread was AI generated."
+    } ]
+  }, {
+    "tStartMs": 2738200,
+    "dDurationMs": 4810,
+    "segs": [ {
+      "utf8": "And they call it out upfront and they're like,\nI just copy and pasted it. Like I don't really"
+    } ]
+  }, {
+    "tStartMs": 2743010,
+    "dDurationMs": 2140,
+    "segs": [ {
+      "utf8": "wanna read it as a person cause I'm like,\nwhatever."
+    } ]
+  }, {
+    "tStartMs": 2745150,
+    "dDurationMs": 4040,
+    "segs": [ {
+      "utf8": "Maybe there's some golden there. Maybe there's\nnot. Now if they're curating it and thinking"
+    } ]
+  }, {
+    "tStartMs": 2749190,
+    "dDurationMs": 5450,
+    "segs": [ {
+      "utf8": "it through, and I know that hey, they used\nai, but. We're very thoughtful about it. Then"
+    } ]
+  }, {
+    "tStartMs": 2754640,
+    "dDurationMs": 3929,
+    "segs": [ {
+      "utf8": "like it, it goes back to I really wanna know\nthis person's thoughts, but yeah, I don't"
+    } ]
+  }, {
+    "tStartMs": 2758569,
+    "dDurationMs": 7641,
+    "segs": [ {
+      "utf8": "know. I don't know if just pumping out a bunch\nof like super cool images Is a replacement"
+    } ]
+  }, {
+    "tStartMs": 2766210,
+    "dDurationMs": 3899,
+    "segs": [ {
+      "utf8": "for Instagram and knowing what your friends\nare doing and knowing what that in, knowing"
+    } ]
+  }, {
+    "tStartMs": 2770109,
+    "dDurationMs": 4710,
+    "segs": [ {
+      "utf8": "what Beyonce is doing and I think they're,\nI think you're getting something out of that's"
+    } ]
+  }, {
+    "tStartMs": 2774819,
+    "dDurationMs": 6201,
+    "segs": [ {
+      "utf8": "not just, oh, that's a cool image. Like you're\ngetting clues about societal draws and what"
+    } ]
+  }, {
+    "tStartMs": 2781020,
+    "dDurationMs": 1820,
+    "segs": [ {
+      "utf8": "people value and all of that."
+    } ]
+  }, {
+    "tStartMs": 2782840,
+    "dDurationMs": 4440,
+    "segs": [ {
+      "utf8": "I don't think AI replaces."
+    } ]
+  }, {
+    "tStartMs": 2787280,
+    "dDurationMs": 9850,
+    "segs": [ {
+      "utf8": "Greg: I think what people care about is content\nthat they connect with. So if AI enhanced"
+    } ]
+  }, {
+    "tStartMs": 2797130,
+    "dDurationMs": 8620,
+    "segs": [ {
+      "utf8": "content helps them connect less with it, then\nthat's a problem. I think if I'm a PM at Instagram,"
+    } ]
+  }, {
+    "tStartMs": 2805750,
+    "dDurationMs": 11940,
+    "segs": [ {
+      "utf8": "I'm okay, I want to go and create tools that\nallow creators to really connect with their"
+    } ]
+  }, {
+    "tStartMs": 2817690,
+    "dDurationMs": 1000,
+    "segs": [ {
+      "utf8": "a."
+    } ]
+  }, {
+    "tStartMs": 2818690,
+    "dDurationMs": 7899,
+    "segs": [ {
+      "utf8": "Dave: Yeah, and I think there's some, there's\nsome Instagram profiles that, they're just"
+    } ]
+  }, {
+    "tStartMs": 2826589,
+    "dDurationMs": 5181,
+    "segs": [ {
+      "utf8": "showing like cool nature photos and things\nlike that. And I think that could be like,"
+    } ]
+  }, {
+    "tStartMs": 2831770,
+    "dDurationMs": 5319,
+    "segs": [ {
+      "utf8": "again, that might be able to be more ai, but\nstill like when I see a really cool waterfall."
+    } ]
+  }, {
+    "tStartMs": 2837089,
+    "dDurationMs": 2931,
+    "segs": [ {
+      "utf8": "In California."
+    } ]
+  }, {
+    "tStartMs": 2840020,
+    "dDurationMs": 3670,
+    "segs": [ {
+      "utf8": "if I just, if it's just AI generated, like\nthat means so much less to me. Cuz otherwise"
+    } ]
+  }, {
+    "tStartMs": 2843690,
+    "dDurationMs": 3560,
+    "segs": [ {
+      "utf8": "if I'm looking at it, it's Hey, we could go\nthere someday. Oh, I can't believe that exists."
+    } ]
+  }, {
+    "tStartMs": 2847250,
+    "dDurationMs": 4859,
+    "segs": [ {
+      "utf8": "Oh what a weird phenomenon that, the water\nsprays up in the rainbow, whatever those things"
+    } ]
+  }, {
+    "tStartMs": 2852109,
+    "dDurationMs": 1000,
+    "segs": [ {
+      "utf8": "are."
+    } ]
+  }, {
+    "tStartMs": 2853109,
+    "dDurationMs": 2981,
+    "segs": [ {
+      "utf8": "If it's just AI generated, it's okay, cool.\nIt's like a cool image, but means nothing"
+    } ]
+  }, {
+    "tStartMs": 2856090,
+    "dDurationMs": 2140,
+    "segs": [ {
+      "utf8": "to like me and the world that I'm in."
+    } ]
+  }, {
+    "tStartMs": 2858230,
+    "dDurationMs": 6310,
+    "segs": [ {
+      "utf8": "Greg: So you're saying, going back to your\nearlier point really, that sometimes it's"
+    } ]
+  }, {
+    "tStartMs": 2864540,
+    "dDurationMs": 6330,
+    "segs": [ {
+      "utf8": "helpful to think about building product AI\nfirst in this like new world versus I've got"
+    } ]
+  }, {
+    "tStartMs": 2870870,
+    "dDurationMs": 5360,
+    "segs": [ {
+      "utf8": "this product and like, how can I slap on AI\nto it?"
+    } ]
+  }, {
+    "tStartMs": 2876230,
+    "dDurationMs": 7910,
+    "segs": [ {
+      "utf8": "Dave: if I'm like, a PM at a big company,\nlike I'm still probably doing the slap, early"
+    } ]
+  }, {
+    "tStartMs": 2884140,
+    "dDurationMs": 6140,
+    "segs": [ {
+      "utf8": "because it's probably worth it. And some,\nand sometimes, but I think the bigger thing"
+    } ]
+  }, {
+    "tStartMs": 2890280,
+    "dDurationMs": 6549,
+    "segs": [ {
+      "utf8": "is yes, like over the next five years you've\ngotta go back to first principles and think."
+    } ]
+  }, {
+    "tStartMs": 2896829,
+    "dDurationMs": 5081,
+    "segs": [ {
+      "utf8": "Is this really the best way to do this at\nall given the new technology? And I think"
+    } ]
+  }, {
+    "tStartMs": 2901910,
+    "dDurationMs": 5700,
+    "segs": [ {
+      "utf8": "sometimes it will be, and slapping it on will\nwork. But I think many times it's going to"
+    } ]
+  }, {
+    "tStartMs": 2907610,
+    "dDurationMs": 3979,
+    "segs": [ {
+      "utf8": "be, no, this is never how we would've done\nit in the first place knowing this technology"
+    } ]
+  }, {
+    "tStartMs": 2911589,
+    "dDurationMs": 2801,
+    "segs": [ {
+      "utf8": "existed and we've gotta go and it's set the\ninnovator's dilemma."
+    } ]
+  }, {
+    "tStartMs": 2914390,
+    "dDurationMs": 5450,
+    "segs": [ {
+      "utf8": "We've gotta go and do the hard work to redo\nit from scratch. Otherwise, some startup will"
+    } ]
+  }, {
+    "tStartMs": 2919840,
+    "dDurationMs": 1050,
+    "segs": [ {
+      "utf8": "come along and."
+    } ]
+  }, {
+    "tStartMs": 2920890,
+    "dDurationMs": 5280,
+    "segs": [ {
+      "utf8": "Greg: As an idea I just had, and I'm curious\nyour feedback on it, so you're hearing it"
+    } ]
+  }, {
+    "tStartMs": 2926170,
+    "dDurationMs": 11130,
+    "segs": [ {
+      "utf8": "fresh. AI for onboarding. So the hardest part\nis getting people to sign up for your product"
+    } ]
+  }, {
+    "tStartMs": 2937300,
+    "dDurationMs": 5110,
+    "segs": [ {
+      "utf8": "or service, even if it's a free product, like\ngetting them through it. And if you can use"
+    } ]
+  }, {
+    "tStartMs": 2942410,
+    "dDurationMs": 8409,
+    "segs": [ {
+      "utf8": "AI that really enhances that and makes it\nquicker and faster and easier generate more"
+    } ]
+  }, {
+    "tStartMs": 2950819,
+    "dDurationMs": 6151,
+    "segs": [ {
+      "utf8": "signups, generate more leads, generate more\ncustomers. What do you think of something"
+    } ]
+  }, {
+    "tStartMs": 2956970,
+    "dDurationMs": 7800,
+    "segs": [ {
+      "utf8": "Dave: Yeah, no, certainly. Just even thinking,\nyou could have it, you could feed in some"
+    } ]
+  }, {
+    "tStartMs": 2964770,
+    "dDurationMs": 4240,
+    "segs": [ {
+      "utf8": "just demographic information about the person,\nso you can have some context of who this person"
+    } ]
+  }, {
+    "tStartMs": 2969010,
+    "dDurationMs": 8360,
+    "segs": [ {
+      "utf8": "is and it's, is it a 65 year old woman in\nKansas, or is it, somebody else."
+    } ]
+  }, {
+    "tStartMs": 2977370,
+    "dDurationMs": 3780,
+    "segs": [ {
+      "utf8": "And. and then you could also feed in like\nwhere are they at in the stage and what buttons"
+    } ]
+  }, {
+    "tStartMs": 2981150,
+    "dDurationMs": 3600,
+    "segs": [ {
+      "utf8": "have they clicked and given all that, like\nwhat do they need next? And it could probably"
+    } ]
+  }, {
+    "tStartMs": 2984750,
+    "dDurationMs": 4079,
+    "segs": [ {
+      "utf8": "do a pretty good job of contextualizing all\nof that. I think particularly if you fine"
+    } ]
+  }, {
+    "tStartMs": 2988829,
+    "dDurationMs": 6301,
+    "segs": [ {
+      "utf8": "tuned it off of all your past successful customers,\nlike here's what clicks matter next."
+    } ]
+  }, {
+    "tStartMs": 2995130,
+    "dDurationMs": 3070,
+    "segs": [ {
+      "utf8": "Then you know, given all that, you could probably\nhave something really cool there."
+    } ]
+  }, {
+    "tStartMs": 2998200,
+    "dDurationMs": 5440,
+    "segs": [ {
+      "utf8": "Greg: All right, so if someone's listening\nand wants to do this, you gotta cut in jasper.ai"
+    } ]
+  }, {
+    "tStartMs": 3003640,
+    "dDurationMs": 3510,
+    "segs": [ {
+      "utf8": "and late checkout. We're interested"
+    } ]
+  }, {
+    "tStartMs": 3007150,
+    "dDurationMs": 3500,
+    "segs": [ {
+      "utf8": "Dave: Yes, totally."
+    } ]
+  }, {
+    "tStartMs": 3010650,
+    "dDurationMs": 9130,
+    "segs": [ {
+      "utf8": "Greg: what's something that the vast majority\nof people misunderstand about the world of"
+    } ]
+  }, {
+    "tStartMs": 3019780,
+    "dDurationMs": 5010,
+    "segs": [ {
+      "utf8": "ai? What's something that you wish that people\nreally understood"
+    } ]
+  }, {
+    "tStartMs": 3024790,
+    "dDurationMs": 17600,
+    "segs": [ {
+      "utf8": "Dave: I see people looking for like they've\ngot a hammer and they're just looking to they're"
+    } ]
+  }, {
+    "tStartMs": 3042390,
+    "dDurationMs": 5590,
+    "segs": [ {
+      "utf8": "looking for nails and they're trying to fit\nthis onto everything else, and they're not"
+    } ]
+  }, {
+    "tStartMs": 3047980,
+    "dDurationMs": 1000,
+    "segs": [ {
+      "utf8": "doing the hard work."
+    } ]
+  }, {
+    "tStartMs": 3048980,
+    "dDurationMs": 6329,
+    "segs": [ {
+      "utf8": "Like you're still building a business. Businesses\nhave always been, when you find a group of"
+    } ]
+  }, {
+    "tStartMs": 3055309,
+    "dDurationMs": 5651,
+    "segs": [ {
+      "utf8": "customers, That have a need and you can solve\nthat need and ideally solve it for, a fair"
+    } ]
+  }, {
+    "tStartMs": 3060960,
+    "dDurationMs": 3609,
+    "segs": [ {
+      "utf8": "exchange of value that everyone's happy with.\nAnd you can do that repeatably and there's"
+    } ]
+  }, {
+    "tStartMs": 3064569,
+    "dDurationMs": 4510,
+    "segs": [ {
+      "utf8": "more of those people than like you can grow\na business like that is still true today."
+    } ]
+  }, {
+    "tStartMs": 3069079,
+    "dDurationMs": 4361,
+    "segs": [ {
+      "utf8": "And I think people think that for some reason\nthat has changed and that AI is just something"
+    } ]
+  }, {
+    "tStartMs": 3073440,
+    "dDurationMs": 3770,
+    "segs": [ {
+      "utf8": "you can just jam anywhere in the world and\nkinda creates some business and there's just"
+    } ]
+  }, {
+    "tStartMs": 3077210,
+    "dDurationMs": 6109,
+    "segs": [ {
+      "utf8": "a lot of kind of copycats just, it's like\non Twitter, just copies of copies when again,"
+    } ]
+  }, {
+    "tStartMs": 3083319,
+    "dDurationMs": 3471,
+    "segs": [ {
+      "utf8": "I could probably go walk down."
+    } ]
+  }, {
+    "tStartMs": 3086790,
+    "dDurationMs": 4310,
+    "segs": [ {
+      "utf8": "downtown Austin and just start talking to\npeople and come up with five ideas that nobody"
+    } ]
+  }, {
+    "tStartMs": 3091100,
+    "dDurationMs": 4320,
+    "segs": [ {
+      "utf8": "on Twitter has ever thought of. There's no\nbusinesses there. And like some of those could"
+    } ]
+  }, {
+    "tStartMs": 3095420,
+    "dDurationMs": 5800,
+    "segs": [ {
+      "utf8": "be really great businesses. And I just think\nthis really cool technology, but it's not"
+    } ]
+  }, {
+    "tStartMs": 3101220,
+    "dDurationMs": 1879,
+    "segs": [ {
+      "utf8": "a business in and of itself."
+    } ]
+  }, {
+    "tStartMs": 3103099,
+    "dDurationMs": 5220,
+    "segs": [ {
+      "utf8": "It's just enhances and I think accelerates,\nbusiness building. But I still think there's"
+    } ]
+  }, {
+    "tStartMs": 3108319,
+    "dDurationMs": 2021,
+    "segs": [ {
+      "utf8": "so much value in just talking to users."
+    } ]
+  }, {
+    "tStartMs": 3110340,
+    "dDurationMs": 9070,
+    "segs": [ {
+      "utf8": "Greg: that's why I'm such a big believer in\nyou wanna build a product, start with a community,"
+    } ]
+  }, {
+    "tStartMs": 3119410,
+    "dDurationMs": 1370,
+    "segs": [ {
+      "utf8": "just build the community,"
+    } ]
+  }, {
+    "tStartMs": 3120780,
+    "dDurationMs": 4269,
+    "segs": [ {
+      "utf8": "Dave: Yeah. Like we had an audience, we had\na community. Like we'd been working in that"
+    } ]
+  }, {
+    "tStartMs": 3125049,
+    "dDurationMs": 8081,
+    "segs": [ {
+      "utf8": "audience for, seven years leading up to it.\nAnd so again I, I didn't, I just wa I, it"
+    } ]
+  }, {
+    "tStartMs": 3133130,
+    "dDurationMs": 3880,
+    "segs": [ {
+      "utf8": "was intuitive for me at that point, because\nI just had been living in it. But yeah, if"
+    } ]
+  }, {
+    "tStartMs": 3137010,
+    "dDurationMs": 3220,
+    "segs": [ {
+      "utf8": "you have a community first, I'm with you,\nman."
+    } ]
+  }, {
+    "tStartMs": 3140230,
+    "dDurationMs": 5569,
+    "segs": [ {
+      "utf8": "That is the easiest way to go and develop\na product and get tons of product ideas that"
+    } ]
+  }, {
+    "tStartMs": 3145799,
+    "dDurationMs": 7132,
+    "segs": [ {
+      "utf8": "would be unique to you, or at least much more\nunique than what you're gonna see. Looking"
+    } ]
+  }, {
+    "tStartMs": 3152931,
+    "dDurationMs": 2979,
+    "segs": [ {
+      "utf8": "at product top 10 and then being like, oh,\nI could do that too."
+    } ]
+  }, {
+    "tStartMs": 3155910,
+    "dDurationMs": 5689,
+    "segs": [ {
+      "utf8": "Greg: All right. I think that's a great place\nto end. Cause I think it's actionable. I think"
+    } ]
+  }, {
+    "tStartMs": 3161599,
+    "dDurationMs": 5321,
+    "segs": [ {
+      "utf8": "like anyone could go and create a free community,\nlike I created, you probably need a robot,"
+    } ]
+  }, {
+    "tStartMs": 3166920,
+    "dDurationMs": 8960,
+    "segs": [ {
+      "utf8": "under a month ago. And like I said, 20, 25,000\npeople. It's just like spreading like wildfire."
+    } ]
+  }, {
+    "tStartMs": 3175880,
+    "dDurationMs": 8239,
+    "segs": [ {
+      "utf8": "And now I ha I know that, 20 products I want\nto go build for it, right? So you know, if"
+    } ]
+  }, {
+    "tStartMs": 3184119,
+    "dDurationMs": 5551,
+    "segs": [ {
+      "utf8": "you wanna learn. One of the, one of the great\nthings to do is just build a free community,"
+    } ]
+  }, {
+    "tStartMs": 3189670,
+    "dDurationMs": 10100,
+    "segs": [ {
+      "utf8": "get people in there but don't just build like\nan AI community. Go fo do AI copywriters or,"
+    } ]
+  }, {
+    "tStartMs": 3199770,
+    "dDurationMs": 3440,
+    "segs": [ {
+      "utf8": "AI lawyers."
+    } ]
+  }, {
+    "tStartMs": 3203210,
+    "dDurationMs": 1490,
+    "segs": [ {
+      "utf8": "Be a bit more ne niche."
+    } ]
+  }, {
+    "tStartMs": 3204700,
+    "dDurationMs": 5810,
+    "segs": [ {
+      "utf8": "Dave: Yep. Get people that are like, have\na job to do. There's value in them outside"
+    } ]
+  }, {
+    "tStartMs": 3210510,
+    "dDurationMs": 5410,
+    "segs": [ {
+      "utf8": "of ai, like being connected to each other,\nbut, they're early adopters. They're at least"
+    } ]
+  }, {
+    "tStartMs": 3215920,
+    "dDurationMs": 10159,
+    "segs": [ {
+      "utf8": "open to trying new things here. But yeah,\nif any industry has 10 AI products coming"
+    } ]
+  }, {
+    "tStartMs": 3226079,
+    "dDurationMs": 4801,
+    "segs": [ {
+      "utf8": "for them that can be really delightful and\neasy to use and amazing and great businesses"
+    } ]
+  }, {
+    "tStartMs": 3230880,
+    "dDurationMs": 2150,
+    "segs": [ {
+      "utf8": "if people will just go and engage with them."
+    } ]
+  }, {
+    "tStartMs": 3233030,
+    "dDurationMs": 6819,
+    "segs": [ {
+      "utf8": "Greg: Dave, thanks for hopping on. if folks\nwanna follow you and Jasper, where do they."
+    } ]
+  }, {
+    "tStartMs": 3239849,
+    "dDurationMs": 7091,
+    "segs": [ {
+      "utf8": "Dave: All my all my hot tweets are on Twitter\nat Dave Rogenmoser and Jasper ai."
+    } ]
+  }, {
+    "tStartMs": 3246940,
+    "dDurationMs": 4050,
+    "segs": [ {
+      "utf8": "Greg: Cool man. Thanks for the time."
+    } ]
+  }, {
+    "tStartMs": 3250990,
+    "dDurationMs": 3530,
+    "segs": [ {
+      "utf8": "Dave: All right. Thanks so much, Greg. Thanks\nfor having me,"
+    } ]
+  }, {
+    "tStartMs": 3254520,
+    "dDurationMs": 860,
+    "segs": [ {
+      "utf8": "man."
+    } ]
+  } ]
+}

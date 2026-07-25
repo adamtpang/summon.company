@@ -61,6 +61,13 @@ class FakeRuntime {
   closeInputs: Array<{ handle: FakeRuntimeHandle; reason: string; discardPersistentState?: boolean }> = [];
   setConfigInputs: Array<{ handle: FakeRuntimeHandle; key: string; value: string }> = [];
   ensureCount = 0;
+  // When set, getCapabilities advertises exactly these config-option keys so a
+  // test can reproduce a backend that does not support e.g. `effort`.
+  advertisedConfigOptionKeys: string[] | null = null;
+  // When set, setConfigOption throws ACP_BACKEND_UNSUPPORTED_CONTROL for these
+  // keys — modeling a real runtime that cannot introspect its advertised keys
+  // (advertisedConfigOptionKeys stays null) yet still hard-rejects at set time.
+  rejectConfigOptionKeys: string[] | null = null;
 
   constructor(
     readonly options: FakeRuntimeOptions,
@@ -117,7 +124,9 @@ class FakeRuntime {
   }
 
   getCapabilities() {
-    return { controls: [] };
+    return this.advertisedConfigOptionKeys
+      ? { controls: [], configOptionKeys: this.advertisedConfigOptionKeys }
+      : { controls: [] };
   }
 
   getStatus() {
@@ -125,6 +134,14 @@ class FakeRuntime {
   }
 
   async setConfigOption(input: { handle: FakeRuntimeHandle; key: string; value: string }) {
+    if (this.rejectConfigOptionKeys?.includes(input.key)) {
+      const supported = (this.advertisedConfigOptionKeys ?? ["agent", "mode", "model"]).join(", ");
+      const error = new Error(
+        `ACP session does not advertise config option '${input.key}'. Supported config options: ${supported}.`,
+      ) as Error & { code?: string };
+      error.code = "ACP_BACKEND_UNSUPPORTED_CONTROL";
+      throw error;
+    }
     this.setConfigInputs.push(input);
   }
 
@@ -419,6 +436,86 @@ describe("claude_local ACP lane", () => {
     const settings = JSON.parse(await fs.readFile(path.join(root, ".claude", "settings.local.json"), "utf8"));
     expect(settings.permissions.defaultMode).toBe("default");
     expect(settings.permissions.allow).toEqual(expect.arrayContaining(["Bash(curl:*)", "Bash(env)"]));
+  });
+
+  it("skips an unadvertised effort config option instead of failing the run", async () => {
+    const root = await makeTempRoot("paperclip-claude-acp-effort-skip-");
+    const runtimes: FakeRuntime[] = [];
+    const logs: Array<{ stream: string; text: string }> = [];
+    const execute = createClaudeAcpExecutor({
+      createRuntime: (options: FakeRuntimeOptions) => {
+        const runtime = new FakeRuntime(options);
+        // Real claude-agent-acp sessions advertise agent/mode/model but not
+        // `effort`; setting effort would throw ACP_BACKEND_UNSUPPORTED_CONTROL.
+        runtime.advertisedConfigOptionKeys = ["agent", "mode", "model"];
+        runtimes.push(runtime);
+        return runtime as never;
+      },
+    });
+
+    const result = await execute(buildContext(root, {
+      config: {
+        engine: "acp",
+        cwd: root,
+        stateDir: path.join(root, "state"),
+        model: "claude-opus-4-7",
+        effort: "high",
+        promptTemplate: "Do the assigned work.",
+      },
+      onLog: async (stream: string, text: string) => {
+        logs.push({ stream, text });
+      },
+    }));
+
+    expect(result.exitCode).toBe(0);
+    // effort must be dropped (not sent) since the session does not advertise it.
+    expect(runtimes[0]?.setConfigInputs.map((input) => input.key)).not.toContain("effort");
+    const logText = logs.map((entry) => entry.text).join("");
+    expect(logText).toContain("Skipped ACPX claude config effort=high");
+    expect(logText).toContain("session advertises only: agent, mode, model");
+  });
+
+  it("survives a backend that rejects effort at set time without advertising its config keys", async () => {
+    // Production failure (run f2907b04): the live claude-agent-acp runtime
+    // returned getCapabilities() WITHOUT configOptionKeys, so the advertised
+    // pre-filter saw nothing to skip and attempted set_config_option('effort'),
+    // which the backend hard-rejected with ACP_BACKEND_UNSUPPORTED_CONTROL —
+    // aborting the whole heartbeat as acpx_session_config_failed. The run must
+    // now continue at the backend default effort instead of dying.
+    const root = await makeTempRoot("paperclip-claude-acp-effort-reject-");
+    const runtimes: FakeRuntime[] = [];
+    const logs: Array<{ stream: string; text: string }> = [];
+    const execute = createClaudeAcpExecutor({
+      createRuntime: (options: FakeRuntimeOptions) => {
+        const runtime = new FakeRuntime(options);
+        // No configOptionKeys advertised (introspection blind), yet the backend
+        // still rejects `effort` when we try to set it.
+        runtime.advertisedConfigOptionKeys = null;
+        runtime.rejectConfigOptionKeys = ["effort"];
+        runtimes.push(runtime);
+        return runtime as never;
+      },
+    });
+
+    const result = await execute(buildContext(root, {
+      config: {
+        engine: "acp",
+        cwd: root,
+        stateDir: path.join(root, "state"),
+        model: "claude-opus-4-7",
+        effort: "high",
+        promptTemplate: "Do the assigned work.",
+      },
+      onLog: async (stream: string, text: string) => {
+        logs.push({ stream, text });
+      },
+    }));
+
+    expect(result.exitCode).toBe(0);
+    const logText = logs.map((entry) => entry.text).join("");
+    expect(logText).toContain("Skipped ACPX claude config effort=high");
+    // The rejected effort option must not be recorded as successfully applied.
+    expect(runtimes[0]?.setConfigInputs.map((input) => input.key)).not.toContain("effort");
   });
 
   it("resumes compatible ACP sessions on later Claude ACP runs", async () => {

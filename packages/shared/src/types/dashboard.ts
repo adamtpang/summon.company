@@ -24,6 +24,38 @@ export interface DashboardRunActivityDay {
   failedByErrorCode: Record<string, number>;
 }
 
+/**
+ * Per-company "Outcomes (30d)" rollup — sourced ONLY from persisted receipts on
+ * tasks with `completedAt` within the last 30 days. @see
+ * doc/finance/OUTCOME-RECEIPTS.md §3 (Vitals CFO, SUM-143 / SUM-158).
+ *
+ * GUARDRAIL: the four levers stay in separate fields. `timeValueCents` is the
+ * dollar-ized value of `timeSavedMinutes` at the documented $60/h rate and is a
+ * parenthetical ONLY — it is NEVER added into `moneySavedCents`.
+ */
+export interface DashboardOutcomes {
+  /**
+   * Count of qualifying receipts that back the numeric totals (confidence
+   * measured|estimated). This is the `k` in "from k receipts".
+   */
+  receiptCount: number;
+  /**
+   * Count of completed tasks whose receipt is `unmeasurable` — the honest
+   * denominator (`u`). Showing it is what makes the measured total trustworthy.
+   */
+  unmeasurableCount: number;
+  /** Σ moneySavedCents over qualifying (non-unmeasurable) receipts. */
+  moneySavedCents: number;
+  /** Σ timeSavedMinutes over qualifying receipts. */
+  timeSavedMinutes: number;
+  /** `timeSavedMinutes` valued at $60/h — parenthetical only, never in money. */
+  timeValueCents: number;
+  /** Σ revenueMovedCents over qualifying receipts. */
+  revenueMovedCents: number;
+  /** Count of receipts with a non-null `riskAvoided` lever. */
+  risksAvoided: number;
+}
+
 export interface DashboardSummary {
   companyId: string;
   agents: {
@@ -51,4 +83,5 @@ export interface DashboardSummary {
     pausedProjects: number;
   };
   runActivity: DashboardRunActivityDay[];
+  outcomes: DashboardOutcomes;
 }

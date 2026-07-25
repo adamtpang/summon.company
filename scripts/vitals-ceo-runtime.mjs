@@ -102,7 +102,9 @@ async function main() {
       effort: "high",
       dangerouslySkipPermissions: true,
     };
-    cheapAdapterConfig = { model: "claude-sonnet-4-6", effort: "low" };
+    // SUM-220: cheap profile must be a claude model on the claude adapter, never
+    // gpt-5.5. Haiku is the cheap lane for claude_local.
+    cheapAdapterConfig = { model: "claude-haiku-4-5", effort: "low" };
   } else if (command === "codex") {
     if (!force && String(agent.errorReason ?? "").includes("usage limit")) {
       throw new Error("Codex is still circuit-broken by its recorded usage limit. Retry after reset or pass --force after verifying access.");

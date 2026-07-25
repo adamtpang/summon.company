@@ -12,6 +12,7 @@ import {
   geminiVersionSupportsNativeAcpFlag,
   parseGeminiVersionParts,
   rewriteGeminiAcpFlagForVersion,
+  sessionConfigOptions,
   summarizeAcpxTurnUsage,
 } from "./execute.js";
 import { runChildProcess } from "../server-utils.js";
@@ -1184,6 +1185,39 @@ describe("findAncestorBin", () => {
   it("terminates at the filesystem root instead of looping forever", async () => {
     const resolved = await findAncestorBin("/", "definitely-not-a-real-bin-name-xyz");
     expect(resolved).toBeNull();
+  });
+});
+
+describe("sessionConfigOptions adapter gating", () => {
+  function prepared(overrides: Record<string, unknown>) {
+    return {
+      acpxAgent: "claude",
+      requestedModel: "",
+      requestedThinkingEffort: "",
+      fastMode: false,
+      ...overrides,
+    } as unknown as Parameters<typeof sessionConfigOptions>[0];
+  }
+
+  it("never emits `effort` for the claude agent (ACP server advertises only agent/mode/model)", () => {
+    const options = sessionConfigOptions(prepared({ acpxAgent: "claude", requestedThinkingEffort: "low" }));
+    expect(options.find((option) => option.key === "effort")).toBeUndefined();
+    expect(options.some((option) => option.key === "reasoning_effort")).toBe(false);
+  });
+
+  it("emits `reasoning_effort` for codex", () => {
+    const options = sessionConfigOptions(prepared({ acpxAgent: "codex", requestedThinkingEffort: "high" }));
+    expect(options).toContainEqual({ key: "reasoning_effort", value: "high" });
+  });
+
+  it("emits `effort` for a non-claude, non-codex adapter that requests it", () => {
+    const options = sessionConfigOptions(prepared({ acpxAgent: "gemini", requestedThinkingEffort: "medium" }));
+    expect(options).toContainEqual({ key: "effort", value: "medium" });
+  });
+
+  it("still skips set_config_option model for the claude agent (pre-set via env)", () => {
+    const options = sessionConfigOptions(prepared({ acpxAgent: "claude", requestedModel: "claude-haiku-4-5" }));
+    expect(options.some((option) => option.key === "model")).toBe(false);
   });
 });
 

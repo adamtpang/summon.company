@@ -892,6 +892,7 @@ export type {
   AgentWakeupRequest,
   InstanceSchedulerHeartbeatAgent,
   LiveEvent,
+  DashboardOutcomes,
   DashboardRunActivityDay,
   DashboardSummary,
   TimelineActorType,
@@ -1070,6 +1071,26 @@ export {
   parseIssueReferenceHref,
   type IssueReferenceMatch,
 } from "./issue-references.js";
+
+export {
+  extractFencedBlock,
+  extractOutcomeBlock,
+  parseOutcomeCore,
+  parseOutcomeReceipt,
+  outcomeTimeValueCents,
+  type OutcomeCore,
+  type OutcomeReceipt,
+  type OutcomeReceiptParseResult,
+} from "./outcome-receipt.js";
+
+export {
+  parseOutcomeForecast,
+  formatForecastLine,
+  summarizeForecastLevers,
+  humanizeDurationMinutes,
+  type OutcomeForecast,
+  type OutcomeForecastParseResult,
+} from "./outcome-forecast.js";
 
 export {
   anchorSnapshotToSelector,
@@ -1830,6 +1851,21 @@ export {
   type QuotaAlert,
   type QuotaAlertLevel,
 } from "./quota-alerts.js";
+
+export {
+  CADENCE_HOT_INTERVAL_SEC,
+  CADENCE_RECENT_INTERVAL_SEC,
+  CADENCE_RECENT_MAX_AGE_DAYS,
+  CADENCE_STALE_INTERVAL_SEC,
+  cadenceIntervalSec,
+  cadenceLabel,
+  parseCadenceTier,
+  resolveWorkItemCadence,
+  type AttentionCadence,
+  type AttentionCadenceSource,
+  type AttentionCadenceTier,
+  type WorkItemCadenceInput,
+} from "./attention-cadence.js";
 
 export {
   FAILOVER_TRIGGERS,

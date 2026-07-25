@@ -1,0 +1,2401 @@
+{
+  "wireMagic": "pb3",
+  "pens": [ {
+  
+  } ],
+  "wsWinStyles": [ {
+  
+  } ],
+  "wpWinPositions": [ {
+  
+  } ],
+  "events": [ {
+    "tStartMs": 320,
+    "dDurationMs": 5760,
+    "segs": [ {
+      "utf8": "Rowan Chung is the genius behind The Rundown.  Now, The Rundown AI is a media company for AI   that's generating millions of dollars a year.  Now, I thought that The Rundown had 50, 100,   150 employees. No, it's a lot less than that.  He just uses AI agents to actually scale the   business. In this episode, he unveils it all,  and I think it's for the first time ever. How   he created an AI avatar that gets millions of  views. How he writes tweets with AI that gets   millions of views. How he writes a newsletter with  AI that gets millions of views. How he created an   EA AI agent that answers leads within seconds.  How he's able to learn anything from a YouTube   vid with AI. How he onboards employees with  GPTs. How he built a partnership AI agent that   works directly with his team. We give away all the  prompts, all the tools, all the workflows, all in   this episode. I hope it gets your creative juices  flowing. Stick to the end. Give us a , comment,   and I'll see you at the end of the episode.  Long time coming. Rowan Chung on the pod from   the rundown. My go-to guy when I need something  explained in AI. Thanks for coming on. Rowan,   by the end of this episode, what are people going  to learn? Yeah, thanks for having me. I love the   show. I love your content. So it's great to  be here. By the end of the show, I'm going   to share seven ways we use AI internally at the  rundown. They're going to be business operation   and content creation focused. We use AI many ways,  but these are solid ones that people can walk away   with. We're going to share some free templates  that people can steal. and I think we're going   to riff on just some general AI overview for the  future. So when you say operations and systems,   what I think you're probably talking about is how  do you take a team that's maybe one, two, three,   four people and make it seem it's 20, 30, 40, 50  people? Is that right? That's exactly right. So we   have a team about 15. I think we operate as a 50  person team in terms of speed. But in some cases,   we might actually operate faster because the  headache of having 50 people is really burdensome.   But yeah, we just use AI in so many different ways  that, you know, we operate extremely fast and we   can get a lot of work done. Okay, cool. Well, I'm  here to learn just as much as everyone else. I   think a lot of people who listen to that, they've  seen other tutorials or videos and they're , yeah,   right. There's no way that AI can make a team  of five turn into 50. But if there's anyone who   could prove it, it's you. So let's get right into  it. Yeah, let's get into it, man. So we can start   with this first one. I think this is probably the  most popular one. It went pretty viral on Twitter,   even though, I mean, this is Instagram. But  basically, the problem we were solving was I have   no time as a founder of the rundown. We're growing  our newsletter, we're growing our ed tech side,   and I also do content on the site as well. And  I'm a writer first. I'm not great in front of   the camera. I'm getting better, trying to get  better. But we realized we're creating all this   content in the newsletter and we have all these  stories and it's so in demand right now with AI   content. And we needed a way to push that writing  into some short form video. At the time I didn't   have a setup, I had nothing. So it was , okay, I  don't have any time to do this. I'm not gonna do   my hair and get in front of the camera. and record  this five minute video, do six different takes.   It just wasn't going to happen. So we're , okay,  what if we run an experiment and we clone my face,   we clone my voice, and we just have an editor who  takes my original writing and pushes that into   CloudScript so we can formulate that better for  short form and then run that through the avatar.   Then obviously it takes a lot of manual editing  to make the pieces right. We've got to do a lot   of storytelling. There's a lot of B-roll that  we have to add. But we said, hey, can we do   this? This is going to be an experiment. We're  very open about it. So on Twitter, we're , hey,   we're running this experiment. We're not trying to  fool anyone. This is an avatar. But if anyone were   to try this, we're going to try this. And if it  works, it's a cool use case because I don't have   any time to create content on short form anyway.  So yeah, we started doing it. And it's been under   a year. And we've grown to over 150,000 followers.  so it's i'd say it's been a success yeah you can   go through any of these some of the recent ones  we've been experimenting with myself narrating   it as well just because i now have a studio as  you can see but i didn't have a studio before   so we just use that avatar and it's way better  than me anyways so you kind of go through these   we had a few really viral ones sam altman the  co-founder of open ai just said that it is the   era of the idea guy and he is not wrong. I  think that right now is an incredible time   to be building a startup. And if you listen to  this podcast, chances are you think so too. Now,   I think that you can look at trends to basically  figure out what are the startup ideas you should   be building. So that's exactly why I built idea  browser.com. Every single day, you're going to   get a free startup idea in your inbox and it's all  backed by high quality data trends. How we do it,   people always ask. We use AI agents to go and  search what are people looking for and what   are they screaming for in terms of products that  you should be building. And then we hand it on a   silver platter for you to go check out. We do have  a few paid plans that take it to the next level,   give you more ideas, give you more AI agents and  more, almost a chat GPT for ideas with it. But   you can start for free, ideabrowser.com. And if  you're listening to this, I highly recommend it.   So 120,000 likes. I actually saw this one. Yeah.  This is talking about Anguilla and the .ai domains   being the number one revenue source for them. Is  that what this is? Yeah, and you can see , if we   reload this, the avatar is only really shown for  the first three, four seconds. because the avatar   portion of it isn't that great. But if you just  show three, four seconds, it looks more real.   The audio, on the other hand, audio is there.  voice AI is really advanced. I'd say video is   lagging behind a little bit. So the voice is also  AI generated, but I'd say the voice is, sometimes   it's better than me even. I mispronounce things  all the time. But yeah, that's basically the way   we do it. And I have an incredible editor who does  all the storytelling. He pushes it all together.   He's taking these stories from things I've written  in the past. And yeah, it's a cool workflow that   works really well for us. I can't say it's going  to work well for everyone. It does take a lot of   work. And you do need a really talented editor to  be able to do this. But for those edge cases where   you have no time as a founder and you really need  to create content, short form content, and you're   already writing, it's just kind of a no-brainer,  right? So yeah, that's the first one. Yeah,   I think the mistake a lot of people make here,  well, there's a few mistakes. One is they don't   pick stories that are going to go viral within  short form, right? So they make the mistake of   just picking boring content and wrapping it. you  know you can have the most boring content but if   it even if it's wrapped in the most beautiful  short form as you know it's not going to go   anywhere yeah exactly and the other thing is a lot  of people think this work they see this workflow   and they think it's one click to generate we do a  lot of work my editor even says sometimes it would   be faster if I just came in and I just quickly  narrated it but I don't even have that 10 minutes   of time and that break in the workflow every  single day takes a lot of mental capacity. So   it really works for us. But I think a lot of  people get that wrong where they're , hey,   we're going to one click generate this and it's  going to be awesome. And they don't spend time   training the avatar and HeyGen. I'd even mention  the tools we use. So we use HeyGen for the avatar   and we use 11 Labs for the voice. HeyGen has 11  Labs integration, but you actually want to do   it separately because if you do it on 11 labs,  you get higher quality and you just stitch it   together. So those are the main two AI tools we  use for this workflow. And yeah, I said, it takes   a lot of editing between, but it is really useful  for people who do get it right and get those   stories right, you said. Yeah. And you can also,  I mean, you can use tools , you know, Gumloop and   Lindy and stuff that to actually pull in stories  that are getting traction on places Reddit. And   then so it's easier to kind of pick the stories. I  know you're actually creating the stories but most   people listening to this probably aren't writing  how many thousands of words you write a day yeah   that's a that's a good workflow and the other  thing is just being active on x actually things   break break out first and i'm me and you are both  probably there 24 7 so we are really on the pulse   but yeah if you're not on the pulse of things  having something a gum loop integration where   it's even pinging you on Slack for the top stories  that are breaking out right now. That would be   really useful. Yeah. Cool. Before we move on  to the, to the next thing you want to show,   why shouldn't someone, you know, people listening  to this, you know, are starting companies, they're   starting businesses, they're starting cash flowing  businesses. Why shouldn't they do this? Well,   I think I actually got asked this by a public  company. he asked me how to do this and I went   to his office and I explained the whole thing and  he's really interested and in his case I actually   think it was somewhat useful because he's actually  from Switzerland and in Switzerland there's four   different languages and he had to record these  videos in four different languages every single   day and it's it takes up hours of his day so  for him it kind of is useful but for the regular   everyday CEO there is some element to it where  there is AI hate right If using an AI avatar for   creating your videos people are going to think  oh it not as authentic For me, it really worked   because we're very open about it. And I'm , kind  of the AI guy. So people accept it. They're , oh,   this is really cool. He's actually practicing what  he's preaching. But for a public, publicly traded   company, CEO, probably shouldn't do this. should  probably be as authentic as possible and strive   for the human element and really push for that  human experience because as we get into the age of   AI generated content and there's just seas of AI  generated content, you want to push for that human   layer because that's really your moat. But for us,  again, it works for our specific case and there's   some cases that it will work. But yeah, you said,  there's definitely some areas we don't want to use   this. I mean, I think what's so smart, and I just  took some notes on this, I think so smart about   your approach is the video avatar piece is 2% of  the video. You know, and you're just using B-roll.   So I think even if you are a public company CEO,  if you're me or you, by the way, people think it's   funny because we're on video a lot, but people  don't realize we actually don't video. we're   actually , I'm afraid of the camera, you know?  I've tried to do short form and I tried to deadpan   into the camera and I'm not good at it. And I  don't, I just honestly don't, I don't feel good   after. That's the best way to describe it. I don't  feel good after. I'm not good with the camera. So   I think there's a lot of people us who know that  there's so much value in short form, who know that   if we actually just looked in the camera and spoke  these stories that we know, we would actually   crush it. And that if you climb Cringe Mountain,  you could get to 151,000 followers and just pick   up millions of views that can absolutely change  the trajectory of your life. That being said,   we don't want to do it. So I think that for anyone  who's listening to this, this is an interesting   approach, at least to try as an experiment for  30 days and then see how you feel about it yeah   and another case on the pros side of things is  faceless channels go viral all the time and they   generate millions of dollars for people right or  even you see these animated characters on youtube   that it's this trend now as well and you can  build a following in a community through animated   content why can't you do it through an avatar and  is this going to be more popular as time goes on.   Right now, you've got to stitch things together.  It will get a lot easier, and that means more   people will do it. So we'll see what the world  really thinks about it as things get more popular.   But for now, it's definitely a huge arbitrage  opportunity. And we grew the account to $150,000,   and it's working for us. Well, thanks for  sharing that sauce. What else you got? Yeah,   the next one, I mean, this is a pretty simple one.  I'm sure you do this all the time as a writer, but   it's just voice-dictated writing, and you push it  into a cloud workflow. So there's no magic secret   other than this prompt. So, I mean, we can drop  this in the description, but it's basically just a   prompt to train on your writing style, right? So I  grabbed all of my top-performing tweets on X ever,   right? i have 10 to 20 of them i dropped this  prompt into claude and you basically just push   all of your best writing and it's going to be  trained on your tweets and then i'm this is a   pretty popular workflow but just i going on  walks and talking on my phone i have my best   ideas while i'm walking so i just walk and i just  have whisper flow open and i just jam on different   things and then I have a bunch of different notes  and then when I come home I just push into this   chat that's trained on my writing and then you  just get really really good tweets so for this   this example they're pretty optimized tweets you  still have to go in and edit it a little bit you   want to get this so once I get this I'm gonna push  it into Twitter for example and I'm going to add a   couple lines that are more give more insight right  the insight part AI sucks at giving human insight   and experience comparing certain things to other  models for example and just tweaking up little   things that just don't seem right Claude likes to  exaggerate a lot I say words game changer but this   is a really really good starting point where it  takes you from walking to literally tweet is 90%   ready. And what I do is every single Sunday, I  just go on this really long walk, and I just jam   on my phone, and I have a bunch of different  voice notes, and I just push it into here,   and I'll have all my tweets ready by the end of  Sunday, and I'll queue them all up. And then,   yeah, it's a really good workflow that works for  me when you want to push out a lot of content. But   yeah, do you use something similar? Well, I have  a question on your walk piece. So do you just go   on a walk and ideas hit you? Or do you have, , I  know I'm speaking about myself. I have an Apple   notes called ideas. And in my Apple notes, I  have these kind of half-bake ideas that then   I'll use whisper flow to actually dictate it in.  But I'm just curious, do you start from nothing   or do you start from something? I usually start  from nothing. The ideas really come to me when   I'm walking. I might have some broader things that  I'm just thinking about. And I don't know, I think   I work so much that I don't have thoughts until  I start walking. My mind is almost numb because   I'm working so much. So once I start walking and  I'm not looking at slack, these ideas just come to   me. And I just start jamming from there. and yeah  it's a really good workflow for me to to just have   tweets 90 ready when i come home and start queuing  them up obviously i'll add an image or some kind   of video because video content does really well on  twitter but yeah this is a pretty simple one that   i think would be useful to a lot of people who  are trying to create linkedin content or twitter   content on my last question on this workflow is  you mentioned this is really good at getting you   know, zero to 90%. But the last 10% is everything.  So what are, you know, what are the prompts? You   kind of mentioned a little bit of this, but what  are the prompts that helped you get it from 90 to   100? Or is it just you? A lot of it is me, but  you can go back and forth a little bit. On the   next example I'm going to share, it's a very,  it's basically the same thing, but I use it for   my newsletter. I'll share how we go back and forth  and use it as an editor. But yeah, a lot of it is   you take the tweet, you add in your insights, you  refine it, and then you ask again, you're , hey,   how is this? What do you think? Make it better.  And then it's going to give you some suggestions.   And again, you don't use them all. But the one  suggestion that it might suggest that you didn't   think about could be the reason why that post  goes viral, right? So it's just you have to   develop this intuition of knowing when it's a good  suggestion versus when it's not a good suggestion.   It just comes with reps. But yeah, Claude is  amazing as an editor. And do you ever have,   is this Claude Max? That's actually a long story.  So I actually can't get Claude Max because I'm,   my account was upgraded by Anthropic and it was a  whole thing. We're just trying to figure it out.   but yeah this is just regular pro pro account so  and and you never have the issue of i know we're   getting to the nitty-gritty but i actually think  people want to know the nitty-gritty you never get   to the issue of the chat is too long therefore  yeah yeah that's i mean this is a huge issue   that everyone always has problems with i'll get to  the so this is the next example i'm going to share   it's basically this exact same prompt but we use  it this is a different use case. We use it as an   editor. And this is exactly what you're saying. So  you can see how long this chat is. This is insane.   And it's really when we write our newsletter, we  write it all by hand, but we to use Claude as an   editor-in-chief. And if you're going back and  forth with it, you're asking for suggestions.   You're saying, oh, how is this? What do you think?  Can we make this better? It's going to give you   some ways. And you say, oh, can we make this a  little bit shorter. Can we make this two words   shorter? Because that's a fit in our email format.  Right. And Claude's extremely good at this. But to   your point, when the chat gets too long, Claude's  just going to say, hey, this chat's too long. You   can't generate anymore. There's a pretty simple  hack. You literally just go to another chat   somewhere not too far off. You want to make sure  there's enough contact still because the chat claw   actually gets better as it goes but you want to  go to here for example you see i have two edits   and you literally just go in here and you can  exit that out and you can start from there wow   i didn't realize that yeah you can literally just  start start again just a tiny bit up and it just   keeps going so especially if you're using it as an  editor so for example we go to my newsletter here   and we grab a main main pair, obviously we already  published this but if we were editing this still   we would write this all by hand and we say  literally this is literally the prompt,   make it better it's super simple but you hit save  and it's just going to start from here all that   bottom part gets erased and you're gonna be able  to continue the chat. So do you have to look for a   one on two situation Is that what you have to look  for Or could it be No no it can be anywhere I was   showing that example because it kind of proof that  I genuinely do this. now it says three, right? But   if you go further up, you'll see some where it's  10 or 12. Because I just stay on this chat. I've   trained it. It works well. You don't want to  retrain every time. It's kind of annoying. But   yeah, this is basically the workflow. it's going  to give you some refined, a refined version. And   you're not going to copy and paste this. That's  the worst thing you can do. But you're going to   read this and you're going to have, you know, your  article open on the other page. You're going to   compare it and you say, oh, that's a better way  of actually explaining that bullet point. Let's   grab that and, you know, refine this word. Right.  And it's really it. It actually takes more time to   edit with as a co-editor. but your content gets so  good because it's trained on your best writing and   you're just going to find these small details that  you wouldn't have otherwise seen. even if you hire   someone, it's it takes so much time for them to go  through it all. And this you're really in control.   So you have an editor in chief that you're in  control of. And yeah, it's just been a game   changer for us writing content newsletter, but  also just writing content on LinkedIn, Twitter.   It's a really good way of doing it. cool yeah so  the next one this is a more fun one but we use   lindy so i know you had flow on the pod he's great  i love flow but this is just a meeting schedule   agent so lindy actually provides a template for  this but i've modified it a little bit because I   wanted my workspace email. So I actually created  an agent and I called it Ava. , so Lindy has this,   they give this own template and they use their  email domain, but I basically switched it up and   I switched a lot of the AI prompts to basically,  , use my workspace domain. So basically what this   does is whenever I'm in a Gmail chat here, I can  actually to show you an example. Whenever I'm in   a Gmail chat, I can literally just CC in Ava. So  Ava at the rundown.ai. And then Ava will come in   and literally look at my Google calendar and find  available times. And we set that parameter of   where I actually want available time. Because you  don't want your full 40-hour work week available   for meetings. You want to have some deep work  blocks. So we scheduled exact times of where   I actually want to take calls and we'll actually  look through your calendar and request those exact   times and say, Hey, did you any of these windows  work for you? , the other person can respond,   say that time works, and then it will go ahead and  book and it'll actually book in your calendar. ,   and then this whole section here is basically  rescheduling. So let's say this person came back   in the thread and say, oh, actually, this time  didn't work. Let's reschedule for, I don't know,   the last time here. Then Ava will literally go in  and cancel the event and then reschedule another   meeting. And it's just a really nice way to, I  don't know, not send a Calendly link. So yeah,   it's a cool little use case. and you can actually  take it a step further. I don't have it in this   workflow. I have it in another one. But you can  take it a step further and actually enable this   across your whole team. So your entire team can  loop in that one email. So Ava at the rundown.ai   and Ava will be attached to their calendar and you  can just literally, Ava is the meeting scheduler.   It's the go-to meeting scheduler and you don't  need Calendly. And I know there's this weird   stigma around Calendly. I don't know how many  people who watch your podcast know about this.   I don't know why. I don't agree with it. But  if you send a Cali link, it's kind of known.   I don't know. It's kind of disrespectful almost.  So having an agent that books the meetings for you   is just a better way to work around that. And it's  useful for your whole team. So, yeah, it's a cool   little agent we built. Go back to your email. So  let me let me explain why I think that this is   such a game changer. So a lot of people listening  to this sell a service or a product, but a lot of   people listening to sell services. When you're in  the services game, time is of the essence. So if,   you know, who is this person? Nicole. So if Nicole  is a lead, basically, you want to get this time   booked as quick as possible. When I'm looking  at exactly, you know where I'm going with this.   When I'm looking at the timestamps, basically  you're responding instantaneously with the Lindy   AI agent. It's a minute. It's a minute. Yeah. One  minute. And even if you scroll down, I even think,   yeah, 642. Nicole goes, hi, Ava, Tuesday at 730,  works for me. 642 responds, right? Ava responds,   sounds great, I just sent the invite. So that, the  gap, if you would have, 6.42 p.m., your EA, your   human EA might be off, you know? Yeah, it works  for you 24-7. It works for you 24-7. So I think   that piece of it is so valuable. It definitely  is. I mean, and for you too, right? even for , you   know, you guys sell sponsorships, for example, and  maybe Microsoft, you know, CMO of Microsoft comes   in. Right. And you want that meeting, you know,  also might be someone interesting. So you want to   make sure that, you know, these busy people,  that time gets booked. Yeah. Yeah. You can   actually use this for partnerships. So we tried  this for some time. We turned it off recently,   but we tried this for some time where we have this  workflow where we have a form. We obviously have   big distribution. So a lot of our leads come  internally inbound. So a lot of these people   come inbound, they answer a form, we get all these  questions and we use those questions. We push into   Lindy and it basically validates them. And then  based on that, if they're validated, Lindy goes   ahead and sends a sponsorship email right away.  and then they can literally go back and forth. And   if they want to book a call, then they will call  with my human salespeople. It worked for a while,   but yeah, we're getting the use cases where  you, when you do get to Microsoft and Google,   I'm just a little, a little weary of using agents  right now because there are occasional times where   it could go wrong. and just that 1%, knowing  that it could go wrong 1% just worries me for   those really high-tier clients. But when you  have so much inbound, it's extremely useful.   But for this meeting schedule use case, it's  perfect. So we can drop this template as well.   I'm happy to share it in the YouTube comments  or something. Yeah, let's do it. But yeah,   anyone can just steal it. Literally, all you  have to do is connect your own email. Yep. so you   probably don't want to use Ava at the rundown.ai,  so you're going to want to change that. And then   here's where you basically add all the emails of  your team. So this is the one with only mine right   now, but you change your email, and then you want  to connect your Google Calendar. And then in here,   the only thing you really need to change  for these two send replies is, at the end,   it says Best Ava. So if you change the name of  it, you don't have to call it Ava, obviously,   But you can change the name of it. And yeah, you  can call it whatever you want. And also here,   sorry, one more. You want to make sure you change  when your meeting hours are, right? You don't   want to have the whole day. Otherwise, you know,  people are going to schedule random times. For me,   I only have three-hour blocks, four days a week.  So that's my meeting times. So yeah, that's   really it what you want to change. But yeah, we're  happy to drop that in the chat. Appreciate that.   All right. So the next one, this one's a kind of  research use case, and it's with Perplexity Comet.   So did you get access to Perplexity Comet? I did.  I did. Yeah, so it's pretty cool. My stickiest use   case is using it as an AI tutor for, , every  video. For example, this video itself, right?   If I don't want to sit through the whole thing,  and I just want to see Rowan's seven use cases,   tell me exactly how to do it. Perplexity can  get you that in two seconds. So it's incredible   use case for just summarizing these long videos.  And it's really sticky. I really this use case.   But it's also useful for just going deeper  on topics you don't understand. Right. So,   for example, I use ChatGPT a lot or ChatGP voice  when I'm reading. So I'll just have it open next   to me. And whenever there's a topic I don't really  understand, I'll just ask it, oh, hey, what does   this mean? And I'll go deeper with it before I  move on to the next page. And it really helps   retention. But perplexity comment is basically  that for every YouTube video or podcast that's   on YouTube. so you have this widget that's on the  side of your tab, , your comment tab. And you just   go into these mini rabbit hole sessions. You can  understand things way deeper than if you were just   watching the video. , so every video in essence  becomes an AI tutor. , so yeah, I think it's   pretty, pretty incredible. , I learned so much  better this. I never did well with school. , so   YouTube videos are always my jam and this is a  huge game. changer for me. I've been trying, I   honestly haven't, I've been playing with assistant  all day, every day, perplexity assistant,   but I've never tried it with YouTube videos. So  I'm definitely going to try it. I'm you also,   I learned from YouTube, , and not surprisingly.  And, , I also, I've got my Mount Rushmore of   people I really look up to and you know Darmesh  is awesome in this example right I would love to   learn about AI from Darmesh right And I could do  that with Assistant. Or even, , imagine someone   listening to this, right? , with the Lindy  AI example, it's , okay, this is, you know,   I have a question about, you know, what Rowan  said about Lindy templates. and then you can just   post it there and just have a full on conversation  with basically AI Rowan using perplexity comment.   Exactly. And the cool thing is the comment  assistant is grounded at the entire context   of the video. Yep. So you can really ask it  anything about the entire video and it's going to   be smarter than a regular perplexity would because  it actually has that context. So exactly you said,   me and you might not have time to respond to every  single comment of this YouTube video. but you can   ask Comet and Comet will probably have the answer  and might actually answer better than we could.   So yeah, it's, it's incredibly useful. I've been  using it as a tool. , so hopefully it's useful to   other people as well. I mean, doesn't DIA have  their version of, of an assistant as well? DIA,   the browser? Yeah, they have. , I have not used  it as much as I should have. , to be honest,   Comet came out right after and I'm , okay, let's  get on this. I heard Dia also does this, but I   don't know. I perplexity and it's just really  sticky. I don't really want to switch at this   point. It works. Right. Yeah. Let us know in the  comment section if people have used Dia and that   works or if you prefer comment. Yeah. I'd love to  know as well. Yeah. I'm just curious. Was there   one more you wanted to share or is that it? Yeah,  I got two more. Two quick ones. This one is a GPT   for new hire onboarding. So problem operating new  hires is extremely tedious when you're scaling   your business. Everything's growing really fast,  but you need new people to take over parts of your   business so you can scale higher. But teaching  them the ins and outs of your company, teaching   them the processes, teaches them how you use AI,  teaching them the tools that you use. There's so   many questions and it just slows everything down,  right? So we built this GPT that's trained on   SOPs, literally Loom transcripts, meeting  notes, our policies on AI usage, HR docs,   any admin related question. And it also knows  everyone on the team and their role. So basically,   the model then becomes don't ask questions you  haven't asked GPT first. Because the GPT literally   knows more about the company than I know. I don't  remember all of these policies even. So you can   literally ask it anything about our company.  You can ask it if we can take a vacation today,   and it'll answer it. And then if it doesn't know,  it will point you to the right person on the team   to ask. So then you go and ask your manager.  But yeah, it's a little little hack we use   to basically scale faster easier save time for  the managers and yeah it's pretty useful we can go   into the back end here so for anyone watching this  if you just want to grab this prompt it's a pretty   simple prompt but really it's just you're making  gpt into a custom onboarding assistant. And then   you just want to drop as much knowledge as, , as  you can. And you can always update this, which is   the cool thing. So as you get more team members,  as you, you know, create more HR policies,   that sort of stuff, you just drop it in and the  GPT just gets updated and it's really useful.   I need to do this. I need to do this. it's useful.  It's also one of those things where some people   are afraid to ask these questions, so they don't.  Yeah. So I think that for a lot of employees,   this will just be so helpful for them that they  can just any time of day, night, they don't have   to, you know, look, you know, when you're asking a  question, especially if you're first starting out,   You want to make a good impression. So I can  totally understand where people are coming from   there. Yeah, and really, this thing answers  questions immediately. You don't have to wait   for your manager to respond. And someone me, I  have so many other things I'm trying to remember   that I don't remember all of our policies. So if  someone asked me a question, I'm going to have to   go in and look in our drive and look through  the points and be , oh, no, sorry. You can't   take this day off, but you can take next week off.  but this assistant can answer that immediately. So   it's a pretty useful thing as you're scaling your  business. And then the last use case I want to   share, this is a little bit more a niche use case,  but it'll actually probably be useful for you as   well. But for anyone that has a ton of replies  to their business email inbox, so for example,   we have two main inboxes that we use this for,  our support inbox, and then our newsletter email   inboxes. So obviously, we get a ton of people who  just reply to our newsletters, and we get a ton of   out-of-office email responses, a ton of spam, but  there will be really good feedback in between some   of that junk, and that's gold, right? So we need  that, and we need to respond to that feedback,   because those are our winning readers or winning  customers, right? So this agent does three things.   One, it filters out the real genuine customer  support in the inbox. So it fills out all the   spam. And then two, it pings the right people on  my team in Slack if there's anything important.   So for example, if there's something sponsor  related, it will go ping our sponsor team.   If it's something education related, it will  go ping our education team. If it's something   deliverability or I don't know, someone tried  to have a subscribe, but they couldn't, then it   will ping me. So it's automatically pinging people  on the team. And then the last thing it does, it   actually auto draft replies in the email inbox. So  when we go in to respond to some of these people,   the responses are nearly there. It's the same  thing with the voice dictation workflow where   it will be 90% there. We still have to sometimes  add context, but it's quite good at saving a lot   of time. And this is the only way we found that we  don't miss any of those really important emails in   between all the spam and the out of office emails.  Yeah, it's, I have this issue. I actually have on   my YouTube, I have my email and I'll be honest, I  don't even really look at it. So I'm getting tons   of emails. For a long time, we didn't look at  it either because it's you're getting hundreds,   if not thousands a day. It's impossible, right?  But there is that really good feedback in the   middle. This just handles all of it. It just runs  one time per day as well. So it's not going to be   using up all your Zapier credits. It just runs  once per day. And then it's just going to ping   you in Slack if there's anything important. So  you know if there's anything important And we've   actually landed two sponsors through this. , it's  really weird that they don't go through our actual   sponsor form, but these are legit sponsors from, ,  big companies that went through our support inbox.   Right? There's really important messages that come  in there. So I'm happy to share this one as well.   It's pretty simple to set up. It's using Zapier  Agents. So it's their agent feature. and we use   actually their co-pilot. So we just literally just  drop this prompt in their co-pilot and it actually   builds this app out for you. you actually don't  have to do anything if you use this prompt. So we   can share this prompt in the chat if anyone  wants to use it. You just got to drop this   in the co-pilot. It'll automatically generate  all the connections and then you just have to   connect it to your Slack or email and all that  stuff. But it's ready. It will be set up in two   minutes if you have this prompt. Beautiful. This  is helpful. Yes, all of this stuff from today will   be in the show notes for people to access. And I  appreciate you sharing that, man. A lot of people   actually come on here and they're , no, I'm not  sharing that. But Rowan, you're the type of guy,   you know, you're a sauce factory. So that's why  I have you on here. And thank you for being so   generous with your time and everything. Of course,  man. And again, there's so many other ways we use   AI. I try to stick to the content creation and  unique business operation ones. But yeah, we use   it across coding. We have marketing workflows. We  have stuff we do for education as well. so yeah   happy to come on and jam anytime and jam with some  other stuff but hopefully this is a good starting   point yeah if you want Rowan to come back on we  got a scream to come back on so let us know in   the comment section I'm going to include places  where you can follow Rowan AI Rowan non AI Rowan   in the show notes X email newsletter Instagram  I'll include that is there anything else Rowan,   you want to share before we head out? No, that  sounds good. I'm mostly active on X. And yeah,   if you don't subscribe to the rundown and you  want to keep up with everything in AI, it's   the easiest place. So we'll put that in the notes  as well. But yeah, it's been great coming on and   I'm a huge fan of the show. So yeah, it's been  awesome. I want you to come back again, man. I   want you to come back again. I want the comment  section to be roaring so that you'll you'll know   that it's not just me, right? It's the people.  The people want you on. So I have a feeling   that they're going to this episode, and I'll see  you next time. Cool. Yeah, appreciate it. Later.\n"
+    } ]
+  }, {
+    "tStartMs": 6080,
+    "dDurationMs": 6320,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 12400,
+    "dDurationMs": 6800,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 19200,
+    "dDurationMs": 6400,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 25600,
+    "dDurationMs": 5840,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 31440,
+    "dDurationMs": 6080,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 37520,
+    "dDurationMs": 7680,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 45200,
+    "dDurationMs": 8080,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 53280,
+    "dDurationMs": 6880,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 60160,
+    "dDurationMs": 6080,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 66240,
+    "dDurationMs": 13520,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 79760,
+    "dDurationMs": 6320,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 86080,
+    "dDurationMs": 5040,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 91120,
+    "dDurationMs": 4640,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 95760,
+    "dDurationMs": 5920,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 101680,
+    "dDurationMs": 6960,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 108640,
+    "dDurationMs": 4720,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 113360,
+    "dDurationMs": 6960,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 120320,
+    "dDurationMs": 7680,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 128000,
+    "dDurationMs": 5440,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 133440,
+    "dDurationMs": 7360,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 140800,
+    "dDurationMs": 6640,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 147440,
+    "dDurationMs": 6560,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 154000,
+    "dDurationMs": 4480,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 158480,
+    "dDurationMs": 4320,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 162800,
+    "dDurationMs": 6400,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 169200,
+    "dDurationMs": 5680,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 174880,
+    "dDurationMs": 7600,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 182480,
+    "dDurationMs": 4960,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 187440,
+    "dDurationMs": 5600,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 193040,
+    "dDurationMs": 4720,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 197760,
+    "dDurationMs": 6080,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 203840,
+    "dDurationMs": 4960,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 208800,
+    "dDurationMs": 7440,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 216240,
+    "dDurationMs": 4880,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 221120,
+    "dDurationMs": 6880,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 229280,
+    "dDurationMs": 5120,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 234400,
+    "dDurationMs": 6880,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 241280,
+    "dDurationMs": 6960,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 248240,
+    "dDurationMs": 3520,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 251760,
+    "dDurationMs": 4720,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 256480,
+    "dDurationMs": 4080,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 260560,
+    "dDurationMs": 6320,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 266880,
+    "dDurationMs": 4320,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 271200,
+    "dDurationMs": 6000,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 277200,
+    "dDurationMs": 6960,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 284160,
+    "dDurationMs": 5760,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 289920,
+    "dDurationMs": 5360,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 295280,
+    "dDurationMs": 5520,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 300800,
+    "dDurationMs": 6960,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 307760,
+    "dDurationMs": 6000,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 313760,
+    "dDurationMs": 4800,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 318560,
+    "dDurationMs": 6320,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 324880,
+    "dDurationMs": 5280,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 330160,
+    "dDurationMs": 9120,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 339280,
+    "dDurationMs": 5440,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 344720,
+    "dDurationMs": 6080,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 350800,
+    "dDurationMs": 7520,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 358320,
+    "dDurationMs": 5920,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 364240,
+    "dDurationMs": 5920,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 370160,
+    "dDurationMs": 7200,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 377360,
+    "dDurationMs": 4720,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 382080,
+    "dDurationMs": 8000,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 390080,
+    "dDurationMs": 7040,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 397120,
+    "dDurationMs": 6480,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 403600,
+    "dDurationMs": 6560,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 410160,
+    "dDurationMs": 5040,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 415200,
+    "dDurationMs": 6320,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 421520,
+    "dDurationMs": 5680,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 427200,
+    "dDurationMs": 6160,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 433360,
+    "dDurationMs": 7280,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 440640,
+    "dDurationMs": 5840,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 446480,
+    "dDurationMs": 7520,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 454880,
+    "dDurationMs": 6720,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 461600,
+    "dDurationMs": 6480,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 468080,
+    "dDurationMs": 7040,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 475120,
+    "dDurationMs": 4400,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 479520,
+    "dDurationMs": 6720,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 486240,
+    "dDurationMs": 6880,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 493120,
+    "dDurationMs": 5520,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 498640,
+    "dDurationMs": 7600,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 506240,
+    "dDurationMs": 4240,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 510480,
+    "dDurationMs": 4400,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 514880,
+    "dDurationMs": 5520,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 520400,
+    "dDurationMs": 6240,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 526640,
+    "dDurationMs": 3840,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 530480,
+    "dDurationMs": 6560,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 537040,
+    "dDurationMs": 4640,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 541680,
+    "dDurationMs": 5840,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 547520,
+    "dDurationMs": 7600,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 555120,
+    "dDurationMs": 4320,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 559440,
+    "dDurationMs": 7920,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 567360,
+    "dDurationMs": 6560,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 573920,
+    "dDurationMs": 6800,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 580720,
+    "dDurationMs": 4720,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 585440,
+    "dDurationMs": 6640,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 592080,
+    "dDurationMs": 6320,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 598400,
+    "dDurationMs": 4800,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 603200,
+    "dDurationMs": 6320,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 609520,
+    "dDurationMs": 7520,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 617040,
+    "dDurationMs": 5840,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 622880,
+    "dDurationMs": 5680,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 628560,
+    "dDurationMs": 5920,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 634480,
+    "dDurationMs": 7360,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 641840,
+    "dDurationMs": 8320,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 650160,
+    "dDurationMs": 5200,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 655360,
+    "dDurationMs": 6160,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 661520,
+    "dDurationMs": 4720,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 666240,
+    "dDurationMs": 7280,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 673520,
+    "dDurationMs": 8160,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 681680,
+    "dDurationMs": 6400,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 688080,
+    "dDurationMs": 7040,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 695120,
+    "dDurationMs": 5840,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 700960,
+    "dDurationMs": 5920,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 706880,
+    "dDurationMs": 9040,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 715920,
+    "dDurationMs": 8560,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 724480,
+    "dDurationMs": 6160,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 730640,
+    "dDurationMs": 6080,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 736720,
+    "dDurationMs": 7120,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 743840,
+    "dDurationMs": 6000,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 749840,
+    "dDurationMs": 6240,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 756080,
+    "dDurationMs": 5760,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 761840,
+    "dDurationMs": 7600,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 769440,
+    "dDurationMs": 5200,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 774640,
+    "dDurationMs": 5600,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 780240,
+    "dDurationMs": 4720,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 784960,
+    "dDurationMs": 7040,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 792000,
+    "dDurationMs": 5920,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 797920,
+    "dDurationMs": 9200,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 807120,
+    "dDurationMs": 6240,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 813360,
+    "dDurationMs": 5360,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 818720,
+    "dDurationMs": 6960,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 825680,
+    "dDurationMs": 6720,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 833040,
+    "dDurationMs": 5440,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 838480,
+    "dDurationMs": 6720,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 845840,
+    "dDurationMs": 7920,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 853760,
+    "dDurationMs": 6480,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 860240,
+    "dDurationMs": 6640,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 866880,
+    "dDurationMs": 10720,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 877600,
+    "dDurationMs": 5600,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 883200,
+    "dDurationMs": 5600,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 888800,
+    "dDurationMs": 7280,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 896080,
+    "dDurationMs": 4960,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 901040,
+    "dDurationMs": 9920,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 910960,
+    "dDurationMs": 7280,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 918240,
+    "dDurationMs": 5520,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 923760,
+    "dDurationMs": 5920,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 929680,
+    "dDurationMs": 7360,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 937040,
+    "dDurationMs": 6800,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 943840,
+    "dDurationMs": 8400,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 952240,
+    "dDurationMs": 6560,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 958800,
+    "dDurationMs": 4400,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 963200,
+    "dDurationMs": 5760,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 969520,
+    "dDurationMs": 6320,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 975840,
+    "dDurationMs": 7200,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 983040,
+    "dDurationMs": 6240,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 989280,
+    "dDurationMs": 6320,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 995600,
+    "dDurationMs": 9440,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1005040,
+    "dDurationMs": 5440,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1010480,
+    "dDurationMs": 6880,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1017360,
+    "dDurationMs": 6080,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1023440,
+    "dDurationMs": 5760,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1029200,
+    "dDurationMs": 8240,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1037440,
+    "dDurationMs": 7200,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1044640,
+    "dDurationMs": 6960,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1051600,
+    "dDurationMs": 3680,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1055280,
+    "dDurationMs": 7120,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1062400,
+    "dDurationMs": 8000,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1070400,
+    "dDurationMs": 4160,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1074560,
+    "dDurationMs": 8000,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1082560,
+    "dDurationMs": 4480,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1087040,
+    "dDurationMs": 7280,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1094320,
+    "dDurationMs": 6080,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1100400,
+    "dDurationMs": 5520,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1105920,
+    "dDurationMs": 6480,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1112400,
+    "dDurationMs": 6160,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1118560,
+    "dDurationMs": 5600,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1124160,
+    "dDurationMs": 7760,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1131920,
+    "dDurationMs": 8640,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1140560,
+    "dDurationMs": 5040,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1145600,
+    "dDurationMs": 7600,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1153200,
+    "dDurationMs": 3680,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1156880,
+    "dDurationMs": 8160,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1165040,
+    "dDurationMs": 5440,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1170480,
+    "dDurationMs": 4560,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1175040,
+    "dDurationMs": 8560,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1183600,
+    "dDurationMs": 6880,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1190480,
+    "dDurationMs": 5280,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1195760,
+    "dDurationMs": 4800,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1200560,
+    "dDurationMs": 3760,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1204320,
+    "dDurationMs": 5920,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1210240,
+    "dDurationMs": 6480,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1216720,
+    "dDurationMs": 12240,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1228960,
+    "dDurationMs": 4720,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1233680,
+    "dDurationMs": 5600,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1239280,
+    "dDurationMs": 8400,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1247680,
+    "dDurationMs": 6880,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1254560,
+    "dDurationMs": 8240,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1265760,
+    "dDurationMs": 6480,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1272240,
+    "dDurationMs": 4320,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1276560,
+    "dDurationMs": 6080,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1282640,
+    "dDurationMs": 5920,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1288560,
+    "dDurationMs": 7280,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1295840,
+    "dDurationMs": 7200,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1303040,
+    "dDurationMs": 5680,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1308720,
+    "dDurationMs": 5360,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1314080,
+    "dDurationMs": 5680,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1319760,
+    "dDurationMs": 4480,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1324240,
+    "dDurationMs": 4640,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1328880,
+    "dDurationMs": 5120,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1334000,
+    "dDurationMs": 6960,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1340960,
+    "dDurationMs": 7840,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1348800,
+    "dDurationMs": 4560,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1353360,
+    "dDurationMs": 6000,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1359360,
+    "dDurationMs": 4400,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1363760,
+    "dDurationMs": 6240,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1370000,
+    "dDurationMs": 8560,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1378560,
+    "dDurationMs": 8000,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1386560,
+    "dDurationMs": 10720,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1397280,
+    "dDurationMs": 8640,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1405920,
+    "dDurationMs": 6160,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1412080,
+    "dDurationMs": 6880,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1418960,
+    "dDurationMs": 6240,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1425200,
+    "dDurationMs": 6800,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1432000,
+    "dDurationMs": 6800,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1438800,
+    "dDurationMs": 5760,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1444560,
+    "dDurationMs": 6880,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1451440,
+    "dDurationMs": 7120,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1458560,
+    "dDurationMs": 7200,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1465760,
+    "dDurationMs": 5920,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1471680,
+    "dDurationMs": 6560,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1478240,
+    "dDurationMs": 5920,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1484160,
+    "dDurationMs": 7840,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1492000,
+    "dDurationMs": 8800,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1500800,
+    "dDurationMs": 5920,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1506720,
+    "dDurationMs": 4000,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1510720,
+    "dDurationMs": 6240,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1516960,
+    "dDurationMs": 5120,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1522080,
+    "dDurationMs": 4080,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1526160,
+    "dDurationMs": 5120,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1531280,
+    "dDurationMs": 4640,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1535920,
+    "dDurationMs": 6720,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1542640,
+    "dDurationMs": 5520,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1548160,
+    "dDurationMs": 8400,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1556560,
+    "dDurationMs": 9760,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1566320,
+    "dDurationMs": 6960,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1573280,
+    "dDurationMs": 9200,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1582480,
+    "dDurationMs": 4320,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1586800,
+    "dDurationMs": 8160,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1594960,
+    "dDurationMs": 7920,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1602880,
+    "dDurationMs": 10000,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1612880,
+    "dDurationMs": 8080,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1620960,
+    "dDurationMs": 6480,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1627440,
+    "dDurationMs": 10800,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1638240,
+    "dDurationMs": 6640,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1644880,
+    "dDurationMs": 5280,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1650160,
+    "dDurationMs": 6560,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1656720,
+    "dDurationMs": 6560,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1663280,
+    "dDurationMs": 6080,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1669360,
+    "dDurationMs": 5040,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1674400,
+    "dDurationMs": 3920,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1678320,
+    "dDurationMs": 5520,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1683840,
+    "dDurationMs": 5440,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1689280,
+    "dDurationMs": 5760,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1695040,
+    "dDurationMs": 8400,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1704560,
+    "dDurationMs": 8400,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1712960,
+    "dDurationMs": 7360,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1720320,
+    "dDurationMs": 5040,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1725360,
+    "dDurationMs": 5600,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1730960,
+    "dDurationMs": 5280,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1736240,
+    "dDurationMs": 7680,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1743920,
+    "dDurationMs": 5120,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1749040,
+    "dDurationMs": 5040,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1754080,
+    "dDurationMs": 8160,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1762240,
+    "dDurationMs": 4320,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1766560,
+    "dDurationMs": 5120,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1771680,
+    "dDurationMs": 5600,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1777280,
+    "dDurationMs": 7280,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1784560,
+    "dDurationMs": 4880,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1789440,
+    "dDurationMs": 6880,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1796320,
+    "dDurationMs": 5760,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1802080,
+    "dDurationMs": 9280,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1811360,
+    "dDurationMs": 7840,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1819200,
+    "dDurationMs": 8000,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1827200,
+    "dDurationMs": 4560,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1831760,
+    "dDurationMs": 7600,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1839360,
+    "dDurationMs": 5840,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1845200,
+    "dDurationMs": 8160,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1853360,
+    "dDurationMs": 6880,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1860240,
+    "dDurationMs": 5760,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1866000,
+    "dDurationMs": 4720,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1871280,
+    "dDurationMs": 6880,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1878160,
+    "dDurationMs": 7120,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1885280,
+    "dDurationMs": 4560,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1889840,
+    "dDurationMs": 8080,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1897920,
+    "dDurationMs": 6720,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1904640,
+    "dDurationMs": 6800,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1911440,
+    "dDurationMs": 7520,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1918960,
+    "dDurationMs": 4400,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1923360,
+    "dDurationMs": 10480,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1933840,
+    "dDurationMs": 6880,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1940720,
+    "dDurationMs": 8480,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1949200,
+    "dDurationMs": 6800,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1956000,
+    "dDurationMs": 6400,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1962400,
+    "dDurationMs": 7680,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1970080,
+    "dDurationMs": 4720,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1974800,
+    "dDurationMs": 4960,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1979760,
+    "dDurationMs": 6800,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1986560,
+    "dDurationMs": 6480,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1993040,
+    "dDurationMs": 6320,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 1999360,
+    "dDurationMs": 5600,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2004960,
+    "dDurationMs": 6400,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2011360,
+    "dDurationMs": 6560,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2017920,
+    "dDurationMs": 6480,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2024400,
+    "dDurationMs": 5120,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2029520,
+    "dDurationMs": 6320,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2035840,
+    "dDurationMs": 6720,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2042560,
+    "dDurationMs": 7760,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2050320,
+    "dDurationMs": 11920,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2062240,
+    "dDurationMs": 5840,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2068080,
+    "dDurationMs": 5120,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2073200,
+    "dDurationMs": 5680,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2078880,
+    "dDurationMs": 9280,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2088160,
+    "dDurationMs": 9520,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2097680,
+    "dDurationMs": 8400,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2106080,
+    "dDurationMs": 6160,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2112240,
+    "dDurationMs": 5440,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2117680,
+    "dDurationMs": 4320,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2122000,
+    "dDurationMs": 5360,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2127360,
+    "dDurationMs": 6320,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2134400,
+    "dDurationMs": 9200,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2143600,
+    "dDurationMs": 6560,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2150160,
+    "dDurationMs": 8560,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2158720,
+    "dDurationMs": 6640,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2165360,
+    "dDurationMs": 7120,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2172480,
+    "dDurationMs": 8080,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2182960,
+    "dDurationMs": 7600,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2190560,
+    "dDurationMs": 9280,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2199840,
+    "dDurationMs": 8960,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2208800,
+    "dDurationMs": 5920,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2214720,
+    "dDurationMs": 5760,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2220480,
+    "dDurationMs": 4720,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2225200,
+    "dDurationMs": 5840,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2231040,
+    "dDurationMs": 4320,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2235360,
+    "dDurationMs": 6480,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2241840,
+    "dDurationMs": 5840,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2247680,
+    "dDurationMs": 7200,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2254880,
+    "dDurationMs": 6320,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2261200,
+    "dDurationMs": 8960,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2270160,
+    "dDurationMs": 6960,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2277120,
+    "dDurationMs": 6880,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2284000,
+    "dDurationMs": 8400,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2292400,
+    "dDurationMs": 5280,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2297680,
+    "dDurationMs": 8080,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2305760,
+    "dDurationMs": 6720,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2312480,
+    "dDurationMs": 5920,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2318400,
+    "dDurationMs": 5920,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2324320,
+    "dDurationMs": 4240,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2329280,
+    "dDurationMs": 5520,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2334800,
+    "dDurationMs": 5440,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2340240,
+    "dDurationMs": 6560,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2346800,
+    "dDurationMs": 6800,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2353600,
+    "dDurationMs": 5600,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2359200,
+    "dDurationMs": 8640,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2367840,
+    "dDurationMs": 6960,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2374800,
+    "dDurationMs": 7760,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2382560,
+    "dDurationMs": 6400,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2388960,
+    "dDurationMs": 5760,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2394720,
+    "dDurationMs": 5520,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2400240,
+    "dDurationMs": 4000,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2404240,
+    "dDurationMs": 5600,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2409840,
+    "dDurationMs": 5920,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2415760,
+    "dDurationMs": 7520,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2423280,
+    "dDurationMs": 6480,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2429760,
+    "dDurationMs": 7360,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2437120,
+    "dDurationMs": 8240,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2445360,
+    "dDurationMs": 4480,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2449840,
+    "dDurationMs": 3520,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2453360,
+    "dDurationMs": 3920,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2458000,
+    "dDurationMs": 6880,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2464880,
+    "dDurationMs": 7760,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2472640,
+    "dDurationMs": 6480,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2479120,
+    "dDurationMs": 6800,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2485920,
+    "dDurationMs": 6720,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2492640,
+    "dDurationMs": 10080,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2502720,
+    "dDurationMs": 6720,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2509440,
+    "dDurationMs": 7760,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2517200,
+    "dDurationMs": 5360,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2522560,
+    "dDurationMs": 7120,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2529680,
+    "dDurationMs": 7040,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2536720,
+    "dDurationMs": 8160,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2544880,
+    "dDurationMs": 7440,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2552320,
+    "dDurationMs": 4000,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2556960,
+    "dDurationMs": 6240,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2563200,
+    "dDurationMs": 5040,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2568240,
+    "dDurationMs": 4320,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2572560,
+    "dDurationMs": 7120,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  }, {
+    "tStartMs": 2579680,
+    "dDurationMs": 6524,
+    "segs": [ {
+      "utf8": "\n"
+    } ]
+  } ]
+}
