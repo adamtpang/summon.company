@@ -202,7 +202,10 @@ describe("SidebarCompanyMenu", () => {
     expect(document.body.textContent).toContain("Switch company");
     expect(document.body.textContent).toContain("Edit");
     expect(document.body.textContent).toContain("Strata");
-    expect(document.body.textContent).toContain("ANA");
+    expect(document.body.textContent).toContain("Anachronist Wiki");
+    // Company tickers (issuePrefix) are plumbing, never chrome (board ruling 2026-07-25).
+    expect(document.body.textContent).not.toContain("ANA-");
+    expect(document.body.textContent).not.toContain("PAP");
     expect(document.body.textContent).toContain("Create new company...");
     expect(document.body.textContent).toContain("Invite people to Acme Labs");
     expect(document.body.textContent).toContain("Company settings");
