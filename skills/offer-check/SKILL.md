@@ -39,6 +39,21 @@ and show the arithmetic:
 GATE: value >= 3x price for a warm buyer, >= 10x for a cold one. If value
 cannot be shown at 3x, the offer or the price is wrong; fix before sending.
 
+## Step 2b — Budget (the gate that kills dead deals early)
+
+Value clearing the bar is not the same as money existing. Name the BUDGET
+LINE the price comes out of: a contractor they already pay, a hire they are
+trying to avoid, an agency retainer, a tool subscription, an event budget.
+- Evidence, not inference: they said it, a job post shows it, a vendor is
+  visibly in use, or the spend is on their site or in their repos.
+- No budget evidence: ask the money question before sending ("what is this
+  costing you per month right now?"), or open with the free artifact until
+  receipts build the case.
+- NEVER discount into a budget that does not exist. A lower price does not
+  create money; it only lowers the ceiling for when the money appears.
+GATE: a named budget line with evidence, or the verdict is FIX (ask the
+money question), never a price cut.
+
 ## Step 3 — Value-equation scorecard (deterministic)
 
 Score each Hormozi variable by its three binary criteria. Score = 4, plus 2
