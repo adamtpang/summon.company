@@ -44,14 +44,19 @@ Every company gets the same shape. Idempotent: check before creating.
 
 1. **Core-8 org chart** — exactly eight departments: engineering, design,
    marketing, sales, finance, operations, support, legal. (Product is NOT a
-   9th — the CEO owns product strategy.) Hire via
-   `POST /companies/:id/agent-hires` (then approve the returned approval —
-   the board's chat instruction IS the approval), one head per department.
-2. **Named agents** — short, functional-evocative names, format
-   `Name · Role` (reference set: Sol·CEO, Vector·CTO, Forge·Engineer,
-   Ledger·CFO, Echo·CMO, Ink·Design, Atlas·COO, Magnet·Sales,
-   Haven·Support, Shield·Legal, Pulse·Diagnostician). Pick names in the same
-   register for new companies.
+   9th — the CEO owns product strategy.) ADOPT BEFORE CREATING: company
+   creation auto-seeds a default department set, and a second staffing pass
+   produces "Engineering 2" duplicates (the Sellsniper SELA incident,
+   2026-07-25). First LIST existing agents; wire and rename what is already
+   there; create only what is missing. Also check for an existing company
+   with the same repo before creating one — a second onboarding must adopt,
+   never duplicate (the SEL/SELA double-ticker incident).
+2. **Plain function names ONLY** (board ruling 2026-07-19, re-affirmed after
+   SELA shipped the retired personas): the top agent is "Cofounder" (role
+   ceo), department heads are named exactly their department: Engineering,
+   Design, Marketing, Sales, Finance, Operations, Support, Legal. NO invented
+   first names (Sol, Atlas, Vector and the rest are retired; personas return
+   only as unlockable characters, SUM-196).
 3. **Model ladder** — CEO = `claude-fable-5`; core-8 department heads =
    `opus`; subagents under a department = `grok_local` (free Grok window).
    A subagent always reports into a head (a fundraiser under Finance), never
