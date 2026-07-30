@@ -206,6 +206,14 @@
   footer a:hover { color: var(--text-primary); }
   footer .sep { opacity: 0.4; }
   footer .right { margin-left: auto; font-family: var(--font-mono); font-size: var(--text-overline); }
+  footer .beta { width: 100%; margin-top: var(--space-2); font-size: var(--text-label); }
+  footer .beta a { color: var(--text-accent); font-weight: 500; }
+
+  .offer-points { list-style: none; margin: var(--space-6) auto var(--space-8); padding: 0; display: grid; gap: var(--space-2); max-width: 52ch; font-size: var(--text-body-sm); color: var(--text-secondary); text-align: left; }
+  .offer-points li b { color: var(--positive-content); }
+
+  /* Evidence slot: stays invisible until real case studies are added inside it. */
+  #case-studies:empty { display: none; }
 </style>
 </head>
 <body>
@@ -237,7 +245,7 @@
       <h1>Hire AI employees.<br />You're the board.</h1>
       <p class="lede">Claude Code is for codebases. <strong>Summon is for companies.</strong> Hire a specialist in 60 seconds, assign the work, approve with one click. <strong>$99/mo per employee</strong>, running on the Claude or Codex subscription you already pay for. No API bills. Budgets pause; they never bill.</p>
       <div class="cta-row">
-        <a class="btn btn-primary btn-xl" href="#founding">Become a founding member, $49/mo, locked for life</a>
+        <a class="btn btn-primary btn-xl" href="#founding">Claim 1 of 2 founding slots, $99/mo locked for life</a>
         <a class="btn btn-neutral btn-xl" href="https://buy.stripe.com/4gM3cv0wy2Wp6og3yhaMU17">Hire your first employee, $99/mo</a>
         <a class="btn btn-neutral btn-xl" href="https://github.com/adamtpang/summon.company/releases/download/v0.1.5/Summon.Setup.0.1.5.exe">Download for Windows, free</a>
       </div>
@@ -277,12 +285,18 @@
   </section>
 
   <section id="founding" class="wrap center">
-    <span class="overline">Founding members, first 10 only</span>
-    <h2 style="margin: var(--space-4) auto var(--space-4); max-width: 24ch;">$49/mo per employee, locked for life.</h2>
-    <p class="lede center" style="max-width: 52ch;">Half price forever, first 30 days free, money-back after. The trade: a 20-minute feedback call weekly for your first month, and we get to tell your story. You shape the product; the product ships your company.</p>
+    <span class="overline">Founding offer</span>
+    <h2 style="margin: var(--space-4) auto var(--space-4); max-width: 24ch;">2 founding slots. $99/mo, locked for life.</h2>
+    <p class="lede center" style="max-width: 52ch;">Then $199/mo, the public price after founding.</p>
+    <ul class="offer-points">
+      <li><b>✓</b> $500 setup includes: a full company diagnosis, your AI org chart, and your first 10 deliverables plated in week one.</li>
+      <li><b>✓</b> Guarantee: first plated deliverable within 7 days or the $500 back.</li>
+      <li><b>✓</b> 15 minutes a week from you. Your departments running in 30 days.</li>
+      <li><b>✓</b> Cancel anytime.</li>
+    </ul>
     <div class="cta-row" style="justify-content: center;">
-      <a class="btn btn-primary btn-xl" href="https://buy.stripe.com/4gM4gz1ACbsV4g83yhaMU18">Claim a founding seat, $49/mo</a>
-      <a class="btn btn-neutral btn-xl" href="https://cal.com/adamtpang">Talk to Adam first</a>
+      <a class="btn btn-primary btn-xl" href="https://buy.stripe.com/4gM4gz1ACbsV4g83yhaMU18">Claim a founding slot, $99/mo locked for life</a>
+      <a class="btn btn-neutral btn-xl" href="https://cal.com/adamtpang">Book a call first</a>
     </div>
   </section>
 
@@ -437,6 +451,10 @@
     </div>
   </section>
 
+  <!-- Evidence slot: real case studies only. Renders nothing while empty (see #case-studies:empty CSS).
+       When a real, verifiable result exists, add its markup inside this section. Never fabricate. -->
+  <section id="case-studies" class="wrap"></section>
+
   <section class="wrap">
     <div class="founder">
       <p class="q">"We run the whole company on Summon. The CEO is an AI; the founder is the board. It ships overnight, and the board approves in the morning. Every number on this page comes from the runtime's own logs."</p>
@@ -471,9 +489,20 @@
     <a href="https://cal.com/adamtpang">Book a call</a><span class="sep">·</span>
     <a href="mailto:hello@summon.company">hello@summon.company</a>
     <span class="right">summon.company · hire AI employees. you're the board.</span>
+    <div class="beta">🧪 Beta · tell me what sucked: <a id="beta-contact" href="mailto:adamtpang@gmail.com?subject=summon%20beta">send it</a></div>
   </div>
 </footer>
 
 <script defer src="/_vercel/insights/script.js"></script>
+<script>
+// Beta contact: when the deploy defines window.NEXT_PUBLIC_ADAM_WA (env NEXT_PUBLIC_ADAM_WA,
+// a WhatsApp number injected at deploy time), the beta link becomes https://wa.me/<value>.
+// Otherwise it stays the mailto fallback. Never hardcode a phone number in this file.
+(function () {
+  var a = document.getElementById("beta-contact");
+  var wa = window.NEXT_PUBLIC_ADAM_WA;
+  if (a && wa) a.href = "https://wa.me/" + wa;
+})();
+</script>
 </body>
 </html>
