@@ -46,3 +46,18 @@ carries a lesser model; a subagent always reports into a department head
   pause; they never bill.
 - Knowledge convention: `doc/KNOWLEDGE-STRUCTURE.md`. Founder corpus:
   `knowledge/`.
+
+## Skill resolution for TEAM.md `includes`
+
+Each department's `TEAM.md` declares an `includes` list of skill shortnames.
+Two roots hold them, so resolve in this order:
+
+1. `skills/<slug>/SKILL.md` — Summon's own company-layer skills (elon-algo,
+   offer-check, invoice, sitegrab).
+2. `.claude/skills/<slug>/SKILL.md` — the gstack craft layer, vendored from
+   garrytan/gstack (review, ship, qa, design-review, canary, benchmark,
+   guard, retro, investigate, codex, and the plan reviews).
+
+The Agent Companies spec resolves shortnames to root 1 only, so a spec
+consumer needs root 2 declared explicitly. Documented rather than moved,
+because gstack must stay where Claude Code discovers it as project skills.

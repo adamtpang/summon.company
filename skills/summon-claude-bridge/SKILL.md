@@ -74,9 +74,12 @@ Every company gets the same shape. Idempotent: check before creating.
 4. **Wiring** — `metadata.department` on every agent (strongest formation
    signal), `reportsTo` chains so the org chart is ONE connected tree rooted
    at the CEO.
-5. **company/ folders** — scaffold `company/<dept>/README.md` in the repo
-   (mode/hero/owns, agent chain with tier, the ONE current task, engagement +
-   escalation). The codebase carries its org. Reference:
+5. **company/ folders** — scaffold `company/<dept>/TEAM.md` in the repo, in
+   Agent Companies spec shape (SUM-275): frontmatter with `name`,
+   `description`, `manager`, and an `includes` list of the skills that
+   department wields; body covers what it owns, how to engage, and
+   escalation. Never hardcode the current task: the board is the only source
+   of truth for that. The codebase carries its org. Reference:
    summon.company/company/.
 6. **Knowledge slot** — every company needs a knowledge base: import existing
    (Notion/Obsidian/Drive via MCP connectors) or scaffold `knowledge/` per
