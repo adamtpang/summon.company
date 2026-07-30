@@ -136,6 +136,31 @@ the change is user-visible. Operations calls `/canary` after a deploy,
 Legal, Finance, Sales, Marketing, and Support get no binding; their work is not
 code.
 
-Refresh note: this install is a file copy, not a link. Re-copy from
-`paperclipai/companies/gstack/skills/` after any upstream change or the skills go
-stale. `/gstack-upgrade` handles its own self-update path.
+### The install has two parts (both required)
+
+1. **Project scope**, `.claude/skills/<name>/` in this repo: the 27 skill
+   bodies, so Claude Code discovers them by name for anyone working here.
+   Source is `garrytan/gstack`, NOT `paperclipai/companies` (that repo ships
+   declaration-only manifests with `usage: referenced` and no procedure body,
+   which is discoverable but does nothing when called).
+2. **User scope**, `~/.claude/skills/gstack/`: the full gstack repo, because
+   every skill body hardcodes `~/.claude/skills/gstack/bin/...` for its 75
+   helpers. Without it, telemetry, learnings, decisions, review logs, and
+   specialist stats all silently no-op.
+
+State lives in `~/.gstack/`: `projects/<slug>/learnings.jsonl`,
+`decisions.jsonl`, `<branch>-reviews.jsonl`, `timeline.jsonl`. Verified
+working on this machine 2026-07-26.
+
+Local patch worth knowing about: `lib/bin-context.ts` `resolveSlug()` spawned
+the `gstack-slug` shebang script directly, which Windows cannot exec, so every
+decision landed in `projects/unknown/`. Patched with a win32 branch that routes
+through bash. A gstack upgrade overwrites it; re-apply or upstream it.
+
+Missing dependency: `jq` is absent on this machine. Ten helpers need it (both
+dashboards, `artifacts-init`, and the six gbrain helpers). The core review and
+ship loop does not.
+
+Refresh note: this install is a file copy, not a link. Re-copy both parts from
+`garrytan/gstack` after any upstream change or the skills go stale.
+`/gstack-upgrade` handles its own self-update path.
