@@ -1,27 +1,44 @@
+---
+name: Operations
+description: Company setup, process, domains, repositories, and operating cadence.
+manager: Cofounder
+includes:
+  - canary
+  - benchmark
+  - guard
+  - retro
+  - elon-algo
+metadata:
+  sources:
+    - kind: spec
+      repo: agentcompanies/agentcompanies
+      path: specification.mdx
+      note: TEAM.md manifest shape, adopted 2026-07-26 (SUM-275)
+---
+
 # Operations
 
-> Runs · hero archetype: Jeff Bezos
+**Owns:** company setup, process, domains, repositories, and operating cadence.
 
-**Owns:** Company setup, process, domains, repositories, and operating cadence.
+## Craft skills
 
-## Agent chain
-
-- **Operations** — layer 2, Claude Opus 4.8
-
-## Working now (Thiel rule: one agent, ONE task)
-
-SUM-140 — aggregate the Paperclip ecosystem: companies.sh templates, Clipmart,
-community tooling.
+`/canary` after any deploy, `/benchmark` for the health picture (there is no
+`/health` skill), `/guard` before destructive work, `/retro` for the weekly.
+Every process passes `/elon-algo` before it is optimized: a process that
+should not exist must never be automated.
 
 ## Operating facts
 
-- Control plane: 127.0.0.1:3100 (hidden server; embedded Postgres :54329).
-- Restart drill: stop Postgres cleanly FIRST (pg_ctl -m fast), then node;
-  orphaned Postgres workers holding :54329 are the known failure mode.
-- Desktop app: installed from apps/desktop (currently 0.1.4); tray owns the
-  lifecycle.
+- Control plane: 127.0.0.1:3100, embedded Postgres on 54329.
+- Restart drill: stop Postgres cleanly first, then node. Orphaned Postgres
+  workers holding 54329 are the known failure mode.
+- Never restart or migrate the live control plane while runs are active.
+
+## Current task
+
+The board is the only source of truth.
 
 ## How to engage
 
-- In Summon: @operations in board chat, or assign a task.
-- Escalation: department → Cofounder → Adam (the CEO).
+- In Summon: assign a task, or address the department in board chat.
+- Escalation: department, then Cofounder, then Adam (the board).

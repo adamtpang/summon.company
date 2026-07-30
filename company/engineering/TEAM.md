@@ -1,27 +1,41 @@
+---
+name: Engineering
+description: Runtime, architecture, reliability, and product execution for summon.company.
+manager: Cofounder
+includes:
+  - review
+  - ship
+  - investigate
+  - codex
+  - elon-algo
+metadata:
+  sources:
+    - kind: spec
+      repo: agentcompanies/agentcompanies
+      path: specification.mdx
+      note: TEAM.md manifest shape, adopted 2026-07-26 (SUM-275)
+---
+
 # Engineering
 
-> Builds · hero archetype: Elon Musk
+**Owns:** app, auth, billing infrastructure, monitoring, and integrations.
+Engineering owns product execution; the Cofounder owns product strategy.
 
-**Owns:** App, auth, billing infrastructure, monitoring, and integrations.
+## Craft skills
 
-## Agent chain
+Declared in `includes` above and bound in the agent's instruction bundle:
+`/review` before in_review, `/ship` for release-shaped work, `/investigate`
+for any bug (no fix before root cause), `/codex` for a cross-model second
+opinion. Decisions run through `/elon-algo` first.
 
-- **Engineering** — core-8 head, Claude Opus 4.8
-- **the Engineer subagent** — subagent under Vector, Grok 4.5 (`grok_local`) —
-  the live testbed for the grok subagent tier (SUM-145)
+## Current task
 
-## Working now (Thiel rule: one agent, ONE task)
-
-- Vector: SUM-144 — unpause must not re-arm the stale backlog; board-cancel
-  must mean cancel (the hydra).
-- Forge: SUM-148 — inbox four-input scoring. Blocked on the grok disposition
-  gap (SUM-145).
+The board is the only source of truth. Never hardcode it here: a task
+written into a doc goes stale the day it changes.
 
 ## How to engage
 
-- In Summon: @engineering in board chat, or assign a task — assignment
-  wakes the agent.
-- Department knowledge lives here as files; anything an agent should always
-  know about engineering belongs in this folder.
-- Escalation: department → Cofounder → Adam (the CEO). Blocked work surfaces in
-  the Inbox with a disposition card.
+- In Summon: assign a task, which wakes the agent, or address the department
+  in board chat.
+- Department knowledge lives in this folder as files.
+- Escalation: department, then Cofounder, then Adam (the board).

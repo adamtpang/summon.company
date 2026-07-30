@@ -1,26 +1,34 @@
+---
+name: Marketing
+description: Positioning, content, social, SEO, paid acquisition, and referrals.
+manager: Cofounder
+includes:
+  - sitegrab
+  - elon-algo
+metadata:
+  sources:
+    - kind: spec
+      repo: agentcompanies/agentcompanies
+      path: specification.mdx
+      note: TEAM.md manifest shape, adopted 2026-07-26 (SUM-275)
+---
+
 # Marketing
 
-> Sells · hero archetype: David Ogilvy
-
-**Owns:** Positioning, content, social, SEO, paid acquisition, and referrals.
-
-## Agent chain
-
-- **Marketing** — layer 2, Claude Opus 4.8
-
-## Working now (Thiel rule: one agent, ONE task)
-
-SUM-134 — SEO-maxx: AI blogger agent + programmatic SEO + every directory and
-MCP listing.
+**Owns:** positioning, content, social, SEO, paid acquisition, and referrals.
 
 ## Standing doctrine
 
-The board MARKETS, never pushes: offers are postable artifacts with a buy
-link; announcements go out, buyers come in. "Be so good they can't ignore
-you" — quality cuts through AI slop.
+The board markets, never pushes: offers are postable artifacts with a buy
+link. Announcements go out, buyers come in. Quality is the only thing that
+cuts through AI slop. `/sitegrab` studies craft elsewhere and takes lessons,
+never content.
+
+## Current task
+
+The board is the only source of truth.
 
 ## How to engage
 
-- In Summon: @marketing in board chat, or assign a task — assignment wakes the
-  agent.
-- Escalation: department → Cofounder → Adam (the CEO).
+- In Summon: assign a task, or address the department in board chat.
+- Escalation: department, then Cofounder, then Adam (the board).

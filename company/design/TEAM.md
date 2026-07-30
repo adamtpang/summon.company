@@ -1,23 +1,39 @@
+---
+name: Design
+description: Brand identity, product experience, and the marketing website.
+manager: Cofounder
+includes:
+  - design-review
+  - qa
+  - plan-design-review
+  - elon-algo
+metadata:
+  sources:
+    - kind: spec
+      repo: agentcompanies/agentcompanies
+      path: specification.mdx
+      note: TEAM.md manifest shape, adopted 2026-07-26 (SUM-275)
+---
+
 # Design
 
-> Builds · hero archetype: Dieter Rams
+**Owns:** brand identity, product experience, and the marketing website.
+Chrome is white and black; color carries data only.
 
-**Owns:** Brand identity, product experience, and the marketing website.
+## Craft skills
 
-## Agent chain
+`/design-review` on changed surfaces (AI slop detection, before and after
+screenshots, an A to F grade), `/qa` when the change is user-visible,
+`/plan-design-review` before a large surface. Decisions run through
+`/elon-algo`: a screen that does not exist cannot be wrong.
 
-- **Design** — layer 2, Claude Opus 4.8
+## Current task
 
-## Working now (Thiel rule: one agent, ONE task)
-
-SUM-142 — the design excellence pass: Apple-grade minimalism, liquid glass on
-elevation surfaces only, the monochrome law (chrome is white/black; color is
-data).
+The board is the only source of truth.
 
 ## How to engage
 
-- In Summon: @design in board chat, or assign a task — assignment wakes the agent.
-- Department knowledge lives here as files: DESIGN.md laws, the identity
-  sources (`design/logo/`), tokens (`ui/src/index.css` is the single source of
-  truth).
-- Escalation: department → Cofounder → Adam (the CEO).
+- In Summon: assign a task, or address the department in board chat.
+- Laws live in DESIGN.md and doc/design/DESIGN-PRINCIPLES.md; tokens live in
+  ui/src/index.css, which is the single source of truth.
+- Escalation: department, then Cofounder, then Adam (the board).

@@ -1,28 +1,41 @@
+---
+name: Sales
+description: Prospecting, outbound, qualification, pipeline, and closing.
+manager: Cofounder
+includes:
+  - offer-check
+  - invoice
+  - elon-algo
+metadata:
+  sources:
+    - kind: spec
+      repo: agentcompanies/agentcompanies
+      path: specification.mdx
+      note: TEAM.md manifest shape, adopted 2026-07-26 (SUM-275)
+---
+
 # Sales
 
-> Sells · hero archetype: Zig Ziglar
+**Owns:** prospecting, outbound, qualification, pipeline, and closing. Pull,
+not push: make the offer findable and frictionless rather than chasing.
 
-**Owns:** Prospecting, outbound, qualification, pipeline, and closing.
+## Craft skills
 
-## Agent chain
+`/offer-check` gates every deal before it goes out (market rate, value math,
+the budget line, the twelve criteria). `/invoice` drafts money artifacts and
+stops at draft. Nothing sends without the board's explicit word.
 
-- **Sales** — core-8 head, Claude Opus 4.8
+## Offers
 
-Named Magnet on purpose: pull, not push. Sales here means making the offer
-findable and frictionless, not chasing.
+company/OFFER.md is the single source of truth for price and terms. Prices
+are never duplicated into department docs, because two copies means one is
+wrong.
 
-## Working now (Thiel rule: one agent, ONE task)
+## Current task
 
-SUM-132 — founding-influencer pipeline: 10 KOL partnerships.
-
-## Live offers
-
-- Founding member: $49/mo — https://buy.stripe.com/4gM4gz1ACbsV4g83yhaMU18
-- Per-employee: $99/mo — https://buy.stripe.com/4gM3cv0wy2Wp6og3yhaMU17
-- First targets: Anton (Regain), Michael (Hawaii Tech Week) — board sends
-  (SUM-137), sales preps.
+The board is the only source of truth.
 
 ## How to engage
 
-- In Summon: @sales in board chat, or assign a task.
-- Escalation: department → Cofounder → Adam (the CEO).
+- In Summon: assign a task, or address the department in board chat.
+- Escalation: department, then Cofounder, then Adam (the board).

@@ -35,7 +35,7 @@ and small enough to matter to us.
 | Spec | Summon today | Gap |
 |---|---|---|
 | COMPANY.md (name, description, slug, goals) | `companies` row plus `goals` | Needs stage and constraint (SUM-269) |
-| TEAM.md (`manager`, `includes`) | department, held in `agents.metadata` jsonb | Promote to a column (SUM-272); repo has `company/<dept>/README.md` that should become TEAM.md |
+| TEAM.md (`manager`, `includes`) | department, held in `agents.metadata` jsonb | Promote to a column (SUM-272); `company/<dept>/TEAM.md` now ships in spec shape (SUM-275, done) |
 | AGENTS.md (`title`, `reportsTo`, `skills`) | `agents.title`, `agents.reportsTo` (real FK), `company_skills` | Close to exact; instructions already live in AGENTS.md files |
 | PROJECT.md | `projects` plus `project_workspaces.repoUrl` | Fill the empty ones |
 | TASK.md (`assignee`, `project`, `schedule`) | `issues.assigneeId`, `routines`, heartbeat schedules | Close to exact |

@@ -1,20 +1,31 @@
+---
+name: Support
+description: Onboarding, community, customer support, and customer feedback.
+manager: Cofounder
+includes:
+  - elon-algo
+metadata:
+  sources:
+    - kind: spec
+      repo: agentcompanies/agentcompanies
+      path: specification.mdx
+      note: TEAM.md manifest shape, adopted 2026-07-26 (SUM-275)
+---
+
 # Support
 
-> Runs and sells · hero archetype: Tony Hsieh
+**Owns:** onboarding, community, customer support, and customer feedback.
 
-**Owns:** Onboarding, community, customer support, and customer feedback.
+## Standing rule
 
-## Agent chain
+No filler work. An agent holds one meaningful task or none. Support goes live
+the moment a first customer exists, and owns onboarding from message one.
 
-- **Support** — core-8 head, Claude Opus 4.8
+## Current task
 
-## Working now (Thiel rule: one agent, ONE task)
-
-Idle — honestly: no customers yet. The first founding member changes that;
-Haven owns onboarding from message one. No filler tasks: an agent holds one
-meaningful task or none.
+The board is the only source of truth.
 
 ## How to engage
 
-- In Summon: @support in board chat, or assign a task.
-- Escalation: department → Cofounder → Adam (the CEO).
+- In Summon: assign a task, or address the department in board chat.
+- Escalation: department, then Cofounder, then Adam (the board).
