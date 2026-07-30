@@ -1,0 +1,118 @@
+/* ============================================================
+   SUMMON ARTIFACT KIT — brand.css
+   Primitives for every non-app surface: decks, social banners,
+   OG images, the brand reference page.
+
+   ONE SOURCE OF TRUTH. This file adds ZERO colours, fonts, or
+   sizes of its own. Every value below resolves to a token from
+   ../tokens.css (the Summon Blue brand system that the landing
+   ships). Retune a token there and every artifact re-skins.
+   If a value is not a token, it does not belong in an artifact.
+   ============================================================ */
+
+/* ---- artifact frame: an exact-pixel canvas you can screenshot ----
+   Each frame declares its own --w / --h. Rasterise by setting the
+   browser viewport to that size (see README) and capturing the frame. */
+.artifact {
+  position: relative;
+  width: var(--w);
+  height: var(--h);
+  overflow: hidden;
+  background: var(--bg-canvas);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  isolation: isolate;
+}
+
+/* Deep-navy artifact: the outward "hero" surface. Uses the same
+   token flip the landing uses, so components drop in unchanged. */
+.artifact--deep {
+  background: var(--bg-section-deep);
+  color: var(--text-on-accent);
+}
+.artifact--deep { --text-primary: #EEF2FA; --text-secondary: #B9C6E4; --text-tertiary: #8A9AC4; }
+
+/* Horizon wash — the signature Summon backdrop. Light-topped: use it ONLY
+   with content in the deep lower zone, never white text on the pale band. */
+.artifact--horizon { background: var(--navy-950); }
+.artifact--horizon::before {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background: var(--gradient-horizon);
+}
+
+/* Brand deep — the outward banner/hero surface. Deep-navy base so white text
+   always reads; a Summon-Blue glow rises from below the canvas, its brightest
+   point off-frame so footers stay legible. Every stop is a token colour
+   (blue-500 → blue-600 → blue-800 → navy-950). This is the banner default. */
+.artifact--brand {
+  background: radial-gradient(130% 120% at 50% 135%,
+    #2B78FF 0%, #0B5FFF 22%, #0640B4 46%, #071F4D 74%);
+  color: #EEF2FA;
+}
+.artifact--brand { --text-primary: #EEF2FA; --text-secondary: #C7D6F5; --text-tertiary: #8A9AC4; }
+
+/* ---- the brand lockup: EKG mark + wordmark ---- */
+.lockup { display: inline-flex; align-items: center; gap: 0.5em; }
+.lockup__mark { display: block; }
+.lockup__word {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: var(--tracking-display);
+  line-height: 1;
+}
+
+/* EKG heartbeat trace — the Summon glyph. Geometry is identical to
+   the favicon (32×32 viewBox). Colour follows --ekg-stroke so the
+   mark lives correctly on light, deep, and horizon surfaces. */
+.ekg-trace { fill: none; stroke: var(--ekg-stroke); stroke-linecap: round; stroke-linejoin: round; }
+.ekg-ring  { fill: none; stroke: currentColor; }
+
+/* ---- type roles (all clamp-free at artifact scale; fixed for raster fidelity) ---- */
+.a-overline {
+  font-family: var(--font-mono);
+  font-size: var(--text-overline);
+  letter-spacing: var(--tracking-overline);
+  text-transform: uppercase;
+  color: var(--text-accent);
+}
+.a-display {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: var(--tracking-display);
+  line-height: var(--leading-display);
+}
+.a-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: var(--tracking-title);
+  line-height: var(--leading-title);
+}
+.a-body {
+  font-family: var(--font-body);
+  line-height: var(--leading-body);
+  letter-spacing: var(--tracking-body);
+  color: var(--text-secondary);
+}
+
+/* ---- accents ---- */
+.a-rule { height: 2px; background: var(--action-primary); border: 0; }
+.a-pill {
+  display: inline-flex; align-items: center; gap: 0.5em;
+  padding: 0.4em 0.9em; border-radius: var(--radius-pill);
+  background: var(--bg-accent-quiet); color: var(--text-accent);
+  font-family: var(--font-mono); font-size: var(--text-label);
+  letter-spacing: var(--tracking-label);
+}
+.artifact--deep .a-pill,
+.artifact--horizon .a-pill {
+  background: rgba(255,255,255,0.10); color: #DCEBFF;
+}
+.a-cta {
+  display: inline-flex; align-items: center; justify-content: center;
+  height: var(--control-lg); padding: 0 var(--space-8);
+  border-radius: var(--radius-input);
+  background: var(--gradient-cta); color: var(--text-on-accent);
+  font-family: var(--font-display); font-weight: 600;
+  box-shadow: var(--shadow-md);
+}

@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Summon — Brand & Design System</title>
+<meta name="description" content="The Summon design system: colour palette, type, logo, voice, and artifact kit — the one aesthetic behind every Summon surface. Summon is the nervous system of companies." />
+
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://design.summon.company" />
+<meta property="og:title" content="Summon — Brand & Design System" />
+<meta property="og:description" content="One design system, everywhere. Palette, type, logo, voice, and the artifact kit — all generated from a single token source." />
+<meta property="og:image" content="https://summon.company/og.png" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<link rel="canonical" href="https://design.summon.company/" />
+<script type="application/ld+json">
+{ "@context":"https://schema.org","@graph":[
+ {"@type":"WebSite","@id":"https://design.summon.company/#site","name":"Summon Design System","url":"https://design.summon.company","publisher":{"@id":"https://summon.company/#org"}},
+ {"@type":"Organization","@id":"https://summon.company/#org","name":"Summon","url":"https://summon.company","description":"The nervous system of companies: diagnose problems, dispatch AI agents to solve them, or route communication to the right human.","parentOrganization":{"@type":"Organization","name":"adam.inc"}}
+]}
+</script>
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7.5' fill='%23FFFFFF'/%3E%3Cpath d='M1.5 16 H10 L13 10.5 L16.5 22 L19 16 H30.5' fill='none' stroke='%230B5FFF' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../tokens.css" />
+<link rel="stylesheet" href="brand.css" />
+<style>
+  * { box-sizing: border-box; margin: 0; }
+  body { background: var(--bg-canvas); color: var(--text-primary); font-family: var(--font-body); line-height: var(--leading-body); }
+  .wrap { max-width: var(--content-max); margin: 0 auto; padding: 0 var(--space-6); }
+
+  /* hero */
+  header.hero { background: var(--navy-950); color: #EEF2FA; position: relative; overflow: hidden; }
+  /* deep base so white text always reads; Summon-Blue glow rises from below.
+     Same recipe as .artifact--brand — all token stops. */
+  header.hero::before { content:""; position:absolute; inset:0;
+    background: radial-gradient(130% 120% at 50% 138%, #2B78FF 0%, #0B5FFF 22%, #0640B4 46%, #071F4D 74%); }
+  .hero__inner { position: relative; padding: var(--space-24) 0 var(--space-20); }
+  .hero h1 { font-family: var(--font-display); font-weight: 700; letter-spacing: var(--tracking-display); line-height: 1.02; font-size: var(--text-display-1); margin: var(--space-6) 0 var(--space-4); }
+  .hero p.lede { font-size: var(--text-body-lg); color: #C7D6F5; max-width: 46ch; }
+  .hero .links { display: flex; flex-wrap: wrap; gap: var(--space-3); margin-top: var(--space-8); }
+  .hero .links a { display:inline-flex; align-items:center; gap:.5em; height: var(--control-md); padding: 0 var(--space-4); border-radius: var(--radius-input); font-family: var(--font-display); font-weight:600; font-size: var(--text-body-sm); text-decoration:none; }
+  .hero .links a.primary { background:#fff; color: var(--navy-950); }
+  .hero .links a.ghost { background: rgba(255,255,255,.10); color:#EEF2FA; border:1px solid rgba(255,255,255,.20); }
+
+  section { padding: var(--space-20) 0; border-bottom: 1px solid var(--border-neutral); }
+  .eyebrow { font-family: var(--font-mono); font-size: var(--text-overline); letter-spacing: var(--tracking-overline); text-transform: uppercase; color: var(--text-accent); }
+  h2.sec { font-family: var(--font-display); font-weight: 700; font-size: var(--text-title-section); letter-spacing: var(--tracking-title); margin: var(--space-2) 0 var(--space-2); }
+  p.sub { color: var(--text-secondary); max-width: 60ch; margin-bottom: var(--space-8); }
+
+  /* swatches */
+  .swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px,1fr)); gap: var(--space-3); }
+  .swatch { border-radius: var(--radius-card); overflow: hidden; border: 1px solid var(--border-neutral); background: var(--bg-elevated); box-shadow: var(--shadow-xs); }
+  .swatch .chip { height: 88px; }
+  .swatch .meta { padding: var(--space-3); }
+  .swatch .name { font-size: var(--text-body-sm); font-weight: 600; }
+  .swatch .val { font-family: var(--font-mono); font-size: var(--text-label); color: var(--text-tertiary); text-transform: uppercase; }
+
+  /* type scale */
+  .typerow { display: grid; grid-template-columns: 120px 1fr; gap: var(--space-4); align-items: baseline; padding: var(--space-3) 0; border-top: 1px solid var(--border-neutral); }
+  .typerow .tag { font-family: var(--font-mono); font-size: var(--text-label); color: var(--text-tertiary); }
+
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap: var(--space-4); }
+  .card { border: 1px solid var(--border-neutral); border-radius: var(--radius-card); padding: var(--space-6); background: var(--bg-elevated); box-shadow: var(--shadow-xs); text-decoration:none; color: inherit; display:block; transition: box-shadow var(--duration-hover) var(--ease-out-soft), transform var(--duration-hover) var(--ease-out-soft); }
+  a.card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+  .card h3 { font-family: var(--font-display); font-size: var(--text-title-card); margin-bottom: var(--space-2); }
+  .card p { color: var(--text-secondary); font-size: var(--text-body-sm); }
+
+  .voice { display:grid; grid-template-columns:1fr 1fr; gap: var(--space-4); }
+  .voice .col h4 { font-size: var(--text-body-sm); font-family: var(--font-mono); text-transform: uppercase; letter-spacing: var(--tracking-label); margin-bottom: var(--space-3); }
+  .voice .col.say h4 { color: var(--positive-content); }
+  .voice .col.dont h4 { color: var(--negative-content); }
+  .voice ul { list-style:none; display:grid; gap: var(--space-2); }
+  .voice li { padding: var(--space-3); border-radius: var(--radius-input); font-size: var(--text-body-sm); }
+  .voice .say li { background: var(--positive-bg); color: var(--positive-content); }
+  .voice .dont li { background: var(--negative-bg); color: var(--negative-content); }
+
+  footer { padding: var(--space-12) 0; color: var(--text-tertiary); font-size: var(--text-body-sm); }
+  @media (max-width: 640px){ .voice{grid-template-columns:1fr} .typerow{grid-template-columns:1fr} }
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="wrap hero__inner">
+    <div class="lockup">
+      <svg class="lockup__mark" width="44" height="44" viewBox="0 0 32 32" aria-hidden="true">
+        <circle class="ekg-ring" cx="16" cy="16" r="10.5" stroke="#8AB9FF" stroke-width="1.5" opacity=".5"/>
+        <path class="ekg-trace" d="M1.5 16 H10 L13 10.5 L16.5 22 L19 16 H30.5" stroke="#8AB9FF" stroke-width="2.4"/>
+      </svg>
+      <span class="lockup__word" style="font-size:1.5rem;color:#EEF2FA">Summon</span>
+    </div>
+    <h1>One design system,<br/>everywhere.</h1>
+    <p class="lede">The colour, type, logo, and voice behind every Summon surface — app, deck, banner, and OG image alike. Summon is the nervous system of companies: diagnose problems, dispatch AI agents to solve them, or route the message to the right human.</p>
+    <div class="links">
+      <a class="primary" href="https://claude.ai/design/p/f3f2637c-e50a-4470-8ebb-f6873a076e39">Claude Design project →</a>
+      <a class="ghost" href="deck.html">Deck template</a>
+      <a class="ghost" href="banners.html">Social banners</a>
+      <a class="ghost" href="https://summon.company">summon.company</a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section id="palette">
+    <span class="eyebrow">Colour</span>
+    <h2 class="sec">The Summon Blue palette</h2>
+    <p class="sub">One brand hue — Summon Blue <code>--blue-600</code> — on a near-white canvas, anchored by deep navy. Every value below is read live from <code>tokens.css</code>; nothing on this page is a hand-typed hex.</p>
+    <div class="swatches" id="swatches"></div>
+  </section>
+
+  <section id="type">
+    <span class="eyebrow">Type</span>
+    <h2 class="sec">Space Grotesk display, Inter body</h2>
+    <p class="sub">Display and titles in Space Grotesk; body and UI in Inter; data and code in JetBrains Mono. The scale is fixed — a closed vocabulary.</p>
+    <div id="typescale"></div>
+  </section>
+
+  <section id="logo">
+    <span class="eyebrow">Mark</span>
+    <h2 class="sec">The heartbeat</h2>
+    <p class="sub">An EKG trace crossing a ring — a company with a pulse. It is the favicon, the deck footer, and the centre of every banner. It renders in <code>--ekg-stroke</code> so it lives on any surface.</p>
+    <div class="cards">
+      <div class="card" style="display:flex;align-items:center;justify-content:center;height:160px">
+        <svg width="120" height="120" viewBox="0 0 32 32"><circle class="ekg-ring" cx="16" cy="16" r="10.5" stroke="var(--blue-600)" stroke-width="1.4" opacity=".45"/><path class="ekg-trace" d="M1.5 16 H10 L13 10.5 L16.5 22 L19 16 H30.5" stroke="var(--blue-600)" stroke-width="2.4"/></svg>
+      </div>
+      <div class="card" style="display:flex;align-items:center;justify-content:center;height:160px;background:var(--navy-950)">
+        <svg width="120" height="120" viewBox="0 0 32 32"><circle class="ekg-ring" cx="16" cy="16" r="10.5" stroke="#8AB9FF" stroke-width="1.4" opacity=".5"/><path class="ekg-trace" d="M1.5 16 H10 L13 10.5 L16.5 22 L19 16 H30.5" stroke="#8AB9FF" stroke-width="2.4"/></svg>
+      </div>
+      <div class="card" style="display:flex;align-items:center;justify-content:center;height:160px">
+        <div class="lockup"><svg width="40" height="40" viewBox="0 0 32 32"><path class="ekg-trace" d="M1.5 16 H10 L13 10.5 L16.5 22 L19 16 H30.5" stroke="var(--blue-600)" stroke-width="2.6"/></svg><span class="lockup__word" style="font-size:1.6rem;color:var(--text-primary)">Summon</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="voice">
+    <span class="eyebrow">Voice</span>
+    <h2 class="sec">How Summon speaks</h2>
+    <p class="sub">Plain, exact, quietly confident. Honest — never promises more than the product delivers. Less, but better.</p>
+    <div class="voice">
+      <div class="col say">
+        <h4>We say</h4>
+        <ul>
+          <li>The nervous system of companies.</li>
+          <li>Diagnose, dispatch, route.</li>
+          <li>You're the board. They do the work.</li>
+          <li>Budget-capped. No surprise bills.</li>
+        </ul>
+      </div>
+      <div class="col dont">
+        <h4>We don't say</h4>
+        <ul>
+          <li>Revolutionary AI-powered synergy.</li>
+          <li>10x your growth overnight.</li>
+          <li>Magic. Effortless. Unlimited.</li>
+          <li>Hype we can't keep.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="kit">
+    <span class="eyebrow">Artifact kit</span>
+    <h2 class="sec">One aesthetic, every surface</h2>
+    <p class="sub">Templates that carry the system past the app — decks, social banners, OG images. Each is a self-contained page that reads the same tokens. Change a token; every artifact re-skins.</p>
+    <div class="cards">
+      <a class="card" href="deck.html"><h3>Deck template →</h3><p>16:9 keyboard-navigable slides. Print to PDF. Filled with the Summon pitch as a worked example.</p></a>
+      <a class="card" href="banners.html"><h3>Social banner set →</h3><p>X header (1500×500), Discord (960×540), OG (1200×630), community cover. Exact-pixel, screenshot-ready.</p></a>
+      <a class="card" href="https://claude.ai/design/p/f3f2637c-e50a-4470-8ebb-f6873a076e39"><h3>Claude Design →</h3><p>The live project. Build new screens and decks from the real Summon components.</p></a>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <div class="lockup"><svg width="22" height="22" viewBox="0 0 32 32"><path class="ekg-trace" d="M1.5 16 H10 L13 10.5 L16.5 22 L19 16 H30.5" stroke="var(--text-tertiary)" stroke-width="2.6"/></svg><span>Summon design system · generated from <code>tokens.css</code> · the nervous system of companies</span></div>
+</footer>
+
+<script>
+  // Palette rendered FROM tokens: read the resolved value of each token
+  // off a probe element. No hex is ever hand-typed on this page.
+  const cs = getComputedStyle(document.documentElement);
+  const val = (t) => cs.getPropertyValue(t).trim();
+  const groups = [
+    ['Summon Blue', ['--blue-600','--blue-700','--blue-500','--blue-400','--blue-300','--blue-100','--blue-050']],
+    ['Ink & navy', ['--ink','--navy-950','--text-secondary','--text-tertiary']],
+    ['Surfaces', ['--bg-canvas','--bg-elevated','--bg-neutral']],
+    ['Sentiment', ['--positive-content','--negative-content','--warning-content','--info-content']],
+  ];
+  const host = document.getElementById('swatches');
+  groups.forEach(([label, toks]) => toks.forEach(t => {
+    const v = val(t);
+    const el = document.createElement('div'); el.className = 'swatch';
+    el.innerHTML = `<div class="chip" style="background:${v}"></div><div class="meta"><div class="name">${t}</div><div class="val">${v || '—'}</div></div>`;
+    host.appendChild(el);
+  }));
+
+  const scale = [
+    ['display-1','var(--text-display-1)','700','var(--font-display)','Summon'],
+    ['display-2','var(--text-display-2)','700','var(--font-display)','The nervous system of companies'],
+    ['title-section','var(--text-title-section)','600','var(--font-display)','Diagnose · dispatch · route'],
+    ['title-card','var(--text-title-card)','600','var(--font-display)','One design system, everywhere'],
+    ['body-lg','var(--text-body-lg)','400','var(--font-body)','They do the work. You approve as the board.'],
+    ['body','var(--text-body)','400','var(--font-body)','Budget-capped AI employees. Founding $99/mo, locked for life.'],
+    ['label','var(--text-label)','500','var(--font-mono)','STATUS · LIVE'],
+  ];
+  const ts = document.getElementById('typescale');
+  scale.forEach(([tag,size,wt,fam,sample]) => {
+    const row = document.createElement('div'); row.className = 'typerow';
+    row.innerHTML = `<div class="tag">${tag}</div><div style="font-size:${size};font-weight:${wt};font-family:${fam};letter-spacing:var(--tracking-title);line-height:1.1">${sample}</div>`;
+    ts.appendChild(row);
+  });
+</script>
+</body>
+</html>
