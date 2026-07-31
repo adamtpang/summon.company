@@ -19,7 +19,7 @@
     { "file": "apps/queue/src/queues/bi-etl.ts", "needle": "expectedRevenue," }
   ],
   "P0-8": [
-    { "file": "apps/admin/messages/ru.po", "pattern": "^msgstr \"\"$", "lines": [21925, 22638], "goal": "decrease" }
+    { "file": "apps/admin/messages/ru.po", "blockContext": "dashboards/executive", "pattern": "^msgstr \"\"$", "goal": "decrease" }
   ],
   "P0-9": [
     { "file": "apps/api/src/modules/v1/persona-cockpits/executive.ts", "needle": "fetchRevenueDataAsOf(tx, organizationId)" }

@@ -28,7 +28,24 @@ export interface Probe {
    * file uses hashed ids and no literal string can stand in.
    */
   pattern?: string;
-  /** Restrict a pattern count to a 1-indexed line range, inclusive. */
+  /**
+   * Restrict a pattern count to a marker-anchored region. Anchors survive the
+   * file growing or shifting; line numbers do not. A fixed range on
+   * regain's ru.po reported a 37 -> 60 regression that was really the window
+   * sliding over new content as the file grew by 830 lines.
+   */
+  anchor?: { start: string; end?: string };
+  /**
+   * Count blocks (blank-line separated records) whose text matches
+   * `blockContext`, and within those, occurrences of `pattern`. This is how a
+   * finding scoped to "the surfaces referenced by X" is measured in a file
+   * that has no stable line ordering, e.g. a .po catalogue.
+   */
+  blockContext?: string;
+  /**
+   * Deprecated: a 1-indexed line range. Kept so existing probe files still
+   * load, but it drifts the moment the file changes. Prefer `anchor`.
+   */
   lines?: [number, number];
   /**
    * Which direction proves the fix. Presence probes expect the evidence to
@@ -38,10 +55,14 @@ export interface Probe {
 }
 
 export interface ProbeResult extends Probe {
-  countAtRegister: number;
-  countAtHead: number;
-  /** satisfied means the goal was fully met, improved means it moved the right way. */
-  verdict: "satisfied" | "improved" | "unchanged" | "regressed";
+  /** null when the probe could not be evaluated at that revision. */
+  countAtRegister: number | null;
+  countAtHead: number | null;
+  /**
+   * satisfied means the goal was fully met, improved means it moved the right
+   * way, unmeasurable means an anchor was missing and no count was possible.
+   */
+  verdict: "satisfied" | "improved" | "unchanged" | "regressed" | "unmeasurable";
   firstPresent?: { sha: string; date: string };
 }
 
@@ -157,19 +178,69 @@ function countOccurrences(haystack: string, needle: string): number {
   return count;
 }
 
-/** Measure one probe against one file revision. */
-export function measure(content: string, probe: Probe): number {
+/**
+ * Resolve a marker-anchored region to text.
+ *
+ * Returns null when the start marker is absent, which the caller must treat as
+ * "unmeasurable", never as zero. A missing anchor silently counting zero is how
+ * a probe turns into a false "closed".
+ */
+export function resolveAnchoredRegion(
+  content: string,
+  anchor: { start: string; end?: string },
+): string | null {
+  const startIndex = content.indexOf(anchor.start);
+  if (startIndex === -1) return null;
+  if (!anchor.end) return content.slice(startIndex);
+  const endIndex = content.indexOf(anchor.end, startIndex + anchor.start.length);
+  if (endIndex === -1) return content.slice(startIndex);
+  return content.slice(startIndex, endIndex + anchor.end.length);
+}
+
+/** Blank-line separated records, the shape of .po catalogues and many configs. */
+function splitBlocks(content: string): string[] {
+  return content.split(/\r?\n\s*\r?\n/);
+}
+
+/**
+ * Measure one probe against one file revision.
+ *
+ * Returns null when the probe cannot be evaluated (missing anchor), so the
+ * caller can report "unmeasurable" rather than inventing a count.
+ */
+export function measure(content: string, probe: Probe): number | null {
+  if (probe.blockContext) {
+    const contextRe = new RegExp(probe.blockContext, "m");
+    const matchRe = probe.pattern ? new RegExp(probe.pattern, "gm") : null;
+    let total = 0;
+    for (const block of splitBlocks(content)) {
+      if (!contextRe.test(block)) continue;
+      total += matchRe ? (block.match(matchRe) ?? []).length : 1;
+    }
+    return total;
+  }
+
   if (probe.pattern) {
-    const body = probe.lines
-      ? content.split(/\r?\n/).slice(probe.lines[0] - 1, probe.lines[1]).join("\n")
-      : content;
+    let body: string | null = content;
+    if (probe.anchor) {
+      body = resolveAnchoredRegion(content, probe.anchor);
+      if (body === null) return null;
+    } else if (probe.lines) {
+      body = content.split(/\r?\n/).slice(probe.lines[0] - 1, probe.lines[1]).join("\n");
+    }
     const re = new RegExp(probe.pattern, "gm");
     return (body.match(re) ?? []).length;
   }
+
   return countOccurrences(content, probe.needle ?? "");
 }
 
-function verdictFor(probe: Probe, before: number, after: number): ProbeResult["verdict"] {
+function verdictFor(
+  probe: Probe,
+  before: number | null,
+  after: number | null,
+): ProbeResult["verdict"] {
+  if (before === null || after === null) return "unmeasurable";
   const goal = probe.goal ?? (probe.pattern ? "decrease" : "increase");
   if (goal === "decrease") {
     if (after === 0 && before > 0) return "satisfied";
@@ -221,7 +292,15 @@ export function classify(
   const improved = probes.filter((p) => p.verdict === "improved");
   const unchanged = probes.filter((p) => p.verdict === "unchanged");
   const regressed = probes.filter((p) => p.verdict === "regressed");
+  const unmeasurable = probes.filter((p) => p.verdict === "unmeasurable");
 
+  if (unmeasurable.length > 0) {
+    return {
+      status: "needs_human",
+      humanReason:
+        "A probe anchor no longer resolves, so this row could not be measured. Re-anchor the probe.",
+    };
+  }
   if (satisfied.length === probes.length) return { status: "closed" };
   if (satisfied.length > 0 || improved.length > 0) return { status: "partial" };
   if (regressed.length > 0) {
@@ -231,7 +310,7 @@ export function classify(
     };
   }
   if (unchanged.length === probes.length) {
-    const anyPresent = probes.some((p) => p.countAtHead > 0);
+    const anyPresent = probes.some((p) => (p.countAtHead ?? 0) > 0);
     return anyPresent
       ? {
           status: "contradicted",

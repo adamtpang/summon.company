@@ -59,6 +59,77 @@ describe("measure", () => {
   });
 });
 
+describe("marker-anchored ranges survive the file moving", () => {
+  const region = ['#: surfaces/executive.tsx', 'msgid "a"', 'msgstr ""', "// END-EXEC"].join("\n");
+  const probe = {
+    file: "x.po",
+    pattern: '^msgstr ""$',
+    anchor: { start: "#: surfaces/executive.tsx", end: "// END-EXEC" },
+  };
+
+  it("measures the same region after the file GROWS above it", () => {
+    const before = measure(region, probe);
+    const grown = ["new".repeat(10), "padding", "lines", region].join("\n");
+    expect(measure(grown, probe)).toBe(before);
+    expect(before).toBe(1);
+  });
+
+  it("measures the same region after the file SHRINKS above it", () => {
+    const padded = ["junk", "junk", region].join("\n");
+    expect(measure(padded, probe)).toBe(measure(region, probe));
+  });
+
+  it("measures the same region after the region MOVES to the end", () => {
+    const moved = ["a", "b", "c", "d", "e", region].join("\n");
+    expect(measure(moved, probe)).toBe(1);
+  });
+
+  it("returns null rather than zero when the anchor is gone", () => {
+    expect(measure("nothing here", probe)).toBeNull();
+  });
+
+  it("a fixed line range drifts where an anchor does not, which was the P0-8 bug", () => {
+    const fixed = { file: "x.po", pattern: '^msgstr ""$', lines: [1, 4] as [number, number] };
+    const grown = ["padding", "padding", region].join("\n");
+    expect(measure(grown, fixed)).toBe(0); // window slid off the real content
+    expect(measure(grown, probe)).toBe(1); // anchor still finds it
+  });
+});
+
+describe("block scanning", () => {
+  const po = [
+    "#: dashboards/executive/page.tsx",
+    'msgid "a"',
+    'msgstr ""',
+    "",
+    "#: settings/other.tsx",
+    'msgid "b"',
+    'msgstr ""',
+    "",
+    "#: dashboards/executive/board-packets/page.tsx",
+    'msgid "c"',
+    'msgstr "готово"',
+  ].join("\n");
+
+  it("counts only blocks whose context matches", () => {
+    const value = measure(po, {
+      file: "ru.po",
+      blockContext: "dashboards/executive",
+      pattern: '^msgstr ""$',
+    });
+    expect(value).toBe(1);
+  });
+
+  it("ignores matching lines in blocks that are out of scope", () => {
+    const value = measure(po, {
+      file: "ru.po",
+      blockContext: "nothing-matches-this",
+      pattern: '^msgstr ""$',
+    });
+    expect(value).toBe(0);
+  });
+});
+
 describe("classify", () => {
   it("closes when every probe is satisfied", () => {
     const result = classify("dead code, no call sites", [
