@@ -18,6 +18,7 @@ import { builtInAgentRoutes } from "./routes/built-in-agents.js";
 import { teamsCatalogRoutes } from "./routes/teams-catalog.js";
 import { agentRoutes } from "./routes/agents.js";
 import { projectRoutes } from "./routes/projects.js";
+import { registerTruthRoutes } from "./routes/register-truth.js";
 import { issueRoutes } from "./routes/issues.js";
 import { issueTreeControlRoutes } from "./routes/issue-tree-control.js";
 import { caseRoutes } from "./routes/cases.js";
@@ -32,6 +33,8 @@ import { boardChatRoutes } from "./routes/board-chat.js";
 import { approvalRoutes } from "./routes/approvals.js";
 import { secretRoutes } from "./routes/secrets.js";
 import { costRoutes } from "./routes/costs.js";
+import { subscriptionRoutes } from "./routes/subscriptions.js";
+import { policyLedgerRoutes } from "./routes/policy-ledger.js";
 import { fleetRoutes } from "./routes/fleet.js";
 import { activityRoutes } from "./routes/activity.js";
 import { dashboardRoutes } from "./routes/dashboard.js";
@@ -238,6 +241,7 @@ export async function createApp(
   api.use(agentRoutes(db, { pluginWorkerManager: workerManager }));
   api.use(assetRoutes(db, opts.storageService));
   api.use(projectRoutes(db));
+  api.use(registerTruthRoutes(db));
   api.use(issueRoutes(db, opts.storageService, {
     feedbackExportService: opts.feedbackExportService,
     pluginWorkerManager: workerManager,
@@ -255,6 +259,8 @@ export async function createApp(
   api.use(approvalRoutes(db, { pluginWorkerManager: workerManager }));
   api.use(secretRoutes(db));
   api.use(costRoutes(db, { pluginWorkerManager: workerManager }));
+  api.use(subscriptionRoutes(db, { pluginWorkerManager: workerManager }));
+  api.use(policyLedgerRoutes(db, { pluginWorkerManager: workerManager }));
   api.use(fleetRoutes(db));
   api.use(activityRoutes(db));
   api.use(dashboardRoutes(db));
