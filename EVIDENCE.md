@@ -65,6 +65,7 @@ one price each.
 | 2026-08-01 | /diagnose verified working end to end | unverified | POST returned stage 7, a named binding constraint, a precedent, and a first move for a test business | live API |
 | 2026-08-01 | Fleet ring added to the landing footer | none | hub plus everybot.fun and summon.guide, renders at 375px with no overflow | apps/landing/index.html |
 | 2026-08-01 | fleet.json status corrected | "code" | "live", the site returns HTTP 200 | Aether/fleet.json |
+| 2026-08-01 | Deployed to production on Adam's instruction | live site had 8 dead buy buttons and sold a superseded $99/mo offer | live site sells the $500/mo founding seat through the one working rail. 14 mentions of $500, zero of $99/mo, JSON-LD price 500.00. design.summon.company, vitals.run, /diagnose, /roles/, /blog.html, /changelog.html, /terms.html all still 200 | deploy `dpl_9oJyZUGxYouc36MwHZChH8cNwjwe` |
 | 2026-08-01 | Michael follow-up drafted | none | outbound/michael-followup.md, unsent, with the Haven precondition flagged | outbound/ |
 
 ## What changes the zero
