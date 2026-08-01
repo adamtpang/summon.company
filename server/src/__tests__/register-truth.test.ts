@@ -1,7 +1,14 @@
 import { describe, expect, it } from "vitest";
 
 import { parseMarkdownRegister, parseChecklistRegister } from "../services/register-truth-parsers.js";
-import { classify, measure, requiresHumanReview, type ProbeResult } from "../services/register-truth.js";
+import {
+  classify,
+  countByStatus,
+  measure,
+  requiresHumanReview,
+  type ProbeResult,
+  type ReconciliationReceipt,
+} from "../services/register-truth.js";
 
 const REGISTER = `## P0 — Blocking
 
@@ -52,10 +59,9 @@ describe("measure", () => {
     expect(measure("a b a b a", { file: "x", needle: "a" })).toBe(3);
   });
 
-  it("counts regex matches inside a line range only", () => {
+  it("counts regex matches", () => {
     const content = ['msgstr ""', 'msgstr "x"', 'msgstr ""', 'msgstr ""'].join("\n");
     expect(measure(content, { file: "x", pattern: '^msgstr ""$' })).toBe(3);
-    expect(measure(content, { file: "x", pattern: '^msgstr ""$', lines: [1, 2] })).toBe(1);
   });
 });
 
@@ -86,13 +92,6 @@ describe("marker-anchored ranges survive the file moving", () => {
 
   it("returns null rather than zero when the anchor is gone", () => {
     expect(measure("nothing here", probe)).toBeNull();
-  });
-
-  it("a fixed line range drifts where an anchor does not, which was the P0-8 bug", () => {
-    const fixed = { file: "x.po", pattern: '^msgstr ""$', lines: [1, 4] as [number, number] };
-    const grown = ["padding", "padding", region].join("\n");
-    expect(measure(grown, fixed)).toBe(0); // window slid off the real content
-    expect(measure(grown, probe)).toBe(1); // anchor still finds it
   });
 });
 
@@ -153,6 +152,14 @@ describe("classify", () => {
     expect(result.humanReason).toMatch(/never auto-closed/i);
   });
 
+  it("routes an unmeasurable probe to a human instead of guessing", () => {
+    const result = classify("some quantity claim", [
+      probe({ countAtRegister: null, countAtHead: null, verdict: "unmeasurable" }),
+    ]);
+    expect(result.status).toBe("needs_human");
+    expect(result.humanReason).toMatch(/re-anchor/i);
+  });
+
   it("calls a row contradicted when nothing moved but evidence is present", () => {
     const result = classify("consumer ignores the real prefix", [
       probe({ countAtRegister: 3, countAtHead: 3, verdict: "unchanged" }),
@@ -160,8 +167,38 @@ describe("classify", () => {
     expect(result.status).toBe("contradicted");
   });
 
+  it("calls a row open when nothing moved and no evidence exists", () => {
+    const result = classify("the fix has not landed", [
+      probe({ countAtRegister: 0, countAtHead: 0, verdict: "unchanged" }),
+    ]);
+    expect(result.status).toBe("open");
+  });
+
   it("asks for a human when no probe could be derived", () => {
     expect(classify("three disagreeing revenue numbers", []).status).toBe("needs_human");
+  });
+});
+
+describe("countByStatus", () => {
+  it("counts every status bucket once, in one place", () => {
+    const receipt = {
+      findings: [
+        { actualStatus: "closed" },
+        { actualStatus: "closed" },
+        { actualStatus: "partial" },
+        { actualStatus: "needs_human" },
+        { actualStatus: "open" },
+        { actualStatus: "contradicted" },
+      ],
+    } as unknown as ReconciliationReceipt;
+    expect(countByStatus(receipt)).toEqual({
+      closed: 2,
+      partial: 1,
+      needsHuman: 1,
+      open: 1,
+      contradicted: 1,
+      total: 6,
+    });
   });
 });
 

@@ -7,19 +7,21 @@
  *
  * Two rules that are not configurable:
  *   1. The customer repo is READ-ONLY. Nothing here writes to it. The doc-PR
- *      proposer produces a diff and stops; opening the PR is a separate,
- *      explicitly enabled step that a human approves.
+ *      proposer produces a diff and stops; opening a PR against a customer
+ *      repo is a separate, explicitly enabled step a human approves.
  *   2. Security and money findings never auto-close (enforced in classify()).
  *
  * Design: doc/REGISTER-TRUTH-AGENT.md
  */
 
 import {
+  countByStatus,
+  createGitReader,
   reconcileRegister,
   summarize,
+  type Probe,
   type ReconciledFinding,
   type ReconciliationReceipt,
-  type Probe,
 } from "./register-truth.js";
 
 export type RunTrigger = "webhook" | "routine" | "manual";
@@ -33,8 +35,6 @@ export interface RunRequest {
   registerPath: string;
   probes?: Record<string, Probe[]>;
   trigger: RunTrigger;
-  /** propose_only is the default and the only mode wired today. */
-  mode?: "propose_only" | "write_enabled";
 }
 
 export interface RunOutcome {
@@ -42,11 +42,10 @@ export interface RunOutcome {
   ran: boolean;
   skippedReason?: string;
   receipt?: ReconciliationReceipt;
-  /** Task that would be (or was) filed. */
-  task?: { title: string; body: string; department: string; priority: string };
-  /** Unified diff proposed against the register. Never applied here. */
+  /** Task that was (or, in a dry run, would be) filed. */
+  task?: { title: string; body: string; priority: string };
+  /** Unified diff proposed against the register. Never applied to the customer repo. */
   proposedDiff?: string;
-  summary?: string;
 }
 
 /** Persistence seam, so the runner is testable without a database. */
@@ -60,19 +59,18 @@ export interface RunStore {
     receipt: ReconciliationReceipt;
     proposedDiff: string;
     trigger: RunTrigger;
-    mode: string;
     issueId?: string;
   }): Promise<void>;
 }
 
-/** Task filing seam, so a dry run can show the task without creating one. */
+/** Task filing seam. Production adapts issueService; a dry run just prints. */
 export interface TaskFiler {
   file(input: {
     companyId: string;
     title: string;
     description: string;
     priority: string;
-  }): Promise<{ id: string; identifier?: string } | null>;
+  }): Promise<{ id: string; identifier?: string | null } | null>;
 }
 
 /** Drift worth telling a human about: the register disagrees with the code. */
@@ -82,7 +80,7 @@ export function findDrift(receipt: ReconciliationReceipt): ReconciledFinding[] {
   );
 }
 
-/** The receipt, rendered for a task body. Evidence only, no adjectives. */
+/** The receipt, rendered for a task body or a CLI. Evidence only, no adjectives. */
 export function renderReceipt(receipt: ReconciliationReceipt): string {
   const lines: string[] = [];
   lines.push(summarize(receipt));
@@ -117,12 +115,12 @@ export function renderReceipt(receipt: ReconciliationReceipt): string {
  * Rows needing a human are annotated as questions, not corrections, so an
  * approver is never nudged into rubber-stamping a security row.
  */
-export function proposeRegisterEdit(
-  registerText: string,
-  receipt: ReconciliationReceipt,
-): { updated: string; diff: string } {
+export function proposeRegisterEdit(receipt: ReconciliationReceipt): {
+  updated: string;
+  diff: string;
+} {
   const byId = new Map(receipt.findings.map((f) => [f.id, f]));
-  const original = registerText.split(/\r?\n/);
+  const original = receipt.registerText.split(/\r?\n/);
 
   const updated = original.map((line) => {
     const match = line.match(/^\|\s*(P\d+-\d+|[A-Z]{1,4}-\d+)\s*\|/);
@@ -168,68 +166,53 @@ export function unifiedDiff(path: string, before: string[], after: string[]): st
 }
 
 /**
- * One run. Reconcile, dedupe, file, propose.
+ * One run. Resolve head, dedupe, reconcile, file, propose.
  *
- * `store` and `filer` are optional so a dry run can execute the whole path and
- * return exactly what it WOULD do without a database or a task.
+ * The head is resolved (one fetch) BEFORE the full reconciliation so a
+ * redelivered webhook or an unchanged repo skips at the cost of a rev-parse,
+ * not a whole run. `store` and `filer` are optional so a dry run can execute
+ * the entire path and return exactly what it WOULD do.
  */
 export async function runReconciliation(
   req: RunRequest,
   deps: { store?: RunStore; filer?: TaskFiler } = {},
 ): Promise<RunOutcome> {
+  const reader = createGitReader(req.repoDir);
+  const head = reader.resolveHead();
+
+  if (deps.store && (await deps.store.hasRun(req.repo, req.registerPath, head.sha))) {
+    return { ran: false, skippedReason: `already reconciled at ${head.sha}` };
+  }
+
   const receipt = reconcileRegister({
     repoDir: req.repoDir,
     repo: req.repo,
     registerPath: req.registerPath,
     overrides: req.probes,
+    reader,
+    head,
   });
 
-  if (deps.store && (await deps.store.hasRun(req.repo, req.registerPath, receipt.headCommit))) {
-    return {
-      ran: false,
-      skippedReason: `already reconciled at ${receipt.headCommit}`,
-      receipt,
-    };
-  }
-
+  const { diff } = proposeRegisterEdit(receipt);
   const drift = findDrift(receipt);
-  const registerText =
-    // Re-read at head so the proposed edit applies to what is actually there.
-    receipt.findings.length > 0 ? req.registerPath : req.registerPath;
-  void registerText;
 
-  const summary = summarize(receipt);
-  if (drift.length === 0) {
-    if (deps.store) {
-      await deps.store.record({
-        companyId: req.companyId,
-        repo: req.repo,
-        registerPath: req.registerPath,
-        receipt,
-        proposedDiff: "",
-        trigger: req.trigger,
-        mode: req.mode ?? "propose_only",
-      });
-    }
-    return { ran: true, receipt, summary };
-  }
-
-  const task = {
-    title: `Register drift: ${drift.length} finding(s) in ${req.registerPath}`,
-    body: renderReceipt(receipt),
-    department: "engineering",
-    priority: drift.length >= 3 ? "high" : "medium",
-  };
-
+  let task: RunOutcome["task"];
   let issueId: string | undefined;
-  if (deps.filer) {
-    const filed = await deps.filer.file({
-      companyId: req.companyId,
-      title: task.title,
-      description: task.body,
-      priority: task.priority,
-    });
-    issueId = filed?.id;
+  if (drift.length > 0) {
+    task = {
+      title: `Register drift: ${drift.length} finding(s) in ${req.registerPath}`,
+      body: renderReceipt(receipt),
+      priority: drift.length >= 3 ? "high" : "medium",
+    };
+    if (deps.filer) {
+      const filed = await deps.filer.file({
+        companyId: req.companyId,
+        title: task.title,
+        description: task.body,
+        priority: task.priority,
+      });
+      issueId = filed?.id ?? undefined;
+    }
   }
 
   if (deps.store) {
@@ -238,15 +221,16 @@ export async function runReconciliation(
       repo: req.repo,
       registerPath: req.registerPath,
       receipt,
-      proposedDiff: "",
+      proposedDiff: diff,
       trigger: req.trigger,
-      mode: req.mode ?? "propose_only",
       issueId,
     });
   }
 
-  return { ran: true, receipt, task, summary };
+  return { ran: true, receipt, task, proposedDiff: diff };
 }
+
+export { countByStatus };
 
 /**
  * Should this webhook payload trigger a run?

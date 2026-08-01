@@ -12,10 +12,12 @@ import {
 } from "../services/register-truth-runner.js";
 import type { ReconciliationReceipt } from "../services/register-truth.js";
 
-vi.mock("../services/register-truth.js", async (importOriginal) => {
-  const actual = await importOriginal<typeof import("../services/register-truth.js")>();
-  return { ...actual, reconcileRegister: vi.fn(() => RECEIPT) };
-});
+const REGISTER_TEXT = [
+  "| #    | Finding |",
+  "| ---- | ------- |",
+  "| P0-2 | nightly build is dead code |",
+  "| P0-1 | route authz missing |",
+].join("\n");
 
 const RECEIPT: ReconciliationReceipt = {
   repo: "regain-inc/miss",
@@ -25,6 +27,7 @@ const RECEIPT: ReconciliationReceipt = {
   headCommit: "d93947d91",
   headBranch: "main",
   commitsSinceRegister: 262,
+  registerText: REGISTER_TEXT,
   generatedAt: "2026-07-31T00:00:00.000Z",
   findings: [
     {
@@ -53,6 +56,22 @@ const RECEIPT: ReconciliationReceipt = {
     },
   ],
 };
+
+vi.mock("../services/register-truth.js", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("../services/register-truth.js")>();
+  return {
+    ...actual,
+    reconcileRegister: vi.fn(() => RECEIPT),
+    createGitReader: vi.fn(() => ({
+      resolveHead: () => ({ sha: "d93947d91", branch: "main" }),
+      readFileAtRef: () => null,
+      countCommitsBetween: () => 0,
+      lastCommitForPath: () => null,
+      commitsTouchingSince: () => [],
+      commitMeta: (sha: string) => ({ sha, date: "2026-07-31" }),
+    })),
+  };
+});
 
 describe("webhook trigger", () => {
   it("fires only on a merged pull request", () => {
@@ -95,32 +114,25 @@ describe("receipt rendering", () => {
 });
 
 describe("proposed register edit", () => {
-  const register = [
-    "| #    | Finding |",
-    "| ---- | ------- |",
-    "| P0-2 | nightly build is dead code |",
-    "| P0-1 | route authz missing |",
-  ].join("\n");
-
-  it("annotates a closed row with evidence", () => {
-    const { updated } = proposeRegisterEdit(register, RECEIPT);
+  it("annotates a closed row with evidence, from the receipt's own text", () => {
+    const { updated } = proposeRegisterEdit(RECEIPT);
     expect(updated).toContain("CLOSED in code as of d93947d91");
     expect(updated).toContain("b4af6e64c");
   });
 
   it("annotates a security row as needing review, never as closed", () => {
-    const { updated } = proposeRegisterEdit(register, RECEIPT);
+    const { updated } = proposeRegisterEdit(RECEIPT);
     const p01 = updated.split("\n").find((l) => l.startsWith("| P0-1"));
     expect(p01).toContain("NEEDS REVIEW");
     expect(p01).not.toContain("CLOSED");
   });
 
-  it("produces a diff, and never mutates the input", () => {
-    const before = register;
-    const { diff } = proposeRegisterEdit(register, RECEIPT);
+  it("produces a diff and never mutates the receipt text", () => {
+    const before = RECEIPT.registerText;
+    const { diff } = proposeRegisterEdit(RECEIPT);
     expect(diff).toContain("--- a/docs/register.md");
     expect(diff).toContain("+++ b/docs/register.md");
-    expect(register).toBe(before);
+    expect(RECEIPT.registerText).toBe(before);
   });
 
   it("returns an empty diff when nothing changed", () => {
@@ -151,18 +163,27 @@ describe("run orchestration", () => {
     expect(filed).toHaveLength(1);
   });
 
-  it("skips a head commit that was already reconciled", async () => {
+  it("produces the proposed diff on the outcome and persists it", async () => {
+    const rows: Array<{ proposedDiff: string; issueId?: string }> = [];
+    const store: RunStore = {
+      hasRun: async () => false,
+      record: async (r) => void rows.push({ proposedDiff: r.proposedDiff, issueId: r.issueId }),
+    };
+    const filer: TaskFiler = { file: async () => ({ id: "issue-9" }) };
+    const outcome = await runReconciliation(base, { store, filer });
+    expect(outcome.proposedDiff).toContain("CLOSED in code as of d93947d91");
+    expect(rows[0].proposedDiff).toBe(outcome.proposedDiff);
+    expect(rows[0].issueId).toBe("issue-9");
+  });
+
+  it("skips before reconciling when the head commit was already done", async () => {
     const store: RunStore = { hasRun: async () => true, record: async () => {} };
+    const mod = await import("../services/register-truth.js");
+    vi.mocked(mod.reconcileRegister).mockClear();
     const outcome = await runReconciliation(base, { store });
     expect(outcome.ran).toBe(false);
     expect(outcome.skippedReason).toContain("already reconciled");
-  });
-
-  it("records history when it does run", async () => {
-    const rows: unknown[] = [];
-    const store: RunStore = { hasRun: async () => false, record: async (r) => void rows.push(r) };
-    await runReconciliation(base, { store });
-    expect(rows).toHaveLength(1);
+    expect(mod.reconcileRegister).not.toHaveBeenCalled();
   });
 
   it("does not file a task when there is no drift", async () => {

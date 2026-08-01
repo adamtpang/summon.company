@@ -18,8 +18,6 @@ export interface ParsedFinding {
   files: string[];
   /** Backticked identifiers named in the row, best-effort probe candidates. */
   symbols: string[];
-  /** 1-indexed line in the register, so a diff can be anchored. */
-  line: number;
 }
 
 const ID_PATTERN = /^\|\s*(P\d+-\d+|[A-Z]{1,4}-\d+)\s*\|/;
@@ -42,7 +40,8 @@ function splitRow(row: string): string[] {
     current += char;
   }
   cells.push(current.trim());
-  return cells.filter((cell, index) => !(index === 0 && cell === ""));
+  if (cells[0] === "") cells.shift();
+  return cells;
 }
 
 function extractFiles(text: string): string[] {
@@ -72,12 +71,12 @@ export function parseMarkdownRegister(text: string): ParsedFinding[] {
   const findings: ParsedFinding[] = [];
   const lines = text.split(/\r?\n/);
 
-  lines.forEach((raw, index) => {
+  for (const raw of lines) {
     const idMatch = raw.match(ID_PATTERN);
-    if (!idMatch) return;
+    if (!idMatch) continue;
 
     const cells = splitRow(raw);
-    if (cells.length < 2) return;
+    if (cells.length < 2) continue;
 
     const id = cells[0];
     // The widest cell is the finding text in every register shape seen so far.
@@ -92,9 +91,8 @@ export function parseMarkdownRegister(text: string): ParsedFinding[] {
       claimedStatus,
       files: extractFiles(raw),
       symbols: extractSymbols(raw),
-      line: index + 1,
     });
-  });
+  }
 
   return findings;
 }
@@ -115,7 +113,6 @@ export function parseChecklistRegister(text: string): ParsedFinding[] {
       claimedStatus: match[1].trim() === "" ? "open" : "done",
       files: extractFiles(raw),
       symbols: extractSymbols(raw),
-      line: index + 1,
     });
   });
 

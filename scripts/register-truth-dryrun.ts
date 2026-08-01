@@ -11,11 +11,8 @@
  */
 
 import { readFileSync } from "node:fs";
-import { spawnSync } from "node:child_process";
 
 import {
-  proposeRegisterEdit,
-  renderReceipt,
   runReconciliation,
   shouldTriggerFromWebhook,
   type RunStore,
@@ -50,7 +47,9 @@ const event = {
 };
 
 console.log("=== 1. incoming webhook ===");
-console.log(`event: ${event.name}  action: ${event.payload.action}  merged: ${event.payload.pull_request.merged}`);
+console.log(
+  `event: ${event.name}  action: ${event.payload.action}  merged: ${event.payload.pull_request.merged}`,
+);
 const triggers = shouldTriggerFromWebhook(event.name, event.payload);
 console.log(`triggers a run: ${triggers}`);
 if (!triggers) process.exit(0);
@@ -64,7 +63,7 @@ const store: RunStore = {
     console.log(`\n=== 3. history row (NOT written, dry run) ===`);
     console.log(
       `repo=${row.repo} register=${row.registerPath} head=${row.receipt.headCommit} ` +
-        `trigger=${row.trigger} mode=${row.mode}`,
+        `trigger=${row.trigger} diffBytes=${row.proposedDiff.length}`,
     );
   },
 };
@@ -82,55 +81,28 @@ const filer: TaskFiler = {
 };
 
 console.log("\n=== 2. reconciling (read-only) ===");
-const outcome = await runReconciliation(
-  {
-    companyId: "dry-run-company",
-    repoDir,
-    repo,
-    registerPath,
-    probes,
-    trigger: "webhook",
-    mode: "propose_only",
-  },
-  { store, filer },
-);
+const request = { companyId: "dry-run-company", repoDir, repo, registerPath, probes };
+const outcome = await runReconciliation({ ...request, trigger: "webhook" }, { store, filer });
 
 if (!outcome.ran) {
   console.log(`skipped: ${outcome.skippedReason}`);
   process.exit(0);
 }
 
-// 5. The proposed doc PR, generated from the register at head. Read-only.
+// 5. The proposed doc PR, computed by the runner from the receipt's own
+// register text, so it is always diffed at the same commit it was classified.
 if (outcome.receipt) {
-  const show = spawnSync(
-    "git",
-    ["show", `origin/${outcome.receipt.headBranch}:${registerPath}`],
-    { cwd: repoDir, encoding: "utf-8", maxBuffer: 32 * 1024 * 1024 },
-  );
-  const registerText = show.stdout ?? "";
-  const { diff } = proposeRegisterEdit(registerText, outcome.receipt);
-
   console.log(`\n=== 5. proposed doc PR (propose-only, NOT opened) ===`);
   console.log(`branch that would be created: summon/register-truth-${outcome.receipt.headCommit}`);
-  console.log(`title: docs: reconcile ${registerPath} against ${outcome.receipt.headCommit}`);
+  console.log(
+    `title: docs: reconcile ${registerPath} against ${outcome.receipt.headCommit}`,
+  );
   console.log("--- diff ---");
-  console.log(diff || "(no changes proposed)");
+  console.log(outcome.proposedDiff || "(no changes proposed)");
 }
 
 console.log(`\n=== 6. second delivery of the same event (idempotency) ===`);
-const second = await runReconciliation(
-  {
-    companyId: "dry-run-company",
-    repoDir,
-    repo,
-    registerPath,
-    probes,
-    trigger: "webhook",
-    mode: "propose_only",
-  },
-  { store, filer },
-);
+const second = await runReconciliation({ ...request, trigger: "webhook" }, { store, filer });
 console.log(`ran: ${second.ran}  reason: ${second.skippedReason ?? "n/a"}`);
 
 console.log(`\nnothing was written to ${repo}. propose-only mode.`);
-void renderReceipt;

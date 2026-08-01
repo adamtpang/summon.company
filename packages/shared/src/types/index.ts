@@ -682,3 +682,11 @@ export type {
   PluginDatabaseNamespaceMode,
   PluginDatabaseNamespaceStatus,
 } from "./plugin.js";
+export type {
+  FindingStatus,
+  FindingStatusCounts,
+  Probe,
+  ProbeResult,
+  ReconciledFinding,
+  ReconciliationReceipt,
+} from "./register-truth.js";
