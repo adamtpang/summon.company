@@ -14,7 +14,9 @@
   "P0-5": [
     { "file": "packages/events/src/consumer.ts", "needle": "XPENDING" }
   ],
-  "P0-6": [],
+  "P0-6": [
+    { "file": "apps/api/src/modules/v1/persona-cockpits/executive.ts", "needle": "was previously unfiltered/all-time, P0-6" }
+  ],
   "P0-7": [
     { "file": "apps/queue/src/queues/bi-etl.ts", "needle": "expectedRevenue," }
   ],

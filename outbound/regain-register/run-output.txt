@@ -1,8 +1,8 @@
 
 regain-inc/miss  register: docs/99-defactum-intel/07-miss-migration/02-ceo-features/21-findings-register.md
 register last edited 2026-07-14 (03ef9825f)
-reconciled against origin/main (d93947d91)
-commits since the register was written: 257
+reconciled against origin/main (c1b1701a2)
+commits since the register was written: 269
 
 NEEDS HUMAN  P0-1
     apps/api/src/modules/v1/persona-cockpits/controller.ts  "rbac: { permission: { bi: ["read"] } }"  2 -> 7  [improved]  closed by 5db025163 2026-07-14
@@ -15,14 +15,14 @@ CLOSED       P0-4
     apps/queue/src/queues/bi-etl.ts  "totalCharges,"  0 -> 2  [satisfied]  closed by b4af6e64c 2026-07-14
 CLOSED       P0-5
     packages/events/src/consumer.ts  "XPENDING"  0 -> 2  [satisfied]  closed by b1baa70cb 2026-07-19
-NEEDS HUMAN  P0-6
-    note: No probe could be derived from the row.
+CLOSED       P0-6
+    apps/api/src/modules/v1/persona-cockpits/executive.ts  "was previously unfiltered/all-time, P0-6"  0 -> 1  [satisfied]  closed by 6513ff3f4 2026-07-14
 CLOSED       P0-7
     apps/queue/src/queues/bi-etl.ts  "expectedRevenue,"  0 -> 2  [satisfied]  closed by b4af6e64c 2026-07-14
 PARTIAL      P0-8
-    apps/admin/messages/ru.po  /^msgstr ""$/ lines 21925-22638  37 -> 7  [improved]  closed by 519f4af31 2026-07-13
+    apps/admin/messages/ru.po  /^msgstr ""$/  53 -> 1  [improved]  closed by 5fa55f2e6 2026-07-15
 CLOSED       P0-9
     apps/api/src/modules/v1/persona-cockpits/executive.ts  "fetchRevenueDataAsOf(tx, organizationId)"  0 -> 1  [satisfied]  closed by 6c25f457d 2026-07-15
 
-6 of 9 findings are closed in code, 1 partially, 2 need a human, but the register has not been updated in 257 commits (last edited 2026-07-14).
+7 of 9 findings are closed in code, 1 partially, 1 need a human, but the register has not been updated in 269 commits (last edited 2026-07-14).
 
