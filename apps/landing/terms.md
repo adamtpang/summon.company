@@ -1,13 +1,14 @@
 <!--
   summon.company — /terms page source
-  Drafted by Shield · Legal (SUM-151). Plain-language refund policy + minimal ToS + privacy one-pager.
+  Drafted by Shield · Legal (SUM-151); split into Terms+Refunds / Privacy by Cicero · Legal (SUM-223).
+  Plain-language refund policy + minimal ToS. The privacy policy now lives in privacy.md → /privacy.html.
   US jurisdiction assumed. Bracketed [PLACEHOLDERS] must be filled before publishing — see the
   "Before you publish" checklist at the bottom. This is an informational draft, not legal advice.
 -->
 
-# Summon — Terms, Refunds & Privacy
+# Summon — Terms & Refunds
 
-_Last updated: July 19, 2026 · Questions: [hello@summon.company](mailto:hello@summon.company)_
+_Last updated: July 23, 2026 · Questions: [hello@summon.company](mailto:hello@summon.company) · [Privacy Policy](/privacy.html)_
 
 Summon is made by **Anchor Marianas LLC** ("Summon," "we," "us"). We keep this page short and in plain
 words on purpose. If a line here ever seems to fight with what a salesperson or a marketing page told
@@ -109,58 +110,13 @@ Questions about these terms? **[hello@summon.company](mailto:hello@summon.compan
 
 ---
 
-## 3. Privacy — the one-pager
+## 3. Your privacy
 
-We collect the least we can, we don't sell your data, and we're upfront about the outside services that
-help us run Summon.
+The short version: we collect the least we can, we don't sell your data, and we're upfront about the outside
+services that help us run Summon. The full details — what we collect, how we use it, who we share it with,
+and your rights — live on our **[Privacy Policy](/privacy.html)**, which is part of these terms by reference.
 
-**What we collect**
-
-- **Account details** — your name, email, and login information.
-- **Billing details** — handled by our payment processor (Stripe). We see enough to manage your
-  subscription (like the last four digits and status); we do **not** store your full card number.
-- **Your work in Summon** — the issues, instructions, files, and content you and your AI employees
-  create. This is yours; we process it to run the service for you.
-- **Basic usage and device data** — things like log data and general analytics that keep the product
-  working and secure.
-
-**How we use it**
-
-- To run Summon, do the work you assign, and show you your vitals dashboard.
-- To bill you, support you, and keep the service secure.
-- To improve Summon. **We do not sell your personal data**, and we don't use your private work content
-  to train public AI models. If we ever want to use your content to improve our own models, we'll ask
-  first and let you opt out.
-
-**Who we share it with**
-
-We share data only with the service providers that make Summon run, and only as needed:
-
-- **AI model providers** — Summon's employees run on third-party AI models (with automatic failover
-  between providers). Your instructions and relevant content are sent to these providers so they can do
-  the work. We use providers that commit not to train their public models on business/API data.
-- **Payment processing** — Stripe.
-- **Infrastructure** — hosting, storage, and analytics providers that run the underlying service.
-- **Legal reasons** — if we're genuinely required to by law, or to protect people's safety or our rights.
-
-We don't sell or rent your personal data to advertisers or data brokers. Full stop.
-
-**Your choices and rights**
-
-- You can access, correct, export, or delete your data — email
-  **[hello@summon.company](mailto:hello@summon.company)** and we'll help.
-- Cancel any time; you can ask us to delete your account data after you leave, subject to records we're
-  legally required to keep (like basic billing history).
-- Depending on where you live (for example, the EU/UK or California), you may have extra rights — we'll
-  honor those.
-
-**Keeping it safe.** We use reasonable technical and organizational measures to protect your data. No
-system is perfectly secure, so please use a strong, unique password.
-
-**Not built for regulated data.** Summon isn't designed for protected health information, children's
-data, or other specially regulated categories. Please don't put that kind of data into Summon.
-
-**Contact.** Privacy questions or requests: **[hello@summon.company](mailto:hello@summon.company)**.
+Read the full **[Privacy Policy →](/privacy.html)** (source: `privacy.md`).
 
 ---
 
@@ -198,6 +154,9 @@ attorney should glance at the flagged items below before this goes live under a 
      models on business/API data." Verify this is true for every provider in your failover chain and
      keep it accurate as you add providers.
 
-WIRING NOTE (non-legal): render this markdown at /terms and /privacy (or one combined /terms page with
-anchors #refunds, #terms, #privacy), and link it from the footer and the founding-offer checkout section.
+WIRING NOTE (non-legal): DONE in SUM-223 — Terms+Refunds render at /terms.html (source: terms.md) and the
+Privacy Policy renders at /privacy.html (source: privacy.md). Both are linked in the index.html footer
+("Terms & refunds" and "Privacy") and cross-link each other. Still TODO before a live paid Stripe link:
+also surface the recurring-charge disclosure + a link to these pages inside the founding-offer checkout flow
+(see attorney item #1 on auto-renewal).
 -->

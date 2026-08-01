@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Summon | Hire AI employees. You're the board.</title>
-<meta name="description" content="Summon a company of AI employees. Marketing, sales, ops, support, engineering: they do the work 24/7, you approve as the board. Budget-capped, so you never get a surprise bill. Founding slots $99/mo locked for life." />
+<meta name="description" content="Summon a company of AI employees. Marketing, sales, ops, support, engineering: they do the work 24/7, you approve as the board. Budget-capped, so you never get a surprise bill. Founding seat $500/mo for the whole org." />
 
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://summon.company" />
@@ -12,11 +12,11 @@
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 <meta property="og:title" content="Summon | Hire AI employees. You're the board." />
-<meta property="og:description" content="Summon a company of AI employees. They do the work; you approve. Budget-capped, no surprise bills. Founding $99/mo locked for life." />
+<meta property="og:description" content="Summon a company of AI employees. They do the work; you approve. Budget-capped, no surprise bills. Founding seat $500/mo for the whole org." />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://summon.company/og.png" />
 <meta name="twitter:title" content="Summon | Hire AI employees. You're the board." />
-<meta name="twitter:description" content="Summon a company of AI employees. Founding $99/mo locked for life. They work 24/7; you're the board." />
+<meta name="twitter:description" content="Summon a company of AI employees. Founding seat $500/mo, all eight departments. They work 24/7; you're the board." />
 <meta property="og:site_name" content="Summon" />
 <meta property="og:locale" content="en_US" />
 <link rel="canonical" href="https://summon.company/" />
@@ -26,8 +26,8 @@
      Add a FAQPage @graph entry only on role pages that render real Q&A. -->
 <script type="application/ld+json">
 { "@context":"https://schema.org","@graph":[
- {"@type":"Organization","@id":"https://summon.company/#org","name":"Summon","url":"https://summon.company","description":"Hire AI employees for $99/mo. You're the board.","parentOrganization":{"@type":"Organization","name":"adam.inc"}},
- {"@type":"SoftwareApplication","@id":"https://summon.company/#app","name":"Summon","applicationCategory":"BusinessApplication","operatingSystem":"Web","url":"https://summon.company","description":"Summon spins up specialist AI employees that run 24/7 under hard budget caps and an approval gate you control.","offers":{"@type":"Offer","price":"99.00","priceCurrency":"USD","priceSpecification":{"@type":"UnitPriceSpecification","price":"99.00","priceCurrency":"USD","unitText":"per AI employee per month","billingDuration":"P1M"}},"publisher":{"@id":"https://summon.company/#org"}}
+ {"@type":"Organization","@id":"https://summon.company/#org","name":"Summon","url":"https://summon.company","description":"Summon a company of AI employees for $500/mo. You're the board.","parentOrganization":{"@type":"Organization","name":"adam.inc"}},
+ {"@type":"SoftwareApplication","@id":"https://summon.company/#app","name":"Summon","applicationCategory":"BusinessApplication","operatingSystem":"Web","url":"https://summon.company","description":"Summon spins up specialist AI employees that run 24/7 under hard budget caps and an approval gate you control.","offers":{"@type":"Offer","price":"500.00","priceCurrency":"USD","priceSpecification":{"@type":"UnitPriceSpecification","price":"500.00","priceCurrency":"USD","unitText":"per company per month, all eight departments","billingDuration":"P1M"}},"publisher":{"@id":"https://summon.company/#org"}}
 ]}
 </script>
 
@@ -208,6 +208,10 @@
   footer .right { margin-left: auto; font-family: var(--font-mono); font-size: var(--text-overline); }
   footer .beta { width: 100%; margin-top: var(--space-2); font-size: var(--text-label); }
   footer .beta a { color: var(--text-accent); font-weight: 500; }
+  /* The fleet ring: hub plus two sisters. See Aether/DISTRIBUTION.md part 2. */
+  footer .fleet { width: 100%; margin-top: var(--space-2); font-size: var(--text-label); color: var(--text-secondary); }
+  footer .fleet a { color: var(--text-secondary); }
+  footer .fleet a:hover { color: var(--text-primary); }
 
   .offer-points { list-style: none; margin: var(--space-6) auto var(--space-8); padding: 0; display: grid; gap: var(--space-2); max-width: 52ch; font-size: var(--text-body-sm); color: var(--text-secondary); text-align: left; }
   .offer-points li b { color: var(--positive-content); }
@@ -243,10 +247,10 @@
     <div>
       <span class="overline">AI employees, on demand</span>
       <h1>Hire AI employees.<br />You're the board.</h1>
-      <p class="lede">Claude Code is for codebases. <strong>Summon is for companies.</strong> Hire a specialist in 60 seconds, assign the work, approve with one click. <strong>Founding slots $99/mo, locked for life</strong>, running on the Claude or Codex subscription you already pay for. No API bills. Budgets pause; they never bill.</p>
+      <p class="lede">Claude Code is for codebases. <strong>Summon is for companies.</strong> Staff all eight departments in 60 seconds, assign the work, approve with one click. <strong>Founding seat $500/mo for the whole org</strong>, running on the Claude or Codex subscription you already pay for. No API bills. Budgets pause; they never bill.</p>
       <div class="cta-row">
-        <a class="btn btn-primary btn-xl" href="#founding">Claim 1 of 2 founding slots, $99/mo locked for life</a>
-        <a class="btn btn-neutral btn-xl" href="https://buy.stripe.com/4gM3cv0wy2Wp6og3yhaMU17">Hire your first employee, $99/mo</a>
+        <a class="btn btn-primary btn-xl" href="#founding">Claim a founding seat, $500/mo</a>
+        <a class="btn btn-neutral btn-xl" href="https://buy.stripe.com/8x2eVd1ACfJb5kc1q9aMU19">Summon your company, $500/mo</a>
         <a class="btn btn-neutral btn-xl" href="https://github.com/adamtpang/summon.company/releases/download/v0.1.5/Summon.Setup.0.1.5.exe">Download for Windows, free</a>
       </div>
       <p class="micro-note">Free forever: your AI employees work while you watch, manual mode, on the Claude, Codex, or Grok subscription you already pay for. Paid is when your company runs while you sleep. <a href="/diagnose"><strong>Get a free 60-second diagnosis of your business</strong></a> · <a href="https://cal.com/adamtpang">or book a call</a></p>
@@ -286,17 +290,18 @@
 
   <section id="founding" class="wrap center">
     <span class="overline">Founding offer</span>
-    <h2 style="margin: var(--space-4) auto var(--space-4); max-width: 24ch;">2 founding slots. $99/mo, locked for life.</h2>
-    <p class="lede center" style="max-width: 52ch;">Then $199/mo, the public price after founding.</p>
+    <h2 style="margin: var(--space-4) auto var(--space-4); max-width: 24ch;">The founding seat. $500/mo, the whole org.</h2>
+    <p class="lede center" style="max-width: 52ch;">One flat price for all eight departments, not $99 per employee. Locked for life while you stay subscribed.</p>
     <ul class="offer-points">
       <li><b>✓</b> The diagnosis comes first, free: written findings on your business within 48 hours of your reply, before any payment.</li>
-      <li><b>✓</b> $500 setup includes: the full diagnosis written up, your AI org chart, and your first 10 deliverables plated in week one.</li>
-      <li><b>✓</b> Guarantee: first plated deliverable within 7 days or the $500 back.</li>
+      <li><b>✓</b> All eight departments staffed: Engineering, Design, Marketing, Sales, Finance, Operations, Support, Legal.</li>
+      <li><b>✓</b> Runs on the Claude or Codex subscription you already pay for. No API bills, no usage metering.</li>
+      <li><b>✓</b> Guarantee: your first plated deliverable within 7 days, or your first month back.</li>
       <li><b>✓</b> 15 minutes a week from you. Your departments running in 30 days.</li>
-      <li><b>✓</b> Cancel anytime.</li>
+      <li><b>✓</b> Founding seats are limited because each company is set up by hand. Cancel anytime.</li>
     </ul>
     <div class="cta-row" style="justify-content: center;">
-      <a class="btn btn-primary btn-xl" href="https://buy.stripe.com/4gM4gz1ACbsV4g83yhaMU18">Claim a founding slot, $99/mo locked for life</a>
+      <a class="btn btn-primary btn-xl" href="https://buy.stripe.com/8x2eVd1ACfJb5kc1q9aMU19">Claim a founding seat, $500/mo</a>
       <a class="btn btn-neutral btn-xl" href="https://cal.com/adamtpang">Book a call first</a>
     </div>
   </section>
@@ -336,51 +341,51 @@
   <section id="roster" class="wrap" style="padding-top: 0;">
     <div class="sec-head center">
       <span class="overline">Meet your AI employees</span>
-      <h2 style="margin: var(--space-4) auto var(--space-3);">Build your team. Founding $99/mo, locked for life.</h2>
-      <p class="lede center">Add the employees you need, drop the ones you don't. Each works 24/7 on your own Claude/Codex subscription, budget-capped, and waits for your approval. Cancel anytime.</p>
+      <h2 style="margin: var(--space-4) auto var(--space-3);">Every department, included in the seat.</h2>
+      <p class="lede center">You do not buy these one at a time. The founding seat staffs all of them for $500/mo. Each works 24/7 on your own Claude/Codex subscription, budget-capped, and waits for your approval. Cancel anytime.</p>
     </div>
     <div class="roster">
       <div class="rcard">
         <div class="top"><div class="av">MKT</div><div><h3>Marketing</h3><div class="role">content, social, seo</div></div></div>
         <p class="pitch">Content, social, SEO, and campaigns: drafted, scheduled, and ready for your yes.</p>
         <svg class="ekg" viewBox="0 0 300 34" preserveAspectRatio="none"><path d="M0 17 H70 l7 -13 7 24 6 -20 5 9 H150 l7 -11 7 22 6 -18 5 8 H300"/></svg>
-        <div class="price">$99<span> /mo</span></div>
-        <a class="btn btn-quiet" href="https://buy.stripe.com/bJe28r1AC0OhbIA0m5aMU11">Hire Marketing</a>
+        <div class="price">Included<span> in the seat</span></div>
+        <a class="btn btn-quiet" href="#founding">Marketing, included</a>
       </div>
       <div class="rcard">
         <div class="top"><div class="av">SAL</div><div><h3>Sales</h3><div class="role">leads, outreach, pipeline</div></div></div>
         <p class="pitch">Lead sourcing, outreach, and pipeline: filled and worked while you sleep.</p>
         <svg class="ekg" viewBox="0 0 300 34" preserveAspectRatio="none"><path d="M0 17 H60 l7 -13 7 24 6 -20 5 9 H140 l7 -11 7 22 6 -18 5 8 H300"/></svg>
-        <div class="price">$99<span> /mo</span></div>
-        <a class="btn btn-quiet" href="https://buy.stripe.com/aFa00j2EGaoRh2U5GpaMU12">Hire Sales</a>
+        <div class="price">Included<span> in the seat</span></div>
+        <a class="btn btn-quiet" href="#founding">Sales, included</a>
       </div>
       <div class="rcard">
         <div class="top"><div class="av">OPS</div><div><h3>Operations</h3><div class="role">admin, process, coord</div></div></div>
         <p class="pitch">Admin, process, and coordination: the busywork off your plate, done right.</p>
         <svg class="ekg" viewBox="0 0 300 34" preserveAspectRatio="none"><path d="M0 17 H84 l7 -13 7 24 6 -20 5 9 H170 l7 -11 7 22 6 -18 5 8 H300"/></svg>
-        <div class="price">$99<span> /mo</span></div>
-        <a class="btn btn-quiet" href="https://buy.stripe.com/28E9AT6UW54x7sk2udaMU13">Hire Operations</a>
+        <div class="price">Included<span> in the seat</span></div>
+        <a class="btn btn-quiet" href="#founding">Operations, included</a>
       </div>
       <div class="rcard">
         <div class="top"><div class="av">SUP</div><div><h3>Support</h3><div class="role">tickets, replies, csat</div></div></div>
         <p class="pitch">Customer questions and ticket resolution: answered fast, on brand, all day.</p>
         <svg class="ekg" viewBox="0 0 300 34" preserveAspectRatio="none"><path d="M0 17 H66 l7 -13 7 24 6 -20 5 9 H150 l7 -11 7 22 6 -18 5 8 H300"/></svg>
-        <div class="price">$99<span> /mo</span></div>
-        <a class="btn btn-quiet" href="https://buy.stripe.com/00w5kD7Z01Sl2801q9aMU14">Hire Support</a>
+        <div class="price">Included<span> in the seat</span></div>
+        <a class="btn btn-quiet" href="#founding">Support, included</a>
       </div>
       <div class="rcard">
         <div class="top"><div class="av">ENG</div><div><h3>Engineering</h3><div class="role">ships, fixes, features</div></div></div>
         <p class="pitch">Ships code, fixes, and features: pulls the ticket, hands back working software.</p>
         <svg class="ekg" viewBox="0 0 300 34" preserveAspectRatio="none"><path d="M0 17 H80 l7 -13 7 24 6 -20 5 9 H160 l7 -11 7 22 6 -18 5 8 H300"/></svg>
-        <div class="price">$99<span> /mo</span></div>
-        <a class="btn btn-quiet" href="https://buy.stripe.com/14AeVd0wy40tcME3yhaMU15">Hire Engineering</a>
+        <div class="price">Included<span> in the seat</span></div>
+        <a class="btn btn-quiet" href="#founding">Engineering, included</a>
       </div>
       <div class="rcard">
         <div class="top"><div class="av">RES</div><div><h3>Research</h3><div class="role">market, comp, data</div></div></div>
         <p class="pitch">Market, competitor, and data analysis: the answer, sourced and summarized.</p>
         <svg class="ekg" viewBox="0 0 300 34" preserveAspectRatio="none"><path d="M0 17 H74 l7 -13 7 24 6 -20 5 9 H156 l7 -11 7 22 6 -18 5 8 H300"/></svg>
-        <div class="price">$99<span> /mo</span></div>
-        <a class="btn btn-quiet" href="https://buy.stripe.com/8x214n3IK40tbIAgl3aMU16">Hire Research</a>
+        <div class="price">Included<span> in the seat</span></div>
+        <a class="btn btn-quiet" href="#founding">Research, included</a>
       </div>
     </div>
     <p class="center micro-note" style="margin-top: var(--space-6);">Want to see them work first? <a href="https://cal.com/adamtpang">Start a free 7-day trial</a> · Or have us set up the whole team on your business: <a href="https://cal.com/adamtpang">book a call</a></p>
@@ -410,7 +415,7 @@
     <div class="sec-head center">
       <span class="overline">Pricing</span>
       <h2 style="margin: var(--space-4) auto var(--space-3);">Hire a whole team for less than one salary.</h2>
-      <p class="lede center">Each AI employee is $99/mo, a rounding error next to the human it replaces. Add as many as you need; you're always the board.</p>
+      <p class="lede center">One seat, $500/mo, and every department is staffed. Less than most people pay for a single AI employee, and a rounding error next to the human it replaces.</p>
     </div>
     <div class="price3">
       <div class="tier dim">
@@ -426,16 +431,16 @@
         <a class="btn btn-neutral" style="pointer-events: none; opacity: 0.5;" href="#roster">The old way</a>
       </div>
       <div class="tier hot">
-        <span class="badge">Most popular</span>
-        <h3>An AI employee</h3>
-        <div class="amt">$99<span> /mo</span></div>
+        <span class="badge">Founding seat</span>
+        <h3>The whole org</h3>
+        <div class="amt">$500<span> /mo</span></div>
         <ul>
-          <li><b>✓</b> Hired in minutes, no onboarding</li>
-          <li><b>✓</b> Works 24/7, add as many as you want</li>
+          <li><b>✓</b> All eight departments, not one employee</li>
+          <li><b>✓</b> Staffed in minutes, no onboarding</li>
+          <li><b>✓</b> Works 24/7 on the subscription you already pay for</li>
           <li><b>✓</b> Budget cap and auto-pause, cancel anytime</li>
-          <li><b>✓</b> Outcome add-ons (sales earns on sales)</li>
         </ul>
-        <a class="btn btn-primary" href="#roster">Hire your first employee</a>
+        <a class="btn btn-primary" href="https://buy.stripe.com/8x2eVd1ACfJb5kc1q9aMU19">Claim a founding seat</a>
       </div>
       <div class="tier">
         <span class="badge">Done for you</span>
@@ -467,9 +472,9 @@
 <div class="horizon">
   <div class="wrap">
     <h2>Assemble your team.</h2>
-    <p>Add your first AI employee tonight, running your business with you as the board. $99/mo, cancel anytime.</p>
+    <p>Summon your company tonight, every department staffed, with you as the board. $500/mo, cancel anytime.</p>
     <div class="cta-row" style="justify-content: center;">
-      <a class="btn btn-primary btn-xl" href="#roster">Hire your first employee, $99/mo</a>
+      <a class="btn btn-primary btn-xl" href="https://buy.stripe.com/8x2eVd1ACfJb5kc1q9aMU19">Claim a founding seat, $500/mo</a>
       <a class="btn btn-neutral btn-xl" href="https://cal.com/adamtpang">Get a free diagnosis</a>
     </div>
   </div>
@@ -494,6 +499,7 @@
     <a href="mailto:hello@summon.company">hello@summon.company</a>
     <span class="right">summon.company · hire AI employees. you're the board.</span>
     <div class="beta">🧪 Beta · tell me what sucked: <a id="beta-contact" href="mailto:adamtpang@gmail.com?subject=summon%20beta">send it</a></div>
+    <div class="fleet">Part of the <a href="https://adam.gives">adam.inc fleet</a><span class="sep">·</span><a href="https://everybot.fun" title="Concierge AI chief of staff">everybot.fun</a><span class="sep">·</span><a href="https://summon.guide" title="Mentor-grade counsel on demand">summon.guide</a></div>
   </div>
 </footer>
 

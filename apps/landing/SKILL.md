@@ -1,9 +1,9 @@
 # Vitals (skill)
 
-A portable, JSON-config company operating system. The fundamentals are universal
+A portable, JSON-config AI company builder. The fundamentals are universal
 (every company has a mission, a problem, money, metrics, a roadmap, an org). The
 founder fills in the blanks. Claude is the agent that operates it. Inspired by Tobi
-Lutke's JSON-config company OS and by Bridgewater's "principles encoded as software."
+Lutke's JSON-config company model and by Bridgewater's "principles encoded as software."
 
 ## The model
 - The **codebase is the knowledge base** (the context files).
