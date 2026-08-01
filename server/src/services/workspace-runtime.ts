@@ -2,6 +2,7 @@ import { spawn, type ChildProcess } from "node:child_process";
 import { existsSync, lstatSync, readdirSync, readFileSync, realpathSync } from "node:fs";
 import fs from "node:fs/promises";
 import net from "node:net";
+import os from "node:os";
 import { createHash, randomUUID } from "node:crypto";
 import path from "node:path";
 import { setTimeout as delay } from "node:timers/promises";
@@ -3159,6 +3160,69 @@ export async function ensurePersistedExecutionWorkspaceAvailable(input: {
   };
 }
 
+const CLEANUP_RESCUE_REF_PREFIX = "refs/paperclip/rescue-cleanup/";
+const RESCUE_BRANCH_PREFIX = "paperclip/rescue/";
+
+/**
+ * Capture the full state of a worktree (tracked and untracked) into a commit
+ * object referenced outside refs/heads, so it survives both worktree removal
+ * and branch deletion. Uses a throwaway index via GIT_INDEX_FILE so the real
+ * index and working tree are never modified, which matters because the repo
+ * may be in active use by other agents sharing the same clone (#10555, #3335).
+ *
+ * Returns null when the tree is clean or the path is not a git worktree.
+ */
+async function captureCleanupRescueRef(input: {
+  worktreePath: string;
+  workspaceId: string;
+}): Promise<{ ref: string; sha: string; fileCount: number } | null> {
+  const status = await runGit(
+    ["status", "--porcelain", "--untracked-files=all"],
+    input.worktreePath,
+  ).catch(() => null);
+  if (!status) return null;
+  const fileCount = status.split("\n").filter((line) => line.trim().length > 0).length;
+  if (fileCount === 0) return null;
+
+  const tmpIndex = path.join(
+    os.tmpdir(),
+    `paperclip-rescue-index-${sanitizeBranchName(input.workspaceId)}-${Date.now()}`,
+  );
+  const gitWithTempIndex = async (args: string[]) => {
+    const proc = await executeProcess({
+      command: "git",
+      args,
+      cwd: input.worktreePath,
+      env: { ...process.env, GIT_INDEX_FILE: tmpIndex },
+    });
+    if (proc.code !== 0) {
+      throw new Error(proc.stderr.trim() || proc.stdout.trim() || `git ${args.join(" ")} failed`);
+    }
+    return proc.stdout.trim();
+  };
+
+  try {
+    const head = await runGit(["rev-parse", "--verify", "HEAD"], input.worktreePath).catch(() => null);
+    if (head) {
+      await gitWithTempIndex(["read-tree", "HEAD"]);
+    }
+    await gitWithTempIndex(["add", "--all"]);
+    const tree = await gitWithTempIndex(["write-tree"]);
+    const sha = await gitWithTempIndex([
+      "commit-tree",
+      tree,
+      ...(head ? ["-p", head] : []),
+      "-m",
+      `paperclip rescue: workspace ${input.workspaceId} captured before destructive cleanup (${fileCount} dirty files)`,
+    ]);
+    const ref = `${CLEANUP_RESCUE_REF_PREFIX}${sanitizeBranchName(input.workspaceId)}`;
+    await runGit(["update-ref", ref, sha], input.worktreePath);
+    return { ref, sha, fileCount };
+  } finally {
+    await fs.rm(tmpIndex, { force: true }).catch(() => {});
+  }
+}
+
 export async function cleanupExecutionWorkspaceArtifacts(input: {
   workspace: {
     id: string;
@@ -3234,6 +3298,24 @@ export async function cleanupExecutionWorkspaceArtifacts(input: {
       if (!repoRoot) {
         warnings.push(`Could not resolve git repo root for "${workspacePath}".`);
       } else {
+        // Uncommitted work must outlive the worktree that holds it (#10555).
+        // The rescue ref lives in the shared repository, so removing the
+        // worktree directory below cannot take the work with it.
+        let rescue: { ref: string; sha: string; fileCount: number } | null = null;
+        try {
+          rescue = await captureCleanupRescueRef({
+            worktreePath: workspacePath,
+            workspaceId: input.workspace.id,
+          });
+        } catch (err) {
+          const message = err instanceof Error ? err.message : String(err);
+          warnings.push(`Could not capture rescue ref before removing "${workspacePath}": ${message}`);
+        }
+        if (rescue) {
+          warnings.push(
+            `Worktree "${workspacePath}" had ${rescue.fileCount} uncommitted files; captured to ${rescue.ref} (${formatShortSha(rescue.sha)}) before removal.`,
+          );
+        }
         try {
           await recordGitOperation(input.recorder, {
             phase: "worktree_cleanup",
@@ -3244,8 +3326,13 @@ export async function cleanupExecutionWorkspaceArtifacts(input: {
               workspacePath,
               branchName: input.workspace.branchName,
               cleanupAction: "worktree_remove",
+              rescueRef: rescue?.ref ?? null,
+              rescueSha: rescue?.sha ?? null,
+              rescuedFileCount: rescue?.fileCount ?? 0,
             },
-            successMessage: `Removed git worktree ${workspacePath}\n`,
+            successMessage: rescue
+              ? `Removed git worktree ${workspacePath} (uncommitted state captured to ${rescue.ref})\n`
+              : `Removed git worktree ${workspacePath}\n`,
             failureLabel: `git worktree remove ${workspacePath}`,
           });
         } catch (err) {
@@ -3254,7 +3341,14 @@ export async function cleanupExecutionWorkspaceArtifacts(input: {
       }
     }
     if (createdByRuntime && input.workspace.branchName) {
-      if (!repoRoot) {
+      if (input.workspace.branchName.startsWith(RESCUE_BRANCH_PREFIX)) {
+        // A rescue branch may be the only reachable copy of quarantined work.
+        // Deleting it here is how the dirty-quarantine safety net and this
+        // cleanup cancelled each other out in #10555.
+        warnings.push(
+          `Preserved rescue branch "${input.workspace.branchName}" instead of deleting it; it may hold quarantined work.`,
+        );
+      } else if (!repoRoot) {
         warnings.push(`Could not resolve git repo root to delete branch "${input.workspace.branchName}".`);
       } else {
         try {
@@ -3289,22 +3383,38 @@ export async function cleanupExecutionWorkspaceArtifacts(input: {
     if (containsProjectWorkspace) {
       warnings.push(`Refusing to remove path "${workspacePath}" because it contains the project workspace.`);
     } else {
-      await fs.rm(resolvedWorkspacePath, { recursive: true, force: true });
-      if (input.recorder) {
-        await input.recorder.recordOperation({
-          phase: "workspace_teardown",
-          cwd: projectWorkspaceCwd ?? process.cwd(),
-          metadata: {
-            workspaceId: input.workspace.id,
-            workspacePath: resolvedWorkspacePath,
-            cleanupAction: "remove_local_fs",
-          },
-          run: async () => ({
-            status: "succeeded",
-            exitCode: 0,
-            system: `Removed local workspace directory ${resolvedWorkspacePath}\n`,
-          }),
-        });
+      // A rescue ref cannot survive removal of its own repository, so for
+      // local_fs the only non-lossy option with uncommitted work is to leave
+      // the directory in place (#10555).
+      const dirtyStatus = await runGit(
+        ["status", "--porcelain", "--untracked-files=all"],
+        resolvedWorkspacePath,
+      ).catch(() => null);
+      const dirtyCount = dirtyStatus
+        ? dirtyStatus.split("\n").filter((line) => line.trim().length > 0).length
+        : 0;
+      if (dirtyCount > 0) {
+        warnings.push(
+          `Left "${workspacePath}" in place: ${dirtyCount} uncommitted files present and a rescue ref cannot outlive its own repository. Commit or export the work, then close again.`,
+        );
+      } else {
+        await fs.rm(resolvedWorkspacePath, { recursive: true, force: true });
+        if (input.recorder) {
+          await input.recorder.recordOperation({
+            phase: "workspace_teardown",
+            cwd: projectWorkspaceCwd ?? process.cwd(),
+            metadata: {
+              workspaceId: input.workspace.id,
+              workspacePath: resolvedWorkspacePath,
+              cleanupAction: "remove_local_fs",
+            },
+            run: async () => ({
+              status: "succeeded",
+              exitCode: 0,
+              system: `Removed local workspace directory ${resolvedWorkspacePath}\n`,
+            }),
+          });
+        }
       }
     }
   }

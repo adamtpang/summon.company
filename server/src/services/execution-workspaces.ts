@@ -1529,19 +1529,34 @@ export function executionWorkspaceService(db: Db) {
         );
       }
 
+      // Uncommitted state blocks destructive close instead of merely warning
+      // (#10555, the uncommitted sibling of #3207). Shared workspace sessions
+      // keep the warning shape because archiving them touches no files.
       if (git?.hasDirtyTrackedFiles) {
-        warnings.push(
+        const dirtyMessage =
           git.dirtyEntryCount === 1
             ? "The workspace has 1 modified tracked file."
-            : `The workspace has ${git.dirtyEntryCount} modified tracked files.`,
-        );
+            : `The workspace has ${git.dirtyEntryCount} modified tracked files.`;
+        if (isSharedWorkspace) {
+          warnings.push(dirtyMessage);
+        } else {
+          blockingReasons.push(
+            `${dirtyMessage} Destructive close is blocked until the changes are committed, stashed, or explicitly discarded.`,
+          );
+        }
       }
       if (git?.hasUntrackedFiles) {
-        warnings.push(
+        const untrackedMessage =
           git.untrackedEntryCount === 1
             ? "The workspace has 1 untracked file."
-            : `The workspace has ${git.untrackedEntryCount} untracked files.`,
-        );
+            : `The workspace has ${git.untrackedEntryCount} untracked files.`;
+        if (isSharedWorkspace) {
+          warnings.push(untrackedMessage);
+        } else {
+          blockingReasons.push(
+            `${untrackedMessage} Destructive close is blocked until the files are committed, stashed, or explicitly discarded.`,
+          );
+        }
       }
       if (git?.aheadCount && git.aheadCount > 0 && git.isMergedIntoBase === false) {
         warnings.push(
