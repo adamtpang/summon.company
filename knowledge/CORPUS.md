@@ -49,6 +49,7 @@ do on Monday*, it is company material.
 | `instantly/` | @InstantlyAI | 230 | 867,232 | **company** - cold email and outbound: deliverability, sequences, lead sourcing |
 | `school-of-hard-knocks/` | @theschoolofhardknocks | 179 | 699,993 | **company** - street interviews on income and work; unusually concrete numbers |
 | `ryan-serhant/` | @RyanSerhant | 164 | 402,777 | **company** - sales, brand building, closing; the sales-department corpus |
+| `john-vervaeke/` | @johnvervaeke | 509 | 5,999,443 | **guide** - relevance realization, meaning crisis, cognitive science; the largest corpus here by 1.5x |
 | `brett-hall/` | @bretthall9080 | (partial) | - | **company** - the *reasoning* layer: how agents should think, not what to think |
 
 Counts are episodes that actually yielded a transcript, which is what `brain/pages/` holds
@@ -76,11 +77,19 @@ extracted so far.
   (including Zuckerberg's), so this corpus carries dated advice alongside current advice.
   Worth weighting by date for anything about present-day fundraising or AI startups.
 
+- **John Vervaeke is a living creator, not contacted.** He is grounded as a public chat figure
+  on summon.guide (`figureSources.ts`, slug `vervaeke`, 6 curated episodes as of 2026-08-05) as
+  a deliberate exception, matching existing site practice: ~20 other living figures (Musk,
+  Bezos, Buffett, Naval, Deutsch, and others) are already live there without individual consent.
+  See `docs/HORIZON_youchop-summon-synergy.md`'s "living creators only by invitation" rule —
+  that rule describes what the site is not actually doing today, not a constraint this corpus
+  respects. Worth revisiting if the site ever moves toward enforcing it.
+
 ### Coverage notes
 A small number of videos have no captions published on YouTube at all and are therefore
 unfetchable by any method (the manifest records them, with `words` absent):
 greg-isenberg 1, starter-story 1, alex-hormozi 7, naval 12, y-combinator 8, ryan-serhant 9,
-chris-williamson 2, instantly 1. Everything else is complete.
+chris-williamson 2, instantly 1, john-vervaeke 7. Everything else is complete.
 Naval's channel is mostly short clips, so its per-episode word counts are small by nature.
 
 ## Provenance and use
