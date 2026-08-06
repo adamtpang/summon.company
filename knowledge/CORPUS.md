@@ -50,6 +50,11 @@ do on Monday*, it is company material.
 | `school-of-hard-knocks/` | @theschoolofhardknocks | 179 | 699,993 | **company** - street interviews on income and work; unusually concrete numbers |
 | `ryan-serhant/` | @RyanSerhant | 164 | 402,777 | **company** - sales, brand building, closing; the sales-department corpus |
 | `john-vervaeke/` | @johnvervaeke | 509 | 5,999,443 | **guide** - relevance realization, meaning crisis, cognitive science; the largest corpus here by 1.5x |
+| `visakan-veerasamy/` | @visakanv | 403 | 1,202,657 | **guide** - sensemaking, noticing, writing/thinking out loud; a distinctive voice, not a playbook |
+| `jack-friks/` | @jackfriks0 | 372 | 363,956 | **company** - indie-hacker build-in-public: shipping, marketing, solo SaaS tactics |
+| `arjun-khemani/` | @arjunkhemani | 58 | 505,040 | **guide** - critical rationalism interviews; same reasoning-layer register as brett-hall |
+| `marc-lou/` | @marc-lou | 68 | 209,167 | **company** - ShipFast creator; rapid solo-SaaS build/launch/monetize tactics |
+| `lulie-tanett-reason-is-fun/` | @ReasonIsFun | 8 | 82,161 | **guide** - Lulie Tanett's show; critical rationalism with David Deutsch and guests |
 | `brett-hall/` | @bretthall9080 | (partial) | - | **company** - the *reasoning* layer: how agents should think, not what to think |
 
 Counts are episodes that actually yielded a transcript, which is what `brain/pages/` holds
@@ -84,12 +89,28 @@ extracted so far.
   See `docs/HORIZON_youchop-summon-synergy.md`'s "living creators only by invitation" rule —
   that rule describes what the site is not actually doing today, not a constraint this corpus
   respects. Worth revisiting if the site ever moves toward enforcing it.
+- **"Lulie Tanett" is the `@ReasonIsFun` channel, not a separate one.** Her show is titled
+  Reason Is Fun; a video description confirms it ("Lulie Tanett and David Deutsch are joined
+  again by..."). Folder is named for the channel handle, same convention as every other corpus.
+- **A second reasoning-layer cluster now exists alongside brett-hall.** `arjun-khemani` and
+  `lulie-tanett-reason-is-fun` are both critical-rationalism (Deutsch/Popper) interview shows,
+  frequently featuring David Deutsch himself as a guest. All three corpora are the natural set
+  for "how should an agent reason and update," as distinct from every domain-tactics corpus above.
+- **Jack Friks and Marc Lou are both indie-hacker build-in-public channels**, extracted with a
+  low 2-minute floor rather than the 15-20 minute floor used for podcast-style corpora, because
+  their median video is under 5 minutes: a high floor would have gutted the actual content
+  rather than filtered clips. Marc Lou is the ShipFast creator; Jack Friks does solo-SaaS
+  build/ship/market logs.
+- **Visakan Veerasamy skews short and wide-ranging** (21s to 2hr, median ~10min), so a 3-minute
+  floor was used to drop pure Shorts while keeping his typical videos. A writer/essayist voice
+  (sensemaking, noticing, thinking in public), not a business-tactics source.
 
 ### Coverage notes
 A small number of videos have no captions published on YouTube at all and are therefore
 unfetchable by any method (the manifest records them, with `words` absent):
 greg-isenberg 1, starter-story 1, alex-hormozi 7, naval 12, y-combinator 8, ryan-serhant 9,
-chris-williamson 2, instantly 1, john-vervaeke 7. Everything else is complete.
+chris-williamson 2, instantly 1, john-vervaeke 7, jack-friks 1, marc-lou 1, visakan-veerasamy 12.
+Everything else is complete (arjun-khemani and lulie-tanett-reason-is-fun both 100%).
 Naval's channel is mostly short clips, so its per-episode word counts are small by nature.
 
 ## Provenance and use
