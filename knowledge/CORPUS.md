@@ -55,6 +55,7 @@ do on Monday*, it is company material.
 | `arjun-khemani/` | @arjunkhemani | 58 | 505,040 | **guide** - critical rationalism interviews; same reasoning-layer register as brett-hall |
 | `marc-lou/` | @marc-lou | 68 | 209,167 | **company** - ShipFast creator; rapid solo-SaaS build/launch/monetize tactics |
 | `lulie-tanett-reason-is-fun/` | @ReasonIsFun | 8 | 82,161 | **guide** - Lulie Tanett's show; critical rationalism with David Deutsch and guests |
+| `mix-with-the-masters/` | @mixwiththemasters | 21 | 123,535 | **guide** - legendary mixing/production engineers on their actual craft; a new category, not business or reasoning |
 | `brett-hall/` | @bretthall9080 | (partial) | - | **company** - the *reasoning* layer: how agents should think, not what to think |
 
 Counts are episodes that actually yielded a transcript, which is what `brain/pages/` holds
@@ -104,12 +105,21 @@ extracted so far.
 - **Visakan Veerasamy skews short and wide-ranging** (21s to 2hr, median ~10min), so a 3-minute
   floor was used to drop pure Shorts while keeping his typical videos. A writer/essayist voice
   (sensemaking, noticing, thinking in public), not a business-tactics source.
+- **Mix With The Masters is a new category: craft/technique, not business or reasoning.** Of
+  561 videos, 536 are 2-3 minute "Trailer" clips promoting the channel's paid full masterclasses;
+  only 25 are the actual substantive content (extended Q&As and live workshops with engineers
+  like Andy Wallace, Steve Albini, Michael Brauer, Manny Marroquin, Jack Joseph Puig, Tchad
+  Blake, and Andrew Scheps). A 20-minute floor was used specifically to isolate that set and
+  skip all the trailers, which is a different reason from every other floor choice in this file
+  (those exclude Shorts; this excludes marketing copy for content the corpus can't access
+  anyway, since the full paid masterclasses aren't on YouTube at all).
 
 ### Coverage notes
 A small number of videos have no captions published on YouTube at all and are therefore
 unfetchable by any method (the manifest records them, with `words` absent):
 greg-isenberg 1, starter-story 1, alex-hormozi 7, naval 12, y-combinator 8, ryan-serhant 9,
-chris-williamson 2, instantly 1, john-vervaeke 7, jack-friks 1, marc-lou 1, visakan-veerasamy 12.
+chris-williamson 2, instantly 1, john-vervaeke 7, jack-friks 1, marc-lou 1, visakan-veerasamy 12,
+mix-with-the-masters 4 (of its 25-video filtered set).
 Everything else is complete (arjun-khemani and lulie-tanett-reason-is-fun both 100%).
 Naval's channel is mostly short clips, so its per-episode word counts are small by nature.
 
