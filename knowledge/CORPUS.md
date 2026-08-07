@@ -56,6 +56,7 @@ do on Monday*, it is company material.
 | `marc-lou/` | @marc-lou | 68 | 209,167 | **company** - ShipFast creator; rapid solo-SaaS build/launch/monetize tactics |
 | `lulie-tanett-reason-is-fun/` | @ReasonIsFun | 8 | 82,161 | **guide** - Lulie Tanett's show; critical rationalism with David Deutsch and guests |
 | `mix-with-the-masters/` | @mixwiththemasters | 21 | 123,535 | **guide** - legendary mixing/production engineers on their actual craft; a new category, not business or reasoning |
+| `starter-story-build/` | @StarterStoryBuild | 64 | 325,605 | **company** - Starter Story's build-focused spin-off channel; distinct from `starter-story/` |
 | `brett-hall/` | @bretthall9080 | (partial) | - | **company** - the *reasoning* layer: how agents should think, not what to think |
 
 Counts are episodes that actually yielded a transcript, which is what `brain/pages/` holds
@@ -113,6 +114,9 @@ extracted so far.
   skip all the trailers, which is a different reason from every other floor choice in this file
   (those exclude Shorts; this excludes marketing copy for content the corpus can't access
   anyway, since the full paid masterclasses aren't on YouTube at all).
+- **`starter-story-build` is a genuinely separate channel from `starter-story`**, confirmed by
+  channel ID (`UCLbKt4FZKk41HwZ2A3Mnz4Q` vs `UChhw6DlKKTQ9mYSpTfXUYqA`), not a duplicate or
+  alias. All 64 videos are substantive (6-47 min, no Shorts problem), all yielded transcripts.
 
 ### Coverage notes
 A small number of videos have no captions published on YouTube at all and are therefore
