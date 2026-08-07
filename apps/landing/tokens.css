@@ -54,12 +54,13 @@
   --action-neutral-active: var(--bg-neutral-active);
 
   /* ---------- sentiment (dark content on pale tint) ---------- */
-  --positive-content: #0A5C38;
-  --positive-bg: #E2F6EB;
-  --negative-content: #C8232E;
-  --negative-bg: #FDEBEC;
-  --warning-content: #6B4E0A;
-  --warning-bg: #FFF4D6;
+  /* Aligned to the shared Aether/brand.md sentiment set 2026-08-07. */
+  --positive-content: #1F7A4D;
+  --positive-bg: #E3F0E9;
+  --negative-content: #A23B2E;
+  --negative-bg: #F5E4DF;
+  --warning-content: #96702A;
+  --warning-bg: #F3EAD3;
   --info-content: var(--blue-700);
   --info-bg: var(--blue-050);
 
@@ -200,12 +201,15 @@
   --action-quiet-hover: rgba(11, 95, 255, 0.24);
   --action-quiet-active: rgba(11, 95, 255, 0.32);
 
-  --positive-content: #6EE7A8;
-  --positive-bg: rgba(16, 122, 74, 0.22);
-  --negative-content: #FF8B93;
-  --negative-bg: rgba(200, 35, 46, 0.22);
-  --warning-content: #F5D06B;
-  --warning-bg: rgba(107, 78, 10, 0.28);
+  /* Same hue family as the shared set, lightened for legibility on dark
+     backgrounds; the shared set's literal hexes are too dark for dark-mode
+     text contrast, so the identity is kept, the lightness is not. */
+  --positive-content: #6FC796;
+  --positive-bg: rgba(31, 122, 77, 0.20);
+  --negative-content: #E8877A;
+  --negative-bg: rgba(162, 59, 46, 0.20);
+  --warning-content: #E0B85E;
+  --warning-bg: rgba(150, 112, 42, 0.24);
   --info-content: #8AB9FF;
   --info-bg: rgba(11, 95, 255, 0.16);
 
