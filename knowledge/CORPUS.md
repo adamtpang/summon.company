@@ -42,7 +42,7 @@ do on Monday*, it is company material.
 | `starter-story/` | @StarterStory | 169 | 542,520 | **company** - concrete "how a small business actually made $X" evidence |
 | `naval/` | @navalr | 66 | 307,118 | **guide** - leverage, judgment, wealth vs status; a voice, not a playbook |
 | `chris-williamson/` | @ChrisWillx | 198 | 3,988,025 | **guide** - Modern Wisdom; psychology, discipline, relationships. A voice, and the single largest corpus here |
-| `y-combinator/` | @ycombinator | 545 | 3,687,638 | **company** - the canonical startup playbook: Startup School, office hours, YC talks |
+| `y-combinator/` | @ycombinator | 550 | 3,734,930 | **company** - the canonical startup playbook: Startup School, office hours, YC talks |
 | `bigdeal-codie-sanchez/` | @PodcastBigDeal | 159 | 1,820,995 | **company** - buying and running small businesses, deal mechanics |
 | `invest-like-the-best/` | @ILTB_Podcast | 64 | 1,047,491 | **guide** - long-form investor and operator interviews, strong named voices |
 | `school-of-hard-knocks-podcast/` | @TheSchoolofHardKnocksPodcast | 69 | 908,888 | **company** - long-form version of the street-interview channel |
@@ -57,6 +57,7 @@ do on Monday*, it is company material.
 | `lulie-tanett-reason-is-fun/` | @ReasonIsFun | 8 | 82,161 | **guide** - Lulie Tanett's show; critical rationalism with David Deutsch and guests |
 | `mix-with-the-masters/` | @mixwiththemasters | 21 | 123,535 | **guide** - legendary mixing/production engineers on their actual craft; a new category, not business or reasoning |
 | `starter-story-build/` | @StarterStoryBuild | 64 | 325,605 | **company** - Starter Story's build-focused spin-off channel; distinct from `starter-story/` |
+| `sequoia-capital/` | @sequoiacapital | 173 | 1,374,751 | **company** - Training Data podcast, founder interviews; VC-perspective operating knowledge |
 | `brett-hall/` | @bretthall9080 | (partial) | - | **company** - the *reasoning* layer: how agents should think, not what to think |
 
 Counts are episodes that actually yielded a transcript, which is what `brain/pages/` holds
@@ -117,6 +118,9 @@ extracted so far.
 - **`starter-story-build` is a genuinely separate channel from `starter-story`**, confirmed by
   channel ID (`UCLbKt4FZKk41HwZ2A3Mnz4Q` vs `UChhw6DlKKTQ9mYSpTfXUYqA`), not a duplicate or
   alias. All 64 videos are substantive (6-47 min, no Shorts problem), all yielded transcripts.
+- **`y-combinator` was re-run and picked up 5 new episodes** (545 → 550, +47,292 words) since
+  its original extraction, confirming the refresh behaviour described below actually works:
+  already-staged episodes are skipped, only new uploads are fetched.
 
 ### Coverage notes
 A small number of videos have no captions published on YouTube at all and are therefore
@@ -124,7 +128,8 @@ unfetchable by any method (the manifest records them, with `words` absent):
 greg-isenberg 1, starter-story 1, alex-hormozi 7, naval 12, y-combinator 8, ryan-serhant 9,
 chris-williamson 2, instantly 1, john-vervaeke 7, jack-friks 1, marc-lou 1, visakan-veerasamy 12,
 mix-with-the-masters 4 (of its 25-video filtered set).
-Everything else is complete (arjun-khemani and lulie-tanett-reason-is-fun both 100%).
+Everything else is complete (arjun-khemani, lulie-tanett-reason-is-fun, starter-story-build,
+and sequoia-capital all 100%).
 Naval's channel is mostly short clips, so its per-episode word counts are small by nature.
 
 ## Provenance and use
