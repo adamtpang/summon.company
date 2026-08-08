@@ -58,6 +58,7 @@ do on Monday*, it is company material.
 | `mix-with-the-masters/` | @mixwiththemasters | 21 | 123,535 | **guide** - legendary mixing/production engineers on their actual craft; a new category, not business or reasoning |
 | `starter-story-build/` | @StarterStoryBuild | 64 | 325,605 | **company** - Starter Story's build-focused spin-off channel; distinct from `starter-story/` |
 | `sequoia-capital/` | @sequoiacapital | 173 | 1,374,751 | **company** - Training Data podcast, founder interviews; VC-perspective operating knowledge |
+| `dave-ramsey/` | @DaveRamsey | 71 | 15,023 | **guide** - short clips only, thin by design; see note below before relying on this one |
 | `brett-hall/` | @bretthall9080 | (partial) | - | **company** - the *reasoning* layer: how agents should think, not what to think |
 
 Counts are episodes that actually yielded a transcript, which is what `brain/pages/` holds
@@ -121,6 +122,11 @@ extracted so far.
 - **`y-combinator` was re-run and picked up 5 new episodes** (545 → 550, +47,292 words) since
   its original extraction, confirming the refresh behaviour described below actually works:
   already-staged episodes are skipped, only new uploads are fetched.
+- **`dave-ramsey` is deliberately the thin option and knows it.** `@DaveRamsey` is his personal
+  clips channel (median ~65s, max under 5min), not `@TheRamseyShowEpisodes` (357 full ~2hr
+  episodes, likely 5-7M words, not yet extracted). Chosen on purpose over the full show for
+  extraction time, so 15,023 words across 71 episodes is expected, not a failure. If richer
+  Dave Ramsey grounding is ever needed, the full show is the known, larger option waiting.
 
 ### Coverage notes
 A small number of videos have no captions published on YouTube at all and are therefore
