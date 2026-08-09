@@ -59,6 +59,7 @@ do on Monday*, it is company material.
 | `starter-story-build/` | @StarterStoryBuild | 64 | 325,605 | **company** - Starter Story's build-focused spin-off channel; distinct from `starter-story/` |
 | `sequoia-capital/` | @sequoiacapital | 173 | 1,374,751 | **company** - Training Data podcast, founder interviews; VC-perspective operating knowledge |
 | `dave-ramsey/` | @DaveRamsey | 71 | 15,023 | **guide** - short clips only, thin by design; see note below before relying on this one |
+| `conjecture-con/` | @conconeurope | 18 | 76,013 | **guide** - Conjecture Con talks; fourth member of the reasoning-layer cluster, includes a David Deutsch Q&A |
 | `brett-hall/` | @bretthall9080 | (partial) | - | **company** - the *reasoning* layer: how agents should think, not what to think |
 
 Counts are episodes that actually yielded a transcript, which is what `brain/pages/` holds
@@ -96,10 +97,11 @@ extracted so far.
 - **"Lulie Tanett" is the `@ReasonIsFun` channel, not a separate one.** Her show is titled
   Reason Is Fun; a video description confirms it ("Lulie Tanett and David Deutsch are joined
   again by..."). Folder is named for the channel handle, same convention as every other corpus.
-- **A second reasoning-layer cluster now exists alongside brett-hall.** `arjun-khemani` and
-  `lulie-tanett-reason-is-fun` are both critical-rationalism (Deutsch/Popper) interview shows,
-  frequently featuring David Deutsch himself as a guest. All three corpora are the natural set
-  for "how should an agent reason and update," as distinct from every domain-tactics corpus above.
+- **The reasoning-layer cluster now has four members: brett-hall, arjun-khemani,
+  lulie-tanett-reason-is-fun, and conjecture-con.** All are critical-rationalism (Deutsch/Popper)
+  material, three featuring David Deutsch directly (a Q&A on `conjecture-con`, guest appearances
+  on the other two). This is the natural set for "how should an agent reason and update," distinct
+  from every domain-tactics corpus above.
 - **Jack Friks and Marc Lou are both indie-hacker build-in-public channels**, extracted with a
   low 2-minute floor rather than the 15-20 minute floor used for podcast-style corpora, because
   their median video is under 5 minutes: a high floor would have gutted the actual content
