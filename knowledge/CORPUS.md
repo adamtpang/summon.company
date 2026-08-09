@@ -60,6 +60,7 @@ do on Monday*, it is company material.
 | `sequoia-capital/` | @sequoiacapital | 173 | 1,374,751 | **company** - Training Data podcast, founder interviews; VC-perspective operating knowledge |
 | `dave-ramsey/` | @DaveRamsey | 71 | 15,023 | **guide** - short clips only, thin by design; see note below before relying on this one |
 | `conjecture-con/` | @conconeurope | 18 | 76,013 | **guide** - Conjecture Con talks; fourth member of the reasoning-layer cluster, includes a David Deutsch Q&A |
+| `elan-lee/` | @ElanLee | 20 | 68,562 | **company** - Exploding Kittens co-creator on board game design, prototyping, publishing, marketing craft |
 | `brett-hall/` | @bretthall9080 | (partial) | - | **company** - the *reasoning* layer: how agents should think, not what to think |
 
 Counts are episodes that actually yielded a transcript, which is what `brain/pages/` holds
