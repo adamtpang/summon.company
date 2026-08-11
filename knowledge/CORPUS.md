@@ -63,6 +63,7 @@ do on Monday*, it is company material.
 | `elan-lee/` | @ElanLee | 20 | 68,562 | **company** - Exploding Kittens co-creator on board game design, prototyping, publishing, marketing craft |
 | `gdc-festival-of-gaming/` | @GDCFestivalofGaming | 96 | 841,725 | **company** - top 100 by views of 1,912; GDC talks and postmortems (DOOM, Diablo, Magic: the Gathering) |
 | `crayon-capital/` | @Crayon_Capital | 27 | 59,114 | **company** - "explained like you're 5" business/finance history case studies (Rockefeller, Bezos, 2008 crisis) |
+| `ray-dalio/` | @principlesbyraydalio | 155 | 221,794 | **guide** - Principles animated explainers; already has an ungrounded chat figure on summon.guide |
 | `brett-hall/` | @bretthall9080 | (partial) | - | **company** - the *reasoning* layer: how agents should think, not what to think |
 
 Counts are episodes that actually yielded a transcript, which is what `brain/pages/` holds
@@ -127,6 +128,11 @@ extracted so far.
 - **`y-combinator` was re-run and picked up 5 new episodes** (545 → 550, +47,292 words) since
   its original extraction, confirming the refresh behaviour described below actually works:
   already-staged episodes are skipped, only new uploads are fetched.
+- **`ray-dalio` fills a real gap: he already has a chat persona on summon.guide with zero
+  grounding**, same situation John Vervaeke was in before his figure was grounded. This corpus
+  (155 episodes from `@principlesbyraydalio`, his animated Principles explainer channel) is
+  ready for the same treatment: hand-pick episodes, write synthesis, wire into
+  `figureSources.ts`. Not yet done, just no longer blocked on missing source material.
 - **`dave-ramsey` is deliberately the thin option and knows it.** `@DaveRamsey` is his personal
   clips channel (median ~65s, max under 5min), not `@TheRamseyShowEpisodes` (357 full ~2hr
   episodes, likely 5-7M words, not yet extracted). Chosen on purpose over the full show for
