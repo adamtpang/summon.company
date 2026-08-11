@@ -64,6 +64,7 @@ do on Monday*, it is company material.
 | `gdc-festival-of-gaming/` | @GDCFestivalofGaming | 96 | 841,725 | **company** - top 100 by views of 1,912; GDC talks and postmortems (DOOM, Diablo, Magic: the Gathering) |
 | `crayon-capital/` | @Crayon_Capital | 27 | 59,114 | **company** - "explained like you're 5" business/finance history case studies (Rockefeller, Bezos, 2008 crisis) |
 | `ray-dalio/` | @principlesbyraydalio | 155 | 221,794 | **guide** - Principles animated explainers; already has an ungrounded chat figure on summon.guide |
+| `joe-lonsdale/` | @Joe_Lonsdale | 267 | 1,603,755 | **company** - Palantir/8VC co-founder; venture, defense tech, and American Optimist interviews |
 | `brett-hall/` | @bretthall9080 | (partial) | - | **company** - the *reasoning* layer: how agents should think, not what to think |
 
 Counts are episodes that actually yielded a transcript, which is what `brain/pages/` holds
