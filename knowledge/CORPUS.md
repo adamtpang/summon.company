@@ -62,6 +62,7 @@ do on Monday*, it is company material.
 | `conjecture-con/` | @conconeurope | 18 | 76,013 | **guide** - Conjecture Con talks; fourth member of the reasoning-layer cluster, includes a David Deutsch Q&A |
 | `elan-lee/` | @ElanLee | 20 | 68,562 | **company** - Exploding Kittens co-creator on board game design, prototyping, publishing, marketing craft |
 | `gdc-festival-of-gaming/` | @GDCFestivalofGaming | 96 | 841,725 | **company** - top 100 by views of 1,912; GDC talks and postmortems (DOOM, Diablo, Magic: the Gathering) |
+| `crayon-capital/` | @Crayon_Capital | 27 | 59,114 | **company** - "explained like you're 5" business/finance history case studies (Rockefeller, Bezos, 2008 crisis) |
 | `brett-hall/` | @bretthall9080 | (partial) | - | **company** - the *reasoning* layer: how agents should think, not what to think |
 
 Counts are episodes that actually yielded a transcript, which is what `brain/pages/` holds
