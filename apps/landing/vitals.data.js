@@ -73,12 +73,12 @@ window.VITALS = {
   ],
 
   org: [
-    { fn: "Product & code", now: "Adam", next: "—" },
-    { fn: "Distribution", now: "Adam", next: "First teammate" },
+    { fn: "Product & code", now: "Founder", next: "—" },
+    { fn: "Distribution", now: "Founder", next: "First teammate" },
   ],
 
   decisions: [
-    { date: "2026-06-16", decision: "Renamed Company OS to summon.company", why: "\"The vital signs of your company\" is the one-line pitch; the .run domain says it's a living dashboard, not a doc.", revisit: "If the name tests worse than 'Company OS' with real founders." },
+    { date: "2026-06-16", decision: "Renamed the product to summon.company", why: "Summon names the action: diagnose the company, then call the right agent to solve the constraint.", revisit: "If the name tests poorly with real founders." },
     { date: "2026-06-09", decision: "Stay zero-dependency and file-based", why: "Founders should own their data and drop it into any repo with no build step. Claude edits a plain JS file.", revisit: "If cross-device sync becomes the #1 request." },
   ],
 };

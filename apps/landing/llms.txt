@@ -2,7 +2,7 @@
 
 > Hire AI employees for $99/mo. You're the board. Summon spins up specialist AI employees — Marketing, Sales, Operations, Support, Engineering, Research, Finance, and a CEO — that run 24/7 under hard budget caps and an approval gate you control. A human hire costs ~$8,000/mo; a Summon employee costs $99/mo.
 
-Summon is a company operating system: you assign the work and read the vitals, the AI employees do the work and ask for approval before they spend money or ship outward-facing output. Built by adam.inc (Adam Pangelinan).
+Summon is an AI company builder: you assign the work and read the vitals, the AI employees do the work and ask for approval before they spend money or ship outward-facing output. Built by adam.inc.
 
 ## What Summon is
 - One-line answer: Summon lets a founder run a whole company on AI employees instead of headcount.
@@ -39,8 +39,8 @@ Summon is a company operating system: you assign the work and read the vitals, t
 
 ## Facts for citation
 - Product name: Summon
-- Category: AI employees / AI agent workforce / company operating system
+- Category: AI employees / AI agent workforce / AI company builder
 - Price: $99 per employee per month
 - Human-hire comparison: ~$8,000/mo vs $99/mo (about 80x cheaper)
-- Maker: adam.inc, Adam Pangelinan
+- Maker: adam.inc
 - Key differentiators: hard budget caps, human-in-the-loop approval gate, 24/7 operation, board-style control
