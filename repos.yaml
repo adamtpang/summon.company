@@ -1,0 +1,23 @@
+# repos.yaml v0 — see github.com/adamtpang/repo-protocol
+repo: summon.company
+is: Canonical store for every YouTube corpus Adam has built (30+ channels, tens of millions of words), each pre-indexed for free local semantic search, the shared knowledge base other Aether projects ground their chat, advice, and content in.
+
+provides:
+  - id: corpus-register
+    what: the full register of every extracted corpus, its size, primary home (guide vs company), and the reasoning behind non-obvious extraction choices (floors, caps, dedup decisions)
+    at: knowledge/CORPUS.md
+  - id: local-search
+    what: keyless local semantic search over any corpus's pre-built embeddings index (bge-small-en-v1.5, no API key, no provider quota); copied into every corpus folder as ask.mjs
+    at: knowledge/john-vervaeke/brain/ask.mjs
+
+stack: [yt-dlp, node, transformers.js]
+
+kin:
+  - repo: youchop.app
+    why: youchop.app's tools/corpus.mjs is what actually extracts every corpus stored here; summon.company is the destination and search layer, not the extractor.
+  - repo: summon.guide
+    why: summon.guide reads specific curated episode files from here (never the raw multi-MB corpora) to ground its chat figures with real, cited source material, e.g. the John Vervaeke figure's 6 sourced episodes.
+  - repo: vitals.run
+    why: this repo is where the original "Vitals" portable company-operating-dashboard product (KPIs, roadmap, decisions) actually lives now, after being renamed and moved wholesale from vitals.run. vitals.run itself has since been repurposed into a fully separate static health-protocol site with no shared code; this edge exists to explain the shared name origin, not a current integration.
+
+canon: knowledge/CORPUS.md
