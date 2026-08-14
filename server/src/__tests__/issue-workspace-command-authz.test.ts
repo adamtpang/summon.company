@@ -3,6 +3,7 @@ import request from "supertest";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 const mockIssueService = vi.hoisted(() => ({
+  resolveCadence: vi.fn(async () => new Map()),
   addComment: vi.fn(),
   assertCheckoutOwner: vi.fn(),
   create: vi.fn(),
@@ -45,6 +46,7 @@ const mockHeartbeatService = vi.hoisted(() => ({
 const mockInstanceSettingsService = vi.hoisted(() => ({
   get: vi.fn(),
   listCompanyIds: vi.fn(),
+  getExperimental: vi.fn(async () => ({})),
 }));
 
 const mockLogActivity = vi.hoisted(() => vi.fn());

@@ -5,6 +5,7 @@ import { errorHandler } from "../middleware/index.js";
 import { issueRoutes } from "../routes/issues.js";
 
 const mockIssueService = vi.hoisted(() => ({
+  resolveCadence: vi.fn(async () => new Map()),
   getById: vi.fn(),
   getAncestors: vi.fn(),
   getRelationSummaries: vi.fn(),
@@ -65,6 +66,7 @@ const mockInstanceSettingsService = vi.hoisted(() => ({
     },
   })),
   listCompanyIds: vi.fn(async () => ["company-1"]),
+  getExperimental: vi.fn(async () => ({})),
 }));
 
 const mockIssueReferenceService = vi.hoisted(() => ({
