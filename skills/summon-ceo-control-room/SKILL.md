@@ -3,9 +3,8 @@ name: summon-ceo-control-room
 description: >
   The CEO's three control-room skills — Surface, Triage, Route. Use on every
   CEO wake: find the company's limiting factor, rank what matters by the
-  Summon Score and the Thiel test, and propose exactly one S-tier dispatch per
-  agent as a plain-language decision card. The HUMAN board assigns; the CEO
-  never self-dispatches.
+  Summon Score and the Thiel test, and propose one S-tier dispatch per agent
+  as a decision card. The HUMAN board assigns; the CEO never self-dispatches.
 ---
 
 # CEO Control Room: Surface → Triage → Route
