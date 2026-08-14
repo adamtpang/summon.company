@@ -1,5 +1,6 @@
 import fs from "node:fs/promises";
 import path from "node:path";
+import { resolvePersonaOverlay, swapPersonaOverlaySection } from "@paperclipai/shared";
 import { notFound, unprocessable } from "../errors.js";
 import { resolveHomeAwarePath, resolvePaperclipInstanceRoot } from "../home-paths.js";
 
@@ -722,6 +723,44 @@ export function agentInstructionsService() {
     return { bundle, adapterConfig };
   }
 
+  /**
+   * Reconcile the `## Your persona:` overlay of a MANAGED instruction bundle to
+   * the archetype named by `personaSlug` (from `agent.metadata.persona`).
+   *
+   * This is the runtime half of the persona picker (SUM-253): once a persona is
+   * selected the entry file the next run reads via `--append-system-prompt-file`
+   * must carry that archetype's doctrine, so the agent writes in the new
+   * register. The swap is purely additive — everything outside the overlay
+   * block (operating rules, governance, approval gates) is preserved verbatim.
+   *
+   * No-ops (returns { changed: false }) when the slug is unknown/empty, the
+   * bundle is not managed on disk, or the overlay already matches. Only managed
+   * bundles are rewritten; external user-owned bundles are never touched.
+   */
+  async function reconcilePersonaOverlay(
+    agent: AgentLike,
+    personaSlug: string | null | undefined,
+  ): Promise<{ changed: boolean; appliedSlug: string | null; archetype: string | null; entryPath: string | null }> {
+    const persona = resolvePersonaOverlay(personaSlug);
+    if (!persona) {
+      return { changed: false, appliedSlug: null, archetype: null, entryPath: null };
+    }
+    const state = await recoverManagedBundleState(agent, deriveBundleState(agent));
+    if (state.mode !== "managed" || !state.rootPath || !state.resolvedEntryPath) {
+      return { changed: false, appliedSlug: persona.slug, archetype: persona.archetype, entryPath: null };
+    }
+    const current = await fs.readFile(state.resolvedEntryPath, "utf8").catch(() => null);
+    if (current === null) {
+      return { changed: false, appliedSlug: persona.slug, archetype: persona.archetype, entryPath: state.resolvedEntryPath };
+    }
+    const next = swapPersonaOverlaySection(current, persona);
+    if (next === current) {
+      return { changed: false, appliedSlug: persona.slug, archetype: persona.archetype, entryPath: state.resolvedEntryPath };
+    }
+    await fs.writeFile(state.resolvedEntryPath, next, "utf8");
+    return { changed: true, appliedSlug: persona.slug, archetype: persona.archetype, entryPath: state.resolvedEntryPath };
+  }
+
   return {
     getBundle,
     readFile,
@@ -731,5 +770,6 @@ export function agentInstructionsService() {
     exportFiles,
     ensureManagedBundle: ensureWritableBundle,
     materializeManagedBundle,
+    reconcilePersonaOverlay,
   };
 }

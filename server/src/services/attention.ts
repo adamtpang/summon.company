@@ -38,10 +38,15 @@ import type {
 } from "@paperclipai/shared";
 import {
   evaluateQuotaAlerts,
+  HEARTBEAT_ALERT_ACTIVITY_ACTION,
   parseOutcomeForecast,
   quotaAlertDedupKey,
   quotaProviderLabel,
 } from "@paperclipai/shared";
+import {
+  readHeartbeatAlertDetails,
+  type HeartbeatAlertDetails,
+} from "./heartbeat-alerts.js";
 import { PRODUCTIVITY_REVIEW_ORIGIN_KIND } from "./productivity-review.js";
 import { budgetService } from "./budgets.js";
 import { issueService } from "./issues.js";
@@ -59,6 +64,7 @@ const ATTENTION_SOURCE_KINDS: AttentionSourceKind[] = [
   "failed_run",
   "budget_alert",
   "agent_error_alert",
+  "heartbeat_alert",
 ];
 
 const SEVERITY_RANK: Record<AttentionSeverity, number> = {
@@ -70,15 +76,16 @@ const SEVERITY_RANK: Record<AttentionSeverity, number> = {
 
 const SOURCE_RANK: Record<AttentionSourceKind, number> = {
   failed_run: 0,
-  recovery_action: 1,
-  blocker_attention: 2,
-  budget_alert: 3,
-  agent_error_alert: 4,
-  approval: 5,
-  issue_thread_interaction: 6,
-  review: 7,
-  productivity_review: 8,
-  join_request: 9,
+  heartbeat_alert: 1,
+  recovery_action: 2,
+  blocker_attention: 3,
+  budget_alert: 4,
+  agent_error_alert: 5,
+  approval: 6,
+  issue_thread_interaction: 7,
+  review: 8,
+  productivity_review: 9,
+  join_request: 10,
 };
 
 const PENDING_INTERACTION_STATUSES = ["pending"] as const;
@@ -602,6 +609,71 @@ async function blockingIssueMap(db: Db, companyId: string, blockedIssueIds: Arra
 function readRunIssueId(contextSnapshot: Record<string, unknown> | null) {
   const issueId = contextSnapshot?.issueId ?? contextSnapshot?.taskId;
   return typeof issueId === "string" && issueId.length > 0 ? issueId : null;
+}
+
+/** A `heartbeat.alert` activity row normalized for the attention feed. */
+export interface HeartbeatAlertActivityRow {
+  id: string;
+  createdAt: Date | string | null;
+  details: HeartbeatAlertDetails;
+}
+
+/**
+ * Build the board attention items for heartbeat alerts (VIT-44 §2, SUM-231).
+ * A successful heartbeat turn that emitted an evidence-backed ```heartbeat-alert
+ * block surfaces here as exactly one row; an OK turn writes no `heartbeat.alert`
+ * activity, so it produces zero rows. Pure over its inputs, so the OK-silent /
+ * alert-surfaces contract is unit-tested without a live database.
+ */
+export function heartbeatAlertAttentionItems(input: {
+  companyId: string;
+  prefix: string;
+  rows: HeartbeatAlertActivityRow[];
+  issueMap: ReadonlyMap<string, IssueSummaryRow>;
+}): AttentionItem[] {
+  return input.rows.map((row) => {
+    const details = row.details;
+    const issue = details.issueId ? input.issueMap.get(details.issueId) ?? null : null;
+    const iso = toIso(row.createdAt);
+    const dedupKey = `heartbeat-alert:${row.id}`;
+    const subject: AttentionSubject = issue
+      ? issueSubject(input.prefix, issue)
+      : {
+          kind: "agent",
+          id: details.agentId ?? row.id,
+          companyId: input.companyId,
+          title: details.title,
+          identifier: null,
+          status: "alert",
+          href: details.agentId ? `/${input.prefix}/agents/${details.agentId}` : null,
+          metadata: { agentName: details.agentName, severity: details.severity },
+        };
+    return createItem({
+      companyId: input.companyId,
+      sourceKind: "heartbeat_alert",
+      subject,
+      whyNow: `Heartbeat check found a problem: ${details.title}`,
+      decisionVerbs: decisionVerbs(
+        { id: "inspect", label: "Inspect", description: "Open the heartbeat finding and decide the next action." },
+        { id: "dismiss", label: "Dismiss", description: "Acknowledge this heartbeat alert." },
+      ),
+      inlineResolvable: true,
+      entryRule: "a successful heartbeat turn emitted an evidence-backed heartbeat-alert block in the last 7 days.",
+      exitRule: "The alert is dismissed.",
+      dedupKey,
+      severity: details.severity,
+      activityAt: iso,
+      createdAt: iso,
+      updatedAt: iso,
+      relatedIssue: issue ? issueSubject(input.prefix, issue) : null,
+      ...issueContext(issue),
+      detail: {
+        kind: "generic",
+        summaryExcerpt: excerpt(details.evidence),
+        images: [],
+      },
+    });
+  });
 }
 
 export function attentionService(db: Db) {
@@ -1394,6 +1466,42 @@ export function attentionService(db: Db) {
             images: [],
           },
         }));
+      }
+
+      // heartbeat board alerts (VIT-44 §2): a successful heartbeat turn that
+      // finds a problem emits a `heartbeat.alert` activity row (an OK turn stays
+      // silent by construction). Surface each as one evidence-backed board item.
+      const heartbeatAlertSince = new Date(Date.now() - 7 * 86_400_000);
+      const heartbeatAlertRows = await db
+        .select({
+          id: activityLog.id,
+          details: activityLog.details,
+          createdAt: activityLog.createdAt,
+        })
+        .from(activityLog)
+        .where(and(
+          eq(activityLog.companyId, companyId),
+          eq(activityLog.action, HEARTBEAT_ALERT_ACTIVITY_ACTION),
+          gte(activityLog.createdAt, heartbeatAlertSince),
+        ))
+        .orderBy(desc(activityLog.createdAt))
+        .limit(50);
+      const normalizedHeartbeatAlerts: HeartbeatAlertActivityRow[] = heartbeatAlertRows.flatMap((row) => {
+        const details = readHeartbeatAlertDetails(row.details);
+        return details ? [{ id: String(row.id), createdAt: row.createdAt, details }] : [];
+      });
+      const heartbeatAlertIssueMap = await issueSummaryMap(
+        db,
+        companyId,
+        normalizedHeartbeatAlerts.map((row) => row.details.issueId),
+      );
+      for (const item of heartbeatAlertAttentionItems({
+        companyId,
+        prefix,
+        rows: normalizedHeartbeatAlerts,
+        issueMap: heartbeatAlertIssueMap,
+      })) {
+        add(item);
       }
 
       const deduped = new Map<string, AttentionItem>();

@@ -1,6 +1,7 @@
 import { sql } from "drizzle-orm";
 import {
   type AnyPgColumn,
+  check,
   pgTable,
   uuid,
   text,
@@ -34,6 +35,10 @@ export const issues = pgTable(
     workMode: text("work_mode").notNull().default("standard"),
     harnessKind: text("harness_kind"),
     priority: text("priority").notNull().default("medium"),
+    // VIT-44 §4: per-item attention-cadence override (hot|recent|stale). Null
+    // means the tier is derived from the isHot signal + activity age; a set
+    // value pins the tier and always wins in resolveWorkItemCadence.
+    cadenceOverride: text("cadence_override"),
     assigneeAgentId: uuid("assignee_agent_id").references(() => agents.id),
     assigneeUserId: text("assignee_user_id"),
     checkoutRunId: uuid("checkout_run_id").references(() => heartbeatRuns.id, { onDelete: "set null" }),
@@ -156,5 +161,9 @@ export const issues = pgTable(
           and ${table.hiddenAt} is null
           and ${table.status} not in ('done', 'cancelled')`,
       ),
+    cadenceOverrideCheck: check(
+      "issues_cadence_override_check",
+      sql`${table.cadenceOverride} is null or ${table.cadenceOverride} in ('hot', 'recent', 'stale')`,
+    ),
   }),
 );

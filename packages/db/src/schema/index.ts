@@ -23,6 +23,7 @@ export { agentRuntimeState } from "./agent_runtime_state.js";
 export { agentTaskSessions } from "./agent_task_sessions.js";
 export { agentWakeupRequests } from "./agent_wakeup_requests.js";
 export { projects } from "./projects.js";
+export { registerReconciliations } from "./register_reconciliations.js";
 export { projectMemberships } from "./project_memberships.js";
 export { projectWorkspaces } from "./project_workspaces.js";
 export { executionWorkspaces } from "./execution_workspaces.js";
@@ -90,6 +91,18 @@ export { heartbeatRunWatchdogDecisions } from "./heartbeat_run_watchdog_decision
 export { costEvents } from "./cost_events.js";
 export { financeEvents } from "./finance_events.js";
 export { issueOutcomes } from "./issue_outcomes.js";
+export {
+  pricingPlans,
+  companySubscriptions,
+  subscriptionUsageRecords,
+  outcomeCommissions,
+} from "./subscriptions.js";
+export {
+  adapterManifests,
+  employeePolicies,
+  employeeCredentials,
+  costLedgerEntries,
+} from "./policy_ledger.js";
 export { approvals } from "./approvals.js";
 export { approvalComments } from "./approval_comments.js";
 export { activityLog } from "./activity_log.js";
