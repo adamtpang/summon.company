@@ -681,7 +681,7 @@ describeEmbeddedPostgres("companySkillService.list", () => {
     await expect(svc.detail(companyId, "paperclip-blog-cover-image")).resolves.toMatchObject({
       id: skill.id,
       slug: "paperclip-blog-cover-image",
-      name: "Summon Blog Cover Image",
+      name: "Paperclip Blog Cover Image",
     });
   });
 

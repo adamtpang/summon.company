@@ -193,6 +193,10 @@ describeEmbeddedPostgres("heartbeat stale queued-run invalidation", () => {
       issuePrefix: `T${companyId.replace(/-/g, "").slice(0, 6).toUpperCase()}`,
       defaultResponsibleUserId: "responsible-user",
       requireBoardApprovalForNewAgents: false,
+      // VIT-127: timer wakes are skipped in manual mode. These tests target
+      // the generic-timer-wake skip/allow logic itself, which only runs at
+      // all in always_on mode.
+      operatingMode: "always_on",
     });
     await db.insert(agents).values({
       id: agentId,
