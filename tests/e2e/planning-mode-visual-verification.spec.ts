@@ -1,7 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-const AGENT_NAME = "Chief of staff";
-const TASK_TITLE = "Hire your first engineer and create a hiring plan";
+const TASK_TITLE = "Hire your first AI employee and create the operating plan";
 
 test("captures planning mode UI for desktop and mobile", async ({ page }) => {
   const timestamp = Date.now();
@@ -41,31 +40,19 @@ test("captures planning mode UI for desktop and mobile", async ({ page }) => {
   });
 
   await page.goto("/onboarding");
-  const startBtn = page.getByRole("button", { name: /Start Onboarding|New Company|Add Agent/ });
-  if (await startBtn.count()) await startBtn.first().click();
 
-  const createCard = page.getByRole("button", { name: /Build a new company/ });
-  if (await createCard.count()) await createCard.first().click();
-
-  await expect(page.getByRole("heading", { name: "Name your company" })).toBeVisible({ timeout: 15_000 });
-
+  await expect(page.getByRole("heading", { name: "Name the company" })).toBeVisible({ timeout: 15_000 });
   await page.locator('input[placeholder="Acme Corp"]').fill(companyName);
-  await page.getByRole("button", { name: /^Next/ }).click();
+  await page.getByRole("button", { name: "Create company" }).click();
 
-  await expect(page.getByRole("heading", { name: "Define your mission" })).toBeVisible({ timeout: 30_000 });
-  await page
-    .getByPlaceholder("What is your team trying to achieve?")
-    .fill("Capture planning mode visual evidence for the graduated task UI.");
-  await page.getByRole("button", { name: /Confirm mission/ }).click();
+  // Fuel step — wait for the mocked probe to resolve before continuing, so
+  // "Finish" below has a connected adapter to hire the CEO with.
+  await expect(page.getByRole("heading", { name: "Connect your fuel" })).toBeVisible({ timeout: 15_000 });
+  await expect(page.getByText("Connected", { exact: false }).first()).toBeVisible({ timeout: 15_000 });
+  await page.getByRole("button", { name: "Continue" }).click();
 
-  await page.waitForSelector('input[placeholder="Chief of staff"]', { timeout: 30_000 });
-  await expect(page.locator('input[placeholder="Chief of staff"]')).toHaveValue(AGENT_NAME);
-
-  await page.getByRole("button", { name: /^Next/ }).click();
-  await page.getByRole("button", { name: /Give it a heartbeat/ }).click();
-
-  await expect(page.getByRole("heading", { name: "Review" })).toBeVisible({ timeout: 30_000 });
-  await page.getByRole("button", { name: /Get started/ }).click();
+  await expect(page.getByRole("heading", { name: "Pair the work" })).toBeVisible({ timeout: 10_000 });
+  await page.getByRole("button", { name: "Finish without a repo" }).click();
   await expect(page).toHaveURL(/\/dashboard$/, { timeout: 30_000 });
 
   const baseOrigin = new URL(page.url()).origin;
