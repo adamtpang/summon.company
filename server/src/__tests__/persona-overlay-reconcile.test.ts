@@ -25,6 +25,7 @@ const AGENT_ID = "sum253-ledger";
 let homeDir: string;
 let entryPath: string;
 const priorHome = process.env.PAPERCLIP_HOME;
+const priorInstanceId = process.env.PAPERCLIP_INSTANCE_ID;
 
 function financeBundle(personaSlug: string): string {
   const overlay = buildPersonaOverlaySection(resolvePersonaOverlay(personaSlug)!);
@@ -45,6 +46,10 @@ function financeBundle(personaSlug: string): string {
 beforeAll(async () => {
   homeDir = await fs.mkdtemp(path.join(os.tmpdir(), "sum253-"));
   process.env.PAPERCLIP_HOME = homeDir;
+  // run-vitest-stable.mjs sets a per-run PAPERCLIP_INSTANCE_ID to sandbox
+  // parallel test runs; pin it to "default" to match the hardcoded
+  // "instances/default" path below.
+  process.env.PAPERCLIP_INSTANCE_ID = "default";
   const instructionsDir = path.join(
     homeDir,
     "instances",
@@ -64,6 +69,8 @@ beforeAll(async () => {
 afterAll(async () => {
   if (priorHome === undefined) delete process.env.PAPERCLIP_HOME;
   else process.env.PAPERCLIP_HOME = priorHome;
+  if (priorInstanceId === undefined) delete process.env.PAPERCLIP_INSTANCE_ID;
+  else process.env.PAPERCLIP_INSTANCE_ID = priorInstanceId;
   await fs.rm(homeDir, { recursive: true, force: true }).catch(() => {});
 });
 
