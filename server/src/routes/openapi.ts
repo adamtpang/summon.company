@@ -16,6 +16,7 @@ import {
   resetAgentSessionSchema,
   agentSkillSyncSchema,
   testAdapterEnvironmentSchema,
+  switchCompanyModelPitStopSchema,
   // Issue
   createIssueSchema,
   updateIssueSchema,
@@ -1287,6 +1288,27 @@ registry.registerPath({
   summary: "List agent configurations for a company",
   request: { params: z.object({ companyId: z.string() }) },
   responses: { 200: r.ok(), 401: r.unauthorized },
+});
+
+registry.registerPath({
+  method: "get",
+  path: "/api/companies/{companyId}/model-pit-stop",
+  tags: ["agents"],
+  summary: "Get the company's model pit stop status",
+  request: { params: z.object({ companyId: z.string() }) },
+  responses: { 200: r.ok(), 401: r.unauthorized },
+});
+
+registry.registerPath({
+  method: "post",
+  path: "/api/companies/{companyId}/model-pit-stop",
+  tags: ["agents"],
+  summary: "Switch the company's eligible agents to a different model provider",
+  request: {
+    params: z.object({ companyId: z.string() }),
+    body: jsonBody(switchCompanyModelPitStopSchema),
+  },
+  responses: { 200: r.ok(), 400: r.badRequest, 401: r.unauthorized, 409: r.conflict, 422: r.unprocessable },
 });
 
 registry.registerPath({
