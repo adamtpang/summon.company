@@ -937,6 +937,7 @@ describeEmbeddedPostgres("heartbeat orphaned process recovery", () => {
       name: "Paperclip",
       issuePrefix,
       requireBoardApprovalForNewAgents: false,
+      operatingMode: "always_on",
     });
 
     await db.insert(agents).values({
@@ -1973,7 +1974,7 @@ describeEmbeddedPostgres("heartbeat orphaned process recovery", () => {
     expect(comments[0]).toMatchObject({
       authorType: "system",
       createdByRunId: runId,
-      body: "Agent failed to resume after approval: `adapter_failed` — retrying (attempt 1/3)",
+      body: "Agent failed to resume after approval: `adapter_failed`, retrying (attempt 1/3)",
     });
 
     const interaction = await db
@@ -2081,7 +2082,7 @@ describeEmbeddedPostgres("heartbeat orphaned process recovery", () => {
     expect(comments).toHaveLength(1);
     expect(comments[0]).toMatchObject({
       authorType: "system",
-      body: expect.stringContaining("Agent failed to resume after approval: `adapter_failed` — needs attention"),
+      body: expect.stringContaining("Agent failed to resume after approval: `adapter_failed`, needs attention"),
     });
     expect(comments[0]?.body).toContain("Recovery action:");
 
@@ -2210,7 +2211,7 @@ describeEmbeddedPostgres("heartbeat orphaned process recovery", () => {
     expect(comments).toHaveLength(1);
     expect(comments[0]).toMatchObject({
       authorType: "system",
-      body: "Agent failed to resume after approval: `process_lost` — retrying (attempt 1/3)",
+      body: "Agent failed to resume after approval: `process_lost`, retrying (attempt 1/3)",
     });
 
     const interaction = await db

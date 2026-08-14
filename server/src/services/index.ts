@@ -86,6 +86,9 @@ export { secretService } from "./secrets.js";
 export { routineService } from "./routines.js";
 export { costService } from "./costs.js";
 export { financeService } from "./finance.js";
+export { subscriptionService, applyMarkup } from "./subscriptions.js";
+export { policyLedgerService } from "./policy-ledger.js";
+export { DEFAULT_ADAPTER_MANIFESTS } from "./adapter-manifests.data.js";
 export { heartbeatService, resolveHeartbeatSchedulingSuppression } from "./heartbeat.js";
 export {
   productivityReviewService,

@@ -11,7 +11,8 @@ export type AttentionSourceKind =
   | "review"
   | "failed_run"
   | "budget_alert"
-  | "agent_error_alert";
+  | "agent_error_alert"
+  | "heartbeat_alert";
 
 export type AttentionSubjectKind =
   | "approval"

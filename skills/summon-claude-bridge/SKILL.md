@@ -1,3 +1,12 @@
+---
+name: summon-claude-bridge
+description: >
+  Connects any Claude Code session, from any repo, to the Summon control
+  plane (summon.company). Onboards the current project as a company,
+  standardizes its org, diagnoses its constraint, and routes work. Summon is
+  Company Zero and dogfoods this bridge on itself.
+---
+
 # /summon — connect any Claude Code session to the Summon control plane
 
 Summon (summon.company) is Adam's AI-agent-company OS: every company gets a

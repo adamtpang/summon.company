@@ -4,6 +4,7 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 import { normalizeIssueExecutionPolicy } from "../services/issue-execution-policy.ts";
 
 const mockIssueService = vi.hoisted(() => ({
+  resolveCadence: vi.fn(async () => new Map()),
   getById: vi.fn(),
   assertCheckoutOwner: vi.fn(),
   update: vi.fn(),
@@ -99,6 +100,7 @@ function registerModuleMocks() {
         },
       })),
       listCompanyIds: vi.fn(async () => ["company-1"]),
+      getExperimental: vi.fn(async () => ({})),
     }),
     issueApprovalService: () => mockIssueApprovalService,
     issueReferenceService: () => ({

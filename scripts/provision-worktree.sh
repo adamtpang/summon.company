@@ -411,10 +411,10 @@ EOF
 }
 
 if [[ -e "$worktree_config_path" && -e "$worktree_env_path" ]] && existing_worktree_config_is_usable; then
-  echo "Reusing existing isolated Paperclip worktree config at $worktree_config_path" >&2
+  echo "Reusing existing isolated Summon worktree config at $worktree_config_path" >&2
 else
   if [[ -e "$worktree_config_path" || -e "$worktree_env_path" ]]; then
-    echo "Existing isolated Paperclip worktree config is stale for this host; regenerating." >&2
+    echo "Existing isolated Summon worktree config is stale for this host; regenerating." >&2
   fi
   if paperclipai_command_available; then
     run_isolated_worktree_init

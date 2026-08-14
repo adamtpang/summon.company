@@ -1037,6 +1037,34 @@
       "when": 1785196800000,
       "tag": "0149_issue_outcomes",
       "breakpoints": true
+    },
+    {
+      "idx": 150,
+      "version": "7",
+      "when": 1785283200000,
+      "tag": "0150_billing_subscriptions",
+      "breakpoints": true
+    },
+    {
+      "idx": 151,
+      "version": "7",
+      "when": 1785369600000,
+      "tag": "0151_employee_policy_ledger",
+      "breakpoints": true
+    },
+    {
+      "idx": 152,
+      "version": "7",
+      "when": 1785456000000,
+      "tag": "0152_issue_cadence_override",
+      "breakpoints": true
+    },
+    {
+      "idx": 153,
+      "version": "7",
+      "when": 1785542400000,
+      "tag": "0153_register_reconciliations",
+      "breakpoints": true
     }
   ]
 }

@@ -7,6 +7,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import type { Issue } from "@paperclipai/shared";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import type { CompanyJoinRequest } from "../api/access";
+import { TooltipProvider } from "@/components/ui/tooltip";
 
 const routerMock = vi.hoisted(() => ({
   location: { pathname: "/", search: "", hash: "" },
@@ -301,7 +302,9 @@ describe("Inbox toolbar", () => {
     await act(async () => {
       root.render(
         <QueryClientProvider client={queryClient}>
-          <Inbox />
+          <TooltipProvider>
+            <Inbox />
+          </TooltipProvider>
         </QueryClientProvider>,
       );
     });
@@ -332,7 +335,9 @@ describe("Inbox toolbar", () => {
     await act(async () => {
       root.render(
         <QueryClientProvider client={queryClient}>
-          <Inbox />
+          <TooltipProvider>
+            <Inbox />
+          </TooltipProvider>
         </QueryClientProvider>,
       );
     });
@@ -363,7 +368,9 @@ describe("Inbox toolbar", () => {
     await act(async () => {
       root.render(
         <QueryClientProvider client={queryClient}>
-          <Inbox />
+          <TooltipProvider>
+            <Inbox />
+          </TooltipProvider>
         </QueryClientProvider>,
       );
     });
@@ -402,7 +409,9 @@ describe("Inbox toolbar", () => {
     await act(async () => {
       root.render(
         <QueryClientProvider client={queryClient}>
-          <Inbox />
+          <TooltipProvider>
+            <Inbox />
+          </TooltipProvider>
         </QueryClientProvider>,
       );
     });
@@ -464,7 +473,9 @@ describe("Inbox toolbar", () => {
     await act(async () => {
       root.render(
         <QueryClientProvider client={queryClient}>
-          <Inbox />
+          <TooltipProvider>
+            <Inbox />
+          </TooltipProvider>
         </QueryClientProvider>,
       );
     });
@@ -518,7 +529,9 @@ describe("Inbox toolbar", () => {
     await act(async () => {
       root.render(
         <QueryClientProvider client={queryClient}>
-          <Inbox />
+          <TooltipProvider>
+            <Inbox />
+          </TooltipProvider>
         </QueryClientProvider>,
       );
     });
