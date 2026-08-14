@@ -690,3 +690,11 @@ export type {
   ReconciledFinding,
   ReconciliationReceipt,
 } from "./register-truth.js";
+export type {
+  CompanyContext,
+  OrgSignals,
+  PageSnapshot,
+  RobotsInfo,
+  SitemapEntry,
+  StructuredDataBlock,
+} from "./company-context.js";

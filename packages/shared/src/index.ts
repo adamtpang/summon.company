@@ -1951,3 +1951,11 @@ export {
   registerTruthRunSchema,
   type RegisterTruthRunPayload,
 } from "./validators/register-truth.js";
+export type {
+  CompanyContext,
+  OrgSignals,
+  PageSnapshot,
+  RobotsInfo,
+  SitemapEntry,
+  StructuredDataBlock,
+} from "./types/company-context.js";

@@ -1,6 +1,6 @@
 # Hawaii Tech Week: a proactive diagnostic
 
-Prepared by Adam Pangelinan / summon.company, 2026-07-25. Sources: public search results for Hawaii Tech Week 2026 (the site itself blocks automated readers, which is finding zero).
+Prepared by Adam Pangelinan / summon.company, 2026-07-25, corrected 2026-08-14 against a live systematic fetch. Sources: public search results, plus a direct read of hawaiitechweek.com, its sitemap, and its robots.txt.
 
 ## Where you are on the road
 
@@ -10,7 +10,7 @@ Stage: Operate and close, with a hard date. Aug 31 to Sep 6, 2026 is about five 
 
 1. **Sponsor close window.** Sponsorship inventory that is not closed in the next five weeks is worth zero on Sep 7. Every day of pipeline slack is unrecoverable.
 2. **Your brand searches leak.** Third-party sites (for example mindlens.ai) rank for "Hawaii Tech Week 2026" queries. People looking for you are landing on pages you do not control, during ticket and sponsor season.
-3. **The site blocks automated readers (HTTP 403).** That can also block link previews and crawlers you want (social unfurls, event aggregators, search indexing). Worth a check before peak traffic.
+3. **Your own robots.txt tells search engines and AI crawlers not to read the site.** A direct fetch still loads fine, but the file explicitly disallows the wildcard and every named bot, which can suppress link previews, AI-assistant answers, and some crawlers you want during ticket and sponsor season. Worth a five-minute check before peak traffic. One more thing worth knowing while we were in there: 33 pages of content live under `/handbook`, more than any other section of the site.
 
 ## The offer
 
