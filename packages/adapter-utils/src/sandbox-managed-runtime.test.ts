@@ -155,9 +155,9 @@ describe("sandbox managed runtime", () => {
       "finalize:Finalizing sandbox workspace",
     ]));
     expect(runtimeStatuses).toEqual(expect.arrayContaining([
-      expect.stringMatching(/^config_sync:Syncing workspace to sandbox: 100% \(\d+\.\d\/\d+\.\d MB\)$/),
-      expect.stringMatching(/^config_sync:Syncing skills to sandbox: 100% \(\d+\.\d\/\d+\.\d MB\)$/),
-      expect.stringMatching(/^restore:Restoring workspace from sandbox: 100% \(\d+\.\d\/\d+\.\d MB\)$/),
+      expect.stringMatching(/^config_sync:\[summon\] Syncing workspace to sandbox: 100% \(\d+\.\d\/\d+\.\d MB\)$/),
+      expect.stringMatching(/^config_sync:\[summon\] Syncing skills to sandbox: 100% \(\d+\.\d\/\d+\.\d MB\)$/),
+      expect.stringMatching(/^restore:\[summon\] Restoring workspace from sandbox: 100% \(\d+\.\d\/\d+\.\d MB\)$/),
     ]));
     expect(runtimeStatuses.at(-1)).toBe("finalize:Finalizing sandbox workspace");
   });
@@ -294,11 +294,11 @@ describe("sandbox managed runtime", () => {
     ]));
     expect(runtimeStatuses.some((status) => (
       status.phase === "git_sync" &&
-      /^Syncing git history to sandbox: 100% \(\d+\.\d\/\d+\.\d MB\)$/.test(status.message)
+      /^\[summon\] Syncing git history to sandbox: 100% \(\d+\.\d\/\d+\.\d MB\)$/.test(status.message)
     ))).toBe(true);
     expect(runtimeStatuses.some((status) => (
       status.phase === "export" &&
-      /^Exporting git history from sandbox: 100% \(\d+\.\d\/\d+\.\d MB\)$/.test(status.message)
+      /^\[summon\] Exporting git history from sandbox: 100% \(\d+\.\d\/\d+\.\d MB\)$/.test(status.message)
     ))).toBe(true);
   });
 

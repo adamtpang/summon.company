@@ -966,7 +966,7 @@ describe("shared ACPX engine runtime behavior", () => {
     expect(additionalDirectories).toContain(path.join(root, "agent-home"));
 
     const note = (meta[0]?.commandNotes as string[] | undefined)?.find((entry) =>
-      entry.includes("Paperclip-managed Claude settings"),
+      entry.includes("Summon-managed Claude settings"),
     );
     expect(note).toBeTruthy();
   });
