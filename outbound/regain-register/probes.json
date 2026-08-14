@@ -1,0 +1,29 @@
+{
+  "P0-1": [
+    { "file": "apps/api/src/modules/v1/persona-cockpits/controller.ts", "needle": "rbac: { permission: { bi: [\"read\"] } }" }
+  ],
+  "P0-2": [
+    { "file": "apps/queue/src/index.ts", "needle": "await scheduleBatchEtl()" }
+  ],
+  "P0-3": [
+    { "file": "apps/queue/src/consumers/bi-etl-stream.ts", "needle": "type.includes(\".clinical.appointment.\")" }
+  ],
+  "P0-4": [
+    { "file": "apps/queue/src/queues/bi-etl.ts", "needle": "totalCharges," }
+  ],
+  "P0-5": [
+    { "file": "packages/events/src/consumer.ts", "needle": "XPENDING" }
+  ],
+  "P0-6": [
+    { "file": "apps/api/src/modules/v1/persona-cockpits/executive.ts", "needle": "was previously unfiltered/all-time, P0-6" }
+  ],
+  "P0-7": [
+    { "file": "apps/queue/src/queues/bi-etl.ts", "needle": "expectedRevenue," }
+  ],
+  "P0-8": [
+    { "file": "apps/admin/messages/ru.po", "blockContext": "dashboards/executive", "pattern": "^msgstr \"\"$", "goal": "decrease" }
+  ],
+  "P0-9": [
+    { "file": "apps/api/src/modules/v1/persona-cockpits/executive.ts", "needle": "fetchRevenueDataAsOf(tx, organizationId)" }
+  ]
+}

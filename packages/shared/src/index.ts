@@ -64,6 +64,15 @@ export {
   type VitalsPersona,
 } from "./vitals-personas.js";
 export {
+  PERSONA_OVERLAY_HEADING,
+  buildPersonaOverlaySection,
+  personaOverlayRoster,
+  resolvePersonaOverlay,
+  swapPersonaOverlaySection,
+  type PersonaOverlay,
+  type PersonaOverlayQuote,
+} from "./persona-overlay.js";
+export {
   CORE8_FORMATION_KEY,
   CORE8_FORMATION_SEATS,
   CORE8_SEAT_DEFAULT_BUDGET_CENTS,
@@ -1093,6 +1102,46 @@ export {
 } from "./outcome-forecast.js";
 
 export {
+  extractProblemsFromFile,
+  extractProblemsFromFiles,
+  rankProblems,
+  formatProblemLine,
+  problemTier,
+  docFirstSort,
+  isDocFile,
+  inferEffort,
+  inferBusinessImpact,
+  isEnvFile,
+  looksLikePiiPath,
+  looksLikePiiContent,
+  refuseReason,
+  compileGitignore,
+  isIgnored,
+  filterIgnored,
+  isTranslationMirror,
+  filterTranslationMirrors,
+  looksResolved,
+  looksLikeCodeToken,
+  type SourceFile,
+  type ProblemSeverity,
+  type ProblemEffort,
+  type ProblemTier,
+  type ExtractedProblem,
+  type RefusedFile,
+  type ExtractionResult,
+  type GitignoreMatcher,
+} from "./problem-extract.js";
+
+export {
+  parseHeartbeatSignal,
+  DEFAULT_HEARTBEAT_ALERT_SEVERITY,
+  HEARTBEAT_ALERT_ACTIVITY_ACTION,
+  HEARTBEAT_OK_ACTIVITY_ACTION,
+  type HeartbeatAlert,
+  type HeartbeatSignal,
+} from "./heartbeat-signal.js";
+
+export {
   anchorSnapshotToSelector,
   createDocumentAnchorSelector,
   normalizeAnchorText,
@@ -1889,3 +1938,16 @@ export {
   type ModelFailoverState,
   type ProviderFailoverHealth,
 } from "./model-chain.js";
+export type {
+  FindingStatus,
+  FindingStatusCounts,
+  Probe,
+  ProbeResult,
+  ReconciledFinding,
+  ReconciliationReceipt,
+} from "./types/register-truth.js";
+export {
+  registerTruthProbeSchema,
+  registerTruthRunSchema,
+  type RegisterTruthRunPayload,
+} from "./validators/register-truth.js";

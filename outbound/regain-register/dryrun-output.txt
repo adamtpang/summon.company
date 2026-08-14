@@ -1,0 +1,307 @@
+=== 1. incoming webhook ===
+event: pull_request  action: closed  merged: true
+triggers a run: true
+
+=== 2. reconciling (read-only) ===
+
+=== 4. task that WOULD be filed (dry run, none created) ===
+title:    Register drift: 7 finding(s) in docs/99-defactum-intel/07-miss-migration/02-ceo-features/21-findings-register.md
+priority: high
+company:  dry-run-company
+--- body ---
+6 of 39 findings are closed in code, 1 partially, 12 need a human, but the register has not been updated in 264 commits (last edited 2026-07-14).
+
+Repo: regain-inc/miss (read-only)
+Register: docs/99-defactum-intel/07-miss-migration/02-ceo-features/21-findings-register.md
+Register last edited: 2026-07-14 (03ef9825f)
+Reconciled against: origin/main (fbcb5ba2a)
+
+P0-1: NEEDS_HUMAN
+  apps/api/src/modules/v1/persona-cockpits/controller.ts "rbac: { permission: { bi: ["read"] } }" 2 -> 7 [improved] closed by 5db025163 2026-07-14
+  note: Security or money finding: evidence is reported, never auto-closed.
+P0-2: CLOSED
+  apps/queue/src/index.ts "await scheduleBatchEtl()" 0 -> 1 [satisfied] closed by b4af6e64c 2026-07-14
+P0-3: CLOSED
+  apps/queue/src/consumers/bi-etl-stream.ts "type.includes(".clinical.appointment.")" 0 -> 1 [satisfied] closed by 0d40a5476 2026-07-14
+P0-4: CLOSED
+  apps/queue/src/queues/bi-etl.ts "totalCharges," 0 -> 2 [satisfied] closed by b4af6e64c 2026-07-14
+P0-5: CLOSED
+  packages/events/src/consumer.ts "XPENDING" 0 -> 2 [satisfied] closed by b1baa70cb 2026-07-19
+P0-6: NEEDS_HUMAN
+  note: No probe could be derived from the row.
+P0-7: CLOSED
+  apps/queue/src/queues/bi-etl.ts "expectedRevenue," 0 -> 2 [satisfied] closed by b4af6e64c 2026-07-14
+P0-8: PARTIAL
+  apps/admin/messages/ru.po /^msgstr ""$/ 53 -> 1 [improved] closed by 5fa55f2e6 2026-07-15
+P0-9: CLOSED
+  apps/api/src/modules/v1/persona-cockpits/executive.ts "fetchRevenueDataAsOf(tx, organizationId)" 0 -> 1 [satisfied] closed by 6c25f457d 2026-07-15
+P1-1: NEEDS_HUMAN
+  bi-etl.ts "SUM(paid_amount)" 0 -> 0 [unchanged]
+  bi-etl.ts "date_key" 0 -> 0 [unchanged]
+  _shared.ts "SUM(paid_amount)" 0 -> 0 [unchanged]
+  _shared.ts "date_key" 0 -> 0 [unchanged]
+  note: Security or money finding: evidence is reported, never auto-closed.
+P1-2: NEEDS_HUMAN
+  finance.ts "fact_claims" 0 -> 0 [unchanged]
+  finance.ts "COUNT(*)" 0 -> 0 [unchanged]
+  finance.ts "allowed_amount" 0 -> 0 [unchanged]
+  finance.ts "denial_code" 0 -> 0 [unchanged]
+  bi-etl.ts "fact_claims" 0 -> 0 [unchanged]
+  bi-etl.ts "COUNT(*)" 0 -> 0 [unchanged]
+  bi-etl.ts "allowed_amount" 0 -> 0 [unchanged]
+  bi-etl.ts "denial_code" 0 -> 0 [unchanged]
+  note: Security or money finding: evidence is reported, never auto-closed.
+P1-3: NEEDS_HUMAN
+  note: No probe could be derived from the row.
+P1-4: NEEDS_HUMAN
+  note: No probe could be derived from the row.
+P1-5: NEEDS_HUMAN
+  rollup-org.ts "rollup-org.ts:381-472" 0 -> 0 [unchanged]
+  note: Security or money finding: evidence is reported, never auto-closed.
+P1-6: OPEN
+  executive.ts "Promise.all" 0 -> 0 [unchanged]
+  executive.ts "executive.ts:177-291" 0 -> 0 [unchanged]
+  executive.ts ":246" 0 -> 0 [unchanged]
+P1-7: OPEN
+  crm-leads.ts "crm_leads" 0 -> 0 [unchanged]
+  crm-leads.ts "crm_inbound_leads" 0 -> 0 [unchanged]
+  rollup-org.ts "crm_leads" 0 -> 0 [unchanged]
+  rollup-org.ts "crm_inbound_leads" 0 -> 0 [unchanged]
+  crm/channels/attribution.ts "crm_leads" 0 -> 0 [unchanged]
+  crm/channels/attribution.ts "crm_inbound_leads" 0 -> 0 [unchanged]
+P1-8: OPEN
+  executive-alerts.ts "2027-04-01" 0 -> 0 [unchanged]
+  compliance-deadlines.ts "2027-04-01" 0 -> 0 [unchanged]
+P1-9: OPEN
+  finance.ts "fiscalBoxStatus" 0 -> 0 [unchanged]
+  finance.ts ""unknown"" 0 -> 0 [unchanged]
+  finance.ts "fiscal/controller.ts:174,457" 0 -> 0 [unchanged]
+  fiscal/controller.ts "fiscalBoxStatus" 0 -> 0 [unchanged]
+  fiscal/controller.ts ""unknown"" 0 -> 0 [unchanged]
+  fiscal/controller.ts "fiscal/controller.ts:174,457" 0 -> 0 [unchanged]
+P1-10: OPEN
+  bi-query.ts "bi_query" 0 -> 0 [unchanged]
+  bi-query.ts "dim_patient" 0 -> 0 [unchanged]
+  bi-query.ts "patient_key" 0 -> 0 [unchanged]
+  bi-query.ts "SELECT patient_key, appointment_date, expected_revenue FROM fact_appointments" 0 -> 0 [unchanged]
+  bi-warehouse-meta.ts "bi_query" 0 -> 0 [unchanged]
+  bi-warehouse-meta.ts "dim_patient" 0 -> 0 [unchanged]
+  bi-warehouse-meta.ts "patient_key" 0 -> 0 [unchanged]
+  bi-warehouse-meta.ts "SELECT patient_key, appointment_date, expected_revenue FROM fact_appointments" 0 -> 0 [unchanged]
+P1-11: OPEN
+  visualization-sources/sql-safety.ts "app.cross_tenant=false" 0 -> 0 [unchanged]
+  sql-validator.ts "app.cross_tenant=false" 0 -> 0 [unchanged]
+P1-12: NEEDS_HUMAN
+  tool-rbac-3.ts "completeTask" 0 -> 0 [unchanged]
+  tool-rbac-3.ts "snoozeTask" 0 -> 0 [unchanged]
+  tool-rbac-3.ts "createFollowUpTask" 0 -> 0 [unchanged]
+  tool-rbac-3.ts "tasks.ts:242,259" 0 -> 0 [unchanged]
+  shared.ts "completeTask" 0 -> 0 [unchanged]
+  shared.ts "snoozeTask" 0 -> 0 [unchanged]
+  shared.ts "createFollowUpTask" 0 -> 0 [unchanged]
+  shared.ts "tasks.ts:242,259" 0 -> 0 [unchanged]
+  tasks.ts "completeTask" 0 -> 0 [unchanged]
+  tasks.ts "snoozeTask" 0 -> 0 [unchanged]
+  tasks.ts "createFollowUpTask" 0 -> 0 [unchanged]
+  tasks.ts "tasks.ts:242,259" 0 -> 0 [unchanged]
+  note: Security or money finding: evidence is reported, never auto-closed.
+P1-13: OPEN
+  MorningBriefPanel.ts "buildMorningBriefItems" 0 -> 0 [unchanged]
+  MorningBriefPanel.ts "/executive-brief" 0 -> 0 [unchanged]
+  MorningBriefPanel.ts "getExecutiveSnapshot" 0 -> 0 [unchanged]
+  MorningBriefPanel.ts "MorningBriefPanel.tsx:55-115" 0 -> 0 [unchanged]
+  skill-packs/executive-brief.ts "buildMorningBriefItems" 0 -> 0 [unchanged]
+  skill-packs/executive-brief.ts "/executive-brief" 0 -> 0 [unchanged]
+  skill-packs/executive-brief.ts "getExecutiveSnapshot" 0 -> 0 [unchanged]
+  skill-packs/executive-brief.ts "MorningBriefPanel.tsx:55-115" 0 -> 0 [unchanged]
+P1-14: OPEN
+  executive/page.ts "null" 0 -> 0 [unchanged]
+  executive/page.ts "executive/page.tsx:36-41" 0 -> 0 [unchanged]
+P1-15: OPEN
+  BoardPacketDetailView.ts "window.print" 0 -> 0 [unchanged]
+  board-packet-narrative.ts "window.print" 0 -> 0 [unchanged]
+  board-packet-data.ts "window.print" 0 -> 0 [unchanged]
+P1-16: NEEDS_HUMAN
+  note: No probe could be derived from the row.
+P1-17: OPEN
+  chain-ops.ts "count(*) dim_location" 0 -> 0 [unchanged]
+  bi-etl.ts "count(*) dim_location" 0 -> 0 [unchanged]
+P1-18: OPEN
+  d1-call-center.ts "callbackBreaches" 0 -> 0 [unchanged]
+  onlinepbx/worker.ts "callbackBreaches" 0 -> 0 [unchanged]
+  marketing.ts "callbackBreaches" 0 -> 0 [unchanged]
+P1-19: OPEN
+  entities/.../types.ts "ExecutiveCockpitResponse" 0 -> 0 [unchanged]
+  entities/.../types.ts "{data,error}" 0 -> 0 [unchanged]
+  entities/.../types.ts "executive/page.tsx:34,50" 0 -> 0 [unchanged]
+  executive/page.ts "ExecutiveCockpitResponse" 0 -> 0 [unchanged]
+  executive/page.ts "{data,error}" 0 -> 0 [unchanged]
+  executive/page.ts "executive/page.tsx:34,50" 0 -> 0 [unchanged]
+  hooks.ts "ExecutiveCockpitResponse" 0 -> 0 [unchanged]
+  hooks.ts "{data,error}" 0 -> 0 [unchanged]
+  hooks.ts "executive/page.tsx:34,50" 0 -> 0 [unchanged]
+P1-20: OPEN
+  front-desk.ts "b2bGapToBudget" 0 -> 0 [unchanged]
+  front-desk.ts "testKey" 0 -> 0 [unchanged]
+  front-desk.ts "lab-ops.ts:140,71" 0 -> 0 [unchanged]
+  finance.ts "b2bGapToBudget" 0 -> 0 [unchanged]
+  finance.ts "testKey" 0 -> 0 [unchanged]
+  finance.ts "lab-ops.ts:140,71" 0 -> 0 [unchanged]
+  executive-cac-history.ts "b2bGapToBudget" 0 -> 0 [unchanged]
+  executive-cac-history.ts "testKey" 0 -> 0 [unchanged]
+  executive-cac-history.ts "lab-ops.ts:140,71" 0 -> 0 [unchanged]
+  lab-ops.ts "b2bGapToBudget" 0 -> 0 [unchanged]
+  lab-ops.ts "testKey" 0 -> 0 [unchanged]
+  lab-ops.ts "lab-ops.ts:140,71" 0 -> 0 [unchanged]
+P2-1: OPEN
+  fiscal/shift-controller.ts "finalize-close" 0 -> 0 [unchanged]
+  fiscal/shift-controller.ts "closing" 0 -> 0 [unchanged]
+  fiscal/shift-controller.ts "open" 0 -> 0 [unchanged]
+  fiscal/shift-controller.ts "failed" 0 -> 0 [unchanged]
+  fiscal/shift-controller.ts "closed" 0 -> 0 [unchanged]
+  compliance-deadlines/service.ts "finalize-close" 0 -> 0 [unchanged]
+  compliance-deadlines/service.ts "closing" 0 -> 0 [unchanged]
+  compliance-deadlines/service.ts "open" 0 -> 0 [unchanged]
+  compliance-deadlines/service.ts "failed" 0 -> 0 [unchanged]
+  compliance-deadlines/service.ts "closed" 0 -> 0 [unchanged]
+P2-2: OPEN
+  demo/controller.ts "/demo/enter" 0 -> 0 [unchanged]
+  demo/controller.ts "DEMO_MODE_ENABLED" 0 -> 0 [unchanged]
+  demo/controller.ts "NODE_ENV" 0 -> 0 [unchanged]
+  demo/controller.ts "/api/dev/admin-session" 0 -> 0 [unchanged]
+  demo/controller.ts "dev-login.html" 0 -> 0 [unchanged]
+  admin-session/route.ts "/demo/enter" 0 -> 0 [unchanged]
+  admin-session/route.ts "DEMO_MODE_ENABLED" 0 -> 0 [unchanged]
+  admin-session/route.ts "NODE_ENV" 0 -> 0 [unchanged]
+  admin-session/route.ts "/api/dev/admin-session" 0 -> 0 [unchanged]
+  admin-session/route.ts "dev-login.html" 0 -> 0 [unchanged]
+  proxy.ts "/demo/enter" 0 -> 0 [unchanged]
+  proxy.ts "DEMO_MODE_ENABLED" 0 -> 0 [unchanged]
+P2-3: OPEN
+  whatChanged.ts "what_changed" 0 -> 0 [unchanged]
+  whatChanged.ts "sql_expression" 0 -> 0 [unchanged]
+  whatChanged.ts "isBiComposableEnabled" 0 -> 0 [unchanged]
+  whatChanged.ts "dim_patient" 0 -> 0 [unchanged]
+  whatChanged.ts "whatChanged.ts:92,120" 0 -> 0 [unchanged]
+P2-4: NEEDS_HUMAN
+  chat-controller.ts "keyBy:"org"" 0 -> 0 [unchanged]
+  chat-controller.ts "/investigate" 0 -> 0 [unchanged]
+  chat-controller.ts "isAuthenticated" 0 -> 0 [unchanged]
+  rate-limit.ts "keyBy:"org"" 0 -> 0 [unchanged]
+  rate-limit.ts "/investigate" 0 -> 0 [unchanged]
+  rate-limit.ts "isAuthenticated" 0 -> 0 [unchanged]
+  note: Security or money finding: evidence is reported, never auto-closed.
+P2-5: OPEN
+  controller.ts "replay/reset" 0 -> 0 [unchanged]
+  controller.ts "isAuthenticated" 0 -> 0 [unchanged]
+  getExecutiveSnapshot.ts "replay/reset" 0 -> 0 [unchanged]
+  getExecutiveSnapshot.ts "isAuthenticated" 0 -> 0 [unchanged]
+P2-6: OPEN
+  board-packet-service.ts "nominalAnalyzerCapacityPerDay" 0 -> 0 [unchanged]
+  board-packet-service.ts "trailingWindowDays" 0 -> 0 [unchanged]
+  board-packet-service.ts "fillRateDeferred" 0 -> 0 [unchanged]
+  board-packet-service.ts "ltvCacDeferred" 0 -> 0 [unchanged]
+  executive-growth-capacity.ts "nominalAnalyzerCapacityPerDay" 0 -> 0 [unchanged]
+  executive-growth-capacity.ts "trailingWindowDays" 0 -> 0 [unchanged]
+  executive-growth-capacity.ts "fillRateDeferred" 0 -> 0 [unchanged]
+  executive-growth-capacity.ts "ltvCacDeferred" 0 -> 0 [unchanged]
+  d6-revenue-daily.ts "nominalAnalyzerCapacityPerDay" 0 -> 0 [unchanged]
+  d6-revenue-daily.ts "trailingWindowDays" 0 -> 0 [unchanged]
+  d6-revenue-daily.ts "fillRateDeferred" 0 -> 0 [unchanged]
+  d6-revenue-daily.ts "ltvCacDeferred" 0 -> 0 [unchanged]
+P2-7: OPEN
+  bi-warehouse-meta.ts "encounter_date_key" 0 -> 0 [unchanged]
+  bi-warehouse-meta.ts "date_key" 0 -> 0 [unchanged]
+  bi-warehouse-meta.ts "fact_claims.patient_key" 0 -> 0 [unchanged]
+  bi-warehouse-meta.ts "bi-warehouse-meta.ts:51,65" 0 -> 0 [unchanged]
+  sql-validator.ts "encounter_date_key" 0 -> 0 [unchanged]
+  sql-validator.ts "date_key" 0 -> 0 [unchanged]
+  sql-validator.ts "fact_claims.patient_key" 0 -> 0 [unchanged]
+  sql-validator.ts "bi-warehouse-meta.ts:51,65" 0 -> 0 [unchanged]
+P2-8: NEEDS_HUMAN
+  note: No probe could be derived from the row.
+P2-9: NEEDS_HUMAN
+  note: No probe could be derived from the row.
+P2-10: OPEN
+  0195_harden_analytics_readonly.sql "0195" 0 -> 0 [unchanged]
+  0195_harden_analytics_readonly.sql "DATABASE miss" 0 -> 0 [unchanged]
+  0195_harden_analytics_readonly.sql "fullstack_mono" 0 -> 0 [unchanged]
+  0195_harden_analytics_readonly.sql "miss_dev" 0 -> 0 [unchanged]
+  0195_harden_analytics_readonly.sql "0194" 0 -> 0 [unchanged]
+  0194_etl_source_identity.sql "0195" 0 -> 0 [unchanged]
+  0194_etl_source_identity.sql "DATABASE miss" 0 -> 0 [unchanged]
+  0194_etl_source_identity.sql "fullstack_mono" 0 -> 0 [unchanged]
+  0194_etl_source_identity.sql "miss_dev" 0 -> 0 [unchanged]
+  0194_etl_source_identity.sql "0194" 0 -> 0 [unchanged]
+
+=== 3. history row (NOT written, dry run) ===
+repo=regain-inc/miss register=docs/99-defactum-intel/07-miss-migration/02-ceo-features/21-findings-register.md head=fbcb5ba2a trigger=webhook mode=propose_only
+
+=== 5. proposed doc PR (propose-only, NOT opened) ===
+branch that would be created: summon/register-truth-fbcb5ba2a
+title: docs: reconcile docs/99-defactum-intel/07-miss-migration/02-ceo-features/21-findings-register.md against fbcb5ba2a
+--- diff ---
+--- a/docs/99-defactum-intel/07-miss-migration/02-ceo-features/21-findings-register.md
++++ b/docs/99-defactum-intel/07-miss-migration/02-ceo-features/21-findings-register.md
+@@ -25,1 +25,1 @@
+-| P0-1 | **Route authz missing → patient PHI exposure.** `/persona-cockpits/front-desk` (and `/executive`, `/executive/alerts`, `/chain-ops`, `/lab-ops`, `/finance`) carry only `isAuthenticated`, no `bi.read`. The patient-principal rejection lives _inside_ the `if(options.permission)` block, so bare-`isAuthenticated` routes never run it — a patient-portal login with an org context can read other patients' names, appointment times, expected revenue, chain financials, and named staff performance. | `persona-cockpits/controller.ts:144,167,197`; guard at `rbac.ts:118-134`                        | D1, D3b    | ✓            |
++| P0-1 [NEEDS REVIEW as of fbcb5ba2a: Security or money finding: evidence is reported, never auto-closed.] | **Route authz missing → patient PHI exposure.** `/persona-cockpits/front-desk` (and `/executive`, `/executive/alerts`, `/chain-ops`, `/lab-ops`, `/finance`) carry only `isAuthenticated`, no `bi.read`. The patient-principal rejection lives _inside_ the `if(options.permission)` block, so bare-`isAuthenticated` routes never run it — a patient-portal login with an org context can read other patients' names, appointment times, expected revenue, chain financials, and named staff performance. | `persona-cockpits/controller.ts:144,167,197`; guard at `rbac.ts:118-134`                        | D1, D3b    | ✓            |
+@@ -26,1 +26,1 @@
+-| P0-2 | **Nightly warehouse build is dead code.** `scheduleBatchEtl()` is defined with a 01:00 cron but has **zero call sites** — the full BI ETL never runs. New tenants / historical data never build; the 01:30 rollup assumes an ETL that never happened.                                                                                                                                                                                                                                                      | `apps/queue/src/queues/bi-etl.ts:1936` (def), no invocation in `apps/queue/src/index.ts`        | D4         | ✓            |
++| P0-2 [CLOSED in code as of fbcb5ba2a: apps/queue/src/index.ts closed by b4af6e64c 2026-07-14] | **Nightly warehouse build is dead code.** `scheduleBatchEtl()` is defined with a 01:00 cron but has **zero call sites** — the full BI ETL never runs. New tenants / historical data never build; the 01:30 rollup assumes an ETL that never happened.                                                                                                                                                                                                                                                      | `apps/queue/src/queues/bi-etl.ts:1936` (def), no invocation in `apps/queue/src/index.ts`        | D4         | ✓            |
+@@ -27,1 +27,1 @@
+-| P0-3 | **Appointment events never reach the warehouse.** Consumer matches `.scheduling.appointment.*`; the state machine emits `com.regain.clinical.appointment.*`. A test _asserts the real prefix is ignored_, codifying the bug. Patients/bookings/no-show facts go stale on real data.                                                                                                                                                                                                                        | `bi-etl-stream.ts:86-87` vs `appointment-state-machine.ts:101-111`; `bi-etl-stream.test.ts:186` | D4         | ✓            |
++| P0-3 [CLOSED in code as of fbcb5ba2a: apps/queue/src/consumers/bi-etl-stream.ts closed by 0d40a5476 2026-07-14] | **Appointment events never reach the warehouse.** Consumer matches `.scheduling.appointment.*`; the state machine emits `com.regain.clinical.appointment.*`. A test _asserts the real prefix is ignored_, codifying the bug. Patients/bookings/no-show facts go stale on real data.                                                                                                                                                                                                                        | `bi-etl-stream.ts:86-87` vs `appointment-state-machine.ts:101-111`; `bi-etl-stream.test.ts:186` | D4         | ✓            |
+@@ -28,1 +28,1 @@
+-| P0-4 | **`fact_encounters.total_charges` has no production writer.** The column exists and seeds fill it, but encounter ETL never writes it, yet executive/chain/finance/board/doctor all `SUM(total_charges)`. Clinic & provider revenue = **0** on organic data (COALESCE hides it).                                                                                                                                                                                                                            | `bi-etl.ts:637` (no write); readers `executive.ts:246`                                          | D2, D4     | ✓            |
++| P0-4 [CLOSED in code as of fbcb5ba2a: apps/queue/src/queues/bi-etl.ts closed by b4af6e64c 2026-07-14] | **`fact_encounters.total_charges` has no production writer.** The column exists and seeds fill it, but encounter ETL never writes it, yet executive/chain/finance/board/doctor all `SUM(total_charges)`. Clinic & provider revenue = **0** on organic data (COALESCE hides it).                                                                                                                                                                                                                            | `bi-etl.ts:637` (no write); readers `executive.ts:246`                                          | D2, D4     | ✓            |
+@@ -29,1 +29,1 @@
+-| P0-5 | **Silent event loss in BI-ETL stream.** The consumer wraps `routeEvent` in try/catch that only `console.error`s — never rethrows — so a failed `biEtlQueue.add` still returns success and the event is ACKed. Warehouse updates are permanently lost, no retry/DLQ.                                                                                                                                                                                                                                        | `bi-etl-stream.ts:145-159`; ACK at `packages/events/src/consumer.ts:257`                        | D2         | ✓            |
++| P0-5 [CLOSED in code as of fbcb5ba2a: packages/events/src/consumer.ts closed by b1baa70cb 2026-07-19] | **Silent event loss in BI-ETL stream.** The consumer wraps `routeEvent` in try/catch that only `console.error`s — never rethrows — so a failed `biEtlQueue.add` still returns success and the event is ACKed. Warehouse updates are permanently lost, no retry/DLQ.                                                                                                                                                                                                                                        | `bi-etl-stream.ts:145-159`; ACK at `packages/events/src/consumer.ts:257`                        | D2         | ✓            |
+@@ -30,1 +30,1 @@
+-| P0-6 | **Three different "revenue" numbers.** Hero/trend = `SUM(fact_claims.paid_amount)`; clinic/provider split = `SUM(fact_encounters.total_charges)` with _no period filter_; Revenue Cycle = 30-day `fact_revenue_daily` collections. Paid claims ≠ gross charges ≠ collected cash. A CEO (or Davron) sees three disagreeing revenues on one screen.                                                                                                                                                          | `_shared.ts:173`, `executive.ts:246`, `executive-revenue-cycle.ts:185`                          | D2, D6     | ✓ (via P0-4) |
++| P0-6 [NEEDS REVIEW as of fbcb5ba2a: No probe could be derived from the row.] | **Three different "revenue" numbers.** Hero/trend = `SUM(fact_claims.paid_amount)`; clinic/provider split = `SUM(fact_encounters.total_charges)` with _no period filter_; Revenue Cycle = 30-day `fact_revenue_daily` collections. Paid claims ≠ gross charges ≠ collected cash. A CEO (or Davron) sees three disagreeing revenues on one screen.                                                                                                                                                          | `_shared.ts:173`, `executive.ts:246`, `executive-revenue-cycle.ts:185`                          | D2, D6     | ✓ (via P0-4) |
+@@ -31,1 +31,1 @@
+-| P0-7 | **`fact_appointments.expected_revenue` no production writer.** Front-desk row amounts are seed-only; NULL→0 on real data.                                                                                                                                                                                                                                                                                                                                                                                  | `bi-etl.ts:737` (no write); reader `front-desk.ts:118`                                          | D2, D4     | —            |
++| P0-7 [CLOSED in code as of fbcb5ba2a: apps/queue/src/queues/bi-etl.ts closed by b4af6e64c 2026-07-14] | **`fact_appointments.expected_revenue` no production writer.** Front-desk row amounts are seed-only; NULL→0 on real data.                                                                                                                                                                                                                                                                                                                                                                                  | `bi-etl.ts:737` (no write); reader `front-desk.ts:118`                                          | D2, D4     | —            |
+@@ -32,1 +32,1 @@
+-| P0-8 | **RU mode leaks English on signature surfaces.** ~53 empty `msgstr` referenced by executive surfaces (30 command-center + 23 board-packet), incl. "Board packet", "Export to PDF", core revenue labels, board-packet signature UI. Demo-blocking for a Russian-speaking CEO.                                                                                                                                                                                                                               | `apps/admin/messages/ru.po:21925-22638` (regions)                                               | D5         | ✓ (sampled)  |
++| P0-8 [PARTIAL in code as of fbcb5ba2a: apps/admin/messages/ru.po closed by 5fa55f2e6 2026-07-15] | **RU mode leaks English on signature surfaces.** ~53 empty `msgstr` referenced by executive surfaces (30 command-center + 23 board-packet), incl. "Board packet", "Export to PDF", core revenue labels, board-packet signature UI. Demo-blocking for a Russian-speaking CEO.                                                                                                                                                                                                                               | `apps/admin/messages/ru.po:21925-22638` (regions)                                               | D5         | ✓ (sampled)  |
+@@ -33,1 +33,1 @@
+-| P0-9 | **"Data as of" is a lie.** `dataAsOf = today.toISOString()`, not the last successful ETL/rollup. Combined with empty→0 coercion, stale or missing data looks like a live zero on a governed exec surface.                                                                                                                                                                                                                                                                                                  | `executive.ts:322`; zero-coercion `_shared.ts:173-224`, `executive.ts:298`                      | D1, D2, D5 | —            |
++| P0-9 [CLOSED in code as of fbcb5ba2a: apps/api/src/modules/v1/persona-cockpits/executive.ts closed by 6c25f457d 2026-07-15] | **"Data as of" is a lie.** `dataAsOf = today.toISOString()`, not the last successful ETL/rollup. Combined with empty→0 coercion, stale or missing data looks like a live zero on a governed exec surface.                                                                                                                                                                                                                                                                                                  | `executive.ts:322`; zero-coercion `_shared.ts:173-224`, `executive.ts:298`                      | D1, D2, D5 | —            |
+@@ -39,1 +39,1 @@
+-| P1-1  | **Revenue dated by claim-submission, not payment.** `SUM(paid_amount)` grouped by submission `date_key`. "Revenue today" omits old claims paid today and rewrites historical revenue when a claim is later paid.                                                                                                                   | `bi-etl.ts:979`; readers `_shared.ts:173`                                                   | D2, D4     | —        |
++| P1-1 [NEEDS REVIEW as of fbcb5ba2a: Security or money finding: evidence is reported, never auto-closed.] | **Revenue dated by claim-submission, not payment.** `SUM(paid_amount)` grouped by submission `date_key`. "Revenue today" omits old claims paid today and rewrites historical revenue when a claim is later paid.                                                                                                                   | `bi-etl.ts:979`; readers `_shared.ts:173`                                                   | D2, D4     | —        |
+@@ -40,1 +40,1 @@
+-| P1-2  | **Line-grain counted as claim-grain.** `fact_claims` is line-grain; pending-invoice / payment-exception / finance counts use `COUNT(*)` → multi-line claims counted N×. Summary (no-line) claims omit `allowed_amount`/`denial_code` → vanish from AR & denial predicates.                                                         | `finance.ts`, `bi-etl.ts:1081`                                                              | D2, D4     | —        |
++| P1-2 [NEEDS REVIEW as of fbcb5ba2a: Security or money finding: evidence is reported, never auto-closed.] | **Line-grain counted as claim-grain.** `fact_claims` is line-grain; pending-invoice / payment-exception / finance counts use `COUNT(*)` → multi-line claims counted N×. Summary (no-line) claims omit `allowed_amount`/`denial_code` → vanish from AR & denial predicates.                                                         | `finance.ts`, `bi-etl.ts:1081`                                                              | D2, D4     | —        |
+@@ -41,1 +41,1 @@
+-| P1-3  | **Rollup per-org failures swallowed.** Errors logged, BullMQ job still succeeds → configured retries never fire; failed orgs silently stale.                                                                                                                                                                                       | `daily-fact-rollups.ts:87`                                                                  | D1, D2, D4 | —        |
++| P1-3 [NEEDS REVIEW as of fbcb5ba2a: No probe could be derived from the row.] | **Rollup per-org failures swallowed.** Errors logged, BullMQ job still succeeds → configured retries never fire; failed orgs silently stale.                                                                                                                                                                                       | `daily-fact-rollups.ts:87`                                                                  | D1, D2, D4 | —        |
+@@ -42,1 +42,1 @@
+-| P1-4  | **Rollups never delete obsolete grains.** Upsert-only; a deleted/regrouped source row leaves stale facts forever (only claims do delete-and-rebuild).                                                                                                                                                                              | `rollup-org.ts:569`; ETL orphan gaps `bi-etl.ts:1235`                                       | D2, D4     | —        |
++| P1-4 [NEEDS REVIEW as of fbcb5ba2a: No probe could be derived from the row.] | **Rollups never delete obsolete grains.** Upsert-only; a deleted/regrouped source row leaves stale facts forever (only claims do delete-and-rebuild).                                                                                                                                                                              | `rollup-org.ts:569`; ETL orphan gaps `bi-etl.ts:1235`                                       | D2, D4     | —        |
+@@ -43,1 +43,1 @@
+-| P1-5  | **D5 drops summary-only payments.** Claim-total fallback runs only when the whole org/day has zero line payments; mixed days lose every header-only payment.                                                                                                                                                                       | `rollup-org.ts:381-472`                                                                     | D2, D4     | —        |
++| P1-5 [NEEDS REVIEW as of fbcb5ba2a: Security or money finding: evidence is reported, never auto-closed.] | **D5 drops summary-only payments.** Claim-total fallback runs only when the whole org/day has zero line payments; mixed days lose every header-only payment.                                                                                                                                                                       | `rollup-org.ts:381-472`                                                                     | D2, D4     | —        |
+@@ -50,1 +50,1 @@
+-| P1-12 | **Executive role gets direct-write Cortex tools.** `completeTask`/`snoozeTask`/`createFollowUpTask` write immediately, no HITL; system roles bypass the permission-action filter. Exceeds the plan's "read-only except board packets / HITL pin-save". `completeTask` has no ownership check and no prior-state predicate (races). | `tool-rbac-3.ts:138`; bypass `shared.ts:153`; `tasks.ts:242,259`                            | D1, D3b    | —        |
++| P1-12 [NEEDS REVIEW as of fbcb5ba2a: Security or money finding: evidence is reported, never auto-closed.] | **Executive role gets direct-write Cortex tools.** `completeTask`/`snoozeTask`/`createFollowUpTask` write immediately, no HITL; system roles bypass the permission-action filter. Exceeds the plan's "read-only except board packets / HITL pin-save". `completeTask` has no ownership check and no prior-state predicate (races). | `tool-rbac-3.ts:138`; bypass `shared.ts:153`; `tasks.ts:242,259`                            | D1, D3b    | —        |
+@@ -54,1 +54,1 @@
+-| P1-16 | **Alerts uncapped + negative signals dead-end.** AlertStrip renders every returned alert (spec caps at 3). Laggard cashier/operator/lab names are plain text (no action); at-risk staff shows a count, no names; several alerts route to a summary band instead of the resolution workflow (see design note below).                | `AlertStrip.tsx:171`; `LeadersLaggardsSection.tsx:177`; `workforce-compliance-cards.tsx:58` | D1, D5     | —        |
++| P1-16 [NEEDS REVIEW as of fbcb5ba2a: No probe could be derived from the row.] | **Alerts uncapped + negative signals dead-end.** AlertStrip renders every returned alert (spec caps at 3). Laggard cashier/operator/lab names are plain text (no action); at-risk staff shows a count, no names; several alerts route to a summary band instead of the resolution workflow (see design note below).                | `AlertStrip.tsx:171`; `LeadersLaggardsSection.tsx:177`; `workforce-compliance-cards.tsx:58` | D1, D5     | —        |
+@@ -67,1 +67,1 @@
+-| P2-4  | **No per-org Cortex budget.** Rate limit is per-user (not `keyBy:"org"`) and fails open when Redis is down; no per-org query/token/cost/investigation ceiling. `/investigate` is `isAuthenticated`-only.                                                                                                   | `chat-controller.ts:2246`; `rate-limit.ts:167`                                            | D3b        |
++| P2-4 [NEEDS REVIEW as of fbcb5ba2a: Security or money finding: evidence is reported, never auto-closed.] | **No per-org Cortex budget.** Rate limit is per-user (not `keyBy:"org"`) and fails open when Redis is down; no per-org query/token/cost/investigation ceiling. `/investigate` is `isAuthenticated`-only.                                                                                                   | `chat-controller.ts:2246`; `rate-limit.ts:167`                                            | D3b        |
+@@ -71,1 +71,1 @@
+-| P2-8  | **Mobile companion not built.** At 390px: alerts + 5-line brief + stacked cards + chart + hundreds of expandable values + 7-col scroll table. Spec'd companion (verdict/alerts/4 KPIs/chart/links) absent. Deferral is weak given the CEO uses a phone.                                                    | `03-target-information-architecture.md:118`; `AlertStrip.tsx:171`                         | D5         |
++| P2-8 [NEEDS REVIEW as of fbcb5ba2a: No probe could be derived from the row.] | **Mobile companion not built.** At 390px: alerts + 5-line brief + stacked cards + chart + hundreds of expandable values + 7-col scroll table. Spec'd companion (verdict/alerts/4 KPIs/chart/links) absent. Deferral is weak given the CEO uses a phone.                                                    | `03-target-information-architecture.md:118`; `AlertStrip.tsx:171`                         | D5         |
+@@ -72,1 +72,1 @@
+-| P2-9  | **Test theater.** Board-packet sandbox hardcoded to return 120/100; marketing mock returns pre-aggregated rows regardless of SQL; staff/revenue-cycle canned arrays; boot tests grep source text. Period test covers one mid-quarter UTC date (no Jan-1 QTD/YTD, no leap/tz).                              | `bi-board-packets.test.ts:257`; `marketing.test.ts:50`; `period.test.ts:9`                | D2, D4     |
++| P2-9 [NEEDS REVIEW as of fbcb5ba2a: No probe could be derived from the row.] | **Test theater.** Board-packet sandbox hardcoded to return 120/100; marketing mock returns pre-aggregated rows regardless of SQL; staff/revenue-cycle canned arrays; boot tests grep source text. Period test covers one mid-quarter UTC date (no Jan-1 QTD/YTD, no leap/tz).                              | `bi-board-packets.test.ts:257`; `marketing.test.ts:50`; `period.test.ts:9`                | D2, D4     |
+
+=== 6. second delivery of the same event (idempotency) ===
+ran: false  reason: already reconciled at fbcb5ba2a
+
+nothing was written to regain-inc/miss. propose-only mode.
