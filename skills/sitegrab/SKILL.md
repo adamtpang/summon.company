@@ -1,3 +1,12 @@
+---
+name: sitegrab
+description: >
+  Grabs a site's homepage HTML, linked stylesheets, and sitemap, then
+  extracts its design system (fonts, color palette, type scale, radii, CSS
+  custom properties, page inventory) into DESIGN-NOTES.md. Studies a site's
+  craft to steal the lessons, not the content. No API key needed.
+---
+
 # /sitegrab — study a website's craft and steal the lessons, not the content
 
 Grabs a site's homepage HTML, every linked stylesheet, and its sitemap into

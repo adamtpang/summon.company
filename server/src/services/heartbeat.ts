@@ -78,6 +78,7 @@ import type {
 import { createLocalAgentJwt } from "../agent-auth-jwt.js";
 import { parseObject, asBoolean, asNumber, appendWithByteCap, MAX_EXCERPT_BYTES } from "../adapters/utils.js";
 import { costService } from "./costs.js";
+import { createPolicyLedgerRuntime } from "./policy-ledger-runtime.js";
 import { trackAgentFirstHeartbeat } from "@paperclipai/shared/telemetry";
 import { getTelemetryClient } from "../telemetry.js";
 import { companySkillService } from "./company-skills.js";
@@ -110,6 +111,7 @@ import {
   isThrottleCandidateIssueRewake,
 } from "./issue-rewake-throttle.js";
 import { logActivity, publishPluginDomainEvent, type LogActivityInput } from "./activity-log.js";
+import { emitHeartbeatSignalActivity } from "./heartbeat-alerts.js";
 import { resolveAgentModelFailoverForRun } from "./model-failover.js";
 import {
   buildWorkspaceReadyComment,
@@ -233,7 +235,7 @@ import {
   UNMANAGED_BACKGROUND_TASK_STOP_REASON,
   writePaperclipSkillSyncPreference,
 } from "@paperclipai/adapter-utils/server-utils";
-import { extractSkillMentionIds, isUuidLike } from "@paperclipai/shared";
+import { extractSkillMentionIds, isUuidLike, parseHeartbeatSignal } from "@paperclipai/shared";
 import { evaluateCodexCredentialReadiness } from "@paperclipai/adapter-codex-local/server";
 import { environmentService } from "./environments.js";
 import { parseExecutionPolicyBootstrapEnv } from "./execution-policy-bootstrap.js";
@@ -387,6 +389,38 @@ export class ConfigurationIncompleteFailure extends Error {
     this.name = "ConfigurationIncompleteFailure";
     this.resultJson = resultJson;
   }
+}
+
+// Per-employee policy/cost-ledger denied the adapter call at the reservation
+// gate (VIT-46), so the provider call must NOT be dispatched. Surfaced as a
+// pre-execution failure with the ledger deny reason as the run error code.
+export class PolicyLedgerBlockedFailure extends Error {
+  code: string;
+  resultJson: Record<string, unknown>;
+
+  constructor(reason: string, action: "stop_run_partial_proposal" | "block", unit: string) {
+    super(
+      action === "stop_run_partial_proposal"
+        ? `Run stopped at its cost limit (${reason}); partial results proposed instead of spending more.`
+        : `Employee is blocked by policy (${reason}); the provider call was not made.`,
+    );
+    this.name = "PolicyLedgerBlockedFailure";
+    this.code = reason;
+    this.resultJson = {
+      policyLedger: {
+        blocked: true,
+        reason,
+        action,
+        unit,
+        // AC2: a cost_limit stop proposes whatever partial work already exists.
+        proposePartialResults: action === "stop_run_partial_proposal",
+      },
+    };
+  }
+}
+
+function isPolicyLedgerBlockedFailure(error: unknown): error is PolicyLedgerBlockedFailure {
+  return error instanceof PolicyLedgerBlockedFailure;
 }
 
 function resolveCodexTransientFallbackMode(attempt: number): CodexTransientFallbackMode {
@@ -5158,6 +5192,24 @@ export function heartbeatService(db: Db, options: HeartbeatServiceOptions = {}) 
   };
   const budgets = budgetService(db, budgetHooks);
   const recovery = recoveryService(db, { enqueueWakeup });
+  // Per-employee policy/cost-ledger call-site interception (VIT-46). Reuses the
+  // budget cancel hook so a monthly-budget block cancels in-flight work exactly
+  // as the company budget guard does; the board alert is mirrored to the log.
+  const policyLedgerRuntime = createPolicyLedgerRuntime(db, {
+    cancelWorkForScope: cancelBudgetScopeWork,
+    onBoardAlert: async (alert) => {
+      await logActivity(db, {
+        companyId: alert.companyId,
+        actorType: "system",
+        actorId: "policy-ledger",
+        agentId: alert.agentId,
+        action: "employee_policy.monthly_budget_exceeded",
+        entityType: "employee_policy",
+        entityId: alert.policyId ?? alert.agentId,
+        details: { monthlyBudgetUnits: alert.monthlyBudgetUnits, unit: alert.unit },
+      });
+    },
+  });
 
   function isPlanApprovalConfirmationPayload(payload: unknown) {
     const target = parseObject(parseObject(payload).target);
@@ -9799,6 +9851,12 @@ export function heartbeatService(db: Db, options: HeartbeatServiceOptions = {}) 
           heartbeat.dailySpendCentsLimit ??
           heartbeat.dailyBudgetCents,
       ),
+      // Per-run cost_limit in the employee's policy unit (VIT-46 AC2). When a
+      // reservation would push a single run over this, the run stops and
+      // proposes its partial results rather than spending more.
+      runCostLimitUnits: normalizeOptionalNonNegativeInteger(
+        heartbeat.runCostLimitUnits ?? heartbeat.runCostLimit ?? heartbeat.perRunCostLimitUnits,
+      ),
     };
   }
 
@@ -11004,9 +11062,10 @@ export function heartbeatService(db: Db, options: HeartbeatServiceOptions = {}) 
       })
       .where(eq(agentRuntimeState.agentId, agent.id));
 
+    let costEventId: string | null = null;
     if (additionalCostCents > 0 || hasTokenUsage) {
       const costs = costService(db, budgetHooks);
-      await costs.createEvent(agent.companyId, {
+      const event = await costs.createEvent(agent.companyId, {
         heartbeatRunId: run.id,
         agentId: agent.id,
         issueId: ledgerScope.issueId,
@@ -11022,6 +11081,27 @@ export function heartbeatService(db: Db, options: HeartbeatServiceOptions = {}) 
         costCents: additionalCostCents,
         occurredAt: new Date(),
       });
+      costEventId = event.id;
+    }
+
+    // VIT-46 call-site interception (settle half): once the real cost is known,
+    // settle the run's open reservation and tie it to the metered cost event so
+    // the ledger reconciles with the event log (AC4). No-op unless this run
+    // reserved (metered adapter + active employee policy).
+    if (policyLedgerRuntime.isPolicyLedgerAdapter(agent.adapterType)) {
+      try {
+        await policyLedgerRuntime.settleAdapterCall({
+          companyId: agent.companyId,
+          runId: run.id,
+          costEventId,
+          hadSpend: costEventId != null,
+        });
+      } catch (settleErr) {
+        logger.warn(
+          { err: settleErr, runId: run.id, agentId: agent.id },
+          "failed to settle policy-ledger reservation for run",
+        );
+      }
     }
   }
 
@@ -12905,6 +12985,43 @@ export function heartbeatService(db: Db, options: HeartbeatServiceOptions = {}) 
         adapterFinalizeOutcome = status;
       };
 
+      // VIT-46 call-site interception: reserve one adapter call against the
+      // employee's policy/cost ledger BEFORE the provider runs. Pure passthrough
+      // unless this is a metered adapter whose employee has an active policy. On
+      // a deny the provider call is never made — the run stops (cost_limit) or
+      // the employee is blocked (monthly budget / revoked credential).
+      const policyLedgerReservation = await policyLedgerRuntime.reserveAdapterCall({
+        companyId: agent.companyId,
+        agentId: agent.id,
+        adapterType: agent.adapterType,
+        model: configuredModel,
+        runId: run.id,
+        issueId: issueId ?? null,
+        heartbeatRunId: run.id,
+        runCostLimitUnits: parseHeartbeatPolicy(agent).runCostLimitUnits,
+      });
+      if (policyLedgerReservation.enforced && !policyLedgerReservation.ok) {
+        await onLog(
+          "stderr",
+          `[summon] Policy ledger denied the adapter call (${policyLedgerReservation.reason}); not dispatching provider call.\n`,
+        );
+        throw new PolicyLedgerBlockedFailure(
+          policyLedgerReservation.reason,
+          policyLedgerReservation.action,
+          policyLedgerReservation.unit,
+        );
+      }
+      if (policyLedgerReservation.enforced && policyLedgerReservation.ok) {
+        // Thread the reservation, credential generation, and run cost_limit into
+        // the adapter run context so the execution carries its accounting frame.
+        context.paperclipPolicyLedger = {
+          reservationId: policyLedgerReservation.reservationId,
+          generation: policyLedgerReservation.generation,
+          reserveUnits: policyLedgerReservation.reserveUnits,
+          unit: policyLedgerReservation.unit,
+        };
+      }
+
       let adapterResult: Awaited<ReturnType<typeof adapter.execute>>;
       try {
         adapterResult = await adapter.execute({
@@ -13219,6 +13336,25 @@ export function heartbeatService(db: Db, options: HeartbeatServiceOptions = {}) 
             );
           }
         }
+        // VIT-44 §2 (SUM-231): classify the heartbeat turn's final output. An
+        // explicit HEARTBEAT_OK stays silent; an evidence-backed
+        // ```heartbeat-alert block raises exactly one first-class board alert.
+        if (outcome === "succeeded") {
+          try {
+            await emitHeartbeatSignalActivity(db, parseHeartbeatSignal(adapterResult.summary), {
+              companyId: livenessRun.companyId,
+              agentId: agent.id,
+              agentName: agent.name,
+              runId: livenessRun.id,
+              issueId: issueId ?? null,
+            });
+          } catch (err) {
+            logger.warn(
+              { err, runId: livenessRun.id },
+              "failed to classify heartbeat signal for board alert",
+            );
+          }
+        }
         if (outcome === "failed" && isMaxTurnExhaustionRun(livenessRun)) {
           const policy = parseMaxTurnContinuationPolicy(agent);
           if (policy.enabled && policy.maxAttempts > 0) {
@@ -13330,11 +13466,13 @@ export function heartbeatService(db: Db, options: HeartbeatServiceOptions = {}) 
       );
       const workspaceValidationFailure = isWorkspaceValidationFailure(err) ? err : null;
       const configurationIncompleteFailure = isConfigurationIncompleteFailure(err) ? err : null;
+      const policyLedgerBlockedFailure = isPolicyLedgerBlockedFailure(err) ? err : null;
       const recordedResponsibleUserDenialCode =
         normalizeResponsibleUserDenialCode((await getRun(run.id).catch(() => null))?.errorCode);
       const failureErrorCode =
         workspaceValidationFailure?.code
         ?? configurationIncompleteFailure?.code
+        ?? policyLedgerBlockedFailure?.code
         ?? recordedResponsibleUserDenialCode
         ?? "adapter_failed";
       logger.error({ err, runId }, "heartbeat execution failed");
@@ -13362,7 +13500,7 @@ export function heartbeatService(db: Db, options: HeartbeatServiceOptions = {}) 
         resultJson: mergeRunStopMetadataForAgent(agent, "failed", {
           errorCode: failureErrorCode,
           errorMessage: message,
-          resultJson: workspaceValidationFailure?.resultJson ?? configurationIncompleteFailure?.resultJson ?? null,
+          resultJson: workspaceValidationFailure?.resultJson ?? configurationIncompleteFailure?.resultJson ?? policyLedgerBlockedFailure?.resultJson ?? null,
         }),
         stdoutExcerpt,
         stderrExcerpt,
