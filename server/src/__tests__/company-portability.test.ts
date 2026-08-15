@@ -2209,6 +2209,68 @@ describe("company portability", () => {
     expect(exported.warnings).toContain("Skipped 1 built-in managed routine from export.");
   });
 
+  it("skips unstaffed core-8 formation-seed agents during export", async () => {
+    const portability = companyPortabilityService({} as any);
+
+    agentSvc.list.mockResolvedValue([
+      {
+        id: "agent-1",
+        name: "ClaudeCoder",
+        status: "idle",
+        role: "engineer",
+        title: "Software Engineer",
+        icon: "code",
+        reportsTo: null,
+        capabilities: "Writes code",
+        adapterType: "claude_local",
+        adapterConfig: { promptTemplate: "You are ClaudeCoder." },
+        runtimeConfig: { heartbeat: { intervalSec: 3600 } },
+        budgetMonthlyCents: 0,
+        permissions: { canCreateAgents: false },
+        metadata: null,
+      },
+      {
+        id: "agent-formation-seed",
+        name: "Design Lead",
+        status: "pending_approval",
+        role: "design",
+        title: "Design Lead",
+        icon: "palette",
+        reportsTo: null,
+        capabilities: null,
+        adapterType: "process",
+        adapterConfig: {},
+        runtimeConfig: {},
+        budgetMonthlyCents: 1000,
+        permissions: {},
+        metadata: {
+          vitalsFormation: {
+            formation: "core8",
+            department: "design",
+            personaSlot: null,
+            instructionsTemplate: null,
+          },
+        },
+      },
+    ]);
+    routineSvc.list.mockResolvedValue([]);
+
+    const exported = await portability.exportBundle("company-1", {
+      include: {
+        company: true,
+        agents: true,
+        projects: true,
+        issues: true,
+        skills: false,
+      },
+    });
+
+    expect(exported.files["agents/claudecoder/AGENTS.md"]).toBeDefined();
+    expect(exported.files["agents/design-lead/AGENTS.md"]).toBeUndefined();
+    expect(exported.manifest.agents.map((agent) => agent.slug)).toEqual(["claudecoder"]);
+    expect(exported.warnings).toContain("Skipped 1 unstaffed core-8 formation seat from export.");
+  });
+
   it("imports recurring task packages as routines instead of one-time issues", async () => {
     const portability = companyPortabilityService({} as any);
 
