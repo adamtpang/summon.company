@@ -46,9 +46,11 @@ test("captures planning mode UI for desktop and mobile", async ({ page }) => {
   await page.getByRole("button", { name: "Create company" }).click();
 
   // Fuel step — wait for the mocked probe to resolve before continuing, so
-  // "Finish" below has a connected adapter to hire the CEO with.
-  await expect(page.getByRole("heading", { name: "Connect your fuel" })).toBeVisible({ timeout: 15_000 });
-  await expect(page.getByText("Connected", { exact: false }).first()).toBeVisible({ timeout: 15_000 });
+  // "Finish" below has a connected adapter to hire the CEO with. The
+  // page.route mocks above add real per-request latency under load, so this
+  // needs more headroom than a plain navigation.
+  await expect(page.getByRole("heading", { name: "Connect your fuel" })).toBeVisible({ timeout: 30_000 });
+  await expect(page.getByText("Connected", { exact: false }).first()).toBeVisible({ timeout: 30_000 });
   await page.getByRole("button", { name: "Continue" }).click();
 
   await expect(page.getByRole("heading", { name: "Pair the work" })).toBeVisible({ timeout: 10_000 });

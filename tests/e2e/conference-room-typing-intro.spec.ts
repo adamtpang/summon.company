@@ -62,12 +62,16 @@ test.describe("Dashboard launch after onboarding wizard", () => {
     await page.getByRole("button", { name: "Create company" }).click();
 
     // Step 2: fuel. Wait for the mocked probe to resolve so the CEO hire
-    // that "Finish" triggers actually has a connected adapter to use.
+    // that "Finish" triggers actually has a connected adapter to use. The
+    // page.route mocks above add real per-request latency (every request,
+    // matched or not, round-trips through Playwright to decide whether to
+    // intercept it), so this step needs more headroom than a plain
+    // navigation under load — 30s, matching the finish/dashboard wait below.
     await expect(
       page.getByRole("heading", { name: "Connect your fuel" }),
-    ).toBeVisible({ timeout: 15_000 });
+    ).toBeVisible({ timeout: 30_000 });
     await expect(page.getByText("Connected", { exact: false }).first()).toBeVisible({
-      timeout: 15_000,
+      timeout: 30_000,
     });
     await page.getByRole("button", { name: "Continue" }).click();
 
