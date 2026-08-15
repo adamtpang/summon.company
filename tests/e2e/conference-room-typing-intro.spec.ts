@@ -3,21 +3,21 @@ import { test, expect } from "@playwright/test";
 /**
  * E2E: post-wizard onboarding launch.
  *
- * Completing the onboarding wizard now creates the first assigned task and
- * lands the user on the company dashboard. The chat intro still has unit
- * coverage in BoardChat tests; the wizard handoff no longer routes there.
+ * Completing the onboarding wizard hires a CEO agent (when fuel is
+ * connected), creates the first assigned task, and lands the user on the
+ * company dashboard. The chat intro still has unit coverage in BoardChat
+ * tests; the wizard handoff no longer routes there.
  */
 
 const COMPANY_NAME = `E2E-TypingIntro-${Date.now()}`;
-const MISSION = "Verify the dashboard launch survives the wizard handoff.";
-const FIRST_TASK_TITLE = "Hire your first engineer and create a hiring plan";
+const FIRST_TASK_TITLE = "Hire your first AI employee and create the operating plan";
 
 test.describe("Dashboard launch after onboarding wizard", () => {
   test("creates the first task and opens the dashboard", async ({
     page,
     baseURL,
   }) => {
-    // Intercept env-test → instant pass (avoid running a real CLI check).
+    // Intercept the fuel probe → instant "connected" (avoid running a real CLI check).
     await page.route("**/test-environment", (route) =>
       route.fulfill({
         contentType: "application/json",
@@ -54,38 +54,29 @@ test.describe("Dashboard launch after onboarding wizard", () => {
 
     await page.goto("/onboarding");
 
-    // Launcher card path (existing companies) — enter the wizard if the
-    // route shows a launcher instead of opening the wizard directly.
-    const startBtn = page.getByRole("button", { name: /Start Onboarding/i });
-    if (await startBtn.count()) await startBtn.first().click();
-
-    // Step 0: front door (skipped when the wizard opens on the create path).
-    const frontDoor = page.getByText("Build a new company");
-    if (await frontDoor.count()) await frontDoor.first().click();
-
     // Step 1: company name.
+    await expect(
+      page.getByRole("heading", { name: "Name the company" }),
+    ).toBeVisible({ timeout: 15_000 });
     await page.getByPlaceholder("Acme Corp").fill(COMPANY_NAME);
-    await page.getByRole("button", { name: /^Next/ }).click();
+    await page.getByRole("button", { name: "Create company" }).click();
 
-    // Step 2: mission (direct path default).
-    await page
-      .getByPlaceholder("What is your team trying to achieve?")
-      .fill(MISSION);
-    await page.getByRole("button", { name: /Confirm mission/ }).click();
-
-    // Step 3: lead name (prefilled) → Next.
-    await page.waitForSelector('input[placeholder="Chief of staff"]', {
+    // Step 2: fuel. Wait for the mocked probe to resolve so the CEO hire
+    // that "Finish" triggers actually has a connected adapter to use.
+    await expect(
+      page.getByRole("heading", { name: "Connect your fuel" }),
+    ).toBeVisible({ timeout: 15_000 });
+    await expect(page.getByText("Connected", { exact: false }).first()).toBeVisible({
       timeout: 15_000,
     });
-    await page.getByRole("button", { name: /^Next/ }).click();
+    await page.getByRole("button", { name: "Continue" }).click();
 
-    // Step 4: adapter (claude_local default); heartbeat is intercepted.
-    await page.getByRole("button", { name: /Give it a heartbeat/ }).click();
-
-    // Step 5: review → Get started creates the first task and opens dashboard.
-    const getStarted = page.getByRole("button", { name: /Get started/ });
-    await getStarted.waitFor({ timeout: 20_000 });
-    await getStarted.click();
+    // Step 3: repo pairing — skip it. "Finish" hires the CEO, creates the
+    // first task, and opens the dashboard.
+    await expect(
+      page.getByRole("heading", { name: "Pair the work" }),
+    ).toBeVisible({ timeout: 10_000 });
+    await page.getByRole("button", { name: "Finish without a repo" }).click();
 
     await expect(page).toHaveURL(/\/dashboard$/, { timeout: 30_000 });
 
