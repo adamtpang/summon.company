@@ -82,6 +82,7 @@ import {
   readPortableCatalogProvenance,
 } from "./catalog-provenance.js";
 import { readBuiltInAgentMarker } from "./built-in-agent-metadata.js";
+import { readCoreEightFormationMarker } from "./formation-seed.js";
 import { normalizePortablePath } from "./portable-path.js";
 
 /** Build OrgNode tree from manifest agent list (slug + reportsToSlug). */
@@ -3376,7 +3377,10 @@ export function companyPortabilityService(db: Db, storage?: StorageService) {
     const allAgentRows = include.agents ? await agents.list(companyId, { includeTerminated: true }) : [];
     const liveAgentRows = allAgentRows.filter((agent) => agent.status !== "terminated");
     const builtInAgentRows = liveAgentRows.filter((agent) => readBuiltInAgentMarker(agent.metadata));
-    const portableAgentRows = liveAgentRows.filter((agent) => !readBuiltInAgentMarker(agent.metadata));
+    const formationSeedAgentRows = liveAgentRows.filter((agent) => readCoreEightFormationMarker(agent.metadata));
+    const portableAgentRows = liveAgentRows.filter(
+      (agent) => !readBuiltInAgentMarker(agent.metadata) && !readCoreEightFormationMarker(agent.metadata),
+    );
     const companySkillRowsRaw = include.skills || include.agents ? await companySkills.listFull(companyId) : [];
     const managedSkillRows = companySkillRowsRaw.filter((skill) => managedSkillIds.has(skill.id));
     const companySkillRows = companySkillRowsRaw.filter((skill) => !managedSkillIds.has(skill.id));
@@ -3387,6 +3391,9 @@ export function companyPortabilityService(db: Db, storage?: StorageService) {
       }
       if (builtInAgentRows.length > 0) {
         warnings.push(`Skipped ${builtInAgentRows.length} built-in managed agent${builtInAgentRows.length === 1 ? "" : "s"} from export.`);
+      }
+      if (formationSeedAgentRows.length > 0) {
+        warnings.push(`Skipped ${formationSeedAgentRows.length} unstaffed core-8 formation seat${formationSeedAgentRows.length === 1 ? "" : "s"} from export.`);
       }
     }
     if (include.skills && managedSkillRows.length > 0) {
