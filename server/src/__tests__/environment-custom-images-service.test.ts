@@ -142,7 +142,7 @@ describeEmbeddedPostgres("environmentCustomImageService", () => {
 
   beforeAll(async () => {
     const started = await startEmbeddedPostgresTestDatabase("environment-custom-images");
-    stopDb = started.stop;
+    stopDb = started.cleanup;
     db = createDb(started.connectionString);
   });
 
@@ -708,7 +708,7 @@ describeEmbeddedPostgres("environmentCustomImageService reconciliation", () => {
 
   beforeAll(async () => {
     const started = await startEmbeddedPostgresTestDatabase("environment-custom-images-reconcile");
-    stopDb = started.stop;
+    stopDb = started.cleanup;
     db = createDb(started.connectionString);
   });
 

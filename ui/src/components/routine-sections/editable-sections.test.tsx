@@ -1,7 +1,6 @@
 // @vitest-environment jsdom
 
-import { useState } from "react";
-import { flushSync } from "react-dom";
+import { act, useState } from "react";
 import { createRoot } from "react-dom/client";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { TriggersSection } from "./editable-sections";
@@ -17,10 +16,6 @@ import {
 vi.mock("../MarkdownEditor", () => ({
   MarkdownEditor: () => null,
 }));
-
-function act(callback: () => void) {
-  flushSync(callback);
-}
 
 function buttonByText(container: HTMLElement, label: string): HTMLButtonElement {
   const button = [...container.querySelectorAll("button")].find(
@@ -78,22 +73,22 @@ describe("TriggersSection", () => {
     document.body.innerHTML = "";
   });
 
-  it("closes the add-trigger composer and resets the draft after a successful create", () => {
+  it("closes the add-trigger composer and resets the draft after a successful create", async () => {
     const createMutate = vi.fn((_variables, options?: { onSuccess?: () => void }) => {
       options?.onSuccess?.();
     });
     const root = createRoot(container);
 
-    act(() => {
+    await act(async () => {
       root.render(<Harness createMutate={createMutate} />);
     });
 
-    act(() => {
+    await act(async () => {
       buttonByText(container, "New trigger").dispatchEvent(new MouseEvent("click", { bubbles: true }));
     });
     expect(container.querySelector('input[aria-label="Cron expression"]')).not.toBeNull();
 
-    act(() => {
+    await act(async () => {
       buttonByText(container, "Add trigger").dispatchEvent(new MouseEvent("click", { bubbles: true }));
     });
 
@@ -101,24 +96,24 @@ describe("TriggersSection", () => {
     expect(container.querySelector('input[aria-label="Cron expression"]')).toBeNull();
     expect(buttonByText(container, "New trigger")).not.toBeNull();
 
-    act(() => {
+    await act(async () => {
       buttonByText(container, "New trigger").dispatchEvent(new MouseEvent("click", { bubbles: true }));
     });
     expect(container.querySelector('input[aria-label="Cron expression"]')).toBeNull();
     expect(container.textContent).toContain("Every day");
 
-    act(() => root.unmount());
+    await act(async () => root.unmount());
   });
 
-  it("disables add trigger while the custom cron draft is invalid locally", () => {
+  it("disables add trigger while the custom cron draft is invalid locally", async () => {
     const createMutate = vi.fn();
     const root = createRoot(container);
 
-    act(() => {
+    await act(async () => {
       root.render(<Harness createMutate={createMutate} />);
     });
 
-    act(() => {
+    await act(async () => {
       buttonByText(container, "New trigger").dispatchEvent(new MouseEvent("click", { bubbles: true }));
     });
 
@@ -126,7 +121,7 @@ describe("TriggersSection", () => {
     expect(input).not.toBeNull();
     expect(buttonByText(container, "Add trigger").disabled).toBe(false);
 
-    act(() => {
+    await act(async () => {
       typeCron(input!, "0 8-18/2 *");
     });
 
@@ -134,12 +129,12 @@ describe("TriggersSection", () => {
     expect(container.textContent).toContain("Use exactly 5 fields");
     expect(buttonByText(container, "Add trigger").disabled).toBe(true);
 
-    act(() => {
+    await act(async () => {
       buttonByText(container, "Add trigger").dispatchEvent(new MouseEvent("click", { bubbles: true }));
     });
 
     expect(createMutate).not.toHaveBeenCalled();
 
-    act(() => root.unmount());
+    await act(async () => root.unmount());
   });
 });
