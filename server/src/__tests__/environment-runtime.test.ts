@@ -134,7 +134,7 @@ describeEmbeddedPostgres("environmentRuntimeService", () => {
 
   beforeAll(async () => {
     const started = await startEmbeddedPostgresTestDatabase("environment-runtime");
-    stopDb = started.stop;
+    stopDb = started.cleanup;
     db = createDb(started.connectionString);
     runtime = environmentRuntimeService(db);
   });

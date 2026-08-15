@@ -149,8 +149,8 @@ export function subscriptionService(db: Db, hooks: SubscriptionServiceHooks = {}
   }
 
   /** Sum of billed usage + base fee accrued in the subscription's current period. */
-  async function periodSpendCents(sub: SubscriptionRow): Promise<number> {
-    const [row] = await db
+  async function periodSpendCents(dbLike: Db, sub: SubscriptionRow): Promise<number> {
+    const [row] = await dbLike
       .select({
         billed: sql<number>`coalesce(sum(${subscriptionUsageRecords.billedCents}), 0)::double precision`,
       })
@@ -162,7 +162,7 @@ export function subscriptionService(db: Db, hooks: SubscriptionServiceHooks = {}
           lt(subscriptionUsageRecords.periodStart, sub.currentPeriodEnd),
         ),
       );
-    const plan = await db
+    const plan = await dbLike
       .select({ basePriceCents: pricingPlans.basePriceCents })
       .from(pricingPlans)
       .where(eq(pricingPlans.id, sub.planId))
@@ -172,8 +172,8 @@ export function subscriptionService(db: Db, hooks: SubscriptionServiceHooks = {}
   }
 
   /** COGS accrued in the current period (drives the bundled-allowance split). */
-  async function periodCogsCents(sub: SubscriptionRow): Promise<number> {
-    const [row] = await db
+  async function periodCogsCents(dbLike: Db, sub: SubscriptionRow): Promise<number> {
+    const [row] = await dbLike
       .select({
         cogs: sql<number>`coalesce(sum(${subscriptionUsageRecords.cogsCents}), 0)::double precision`,
       })
@@ -188,23 +188,22 @@ export function subscriptionService(db: Db, hooks: SubscriptionServiceHooks = {}
     return Number(row?.cogs ?? 0);
   }
 
-  async function pauseCompanyForCap(sub: SubscriptionRow) {
+  /** DB-only half of the pause: writes the paused state atomically with the cap
+   * decision that triggered it. The cancelWorkForScope hook runs separately,
+   * after the transaction commits — it can do real IO and shouldn't hold the
+   * row lock or roll back the pause if it fails. */
+  async function pauseCompanyForCapTx(txDb: Db, sub: SubscriptionRow) {
     const now = new Date();
     // Pause the company using the enforced "budget" pause reason so the existing
     // resume path recognizes it; record the billing-specific reason on the sub.
-    await db
+    await txDb
       .update(companies)
       .set({ status: "paused", pauseReason: "budget", pausedAt: now, updatedAt: now })
       .where(and(eq(companies.id, sub.companyId), eq(companies.status, "active")));
-    await db
+    await txDb
       .update(companySubscriptions)
       .set({ pausedAt: now, pauseReason: "billing_cap", updatedAt: now })
       .where(eq(companySubscriptions.id, sub.id));
-    await hooks.cancelWorkForScope?.({
-      companyId: sub.companyId,
-      scopeType: "company",
-      scopeId: sub.companyId,
-    });
   }
 
   return {
@@ -314,46 +313,73 @@ export function subscriptionService(db: Db, hooks: SubscriptionServiceHooks = {}
       const plan = await getPlanRow(companyId, sub.planId);
       const cogs = Math.max(0, Math.round(input.cogsCents));
       if (cogs === 0) throw badRequest("cogsCents must be greater than zero");
-
-      // How much of the bundled allowance is still unused this period.
-      const priorCogs = await periodCogsCents(sub);
-      const bundleRemaining = Math.max(0, plan.bundledUsageCents - priorCogs);
-      const bundledPortion = Math.min(cogs, bundleRemaining);
-      const overageCogs = cogs - bundledPortion;
-      const billed = applyMarkup(overageCogs, plan.overageMarkupBps);
       const occurredAt = input.occurredAt ?? new Date();
 
-      const record = await db
-        .insert(subscriptionUsageRecords)
-        .values({
-          companyId,
-          subscriptionId: sub.id,
-          agentId: input.agentId ?? null,
-          issueId: input.issueId ?? null,
-          heartbeatRunId: input.heartbeatRunId ?? null,
-          costEventId: input.costEventId ?? null,
-          description: input.description ?? null,
-          periodStart: sub.currentPeriodStart,
-          unit: input.unit ?? "usd_cogs",
-          quantity: input.quantity ?? 1,
-          cogsCents: cogs,
-          bundledCents: bundledPortion,
-          overageCogsCents: overageCogs,
-          markupBps: plan.overageMarkupBps,
-          billedCents: billed,
-          occurredAt,
-        })
-        .returning()
-        .then((rows) => rows[0]);
+      // The insert + cap-check + pause run inside one transaction, holding a
+      // row lock on the subscription, so two concurrent recordUsage calls for
+      // the same subscription can't both read spend under the cap before
+      // either's insert lands - the second call always sees the first's
+      // committed spend before deciding whether it tips the cap.
+      const { record, capHit } = await db.transaction(async (tx) => {
+        const txDb = tx as unknown as Db;
+        const [lockedSub] = await txDb
+          .select()
+          .from(companySubscriptions)
+          .where(eq(companySubscriptions.id, sub.id))
+          .for("update");
+        if (!lockedSub) throw unprocessable("Company has no active subscription");
 
-      // Hard-stop on ACCRUED SPEND, not on an issued bill.
-      let capHit = false;
-      if (sub.hardStopEnabled && sub.capCents != null && sub.capCents > 0) {
-        const spend = await periodSpendCents(sub);
-        if (spend >= sub.capCents) {
-          capHit = true;
-          await pauseCompanyForCap(sub);
+        // How much of the bundled allowance is still unused this period.
+        const priorCogs = await periodCogsCents(txDb, lockedSub);
+        const bundleRemaining = Math.max(0, plan.bundledUsageCents - priorCogs);
+        const bundledPortion = Math.min(cogs, bundleRemaining);
+        const overageCogs = cogs - bundledPortion;
+        const billed = applyMarkup(overageCogs, plan.overageMarkupBps);
+
+        const record = await txDb
+          .insert(subscriptionUsageRecords)
+          .values({
+            companyId,
+            subscriptionId: lockedSub.id,
+            agentId: input.agentId ?? null,
+            issueId: input.issueId ?? null,
+            heartbeatRunId: input.heartbeatRunId ?? null,
+            costEventId: input.costEventId ?? null,
+            description: input.description ?? null,
+            periodStart: lockedSub.currentPeriodStart,
+            unit: input.unit ?? "usd_cogs",
+            quantity: input.quantity ?? 1,
+            cogsCents: cogs,
+            bundledCents: bundledPortion,
+            overageCogsCents: overageCogs,
+            markupBps: plan.overageMarkupBps,
+            billedCents: billed,
+            occurredAt,
+          })
+          .returning()
+          .then((rows) => rows[0]);
+
+        // Hard-stop on ACCRUED SPEND, not on an issued bill.
+        let capHit = false;
+        if (lockedSub.hardStopEnabled && lockedSub.capCents != null && lockedSub.capCents > 0) {
+          const spend = await periodSpendCents(txDb, lockedSub);
+          if (spend >= lockedSub.capCents) {
+            capHit = true;
+            await pauseCompanyForCapTx(txDb, lockedSub);
+          }
         }
+
+        return { record, capHit };
+      });
+
+      // The cancellation hook does real IO (cancelling live runs) - run it
+      // after the transaction commits, not while the row lock is held.
+      if (capHit) {
+        await hooks.cancelWorkForScope?.({
+          companyId: sub.companyId,
+          scopeType: "company",
+          scopeId: sub.companyId,
+        });
       }
 
       return { record, capHit };
