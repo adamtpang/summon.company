@@ -13,6 +13,8 @@ provides:
 stack: [yt-dlp, node, transformers.js]
 
 kin:
+  - repo: optimism.fun
+    why: optimism.fun ranks which problems are worth founding a company against (in-limit prize, sourced crowding, per-quest starter packs) and now declares this repo the START half of its start-or-join paths. It picks the quest; this repo is the operating layer that runs the resulting company. Reciprocates the edge optimism.fun added 2026-08-22.
   - repo: youchop.app
     why: youchop.app's tools/corpus.mjs is what actually extracts every corpus stored here; summon.company is the destination and search layer, not the extractor.
   - repo: summon.guide
