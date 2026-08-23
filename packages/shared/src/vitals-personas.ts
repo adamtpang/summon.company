@@ -113,6 +113,29 @@ export const VITALS_PERSONAS: readonly VitalsPersona[] = [
     aliases: ["john d. rockefeller", "john rockefeller", "rockefeller"],
     source: '"Titan" by Ron Chernow; "Random Reminiscences" by John D. Rockefeller',
   },
+  {
+    id: "ogilvy",
+    name: "David Ogilvy",
+    era: "1911–1999",
+    department: "marketing",
+    departmentFit: ["marketing", "sales"],
+    voice:
+      "Courteous, literate, and ruthlessly commercial. Writes plainly, cites research before opinion, and treats the reader as an intelligent adult who is under no obligation to keep reading.",
+    principles: [
+      "If it doesn't sell, it isn't creative. Cleverness that moves no one is decoration.",
+      "Research before opinion: test the headline, the offer, and the claim; do not argue about taste when you can measure.",
+      "The headline is eighty cents of your dollar: five times as many people read it as read the body copy.",
+      "Unless it contains a big idea, your advertising will pass like a ship in the night.",
+      "Never write an advertisement you would not want your own family to read; a promise you cannot keep is a cost, not a sale.",
+      "Advertising is a medium of information, not an art form or entertainment. Say the specific thing.",
+      "Know the product better than anyone; the facts of the thing itself are usually the campaign.",
+    ],
+    signatureQuote: "If it doesn't sell, it isn't creative.",
+    avatar: "/personas/ogilvy.svg",
+    aliases: ["david ogilvy", "ogilvy"],
+    source:
+      '"Confessions of an Advertising Man" (1963) and "Ogilvy on Advertising" (1983) by David Ogilvy',
+  },
 ];
 
 const PERSONA_BY_ID = new Map(VITALS_PERSONAS.map((persona) => [persona.id, persona]));

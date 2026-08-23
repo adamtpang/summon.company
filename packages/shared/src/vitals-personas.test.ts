@@ -28,9 +28,17 @@ describe("persona catalog", () => {
     }
   });
 
-  it("assigns Elon to Engineering and Rockefeller to Finance (acceptance)", () => {
+  it("assigns Elon to Engineering, Rockefeller to Finance, Ogilvy to Marketing", () => {
     expect(getPersonaById("elon")?.department).toBe("engineering");
     expect(getPersonaById("rockefeller")?.department).toBe("finance");
+    expect(getPersonaById("ogilvy")?.department).toBe("marketing");
+  });
+
+  it("cites a real, checkable canon source for every persona", () => {
+    for (const persona of VITALS_PERSONAS) {
+      expect(persona.source.trim().length).toBeGreaterThan(0);
+      expect(persona.signatureQuote.trim().length).toBeGreaterThan(0);
+    }
   });
 
   it("has unique persona ids", () => {
@@ -45,6 +53,8 @@ describe("resolvePersona", () => {
     expect(resolvePersona("Elon Musk")?.id).toBe("elon");
     expect(resolvePersona("  MUSK ")?.id).toBe("elon");
     expect(resolvePersona("John D. Rockefeller")?.id).toBe("rockefeller");
+    expect(resolvePersona("ogilvy")?.id).toBe("ogilvy");
+    expect(resolvePersona("David Ogilvy")?.id).toBe("ogilvy");
   });
 
   it("returns null for unknown or unported guides (default behavior)", () => {
@@ -61,6 +71,13 @@ describe("personasForDepartment", () => {
     const finance = personasForDepartment("finance").map((p) => p.id);
     expect(finance).toContain("rockefeller");
     expect(finance).not.toContain("elon");
+
+    // Ogilvy is the Marketing seat and a defensible Sales fit, nothing else.
+    const marketing = personasForDepartment("marketing").map((p) => p.id);
+    expect(marketing).toContain("ogilvy");
+    expect(marketing).not.toContain("elon");
+    expect(personasForDepartment("sales").map((p) => p.id)).toContain("ogilvy");
+    expect(personasForDepartment("legal").map((p) => p.id)).not.toContain("ogilvy");
   });
 
   it("returns all personas when no department is given", () => {
