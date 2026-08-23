@@ -17,6 +17,10 @@ const SERVER_URL = `http://${SERVER_HOST}:${SERVER_PORT}`;
 const HEALTH_URL = `${SERVER_URL}/api/health`;
 const APP_URL = `${SERVER_URL}/`; // SPA routes itself to the last company; no hardcoded prefix
 const HEALTH_TIMEOUT_MS = 2000;
+// The startup probe only ever talks to loopback: a live server answers in
+// single-digit milliseconds and a dead port fails immediately. 2s of grace
+// there bought nothing and delayed first paint on every cold start.
+const STARTUP_PROBE_MS = 600;
 const BOOT_POLL_INTERVAL_MS = 1000;
 const BOOT_POLL_MAX_TRIES = 120; // 120s
 const KILL_GRACE_MS = 8000;
@@ -102,18 +106,31 @@ function checkHealth(timeoutMs = HEALTH_TIMEOUT_MS) {
 // see-saw: source dies → this spawns the (older) packaged runtime → it serves
 // stale UI + misses source-only API routes → the board kills it → repeat.
 // Customer machines have no repo and keep the packaged path.
-const SOURCE_START_CMD = path.join(
-  os.homedir(),
-  'OneDrive',
-  'Aether',
-  'summon.company',
-  'scripts',
-  'start-summon.cmd'
-);
+// Dev seats do not all keep the repo in the same place: this was hardcoded to
+// a OneDrive path, so on a checkout living anywhere else the rule silently
+// never fired and owned mode always fell back to the packaged runtime, the
+// exact stale-UI failure the rule above exists to prevent. Resolve against the
+// real candidates instead, first hit wins, with an explicit env escape hatch.
+const SOURCE_START_CANDIDATES = [
+  process.env.SUMMON_SOURCE_START_CMD,
+  path.join(os.homedir(), 'Aether', 'summon.company', 'scripts', 'start-summon.cmd'),
+  path.join(os.homedir(), 'OneDrive', 'Aether', 'summon.company', 'scripts', 'start-summon.cmd'),
+].filter(Boolean);
+
+function resolveSourceStartCmd() {
+  for (const candidate of SOURCE_START_CANDIDATES) {
+    try {
+      if (fs.existsSync(candidate)) return candidate;
+    } catch {
+      // Unreadable candidate is simply not a match.
+    }
+  }
+  return null;
+}
 
 function spawnServer() {
-  const useSource = fs.existsSync(SOURCE_START_CMD);
-  serverProcess = spawn(useSource ? `"${SOURCE_START_CMD}"` : 'paperclipai run', [], {
+  const sourceStartCmd = resolveSourceStartCmd();
+  serverProcess = spawn(sourceStartCmd ? `"${sourceStartCmd}"` : 'paperclipai run', [], {
     shell: true,
     detached: false,
     windowsHide: true,
@@ -445,7 +462,13 @@ async function onReady() {
   createMainWindow();
   createTray();
 
-  const up = await checkHealth();
+  // Paint the splash BEFORE probing. `ready-to-show` cannot fire until
+  // something is loaded, so probing first left the window invisible for the
+  // whole probe. Loading a local file first makes the app appear immediately
+  // in both modes; attached mode then swaps to the real UI a moment later.
+  await mainWindow.loadFile(path.join(__dirname, 'splash.html'));
+
+  const up = await checkHealth(STARTUP_PROBE_MS);
 
   if (up) {
     // Attached mode: someone else owns the server. Never kill it.
@@ -453,8 +476,7 @@ async function onReady() {
     return;
   }
 
-  // Owned mode: show splash, spawn the server, poll until healthy.
-  await mainWindow.loadFile(path.join(__dirname, 'splash.html'));
+  // Owned mode: the splash is already up; spawn the server and poll.
   spawnServer();
 
   const healthy = await waitForServer();
