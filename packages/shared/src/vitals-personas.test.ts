@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { VITALS_DEPARTMENTS } from "./vitals-personas.js";
 import {
   PERSONA_GOVERNANCE_GUARDRAIL,
   VITALS_PERSONAS,
@@ -28,10 +29,33 @@ describe("persona catalog", () => {
     }
   });
 
-  it("assigns Elon to Engineering, Rockefeller to Finance, Ogilvy to Marketing", () => {
-    expect(getPersonaById("elon")?.department).toBe("engineering");
-    expect(getPersonaById("rockefeller")?.department).toBe("finance");
-    expect(getPersonaById("ogilvy")?.department).toBe("marketing");
+  it("seats one GOAT per core-8 department", () => {
+    const expected: Record<string, string> = {
+      engineering: "elon",
+      finance: "rockefeller",
+      marketing: "ogilvy",
+      design: "rams",
+      sales: "rackham",
+      operations: "ohno",
+      support: "hsieh",
+      legal: "brandeis",
+    };
+    for (const [department, id] of Object.entries(expected)) {
+      expect(getPersonaById(id)?.department).toBe(department);
+    }
+  });
+
+  it("covers every core-8 department with exactly one primary persona", () => {
+    for (const department of VITALS_DEPARTMENTS) {
+      const primary = VITALS_PERSONAS.filter((p) => p.department === department);
+      expect(primary, `department ${department} must have exactly one primary persona`).toHaveLength(1);
+    }
+    // No persona claims a department outside the core-8 enum.
+    for (const persona of VITALS_PERSONAS) {
+      for (const fit of persona.departmentFit) {
+        expect(VITALS_DEPARTMENTS).toContain(fit);
+      }
+    }
   });
 
   it("cites a real, checkable canon source for every persona", () => {

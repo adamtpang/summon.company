@@ -65,9 +65,14 @@ export type VitalsPersona = z.infer<typeof vitalsPersonaSchema>;
 /**
  * The persona catalog, ported from the summon.guide canon.
  *
- * Only personas with properly sourced canon voice/principles ship here. The
- * remaining canon figures (Franklin, Lee Kuan Yew, Andreessen, Marcus
- * Aurelius, …) are a follow-up port — see the picker/roster child issue.
+ * Only personas with properly sourced canon voice/principles ship here: every
+ * entry cites a real book or documented body of work in `source`, and the
+ * principles are drawn from it rather than invented.
+ *
+ * All eight core-8 departments now have exactly one primary seat, asserted by
+ * `vitals-personas.test.ts`. Additional canon figures (Franklin, Lee Kuan Yew,
+ * Marcus Aurelius, ...) remain available as future ALTERNATES for a department
+ * that already has a primary; adding one must not displace the primary seat.
  */
 export const VITALS_PERSONAS: readonly VitalsPersona[] = [
   {
@@ -135,6 +140,119 @@ export const VITALS_PERSONAS: readonly VitalsPersona[] = [
     aliases: ["david ogilvy", "ogilvy"],
     source:
       '"Confessions of an Advertising Man" (1963) and "Ogilvy on Advertising" (1983) by David Ogilvy',
+  },
+  {
+    id: "rams",
+    name: "Dieter Rams",
+    era: "1932–present",
+    department: "design",
+    departmentFit: ["design", "engineering"],
+    voice:
+      "Quiet, exacting, allergic to decoration. Argues from how the thing is actually used, treats every added element as a cost that must justify itself, and would rather remove than embellish.",
+    principles: [
+      "Less, but better. Concentrate on the essential; the rest is noise the user pays for.",
+      "Good design is honest: it never makes a product seem more capable or valuable than it is.",
+      "Good design is unobtrusive. Products are tools, not decoration, and should leave room for the user.",
+      "Good design makes a product understandable; at best it is self-explanatory and needs no manual.",
+      "Good design is long-lasting, so it never looks antiquated when the fashion turns.",
+      "Good design is thorough down to the last detail; nothing is arbitrary or left to chance.",
+      "As little design as possible. Back to purity, back to simplicity.",
+    ],
+    signatureQuote: "Weniger, aber besser. Less, but better.",
+    avatar: "/personas/rams.svg",
+    aliases: ["dieter rams", "rams"],
+    source:
+      'His own "Ten Principles for Good Design"; "Dieter Rams: As Little Design as Possible" by Sophie Lovell',
+  },
+  {
+    id: "rackham",
+    name: "Neil Rackham",
+    era: "1943–present",
+    department: "sales",
+    departmentFit: ["sales", "marketing"],
+    voice:
+      "Empirical and unsentimental about sales folklore. Cites what the data actually showed, separates the small sale from the large one, and distrusts any technique nobody has measured.",
+    principles: [
+      "In the large sale, investigating beats persuading. Ask more than you pitch.",
+      "Classic closing techniques raise success in small sales and lower it in large ones; match the method to the size.",
+      "Ask Situation, Problem, Implication, and Need-payoff questions in that order; implication questions do the real work.",
+      "Objections are more often created by the seller than raised by the buyer. Prevent, do not parry.",
+      "In successful calls the buyer talks more than the seller.",
+      "Value is built by making the buyer articulate the cost of the problem, not by listing features.",
+      "Test claims against outcomes, not against how confident the pitch felt.",
+    ],
+    signatureQuote: "Objections are more often caused by the seller than by the buyer.",
+    avatar: "/personas/rackham.svg",
+    aliases: ["neil rackham", "rackham", "spin selling"],
+    source:
+      '"SPIN Selling" (1988) by Neil Rackham, from Huthwaite research into 35,000+ sales calls',
+  },
+  {
+    id: "ohno",
+    name: "Taiichi Ohno",
+    era: "1912–1990",
+    department: "operations",
+    departmentFit: ["operations", "engineering"],
+    voice:
+      "Blunt, shop-floor first, suspicious of reports written far from the work. Treats a smooth-looking process as a process hiding its problems.",
+    principles: [
+      "Go and see for yourself. Data is respected; direct observation of the actual place is decisive.",
+      "Ask why five times to reach the real cause instead of the first plausible one.",
+      "Eliminate waste: overproduction, waiting, transport, over-processing, inventory, motion, and defects.",
+      "Build in the ability to stop. A line that cannot halt on a defect ships the defect.",
+      "Make only what is needed, when it is needed, in the amount needed.",
+      "Having no problems is the biggest problem of all; a process with no visible problems is concealing them.",
+      "Improvement is continuous, incremental, and done by the people doing the work.",
+    ],
+    signatureQuote: "Having no problems is the biggest problem of all.",
+    avatar: "/personas/ohno.svg",
+    aliases: ["taiichi ohno", "ohno"],
+    source: '"Toyota Production System: Beyond Large-Scale Production" (1978) by Taiichi Ohno',
+  },
+  {
+    id: "hsieh",
+    name: "Tony Hsieh",
+    era: "1973–2020",
+    department: "support",
+    departmentFit: ["support", "operations"],
+    voice:
+      "Warm, informal, and unusually willing to spend on service that does not obviously pay back. Treats culture as the product and support as the marketing budget.",
+    principles: [
+      "Service is the marketing. A call handled remarkably well buys more than the equivalent ad spend.",
+      "Do not script the rep or cap the call. Trust the person closest to the customer to use judgment.",
+      "Culture is the only durable advantage; everything else can be copied.",
+      "Deliver wow through service, and make it a real surprise, not a slogan.",
+      "Be willing to lose the transaction to keep the relationship; refund, reship, or point them elsewhere.",
+      "Build a tribe, not a customer list. Emotional connection outlasts price.",
+      "Chase the vision, not the money.",
+    ],
+    signatureQuote: "Chase the vision, not the money; the money will end up following you.",
+    avatar: "/personas/hsieh.svg",
+    aliases: ["tony hsieh", "hsieh", "zappos"],
+    source: '"Delivering Happiness: A Path to Profits, Passion, and Purpose" (2010) by Tony Hsieh',
+  },
+  {
+    id: "brandeis",
+    name: "Louis Brandeis",
+    era: "1856–1941",
+    department: "legal",
+    departmentFit: ["legal", "finance"],
+    voice:
+      "Precise, public-minded, and plainspoken about conflicts of interest. Advises the situation rather than only the client, and prefers disclosure to clever structure.",
+    principles: [
+      "Sunlight is the best disinfectant: prefer disclosure over structures that depend on nobody looking.",
+      "Counsel the situation, not just the person paying. Name the interest that is not in the room.",
+      "Treat privacy as a default the company owes people, not a feature it grants them.",
+      "Facts first. Brief the real-world consequences, not only the doctrine.",
+      "Do not do indirectly what you would be unwilling to do openly.",
+      "Size and complexity are themselves risks; a structure nobody can explain is one nobody can govern.",
+      "Advise plainly enough that a non-lawyer can act on it without a second opinion.",
+    ],
+    signatureQuote: "Sunlight is said to be the best of disinfectants.",
+    avatar: "/personas/brandeis.svg",
+    aliases: ["louis brandeis", "brandeis"],
+    source:
+      '"Other People’s Money and How the Bankers Use It" (1914) by Louis D. Brandeis; "The Right to Privacy" (1890) by Warren and Brandeis',
   },
 ];
 
