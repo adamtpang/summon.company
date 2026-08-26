@@ -3,17 +3,15 @@
 //   -> writes roles/index.html + roles/ai-employee-for-<slug>.html for each role
 //   -> rewrites the <!--ROLES--> block of sitemap.xml
 // House rule: real, distinct content per page (thin doorway pages get slapped),
-// grounded ONLY in verified facts: wave-1 founding offer = 2 founding slots at
-// $99/mo locked for life, then $199/mo public; $500 setup (company diagnosis +
-// AI org chart + first 10 deliverables in week one); first plated deliverable
-// within 7 days or the $500 back; 15 minutes a week; cancel anytime.
-// Approval-gating + budget caps, the core-8 departments. No em dashes in copy.
+// grounded ONLY in verified live facts (2026-08-26): one founding seat at
+// $500/mo covering eight departments; buy link buy.stripe.com/...aMU19;
+// approval-gating + budget caps. No em dashes in copy.
 import fs from "node:fs";
 
 const SITE = "https://summon.company";
-// One purchase surface: the landing founding section owns checkout links.
-const FOUNDING = "/#founding";
-const TODAY = "2026-07-29";
+const BUY = "https://buy.stripe.com/8x2eVd1ACfJb5kc1q9aMU19";
+const FOUNDING = BUY;
+const TODAY = "2026-08-26";
 
 // The core-8. Each role is a real department this company runs on.
 const roles = [
@@ -21,7 +19,7 @@ const roles = [
     slug: "marketing",
     role: "Marketing",
     search: "marketing",
-    lede: "Positioning, content, and search that keep working after you close the tab. Here is what an AI marketer does for $99 a month, and what still needs your yes.",
+    lede: "Positioning, content, and search that keep working after you close the tab. Here is what an AI marketer does inside the $500/mo founding seat, and what still needs your yes.",
     does: [
       "Drafts positioning and messaging from evidence in your own product and customers, not slogans.",
       "Writes SEO pages and blog posts on a set cadence, with clean headings and schema so both people and search engines can read them.",
@@ -111,7 +109,7 @@ const roles = [
     slug: "research",
     role: "Research",
     search: "research",
-    lede: "Homework done right: markets, competitors, and evidence summarized with citations you can trust. Here is what an AI research employee does for $99 a month.",
+    lede: "Homework done right: markets, competitors, and evidence summarized with citations you can trust. Here is what an AI research employee does inside the $500/mo founding seat.",
     does: [
       "Researches markets and competitors and hands you a brief, not a hunch.",
       "Summarizes long sources down to the facts that matter, with citations.",
@@ -212,9 +210,9 @@ const headerHtml = (rightHref, rightText) => `  <header class="site">
 
 const ctaHtml = (role) => `  <div class="cta">
     <h2>Hire your AI ${esc(role)} employee</h2>
-    <p>Start with the one role that is your bottleneck this month. Founding slots are $99 per month locked for life, limited to 2, then $199 per month. The $500 setup includes a full company diagnosis, your AI org chart, and your first 10 deliverables plated in week one.</p>
-    <a class="btn" href="${FOUNDING}">Claim a founding slot, $99/mo locked for life</a>
-    <p class="fine">First plated deliverable within 7 days or the $500 back. 15 minutes a week from you. Cancel anytime.</p>
+    <p>Start with the role that is your bottleneck this month. One founding seat is $500 per month and covers all eight departments under hard budget caps. Employees draft the work; you approve anything that spends money or goes public.</p>
+    <a class="btn" href="${FOUNDING}">Claim the founding seat, $500/mo</a>
+    <p class="fine">You stay the board. Cancel anytime. Book a walkthrough at cal.com/adamtpang.</p>
   </div>`;
 
 const footerHtml = `  <footer class="post">
@@ -224,8 +222,8 @@ const footerHtml = `  <footer class="post">
 function rolePage(r) {
   const url = `${SITE}/roles/ai-employee-for-${r.slug}`;
   const h1 = `An AI Employee for ${r.role}`;
-  const title = `AI Employee for ${r.role}, $99/mo · Summon`;
-  const desc = `Hire an AI ${r.role.toLowerCase()} employee that works 24/7. Founding slots are $99 a month locked for life, then $199. What it does, what you approve, and how it plugs into your company.`;
+  const title = `AI Employee for ${r.role} · Summon`;
+  const desc = `Hire an AI ${r.role.toLowerCase()} employee that works 24/7. One $500/mo founding seat covers eight departments. What it does, what you approve, and how it plugs into your company.`;
   const faqLd = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -237,7 +235,7 @@ function rolePage(r) {
     serviceType: `AI ${r.role} employee`,
     provider: { "@type": "Organization", name: "Summon", url: SITE },
     description: desc,
-    offers: { "@type": "Offer", price: "99", priceCurrency: "USD", url },
+    offers: { "@type": "Offer", price: "500.00", priceCurrency: "USD", url: BUY },
     areaServed: "Worldwide",
   };
   return `<!doctype html>
@@ -268,11 +266,11 @@ ${headerHtml("/roles/", "All roles")}
 
   <article>
   <h1>${esc(h1)}</h1>
-  <p class="meta">AI employee · ${esc(r.role)} · $99/mo</p>
+  <p class="meta">AI employee · ${esc(r.role)} · included in $500/mo founding seat</p>
 
   <p class="lede">${esc(r.lede)}</p>
 
-  <p>You do not need another seat on the payroll. You need a ${esc(r.role.toLowerCase())} teammate that never sleeps, never forgets, and costs less than lunch. With Summon, <strong>you are the board and your ${esc(r.role.toLowerCase())} employee is AI</strong>: it does the work around the clock, inside a budget you set, and anything that touches the outside world waits for your approval.</p>
+  <p>You do not need another seat on the payroll. You need a ${esc(r.role.toLowerCase())} teammate that never sleeps, never forgets, and stays inside a budget you set. With Summon, <strong>you are the board and your ${esc(r.role.toLowerCase())} employee is AI</strong>: it does the work around the clock, and anything that touches the outside world waits for your approval.</p>
 
   <h2>What an AI ${esc(r.role)} employee does</h2>
   <ul>
@@ -284,8 +282,8 @@ ${r.does.map((d) => `    <li>${esc(d)}</li>`).join("\n")}
 
   <h2>What it costs</h2>
   <ul>
-    <li><strong>Founding: $99 per month, locked for life.</strong> Limited to 2 founding slots, then $199 per month. One company of AI employees that works 24/7, not one person's salary.</li>
-    <li><strong>$500 setup.</strong> A full company diagnosis, your AI org chart, and your first 10 deliverables plated in week one. First plated deliverable within 7 days or the $500 back. Cancel anytime.</li>
+    <li><strong>Founding seat: $500 per month.</strong> One seat covers all eight departments (Marketing, Sales, Operations, Support, Engineering, Research, Finance, Legal/chief of staff). Not a per-employee meter.</li>
+    <li><strong>You stay the board.</strong> Hard budget caps. Approval gate before spend or public sends. Cancel anytime.</li>
   </ul>
 
 ${ctaHtml(r.role)}
@@ -307,7 +305,7 @@ ${footerHtml}
 function indexPage() {
   const url = `${SITE}/roles`;
   const title = "AI Employees by Role · Summon";
-  const desc = "Hire an AI employee for any role: marketing, sales, engineering, support, operations, research, finance, or chief of staff. Founding slots $99 a month locked for life, then $199.";
+  const desc = "Hire an AI employee for any role: marketing, sales, engineering, support, operations, research, finance, or chief of staff. One $500/mo founding seat covers all eight departments.";
   const itemLd = {
     "@context": "https://schema.org",
     "@type": "ItemList",
@@ -336,9 +334,9 @@ ${JSON.stringify(itemLd, null, 2)}
 </head>
 <body>
 <div class="page">
-${headerHtml("/#founding", "Become a founding member")}
+${headerHtml(FOUNDING, "Claim founding seat")}
   <h1>An AI employee for every role</h1>
-  <p class="lede">Pick the role that is your bottleneck this month. Each is an AI employee that works 24/7, drafts the work, and waits for your approval before anything reaches the outside world. Founding slots are $99 a month locked for life, then $199.</p>
+  <p class="lede">Pick the role that is your bottleneck this month. Each is an AI employee that works 24/7, drafts the work, and waits for your approval before anything reaches the outside world. One founding seat is $500/mo and covers all eight departments.</p>
   <ul class="roles">
 ${roles.map((r) => `    <li><a href="/roles/ai-employee-for-${r.slug}"><strong>AI Employee for ${esc(r.role)}</strong></a></li>`).join("\n")}
   </ul>

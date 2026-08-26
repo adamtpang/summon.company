@@ -7,5 +7,15 @@
       "destination": "/kit/",
       "permanent": false
     }
+  ],
+  "rewrites": [
+    { "source": "/hire/ai-marketing", "destination": "/roles/ai-employee-for-marketing" },
+    { "source": "/hire/ai-sales", "destination": "/roles/ai-employee-for-sales" },
+    { "source": "/hire/ai-operations", "destination": "/roles/ai-employee-for-operations" },
+    { "source": "/hire/ai-support", "destination": "/roles/ai-employee-for-support" },
+    { "source": "/hire/ai-engineering", "destination": "/roles/ai-employee-for-engineering" },
+    { "source": "/hire/ai-research", "destination": "/roles/ai-employee-for-research" },
+    { "source": "/hire/ai-finance", "destination": "/roles/ai-employee-for-finance" },
+    { "source": "/hire/ai-ceo", "destination": "/roles/ai-employee-for-chief-of-staff" }
   ]
 }
