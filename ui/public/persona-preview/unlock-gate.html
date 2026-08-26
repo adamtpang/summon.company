@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>SUM-196 persona unlock preview</title>
+  <style>
+    :root { color-scheme: light; --ink:#0a0a0a; --paper:#fff; --muted:#737373; --line:#e5e5e5; --primary:#0a0a0a; }
+    * { box-sizing: border-box; }
+    body { margin:0; font: 14px/1.4 ui-sans-serif, system-ui, sans-serif; background: var(--paper); color: var(--ink); padding: 32px; }
+    h1 { font-size: 20px; letter-spacing: -0.02em; margin: 0 0 8px; }
+    p { color: var(--muted); margin: 0 0 24px; max-width: 60ch; }
+    .grid { display:grid; grid-template-columns: repeat(3, minmax(0, 220px)); gap: 16px; }
+    .card { border:1px solid var(--line); border-radius: 12px; overflow:hidden; background:#fff; }
+    .card[data-locked="true"] { opacity: .72; background: #fafafa; }
+    .portrait { height: 96px; display:flex; align-items:center; justify-content:center; position:relative;
+      background: linear-gradient(to bottom, rgba(10,10,10,.07), transparent); border-bottom:1px solid #ececec; }
+    .mono { font-size: 36px; font-weight: 600; letter-spacing: -0.03em; }
+    .badge { position:absolute; top:8px; left:8px; font-size:9px; text-transform:uppercase; letter-spacing:.06em;
+      border:1px solid var(--line); border-radius:999px; padding:2px 6px; background:rgba(255,255,255,.92); color:var(--muted); }
+    .body { padding:12px; }
+    .name { font-weight:600; }
+    .meta { font-size:11px; color:var(--muted); margin-top:2px; }
+    .note { font-size:12px; color:var(--muted); margin-top:8px; }
+  </style>
+</head>
+<body>
+  <h1>Finance roster — unlock gate</h1>
+  <p>Defaults always unlocked. Buffett unlocks at Identity. Munger unlocks at Build. Illustrated monochrome marks, never photos.</p>
+  <div class="grid">
+    <article class="card" data-locked="false">
+      <div class="portrait"><span class="mono">JR</span></div>
+      <div class="body">
+        <div class="name">John D. Rockefeller</div>
+        <div class="meta">Default · always unlocked</div>
+        <div class="note">Compound patience. Own the infrastructure.</div>
+      </div>
+    </article>
+    <article class="card" data-locked="true">
+      <div class="portrait"><span class="badge">Locked</span><span class="mono">WB</span></div>
+      <div class="body">
+        <div class="name">Warren Buffett</div>
+        <div class="meta">Alternate</div>
+        <div class="note">Unlocks at <strong style="color:var(--ink)">Identity</strong> on the company roadmap.</div>
+      </div>
+    </article>
+    <article class="card" data-locked="true">
+      <div class="portrait"><span class="badge">Locked</span><span class="mono">CM</span></div>
+      <div class="body">
+        <div class="name">Charlie Munger</div>
+        <div class="meta">Alternate</div>
+        <div class="note">Unlocks at <strong style="color:var(--ink)">Build</strong> on the company roadmap.</div>
+      </div>
+    </article>
+  </div>
+</body>
+</html>
