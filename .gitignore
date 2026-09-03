@@ -66,3 +66,6 @@ tests/storybook-visual/playwright-report/
 .superpowers/
 .claude/worktrees/
 .herenow
+
+# Generated agent handoffs may contain private conversation and account data.
+*_CONTINUE_FROM_*.md
