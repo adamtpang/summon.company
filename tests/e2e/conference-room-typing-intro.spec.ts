@@ -12,6 +12,28 @@ import { test, expect } from "@playwright/test";
 const COMPANY_NAME = `E2E-TypingIntro-${Date.now()}`;
 const FIRST_TASK_TITLE = "Hire your first AI employee and create the operating plan";
 
+
+// Diagnostic for the intermittent CI stall after "Create company": print
+// what the page actually shows so the failure is explainable from the job
+// log alone. Read-only; rethrows the original assertion error.
+async function dumpWizardState(page: import("@playwright/test").Page, label: string) {
+  const url = page.url();
+  const storage = await page.evaluate(() => {
+    const out: Record<string, string> = {};
+    for (let i = 0; i < localStorage.length; i += 1) {
+      const key = localStorage.key(i);
+      if (key) out[key] = localStorage.getItem(key) ?? "";
+    }
+    return out;
+  });
+  const dialogs = await page.locator("[role=dialog]").count();
+  const snapshot = (await page.locator("body").ariaSnapshot()).slice(0, 6000);
+  console.log(`[e2e-diag ${label}] url=${url} dialogs=${dialogs}`);
+  console.log(`[e2e-diag ${label}] localStorage=${JSON.stringify(storage)}`);
+  console.log(`[e2e-diag ${label}] aria=
+${snapshot}`);
+}
+
 test.describe("Dashboard launch after onboarding wizard", () => {
   test("creates the first task and opens the dashboard", async ({
     page,
@@ -67,12 +89,22 @@ test.describe("Dashboard launch after onboarding wizard", () => {
     // matched or not, round-trips through Playwright to decide whether to
     // intercept it), so this step needs more headroom than a plain
     // navigation under load — 30s, matching the finish/dashboard wait below.
-    await expect(
-      page.getByRole("heading", { name: "Connect your fuel" }),
-    ).toBeVisible({ timeout: 30_000 });
-    await expect(page.getByText("Connected", { exact: false }).first()).toBeVisible({
-      timeout: 30_000,
-    });
+    try {
+      await expect(
+        page.getByRole("heading", { name: "Connect your fuel" }),
+      ).toBeVisible({ timeout: 30_000 });
+    } catch (err) {
+      await dumpWizardState(page, "fuel-heading-missing");
+      throw err;
+    }
+    try {
+      await expect(page.getByText("Connected", { exact: false }).first()).toBeVisible({
+        timeout: 30_000,
+      });
+    } catch (err) {
+      await dumpWizardState(page, "connected-missing");
+      throw err;
+    }
     await page.getByRole("button", { name: "Continue" }).click();
 
     // Step 3: repo pairing — skip it. "Finish" hires the CEO, creates the
