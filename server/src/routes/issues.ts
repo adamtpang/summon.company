@@ -5268,8 +5268,10 @@ export function issueRoutes(
       ? await executionWorkspacesSvc.getById(issue.executionWorkspaceId)
       : null;
     const workProducts = await workProductsSvc.listForIssue(issue.id);
+    const cadence = (await svc.resolveCadence(issue.companyId, [issue])).get(issue.id) ?? null;
     res.json({
       ...issue,
+      cadence,
       goalId: goal?.id ?? issue.goalId,
       ancestors,
       ...(blockerAttention ? { blockerAttention } : {}),
@@ -8671,7 +8673,8 @@ export function issueRoutes(
     })();
 
     await queueTaskWatchdogEvaluation(issue, actor.runId);
-    res.json({ ...issueResponse, comment });
+    const cadence = (await svc.resolveCadence(issue.companyId, [issue])).get(issue.id) ?? null;
+    res.json({ ...issueResponse, cadence, comment });
   });
 
   router.delete("/issues/:id", async (req, res) => {
@@ -9646,16 +9649,17 @@ export function issueRoutes(
     const effectiveMoveToTodoRequested =
       !assigneeSelfCommentOnTerminal &&
       (explicitMoveToTodoRequested ||
-        shouldImplicitlyMoveCommentedIssueToTodo({
-          issueStatus: issue.status,
-          assigneeAgentId: issue.assigneeAgentId,
-          actorType: actor.actorType,
-          actorId: actor.actorId,
-          actorRunId: actor.runId,
-          checkoutRunId: issue.checkoutRunId,
-          executionRunId: issue.executionRunId,
-        }) ||
-        shouldResumeInProgressScheduledRetry);
+        (req.body.reopen !== false &&
+          shouldImplicitlyMoveCommentedIssueToTodo({
+            issueStatus: issue.status,
+            assigneeAgentId: issue.assigneeAgentId,
+            actorType: actor.actorType,
+            actorId: actor.actorId,
+            actorRunId: actor.runId,
+            checkoutRunId: issue.checkoutRunId,
+            executionRunId: issue.executionRunId,
+          })) ||
+        (req.body.reopen !== false && shouldResumeInProgressScheduledRetry));
     const hasUnresolvedFirstClassBlockers =
       isBlocked && effectiveMoveToTodoRequested
         ? (await svc.getDependencyReadiness(issue.id)).unresolvedBlockerCount > 0

@@ -83,7 +83,7 @@ mechanics); (5) weights configurable per company in the config (desired-state fi
 VIT-102) - the formula is a default, not a dogma.
 ACCEPTANCE: every open task carries a score with visible breakdown; re-starring
 reorders live; the CEO autopilot files tasks with proposed stars; formula documented
-in VITALS_COMPANY_STANDARD.md.`,
+  in SUMMON_COMPANY_STANDARD.md.`,
   },
   {
     title: "Core-8 by default: every new company starts with the eight-department formation",

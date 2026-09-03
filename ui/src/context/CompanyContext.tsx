@@ -46,7 +46,10 @@ export function resolveBootstrapCompanySelection(input: {
   const selectableCompanies = input.sidebarCompanies.length > 0
     ? input.sidebarCompanies
     : input.companies;
-  if (input.selectedCompanyId && selectableCompanies.some((company) => company.id === input.selectedCompanyId)) {
+  // Preserve an explicit in-session selection even after the company is archived,
+  // so the board can restore or permanently delete it from Settings. Archived
+  // stored selections are still ignored on a fresh bootstrap below.
+  if (input.selectedCompanyId && input.companies.some((company) => company.id === input.selectedCompanyId)) {
     return input.selectedCompanyId;
   }
   if (input.storedCompanyId && selectableCompanies.some((company) => company.id === input.storedCompanyId)) {

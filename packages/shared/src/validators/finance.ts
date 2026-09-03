@@ -32,3 +32,12 @@ export const createFinanceEventSchema = z.object({
 }));
 
 export type CreateFinanceEvent = z.infer<typeof createFinanceEventSchema>;
+
+export const importFinanceStatementSchema = z.object({
+  sourceKind: z.enum(["bank_csv", "accounting_csv"]),
+  accountLabel: z.string().trim().min(1).max(120),
+  fileName: z.string().trim().min(1).max(240),
+  csv: z.string().min(1).max(2_000_000),
+});
+
+export type ImportFinanceStatement = z.infer<typeof importFinanceStatementSchema>;

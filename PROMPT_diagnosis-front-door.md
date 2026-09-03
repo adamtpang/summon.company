@@ -1,7 +1,7 @@
 # Claude Code prompt: perfect Summon's "improve my business" front door
 
 Paste below the line into a Claude Code session opened IN the summon.company repo.
-First read `NORTH_STAR.md`, `ROADMAP.md`, `VITALS_FORMATION_ROADMAP.md`, and `CLAUDE.md`.
+First read `NORTH_STAR.md`, `ROADMAP.md`, `SUMMON_FORMATION_ROADMAP.md`, and `CLAUDE.md`.
 
 ---
 
@@ -13,7 +13,7 @@ DIAGNOSE half of the NORTH_STAR loop, productized as the acquisition surface.
 
 ## Hard constraints (read before touching anything)
 - **Never point source at the live packaged database, and never restart or migrate the
-  live control plane** (the VIT-14 / S0 blocker). Build this as an additive surface that a
+  live control plane** (the SUM-14 / S0 blocker). Build this as an additive surface that a
   stranger can use WITHOUT installing the runtime: a public `/diagnose` experience.
 - Additive only. Do not rename `@paperclipai/*`, `PAPERCLIP_*`, protocol, or DB names.
 - No em dashes (house style). Exactly 8 departments (Product is not a 9th).
@@ -24,7 +24,7 @@ DIAGNOSE half of the NORTH_STAR loop, productized as the acquisition surface.
 
 1. **The diagnosis front door (`/diagnose`).** A founder pastes a URL or describes their
    business in a sentence. Return, in under a minute:
-   - **Stage**: where they are on the 8-stage roadmap (from VITALS_FORMATION_ROADMAP.md).
+   - **Stage**: where they are on the 8-stage roadmap (from SUMMON_FORMATION_ROADMAP.md).
    - **The ONE binding constraint**: theory-of-constraints, /cofounder-style. Not a list,
      the single thing most limiting saved time, saved money, or grown revenue right now.
    - **The formation that fixes it**: which of the 8 departments to summon first, what its
@@ -50,7 +50,7 @@ DIAGNOSE half of the NORTH_STAR loop, productized as the acquisition surface.
    single constraint and a specific first move, or fix the prompt until it does.
 
 ## Constraints on scope
-Do NOT try to fix VIT-14 or the packaged runtime here. Do NOT rebuild the whole engine.
+Do NOT try to fix SUM-14 or the packaged runtime here. Do NOT rebuild the whole engine.
 This is the front door and the diagnosis quality, the thing that makes a founder say "yes,
 that is my actual problem." Everything else in the loop already exists.
 

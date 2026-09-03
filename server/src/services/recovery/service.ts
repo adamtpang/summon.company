@@ -44,6 +44,7 @@ import {
   findExistingIssueBlockersResolvedWakeForAnyKey,
 } from "../issue-dependency-wakeups.js";
 import { parseIssueExecutionState } from "../issue-execution-policy.js";
+import { readIssueSpendLimitState } from "../issue-spend-limit.js";
 import { evaluateAgentInvokabilityFromDb } from "../agent-invokability.js";
 import { getRunLogStore } from "../run-log-store.js";
 import {
@@ -69,6 +70,7 @@ import {
   withRecoveryModelProfileHint,
 } from "./model-profile-hint.js";
 import { isAutomaticRecoverySuppressedByPauseHold } from "./pause-hold-guard.js";
+import { shouldSkipStaleBacklogAfterResume } from "./last-resumed-gate.js";
 
 const EXECUTION_PATH_HEARTBEAT_RUN_STATUSES = ["queued", "running", "scheduled_retry"] as const;
 const UNSUCCESSFUL_HEARTBEAT_RUN_TERMINAL_STATUSES = ["interrupted", "failed", "cancelled", "timed_out"] as const;
@@ -921,6 +923,9 @@ export function recoveryService(db: Db, deps: { enqueueWakeup: RecoveryWakeup })
   }
 
   async function isInvocationBudgetBlocked(issue: typeof issues.$inferSelect, agentId: string) {
+    const issueSpendLimit = await readIssueSpendLimitState(db, issue.companyId, issue.id);
+    if (issueSpendLimit?.reached) return true;
+
     const budgetBlock = await budgets.getInvocationBlock(issue.companyId, agentId, {
       issueId: issue.id,
       projectId: issue.projectId,
@@ -3248,6 +3253,23 @@ export function recoveryService(db: Db, deps: { enqueueWakeup: RecoveryWakeup })
             continue;
           }
 
+          // SUM-170 (SUM-144 D1): unpause resumes NOTHING by default.
+          // Stale assigned todos must not fan out just because the agent became invokable.
+          if (shouldSkipStaleBacklogAfterResume(agent, {
+            issueUpdatedAt: issue.updatedAt,
+            issueCreatedAt: issue.createdAt,
+          })) {
+            result.skipped += 1;
+            logger.info({
+              companyId: issue.companyId,
+              issueId: issue.id,
+              agentId,
+              lastResumedAt: agent?.lastResumedAt ?? null,
+              issueUpdatedAt: issue.updatedAt ?? null,
+            }, "recovery: skipping stale backlog re-arm after unpause");
+            continue;
+          }
+
           const queued = await enqueueInitialAssignedTodoDispatch(issue, agentId);
           if (queued) {
             result.assignmentDispatched += 1;
@@ -3285,6 +3307,25 @@ export function recoveryService(db: Db, deps: { enqueueWakeup: RecoveryWakeup })
 
         if (await isInvocationBudgetBlocked(issue, agentId)) {
           result.skipped += 1;
+          continue;
+        }
+
+        // SUM-170 (SUM-144 D1): do not re-arm pre-unpause assignment recoveries.
+        if (shouldSkipStaleBacklogAfterResume(agent, {
+          issueUpdatedAt: issue.updatedAt,
+          issueCreatedAt: issue.createdAt,
+          latestRunCreatedAt: latestRun.createdAt,
+          latestRunStartedAt: latestRun.startedAt,
+        })) {
+          result.skipped += 1;
+          logger.info({
+            companyId: issue.companyId,
+            issueId: issue.id,
+            agentId,
+            lastResumedAt: agent?.lastResumedAt ?? null,
+            issueUpdatedAt: issue.updatedAt ?? null,
+            latestRunId: latestRun.id,
+          }, "recovery: skipping stale backlog re-arm after unpause");
           continue;
         }
 

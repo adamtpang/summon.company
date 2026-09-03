@@ -57,6 +57,9 @@ describe.sequential("auth routes", () => {
     name: "Jane Example",
     email: "jane@example.com",
     image: "https://example.com/jane.png",
+    accountState: "active",
+    deactivatedAt: null,
+    deletedAt: null,
   };
 
   it("returns the persisted user profile in the session payload", async () => {

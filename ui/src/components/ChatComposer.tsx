@@ -9,7 +9,7 @@ import {
   type KeyboardEvent as ReactKeyboardEvent,
   type ReactNode,
 } from "react";
-import { AlertTriangle, Check, Loader2, Paperclip, Send } from "lucide-react";
+import { AlertTriangle, Check, Loader2, Mic, Paperclip, Send, Square, X } from "lucide-react";
 import { cn } from "../lib/utils";
 
 /**
@@ -77,8 +77,13 @@ export interface ChatComposerProps {
    * the `attachments` prop. Omit entirely to render bare (no attach affordance).
    */
   onAttachFiles?: (files: File[]) => void | Promise<void>;
+  onRemoveAttachment?: (attachment: ChatComposerAttachment) => void | Promise<void>;
   attachments?: ChatComposerAttachment[];
   attaching?: boolean;
+  onVoice?: () => void | Promise<void>;
+  voiceStatus?: "idle" | "recording" | "processing";
+  voiceLabel?: string;
+  voiceDisabled?: boolean;
   /** Restrict the file picker (e.g. "image/*"). */
   acceptFileTypes?: string;
   /** Slot rendered just right of the attach button (e.g. the planning mode chip). */
@@ -123,8 +128,13 @@ export const ChatComposer = forwardRef<ChatComposerHandle, ChatComposerProps>(fu
     autoFocus = false,
     sendLabel = "Send message",
     onAttachFiles,
+    onRemoveAttachment,
     attachments = [],
     attaching = false,
+    onVoice,
+    voiceStatus = "idle",
+    voiceLabel = "Record voice direction",
+    voiceDisabled = false,
     acceptFileTypes,
     leadingTools,
     trailingTools,
@@ -143,7 +153,7 @@ export const ChatComposer = forwardRef<ChatComposerHandle, ChatComposerProps>(fu
   const canAttach = typeof onAttachFiles === "function";
   const isAsk = tone === "ask";
   const isPlanning = tone === "planning";
-  const canSend = !disabled && !submitting && value.trim().length > 0;
+  const canSend = !disabled && !submitting && voiceStatus === "idle" && value.trim().length > 0;
 
   useImperativeHandle(forwardedRef, () => ({
     focus: () => textareaRef.current?.focus(),
@@ -266,7 +276,7 @@ export const ChatComposer = forwardRef<ChatComposerHandle, ChatComposerProps>(fu
         onChange={handleChange}
         onKeyDown={handleKeyDown}
         placeholder={placeholder}
-        disabled={disabled}
+        disabled={disabled || voiceStatus !== "idle"}
         autoFocus={autoFocus}
         rows={1}
         wrap={singleLine ? "off" : "soft"}
@@ -316,6 +326,18 @@ export const ChatComposer = forwardRef<ChatComposerHandle, ChatComposerProps>(fu
                 </span>
                 {sizeLabel ? <span className="shrink-0">{sizeLabel}</span> : null}
                 <span className="shrink-0">{statusLabel}</span>
+                {onRemoveAttachment ? (
+                  <button
+                    type="button"
+                    onClick={() => void onRemoveAttachment(attachment)}
+                    disabled={attachment.status === "uploading"}
+                    aria-label={`Remove ${attachment.name}`}
+                    title={`Remove ${attachment.name}`}
+                    className="grid size-6 shrink-0 place-items-center rounded-sm text-muted-foreground hover:bg-accent hover:text-foreground disabled:cursor-not-allowed disabled:opacity-50"
+                  >
+                    <X className="size-3.5" aria-hidden="true" />
+                  </button>
+                ) : null}
               </div>
             );
           })}
@@ -341,7 +363,7 @@ export const ChatComposer = forwardRef<ChatComposerHandle, ChatComposerProps>(fu
             <button
               type="button"
               onClick={triggerFilePicker}
-              disabled={disabled || attaching}
+              disabled={disabled || attaching || voiceStatus !== "idle"}
               aria-label="Attach files"
               title="Attach files"
               className="grid h-7 w-7 shrink-0 place-items-center rounded-md text-muted-foreground transition-colors duration-150 hover:bg-accent hover:text-foreground disabled:cursor-not-allowed disabled:opacity-50"
@@ -349,6 +371,29 @@ export const ChatComposer = forwardRef<ChatComposerHandle, ChatComposerProps>(fu
               {attaching ? <Loader2 className="h-4 w-4 animate-spin" /> : <Paperclip className="h-4 w-4" />}
             </button>
           </>
+        ) : null}
+
+        {onVoice ? (
+          <button
+            type="button"
+            onClick={() => void onVoice()}
+            disabled={disabled || voiceDisabled || voiceStatus === "processing"}
+            aria-label={voiceLabel}
+            title={voiceLabel}
+            aria-pressed={voiceStatus === "recording"}
+            className={cn(
+              "grid h-7 w-7 shrink-0 place-items-center rounded-md text-muted-foreground transition-colors duration-150 hover:bg-accent hover:text-foreground disabled:cursor-not-allowed disabled:opacity-50",
+              voiceStatus === "recording" && "bg-destructive/10 text-destructive",
+            )}
+          >
+            {voiceStatus === "processing" ? (
+              <Loader2 className="h-4 w-4 animate-spin" />
+            ) : voiceStatus === "recording" ? (
+              <Square className="h-3.5 w-3.5 fill-current" />
+            ) : (
+              <Mic className="h-4 w-4" />
+            )}
+          </button>
         ) : null}
 
         {leadingTools}

@@ -44,6 +44,8 @@ function createApp(
   db?: Db,
   serverInfo = testServerInfo,
   databaseBackupHealth?: Parameters<typeof healthRoutes>[1]["databaseBackupHealth"],
+  billingPortalUrl?: string,
+  supportUrl?: string,
 ) {
   const app = express();
   app.use(
@@ -53,6 +55,8 @@ function createApp(
       deploymentExposure: "private",
       authReady: true,
       companyDeletionEnabled: true,
+      billingPortalUrl,
+      supportUrl,
       serverInfo,
       databaseBackupHealth,
     }),
@@ -90,6 +94,32 @@ describe("GET /health", () => {
       status: "ok",
       version: serverVersion,
       serverInfo: testServerInfo,
+    });
+  });
+
+  it("exposes an operator-configured billing portal only in full health details", async () => {
+    const billingPortalUrl = "https://billing.stripe.com/p/login/test_4gw6oJchs69w47e7ss";
+    const app = createApp(createHealthyDb(), testServerInfo, undefined, billingPortalUrl);
+
+    const res = await request(app).get("/health");
+
+    expect(res.status).toBe(200);
+    expect(res.body.features).toEqual({
+      companyDeletionEnabled: true,
+      billingPortalUrl,
+    });
+  });
+
+  it("exposes an operator-configured human-support page only in full health details", async () => {
+    const supportUrl = "https://support.summon.company/";
+    const app = createApp(createHealthyDb(), testServerInfo, undefined, undefined, supportUrl);
+
+    const res = await request(app).get("/health");
+
+    expect(res.status).toBe(200);
+    expect(res.body.features).toEqual({
+      companyDeletionEnabled: true,
+      supportUrl,
     });
   });
 
@@ -262,6 +292,8 @@ describe("GET /health", () => {
         deploymentExposure: "public",
         authReady: true,
         companyDeletionEnabled: false,
+        billingPortalUrl: "https://billing.stripe.com/p/login/test_privatePortal123",
+        supportUrl: "https://support.summon.company/",
         serverInfo: testServerInfo,
         databaseBackupHealth: {
           enabled: true,
@@ -324,6 +356,8 @@ describe("GET /health", () => {
         deploymentExposure: "public",
         authReady: true,
         companyDeletionEnabled: false,
+        billingPortalUrl: "https://billing.stripe.com/p/login/test_boardPortal123",
+        supportUrl: "https://support.summon.company/",
         serverInfo: testServerInfo,
       }),
     );
@@ -339,6 +373,7 @@ describe("GET /health", () => {
       bootstrapInviteActive: false,
     });
     expect(res.body.serverInfo).toBeUndefined();
+    expect(res.body.features).toBeUndefined();
   });
 
   it("redacts detailed metadata when authenticated mode is reached without auth middleware", async () => {
@@ -361,6 +396,8 @@ describe("GET /health", () => {
         deploymentExposure: "public",
         authReady: true,
         companyDeletionEnabled: false,
+        billingPortalUrl: "https://billing.stripe.com/p/login/test_boardPortal123",
+        supportUrl: "https://support.summon.company/",
         serverInfo: testServerInfo,
       }),
     );
@@ -402,6 +439,8 @@ describe("GET /health", () => {
         deploymentExposure: "public",
         authReady: true,
         companyDeletionEnabled: false,
+        billingPortalUrl: "https://billing.stripe.com/p/login/test_boardPortal123",
+        supportUrl: "https://support.summon.company/",
         serverInfo: testServerInfo,
       }),
     );
@@ -419,8 +458,44 @@ describe("GET /health", () => {
       bootstrapInviteActive: false,
       features: {
         companyDeletionEnabled: false,
+        billingPortalUrl: "https://billing.stripe.com/p/login/test_boardPortal123",
+        supportUrl: "https://support.summon.company/",
       },
       serverInfo: testServerInfo,
     });
+  });
+
+  it("does not expose customer billing or human-support links to an authenticated agent", async () => {
+    const db = {
+      execute: vi.fn().mockResolvedValue([{ "?column?": 1 }]),
+      select: vi.fn(() => ({
+        from: vi.fn(() => ({
+          where: vi.fn().mockResolvedValue([{ count: 1 }]),
+        })),
+      })),
+    } as unknown as Db;
+    const app = express();
+    app.use((req, _res, next) => {
+      (req as any).actor = { type: "agent", agentId: "agent-1", source: "api_key" };
+      next();
+    });
+    app.use(
+      "/health",
+      healthRoutes(db, {
+        deploymentMode: "authenticated",
+        deploymentExposure: "public",
+        authReady: true,
+        companyDeletionEnabled: false,
+        billingPortalUrl: "https://billing.stripe.com/p/login/test_privatePortal123",
+        supportUrl: "https://support.summon.company/",
+        serverInfo: testServerInfo,
+      }),
+    );
+
+    const res = await request(app).get("/health");
+
+    expect(res.status).toBe(200);
+    expect(res.body.serverInfo).toEqual(testServerInfo);
+    expect(res.body.features).toEqual({ companyDeletionEnabled: false });
   });
 });

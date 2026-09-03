@@ -15,6 +15,7 @@
   h1 { font-size: 1.9rem; letter-spacing: -0.02em; margin: 0 0 0.5rem; }
   .lede { color: #5a5a5a; margin: 0 0 2rem; }
   form { display: flex; flex-direction: column; gap: 0.75rem; }
+  .field-label { font-weight: 600; }
   textarea { width: 100%; min-height: 5.5rem; padding: 0.85rem 1rem; font: inherit; border: 1px solid rgba(0,0,0,0.18); border-radius: 12px; resize: vertical; }
   textarea:focus { outline: 2px solid #0a0a0a; outline-offset: 1px; border-color: transparent; }
   button.go { align-self: flex-start; background: #0a0a0a; color: #ffffff; border: 0; border-radius: 999px; padding: 0.7rem 1.5rem; font: inherit; font-weight: 600; cursor: pointer; }
@@ -55,6 +56,7 @@
     blockquote { border-color: #f2f2f2; }
   }
 </style>
+<link rel="stylesheet" href="/public.css" />
 </head>
 <body>
 <div class="page">
@@ -70,6 +72,7 @@
   <p class="lede">Paste a URL or describe your business in a sentence. You get your stage on the 8-stage company roadmap, the one constraint holding you back, the founder who solved it before you, and the AI department that fixes it. Grounded in 48 real founder case studies.</p>
 
   <form id="form">
+    <label class="field-label" for="input">Website or business</label>
     <textarea id="input" placeholder="e.g. idiguam.com, or: I run a two-person landscaping company in Guam, mostly word of mouth" required></textarea>
     <button class="go" id="go" type="submit">Diagnose</button>
     <p class="micro">No signup. Under a minute. Your input is used only to generate this diagnosis.</p>
@@ -113,7 +116,7 @@
       <p class="muted" id="r-vitals" style="margin-top:0.75rem"></p>
       <div class="cta-row">
         <a class="btn btn-primary" id="r-summon" href="#">Summon this department</a>
-        <a class="btn btn-quiet" href="/#founding">Founding slot, $99/mo locked for life</a>
+        <a class="btn btn-quiet" href="/#founding">Founding seat, $500/mo</a>
         <a class="btn btn-quiet" href="https://cal.com/adamtpang">Talk it through, free</a>
       </div>
       <p class="micro">Already running Summon? Open your Chat tab and hand these three tasks to the department. Not yet? The summon button sends this diagnosis to us and we set your company up.</p>
@@ -124,6 +127,10 @@
       </div>
     </div>
   </section>
+  <footer class="site">
+    <p>Anchor Marianas LLC · summon.company · human board, governed AI work.</p>
+    <nav class="footer-links" aria-label="Summon pages"><a href="/about">About</a><a href="/blog">Blog</a><a href="/changelog">Build log</a><a href="/privacy">Privacy</a><a href="/terms">Terms</a></nav>
+  </footer>
 </div>
 
 <script>

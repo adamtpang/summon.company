@@ -16,6 +16,14 @@ export interface AgentEligibilityAgent {
   reportsTo?: string | null;
 }
 
+export interface CompanyCofounderCandidate {
+  id: string;
+  role?: string | null;
+  reportsTo?: string | null;
+  status: AgentStatus | string;
+  createdAt?: Date | string | null;
+}
+
 export interface AgentOrgChainEntry {
   id: string;
   companyId: string;
@@ -59,6 +67,33 @@ const NON_ASSIGNABLE_AGENT_STATUSES = new Set<string>(["terminated", "pending_ap
 const NON_INVOKABLE_AGENT_STATUSES = new Set<string>(["terminated", "pending_approval", "paused"]);
 const ASSIGNABLE_AGENT_STATUSES = new Set<string>(["active", "paused", "idle", "running", "error"]);
 const INVOKABLE_AGENT_STATUSES = new Set<string>(["active", "idle", "running", "error"]);
+
+/**
+ * One opinionated Cofounder choice for Company Loop and every board-chat
+ * surface: CEO first, otherwise a top-level employee, otherwise the oldest
+ * remaining employee. Lifecycle eligibility is checked separately so a
+ * paused or pending preferred Cofounder fails visibly instead of silently
+ * routing board authority to somebody else.
+ */
+export function selectCompanyCofounder<T extends CompanyCofounderCandidate>(
+  companyAgents: readonly T[],
+): T | null {
+  const rank = (agent: T) => agent.role === "ceo" ? 0 : agent.reportsTo == null ? 1 : 2;
+  const createdAtKey = (agent: T) =>
+    agent.createdAt instanceof Date
+      ? agent.createdAt.toISOString()
+      : String(agent.createdAt ?? "");
+
+  return [...companyAgents]
+    .filter((agent) => agent.status !== "terminated")
+    .sort((left, right) => {
+      const rankDifference = rank(left) - rank(right);
+      if (rankDifference !== 0) return rankDifference;
+      const createdAtDifference = createdAtKey(left).localeCompare(createdAtKey(right));
+      if (createdAtDifference !== 0) return createdAtDifference;
+      return left.id.localeCompare(right.id);
+    })[0] ?? null;
+}
 
 export function isAgentStatusAssignableToWork(status: AgentStatus | string): boolean {
   return ASSIGNABLE_AGENT_STATUSES.has(status) && !NON_ASSIGNABLE_AGENT_STATUSES.has(status);

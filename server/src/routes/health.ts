@@ -63,6 +63,8 @@ export function healthRoutes(
     deploymentExposure: DeploymentExposure;
     authReady: boolean;
     companyDeletionEnabled: boolean;
+    billingPortalUrl?: string;
+    supportUrl?: string;
     serverInfo?: ServerInfoSnapshot;
     databaseBackupHealth?: InspectDatabaseBackupHealthOptions;
   } = {
@@ -114,6 +116,7 @@ export function healthRoutes(
       actorType,
       opts.deploymentMode,
     );
+    const exposeBoardConfiguredLinks = opts.deploymentMode !== "authenticated" || actorType === "board";
     // serverInfo (git SHA + process start) rides on the full-details responses
     // only, so it reaches board/agent actors in authenticated mode or any caller
     // in local_trusted dev — never anonymous authenticated callers. The
@@ -221,6 +224,8 @@ export function healthRoutes(
       bootstrapInviteActive,
       features: {
         companyDeletionEnabled: opts.companyDeletionEnabled,
+        ...(exposeBoardConfiguredLinks && opts.billingPortalUrl ? { billingPortalUrl: opts.billingPortalUrl } : {}),
+        ...(exposeBoardConfiguredLinks && opts.supportUrl ? { supportUrl: opts.supportUrl } : {}),
       },
       serverInfo,
       ...(databaseBackup ? { databaseBackup } : {}),

@@ -2544,10 +2544,13 @@ describe("company portability", () => {
       collisionStrategy: "rename",
     }, "user-1");
 
-    expect(companySvc.create).toHaveBeenCalledWith(expect.objectContaining({
-      name: "Imported Paperclip",
-      description: "Portable company package",
-    }));
+    expect(companySvc.create).toHaveBeenCalledWith(
+      expect.objectContaining({
+        name: "Imported Paperclip",
+        description: "Portable company package",
+      }),
+      { formationProfile: "none" },
+    );
     expect(agentSvc.create).toHaveBeenCalledWith("company-imported", expect.objectContaining({
       name: "ClaudeCoder",
       adapterType: "process",
@@ -2792,6 +2795,70 @@ describe("company portability", () => {
       contentType: "image/png",
       createdByUserId: "user-1",
     }));
+    expect(companySvc.update).toHaveBeenCalledWith("company-imported", {
+      logoAssetId: "asset-created",
+    });
+  });
+
+  it("uses favicon.ico as the company logo when an imported package has no explicit logo", async () => {
+    const storage = {
+      putFile: vi.fn().mockResolvedValue({
+        provider: "local_disk",
+        objectKey: "assets/companies/imported-favicon",
+        contentType: "image/x-icon",
+        byteSize: 9,
+        sha256: "favicon-sha",
+        originalFilename: "favicon.ico",
+      }),
+    };
+    companySvc.create.mockResolvedValue({
+      id: "company-imported",
+      name: "Imported Company",
+      logoAssetId: null,
+    });
+    companySvc.update.mockResolvedValue({
+      id: "company-imported",
+      name: "Imported Company",
+      logoAssetId: "asset-created",
+    });
+    agentSvc.list.mockResolvedValue([]);
+
+    const portability = companyPortabilityService({} as any, storage as any);
+    const files = {
+      "COMPANY.md": ['---', 'name: "Imported Company"', '---', ''].join("\n"),
+      "public/favicon.ico": {
+        encoding: "base64" as const,
+        data: Buffer.from("ico-bytes").toString("base64"),
+        contentType: "image/x-icon",
+      },
+    };
+    const preview = await portability.previewImport({
+      source: { type: "inline", rootPath: "imported-company", files },
+      include: { company: true, agents: false, projects: false, issues: false },
+      target: { mode: "new_company", newCompanyName: "Imported Company" },
+      collisionStrategy: "rename",
+    });
+
+    expect(preview.manifest.company?.logoPath).toBe("public/favicon.ico");
+
+    await portability.importBundle(
+      {
+        source: { type: "inline", rootPath: "imported-company", files },
+        include: { company: true, agents: false, projects: false, issues: false },
+        target: { mode: "new_company", newCompanyName: "Imported Company" },
+        collisionStrategy: "rename",
+      },
+      "user-1",
+    );
+
+    expect(storage.putFile).toHaveBeenCalledWith(
+      expect.objectContaining({
+        companyId: "company-imported",
+        originalFilename: "favicon.ico",
+        contentType: "image/x-icon",
+        body: Buffer.from("ico-bytes"),
+      }),
+    );
     expect(companySvc.update).toHaveBeenCalledWith("company-imported", {
       logoAssetId: "asset-created",
     });
@@ -3749,9 +3816,12 @@ describe("company portability", () => {
       }),
       status: "idle",
     }));
-    expect(companySvc.create).toHaveBeenCalledWith(expect.objectContaining({
-      requireBoardApprovalForNewAgents: false,
-    }));
+    expect(companySvc.create).toHaveBeenCalledWith(
+      expect.objectContaining({
+        requireBoardApprovalForNewAgents: false,
+      }),
+      { formationProfile: "none" },
+    );
   });
 
   it("normalizes adapter config on replace imports before updating existing agents", async () => {

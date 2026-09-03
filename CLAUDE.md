@@ -1,6 +1,30 @@
 # summon.company cross-agent handoff
 
-Last updated: 2026-07-14 by Codex.
+Last updated: 2026-08-01 by Claude (board handoff below). Prior: 2026-07-14 by Codex.
+
+## BOARD HANDOFF 2026-08-01: summon work lives HERE now
+
+Adam's ruling: Aether root sessions handle portfolio only; ALL summon execution
+happens in summon.company sessions and the kitchen. Current state:
+
+- **Offer canon = wave-1 (A):** $500 setup + $99/mo locked for life, 2 founding slots,
+  then $199/mo public. 48h free diagnosis BEFORE payment (the Delay killer). Guarantee:
+  first plated deliverable within 7 days or the $500 back. 15 min/week. Cancel anytime.
+  master tip 97ef0de90 and the working tree both tell this story. Do not reintroduce
+  per-employee pricing or the $500/mo seat.
+- **The $500/mo seat variant is ARCHIVED, not dead:** complete site on branch
+  `archive/b-offer-500mo-seat`. It is tier T3 of the evidence-gated ladder (unlock:
+  3 public case studies + 90 days of receipts). Ladder + gates: Aether/BETA_KIT.md.
+- **TICKET_QUEUE.md (repo root):** file these into the runtime when it is up, 0a/0b
+  (founding diagnoses for Anton and Michael, 48h clock) FIRST.
+- **Founder actions pending (never do these for him):** send the founding offer
+  (drafted, in the Aether session log and implied by the landing copy); deploy
+  (`vercel --prod --yes` from apps/landing; NO git auto-deploy exists); reconnect
+  Stripe, then mint the $500+$99/mo founding link and deactivate the old $49/mo
+  founding, $29 sellsniper, and $500/mo seat (8x2eVd...) links; Vercel project rename
+  vitals.run -> summon-company.
+- **Machine-readable schema caveat:** index.html JSON-LD from SUM-153 says "$99 per AI
+  employee per month"; reconcile to the wave-1 company-level offer on the next pass.
 
 ## Product and doctrine
 
@@ -164,3 +188,40 @@ ship loop does not.
 Refresh note: this install is a file copy, not a link. Re-copy both parts from
 `garrytan/gstack` after any upstream change or the skills go stale.
 `/gstack-upgrade` handles its own self-update path.
+
+## 2026-08-29 commercial-distance handoff
+
+The Aether Portfolio now opens with a private **Closest to cash** league below
+the portfolio north star. It ranks projects by hard commercial evidence instead
+of inventing another 0 to 100 score:
+
+1. measured revenue
+2. active live checkout
+3. connected live payment rail
+4. exact Summon company link
+5. unformed project
+6. evidence blocker
+
+The server projection reads existing portfolio economics and Company Payments
+evidence, exposes only safe aggregates, and supplies one exact next action for
+each row. The UI shows stage counts plus a dense rank, company, position, money
+evidence, and next-action table. It does not claim that site quality is revenue.
+
+Changed surfaces:
+
+- `packages/shared/src/types/aether-portfolio.ts`
+- `server/src/services/aether-portfolio.ts`
+- `server/src/services/aether-portfolio.test.ts`
+- `ui/src/pages/AetherPortfolio.tsx`
+- `ui/src/pages/AetherPortfolio.test.tsx`
+
+Verification: focused server and UI tests pass, 20 of 20. Shared and UI
+typechecks pass. The UI production build passes. The server typecheck still has
+two unrelated pre-existing errors in `server/src/services/recovery/service.ts`
+for missing `createdAt` and `startedAt` properties. Desktop visual evidence is
+at `screenshots/summon-closest-to-cash-desktop-20260829.png`. The preview used a
+fresh `PAPERCLIP_HOME` on port 3104 and did not touch the live control plane.
+
+<!-- BEGIN:shapeable-design-system -->
+@.shapeable/CLAUDE_DESIGN_SYSTEM.md
+<!-- END:shapeable-design-system -->

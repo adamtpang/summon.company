@@ -93,6 +93,12 @@ export function Layout() {
   const location = useLocation();
   const navigationType = useNavigationType();
   const isCompanySettingsRoute = location.pathname.includes("/company/settings");
+  const companyRouteSegment = getCompanyRouteSegment(location.pathname, companyPrefix);
+  const isMissionControlRoute = companyRouteSegment === "dashboard";
+  const isFactoryFloorRoute = companyRouteSegment === "factory-floor";
+  const isPortfolioRoute = companyRouteSegment === "portfolio" || location.pathname === "/portfolio";
+  const isImmersiveRoute = isMissionControlRoute || isFactoryFloorRoute;
+  const isViewportRoute = isImmersiveRoute || isPortfolioRoute;
   // The Skills Store renders its own secondary (category) sidebar, so the main
   // app nav collapses to its rail throughout the Skills Store section (PAP-10879).
   const isSkillsRoute = isSkillsStoreRoute(location.pathname, companyPrefix);
@@ -176,12 +182,13 @@ export function Layout() {
 
   useEffect(() => {
     if (companiesLoading || onboardingTriggered.current) return;
+    if (isPortfolioRoute) return;
     if (health?.deploymentMode === "authenticated") return;
     if (companies.length === 0) {
       onboardingTriggered.current = true;
       openOnboarding();
     }
-  }, [companies, companiesLoading, openOnboarding, health?.deploymentMode]);
+  }, [companies, companiesLoading, openOnboarding, health?.deploymentMode, isPortfolioRoute]);
 
   useEffect(() => {
     if (!companyPrefix || companiesLoading || companies.length === 0) return;
@@ -515,7 +522,11 @@ export function Layout() {
         // whole viewport scroll horizontally. clip (not hidden) leaves overflow-y
         // computed as visible, so native body scroll + the sticky breadcrumb keep
         // working.
-        isMobile ? "min-h-dvh overflow-x-clip" : "flex h-dvh flex-col overflow-clip",
+        isViewportRoute
+          ? "flex h-dvh flex-col overflow-hidden"
+          : isMobile
+            ? "min-h-dvh overflow-x-clip"
+            : "flex h-dvh flex-col overflow-clip",
       )}
       >
       <a
@@ -524,10 +535,15 @@ export function Layout() {
       >
         Skip to Main Content
       </a>
-      <WorktreeBanner />
-      <DevRestartBanner devServer={health?.devServer} />
-      <div className={cn("min-h-0 flex-1", isMobile ? "w-full" : "flex overflow-clip")}>
-        {isMobile && sidebarOpen && (
+      {!isViewportRoute ? <WorktreeBanner /> : null}
+      {!isViewportRoute ? <DevRestartBanner devServer={health?.devServer} /> : null}
+      <div
+        className={cn(
+          "min-h-0 flex-1",
+          isViewportRoute ? "flex w-full overflow-hidden" : isMobile ? "w-full" : "flex overflow-clip",
+        )}
+      >
+        {!isImmersiveRoute && isMobile && sidebarOpen && (
           <button
             type="button"
             className="fixed inset-0 z-40 bg-black/50"
@@ -536,7 +552,7 @@ export function Layout() {
           />
         )}
 
-        {isMobile ? (
+        {!isImmersiveRoute && (isMobile ? (
           <div
             className={cn(
               "fixed inset-y-0 left-0 z-50 flex flex-col overflow-hidden pt-(--sz-safe-top) transition-transform duration-100 ease-out",
@@ -550,6 +566,8 @@ export function Layout() {
             </div>
             <SidebarAccountMenu
               deploymentMode={health?.deploymentMode}
+              billingPortalUrl={health?.features?.billingPortalUrl}
+              supportUrl={health?.features?.supportUrl}
               serverGit={health?.serverInfo?.git}
               version={health?.version}
             />
@@ -570,43 +588,66 @@ export function Layout() {
             </div>
             <SidebarAccountMenu
               deploymentMode={health?.deploymentMode}
+              billingPortalUrl={health?.features?.billingPortalUrl}
+              supportUrl={health?.features?.supportUrl}
               serverGit={health?.serverInfo?.git}
               version={health?.version}
             />
           </SidebarShell>
-        )}
+        ))}
 
-        {!isMobile && hasSecondarySidebar ? (
+        {!isImmersiveRoute && !isMobile && hasSecondarySidebar ? (
           <SecondarySidebar>{secondarySidebar}</SecondarySidebar>
         ) : null}
 
-        <div className={cn("flex min-w-0 flex-col", isMobile ? "w-full" : "h-full flex-1")}>
+        <div
+          className={cn(
+            "flex min-w-0 flex-col",
+            isImmersiveRoute
+              ? "h-full w-full"
+              : isPortfolioRoute
+                ? "h-full flex-1"
+                : isMobile
+                  ? "w-full"
+                  : "h-full flex-1",
+          )}
+        >
+          {!isViewportRoute ? (
+            <div
+              className={cn(
+                isMobile && "sticky top-0 z-20 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/85",
+              )}
+            >
+              <StandaloneBrowserControls mobile={isMobile} />
+              <BreadcrumbBar />
+              {isMobile && isCompanySettingsRoute ? (
+                <div className="border-b border-border px-4 pb-3">
+                  <CompanySettingsNav />
+                </div>
+              ) : null}
+            </div>
+          ) : null}
           <div
             className={cn(
-              isMobile && "sticky top-0 z-20 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/85",
+            isViewportRoute ? "flex min-h-0 flex-1" : isMobile ? "block" : "flex flex-1 min-h-0",
             )}
           >
-            <StandaloneBrowserControls mobile={isMobile} />
-            <BreadcrumbBar />
-            {isMobile && isCompanySettingsRoute ? (
-              <div className="border-b border-border px-4 pb-3">
-                <CompanySettingsNav />
-              </div>
-            ) : null}
-          </div>
-          <div className={cn(isMobile ? "block" : "flex flex-1 min-h-0")}>
             <main
               id="main-content"
               ref={mainContentRef}
               tabIndex={-1}
               className={cn(
-                "flex-1 p-4 outline-none md:p-6",
+                "flex-1 outline-none",
                 // Reserve the scrollbar gutter on desktop so pages whose height
                 // changes (e.g. switching skill-detail tabs) don't widen/shift
                 // when the vertical scrollbar appears or disappears (PAP-10907).
-                isMobile
-                  ? "overflow-visible pb-(--sz-calc-43)"
-                  : "overflow-auto [scrollbar-gutter:stable]",
+                isImmersiveRoute
+                  ? "min-h-0 overflow-hidden p-0"
+                  : isPortfolioRoute
+                    ? "min-h-0 overflow-auto p-0 [scrollbar-gutter:stable]"
+                  : isMobile
+                    ? "overflow-visible p-4 pb-(--sz-calc-43) md:p-6"
+                    : "overflow-auto p-4 md:p-6 [scrollbar-gutter:stable]",
               )}
             >
               {hasUnknownCompanyPrefix ? (
@@ -620,21 +661,21 @@ export function Layout() {
                 </RouteErrorBoundary>
               )}
             </main>
-            <PropertiesPanel />
+            {!isViewportRoute ? <PropertiesPanel /> : null}
           </div>
           {/* The persistent bottom composer retired (board, 2026-07-19):
               Chat (beta) is the one conversation surface; two chat inputs on
               screen was duplicate chrome. */}
         </div>
       </div>
-      {isMobile && <MobileBottomNav visible={mobileNavVisible} />}
+      {!isImmersiveRoute && isMobile ? <MobileBottomNav visible={mobileNavVisible} /> : null}
       <CommandPalette />
       <NewIssueDialog />
       <NewProjectDialog />
       <NewGoalDialog />
       <NewAgentDialog />
       <KeyboardShortcutsCheatsheet open={shortcutsOpen} onOpenChange={setShortcutsOpen} />
-      <FeedbackWidget />
+      {!isViewportRoute ? <FeedbackWidget /> : null}
       <ToastViewport />
       </div>
     </GeneralSettingsProvider>

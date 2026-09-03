@@ -2,17 +2,14 @@ import { useMemo } from "react";
 import { NavLink, useLocation } from "@/lib/router";
 import {
   House,
+  Building2,
   CircleDot,
   SquarePen,
-  Users,
-  Inbox,
+  ListChecks,
 } from "lucide-react";
-import { useCompany } from "../context/CompanyContext";
 import { useDialogActions } from "../context/DialogContext";
 import { SIDEBAR_SCROLL_RESET_STATE } from "../lib/navigation-scroll";
 import { cn } from "../lib/utils";
-import { useInboxBadge } from "../hooks/useInboxBadge";
-import { Badge } from "@/components/ui/badge";
 
 interface MobileBottomNavProps {
   visible: boolean;
@@ -23,7 +20,6 @@ interface MobileNavLinkItem {
   to: string;
   label: string;
   icon: typeof House;
-  badge?: number;
 }
 
 interface MobileNavActionItem {
@@ -37,25 +33,17 @@ type MobileNavItem = MobileNavLinkItem | MobileNavActionItem;
 
 export function MobileBottomNav({ visible }: MobileBottomNavProps) {
   const location = useLocation();
-  const { selectedCompanyId } = useCompany();
   const { openNewIssue } = useDialogActions();
-  const inboxBadge = useInboxBadge(selectedCompanyId);
 
   const items = useMemo<MobileNavItem[]>(
     () => [
-      { type: "link", to: "/dashboard", label: "Home", icon: House },
-      { type: "link", to: "/issues", label: "Tasks", icon: CircleDot },
+      { type: "link", to: "/dashboard", label: "Control", icon: House },
+      { type: "link", to: "/factory-floor", label: "Office", icon: Building2 },
       { type: "action", label: "Create", icon: SquarePen, onClick: () => openNewIssue() },
-      { type: "link", to: "/agents/all", label: "Agents", icon: Users },
-      {
-        type: "link",
-        to: "/inbox",
-        label: "Inbox",
-        icon: Inbox,
-        badge: inboxBadge.inbox,
-      },
+      { type: "link", to: "/issues", label: "Tasks", icon: CircleDot },
+      { type: "link", to: "/decisions", label: "Decide", icon: ListChecks },
     ],
-    [openNewIssue, inboxBadge.inbox],
+    [openNewIssue],
   );
 
   return (
@@ -108,11 +96,6 @@ export function MobileBottomNav({ visible }: MobileBottomNavProps) {
                 <>
                   <span className="relative">
                     <Icon className={cn("h-(--sz-18px) w-(--sz-18px)", isActive && "stroke-(length:--sw-2_3)")} />
-                    {item.badge != null && item.badge > 0 && (
-                      <Badge variant="ghost" className="absolute -right-2 -top-2 bg-primary px-1.5 text-(length:--text-nano) leading-none text-primary-foreground">
-                        {item.badge > 99 ? "99+" : item.badge}
-                      </Badge>
-                    )}
                   </span>
                   <span className="truncate">{item.label}</span>
                 </>

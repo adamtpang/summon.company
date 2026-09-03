@@ -7,6 +7,47 @@ import { healthApi } from "@/api/health";
 import { queryKeys } from "@/lib/queryKeys";
 import { BootstrapPendingPage } from "@/components/BootstrapPendingPage";
 import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+
+function AccountInactivePage() {
+  const queryClient = useQueryClient();
+  const reactivateMutation = useMutation({
+    mutationFn: () => authApi.reactivateAccount(),
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: queryKeys.auth.session });
+      await queryClient.invalidateQueries({ queryKey: queryKeys.auth.lifecycle });
+      await queryClient.invalidateQueries({ queryKey: queryKeys.access.currentBoardAccess });
+    },
+  });
+  const signOutMutation = useMutation({
+    mutationFn: () => authApi.signOut(),
+    onSuccess: () => queryClient.setQueryData(queryKeys.auth.session, null),
+  });
+  const error = reactivateMutation.error ?? signOutMutation.error;
+
+  return (
+    <div className="mx-auto max-w-xl py-10">
+      <Card className="block space-y-4 p-6">
+        <div className="space-y-2">
+          <h1 className="text-xl font-semibold">Account deactivated</h1>
+          <p className="text-sm text-muted-foreground">
+            Your companies and their evidence still exist, but this identity has no active authority. Reactivating
+            does not restore company memberships, API keys, permission grants, or paused routines.
+          </p>
+        </div>
+        {error ? <p className="text-sm text-destructive" role="alert">{error instanceof Error ? error.message : "Account action failed."}</p> : null}
+        <div className="flex flex-wrap gap-2">
+          <Button onClick={() => reactivateMutation.mutate()} disabled={reactivateMutation.isPending || signOutMutation.isPending}>
+            {reactivateMutation.isPending ? "Reactivating…" : "Reactivate account"}
+          </Button>
+          <Button variant="outline" onClick={() => signOutMutation.mutate()} disabled={reactivateMutation.isPending || signOutMutation.isPending}>
+            {signOutMutation.isPending ? "Signing out…" : "Sign out"}
+          </Button>
+        </div>
+      </Card>
+    </div>
+  );
+}
 
 function NoBoardAccessPage() {
   return (
@@ -55,7 +96,10 @@ export function CloudAccessGate() {
   const boardAccessQuery = useQuery({
     queryKey: queryKeys.access.currentBoardAccess,
     queryFn: () => accessApi.getCurrentBoardAccess(),
-    enabled: isAuthenticatedMode && !isBootstrapPending && !!sessionQuery.data,
+    enabled:
+      isAuthenticatedMode &&
+      !isBootstrapPending &&
+      sessionQuery.data?.user.accountState === "active",
     retry: false,
   });
   const claimMutation = useMutation({
@@ -72,7 +116,7 @@ export function CloudAccessGate() {
   if (
     healthQuery.isLoading ||
     (isAuthenticatedMode && sessionQuery.isLoading) ||
-    (isAuthenticatedMode && !isBootstrapPending && !!sessionQuery.data && boardAccessQuery.isLoading)
+    (isAuthenticatedMode && !isBootstrapPending && sessionQuery.data?.user.accountState === "active" && boardAccessQuery.isLoading)
   ) {
     return <div className="mx-auto max-w-xl py-10 text-sm text-muted-foreground">Loading...</div>;
   }
@@ -87,6 +131,10 @@ export function CloudAccessGate() {
             : "Failed to load app state"}
       </div>
     );
+  }
+
+  if (isAuthenticatedMode && sessionQuery.data?.user.accountState === "deactivated") {
+    return <AccountInactivePage />;
   }
 
   if (isBootstrapPending) {

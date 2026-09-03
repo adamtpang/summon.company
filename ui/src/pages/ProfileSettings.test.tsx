@@ -12,6 +12,10 @@ const mockAuthApi = vi.hoisted(() => ({
   signUpEmail: vi.fn(),
   getProfile: vi.fn(),
   updateProfile: vi.fn(),
+  getAccountLifecycle: vi.fn(),
+  deactivateAccount: vi.fn(),
+  reactivateAccount: vi.fn(),
+  permanentlyDeleteAccount: vi.fn(),
   signOut: vi.fn(),
 }));
 
@@ -67,7 +71,18 @@ describe("ProfileSettings", () => {
         name: "Jane Example",
         email: "jane@example.com",
         image: "https://example.com/jane.png",
+        accountState: "active",
+        deactivatedAt: null,
+        deletedAt: null,
       },
+    });
+    mockAuthApi.getAccountLifecycle.mockResolvedValue({
+      accountState: "active",
+      deactivatedAt: null,
+      deletedAt: null,
+      canExit: true,
+      blockers: [],
+      consequences: [],
     });
     mockAssetsApi.uploadImage.mockResolvedValue({
       assetId: "asset-1",
@@ -78,6 +93,9 @@ describe("ProfileSettings", () => {
       name: input.name,
       email: "jane@example.com",
       image: input.image,
+      accountState: "active",
+      deactivatedAt: null,
+      deletedAt: null,
     }));
   });
 
@@ -104,6 +122,9 @@ describe("ProfileSettings", () => {
     await flushReact();
 
     expect(container.textContent).not.toContain("Avatar image URL");
+    expect(container.textContent).toContain("Export account data");
+    expect(container.textContent).toContain("Deactivate account");
+    expect(container.textContent).toContain("Permanently delete personal identity");
 
     const avatarInput = container.querySelector('input[type="file"]') as HTMLInputElement | null;
     expect(avatarInput).not.toBeNull();

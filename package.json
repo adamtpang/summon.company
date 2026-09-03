@@ -4,6 +4,7 @@
   "type": "module",
   "scripts": {
     "postinstall": "node scripts/link-plugin-dev-sdk.mjs",
+    "verify:summon-status": "node scripts/verify-summon-status.mjs",
     "preflight:workspace-links": "node cli/node_modules/tsx/dist/cli.mjs scripts/ensure-workspace-package-links.ts",
     "dev": "pnpm --filter @paperclipai/server exec tsx ../scripts/dev-runner.ts watch",
     "dev:watch": "pnpm --filter @paperclipai/server exec tsx ../scripts/dev-runner.ts watch",
@@ -37,7 +38,12 @@
     "release:bootstrap-package": "node scripts/bootstrap-npm-package.mjs",
     "check:tokens": "node scripts/check-forbidden-tokens.mjs",
     "check:token-gates": "node scripts/check-token-gates.mjs",
+    "check:polsia-parity": "node scripts/check-polsia-parity-drift.mjs",
+    "check:polsia-acceptance": "node scripts/check-polsia-acceptance-readiness.mjs",
+    "verify:polsia-acceptance": "node scripts/check-polsia-acceptance-readiness.mjs --require-complete",
     "check:no-git-push": "node scripts/check-no-git-push.mjs",
+    "test:polsia-parity": "node --test scripts/check-polsia-parity-drift.test.mjs",
+    "test:polsia-acceptance": "node --test scripts/check-polsia-acceptance-readiness.test.mjs",
     "test:check-no-git-push": "node --test scripts/check-no-git-push.test.mjs",
     "test:hermes-gateway-smoke": "node --test scripts/smoke/hermes-gateway-smoke.test.mjs",
     "docs:dev": "cd docs && npx mintlify dev",
@@ -62,11 +68,11 @@
     "perf:issue-chat-long-thread": "node scripts/measure-issue-chat-long-thread.mjs"
   },
   "devDependencies": {
-    "@playwright/test": "^1.62.0",
+    "@playwright/test": "^1.58.2",
     "cross-env": "^10.1.0",
     "esbuild": "^0.28.1",
     "typescript": "^5.7.3",
-    "vitest": "^4.1.10"
+    "vitest": "^4.1.8"
   },
   "engines": {
     "node": ">=20"

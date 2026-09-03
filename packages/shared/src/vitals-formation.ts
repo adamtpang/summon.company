@@ -96,12 +96,18 @@ export const CORE8_FORMATION_SEATS: readonly FormationSeat[] = VITALS_DEPARTMENT
   (department) => ({
     department,
     name: departmentTitle(department),
-    title: `Head of ${departmentTitle(department)}`,
+    title: departmentTitle(department),
     role: department,
     capabilities: DEPARTMENT_OWNERSHIP[department],
     instructionsTemplate: buildDepartmentInstructionsTemplate(department),
     defaultBudgetMonthlyCents: CORE8_SEAT_DEFAULT_BUDGET_CENTS,
   }),
+);
+
+/** Company ceiling that contains the complete default Core-8 formation. */
+export const CORE8_FORMATION_TOTAL_BUDGET_CENTS = CORE8_FORMATION_SEATS.reduce(
+  (total, seat) => total + seat.defaultBudgetMonthlyCents,
+  0,
 );
 
 /** Persona ids that are a defensible fit for a seat's department (VIT-42). */

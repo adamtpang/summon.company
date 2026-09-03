@@ -199,6 +199,7 @@ export function financeEventKindDisplayName(eventKind: FinanceEventKind): string
     training_charge: "Training",
     custom_model_import_charge: "Custom model import",
     custom_model_storage_charge: "Custom model storage",
+    operating_expense: "Operating expense",
     manual_adjustment: "Manual adjustment",
   };
   return map[eventKind];

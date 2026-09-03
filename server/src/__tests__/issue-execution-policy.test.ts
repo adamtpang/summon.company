@@ -132,6 +132,14 @@ describe("normalizeIssueExecutionPolicy", () => {
       },
     });
   });
+
+  it("keeps a task-only recorded-spend ceiling", () => {
+    expect(normalizeIssueExecutionPolicy({ stages: [], spendLimitCents: 2_500 })).toMatchObject({
+      mode: "normal",
+      stages: [],
+      spendLimitCents: 2_500,
+    });
+  });
 });
 
 describe("parseIssueExecutionState", () => {

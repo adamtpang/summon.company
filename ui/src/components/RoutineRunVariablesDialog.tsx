@@ -16,6 +16,7 @@ import { AgentIcon } from "./AgentIconPicker";
 import { InlineEntitySelector, type InlineEntityOption } from "./InlineEntitySelector";
 import { getRecentAssigneeIds, sortAgentsByRecency, trackRecentAssignee } from "../lib/recent-assignees";
 import { getRecentProjectIds, trackRecentProject } from "../lib/recent-projects";
+import { isApprovedRunnableAgent, runnableAgentBoundary } from "../lib/agent-staffing";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -223,7 +224,7 @@ export function RoutineRunVariablesDialog({
   const assigneeOptions = useMemo<InlineEntityOption[]>(
     () =>
       sortAgentsByRecency(
-        agents.filter((agent) => agent.status !== "terminated"),
+        agents.filter(isApprovedRunnableAgent),
         recentAssigneeIds,
       ).map((agent) => ({
         id: agent.id,
@@ -243,6 +244,7 @@ export function RoutineRunVariablesDialog({
   const currentAssignee = selection.assigneeAgentId
     ? agents.find((agent) => agent.id === selection.assigneeAgentId) ?? null
     : null;
+  const selectedAssigneeCanRun = currentAssignee ? isApprovedRunnableAgent(currentAssignee) : false;
   const [workspaceConfig, setWorkspaceConfig] = useState(() =>
     buildInitialWorkspaceConfig(selectedProject, defaultExecutionWorkspace));
   const [workspaceConfigValid, setWorkspaceConfigValid] = useState(true);
@@ -314,7 +316,7 @@ export function RoutineRunVariablesDialog({
   ]);
 
   const canSubmit =
-    selection.assigneeAgentId.trim().length > 0 &&
+    selectedAssigneeCanRun &&
     missingRequired.length === 0 &&
     (!workspaceSelectionEnabled || workspaceConfigValid);
 
@@ -534,7 +536,9 @@ export function RoutineRunVariablesDialog({
           showCloseButton={false}
           className="shrink-0 border-t border-border/60 bg-background px-6 pb-(--sz-calc-19) pt-4"
         >
-          {!selection.assigneeAgentId ? (
+          {selection.assigneeAgentId && !selectedAssigneeCanRun ? (
+            <p className="mr-auto text-xs text-amber-600">{runnableAgentBoundary(currentAssignee)}</p>
+          ) : !selection.assigneeAgentId ? (
             <p className="mr-auto text-xs text-amber-600">Default agent required for this run.</p>
           ) : missingRequired.length > 0 ? (
             <p className="mr-auto text-xs text-amber-600">

@@ -39,9 +39,20 @@ import {
   feedbackService,
   backfillPrincipalAccessCompatibility,
   bootstrapExecutionPolicyFromEnv,
+  companyInboxService,
+  companyFinanceService,
+  companyLoopService,
+  companyMediaService,
+  companyNotificationService,
+  companyOutreachService,
+  companyPaymentsService,
+  companySocialService,
+  companyStackDatabaseSnapshotService,
+  companyWebsiteService,
   environmentCustomImageService,
   heartbeatService,
   instanceSettingsService,
+  processAetherPortfolioCureLoops,
   reconcileBuiltInAgentsOnStartup,
   reconcileCloudUpstreamRunsOnStartup,
   reconcileCodexLocalManagedHomesOnStartup,
@@ -49,6 +60,7 @@ import {
   routineService,
 } from "./services/index.js";
 import { resolveWorktreeRunExecutionActivationState } from "./services/instance-settings.js";
+import { queueIssueAssignmentWakeup } from "./services/issue-assignment-wakeup.js";
 import {
   parseAdapterRegistryEnv,
   reconcileAdapterAvailability,
@@ -685,6 +697,9 @@ export async function startServer(): Promise<StartedServer> {
     deploymentExposure: config.deploymentExposure,
     allowedHostnames: config.allowedHostnames,
     bindHost: config.host,
+    publicCompanyBaseUrl: config.publicCompanyBaseUrl,
+    billingPortalUrl: config.billingPortalUrl,
+    supportUrl: config.supportUrl,
     authReady,
     companyDeletionEnabled: config.companyDeletionEnabled,
     pluginMigrationDb: pluginMigrationDb as any,
@@ -836,6 +851,58 @@ export async function startServer(): Promise<StartedServer> {
 
   if (config.heartbeatSchedulerEnabled) {
     const heartbeat = heartbeatService(db as any, { pluginWorkerManager });
+    const companyLoop = companyLoopService(db as any, { heartbeat });
+    const companyInbox = companyInboxService(db as any, {
+      queueAutomationWork: async ({ issue, authorizedByUserId }) => {
+        await queueIssueAssignmentWakeup({
+          heartbeat,
+          issue,
+          reason: "customer_message_assigned",
+          mutation: "company_inbox.automation_work_created",
+          contextSource: "company_inbox.support_loop",
+          requestedByActorType: "system",
+          requestedByActorId: authorizedByUserId,
+          rethrowOnError: true,
+        });
+      },
+    });
+    const companyNotifications = companyNotificationService(db as any);
+    const companyOutreach = companyOutreachService(db as any, {
+      queueAutomationWork: async ({ issue, authorizedByUserId }) => {
+        await queueIssueAssignmentWakeup({
+          heartbeat,
+          issue,
+          reason: "outreach_preparation_assigned",
+          mutation: "company_outreach.automation_work_created",
+          contextSource: "company_outreach.continuous_preparation",
+          requestedByActorType: "system",
+          requestedByActorId: authorizedByUserId,
+          rethrowOnError: true,
+        });
+      },
+    });
+    const companyMedia = companyMediaService(db as any, {
+      queueScheduledWork: async ({ issue, authorizedByUserId }) => {
+        await queueIssueAssignmentWakeup({
+          heartbeat,
+          issue,
+          reason: "scheduled_media_assigned",
+          mutation: "company_media.schedule_work_created",
+          contextSource: "company_media.recurring_generation",
+          requestedByActorType: "system",
+          requestedByActorId: authorizedByUserId,
+          rethrowOnError: true,
+        });
+      },
+    });
+    const companyPayments = companyPaymentsService(db as any);
+    const companyFinance = companyFinanceService(db as any);
+    const companySocial = companySocialService(db as any);
+    const companyWebsite = companyWebsiteService(db as any);
+    const companyStackDatabaseSnapshots = companyStackDatabaseSnapshotService(
+      db as any,
+      storageService,
+    );
     drainHeartbeatRunsForShutdown = heartbeat.drainRunningRunsForShutdown;
     const environmentCustomImages = environmentCustomImageService(db as any, { pluginWorkerManager });
     const routines = routineService(db as any, { pluginWorkerManager });
@@ -939,6 +1006,205 @@ export async function startServer(): Promise<StartedServer> {
       logger.warn({ ...setupCleanup }, "startup environment customImage setup cleanup changed sessions");
     }
 
+    const startupCompanyLoop = companyLoop.tick(new Date())
+      .then((result) => {
+        if (result.cyclesChecked > 0 || result.briefsGenerated > 0 || result.schedulesChecked > 0) {
+          logger.info(result, "startup company loop reconciliation complete");
+        }
+      })
+      .catch((err) => {
+        logger.error({ err }, "startup company loop reconciliation failed");
+      });
+    trackHeartbeatSchedulerWork(startupCompanyLoop);
+
+    const startupAetherCureLoops = processAetherPortfolioCureLoops(db as any)
+      .then((result) => {
+        if (result.diagnosisRuns > 0 || result.advanced > 0 || result.completed > 0 || result.stalled > 0 || result.stopped > 0) {
+          logger.info(result, "startup Aether Verified Cure Loop reconciliation complete");
+        }
+      })
+      .catch((err) => {
+        logger.error({ err }, "startup Aether Verified Cure Loop reconciliation failed");
+      });
+    trackHeartbeatSchedulerWork(startupAetherCureLoops);
+
+    const startupCompanyNotifications = companyNotifications.tick(new Date())
+      .then((result) => {
+        if (result.captured > 0 || result.attempted > 0 || result.revoked > 0) {
+          logger.info(result, "startup company notification reconciliation complete");
+        }
+      })
+      .catch((err) => {
+        logger.error({ err }, "startup company notification reconciliation failed");
+      });
+    trackHeartbeatSchedulerWork(startupCompanyNotifications);
+
+    const startupCompanyInbox = companyInbox.reconcileStaleReplyExecutions(new Date())
+      .then((result) => {
+        if (result.recoveredSent > 0 || result.quarantined > 0 || result.failed > 0) {
+          logger.info(result, "startup company inbox reply reconciliation complete");
+        }
+      })
+      .catch((err) => {
+        logger.error({ err }, "startup company inbox reply reconciliation failed");
+      });
+    trackHeartbeatSchedulerWork(startupCompanyInbox);
+
+    const startupCompanyInboxAutomation = companyInbox.processDueAutomations(new Date())
+      .then((result) => {
+        if (result.completed > 0 || result.failed > 0 || result.workCreated > 0 || result.workAssigned > 0) {
+          logger.info(result, "startup company inbox support-loop reconciliation complete");
+        }
+      })
+      .catch((err) => {
+        logger.error({ err }, "startup company inbox support-loop reconciliation failed");
+      });
+    trackHeartbeatSchedulerWork(startupCompanyInboxAutomation);
+
+    const startupCompanyOutreachAutomation = companyOutreach.processDueAutomations(new Date())
+      .then((result) => {
+        if (result.completed > 0 || result.failed > 0 || result.workCreated > 0 || result.workAssigned > 0) {
+          logger.info(result, "startup company outreach preparation reconciliation complete");
+        }
+      })
+      .catch((err) => {
+        logger.error({ err }, "startup company outreach preparation reconciliation failed");
+      });
+    trackHeartbeatSchedulerWork(startupCompanyOutreachAutomation);
+
+    const startupCompanyMediaSchedules = companyMedia.processDueSchedules(new Date())
+      .then((result) => {
+        if (result.completed > 0 || result.failed > 0 || result.workCreated > 0 || result.workAssigned > 0) {
+          logger.info(result, "startup company media schedule reconciliation complete");
+        }
+      })
+      .catch((err) => {
+        logger.error({ err }, "startup company media schedule reconciliation failed");
+      });
+    trackHeartbeatSchedulerWork(startupCompanyMediaSchedules);
+
+    const startupCompanyPayments = companyPayments.reconcileStalePaymentLinkExecutions(new Date())
+      .then((result) => {
+        if (result.recoveredActive > 0 || result.recoveredInactive > 0 || result.quarantined > 0 || result.failed > 0) {
+          logger.info(result, "startup company payment-link reconciliation complete");
+        }
+      })
+      .catch((err) => {
+        logger.error({ err }, "startup company payment-link reconciliation failed");
+      });
+    trackHeartbeatSchedulerWork(startupCompanyPayments);
+
+    const startupCompanyPaymentRevenue = companyPayments.processDueRevenueSyncs(new Date())
+      .then((result) => {
+        if (result.refreshed > 0 || result.unchanged > 0 || result.retrying > 0 || result.failed > 0) {
+          logger.info(result, "startup company payment revenue refresh complete");
+        }
+      })
+      .catch((err) => {
+        logger.error({ err }, "startup company payment revenue refresh failed");
+      });
+    trackHeartbeatSchedulerWork(startupCompanyPaymentRevenue);
+
+    const startupCompanyFinance = companyFinance.processDueSyncs(new Date())
+      .then((result) => {
+        if (result.refreshed > 0 || result.unchanged > 0 || result.retrying > 0 || result.failed > 0) {
+          logger.info(result, "startup company finance refresh complete");
+        }
+      })
+      .catch((err) => {
+        logger.error({ err }, "startup company finance refresh failed");
+      });
+    trackHeartbeatSchedulerWork(startupCompanyFinance);
+
+    const startupCompanyFinanceRevocations = companyFinance.processDueRevocations(new Date())
+      .then((result) => {
+        if (result.confirmed > 0 || result.retrying > 0 || result.failed > 0) {
+          logger.info(result, "startup company finance revocation reconciliation complete");
+        }
+      })
+      .catch((err) => {
+        logger.error({ err }, "startup company finance revocation reconciliation failed");
+      });
+    trackHeartbeatSchedulerWork(startupCompanyFinanceRevocations);
+
+    const startupCompanySocial = companySocial.reconcileStalePostExecutions(new Date())
+      .then((result) => {
+        if (result.recovered > 0 || result.quarantined > 0 || result.failed > 0) {
+          logger.info(result, "startup company social-post reconciliation complete");
+        }
+      })
+      .catch((err) => {
+        logger.error({ err }, "startup company social-post reconciliation failed");
+      });
+    trackHeartbeatSchedulerWork(startupCompanySocial);
+
+    const startupCompanySocialDeletions = companySocial.reconcileStalePostDeletions(new Date())
+      .then((result) => {
+        if (result.deleted > 0 || result.stillPublished > 0 || result.quarantined > 0 || result.failed > 0) {
+          logger.info(result, "startup company social-post deletion reconciliation complete");
+        }
+      })
+      .catch((err) => {
+        logger.error({ err }, "startup company social-post deletion reconciliation failed");
+      });
+    trackHeartbeatSchedulerWork(startupCompanySocialDeletions);
+
+    const startupCompanySocialAnalytics = companySocial.refreshDuePostAnalytics(new Date())
+      .then((result) => {
+        if (result.refreshed > 0 || result.pending > 0 || result.unavailable > 0 || result.failed > 0) {
+          logger.info(result, "startup company social analytics refresh complete");
+        }
+      })
+      .catch((err) => {
+        logger.error({ err }, "startup company social analytics refresh failed");
+      });
+    trackHeartbeatSchedulerWork(startupCompanySocialAnalytics);
+
+    const startupCompanySocialWebhooks = companySocial.processPendingWebhookEvents(new Date())
+      .then((result) => {
+        if (result.processed > 0 || result.ignored > 0 || result.retried > 0 || result.failed > 0) {
+          logger.info(result, "startup company social webhook reconciliation complete");
+        }
+      })
+      .catch((err) => {
+        logger.error({ err }, "startup company social webhook reconciliation failed");
+      });
+    trackHeartbeatSchedulerWork(startupCompanySocialWebhooks);
+
+    const startupCompanyWebsite = companyWebsite.reconcileStaleDeploymentExecutions(new Date())
+      .then((result) => {
+        if (result.recovered > 0 || result.quarantined > 0 || result.failed > 0) {
+          logger.info(result, "startup company website deployment reconciliation complete");
+        }
+      })
+      .catch((err) => {
+        logger.error({ err }, "startup company website deployment reconciliation failed");
+      });
+    trackHeartbeatSchedulerWork(startupCompanyWebsite);
+
+    const startupCompanyOutreach = companyOutreach.reconcileOperationalState(new Date())
+      .then((result) => {
+        if (result.submissions.ambiguousMarked > 0 || result.submissions.providerChecked > 0 || result.submissions.failed > 0 || result.verifications.expired > 0) {
+          logger.info(result, "startup company outreach reconciliation complete");
+        }
+      })
+      .catch((err) => {
+        logger.error({ err }, "startup company outreach reconciliation failed");
+      });
+    trackHeartbeatSchedulerWork(startupCompanyOutreach);
+
+    const startupCompanyStackSnapshotExpiry = companyStackDatabaseSnapshots
+      .expireDue(new Date())
+      .then((result) => {
+        if (result.expired > 0) {
+          logger.info(result, "startup company stack snapshot expiry complete");
+        }
+      })
+      .catch((err) => {
+        logger.error({ err }, "startup company stack snapshot expiry failed");
+      });
+    trackHeartbeatSchedulerWork(startupCompanyStackSnapshotExpiry);
+
     heartbeatSchedulerInterval = setInterval(() => {
       // Async so the suppression checks below can honor the override-aware
       // resolver (e.g. worktree run-execution opt-in). The gated work is still
@@ -965,6 +1231,209 @@ export async function startServer(): Promise<StartedServer> {
             logger.error({ err }, "heartbeat timer tick failed");
           }));
       }
+
+      if (heartbeatSchedulerStopped) return;
+      trackHeartbeatSchedulerWork(companyLoop
+        .tick(new Date())
+        .then((result) => {
+          if (result.cyclesChecked > 0 || result.briefsGenerated > 0 || result.schedulesChecked > 0) {
+            logger.info(result, "company loop scheduler tick complete");
+          }
+        })
+        .catch((err) => {
+          logger.error({ err }, "company loop scheduler tick failed");
+        }));
+
+      if (heartbeatSchedulerStopped) return;
+      trackHeartbeatSchedulerWork(processAetherPortfolioCureLoops(db as any)
+        .then((result) => {
+          if (result.diagnosisRuns > 0 || result.advanced > 0 || result.completed > 0 || result.stalled > 0 || result.stopped > 0) {
+            logger.info(result, "Aether Verified Cure Loop scheduler tick complete");
+          }
+        })
+        .catch((err) => {
+          logger.error({ err }, "Aether Verified Cure Loop scheduler tick failed");
+        }));
+
+      if (heartbeatSchedulerStopped) return;
+      trackHeartbeatSchedulerWork(companyNotifications
+        .tick(new Date())
+        .then((result) => {
+          if (result.captured > 0 || result.attempted > 0 || result.revoked > 0) {
+            logger.info(result, "company notification scheduler tick complete");
+          }
+        })
+        .catch((err) => {
+          logger.error({ err }, "company notification scheduler tick failed");
+        }));
+
+      if (heartbeatSchedulerStopped) return;
+      trackHeartbeatSchedulerWork(companyInbox
+        .reconcileStaleReplyExecutions(new Date())
+        .then((result) => {
+          if (result.recoveredSent > 0 || result.quarantined > 0 || result.failed > 0) {
+            logger.info(result, "company inbox reply reconciliation tick complete");
+          }
+        })
+        .catch((err) => {
+          logger.error({ err }, "company inbox reply reconciliation tick failed");
+        }));
+
+      if (heartbeatSchedulerStopped) return;
+      trackHeartbeatSchedulerWork(companyInbox
+        .processDueAutomations(new Date())
+        .then((result) => {
+          if (result.completed > 0 || result.failed > 0 || result.workCreated > 0 || result.workAssigned > 0) {
+            logger.info(result, "company inbox support-loop scheduler tick complete");
+          }
+        })
+        .catch((err) => {
+          logger.error({ err }, "company inbox support-loop scheduler tick failed");
+        }));
+
+      if (heartbeatSchedulerStopped) return;
+      trackHeartbeatSchedulerWork(companyPayments
+        .reconcileStalePaymentLinkExecutions(new Date())
+        .then((result) => {
+          if (result.recoveredActive > 0 || result.recoveredInactive > 0 || result.quarantined > 0 || result.failed > 0) {
+            logger.info(result, "company payment-link reconciliation tick complete");
+          }
+        })
+        .catch((err) => {
+          logger.error({ err }, "company payment-link reconciliation tick failed");
+        }));
+
+      if (heartbeatSchedulerStopped) return;
+      trackHeartbeatSchedulerWork(companyPayments
+        .processDueRevenueSyncs(new Date())
+        .then((result) => {
+          if (result.refreshed > 0 || result.unchanged > 0 || result.retrying > 0 || result.failed > 0) {
+            logger.info(result, "company payment revenue refresh tick complete");
+          }
+        })
+        .catch((err) => {
+          logger.error({ err }, "company payment revenue refresh tick failed");
+        }));
+
+      if (heartbeatSchedulerStopped) return;
+      trackHeartbeatSchedulerWork(companyFinance
+        .processDueSyncs(new Date())
+        .then((result) => {
+          if (result.refreshed > 0 || result.unchanged > 0 || result.retrying > 0 || result.failed > 0) {
+            logger.info(result, "company finance refresh tick complete");
+          }
+        })
+        .catch((err) => {
+          logger.error({ err }, "company finance refresh tick failed");
+        }));
+
+      if (heartbeatSchedulerStopped) return;
+      trackHeartbeatSchedulerWork(companyFinance
+        .processDueRevocations(new Date())
+        .then((result) => {
+          if (result.confirmed > 0 || result.retrying > 0 || result.failed > 0) {
+            logger.info(result, "company finance revocation reconciliation tick complete");
+          }
+        })
+        .catch((err) => {
+          logger.error({ err }, "company finance revocation reconciliation tick failed");
+        }));
+
+      if (heartbeatSchedulerStopped) return;
+      trackHeartbeatSchedulerWork(companySocial
+        .reconcileStalePostExecutions(new Date())
+        .then((result) => {
+          if (result.recovered > 0 || result.quarantined > 0 || result.failed > 0) {
+            logger.info(result, "company social-post reconciliation tick complete");
+          }
+        })
+        .catch((err) => {
+          logger.error({ err }, "company social-post reconciliation tick failed");
+        }));
+
+      if (heartbeatSchedulerStopped) return;
+      trackHeartbeatSchedulerWork(companySocial
+        .reconcileStalePostDeletions(new Date())
+        .then((result) => {
+          if (result.deleted > 0 || result.stillPublished > 0 || result.quarantined > 0 || result.failed > 0) {
+            logger.info(result, "company social-post deletion reconciliation tick complete");
+          }
+        })
+        .catch((err) => {
+          logger.error({ err }, "company social-post deletion reconciliation tick failed");
+        }));
+
+      if (heartbeatSchedulerStopped) return;
+      trackHeartbeatSchedulerWork(companySocial
+        .refreshDuePostAnalytics(new Date())
+        .then((result) => {
+          if (result.refreshed > 0 || result.pending > 0 || result.unavailable > 0 || result.failed > 0) {
+            logger.info(result, "company social analytics refresh tick complete");
+          }
+        })
+        .catch((err) => {
+          logger.error({ err }, "company social analytics refresh tick failed");
+        }));
+
+      if (heartbeatSchedulerStopped) return;
+      trackHeartbeatSchedulerWork(companyWebsite
+        .reconcileStaleDeploymentExecutions(new Date())
+        .then((result) => {
+          if (result.recovered > 0 || result.quarantined > 0 || result.failed > 0) {
+            logger.info(result, "company website deployment reconciliation tick complete");
+          }
+        })
+        .catch((err) => {
+          logger.error({ err }, "company website deployment reconciliation tick failed");
+        }));
+
+      if (heartbeatSchedulerStopped) return;
+      trackHeartbeatSchedulerWork(companyOutreach
+        .reconcileOperationalState(new Date())
+        .then((result) => {
+          if (result.submissions.ambiguousMarked > 0 || result.submissions.providerChecked > 0 || result.submissions.failed > 0 || result.verifications.expired > 0) {
+            logger.info(result, "company outreach reconciliation tick complete");
+          }
+        })
+        .catch((err) => {
+          logger.error({ err }, "company outreach reconciliation tick failed");
+        }));
+
+      if (heartbeatSchedulerStopped) return;
+      trackHeartbeatSchedulerWork(companyOutreach
+        .processDueAutomations(new Date())
+        .then((result) => {
+          if (result.completed > 0 || result.failed > 0 || result.workCreated > 0 || result.workAssigned > 0) {
+            logger.info(result, "company outreach preparation scheduler tick complete");
+          }
+        })
+        .catch((err) => {
+          logger.error({ err }, "company outreach preparation scheduler tick failed");
+        }));
+
+      if (heartbeatSchedulerStopped) return;
+      trackHeartbeatSchedulerWork(companyMedia
+        .processDueSchedules(new Date())
+        .then((result) => {
+          if (result.completed > 0 || result.failed > 0 || result.workCreated > 0 || result.workAssigned > 0) {
+            logger.info(result, "company media schedule scheduler tick complete");
+          }
+        })
+        .catch((err) => {
+          logger.error({ err }, "company media schedule scheduler tick failed");
+        }));
+
+      if (heartbeatSchedulerStopped) return;
+      trackHeartbeatSchedulerWork(companyStackDatabaseSnapshots
+        .expireDue(new Date())
+        .then((result) => {
+          if (result.expired > 0) {
+            logger.info(result, "company stack snapshot expiry tick complete");
+          }
+        })
+        .catch((err) => {
+          logger.error({ err }, "company stack snapshot expiry tick failed");
+        }));
 
       if (heartbeatSchedulerStopped) return;
       trackHeartbeatSchedulerWork(routines
@@ -1046,6 +1515,18 @@ export async function startServer(): Promise<StartedServer> {
           .catch((err) => {
             logger.error({ err }, "periodic heartbeat recovery failed");
           }));
+
+      if (heartbeatSchedulerStopped) return;
+      trackHeartbeatSchedulerWork(companySocial
+        .processPendingWebhookEvents(new Date())
+        .then((result) => {
+          if (result.processed > 0 || result.ignored > 0 || result.retried > 0 || result.failed > 0) {
+            logger.info(result, "company social webhook reconciliation tick complete");
+          }
+        })
+        .catch((err) => {
+          logger.error({ err }, "company social webhook reconciliation tick failed");
+        }));
       }
       })();
     }, config.heartbeatSchedulerIntervalMs);

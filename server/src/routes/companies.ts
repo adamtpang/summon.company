@@ -14,6 +14,7 @@ import {
   feedbackTargetTypeSchema,
   feedbackTraceStatusSchema,
   feedbackVoteValueSchema,
+  permanentlyDeleteCompanySchema,
   updateCompanyBrandingSchema,
   updateCompanySchema,
 } from "@paperclipai/shared";
@@ -472,13 +473,18 @@ export function companyRoutes(db: Db, storage?: StorageService) {
       return;
     }
     if (!lifecycleEventEmittedByService) {
+      const action = body.status === "paused" && existingCompany.status === "active"
+        ? "company.paused"
+        : body.status === "active" && existingCompany.status === "paused"
+          ? "company.resumed"
+          : "company.updated";
       await logActivity(db, {
         companyId,
         actorType: actor.actorType,
         actorId: actor.actorId,
         agentId: actor.agentId,
         runId: actor.runId,
-        action: "company.updated",
+        action,
         entityType: "company",
         entityId: companyId,
         details: body,
@@ -527,7 +533,8 @@ export function companyRoutes(db: Db, storage?: StorageService) {
     const companyId = req.params.companyId as string;
     assertCompanyAccess(req, companyId);
     assertBoard(req);
-    const company = await svc.remove(companyId);
+    const body = permanentlyDeleteCompanySchema.parse(req.body);
+    const company = await svc.removePermanently(companyId, body.confirmationName);
     if (!company) {
       res.status(404).json({ error: "Company not found" });
       return;

@@ -9,6 +9,7 @@ const BRAND_WORKTREE_ROOT =
   process.env.VITALS_BRAND_WORKTREE_ROOT ??
   "C:\\Users\\adamp\\OneDrive\\Aether\\.worktrees\\vitals-run-brand-system-20260714";
 const BRAND_WORKTREE_BRANCH = "codex/vitals-brand-system";
+const CODEX_MODEL = process.env.SUMMON_CODEX_MODEL ?? "gpt-5.6-sol";
 const CEO_SELF_DIAGNOSIS_SCRIPT = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
   "vitals-ceo-self-diagnosis.mjs",
@@ -47,14 +48,14 @@ async function clearAgentErrorIfNeeded(agent) {
 }
 
 const strongModel = {
-  model: "gpt-5.5",
+  model: CODEX_MODEL,
   modelReasoningEffort: "high",
   env: { CODEX_HOME: "C:\\Users\\adamp\\.codex" },
 };
 const codexCheapModel = {
   enabled: true,
   label: "Fast Codex",
-  adapterConfig: { model: "gpt-5.5", modelReasoningEffort: "low" },
+  adapterConfig: { model: CODEX_MODEL, modelReasoningEffort: "low" },
 };
 const claudeCheapModel = {
   enabled: true,
@@ -62,9 +63,9 @@ const claudeCheapModel = {
   adapterConfig: { model: "claude-haiku-4-5", effort: "low" },
 };
 
-// SUM-220: the cheap profile MUST match the agent's adapter. A gpt-5.5 cheap
+// SUM-220: the cheap profile MUST match the agent's adapter. A Codex cheap
 // profile on a claude_local agent is instant-fail poison — the claude adapter
-// cannot run gpt-5.5, so any run that resolves `cheap` dies in ~4s. Never
+// cannot run a Codex model, so any run that resolves `cheap` dies in ~4s. Never
 // hard-code the cheap model into a shared runtime object; resolve it from the
 // adapter every time an agent runtimeConfig is built.
 function cheapModelForAdapter(adapterType) {

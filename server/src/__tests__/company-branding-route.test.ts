@@ -10,6 +10,7 @@ const mockCompanyService = vi.hoisted(() => ({
   update: vi.fn(),
   archive: vi.fn(),
   remove: vi.fn(),
+  removePermanently: vi.fn(),
 }));
 
 const mockAgentService = vi.hoisted(() => ({
@@ -353,5 +354,47 @@ describe("PATCH /api/companies/:companyId", () => {
       actorType: "user",
       actorId: "user-1",
     }));
+  });
+});
+
+describe("DELETE /api/companies/:companyId", () => {
+  beforeEach(() => {
+    vi.resetModules();
+    vi.doUnmock("../routes/companies.js");
+    vi.doUnmock("../routes/authz.js");
+    vi.doUnmock("../middleware/index.js");
+    vi.clearAllMocks();
+  });
+
+  it("requires board authority and the typed company name", async () => {
+    const app = await createApp({
+      type: "agent",
+      agentId: "agent-1",
+      companyId: "company-1",
+      source: "agent_key",
+      runId: "run-1",
+    });
+
+    await request(app)
+      .delete("/api/companies/company-1")
+      .send({ confirmationName: "Paperclip" })
+      .expect(403);
+    expect(mockCompanyService.removePermanently).not.toHaveBeenCalled();
+  });
+
+  it("rejects missing confirmation before calling the deletion service", async () => {
+    const app = await createApp({ type: "board", userId: "user-1", source: "local_implicit" });
+    await request(app).delete("/api/companies/company-1").send({}).expect(400);
+    expect(mockCompanyService.removePermanently).not.toHaveBeenCalled();
+  });
+
+  it("passes the exact confirmation to the guarded deletion service", async () => {
+    mockCompanyService.removePermanently.mockResolvedValue(createCompany());
+    const app = await createApp({ type: "board", userId: "user-1", source: "local_implicit" });
+    await request(app)
+      .delete("/api/companies/company-1")
+      .send({ confirmationName: "Paperclip" })
+      .expect(200, { ok: true });
+    expect(mockCompanyService.removePermanently).toHaveBeenCalledWith("company-1", "Paperclip");
   });
 });

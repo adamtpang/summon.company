@@ -245,20 +245,21 @@
    ============================================================ */
 @media (prefers-reduced-motion: reduce) {
   :root {
-    --duration-micro: 1ms;
-    --duration-hover: 1ms;
-    --duration-panel: 1ms;
-    --duration-section: 1ms;
+    --duration-micro: 0ms;
+    --duration-hover: 0ms;
+    --duration-panel: 0ms;
+    --duration-section: 0ms;
     --ekg-cycle: 0ms;
     --ekg-glow: none;
   }
   *, *::before, *::after {
-    animation-duration: 1ms !important;
+    animation-duration: 0ms !important;
     animation-iteration-count: 1 !important;
-    transition-duration: 1ms !important;
+    transition-duration: 0ms !important;
     scroll-behavior: auto !important;
   }
-  .ekg-trace {
+  .ekg-trace,
+  .ekg path {
     stroke-dashoffset: 0 !important; /* full static trace, no drawing */
   }
 }

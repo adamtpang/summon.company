@@ -278,9 +278,12 @@ export type IssueThreadInteractionContinuationPolicy =
   (typeof ISSUE_THREAD_INTERACTION_CONTINUATION_POLICIES)[number];
 
 export const TASK_WATCHDOG_PRODUCT_BUG_ORIGIN_KIND = "task_watchdog_product_bug";
+export const AETHER_PORTFOLIO_CURE_ORIGIN_KIND = "aether_portfolio_cure";
+export const COMPANY_WEBSITE_DEEP_REPAIR_ORIGIN_KIND = "company_website_deep_repair";
 
 export const ISSUE_ORIGIN_KINDS = [
   "manual",
+  "customer_message",
   "routine_execution",
   "stale_active_run_evaluation",
   "harness_liveness_escalation",
@@ -288,6 +291,8 @@ export const ISSUE_ORIGIN_KINDS = [
   "stranded_issue_recovery",
   "task_watchdog",
   TASK_WATCHDOG_PRODUCT_BUG_ORIGIN_KIND,
+  AETHER_PORTFOLIO_CURE_ORIGIN_KIND,
+  COMPANY_WEBSITE_DEEP_REPAIR_ORIGIN_KIND,
 ] as const;
 export type BuiltInIssueOriginKind = (typeof ISSUE_ORIGIN_KINDS)[number];
 export type PluginIssueOriginKind = `plugin:${string}`;
@@ -708,6 +713,7 @@ export const FINANCE_EVENT_KINDS = [
   "training_charge",
   "custom_model_import_charge",
   "custom_model_storage_charge",
+  "operating_expense",
   "manual_adjustment",
 ] as const;
 export type FinanceEventKind = (typeof FINANCE_EVENT_KINDS)[number];

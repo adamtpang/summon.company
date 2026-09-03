@@ -145,6 +145,7 @@ describe("sourceMeta + severityStyle", () => {
       "failed_run",
       "budget_alert",
       "agent_error_alert",
+      "heartbeat_alert",
     ];
     for (const kind of kinds) {
       expect(sourceMeta(kind).label.length).toBeGreaterThan(0);
@@ -188,6 +189,7 @@ describe("attentionTone + attentionToneStyle (canonical color map §4)", () => {
   it("colors failures rose and blocked/recovery/budget amber", () => {
     expect(attentionTone(buildItem({ sourceKind: "failed_run" }))).toBe("rose");
     expect(attentionTone(buildItem({ sourceKind: "agent_error_alert" }))).toBe("rose");
+    expect(attentionTone(buildItem({ sourceKind: "heartbeat_alert" }))).toBe("rose");
     expect(attentionTone(buildItem({ sourceKind: "blocker_attention" }))).toBe("amber");
     expect(attentionTone(buildItem({ sourceKind: "recovery_action" }))).toBe("amber");
     expect(attentionTone(buildItem({ sourceKind: "budget_alert" }))).toBe("amber");

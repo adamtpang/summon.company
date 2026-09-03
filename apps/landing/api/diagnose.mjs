@@ -1,32 +1,30 @@
-// POST /api/diagnose — the Summon front door.
+// POST /api/diagnose: the Summon front door.
 // A founder pastes a URL or a sentence about their business; this returns the
 // stage (of Summon's 8-stage roadmap), the ONE binding constraint, a founder
 // precedent from the real knowledge corpus, and the department to summon
 // first with its first three tasks.
 //
-// Zero-secret: authenticates to the Vercel AI Gateway with the deployment's
-// OIDC token (no API key stored anywhere). AI_GATEWAY_API_KEY env var is the
-// local-dev fallback.
-import { getVercelOidcToken } from "@vercel/functions/oidc";
-import { PRECEDENTS, CONSTRAINT_KEYS, STAGES, DEPARTMENTS, MODELS as BIZ_MODELS, MODEL_KEYS } from "./_precedents.mjs";
+// OFFLINE since 2026-08-24. This route used to authenticate to the Vercel AI
+// Gateway with the deployment's OIDC token and run a live model diagnosis.
+// Adam's call: no project in this workspace may use the Vercel AI Gateway.
+// It is a metered, per-token service billed to a card, and this endpoint is
+// public and unauthenticated, so anyone could have spent his money by POSTing
+// to it. Vercel's "$5/month free credits if you add a card" offer was declined
+// for the same reason.
+//
+// The gateway client, the OIDC token fetch, and the model ladder were deleted
+// outright rather than feature-flagged, so no code path can reach a paid
+// provider by accident. The prompt and schema below are intentionally kept:
+// they are the real work product, and they are what a future model path would
+// be rebuilt on.
+//
+// Do not restore this by pointing it at the gateway again. If Adam restarts
+// summon.company and wants the diagnosis engine live, give it a funded
+// ANTHROPIC_API_KEY (or bring-your-own-key, the way skill.supply now works)
+// and put an auth check in front of it so it is not a public compute endpoint.
+import { CONSTRAINT_KEYS, STAGES, DEPARTMENTS, MODEL_KEYS } from "./_precedents.mjs";
 
-export const config = { maxDuration: 60 };
-
-const GATEWAY = "https://ai-gateway.vercel.sh/v1";
-// Candidate slugs tried best-first; the gateway's catalog and the account's
-// tier decide which one answers. On the free tier this degrades toward the
-// models the account can use, and it upgrades itself once credits are funded.
-const MODELS = [
-  "anthropic/claude-opus-4.8",
-  "anthropic/claude-sonnet-5",
-  "anthropic/claude-sonnet-4.5",
-  "anthropic/claude-haiku-4.5",
-];
-
-async function gatewayToken() {
-  if (process.env.AI_GATEWAY_API_KEY) return process.env.AI_GATEWAY_API_KEY;
-  return getVercelOidcToken();
-}
+export const config = { maxDuration: 10 };
 
 function systemPrompt() {
   return [
@@ -65,84 +63,17 @@ function extractJson(text, model) {
   return JSON.parse(text.slice(start, end + 1));
 }
 
-async function callGateway(token, model, input) {
-  const res = await fetch(`${GATEWAY}/chat/completions`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
-    body: JSON.stringify({
-      model,
-      max_tokens: 3200,
-      messages: [
-        { role: "system", content: systemPrompt() },
-        { role: "user", content: `Diagnose this business: ${input}` },
-      ],
-    }),
-  });
-  if (!res.ok) {
-    const body = await res.text();
-    const err = new Error(`gateway ${res.status}: ${body.slice(0, 200)}`);
-    err.status = res.status;
-    throw err;
-  }
-  const json = await res.json();
-  const content = json.choices?.[0]?.message?.content ?? "";
-  if (!content.trim()) {
-    // Thinking consumed the budget or the model stayed silent: try the next rung.
-    const err = new Error("empty content from " + model + " (finish: " + (json.choices?.[0]?.finish_reason ?? "?") + ")");
-    err.status = 429;
-    throw err;
-  }
-  return content;
-}
 
 export default async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
   if (req.method === "OPTIONS") return res.status(204).end();
 
-  const token = await gatewayToken();
-
-  // Debug: enumerate the gateway's model catalog so the slug can be pinned.
-  if (req.method === "GET" && req.query?.models) {
-    const r = await fetch(`${GATEWAY}/models`, { headers: { Authorization: `Bearer ${token}` } });
-    const body = await r.json().catch(() => ({}));
-    const ids = (body.data ?? []).map((m) => m.id).filter((id) => /claude|anthropic/i.test(id));
-    return res.status(200).json({ status: r.status, claudeModels: ids });
-  }
-
-  if (req.method !== "POST") return res.status(405).json({ error: "POST a JSON body: {input}" });
-
-  const input = String(req.body?.input ?? "").trim().slice(0, 2000);
-  if (input.length < 4) return res.status(400).json({ error: "Describe the business or paste a URL." });
-
-  let lastError = null;
-  for (const model of MODELS) {
-    try {
-      const text = await callGateway(token, model, input);
-      const parsed = extractJson(text, model);
-      const key = CONSTRAINT_KEYS.includes(parsed.constraintKey) ? parsed.constraintKey : "focus";
-      const stage = Math.min(8, Math.max(1, Number(parsed.stage) || 1));
-      const department = DEPARTMENTS.includes(parsed.department) ? parsed.department : "Operations";
-      const modelKey = MODEL_KEYS.includes(parsed.businessModelKey) ? parsed.businessModelKey : "productized_service";
-      return res.status(200).json({
-        business: parsed.business,
-        stage,
-        stageName: STAGES[stage - 1],
-        stageReason: parsed.stageReason,
-        constraint: parsed.constraint,
-        precedent: PRECEDENTS[key],
-        businessModel: { key: modelKey, ...BIZ_MODELS[modelKey], reason: parsed.businessModelReason },
-        department,
-        tasks: (parsed.tasks ?? []).slice(0, 3),
-        vitalsMove: parsed.vitalsMove,
-        model,
-      });
-    } catch (err) {
-      lastError = err;
-      // Unknown slug or tier-blocked model: try the next candidate.
-      if (err.status === 404 || err.status === 400 || err.status === 403 || err.status === 429) continue;
-      break;
-    }
-  }
-  return res.status(502).json({ error: "Diagnosis engine unavailable. Try again in a minute.", detail: String(lastError?.message ?? "").slice(0, 200) });
+  // No model path exists any more, so every request ends here. This returns
+  // before reading the body, before any network call, and before any billable
+  // work of any kind. It is deliberately a plain, cheap, constant response.
+  return res.status(503).json({
+    error: "The diagnosis engine is offline.",
+    detail: "This endpoint no longer calls any model provider. summon.company is paused.",
+  });
 }

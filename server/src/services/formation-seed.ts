@@ -74,6 +74,7 @@ export function formationSeedService(db: Db) {
             question: card.question,
             summary: card.summary,
             totalBudgetMonthlyCents: card.totalBudgetMonthlyCents,
+            companyBudgetMonthlyCents: card.totalBudgetMonthlyCents,
             seats: seatAgents.map(({ seat, agentId, name }) => ({
               department: seat.department,
               agentId,
@@ -108,8 +109,88 @@ export function formationSeedService(db: Db) {
       return { approval, seatAgentIds: seatAgents.map(({ agentId }) => agentId) };
   }
 
+  async function seedStewardshipFormation(
+    companyId: string,
+    contract: Record<string, unknown> | null = null,
+  ) {
+    const existingCards = await db
+      .select({ id: approvals.id, payload: approvals.payload })
+      .from(approvals)
+      .where(and(
+        eq(approvals.companyId, companyId),
+        eq(approvals.type, "hire_agent"),
+      ));
+    if (existingCards.some((card) => (
+      (card.payload as Record<string, unknown> | null)?.formation === "aether_stewardship_v1"
+    ))) return null;
+
+    const steward = await agentsSvc.create(companyId, {
+      name: "Steward",
+      role: "stewardship",
+      title: "Portfolio Steward",
+      capabilities: "Maintain the beneficiary contract, inspect evidence, select one bounded next action, and preserve human approval boundaries.",
+      adapterType: "process",
+      adapterConfig: {},
+      runtimeConfig: {},
+      budgetMonthlyCents: 1_000,
+      status: "pending_approval",
+      spentMonthlyCents: 0,
+      lastHeartbeatAt: null,
+      metadata: {
+        vitalsFormation: {
+          formation: "aether_stewardship_v1",
+          department: "operations",
+          personaSlot: null,
+          instructionsTemplate: "aether-stewardship-v1",
+        },
+        aetherStewardship: contract,
+      },
+    });
+    const approval = await db.insert(approvals).values({
+      companyId,
+      type: "hire_agent",
+      status: "pending",
+      requestedByAgentId: null,
+      requestedByUserId: null,
+      payload: {
+        formation: "aether_stewardship_v1",
+        name: steward.name,
+        role: steward.role,
+        title: steward.title,
+        capabilities: steward.capabilities,
+        adapterType: steward.adapterType,
+        adapterConfig: steward.adapterConfig,
+        runtimeConfig: steward.runtimeConfig,
+        budgetMonthlyCents: steward.budgetMonthlyCents,
+        metadata: steward.metadata,
+        agentId: steward.id,
+        beneficiaryContract: contract,
+      },
+      decisionNote: null,
+      decidedByUserId: null,
+      decidedAt: null,
+      updatedAt: new Date(),
+    }).returning().then((rows) => rows[0]);
+    await logActivity(db, {
+      companyId,
+      actorType: "system",
+      actorId: "system",
+      action: "approval.created",
+      entityType: "approval",
+      entityId: approval.id,
+      details: {
+        type: "hire_agent",
+        formation: "aether_stewardship_v1",
+        seatCount: 1,
+        totalBudgetMonthlyCents: steward.budgetMonthlyCents,
+      },
+    });
+    return { approval, stewardAgentId: steward.id };
+  }
+
   return {
     seedCoreEightFormation,
+    seedStewardshipFormation,
 
     /**
      * Company creation must never fail because formation seeding failed —
@@ -120,6 +201,17 @@ export function formationSeedService(db: Db) {
         return await seedCoreEightFormation(companyId);
       } catch (err) {
         logger.warn({ err, companyId }, "core-8 formation seeding failed");
+        return null;
+      }
+    },
+    seedStewardshipFormationBestEffort: async (
+      companyId: string,
+      contract: Record<string, unknown> | null = null,
+    ) => {
+      try {
+        return await seedStewardshipFormation(companyId, contract);
+      } catch (err) {
+        logger.warn({ err, companyId }, "stewardship formation seeding failed");
         return null;
       }
     },

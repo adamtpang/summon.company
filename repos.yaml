@@ -1,6 +1,7 @@
 # repos.yaml v0 — see github.com/adamtpang/repo-protocol
 repo: summon.company
-is: Canonical store for every YouTube corpus Adam has built (30+ channels, tens of millions of words), each pre-indexed for free local semantic search, the shared knowledge base other Aether projects ground their chat, advice, and content in.
+is: The provider-neutral control plane for Adam's AI-operated companies. It diagnoses the binding constraint, assigns accountable work, shows evidence and errors, generates an improvement prompt, and verifies the next run.
+url: https://summon.company
 
 provides:
   - id: corpus-register
@@ -9,17 +10,70 @@ provides:
   - id: local-search
     what: keyless local semantic search over any corpus's pre-built embeddings index (bge-small-en-v1.5, no API key, no provider quota); copied into every corpus folder as ask.mjs
     at: knowledge/john-vervaeke/brain/ask.mjs
+  - id: aether-portfolio-control
+    what: board-only Aether portfolio control plane that reads Lightmark's dated fleet diagnoses, ranks every scannable company, exposes each evidence-backed error and improvement prompt, compares score and finding changes with the nearest earlier valid run, projects exact-linked company economics with explicit evidence coverage, prevents duplicate operating-company totals, safely forms confirmed manual-mode Core-8 companies from verified local workspaces, and triggers the next diagnose-and-cure evidence run
+    at: server/src/services/aether-portfolio.ts
+  - id: aether-portfolio-ui
+    what: CompaniesMarketCap-inspired local portfolio table with strict 100/100 membership, measured USD revenue, expense, profit, cash, savings, and runway coverage, explicit confirmed Aether company formation, expandable evidence and cures, fleet constraints, search, filters, and one-click Claude prompt copying
+    at: ui/src/pages/AetherPortfolio.tsx
+  - id: core-8-capability-map
+    what: the canonical mapping from specialist Aether products and attributed external resources into the eight accountable departments, including scope gaps, provenance, freshness, authority, evidence, and board gates
+    at: company/DEPARTMENT_CAPABILITY_MAP.md
+  - id: dojo-product-auditor
+    what: a product-level manifest validator and worst-first readiness scorer that audits Dojo album tracks without forming one company per product or treating technical checks as usefulness or revenue
+    at: scripts/summon-product-audit.mjs
 
 stack: [yt-dlp, node, transformers.js]
 
+exchanges:
+  - id: shapeable-summon-design-system-alignment
+    with: shapeable.art
+    trigger: manual
+    asks: close Shapeable's fleet-wide Claude design-system coverage gaps, generate Summon's site-specific v3 pack from its internal product family, and return a bounded landing-alignment adoption recipe
+    returns: fail-closed factory coverage evidence, exact Shapeable changes and tests, a validated Summon machine pack and Claude guide, and a content-bound repos.chat adoption request back to summon.company
+    permission: propose-change
+    approval: human-required
+    at: doc/plans/2026-09-01-shapeable-summon-design-system-alignment.md
+  - id: shapeable-fleet-design-system-implementation
+    with: shapeable.art
+    trigger: manual
+    asks: implement the Repo Rep's exact fail-closed fleet design-system coverage proposal, generate and validate the Summon draft v3 pack and Claude guide, and declare the bounded return adoption recipe
+    returns: exact changed files, complete verification results, the regenerated truthful coverage artifact, Summon pack hashes, return-exchange details, human gates, and file-scoped rollback
+    permission: branch-pr
+    approval: human-required
+    at: doc/plans/2026-09-01-shapeable-summon-design-system-alignment.md
+  - id: shapeable-core-8-capability-memory
+    with: shapeable.art
+    trigger: manual
+    asks: preserve the exact bounded role of Shapeable under Design and record the initial Aether capability anchors, external reference principles, gaps, provenance, and board gates across Summon's authoritative Core 8
+    returns: the canonical department capability map, unchanged Core 8 accountability, attributed Cofounder and Polsia learning boundaries, and verification evidence
+    permission: propose-change
+    approval: human-required
+    at: company/DEPARTMENT_CAPABILITY_MAP.md
+  - id: dojo-advent-product-audit
+    with: thedojo.fun
+    trigger: manual
+    asks: provide one versioned 24-product album manifest plus dated build, access, and telemetry receipts
+    returns: a no-send TeamLedger canary, a complete worst-first readiness report, and evidence-gated release, usefulness, and revenue next actions
+    permission: propose-change
+    approval: human-required
+    at: scripts/summon-product-audit.mjs
+
 kin:
+  - repo: Aether
+    why: Aether is the source workspace and repo-connect inventory for the whole business portfolio; summon.company turns that manifested graph into one governed improvement control plane instead of treating each repository as an isolated app.
+  - repo: lightmark.app
+    why: Lightmark supplies the actual eleven-scorecard public-site diagnosis and evidence-bound cure prompts. Summon schedules and displays that loop without duplicating Lightmark's measurement engine.
+  - repo: sellsniper.com
+    why: SellSniper is the first named portfolio pilot. Its latest Lightmark score and findings are surfaced in Summon with a repository-specific Claude cure prompt, then rescored after fixes.
   - repo: optimism.fun
     why: optimism.fun ranks which problems are worth founding a company against (in-limit prize, sourced crowding, per-quest starter packs) and now declares this repo the START half of its start-or-join paths. It picks the quest; this repo is the operating layer that runs the resulting company. Reciprocates the edge optimism.fun added 2026-08-22.
   - repo: youchop.app
     why: youchop.app's tools/corpus.mjs is what actually extracts every corpus stored here; summon.company is the destination and search layer, not the extractor.
   - repo: summon.guide
     why: summon.guide reads specific curated episode files from here (never the raw multi-MB corpora) to ground its chat figures with real, cited source material, e.g. the John Vervaeke figure's 6 sourced episodes.
-  - repo: vitals.run
-    why: this repo is where the original "Vitals" portable company-operating-dashboard product (KPIs, roadmap, decisions) actually lives now, after being renamed and moved wholesale from vitals.run. vitals.run itself has since been repurposed into a fully separate static health-protocol site with no shared code; this edge exists to explain the shared name origin, not a current integration.
-
+  - repo: shapeable.art
+    why: Shapeable supplies the site-specific machine and Claude design-system contract, audit evidence, and bounded cure handoff needed to keep Summon's public landing and internal control plane in one truthful product family.
+  - repo: thedojo.fun
+    why: thedojo.fun owns the canonical multi-product album contract; Summon consumes its products in bounded audit mode while preserving the distinction between one Dojo operating context and 24 customer products.
 canon: knowledge/CORPUS.md

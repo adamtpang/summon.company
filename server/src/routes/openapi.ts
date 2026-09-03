@@ -114,6 +114,7 @@ import {
   submitIssueThreadInteractionVerdictsSchema,
   // Auth / profile
   updateCurrentUserProfileSchema,
+  accountExitConfirmationSchema,
   // Company portability (legacy routes)
   companyPortabilityExportSchema,
   companyPortabilityPreviewSchema,
@@ -2955,6 +2956,102 @@ registry.registerPath({
 
 registry.registerPath({
   method: "post",
+  path: "/api/board/chat/prepare",
+  tags: ["instance"],
+  summary: "Prepare the standing board conversation for an explicit attachment",
+  request: {
+    body: jsonBody(z.object({ companyId: z.string() })),
+  },
+  responses: { 200: r.ok(), 201: r.ok(), 400: r.badRequest, 401: r.unauthorized, 403: r.forbidden },
+});
+
+registry.registerPath({
+  method: "get",
+  path: "/api/auth/account/lifecycle",
+  tags: ["auth"],
+  summary: "Inspect personal-account exit safety and consequences",
+  responses: { 200: r.ok(), 401: r.unauthorized },
+});
+
+registry.registerPath({
+  method: "get",
+  path: "/api/auth/account/export",
+  tags: ["auth"],
+  summary: "Export personal account data without credentials or company-owned work",
+  responses: { 200: r.ok(), 401: r.unauthorized },
+});
+
+registry.registerPath({
+  method: "post",
+  path: "/api/auth/account/deactivate",
+  tags: ["auth"],
+  summary: "Deactivate the current personal account",
+  request: { body: jsonBody(accountExitConfirmationSchema) },
+  responses: { 200: r.ok(), 400: r.badRequest, 401: r.unauthorized, 409: r.conflict },
+});
+
+registry.registerPath({
+  method: "post",
+  path: "/api/auth/account/reactivate",
+  tags: ["auth"],
+  summary: "Reactivate the current personal identity without restoring authority",
+  responses: { 200: r.ok(), 401: r.unauthorized, 409: r.conflict },
+});
+
+registry.registerPath({
+  method: "delete",
+  path: "/api/auth/account",
+  tags: ["auth"],
+  summary: "Permanently delete and pseudonymize the current personal identity",
+  request: { body: jsonBody(accountExitConfirmationSchema) },
+  responses: { 200: r.ok(), 400: r.badRequest, 401: r.unauthorized, 409: r.conflict },
+});
+
+registry.registerPath({
+  method: "get",
+  path: "/api/board/chat/transcription",
+  tags: ["instance"],
+  summary: "Read the governed company-chat voice capability and budget",
+  request: { query: z.object({ companyId: z.string().uuid() }) },
+  responses: { 200: r.ok(), 400: r.badRequest, 401: r.unauthorized, 403: r.forbidden },
+});
+
+registry.registerPath({
+  method: "post",
+  path: "/api/board/chat/transcribe",
+  tags: ["instance"],
+  summary: "Transcribe bounded board audio into a non-persisted review draft",
+  request: {
+    body: {
+      content: {
+        "multipart/form-data": {
+          schema: {
+            type: "object",
+            required: ["companyId", "clientRequestId", "audio"],
+            properties: {
+              companyId: { type: "string", format: "uuid" },
+              clientRequestId: { type: "string", format: "uuid" },
+              audio: { type: "string", format: "binary" },
+            },
+          },
+        },
+      },
+    },
+  },
+  responses: {
+    200: r.ok(),
+    400: r.badRequest,
+    401: r.unauthorized,
+    403: r.forbidden,
+    409: r.conflict,
+    413: r.badRequest,
+    415: r.badRequest,
+    429: r.badRequest,
+  },
+});
+
+registry.registerPath({
+  method: "post",
   path: "/api/board/chat/stream",
   tags: ["instance"],
   summary: "Stream a board-level chat response (requires enableConferenceRoomChat)",
@@ -2964,6 +3061,7 @@ registry.registerPath({
         companyId: z.string(),
         message: z.string(),
         taskId: z.string().optional(),
+        attachmentIds: z.array(z.string().uuid()).max(8).optional(),
       }),
     ),
   },

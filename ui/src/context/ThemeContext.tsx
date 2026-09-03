@@ -13,11 +13,13 @@ import {
   APP_THEME_STORAGE_KEY,
 } from "../lib/app-branding";
 
-type Theme = "light" | "dark";
+export type Theme = "light" | "dark";
+export type ThemePreference = Theme | "system";
 
 interface ThemeContextValue {
   theme: Theme;
-  setTheme: (theme: Theme) => void;
+  preference: ThemePreference;
+  setTheme: (theme: ThemePreference) => void;
   toggleTheme: () => void;
 }
 
@@ -31,14 +33,23 @@ function resolveThemeFromDocument(): Theme {
   return document.documentElement.classList.contains("dark") ? "dark" : "light";
 }
 
-function hasStoredTheme(): boolean {
-  if (typeof window === "undefined") return false;
+function readStoredThemePreference(): ThemePreference | null {
+  if (typeof window === "undefined") return null;
   try {
     const stored = window.localStorage.getItem(THEME_STORAGE_KEY);
-    return stored === "light" || stored === "dark";
+    return stored === "light" || stored === "dark" || stored === "system" ? stored : null;
   } catch {
-    return false;
+    return null;
   }
+}
+
+function resolveSystemTheme(): Theme {
+  if (typeof window === "undefined" || typeof window.matchMedia !== "function") return "light";
+  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+}
+
+function resolvePreference(preference: ThemePreference): Theme {
+  return preference === "system" ? resolveSystemTheme() : preference;
 }
 
 function applyTheme(theme: Theme) {
@@ -54,38 +65,51 @@ function applyTheme(theme: Theme) {
 }
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
+  const storedPreference = readStoredThemePreference();
+  const [preference, setPreference] = useState<ThemePreference>(() => storedPreference ?? "light");
   const [theme, setThemeState] = useState<Theme>(() => resolveThemeFromDocument());
   // Track whether the user has explicitly chosen a theme. If false, use the
   // light-first document default without persisting a preference.
-  const [hasExplicitChoice, setHasExplicitChoice] = useState<boolean>(() => hasStoredTheme());
+  const [hasExplicitChoice, setHasExplicitChoice] = useState<boolean>(() => storedPreference !== null);
 
-  const setTheme = useCallback((nextTheme: Theme) => {
+  const setTheme = useCallback((nextTheme: ThemePreference) => {
     setHasExplicitChoice(true);
-    setThemeState(nextTheme);
+    setPreference(nextTheme);
   }, []);
 
   const toggleTheme = useCallback(() => {
     setHasExplicitChoice(true);
-    setThemeState((current) => (current === "dark" ? "light" : "dark"));
-  }, []);
+    setPreference(theme === "dark" ? "light" : "dark");
+  }, [theme]);
+
+  useEffect(() => {
+    const applyPreference = () => setThemeState(resolvePreference(preference));
+    applyPreference();
+    if (preference !== "system" || typeof window.matchMedia !== "function") return;
+    const media = window.matchMedia("(prefers-color-scheme: dark)");
+    media.addEventListener?.("change", applyPreference);
+    return () => media.removeEventListener?.("change", applyPreference);
+  }, [preference]);
 
   useEffect(() => {
     applyTheme(theme);
     if (!hasExplicitChoice) return;
     try {
-      localStorage.setItem(THEME_STORAGE_KEY, theme);
+      localStorage.setItem(THEME_STORAGE_KEY, preference);
+      window.dispatchEvent(new CustomEvent("summon:theme-preference-change", { detail: preference }));
     } catch {
       // Ignore local storage write failures in restricted environments.
     }
-  }, [theme, hasExplicitChoice]);
+  }, [theme, preference, hasExplicitChoice]);
 
   const value = useMemo(
     () => ({
       theme,
+      preference,
       setTheme,
       toggleTheme,
     }),
-    [theme, setTheme, toggleTheme],
+    [theme, preference, setTheme, toggleTheme],
   );
 
   return (

@@ -1,5 +1,7 @@
 import { useState } from "react";
 import {
+  ArrowDown,
+  ArrowUp,
   BookOpen,
   Bot,
   Check,
@@ -7,6 +9,7 @@ import {
   CircleDot,
   Command as CommandIcon,
   DollarSign,
+  GripVertical,
   Hexagon,
   History,
   Inbox,
@@ -136,6 +139,9 @@ import { GlobalComposer } from "@/components/GlobalComposer";
 import type { ComposerRoster } from "@/lib/globalComposer";
 import { MembershipAction } from "@/components/MembershipAction";
 import { IssueOutputSection } from "@/components/issue-output/IssueOutputSection";
+import { CompanyOffice } from "@/components/CompanyOffice";
+import { SummonMark } from "@/components/SummonMark";
+import { cn } from "@/lib/utils";
 import { EnvironmentVariablesEditor } from "@/components/environment-variables-editor";
 import type { CompanySecret, EnvBinding } from "@paperclipai/shared";
 import {
@@ -157,7 +163,7 @@ import {
   sampleTeam,
   warnTeam,
 } from "@/pages/TeamCatalog.fixtures";
-import type { IssueWorkProduct } from "@paperclipai/shared";
+import type { Agent, Issue, IssueWorkProduct } from "@paperclipai/shared";
 
 /* ------------------------------------------------------------------ */
 /*  Sample data for the Issue Output surface showcase                  */
@@ -225,6 +231,79 @@ const DESIGN_GUIDE_DEGRADED_OUTPUTS: IssueWorkProduct[] = [
     // Strip the path metadata so it fails the shared artifact schema.
     metadata: { attachmentId: "cccccccc-cccc-4ccc-8ccc-cccccccccccc", contentType: "video/mp4" },
   } as IssueWorkProduct,
+];
+
+const DESIGN_GUIDE_OFFICE_NOW = new Date("2026-08-26T12:00:00.000Z").getTime();
+
+function sampleOfficeAgent(
+  id: string,
+  name: string,
+  department: string,
+  status: Agent["status"] = "idle",
+): Agent {
+  return {
+    id,
+    companyId: "demo-company",
+    name,
+    urlKey: id,
+    role: department === "cofounder" ? "ceo" : "engineer",
+    title: department,
+    icon: null,
+    status,
+    reportsTo: null,
+    capabilities: null,
+    adapterType: "codex_local",
+    adapterConfig: {},
+    runtimeConfig: {},
+    budgetMonthlyCents: 0,
+    spentMonthlyCents: 0,
+    pauseReason: null,
+    pausedAt: null,
+    permissions: {},
+    lastHeartbeatAt: null,
+    metadata: department === "cofounder" ? null : { department },
+    createdAt: new Date(DESIGN_GUIDE_OFFICE_NOW),
+    updatedAt: new Date(DESIGN_GUIDE_OFFICE_NOW),
+  } as Agent;
+}
+
+function sampleOfficeIssue(
+  id: string,
+  assigneeAgentId: string,
+  title: string,
+  status: Issue["status"],
+  live = false,
+): Issue {
+  return {
+    id,
+    companyId: "demo-company",
+    identifier: id.toUpperCase(),
+    title,
+    status,
+    priority: "high",
+    assigneeAgentId,
+    hiddenAt: null,
+    executionRunId: live ? `${id}-run` : null,
+    checkoutRunId: null,
+    executionLockedAt: null,
+    startedAt: live ? new Date(DESIGN_GUIDE_OFFICE_NOW) : null,
+    createdAt: new Date(DESIGN_GUIDE_OFFICE_NOW),
+    updatedAt: new Date(DESIGN_GUIDE_OFFICE_NOW),
+  } as unknown as Issue;
+}
+
+const DESIGN_GUIDE_OFFICE_AGENTS: Agent[] = [
+  sampleOfficeAgent("atlas", "Atlas", "cofounder"),
+  sampleOfficeAgent("forge", "Forge", "engineering", "running"),
+  sampleOfficeAgent("ink", "Ink", "design"),
+  sampleOfficeAgent("echo", "Echo", "marketing", "paused"),
+];
+
+const DESIGN_GUIDE_OFFICE_ISSUES: Issue[] = [
+  sampleOfficeIssue("sum-301", "forge", "Ship the company floor", "in_progress", true),
+  sampleOfficeIssue("sum-302", "ink", "Review the launch proof", "in_review"),
+  sampleOfficeIssue("sum-303", "atlas", "Wait for board authority", "blocked"),
+  sampleOfficeIssue("sum-304", "echo", "Publish the company story", "todo"),
 ];
 
 const DESIGN_GUIDE_COMPOSER_ROSTER: ComposerRoster = [
@@ -455,7 +534,7 @@ export function DesignGuide() {
                 "StatusBadge", "StatusIcon", "PriorityIcon", "EntityRow", "EmptyState", "MetricCard",
                 "FilterBar", "InlineEditor", "PageSkeleton", "Identity", "CommentThread", "MarkdownEditor",
                 "PropertiesPanel", "Sidebar", "CommandPalette", "EnvironmentVariablesEditor",
-                "InlineBanner", "BuiltInAgentGate", "BuiltInAgentBadge", "GlobalComposer",
+                "InlineBanner", "BuiltInAgentGate", "BuiltInAgentBadge", "GlobalComposer", "CompanyOffice", "SummonMark",
               ].map((name) => (
                 <Badge key={name} variant="ghost" className="font-mono text-(length:--text-nano)">
                   {name}
@@ -1271,6 +1350,64 @@ export function DesignGuide() {
             />
           </div>
         </SubSection>
+        <SubSection title="Dispatch rail">
+          <div className="overflow-hidden rounded-md border border-border">
+            {[
+              { id: "SUM-301", title: "Ship the founding diagnosis", priority: "critical", status: "in_progress" },
+              { id: "SUM-302", title: "Publish the outcome receipt", priority: "high", status: "todo" },
+              { id: "SUM-303", title: "Interview the next founder", priority: "medium", status: "backlog" },
+            ].map((item, index, items) => (
+              <div
+                key={item.id}
+                className={cn(
+                  "relative flex flex-wrap items-center gap-2 border-b border-border/70 px-3 py-2.5 last:border-b-0",
+                  index === 0 && "bg-primary/5",
+                )}
+              >
+                {index === 0 ? (
+                  <span className="absolute inset-y-0 left-0 w-0.5 bg-primary" aria-hidden="true" />
+                ) : null}
+                <span className="inline-flex size-7 shrink-0 items-center justify-center rounded-sm border border-border/70 bg-muted/40 text-xs font-semibold tabular-nums text-muted-foreground">
+                  {index + 1}
+                </span>
+                <PriorityIcon priority={item.priority} />
+                <span className="min-w-40 flex-1">
+                  <span className="block truncate text-sm font-medium">{item.title}</span>
+                  <span className="mt-0.5 block font-mono text-xs text-muted-foreground">{item.id}</span>
+                </span>
+                <IssueStatusBadge status={item.status} />
+                <div className="ml-auto flex items-center gap-0.5">
+                  <Button type="button" size="icon-sm" variant="ghost" disabled={index === 0} aria-label={`Move ${item.title} up`}>
+                    <ArrowUp aria-hidden="true" />
+                  </Button>
+                  <Button type="button" size="icon-sm" variant="ghost" disabled={index === items.length - 1} aria-label={`Move ${item.title} down`}>
+                    <ArrowDown aria-hidden="true" />
+                  </Button>
+                  <Button type="button" size="icon-sm" variant="ghost" aria-label={`Drag ${item.title} to reprioritize`}>
+                    <GripVertical aria-hidden="true" />
+                  </Button>
+                </div>
+              </div>
+            ))}
+          </div>
+          <p className="text-xs text-muted-foreground">
+            Order is operational data. The first ready task is the next dispatch; active work is never interrupted.
+          </p>
+        </SubSection>
+      </Section>
+
+      {/* ============================================================ */}
+      {/*  COMPANY OFFICE                                               */}
+      {/* ============================================================ */}
+      <Section title="Company Office">
+        <SubSection title="Live floor plan">
+          <CompanyOffice
+            agents={DESIGN_GUIDE_OFFICE_AGENTS}
+            issues={DESIGN_GUIDE_OFFICE_ISSUES}
+            decisionCount={2}
+            now={DESIGN_GUIDE_OFFICE_NOW}
+          />
+        </SubSection>
       </Section>
 
       {/* ============================================================ */}
@@ -1324,6 +1461,15 @@ export function DesignGuide() {
       {/*  IDENTITY                                                     */}
       {/* ============================================================ */}
       <Section title="Identity">
+        <SubSection title="Summon mark">
+          <div className="flex items-center gap-4">
+            <SummonMark className="size-8 text-primary" />
+            <p className="text-sm text-muted-foreground">
+              The EKG mark identifies the company operating system. It inherits the semantic action color.
+            </p>
+          </div>
+        </SubSection>
+
         <SubSection title="Sizes">
           <div className="flex items-center gap-6">
             <Identity name="Agent Alpha" size="sm" />

@@ -88,6 +88,7 @@ const mockCostService = vi.hoisted(() => ({
 }));
 const mockFinanceService = vi.hoisted(() => ({
   createEvent: vi.fn(),
+  importStatement: vi.fn(),
   summary: vi.fn().mockResolvedValue({ debitCents: 0, creditCents: 0, netCents: 0, estimatedDebitCents: 0, eventCount: 0 }),
   byBiller: vi.fn().mockResolvedValue([]),
   byKind: vi.fn().mockResolvedValue([]),
@@ -185,6 +186,19 @@ beforeEach(() => {
     budgetMonthlyCents: 100,
     spentMonthlyCents: 0,
   });
+  mockCompanyService.getById.mockResolvedValue({ id: "company-1", name: "Paperclip" });
+  mockFinanceService.importStatement.mockResolvedValue({
+    sourceKind: "bank_csv",
+    statementHash: "a".repeat(64),
+    importedCount: 2,
+    skippedDuplicateCount: 0,
+    debitCents: 3_000,
+    creditCents: 500,
+    periodStart: "2026-08-01",
+    periodEnd: "2026-08-02",
+    transactionIdCount: 2,
+    compositeFingerprintCount: 0,
+  });
   mockAgentService.getById.mockResolvedValue({
     id: "agent-1",
     companyId: "company-1",
@@ -247,6 +261,63 @@ describe("cost routes", () => {
       estimatedDebitCents: 0,
       eventCount: 0,
     });
+  });
+
+  it("imports a board-provided statement without logging the raw account label or CSV", async () => {
+    const app = await createAppWithActor({
+      type: "board",
+      userId: "board-user",
+      source: "session",
+      isInstanceAdmin: false,
+      companyIds: ["company-1"],
+      memberships: [{ companyId: "company-1", status: "active", membershipRole: "admin" }],
+    });
+    const input = {
+      sourceKind: "bank_csv",
+      accountLabel: "Private operating account",
+      fileName: "statement.csv",
+      csv: "date,vendor,amount,direction,transaction_id\n2026-08-01,Vercel,25.00,debit,tx-1",
+    };
+
+    const res = await request(app)
+      .post("/api/companies/company-1/finance-statements/import")
+      .send(input);
+
+    expect(res.status).toBe(201);
+    expect(mockFinanceService.importStatement).toHaveBeenCalledWith("company-1", input);
+    expect(mockLogActivity).toHaveBeenCalledWith(
+      expect.anything(),
+      expect.objectContaining({
+        companyId: "company-1",
+        action: "finance_statement.imported",
+        entityType: "finance_statement",
+        entityId: "a".repeat(64),
+      }),
+    );
+    const activity = mockLogActivity.mock.calls.at(-1)?.[1];
+    expect(JSON.stringify(activity)).not.toContain(input.accountLabel);
+    expect(JSON.stringify(activity)).not.toContain(input.csv);
+  });
+
+  it("rejects statement imports from an agent before finance mutation", async () => {
+    const app = await createAppWithActor({
+      type: "agent",
+      agentId: "agent-1",
+      companyId: "company-1",
+      runId: "run-1",
+    });
+
+    const res = await request(app)
+      .post("/api/companies/company-1/finance-statements/import")
+      .send({
+        sourceKind: "bank_csv",
+        accountLabel: "Operating",
+        fileName: "statement.csv",
+        csv: "date,vendor,amount,direction\n2026-08-01,Vercel,25.00,debit",
+      });
+
+    expect(res.status).toBe(403);
+    expect(mockFinanceService.importStatement).not.toHaveBeenCalled();
   });
 
   it("returns issue subtree cost summaries for issue refs", async () => {
@@ -431,6 +502,81 @@ describeEmbeddedPostgres("cost and finance aggregate overflow handling", () => {
 
   afterAll(async () => {
     await tempDb?.cleanup();
+  });
+
+  it("imports statement transactions once, preserves duplicate purchases, and stores only hashed account provenance", async () => {
+    const companyId = randomUUID();
+    await db.insert(companies).values({
+      id: companyId,
+      name: "Statement Company",
+      issuePrefix: `S${companyId.replace(/-/g, "").slice(0, 6).toUpperCase()}`,
+      requireBoardApprovalForNewAgents: false,
+    });
+    const input = {
+      sourceKind: "bank_csv" as const,
+      accountLabel: "Private operating account 4471",
+      fileName: "august.csv",
+      csv: [
+        "date,vendor,debit,credit,currency,transaction_id,description",
+        "2026-08-02,Vercel,20.00,,USD,bank-1,Hosting",
+        "2026-08-03,Refund,,5.00,USD,bank-2,Service credit",
+        "2026-08-04,Coffee,10.00,,, ,Team meeting",
+        "2026-08-04,Coffee,10.00,,, ,Team meeting",
+      ].join("\n"),
+    };
+
+    const [first, second] = await Promise.all([
+      finance.importStatement(companyId, input),
+      finance.importStatement(companyId, input),
+    ]);
+    const stored = await db.select().from(financeEvents).where(eq(financeEvents.companyId, companyId));
+
+    expect(first).toMatchObject({
+      importedCount: 4,
+      skippedDuplicateCount: 0,
+      debitCents: 4_000,
+      creditCents: 500,
+      transactionIdCount: 2,
+      compositeFingerprintCount: 2,
+      periodStart: "2026-08-02",
+      periodEnd: "2026-08-04",
+    });
+    expect(second).toMatchObject({
+      importedCount: 0,
+      skippedDuplicateCount: 4,
+      transactionIdCount: 2,
+      compositeFingerprintCount: 2,
+    });
+    expect(stored).toHaveLength(4);
+    expect(new Set(stored.map((row) => row.externalInvoiceId)).size).toBe(4);
+    expect(stored.every((row) => row.estimated === false && row.currency === "USD")).toBe(true);
+    const persisted = JSON.stringify(stored);
+    expect(persisted).not.toContain(input.accountLabel);
+    expect(persisted).not.toContain(input.fileName);
+    expect(persisted).not.toContain(input.csv);
+    expect((await finance.summary(companyId)).netCents).toBe(3_500);
+  });
+
+  it("rejects an ambiguous statement atomically", async () => {
+    const companyId = randomUUID();
+    await db.insert(companies).values({
+      id: companyId,
+      name: "Rejected Statement Company",
+      issuePrefix: `R${companyId.replace(/-/g, "").slice(0, 6).toUpperCase()}`,
+      requireBoardApprovalForNewAgents: false,
+    });
+
+    await expect(finance.importStatement(companyId, {
+      sourceKind: "accounting_csv",
+      accountLabel: "Ledger",
+      fileName: "mixed.csv",
+      csv: [
+        "date,vendor,amount,direction,currency,transaction_id",
+        "2026-08-02,Vercel,20.00,debit,USD,ledger-1",
+        "2026-08-03,Foreign vendor,10.00,debit,EUR,ledger-2",
+      ].join("\n"),
+    })).rejects.toThrow(/only USD statements are accepted/i);
+    expect(await db.select().from(financeEvents).where(eq(financeEvents.companyId, companyId))).toHaveLength(0);
   });
 
   it("persists unpriced token usage without inflating monthly spend", async () => {

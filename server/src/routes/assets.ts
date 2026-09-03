@@ -10,6 +10,8 @@ import { isAllowedContentType, MAX_ATTACHMENT_BYTES } from "../attachment-types.
 import { assertCompanyAccess, getActorInfo } from "./authz.js";
 const SVG_CONTENT_TYPE = "image/svg+xml";
 const ALLOWED_COMPANY_LOGO_CONTENT_TYPES = new Set([
+  "image/vnd.microsoft.icon",
+  "image/x-icon",
   "image/png",
   "image/jpeg",
   "image/jpg",

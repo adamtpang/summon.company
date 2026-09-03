@@ -1,7 +1,7 @@
 import express from "express";
 import request from "supertest";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { instanceUserRoles } from "@paperclipai/db";
+import { authUsers, instanceUserRoles } from "@paperclipai/db";
 import { actorMiddleware } from "../middleware/auth.js";
 
 function createSelectChain(rows: unknown[]) {
@@ -20,6 +20,7 @@ function createDb() {
   return {
     select: vi
       .fn()
+      .mockImplementationOnce(() => createSelectChain([{ accountState: "active" }]))
       .mockImplementationOnce(() => createSelectChain([]))
       .mockImplementationOnce(() => createSelectChain([])),
   } as any;
@@ -61,6 +62,42 @@ describe("actorMiddleware authenticated session profile", () => {
       userName: "User One",
       userEmail: "user@example.com",
       source: "session",
+      accountState: "active",
+      sessionId: "session-1",
+      companyIds: [],
+      memberships: [],
+      isInstanceAdmin: false,
+    });
+  });
+
+  it("keeps a deactivated session identifiable while stripping company and instance authority", async () => {
+    const db = {
+      select: vi
+        .fn()
+        .mockImplementationOnce(() => createSelectChain([{ accountState: "deactivated" }]))
+        .mockImplementationOnce(() => createSelectChain([{ id: "admin-role" }]))
+        .mockImplementationOnce(() => createSelectChain([{
+          companyId: "company-1",
+          membershipRole: "owner",
+          status: "active",
+        }])),
+    } as any;
+    const app = express();
+    app.use(actorMiddleware(db, {
+      deploymentMode: "authenticated",
+      resolveSession: async () => ({
+        session: { id: "session-2", userId: "user-2" },
+        user: { id: "user-2", name: "Inactive", email: "inactive@example.com" },
+      }),
+    }));
+    app.get("/actor", (req, res) => res.json(req.actor));
+
+    const res = await request(app).get("/actor");
+    expect(res.status).toBe(200);
+    expect(res.body).toMatchObject({
+      type: "board",
+      accountState: "deactivated",
+      sessionId: "session-2",
       companyIds: [],
       memberships: [],
       isInstanceAdmin: false,
@@ -94,7 +131,7 @@ describe("actorMiddleware authenticated session profile", () => {
         return chain;
       }),
       delete: vi.fn(() => ({ where: () => Promise.resolve(undefined) })),
-      select: vi.fn(),
+      select: vi.fn(() => createSelectChain([{ accountState: "active" }])),
     } as any;
     const app = express();
     app.use(
@@ -166,7 +203,11 @@ describe("actorMiddleware authenticated session profile", () => {
         from: (table: unknown) => ({
           where: () =>
             Promise.resolve(
-              table === instanceUserRoles && state.staleInstanceAdminRow ? [{ id: "stale-role-row" }] : [],
+              table === authUsers
+                ? [{ accountState: "active" }]
+                : table === instanceUserRoles && state.staleInstanceAdminRow
+                  ? [{ id: "stale-role-row" }]
+                  : [],
             ),
         }),
       })),

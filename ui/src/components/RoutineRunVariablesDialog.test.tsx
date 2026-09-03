@@ -80,7 +80,7 @@ function createProject(): Project {
     status: "in_progress",
     leadAgentId: null,
     targetDate: null,
-    color: "#22c55e",
+    color: null,
     icon: null,
     env: null,
     pauseReason: null,
@@ -109,7 +109,7 @@ function createProject(): Project {
   };
 }
 
-function createAgent(): Agent {
+function createAgent(overrides: Partial<Agent> = {}): Agent {
   return {
     id: "agent-1",
     companyId: "company-1",
@@ -133,6 +133,7 @@ function createAgent(): Agent {
     pauseReason: null,
     pausedAt: null,
     permissions: { canCreateAgents: false },
+    ...overrides,
   };
 }
 
@@ -346,6 +347,41 @@ describe("RoutineRunVariablesDialog", () => {
     await flushUi(() => {
       root.unmount();
     });
+  });
+
+  it.each([
+    ["pending_approval", "Pending Design", "Approve Pending Design before running this routine."],
+    ["paused", "Reflection Coach", "Resume Reflection Coach before running this routine."],
+  ] as const)("blocks a %s default agent from Run now", async (status, name, expectedBoundary) => {
+    const onSubmit = vi.fn();
+    const root = createRoot(container);
+    const queryClient = createQueryClient();
+
+    await flushUi(() => {
+      root.render(
+        <QueryClientProvider client={queryClient}>
+          <RoutineRunVariablesDialog
+            open
+            onOpenChange={() => {}}
+            companyId="company-1"
+            projects={[]}
+            agents={[createAgent({ status, name })]}
+            defaultAssigneeAgentId="agent-1"
+            variables={[]}
+            isPending={false}
+            onSubmit={onSubmit}
+          />
+        </QueryClientProvider>,
+      );
+    });
+
+    const runButton = findRunButton();
+    expect(runButton?.disabled).toBe(true);
+    expect(document.body.textContent).toContain(expectedBoundary);
+    await flushUi(() => runButton?.dispatchEvent(new MouseEvent("click", { bubbles: true })));
+    expect(onSubmit).not.toHaveBeenCalled();
+
+    await flushUi(() => root.unmount());
   });
 
   it("renders workspaceBranch as a read-only selected workspace value", async () => {

@@ -2200,6 +2200,7 @@ export function Inbox() {
               },
               { value: "unread", label: "Unread" },
               { value: "blocked", label: "Blocked" },
+              { value: "customers", label: "Customers" },
               { value: "all", label: "All" },
             ]}
           />

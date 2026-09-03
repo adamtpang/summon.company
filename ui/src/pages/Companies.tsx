@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 import { useCompany } from "../context/CompanyContext";
 import { useDialogActions } from "../context/DialogContext";
 import { useBreadcrumbs } from "../context/BreadcrumbContext";
 import { companiesApi } from "../api/companies";
+import { aetherPortfolioApi } from "../api/aetherPortfolio";
 import { queryKeys } from "../lib/queryKeys";
 import { formatCents, relativeTime } from "../lib/utils";
 import { Input } from "@/components/ui/input";
@@ -13,7 +15,6 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Badge } from "@/components/ui/badge";
@@ -23,7 +24,7 @@ import {
   X,
   Plus,
   MoreHorizontal,
-  Trash2,
+  Settings2,
   Users,
   CircleDot,
   DollarSign,
@@ -41,16 +42,24 @@ export function Companies() {
   const { openOnboarding } = useDialogActions();
   const { setBreadcrumbs } = useBreadcrumbs();
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
   const { data: stats } = useQuery({
     queryKey: queryKeys.companies.stats,
     queryFn: () => companiesApi.stats(),
   });
+  const { data: portfolio } = useQuery({
+    queryKey: queryKeys.aetherPortfolio.snapshot,
+    queryFn: aetherPortfolioApi.get,
+    retry: false,
+  });
+  const healthByCompanyId = new Map((portfolio?.companies ?? []).flatMap((entry) => (
+    entry.businessHealth?.companyId ? [[entry.businessHealth.companyId, entry] as const] : []
+  )));
 
   // Inline edit state
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editName, setEditName] = useState("");
-  const [confirmDeleteId, setConfirmDeleteId] = useState<string | null>(null);
 
   const editMutation = useMutation({
     mutationFn: ({ id, newName }: { id: string; newName: string }) =>
@@ -58,15 +67,6 @@ export function Companies() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.companies.all });
       setEditingId(null);
-    },
-  });
-
-  const deleteMutation = useMutation({
-    mutationFn: (id: string) => companiesApi.remove(id),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: queryKeys.companies.all });
-      queryClient.invalidateQueries({ queryKey: queryKeys.companies.stats });
-      setConfirmDeleteId(null);
     },
   });
 
@@ -107,8 +107,8 @@ export function Companies() {
         {companies.map((company) => {
           const selected = company.id === selectedCompanyId;
           const isEditing = editingId === company.id;
-          const isConfirmingDelete = confirmDeleteId === company.id;
           const companyStats = stats?.[company.id];
+          const fleetEntry = healthByCompanyId.get(company.id);
           const agentCount = companyStats?.agentCount ?? 0;
           const issueCount = companyStats?.issueCount ?? 0;
           const budgetPct =
@@ -218,13 +218,14 @@ export function Companies() {
                         <Pencil className="h-3.5 w-3.5" />
                         Rename
                       </DropdownMenuItem>
-                      <DropdownMenuSeparator />
                       <DropdownMenuItem
-                        variant="destructive"
-                        onClick={() => setConfirmDeleteId(company.id)}
+                        onClick={() => {
+                          setSelectedCompanyId(company.id);
+                          navigate("/company/settings");
+                        }}
                       >
-                        <Trash2 className="h-3.5 w-3.5" />
-                        Delete Company
+                        <Settings2 className="h-3.5 w-3.5" />
+                        Manage lifecycle
                       </DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
@@ -232,6 +233,33 @@ export function Companies() {
               </div>
 
               {/* Stats row */}
+              {fleetEntry ? (
+                <div className="mt-4 border-y border-border py-3">
+                  <div className="grid gap-3 sm:grid-cols-4">
+                    <div>
+                      <p className="font-console text-xs uppercase tracking-(--tracking-eyebrow) text-muted-foreground">Core-8 health</p>
+                      <p className="mt-1 font-bold tabular-nums">
+                        {fleetEntry.businessHealth.score === null ? "Stewardship" : `${fleetEntry.businessHealth.score}/100`}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="font-console text-xs uppercase tracking-(--tracking-eyebrow) text-muted-foreground">Weakest</p>
+                      <p className="mt-1 font-bold">{fleetEntry.businessHealth.bindingConstraint?.label ?? "Beneficiary evidence"}</p>
+                    </div>
+                    <div>
+                      <p className="font-console text-xs uppercase tracking-(--tracking-eyebrow) text-muted-foreground">Unit cost · ask · floor</p>
+                      <p className="mt-1 font-bold tabular-nums">
+                        {fleetEntry.unitEconomics.unitCostCents === null ? "—" : formatCents(fleetEntry.unitEconomics.unitCostCents)} · {fleetEntry.unitEconomics.askPriceCents === null ? "—" : formatCents(fleetEntry.unitEconomics.askPriceCents)} · {fleetEntry.unitEconomics.minimumSustainablePriceCents === null ? "—" : formatCents(fleetEntry.unitEconomics.minimumSustainablePriceCents)}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="font-console text-xs uppercase tracking-(--tracking-eyebrow) text-muted-foreground">Next action</p>
+                      <p className="mt-1 text-sm text-muted-foreground line-clamp-2">{fleetEntry.businessHealth.nextAction}</p>
+                    </div>
+                  </div>
+                </div>
+              ) : null}
+
               <div className="flex items-center gap-3 sm:gap-5 mt-4 text-sm text-muted-foreground flex-wrap">
                 <div className="flex items-center gap-1.5">
                   <Users className="h-3.5 w-3.5" />
@@ -260,35 +288,6 @@ export function Companies() {
                 </div>
               </div>
 
-              {/* Delete confirmation */}
-              {isConfirmingDelete && (
-                <div
-                  className="mt-4 flex items-center justify-between bg-destructive/5 border border-destructive/20 rounded-md px-4 py-3"
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  <p className="text-sm text-destructive font-medium">
-                    Delete this company and all its data? This cannot be undone.
-                  </p>
-                  <div className="flex items-center gap-2 ml-4 shrink-0">
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={() => setConfirmDeleteId(null)}
-                      disabled={deleteMutation.isPending}
-                    >
-                      Cancel
-                    </Button>
-                    <Button
-                      variant="destructive"
-                      size="sm"
-                      onClick={() => deleteMutation.mutate(company.id)}
-                      disabled={deleteMutation.isPending}
-                    >
-                      {deleteMutation.isPending ? "Deleting…" : "Delete"}
-                    </Button>
-                  </div>
-                </div>
-              )}
             </Card>
           );
         })}

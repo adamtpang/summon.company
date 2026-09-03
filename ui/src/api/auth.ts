@@ -1,6 +1,8 @@
 import {
+  accountLifecycleSchema,
   authSessionSchema,
   currentUserProfileSchema,
+  type AccountLifecycle,
   type AuthSession,
   type CurrentUserProfile,
   type UpdateCurrentUserProfile,
@@ -88,6 +90,28 @@ async function authPatch<T>(path: string, body: Record<string, unknown>, parse: 
   return parse(payload);
 }
 
+async function authJson<T>(
+  path: string,
+  method: "GET" | "POST" | "DELETE",
+  body: Record<string, unknown> | undefined,
+  parse: (value: unknown) => T,
+): Promise<T> {
+  const res = await fetch(`/api/auth${path}`, {
+    method,
+    credentials: "include",
+    headers: {
+      Accept: "application/json",
+      ...(body ? { "Content-Type": "application/json" } : {}),
+    },
+    ...(body ? { body: JSON.stringify(body) } : {}),
+  });
+  const payload = await res.json().catch(() => null);
+  if (!res.ok) {
+    throw extractAuthError(payload as AuthErrorBody, res.status);
+  }
+  return parse(payload);
+}
+
 export const authApi = {
   getSession: async (): Promise<AuthSession | null> => {
     const res = await fetch("/api/auth/get-session", {
@@ -127,6 +151,23 @@ export const authApi = {
 
   updateProfile: async (input: UpdateCurrentUserProfile): Promise<CurrentUserProfile> =>
     authPatch("/profile", input, (payload) => currentUserProfileSchema.parse(payload)),
+
+  getAccountLifecycle: async (): Promise<AccountLifecycle> =>
+    authJson("/account/lifecycle", "GET", undefined, (payload) => accountLifecycleSchema.parse(payload)),
+
+  deactivateAccount: async (input: { email: string; confirmation: "DEACTIVATE" }): Promise<AccountLifecycle> =>
+    authJson("/account/deactivate", "POST", input, (payload) => accountLifecycleSchema.parse(payload)),
+
+  reactivateAccount: async (): Promise<AccountLifecycle> =>
+    authJson("/account/reactivate", "POST", undefined, (payload) => accountLifecycleSchema.parse(payload)),
+
+  permanentlyDeleteAccount: async (input: { email: string; confirmation: "DELETE" }): Promise<{ deleted: true }> =>
+    authJson("/account", "DELETE", input, (payload) => {
+      if (!payload || typeof payload !== "object" || (payload as { deleted?: unknown }).deleted !== true) {
+        throw new Error("Invalid account deletion response");
+      }
+      return { deleted: true };
+    }),
 
   signOut: async () => {
     await authPost("/sign-out", {});

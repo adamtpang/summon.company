@@ -1,6 +1,6 @@
 const API_BASE = process.env.VITALS_API_BASE ?? "http://127.0.0.1:3100/api";
 const COMPANY_ID = process.env.VITALS_COMPANY_ID ?? "4a46da88-eb15-40d5-98a8-10739d4fa310";
-const S_TIER_IDENTIFIERS = ["VIT-14", "VIT-22", "VIT-4", "VIT-13", "VIT-11"];
+const S_TIER_IDENTIFIERS = ["SUM-14", "SUM-22", "SUM-4", "SUM-13", "SUM-11"];
 
 async function get(path) {
   const response = await fetch(`${API_BASE}${path}`);

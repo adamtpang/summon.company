@@ -8,6 +8,7 @@ import type { InspectDatabaseBackupHealthOptions } from "./services/database-bac
 import type { StorageService } from "./storage/types.js";
 import { httpLogger, errorHandler } from "./middleware/index.js";
 import { actorMiddleware } from "./middleware/auth.js";
+import { accountLifecycleGuard } from "./middleware/account-lifecycle.js";
 import { boardMutationGuard } from "./middleware/board-mutation-guard.js";
 import { privateHostnameGuard, resolvePrivateHostnameAllowSet } from "./middleware/private-hostname-guard.js";
 import { applyTrustProxy, parseTrustProxyEnv } from "./middleware/trust-proxy.js";
@@ -38,12 +39,34 @@ import { policyLedgerRoutes } from "./routes/policy-ledger.js";
 import { fleetRoutes } from "./routes/fleet.js";
 import { activityRoutes } from "./routes/activity.js";
 import { dashboardRoutes } from "./routes/dashboard.js";
+import { companyLoopRoutes } from "./routes/company-loop.js";
+import { aetherPortfolioRoutes } from "./routes/aether-portfolio.js";
 import { attentionRoutes } from "./routes/attention.js";
 import { userProfileRoutes } from "./routes/user-profiles.js";
 import { sidebarBadgeRoutes } from "./routes/sidebar-badges.js";
 import { sidebarPreferenceRoutes } from "./routes/sidebar-preferences.js";
 import { resourceMembershipRoutes } from "./routes/resource-memberships.js";
 import { inboxDismissalRoutes } from "./routes/inbox-dismissals.js";
+import { companyInboxRoutes } from "./routes/company-inbox.js";
+import { companyNotificationRoutes } from "./routes/company-notifications.js";
+import { companyWebsiteRoutes } from "./routes/company-website.js";
+import { companyPaymentRoutes } from "./routes/company-payments.js";
+import { companyFinanceRoutes } from "./routes/company-finance.js";
+import { companyPaymentWebhookRoutes } from "./routes/company-payment-webhooks.js";
+import { companySocialRoutes } from "./routes/company-social.js";
+import { companySocialWebhookRoutes } from "./routes/company-social-webhooks.js";
+import { companyOutreachRoutes } from "./routes/company-outreach.js";
+import { companyMediaRoutes } from "./routes/company-media.js";
+import { companyOutreachUnsubscribeRoutes } from "./routes/company-outreach-unsubscribe.js";
+import { companyOutreachWebhookRoutes } from "./routes/company-outreach-webhooks.js";
+import { companyAdsRoutes } from "./routes/company-ads.js";
+import { companyStackRoutes } from "./routes/company-stack.js";
+import { companyStackDatabaseSnapshotRoutes } from "./routes/company-stack-database-snapshots.js";
+import { companyMobileBuildRoutes } from "./routes/company-mobile-builds.js";
+import { companyMobileWebhookRoutes } from "./routes/company-mobile-webhooks.js";
+import { companyAiGatewayRoutes } from "./routes/company-ai-gateway.js";
+import { companyAiGatewayInferenceRoutes } from "./routes/company-ai-gateway-inference.js";
+import { companyPublicRoutes } from "./routes/company-public.js";
 import { instanceSettingsRoutes } from "./routes/instance-settings.js";
 import { openApiRoutes } from "./routes/openapi.js";
 import {
@@ -57,7 +80,7 @@ import { accessRoutes } from "./routes/access.js";
 import { pluginRoutes } from "./routes/plugins.js";
 import { adapterRoutes } from "./routes/adapters.js";
 import { pluginUiStaticRoutes } from "./routes/plugin-ui-static.js";
-import { readBrandedStaticIndexHtml } from "./static-index-html.js";
+import { readBrandedStaticIndexHtml, resolveStaticUiDist } from "./static-index-html.js";
 import { applyUiBranding } from "./ui-branding.js";
 import { logger } from "./middleware/logger.js";
 import { DEFAULT_LOCAL_PLUGIN_DIR, pluginLoader } from "./services/plugin-loader.js";
@@ -73,6 +96,14 @@ import { setPluginEventBus } from "./services/activity-log.js";
 import { createPluginDevWatcher } from "./services/plugin-dev-watcher.js";
 import { createPluginHostServiceCleanup } from "./services/plugin-host-service-cleanup.js";
 import { pluginRegistryService } from "./services/plugin-registry.js";
+import { companyPublicService } from "./services/company-public.js";
+import { createPublicCompanyRateLimiter } from "./services/public-company-rate-limit.js";
+import {
+  classifyPublicCompanyHost,
+  injectPublicCompanyMetadata,
+  parsePublicCompanyBaseUrl,
+  publicCompanyCanonicalUrl,
+} from "./public-company-html.js";
 import { createHostClientHandlers } from "@paperclipai/plugin-sdk";
 import type { BetterAuthSessionResult } from "./auth/better-auth.js";
 import { createCachedViteHtmlRenderer } from "./vite-html-renderer.js";
@@ -157,6 +188,9 @@ export async function createApp(
     deploymentExposure: DeploymentExposure;
     allowedHostnames: string[];
     bindHost: string;
+    publicCompanyBaseUrl?: string | null;
+    billingPortalUrl?: string;
+    supportUrl?: string;
     authReady: boolean;
     companyDeletionEnabled: boolean;
     instanceId?: string;
@@ -169,6 +203,8 @@ export async function createApp(
   },
 ) {
   const app = express();
+  const publicCompanyRateLimiter = createPublicCompanyRateLimiter();
+  const workerManager = opts.pluginWorkerManager ?? createPluginWorkerManager();
   app.locals.paperclipDb = db;
   const captureRawBody = (req: express.Request, _res: express.Response, buf: Buffer) => {
     (req as unknown as { rawBody: Buffer }).rawBody = buf;
@@ -205,6 +241,30 @@ export async function createApp(
     }),
   );
   app.use(
+    "/api/payment-webhooks",
+    companyPaymentWebhookRoutes(db, { pluginWorkerManager: workerManager }),
+  );
+  app.use(
+    "/api/mobile-webhooks",
+    companyMobileWebhookRoutes(db),
+  );
+  app.use(
+    "/v1",
+    companyAiGatewayInferenceRoutes(db),
+  );
+  app.use(
+    "/outreach/unsubscribe",
+    companyOutreachUnsubscribeRoutes(db),
+  );
+  app.use(
+    "/outreach",
+    companyOutreachWebhookRoutes(db),
+  );
+  app.use(
+    "/social",
+    companySocialWebhookRoutes(db),
+  );
+  app.use(
     actorMiddleware(db, {
       deploymentMode: opts.deploymentMode,
       resolveSession: opts.resolveSession,
@@ -214,10 +274,10 @@ export async function createApp(
   if (opts.betterAuthHandler) {
     app.all("/api/auth/{*authPath}", opts.betterAuthHandler);
   }
+  app.use(accountLifecycleGuard());
   app.use(llmRoutes(db));
 
   const hostServicesDisposers = new Map<string, () => void>();
-  const workerManager = opts.pluginWorkerManager ?? createPluginWorkerManager();
 
   // Mount API routes
   const api = Router();
@@ -229,6 +289,8 @@ export async function createApp(
       deploymentExposure: opts.deploymentExposure,
       authReady: opts.authReady,
       companyDeletionEnabled: opts.companyDeletionEnabled,
+      billingPortalUrl: opts.billingPortalUrl,
+      supportUrl: opts.supportUrl,
       databaseBackupHealth: opts.databaseBackupHealth,
     }),
   );
@@ -255,7 +317,7 @@ export async function createApp(
   api.use(environmentRoutes(db, { pluginWorkerManager: workerManager }));
   api.use(executionWorkspaceRoutes(db, { pluginWorkerManager: workerManager }));
   api.use(goalRoutes(db));
-  api.use(boardChatRoutes(db, { deploymentMode: opts.deploymentMode }));
+  api.use(boardChatRoutes(db, { pluginWorkerManager: workerManager }));
   api.use(approvalRoutes(db, { pluginWorkerManager: workerManager }));
   api.use(secretRoutes(db));
   api.use(costRoutes(db, { pluginWorkerManager: workerManager }));
@@ -264,12 +326,28 @@ export async function createApp(
   api.use(fleetRoutes(db));
   api.use(activityRoutes(db));
   api.use(dashboardRoutes(db));
+  api.use(companyLoopRoutes(db, { pluginWorkerManager: workerManager }));
+  api.use(aetherPortfolioRoutes(db));
   api.use(attentionRoutes(db));
   api.use(userProfileRoutes(db));
   api.use(sidebarBadgeRoutes(db));
   api.use(sidebarPreferenceRoutes(db));
   api.use(resourceMembershipRoutes(db));
   api.use(inboxDismissalRoutes(db));
+  api.use(companyInboxRoutes(db, { pluginWorkerManager: workerManager }));
+  api.use(companyNotificationRoutes(db));
+  api.use(companyWebsiteRoutes(db, { pluginWorkerManager: workerManager }));
+  api.use(companyPaymentRoutes(db));
+  api.use(companyFinanceRoutes(db));
+  api.use(companySocialRoutes(db, { storage: opts.storageService }));
+  api.use(companyOutreachRoutes(db, { pluginWorkerManager: workerManager }));
+  api.use(companyMediaRoutes(db, { pluginWorkerManager: workerManager }));
+  api.use(companyAdsRoutes(db));
+  api.use(companyStackRoutes(db));
+  api.use(companyStackDatabaseSnapshotRoutes(db, opts.storageService));
+  api.use(companyMobileBuildRoutes(db));
+  api.use(companyAiGatewayRoutes(db));
+  api.use(companyPublicRoutes(db, { rateLimiter: publicCompanyRateLimiter }));
   api.use(instanceSettingsRoutes(db));
   if (opts.databaseBackupService) {
     api.use(instanceDatabaseBackupRoutes(opts.databaseBackupService));
@@ -357,18 +435,99 @@ export async function createApp(
   app.use("/api", (_req, res) => {
     res.status(404).json({ error: "API route not found" });
   });
+
+  // The public-company HTML shell is deliberately uncached so unpublishing is
+  // reflected immediately. Emit a crawler directive at the HTTP layer as well
+  // as in the React page: bots that do not execute JavaScript still respect the
+  // board's separate search-indexing choice. Unknown/private slugs fail closed.
+  const publicCompany = companyPublicService(db);
+  const publicCompanyHost = parsePublicCompanyBaseUrl(opts.publicCompanyBaseUrl);
+  if (opts.publicCompanyBaseUrl && !publicCompanyHost) {
+    throw new Error("PAPERCLIP_PUBLIC_COMPANY_BASE_URL must be an HTTP(S) origin without a path, query, or credentials");
+  }
+  const setPublicCompanyHtmlContext = async (slug: string, res: express.Response) => {
+    const projection = await publicCompany.getPublicProjection(slug);
+    res.locals.publicCompanyProjection = projection;
+    res.locals.publicCompanyCanonicalUrl = publicCompanyCanonicalUrl(projection.slug, publicCompanyHost);
+    res.set("Cache-Control", "no-store");
+    res.set("X-Robots-Tag", projection.searchIndexing ? "index, follow" : "noindex, nofollow");
+  };
+  const allowPublicCompanyHtmlRequest = (req: express.Request, res: express.Response) => {
+    const rateLimit = publicCompanyRateLimiter.consume(req.ip || req.socket.remoteAddress || "unknown");
+    res.set("X-RateLimit-Limit", String(rateLimit.limit));
+    res.set("X-RateLimit-Remaining", String(rateLimit.remaining));
+    if (rateLimit.allowed) return true;
+    res
+      .status(429)
+      .set("Cache-Control", "no-store")
+      .set("X-Robots-Tag", "noindex, nofollow")
+      .set("Retry-After", String(rateLimit.retryAfterSeconds))
+      .type("text/plain")
+      .send("Public company request limit exceeded");
+    return false;
+  };
+  app.get("/public/:slug", async (req, res, next) => {
+    if (!allowPublicCompanyHtmlRequest(req, res)) return;
+    try {
+      await setPublicCompanyHtmlContext(req.params.slug as string, res);
+    } catch {
+      res.set("Cache-Control", "no-store");
+      res.set("X-Robots-Tag", "noindex, nofollow");
+    }
+    next();
+  });
+  app.get("/discover", (req, res, next) => {
+    if (!allowPublicCompanyHtmlRequest(req, res)) return;
+    res.locals.publicCompanyNoStore = true;
+    res.set("Cache-Control", "no-store");
+    res.set("X-Robots-Tag", "noindex, nofollow");
+    next();
+  });
+
+  // A configured base URL turns exactly one safe subdomain label into an
+  // anonymous company root. Resolution happens on the server so an arbitrary
+  // hostname can never trick the client into selecting a tenant. Unpublished
+  // companies fail before the private board shell is served.
+  app.get("/", async (req, res, next) => {
+    const host = classifyPublicCompanyHost(req.header("host"), publicCompanyHost);
+    if (host.kind === "none" || host.kind === "reserved") {
+      next();
+      return;
+    }
+    if (!allowPublicCompanyHtmlRequest(req, res)) return;
+    if (host.kind === "invalid") {
+      res
+        .status(404)
+        .set("Cache-Control", "no-store")
+        .set("X-Robots-Tag", "noindex, nofollow")
+        .type("text/plain")
+        .send("Public company not found");
+      return;
+    }
+    try {
+      await setPublicCompanyHtmlContext(host.slug, res);
+      next();
+    } catch {
+      res
+        .status(404)
+        .set("Cache-Control", "no-store")
+        .set("X-Robots-Tag", "noindex, nofollow")
+        .type("text/plain")
+        .send("Public company not found");
+    }
+  });
+
   app.use(pluginUiStaticRoutes(db, {
     localPluginDir: opts.localPluginDir ?? DEFAULT_LOCAL_PLUGIN_DIR,
   }));
 
   const __dirname = path.dirname(fileURLToPath(import.meta.url));
   if (opts.uiMode === "static") {
-    // Try published location first (server/ui-dist/), then monorepo dev location (../../ui/dist)
-    const candidates = [
-      path.resolve(__dirname, "../ui-dist"),
-      path.resolve(__dirname, "../../ui/dist"),
-    ];
-    const uiDist = candidates.find((p) => fs.existsSync(path.join(p, "index.html")));
+    // Prefer the current monorepo build when it exists. A checkout may retain a
+    // stale server/ui-dist from packaging; selecting it first can silently pair
+    // a current API with an old client. Published packages do not include the
+    // monorepo ui/dist path and therefore fall back to their bundled ui-dist.
+    const uiDist = resolveStaticUiDist(__dirname);
     if (uiDist) {
       // Hashed asset files (Vite emits them under /assets/<name>.<hash>.<ext>)
       // never change once built, so they can be cached aggressively.
@@ -382,10 +541,11 @@ export async function createApp(
       // Non-hashed static files (favicon.ico, manifest, robots.txt, etc.):
       // short cache so operators who swap them out see the new version
       // reasonably fast. Override for `index.html` specifically — it is
-      // served by this middleware for `/` and `/index.html`, and it must
-      // never outlive the asset hashes it points at.
+      // never outlive the asset hashes they point at. `index.html` is always
+      // served by the fallback below so hosted-company metadata can be added.
       app.use(
         express.static(uiDist, {
+          index: false,
           maxAge: "1h",
           setHeaders(res, filePath) {
             if (path.basename(filePath) === "index.html") {
@@ -405,11 +565,20 @@ export async function createApp(
           res.status(404).end();
           return;
         }
+        const projection = res.locals.publicCompanyProjection;
+        const html = projection
+          ? injectPublicCompanyMetadata(
+            readBrandedStaticIndexHtml(uiDist),
+            projection,
+            res.locals.publicCompanyCanonicalUrl ?? null,
+          )
+          : readBrandedStaticIndexHtml(uiDist);
+        const publicCompanyNoStore = Boolean(projection || res.locals.publicCompanyNoStore);
         res
           .status(200)
           .set("Content-Type", "text/html")
-          .set("Cache-Control", "no-cache")
-          .end(readBrandedStaticIndexHtml(uiDist));
+          .set("Cache-Control", publicCompanyNoStore ? "no-store" : "no-cache")
+          .end(html);
       });
     } else {
       console.warn("[summon] UI dist not found; running in API-only mode");
@@ -451,8 +620,21 @@ export async function createApp(
         return;
       }
       try {
-        const html = await renderViteHtml.render(req.originalUrl);
-        res.status(200).set({ "Content-Type": "text/html" }).end(html);
+        const template = await renderViteHtml.render(req.originalUrl);
+        const projection = res.locals.publicCompanyProjection;
+        const html = projection
+          ? injectPublicCompanyMetadata(
+            template,
+            projection,
+            res.locals.publicCompanyCanonicalUrl ?? null,
+          )
+          : template;
+        const publicCompanyNoStore = Boolean(projection || res.locals.publicCompanyNoStore);
+        res
+          .status(200)
+          .set("Content-Type", "text/html")
+          .set("Cache-Control", publicCompanyNoStore ? "no-store" : "no-cache")
+          .end(html);
       } catch (err) {
         next(err);
       }

@@ -12,6 +12,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { AccountLifecycleControls } from "@/components/AccountLifecycleControls";
 
 function deriveInitials(name: string) {
   const parts = name.trim().split(/\s+/).filter(Boolean);
@@ -269,6 +270,10 @@ export function ProfileSettings() {
             </Button>
           </div>
         </form>
+
+        {sessionQuery.data.user.email ? (
+          <AccountLifecycleControls email={sessionQuery.data.user.email} />
+        ) : null}
       </section>
     </div>
   );

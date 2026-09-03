@@ -58,3 +58,18 @@ export interface FinanceByKind {
   eventCount: number;
   billerCount: number;
 }
+
+export type FinanceStatementSourceKind = "bank_csv" | "accounting_csv";
+
+export interface FinanceStatementImportResult {
+  sourceKind: FinanceStatementSourceKind;
+  statementHash: string;
+  importedCount: number;
+  skippedDuplicateCount: number;
+  debitCents: number;
+  creditCents: number;
+  periodStart: string;
+  periodEnd: string;
+  transactionIdCount: number;
+  compositeFingerprintCount: number;
+}

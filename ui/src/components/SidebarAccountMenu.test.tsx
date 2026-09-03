@@ -109,6 +109,8 @@ describe("SidebarAccountMenu", () => {
       root.render(
         <QueryClientProvider client={queryClient}>
           <SidebarAccountMenu
+            billingPortalUrl="https://billing.stripe.com/p/login/test_4gw6oJchs69w47e7ss"
+            supportUrl="https://support.summon.company/"
             deploymentMode="authenticated"
             version="1.2.3"
           />
@@ -131,20 +133,39 @@ describe("SidebarAccountMenu", () => {
 
     expect(document.body.textContent).toContain("Edit profile");
     expect(document.body.textContent).not.toContain("Instance settings");
-    expect(document.body.textContent).toContain("Documentation");
-    expect(document.body.textContent).toContain("Feedback");
+    expect(document.body.textContent).toContain("Help");
+    expect(document.body.textContent).toContain("Manage billing");
+    expect(document.body.textContent).toContain("Human support");
+    expect(document.body.textContent).toContain("Product feedback");
 
-    // Feedback link opens in a new tab pointing at the feedback URL
-    const feedbackAnchor = document.body.querySelector('a[href="https://paperclip.ing/feedback"]') as HTMLAnchorElement | null;
+    const billingAnchor = document.body.querySelector(
+      'a[href="https://billing.stripe.com/p/login/test_4gw6oJchs69w47e7ss"]',
+    ) as HTMLAnchorElement | null;
+    expect(billingAnchor).not.toBeNull();
+    expect(billingAnchor?.getAttribute("target")).toBe("_blank");
+    expect(billingAnchor?.getAttribute("rel")).toBe("noreferrer");
+
+    const helpAnchor = document.body.querySelector('a[href="/help"]') as HTMLAnchorElement | null;
+    expect(helpAnchor).not.toBeNull();
+    expect(helpAnchor?.getAttribute("target")).toBeNull();
+
+    const supportAnchor = document.body.querySelector('a[href="https://support.summon.company/"]') as HTMLAnchorElement | null;
+    expect(supportAnchor).not.toBeNull();
+    expect(supportAnchor?.getAttribute("target")).toBe("_blank");
+    expect(document.body.querySelector('a[href="https://paperclip.ing/feedback"]')).toBeNull();
+
+    const feedbackAnchor = Array.from(document.body.querySelectorAll('a[href="/help"]')).find((anchor) => anchor.textContent?.includes("Product feedback"));
     expect(feedbackAnchor).not.toBeNull();
-    expect(feedbackAnchor?.getAttribute("target")).toBe("_blank");
+    expect(feedbackAnchor?.getAttribute("target")).toBeNull();
 
-    // Feedback appears after Documentation and before the theme toggle
+    // Feedback appears after Help and before the theme toggle
     const menuText = document.body.querySelector('[data-slot="popover-content"]')?.textContent ?? "";
-    const docsPos = menuText.indexOf("Documentation");
-    const feedbackPos = menuText.indexOf("Feedback");
+    const helpPos = menuText.indexOf("Help");
+    const supportPos = menuText.indexOf("Human support");
+    const feedbackPos = menuText.indexOf("Product feedback");
     const themePos = menuText.indexOf("Switch to");
-    expect(docsPos).toBeLessThan(feedbackPos);
+    expect(helpPos).toBeLessThan(supportPos);
+    expect(supportPos).toBeLessThan(feedbackPos);
     expect(feedbackPos).toBeLessThan(themePos);
 
     expect(document.body.textContent).toContain("summon.company v1.2.3");
@@ -205,6 +226,9 @@ describe("SidebarAccountMenu", () => {
 
     expect(document.body.textContent).toContain("feature/source-build-labelsummon.company 518fc71");
     expect(document.body.textContent).not.toContain("2026.626.0+58.git.518fc71ce");
+    expect(document.body.textContent).not.toContain("Manage billing");
+    expect(document.body.textContent).not.toContain("Human support");
+    expect(document.body.textContent).toContain("Product feedback");
     expect(document.body.querySelector('a[href="https://github.com/paperclipai/paperclip/tree/feature%2Fsource-build-label"]')?.textContent).toBe(
       "feature/source-build-label",
     );

@@ -66,18 +66,24 @@ export const httpLogger = pinoHttp({
   },
   customProps(req, res) {
     if (res.statusCode >= 400) {
+      const suppressRequestBody = (req as any).__paperclipSuppressErrorBodyLogging === true;
       const ctx = (res as any).__errorContext;
       if (ctx) {
         return {
           errorContext: ctx.error,
-          reqBody: redactSensitive(ctx.reqBody),
+          ...(suppressRequestBody ? {} : { reqBody: redactSensitive(ctx.reqBody) }),
           reqParams: redactSensitive(ctx.reqParams),
           reqQuery: redactSensitive(ctx.reqQuery),
         };
       }
       const props: Record<string, unknown> = {};
       const { body, params, query } = req as any;
-      if (body && typeof body === "object" && Object.keys(body).length > 0) {
+      if (
+        !suppressRequestBody
+        && body
+        && typeof body === "object"
+        && Object.keys(body).length > 0
+      ) {
         props.reqBody = redactSensitive(body);
       }
       if (params && typeof params === "object" && Object.keys(params).length > 0) {

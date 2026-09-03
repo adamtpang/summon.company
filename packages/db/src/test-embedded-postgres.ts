@@ -103,7 +103,7 @@ async function createEmbeddedPostgresTestInstance(tempDirPrefix: string) {
 }
 
 function cleanupEmbeddedPostgresTestDirs(dataDir: string) {
-  fs.rmSync(dataDir, { recursive: true, force: true });
+  fs.rmSync(dataDir, { recursive: true, force: true, maxRetries: 20, retryDelay: 250 });
 }
 
 function formatEmbeddedPostgresError(error: unknown): string {

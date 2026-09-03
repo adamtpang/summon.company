@@ -1,9 +1,9 @@
 {
   "name": "vitals-desktop",
-  "productName": "Vitals",
+  "productName": "Summon",
   "version": "0.1.7",
   "private": true,
-  "description": "Vitals desktop app: chromeless window + tray that attaches to (or starts) the local summon.company company OS server on 127.0.0.1:3100.",
+  "description": "Summon desktop app: chromeless window and tray for the local summon.company AI company builder on 127.0.0.1:3100.",
   "main": "main.js",
   "author": "Adam Pangelinan",
   "license": "MIT",

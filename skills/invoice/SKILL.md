@@ -55,12 +55,13 @@ invoice for the work on X", "send <client> an invoice".
    4. STOP at draft. Report the dashboard link
       (`https://dashboard.stripe.com/invoices/<id>`), the total restated in
       dollars, and what is missing (usually the email).
-6. **Finalize and send ONLY on Adam's explicit "send"**:
-   `PostInvoicesInvoiceFinalize` then `PostInvoicesInvoiceSend` (Stripe emails
-   the hosted invoice + PDF). Without the word "send", hand Adam the hosted
-   link after finalize and he delivers it himself. If the MCP asks for
-   approval via URL, show the link, wait for Adam to say he approved, then
-   re-call with the approval_token.
+6. **Finalize without sending**:
+   Call `PostInvoicesInvoiceFinalize` only when finalization is appropriate.
+   Never call `PostInvoicesInvoiceSend`, even if Adam says "send" or approves
+   exact wording. Hand Adam the hosted invoice link and any copy-ready email
+   text so he can deliver it manually. If the MCP asks for approval to finalize,
+   show the link, wait for Adam to say he approved, then re-call with the
+   approval_token for finalization only.
 
 ## Fallback script and modular client profiles
 
@@ -78,7 +79,8 @@ map of named line-item presets. `--client <slug>` loads the profile,
 `--preset <name>` pulls a preset line, and every flag overrides the profile.
 One JSON file per client is the customization surface: new client, new file.
 Current profiles: `joe` (Quantus, net 7), `anton` (Regain, founding footer).
-`--dry` prints the plan without touching Stripe. `--send` only on the word.
+`--dry` prints the plan without touching Stripe. Agents must never use
+`--send`; Adam delivers the finalized invoice manually.
 
 ## Pre-mint gate
 
@@ -94,7 +96,8 @@ skip the gate. Adam can override with an explicit "skip the check".
   (120000 = $1,200.00) so a magnitude typo dies in review.
 - Drafts are reversible and invisible to the client: safe to create.
   Finalizing assigns the invoice number; SENDING is outward and irreversible.
-  Never finalize-and-send without the explicit word "send".
+  Never call a send action. Finalize when appropriate, then give Adam the link
+  and copy-ready delivery text for manual sending.
 - The secret key is never printed, echoed, or passed on the CLI (script path
   resolves it internally; MCP path never touches a key at all).
 - No em dashes anywhere in client-facing text.

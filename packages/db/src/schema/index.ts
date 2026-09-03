@@ -23,6 +23,7 @@ export { agentRuntimeState } from "./agent_runtime_state.js";
 export { agentTaskSessions } from "./agent_task_sessions.js";
 export { agentWakeupRequests } from "./agent_wakeup_requests.js";
 export { projects } from "./projects.js";
+export { registerReconciliations } from "./register_reconciliations.js";
 export { projectMemberships } from "./project_memberships.js";
 export { projectWorkspaces } from "./project_workspaces.js";
 export { executionWorkspaces } from "./execution_workspaces.js";
@@ -72,6 +73,56 @@ export { issueTreeHoldMembers } from "./issue_tree_hold_members.js";
 export { issueExecutionDecisions } from "./issue_execution_decisions.js";
 export { issueInboxArchives } from "./issue_inbox_archives.js";
 export { inboxDismissals } from "./inbox_dismissals.js";
+export { companyInboxConnectors, companyInboxMessages, companyInboxReceipts } from "./company_inbox.js";
+export {
+  companyWebsites,
+  companyWebsiteReceipts,
+  companyWebsiteEnvironmentVariables,
+} from "./company_website.js";
+export {
+  companyPaymentAccounts,
+  companyPaymentDisputes,
+  companyPaymentOffers,
+  companyPaymentReceipts,
+  companyPaymentRefunds,
+} from "./company_payments.js";
+export {
+  companySocialConnections,
+  companySocialChannels,
+  companySocialPosts,
+  companySocialReceipts,
+  companySocialWebhookEvents,
+} from "./company_social.js";
+export {
+  companyOutreachConnections,
+  companyOutreachLeads,
+  companyOutreachCampaigns,
+  companyOutreachMessages,
+  companyOutreachSuppressions,
+  companyOutreachUnsubscribeTokens,
+  companyOutreachReceipts,
+} from "./company_outreach.js";
+export { companyAdConnections, companyAdCampaigns, companyAdReceipts } from "./company_ads.js";
+export {
+  companyStacks,
+  companyStackReceipts,
+  companyStackApplications,
+  companyStackDatabaseSnapshots,
+} from "./company_stack.js";
+export {
+  companyMobileApps,
+  companyMobileBuilds,
+  companyMobileReleases,
+  companyMobileReceipts,
+  companyMobileSources,
+} from "./company_mobile.js";
+export {
+  companyAiGateways,
+  companyAiGatewayKeys,
+  companyAiGatewayRequests,
+  companyAiGatewayTranscriptions,
+} from "./company_ai_gateway.js";
+export { companyPublicProfiles, companyPublicUpdates, companyPublicAbuseReports } from "./company_public.js";
 export { feedbackVotes } from "./feedback_votes.js";
 export { feedbackExports } from "./feedback_exports.js";
 export { issueReadStates } from "./issue_read_states.js";
@@ -89,10 +140,34 @@ export { heartbeatRunEvents } from "./heartbeat_run_events.js";
 export { heartbeatRunWatchdogDecisions } from "./heartbeat_run_watchdog_decisions.js";
 export { costEvents } from "./cost_events.js";
 export { financeEvents } from "./finance_events.js";
+export {
+  companyFinanceConnections,
+  companyFinanceTransactions,
+  companyFinanceReceipts,
+} from "./company_finance.js";
 export { issueOutcomes } from "./issue_outcomes.js";
+export {
+  pricingPlans,
+  companySubscriptions,
+  subscriptionUsageRecords,
+  outcomeCommissions,
+} from "./subscriptions.js";
+export {
+  adapterManifests,
+  employeePolicies,
+  employeeCredentials,
+  costLedgerEntries,
+} from "./policy_ledger.js";
 export { approvals } from "./approvals.js";
 export { approvalComments } from "./approval_comments.js";
 export { activityLog } from "./activity_log.js";
+export { companyNightshiftSchedules } from "./company_loop.js";
+export { companyMediaSchedules } from "./company_media.js";
+export {
+  companyNotificationPreferences,
+  companyNotificationDeliveries,
+  companyNotificationReceipts,
+} from "./company_notifications.js";
 export { companySecretProviderConfigs } from "./company_secret_provider_configs.js";
 export { userSecretDefinitions } from "./user_secret_definitions.js";
 export { companySecrets } from "./company_secrets.js";

@@ -28,3 +28,54 @@ diff --git a/dist/index.js b/dist/index.js
                  // Connect to stderr, as that is where the messages get sent
                  (_a = this.process.stderr) === null || _a === void 0 ? void 0 : _a.on('data', (chunk) => {
                      // Parse the data as a string and log it
+@@ -210,19 +210,31 @@
+-            // Kill the existing postgres process
+-            yield new Promise((resolve) => {
+-                var _a, _b, _c;
+-                // Register a handler for when the process finally exists
+-                (_a = this.process) === null || _a === void 0 ? void 0 : _a.on('exit', resolve);
+-                // GUARD: Check if we're on Windows, since Windows doesn't support SIGINT
+-                if (platform() === 'win32') {
+-                    // GUARD: Double check the pid is there to keep TypeScript happy
+-                    if (!((_b = this.process) === null || _b === void 0 ? void 0 : _b.pid)) {
+-                        throw new Error('Could not find process PID');
+-                    }
+-                    // Actually kill the process using the Windows taskkill command
+-                    spawn('taskkill', ['/pid', this.process.pid.toString(), '/f', '/t']);
+-                }
+-                else {
+-                    // If on a sane OS, simply kill using SIGINT
+-                    (_c = this.process) === null || _c === void 0 ? void 0 : _c.kill('SIGINT');
+-                }
+-            });
++            // Ask PostgreSQL to shut down cleanly on Windows. Force-killing the
++            // process tree can strand an io_worker that keeps shared memory and
++            // the configured port alive after the parent has exited.
++            if (platform() === 'win32') {
++                const { pg_ctl } = yield bin;
++                yield new Promise((resolve, reject) => {
++                    const stopProcess = spawn(pg_ctl, [
++                        'stop',
++                        `--pgdata=${this.options.databaseDir}`,
++                        '--mode=fast',
++                        '--wait',
++                        '--timeout=10',
++                    ], { env: Object.assign(Object.assign({}, globalThis.process.env), { LC_MESSAGES: LC_MESSAGES_LOCALE }) });
++                    stopProcess.once('error', reject);
++                    stopProcess.once('close', (code) => {
++                        if (code === 0 || this.process.exitCode !== null || this.process.signalCode !== null) {
++                            resolve();
++                        }
++                        else {
++                            reject(new Error(`pg_ctl stop exited with code ${code}`));
++                        }
++                    });
++                });
++            }
++            else {
++                yield new Promise((resolve) => {
++                    var _a;
++                    (_a = this.process) === null || _a === void 0 ? void 0 : _a.once('close', resolve);
++                    this.process.kill('SIGINT');
++                });
++            }

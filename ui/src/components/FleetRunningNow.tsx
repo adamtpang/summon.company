@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { isAgentStatusInvokable, type Agent } from "@paperclipai/shared";
 import { Link } from "@/lib/router";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Hand, Moon, OctagonX, Play, Square } from "lucide-react";
+import { OctagonX, Play, Square, Sunrise } from "lucide-react";
 import { useCompany } from "../context/CompanyContext";
-import { companiesApi } from "../api/companies";
+import { agentsApi } from "../api/agents";
 import { fleetApi } from "../api/fleet";
 import { queryKeys } from "../lib/queryKeys";
 import { cn } from "../lib/utils";
@@ -30,23 +31,14 @@ function elapsedLabel(iso: string | null): string {
  * every agent and cancels the queued backlog — powerful, not irreversible
  * (agents unpause individually), but never one accidental click.
  */
-export function FleetRunningNow() {
+export function FleetRunningNow({ agents, className }: { agents: Agent[]; className?: string }) {
   const queryClient = useQueryClient();
   const { selectedCompany } = useCompany();
   const companyId = selectedCompany?.id;
-  const operatingMode = selectedCompany?.operatingMode;
+  const cofounder = agents.find((agent) => agent.role === "ceo" && agent.status !== "terminated") ?? null;
+  const canRunCompany = Boolean(companyId && cofounder && isAgentStatusInvokable(cofounder.status));
   const [confirmingStopAll, setConfirmingStopAll] = useState(false);
-  const [confirmingAlwaysOn, setConfirmingAlwaysOn] = useState(false);
-  const [lastSweep, setLastSweep] = useState<string | null>(null);
-
-  const setMode = useMutation({
-    mutationFn: (mode: "manual" | "always_on") =>
-      companiesApi.update(companyId!, { operatingMode: mode }),
-    onSuccess: () => {
-      setConfirmingAlwaysOn(false);
-      queryClient.invalidateQueries({ queryKey: queryKeys.companies.all });
-    },
-  });
+  const [lastAction, setLastAction] = useState<string | null>(null);
 
   const { data, isLoading } = useQuery({
     queryKey: FLEET_RUNNING_KEY,
@@ -54,11 +46,31 @@ export function FleetRunningNow() {
     refetchInterval: 15_000,
   });
 
+  const runCompany = useMutation({
+    mutationFn: () =>
+      agentsApi.invoke(cofounder!.id, companyId!, {
+        source: "on_demand",
+        triggerDetail: "manual",
+        reason: "Board requested an immediate company review from Mission Control",
+        payload: { intent: "run_company_now" },
+      }),
+    onSuccess: () => {
+      setLastAction(`${cofounder?.name ?? "Your cofounder"} is reviewing the company now.`);
+      queryClient.invalidateQueries({ queryKey: FLEET_RUNNING_KEY });
+      if (companyId && cofounder) {
+        queryClient.invalidateQueries({ queryKey: queryKeys.agents.list(companyId) });
+        queryClient.invalidateQueries({ queryKey: queryKeys.liveRuns(companyId) });
+        queryClient.invalidateQueries({ queryKey: queryKeys.heartbeats(companyId, cofounder.id) });
+      }
+    },
+    onError: () => setLastAction("Run did not start. Check the cofounder status and try again."),
+  });
+
   const stopAll = useMutation({
     mutationFn: () => fleetApi.stop({ reason: "Board kill switch" }),
     onSuccess: (result) => {
       setConfirmingStopAll(false);
-      setLastSweep(
+      setLastAction(
         `Stopped: ${result.runsCancelled} run${result.runsCancelled === 1 ? "" : "s"}, ` +
           `${result.wakeupsCancelled} queued wake${result.wakeupsCancelled === 1 ? "" : "s"}, ` +
           `${result.agentsPaused} agent${result.agentsPaused === 1 ? "" : "s"} paused.`,
@@ -78,71 +90,47 @@ export function FleetRunningNow() {
   const quiet = runs.length === 0 && queuedWakeups === 0;
 
   return (
-    <Card data-testid="fleet-running-now" className="p-4 space-y-3">
-      <div className="flex items-center justify-between gap-3">
-        <div className="flex items-center gap-2">
-          <Play className="h-4 w-4 text-muted-foreground" />
-          <h2 className="text-sm font-semibold">Running now</h2>
-          <span className="text-xs text-muted-foreground">
-            {isLoading
-              ? "checking…"
-              : quiet
-                ? "fleet is quiet"
-                : `${runs.length} live · ${queuedWakeups} queued`}
-          </span>
+    <Card data-testid="fleet-running-now" className={cn("space-y-3 p-4", className)}>
+      <div className="flex flex-wrap items-start justify-between gap-3">
+        <div>
+          <div className="flex items-center gap-2">
+            <Play className="h-4 w-4 text-muted-foreground" />
+            <h2 className="text-sm font-semibold">Running now</h2>
+            <span className="text-xs text-muted-foreground">
+              {isLoading
+                ? "checking…"
+                : quiet
+                  ? "company is quiet"
+                  : `${runs.length} live · ${queuedWakeups} queued`}
+            </span>
+          </div>
+          <p className="mt-1 text-xs text-muted-foreground">Live agents and queued wakes across the company.</p>
         </div>
-        <div className="flex items-center gap-2">
-          {/* VIT-127: the operating-mode dial lives beside the kill switch —
-              Manual (nothing executes unpointed) is the default; switching to
-              24/7 is a spend decision, so it confirms. Back to Manual is the
-              safe direction and never confirms. */}
-          {companyId && operatingMode ? (
-            confirmingAlwaysOn ? (
-              <>
-                <span className="text-xs text-muted-foreground">
-                  Timers wake agents overnight; budget caps pause, never bill. Go 24/7?
-                </span>
-                <Button
-                  size="sm"
-                  className="h-7 px-2.5 text-xs"
-                  disabled={setMode.isPending}
-                  onClick={() => setMode.mutate("always_on")}
-                >
-                  {setMode.isPending ? "Switching…" : "Confirm 24/7"}
-                </Button>
-                <Button
-                  size="sm"
-                  variant="ghost"
-                  className="h-7 px-2 text-xs"
-                  disabled={setMode.isPending}
-                  onClick={() => setConfirmingAlwaysOn(false)}
-                >
-                  Stay manual
-                </Button>
-              </>
-            ) : (
-              <Button
-                size="sm"
-                variant="outline"
-                className="h-7 px-2.5 text-xs"
-                disabled={setMode.isPending}
-                onClick={() =>
-                  operatingMode === "manual" ? setConfirmingAlwaysOn(true) : setMode.mutate("manual")
-                }
-              >
-                {operatingMode === "manual" ? (
-                  <>
-                    <Hand className="h-3.5 w-3.5 mr-1" />
-                    Manual mode
-                  </>
-                ) : (
-                  <>
-                    <Moon className="h-3.5 w-3.5 mr-1" />
-                    24/7 mode
-                  </>
-                )}
-              </Button>
-            )
+        <div className="flex flex-wrap items-center justify-end gap-2">
+          <Button
+            size="sm"
+            className="h-7 px-2.5 text-xs"
+            disabled={!canRunCompany || runCompany.isPending}
+            title={
+              !cofounder
+                ? "Add a CEO before running the company"
+                : !isAgentStatusInvokable(cofounder.status)
+                  ? `Resume ${cofounder.name} before running the company`
+                  : undefined
+            }
+            onClick={() => runCompany.mutate()}
+          >
+            <Sunrise className="h-3.5 w-3.5 mr-1" />
+            {runCompany.isPending ? "Starting…" : "Run company now"}
+          </Button>
+          {!cofounder ? (
+            <Link className="text-xs text-muted-foreground underline-offset-2 hover:underline" to="/agents/new?role=ceo">
+              Add CEO
+            </Link>
+          ) : !isAgentStatusInvokable(cofounder.status) ? (
+            <Link className="text-xs text-muted-foreground underline-offset-2 hover:underline" to={`/agents/${cofounder.id}`}>
+              Resume cofounder
+            </Link>
           ) : null}
           {confirmingStopAll ? (
             <>
@@ -182,7 +170,7 @@ export function FleetRunningNow() {
         </div>
       </div>
 
-      {lastSweep && <p className="text-xs text-muted-foreground">{lastSweep}</p>}
+      {lastAction && <p role="status" className="text-xs text-muted-foreground">{lastAction}</p>}
 
       {runs.length > 0 && (
         <ul className="space-y-1.5">

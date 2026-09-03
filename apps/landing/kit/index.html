@@ -26,7 +26,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="../tokens.css" />
-<link rel="stylesheet" href="brand.css" />
+<link rel="stylesheet" href="/kit/brand.css" />
 <style>
   * { box-sizing: border-box; margin: 0; }
   body { background: var(--bg-canvas); color: var(--text-primary); font-family: var(--font-body); line-height: var(--leading-body); }
@@ -42,7 +42,7 @@
   .hero h1 { font-family: var(--font-display); font-weight: 700; letter-spacing: var(--tracking-display); line-height: 1.02; font-size: var(--text-display-1); margin: var(--space-6) 0 var(--space-4); }
   .hero p.lede { font-size: var(--text-body-lg); color: #C7D6F5; max-width: 46ch; }
   .hero .links { display: flex; flex-wrap: wrap; gap: var(--space-3); margin-top: var(--space-8); }
-  .hero .links a { display:inline-flex; align-items:center; gap:.5em; height: var(--control-md); padding: 0 var(--space-4); border-radius: var(--radius-input); font-family: var(--font-display); font-weight:600; font-size: var(--text-body-sm); text-decoration:none; }
+  .hero .links a { display:inline-flex; min-height: var(--control-lg); align-items:center; gap:.5em; padding: 0 var(--space-4); border-radius: var(--radius-input); font-family: var(--font-display); font-weight:600; font-size: var(--text-body-sm); text-decoration:none; }
   .hero .links a.primary { background:#fff; color: var(--navy-950); }
   .hero .links a.ghost { background: rgba(255,255,255,.10); color:#EEF2FA; border:1px solid rgba(255,255,255,.20); }
 
@@ -79,6 +79,8 @@
   .voice .dont li { background: var(--negative-bg); color: var(--negative-content); }
 
   footer { padding: var(--space-12) 0; color: var(--text-tertiary); font-size: var(--text-body-sm); }
+  :where(a, button):focus-visible { outline: 2px solid var(--border-focus); outline-offset: 3px; }
+  header.hero a:focus-visible { outline-color: #8AB9FF; }
   @media (max-width: 640px){ .voice{grid-template-columns:1fr} .typerow{grid-template-columns:1fr} }
 </style>
 </head>
@@ -96,8 +98,8 @@
     <p class="lede">The colour, type, logo, and voice behind every Summon surface — app, deck, banner, and OG image alike. Summon is the nervous system of companies: diagnose problems, dispatch AI agents to solve them, or route the message to the right human.</p>
     <div class="links">
       <a class="primary" href="https://claude.ai/design/p/f3f2637c-e50a-4470-8ebb-f6873a076e39">Claude Design project →</a>
-      <a class="ghost" href="deck.html">Deck template</a>
-      <a class="ghost" href="banners.html">Social banners</a>
+      <a class="ghost" href="/kit/deck">Deck template</a>
+      <a class="ghost" href="/kit/banners">Social banners</a>
       <a class="ghost" href="https://summon.company">summon.company</a>
     </div>
   </div>
@@ -166,8 +168,8 @@
     <h2 class="sec">One aesthetic, every surface</h2>
     <p class="sub">Templates that carry the system past the app — decks, social banners, OG images. Each is a self-contained page that reads the same tokens. Change a token; every artifact re-skins.</p>
     <div class="cards">
-      <a class="card" href="deck.html"><h3>Deck template →</h3><p>16:9 keyboard-navigable slides. Print to PDF. Filled with the Summon pitch as a worked example.</p></a>
-      <a class="card" href="banners.html"><h3>Social banner set →</h3><p>X header (1500×500), Discord (960×540), OG (1200×630), community cover. Exact-pixel, screenshot-ready.</p></a>
+      <a class="card" href="/kit/deck"><h3>Deck template →</h3><p>16:9 keyboard-navigable slides. Print to PDF. Filled with the Summon pitch as a worked example.</p></a>
+      <a class="card" href="/kit/banners"><h3>Social banner set →</h3><p>X header (1500×500), Discord (960×540), OG (1200×630), community cover. Exact-pixel, screenshot-ready.</p></a>
       <a class="card" href="https://claude.ai/design/p/f3f2637c-e50a-4470-8ebb-f6873a076e39"><h3>Claude Design →</h3><p>The live project. Build new screens and decks from the real Summon components.</p></a>
     </div>
   </section>
@@ -202,7 +204,7 @@
     ['title-section','var(--text-title-section)','600','var(--font-display)','Diagnose · dispatch · route'],
     ['title-card','var(--text-title-card)','600','var(--font-display)','One design system, everywhere'],
     ['body-lg','var(--text-body-lg)','400','var(--font-body)','They do the work. You approve as the board.'],
-    ['body','var(--text-body)','400','var(--font-body)','Budget-capped AI employees. Founding $99/mo, locked for life.'],
+    ['body','var(--text-body)','400','var(--font-body)','Budget-capped AI employees. One $500/mo founding seat covers all eight departments.'],
     ['label','var(--text-label)','500','var(--font-mono)','STATUS · LIVE'],
   ];
   const ts = document.getElementById('typescale');

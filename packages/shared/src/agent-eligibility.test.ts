@@ -4,6 +4,7 @@ import {
   getAgentWorkEligibility,
   isAgentAssignableToWork,
   isAgentInvokable,
+  selectCompanyCofounder,
   type AgentEligibilityAgent,
 } from "./agent-eligibility.js";
 
@@ -154,5 +155,31 @@ describe("agent work eligibility", () => {
     expect(eligibility.invokable).toBe(false);
     expect(eligibility.assignabilityReason).toBe("invalid_org_chain");
     expect(eligibility.invokabilityReason).toBe("invalid_org_chain");
+  });
+});
+
+describe("company Cofounder selection", () => {
+  it("prefers CEO, then top-level, then oldest and never silently falls back from the preferred lifecycle state", () => {
+    const selected = selectCompanyCofounder([
+      { id: "child", role: "operations", reportsTo: "top", status: "active", createdAt: "2024-01-01" },
+      { id: "top", role: "operations", reportsTo: null, status: "active", createdAt: "2025-01-01" },
+      { id: "ceo-new", role: "ceo", reportsTo: null, status: "active", createdAt: "2026-01-01" },
+      { id: "ceo-old", role: "ceo", reportsTo: null, status: "paused", createdAt: "2023-01-01" },
+      { id: "former-ceo", role: "ceo", reportsTo: null, status: "terminated", createdAt: "2020-01-01" },
+    ]);
+
+    expect(selected?.id).toBe("ceo-old");
+    expect(selected?.status).toBe("paused");
+  });
+
+  it("uses a stable ID tie-break and returns null for an empty or terminated-only roster", () => {
+    expect(selectCompanyCofounder([
+      { id: "b", role: "operations", reportsTo: null, status: "active", createdAt: null },
+      { id: "a", role: "design", reportsTo: null, status: "active", createdAt: null },
+    ])?.id).toBe("a");
+    expect(selectCompanyCofounder([])).toBeNull();
+    expect(selectCompanyCofounder([
+      { id: "former", role: "ceo", reportsTo: null, status: "terminated", createdAt: null },
+    ])).toBeNull();
   });
 });

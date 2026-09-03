@@ -131,6 +131,19 @@ Granular overrides remain available if needed (`PAPERCLIP_AUTH_PUBLIC_BASE_URL`,
 
 Set `PAPERCLIP_ALLOWED_HOSTNAMES` explicitly only when you need additional hostnames beyond the public URL host (for example Tailscale/LAN aliases or multiple private hostnames).
 
+### Hosted Public Company Addresses
+
+To serve published Public Company records at slug subdomains, configure the trusted base origin separately from the private board URL:
+
+```yaml
+services:
+  paperclip:
+    environment:
+      PAPERCLIP_PUBLIC_COMPANY_BASE_URL: https://companies.example.com
+```
+
+A published slug such as `acme-labs` then resolves at `https://acme-labs.companies.example.com/`. The value must be an HTTP(S) origin with no credentials, path, query, or fragment. The operator must separately configure wildcard DNS, TLS, and proxy routing for `*.companies.example.com`; Summon does not mutate those resources. See `doc/PUBLIC-COMPANY.md` for hostname isolation, privacy, and indexing semantics.
+
 ## Claude + Codex Local Adapters in Docker
 
 The image pre-installs:

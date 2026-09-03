@@ -30,7 +30,7 @@ const VERDICTS = {
   "VIT-43": ["done", V + "APPROVED. Propose/apply split (a8be53767): employees never hold write credentials; snapshot drift gate + founder protection. Prerequisite for safe 24/7 mode - security-critical, verified in source diff."],
   "VIT-101": ["done", V + "APPROVED. Matches doc/MARKET-CAP-MODEL.md exactly; renders honestly in the approved Mission Control sheet (Option value, first-$99 lever, blanked runway w/ reason)."],
   "VIT-63": ["done", V + "APPROVED. MX records for summon.company verified live this session (ImprovMX mx1/mx2). Founder-side steps (test email round-trip) noted as follow-up, non-blocking."],
-  "VIT-39": ["done", V + "APPROVED. Standard shipped (VITALS_COMPANY_STANDARD.md), core-8 seeding live, Quantus standardized as evidence. Rollout continues as operating practice, not an open ticket."],
+  "VIT-39": ["done", V + "APPROVED. Standard shipped (now SUMMON_COMPANY_STANDARD.md), core-8 seeding live, Quantus standardized as evidence. Rollout continues as operating practice, not an open ticket."],
 };
 
 // VIT-36 logo pick (delegated taste call, flagged for board veto)

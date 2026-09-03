@@ -1,6 +1,7 @@
 import { sql } from "drizzle-orm";
 import {
   type AnyPgColumn,
+  check,
   pgTable,
   uuid,
   text,
@@ -34,6 +35,10 @@ export const issues = pgTable(
     workMode: text("work_mode").notNull().default("standard"),
     harnessKind: text("harness_kind"),
     priority: text("priority").notNull().default("medium"),
+    // VIT-44 §4: per-item attention-cadence override (hot|recent|stale). Null
+    // means the tier is derived from the isHot signal + activity age; a set
+    // value pins the tier and always wins in resolveWorkItemCadence.
+    cadenceOverride: text("cadence_override"),
     assigneeAgentId: uuid("assignee_agent_id").references(() => agents.id),
     assigneeUserId: text("assignee_user_id"),
     checkoutRunId: uuid("checkout_run_id").references(() => heartbeatRuns.id, { onDelete: "set null" }),
@@ -108,6 +113,18 @@ export const issues = pgTable(
           and ${table.executionRunId} is not null
           and ${table.status} in ('backlog', 'todo', 'in_progress', 'in_review', 'blocked')`,
       ),
+    customerMessageOriginUq: uniqueIndex("issues_customer_message_origin_uq")
+      .on(table.companyId, table.originKind, table.originId)
+      .where(
+        sql`${table.originKind} = 'customer_message'
+          and ${table.originId} is not null`,
+      ),
+    customerPaymentOriginUq: uniqueIndex("issues_customer_payment_origin_uq")
+      .on(table.companyId, table.originKind, table.originId)
+      .where(
+        sql`${table.originKind} = 'customer_payment'
+          and ${table.originId} is not null`,
+      ),
     activeLivenessRecoveryIncidentIdx: uniqueIndex("issues_active_liveness_recovery_incident_uq")
       .on(table.companyId, table.originKind, table.originId)
       .where(
@@ -156,5 +173,23 @@ export const issues = pgTable(
           and ${table.hiddenAt} is null
           and ${table.status} not in ('done', 'cancelled')`,
       ),
+    activeCompanyWebsiteDeepRepairIdx: uniqueIndex("issues_active_company_website_deep_repair_uq")
+      .on(table.companyId, table.originKind, table.originId)
+      .where(
+        sql`${table.originKind} = 'company_website_deep_repair'
+          and ${table.originId} is not null
+          and ${table.hiddenAt} is null
+          and ${table.status} not in ('done', 'cancelled')`,
+      ),
+    companyWebsiteDeepRepairRequestIdx: uniqueIndex("issues_company_website_deep_repair_request_uq")
+      .on(table.companyId, table.originKind, table.originRunId)
+      .where(
+        sql`${table.originKind} = 'company_website_deep_repair'
+          and ${table.originRunId} is not null`,
+      ),
+    cadenceOverrideCheck: check(
+      "issues_cadence_override_check",
+      sql`${table.cadenceOverride} is null or ${table.cadenceOverride} in ('hot', 'recent', 'stale')`,
+    ),
   }),
 );

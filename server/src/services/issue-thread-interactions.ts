@@ -491,7 +491,7 @@ function isCommentAtOrAfterInteraction(args: {
   return commentCreatedAtMs >= interactionCreatedAtMs;
 }
 
-function buildTaskCreationOrder(tasks: ReadonlyArray<SuggestTasksInteraction["payload"]["tasks"][number]>) {
+export function buildSuggestedTaskCreationOrder(tasks: ReadonlyArray<SuggestTasksInteraction["payload"]["tasks"][number]>) {
   const taskByClientKey = new Map(tasks.map((task) => [task.clientKey, task] as const));
   const ordered: Array<SuggestTasksInteraction["payload"]["tasks"][number]> = [];
   const state = new Map<string, "visiting" | "done">();
@@ -523,7 +523,7 @@ function buildTaskCreationOrder(tasks: ReadonlyArray<SuggestTasksInteraction["pa
   return ordered;
 }
 
-function resolveSelectedSuggestedTasks(args: {
+export function resolveSelectedSuggestedTasks(args: {
   interaction: SuggestTasksInteraction;
   selectedClientKeys?: AcceptIssueThreadInteraction["selectedClientKeys"];
 }) {
@@ -556,7 +556,7 @@ function resolveSelectedSuggestedTasks(args: {
   }
 
   return {
-    selectedTasks: args.interaction.payload.tasks.filter((task) => selectedClientKeySet.has(task.clientKey)),
+    selectedTasks: [...selectedClientKeySet].map((clientKey) => taskByClientKey.get(clientKey)!),
     skippedClientKeys: args.interaction.payload.tasks
       .filter((task) => !selectedClientKeySet.has(task.clientKey))
       .map((task) => task.clientKey),
@@ -1277,7 +1277,7 @@ export function issueThreadInteractionService(db: Db) {
         interaction,
         selectedClientKeys: input.selectedClientKeys,
       });
-      const orderedTasks = buildTaskCreationOrder(selectedTasks);
+      const orderedTasks = buildSuggestedTaskCreationOrder(selectedTasks);
       const explicitParentIds = [...new Set([
         issue.id,
         ...(interaction.payload.defaultParentId ? [interaction.payload.defaultParentId] : []),

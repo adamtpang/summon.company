@@ -3,3 +3,4 @@ node_modules/
 # Consumers: gitignore your own vitals.data.js if its finance numbers are real.
 .vercel
 .claude/
+.env*

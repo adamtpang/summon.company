@@ -37,7 +37,7 @@ import {
   issueThreadInteractions,
   issueWatchdogs,
 } from "@paperclipai/db";
-import { notFound, unprocessable } from "../errors.js";
+import { conflict, notFound, unprocessable } from "../errors.js";
 import { environmentService } from "./environments.js";
 import { formationSeedService } from "./formation-seed.js";
 import { heartbeatService } from "./heartbeat.js";
@@ -139,6 +139,8 @@ export function companyService(db: Db) {
     description: companies.description,
     status: companies.status,
     operatingMode: companies.operatingMode,
+    pauseReason: companies.pauseReason,
+    pausedAt: companies.pausedAt,
     issuePrefix: companies.issuePrefix,
     issueCounter: companies.issueCounter,
     budgetMonthlyCents: companies.budgetMonthlyCents,
@@ -257,6 +259,63 @@ export function companyService(db: Db) {
     throw new Error("Unable to allocate unique issue prefix");
   }
 
+  async function removeCompanyInTx(tx: CompanyTx, id: string) {
+    // Delete from child tables in dependency order.
+    const companyRunIds = await tx
+      .select({ id: heartbeatRuns.id })
+      .from(heartbeatRuns)
+      .where(eq(heartbeatRuns.companyId, id));
+
+    await tx.delete(heartbeatRunEvents).where(eq(heartbeatRunEvents.companyId, id));
+    if (companyRunIds.length > 0) {
+      await tx
+        .delete(heartbeatRunEvents)
+        .where(inArray(heartbeatRunEvents.runId, companyRunIds.map((run) => run.id)));
+    }
+    await tx.delete(agentTaskSessions).where(eq(agentTaskSessions.companyId, id));
+    await tx.delete(activityLog).where(eq(activityLog.companyId, id));
+    // cost_events references heartbeat_runs (restrict), so it must go first.
+    await tx.delete(costEvents).where(eq(costEvents.companyId, id));
+    await tx.delete(heartbeatRuns).where(eq(heartbeatRuns.companyId, id));
+    await tx.delete(agentWakeupRequests).where(eq(agentWakeupRequests.companyId, id));
+    await tx.delete(agentApiKeys).where(eq(agentApiKeys.companyId, id));
+    await tx.delete(agentRuntimeState).where(eq(agentRuntimeState.companyId, id));
+    // Leaf tables whose FKs to issues/agents/approvals have no ON DELETE
+    // behavior must be gone before their parent rows.
+    await tx.delete(issueThreadInteractions).where(eq(issueThreadInteractions.companyId, id));
+    await tx.delete(issueExecutionDecisions).where(eq(issueExecutionDecisions.companyId, id));
+    await tx.delete(issueInboxArchives).where(eq(issueInboxArchives.companyId, id));
+    await tx.delete(issueWatchdogs).where(eq(issueWatchdogs.companyId, id));
+    await tx.delete(feedbackVotes).where(eq(feedbackVotes.companyId, id));
+    await tx.delete(budgetIncidents).where(eq(budgetIncidents.companyId, id));
+    await tx.delete(issueComments).where(eq(issueComments.companyId, id));
+    await tx.delete(financeEvents).where(eq(financeEvents.companyId, id));
+    await tx.delete(budgetPolicies).where(eq(budgetPolicies.companyId, id));
+    await tx.delete(approvalComments).where(eq(approvalComments.companyId, id));
+    await tx.delete(approvals).where(eq(approvals.companyId, id));
+    await tx.delete(companySecrets).where(eq(companySecrets.companyId, id));
+    await tx.delete(joinRequests).where(eq(joinRequests.companyId, id));
+    await tx.delete(invites).where(eq(invites.companyId, id));
+    await tx.delete(principalPermissionGrants).where(eq(principalPermissionGrants.companyId, id));
+    await tx.delete(companyMemberships).where(eq(companyMemberships.companyId, id));
+    await tx.delete(companySkills).where(eq(companySkills.companyId, id));
+    await tx.delete(issueReadStates).where(eq(issueReadStates.companyId, id));
+    await tx.delete(documents).where(eq(documents.companyId, id));
+    await tx.delete(issues).where(eq(issues.companyId, id));
+    await tx.delete(companyLogos).where(eq(companyLogos.companyId, id));
+    await tx.delete(assets).where(eq(assets.companyId, id));
+    await tx.delete(goals).where(eq(goals.companyId, id));
+    await tx.delete(projects).where(eq(projects.companyId, id));
+    // routines.assignee_agent_id references agents with no ON DELETE behavior.
+    await tx.delete(routines).where(eq(routines.companyId, id));
+    await tx.delete(agents).where(eq(agents.companyId, id));
+    const rows = await tx
+      .delete(companies)
+      .where(eq(companies.id, id))
+      .returning();
+    return rows[0] ?? null;
+  }
+
   return {
     list: async () => {
       const rows = await getCompanyQuery(db);
@@ -273,11 +332,25 @@ export function companyService(db: Db) {
       return enrichCompany(hydrated);
     },
 
-    create: async (data: typeof companies.$inferInsert) => {
+    create: async (
+      data: typeof companies.$inferInsert,
+      options: {
+        formationProfile?: "core8" | "stewardship" | "none";
+        stewardshipContract?: Record<string, unknown> | null;
+      } = {},
+    ) => {
       const created = await createCompanyWithUniquePrefix(data);
       await environmentsSvc.ensureLocalEnvironment(created.id);
       await builtInAgents.autoProvisionBundledAgents(created.id);
-      await formationSeed.seedCoreEightFormationBestEffort(created.id);
+      const formationProfile = options.formationProfile ?? "core8";
+      if (formationProfile === "core8") {
+        await formationSeed.seedCoreEightFormationBestEffort(created.id);
+      } else if (formationProfile === "stewardship") {
+        await formationSeed.seedStewardshipFormationBestEffort(
+          created.id,
+          options.stewardshipContract ?? null,
+        );
+      }
       const row = await getCompanyQuery(db)
         .where(eq(companies.id, created.id))
         .then((rows) => rows[0] ?? null);
@@ -297,7 +370,26 @@ export function companyService(db: Db) {
           .then((rows) => rows[0] ?? null);
         if (!existing) return null;
 
-        const { logoAssetId, ...companyPatch } = data;
+        const { logoAssetId, ...rawCompanyPatch } = data;
+        const now = new Date();
+        const companyPatch = { ...rawCompanyPatch };
+        if (
+          existing.status === "paused"
+          && existing.pauseReason === "budget"
+          && companyPatch.status === "active"
+        ) {
+          throw conflict("Resolve the company budget pause before resuming autonomous work");
+        }
+        if (existing.status === "active" && companyPatch.status === "paused") {
+          companyPatch.pauseReason = "manual";
+          companyPatch.pausedAt = now;
+        } else if (companyPatch.status === "active" && existing.status !== "active") {
+          companyPatch.pauseReason = null;
+          companyPatch.pausedAt = null;
+        } else if (companyPatch.status === "archived" && existing.status !== "archived") {
+          companyPatch.pauseReason = "company_archived";
+          companyPatch.pausedAt = now;
+        }
         const willReactivate = existing.status !== "active" && companyPatch.status === "active";
         const willArchive = existing.status !== "archived" && companyPatch.status === "archived";
 
@@ -315,7 +407,7 @@ export function companyService(db: Db) {
 
         const updated = await tx
           .update(companies)
-          .set({ ...companyPatch, updatedAt: new Date() })
+          .set({ ...companyPatch, updatedAt: now })
           .where(eq(companies.id, id))
           .returning()
           .then((rows) => rows[0] ?? null);
@@ -412,7 +504,12 @@ export function companyService(db: Db) {
         if (!wasAlreadyArchived) {
           await tx
             .update(companies)
-            .set({ status: "archived", updatedAt: new Date() })
+            .set({
+              status: "archived",
+              pauseReason: "company_archived",
+              pausedAt: new Date(),
+              updatedAt: new Date(),
+            })
             .where(eq(companies.id, id));
         }
 
@@ -437,64 +534,49 @@ export function companyService(db: Db) {
       return result.company;
     },
 
-    remove: (id: string) =>
-      db.transaction(async (tx) => {
-        // Delete from child tables in dependency order
-        const companyRunIds = await tx
-          .select({ id: heartbeatRuns.id })
-          .from(heartbeatRuns)
-          .where(eq(heartbeatRuns.companyId, id));
+    remove: (id: string) => db.transaction((tx) => removeCompanyInTx(tx, id)),
 
-        await tx.delete(heartbeatRunEvents).where(eq(heartbeatRunEvents.companyId, id));
-        if (companyRunIds.length > 0) {
-          await tx
-            .delete(heartbeatRunEvents)
-            .where(inArray(heartbeatRunEvents.runId, companyRunIds.map((run) => run.id)));
-        }
-        await tx.delete(agentTaskSessions).where(eq(agentTaskSessions.companyId, id));
-        await tx.delete(activityLog).where(eq(activityLog.companyId, id));
-        // cost_events references heartbeat_runs (restrict), so it must go first.
-        await tx.delete(costEvents).where(eq(costEvents.companyId, id));
-        await tx.delete(heartbeatRuns).where(eq(heartbeatRuns.companyId, id));
-        await tx.delete(agentWakeupRequests).where(eq(agentWakeupRequests.companyId, id));
-        await tx.delete(agentApiKeys).where(eq(agentApiKeys.companyId, id));
-        await tx.delete(agentRuntimeState).where(eq(agentRuntimeState.companyId, id));
-        // Leaf tables whose FKs to issues/agents/approvals have no ON DELETE
-        // behavior — found by auditing the schema after two live deletion
-        // failures. Each must be gone before its parent is.
-        await tx.delete(issueThreadInteractions).where(eq(issueThreadInteractions.companyId, id));
-        await tx.delete(issueExecutionDecisions).where(eq(issueExecutionDecisions.companyId, id));
-        await tx.delete(issueInboxArchives).where(eq(issueInboxArchives.companyId, id));
-        await tx.delete(issueWatchdogs).where(eq(issueWatchdogs.companyId, id));
-        await tx.delete(feedbackVotes).where(eq(feedbackVotes.companyId, id));
-        await tx.delete(budgetIncidents).where(eq(budgetIncidents.companyId, id));
-        await tx.delete(issueComments).where(eq(issueComments.companyId, id));
-        await tx.delete(financeEvents).where(eq(financeEvents.companyId, id));
-        await tx.delete(budgetPolicies).where(eq(budgetPolicies.companyId, id));
-        await tx.delete(approvalComments).where(eq(approvalComments.companyId, id));
-        await tx.delete(approvals).where(eq(approvals.companyId, id));
-        await tx.delete(companySecrets).where(eq(companySecrets.companyId, id));
-        await tx.delete(joinRequests).where(eq(joinRequests.companyId, id));
-        await tx.delete(invites).where(eq(invites.companyId, id));
-        await tx.delete(principalPermissionGrants).where(eq(principalPermissionGrants.companyId, id));
-        await tx.delete(companyMemberships).where(eq(companyMemberships.companyId, id));
-        await tx.delete(companySkills).where(eq(companySkills.companyId, id));
-        await tx.delete(issueReadStates).where(eq(issueReadStates.companyId, id));
-        await tx.delete(documents).where(eq(documents.companyId, id));
-        await tx.delete(issues).where(eq(issues.companyId, id));
-        await tx.delete(companyLogos).where(eq(companyLogos.companyId, id));
-        await tx.delete(assets).where(eq(assets.companyId, id));
-        await tx.delete(goals).where(eq(goals.companyId, id));
-        await tx.delete(projects).where(eq(projects.companyId, id));
-        // routines.assignee_agent_id references agents with no ON DELETE
-        // behavior, so routines must be gone before their agents are.
-        await tx.delete(routines).where(eq(routines.companyId, id));
-        await tx.delete(agents).where(eq(agents.companyId, id));
-        const rows = await tx
-          .delete(companies)
+    removePermanently: (id: string, confirmationName: string) =>
+      db.transaction(async (tx) => {
+        const existing = await tx
+          .select({ name: companies.name, status: companies.status })
+          .from(companies)
           .where(eq(companies.id, id))
-          .returning();
-        return rows[0] ?? null;
+          .for("update")
+          .then((rows) => rows[0] ?? null);
+        if (!existing) return null;
+        if (confirmationName !== existing.name) {
+          throw unprocessable("Type the exact company name to confirm permanent deletion");
+        }
+        if (existing.status !== "paused" && existing.status !== "archived") {
+          throw conflict("Pause or archive the company before permanent deletion");
+        }
+
+        const [activeRunCount, activeWakeCount] = await Promise.all([
+          tx
+            .select({ value: count() })
+            .from(heartbeatRuns)
+            .where(and(
+              eq(heartbeatRuns.companyId, id),
+              inArray(heartbeatRuns.status, ["queued", "running"]),
+            ))
+            .then((rows) => Number(rows[0]?.value ?? 0)),
+          tx
+            .select({ value: count() })
+            .from(agentWakeupRequests)
+            .where(and(
+              eq(agentWakeupRequests.companyId, id),
+              inArray(agentWakeupRequests.status, ["queued", "deferred_issue_execution", "claimed"]),
+            ))
+            .then((rows) => Number(rows[0]?.value ?? 0)),
+        ]);
+        if (activeRunCount > 0 || activeWakeCount > 0) {
+          throw conflict("Wait for active company work to finish or archive it before permanent deletion", {
+            activeRuns: activeRunCount,
+            activeWakeRequests: activeWakeCount,
+          });
+        }
+        return removeCompanyInTx(tx, id);
       }),
 
     stats: () =>

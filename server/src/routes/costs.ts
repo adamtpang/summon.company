@@ -3,6 +3,7 @@ import type { Db } from "@paperclipai/db";
 import {
   createCostEventSchema,
   createFinanceEventSchema,
+  importFinanceStatementSchema,
   normalizeIssueIdentifier,
   resolveBudgetIncidentSchema,
   updateBudgetSchema,
@@ -169,6 +170,47 @@ export function costRoutes(
 
     res.status(201).json(event);
   });
+
+  router.post(
+    "/companies/:companyId/finance-statements/import",
+    validate(importFinanceStatementSchema),
+    async (req, res) => {
+      const companyId = req.params.companyId as string;
+      assertCompanyAccess(req, companyId);
+      assertBoard(req);
+      const company = await companies.getById(companyId);
+      if (!company) {
+        res.status(404).json({ error: "Company not found" });
+        return;
+      }
+
+      const result = await finance.importStatement(companyId, req.body);
+      const actor = getActorInfo(req);
+      await logActivity(db, {
+        companyId,
+        actorType: actor.actorType,
+        actorId: actor.actorId,
+        agentId: actor.agentId,
+        action: "finance_statement.imported",
+        entityType: "finance_statement",
+        entityId: result.statementHash,
+        details: {
+          sourceKind: result.sourceKind,
+          statementHash: result.statementHash,
+          importedCount: result.importedCount,
+          skippedDuplicateCount: result.skippedDuplicateCount,
+          debitCents: result.debitCents,
+          creditCents: result.creditCents,
+          periodStart: result.periodStart,
+          periodEnd: result.periodEnd,
+          transactionIdCount: result.transactionIdCount,
+          compositeFingerprintCount: result.compositeFingerprintCount,
+        },
+      });
+
+      res.status(result.importedCount > 0 ? 201 : 200).json(result);
+    },
+  );
 
   router.get("/companies/:companyId/costs/summary", async (req, res) => {
     const companyId = req.params.companyId as string;

@@ -177,7 +177,7 @@ function createMainWindow() {
     height: 900,
     autoHideMenuBar: true,
     backgroundColor: '#FFFFFF',
-    title: 'Summon - Company OS',
+    title: 'Summon',
     icon: path.join(__dirname, 'icon.ico'),
     // Open maximized: create hidden, maximize, then show — no resize flash.
     show: false,
@@ -233,14 +233,19 @@ function createMainWindow() {
         `(() => {
           if (window.__summonThemeWatch || !window.summonDesktop) return;
           window.__summonThemeWatch = true;
-          const report = () =>
+          const report = () => {
+            const preference = localStorage.getItem('vitals.theme');
             window.summonDesktop.themeChanged(
-              document.documentElement.classList.contains('dark') ? 'dark' : 'light'
+              preference === 'system'
+                ? 'system'
+                : document.documentElement.classList.contains('dark') ? 'dark' : 'light'
             );
+          };
           new MutationObserver(report).observe(document.documentElement, {
             attributes: true,
             attributeFilter: ['class'],
           });
+          window.addEventListener('summon:theme-preference-change', report);
           report();
         })();`,
         true
@@ -296,12 +301,7 @@ async function setUiTheme(theme) {
   applyNativeTheme(theme);
   if (!mainWindow) return;
   try {
-    // 'system': the UI has no OS-follow mode — clearing the key returns it to
-    // its light-first default; explicit light/dark write the key it reads.
-    const js =
-      theme === 'system'
-        ? `localStorage.removeItem(${JSON.stringify(UI_THEME_KEY)}); location.reload();`
-        : `localStorage.setItem(${JSON.stringify(UI_THEME_KEY)}, ${JSON.stringify(theme)}); location.reload();`;
+    const js = `localStorage.setItem(${JSON.stringify(UI_THEME_KEY)}, ${JSON.stringify(theme)}); location.reload();`;
     await mainWindow.webContents.executeJavaScript(js, true);
   } catch {
     // Splash or a failed page has no UI localStorage to set; theme applies on next load.
@@ -360,7 +360,7 @@ let refreshTrayMenu = () => {};
 
 function createTray() {
   tray = new Tray(trayIcon());
-  tray.setToolTip('Summon - Company OS');
+  tray.setToolTip('Summon');
   nativeTheme.on('updated', () => {
     if (tray) tray.setImage(trayIcon());
   });
@@ -433,7 +433,7 @@ async function onReady() {
   // In-app theme toggles arrive here via the preload bridge: keep the native
   // chrome, the tray radio, and the saved setting in sync with the page.
   ipcMain.on('summon:theme-changed', (_event, theme) => {
-    if (theme !== 'light' && theme !== 'dark') return;
+    if (theme !== 'light' && theme !== 'dark' && theme !== 'system') return;
     if (currentTheme === theme) return;
     currentTheme = theme;
     settings.theme = theme;

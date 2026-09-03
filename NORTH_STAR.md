@@ -8,9 +8,13 @@ One page. When lost, re-read this. Everything that doesn't serve this page gets 
 department; Summon operates the whole company.
 
 ## The one sentence
-**Give it any business - an idea or an existing one, yours or a stranger's - and it
-gives you back a company: a formation of AI employees that diagnoses the constraint,
-does the work 24/7, and reports to you as the board.**
+**Give it any repository, project, or business and it first classifies what it really
+is, then builds the smallest governed AI operating loop that advances its actual
+beneficiary and proves the outcome. Commercial routes may become companies; research,
+personal, infrastructure, media, and archived work keep their own shape.**
+
+This is hard to vary: classification must precede formation because a repository is an
+implementation container, not evidence of a buyer, company, or commercial intent.
 
 ## The offer (RATIFIED 2026-07-16, board, VIT-103)
 - **We SELL:** one hireable AI employee that owns an outcome end-to-end (the board
@@ -41,6 +45,8 @@ two-step trade; Summon matchmakes supply and demand. The org chart exists to ser
 this mission: the CEO owns problem selection (priority), the 8 departments own the
 doing, the board (the human) owns judgment.
 
+Specialist Aether products strengthen that organization without replacing it. Shapeable is the site-design and UI/UX capability under Design. SellSniper is a targeting capability under Sales. Lightmark is a public-site visibility, SEO, and optimization capability under Marketing, not the whole Marketing department. `company/DEPARTMENT_CAPABILITY_MAP.md` preserves this map and the bounded principles Summon learns from Cofounder's evidence-backed roadmap and Polsia's coordinated continuous execution.
+
 ## The fuel
 Agents run on the founder's existing subscriptions, not metered API burn: claude_local
 agents run Claude Code on the Claude subscription login; codex_local agents run Codex
@@ -48,24 +54,28 @@ on the Codex subscription. The instance API key is fallback/server-side only. Th
 what makes 24/7 proactive diagnose-and-cure affordable at $0 marginal cost.
 
 ## The game loop (this IS the product)
-1. **FEED** - paste a URL or describe an idea.
-2. **DIAGNOSE** - it finds the business's stage (8-stage roadmap) and its ONE binding
+1. **FEED** - paste a URL, repository, project, or idea.
+2. **CLASSIFY** - choose one explicit route: company, customer product, research
+   project, personal tool, portfolio infrastructure, media project, or
+   consolidated/archive. No formation or commercialization happens before this gate.
+3. **DIAGNOSE** - it finds the route's stage and its ONE binding
    constraint (theory of constraints, /cofounder-style).
-3. **SUMMON** - you hire the formation: 8 departments (Engineering, Design, Marketing,
-   Sales, Finance, Operations, Support, Legal), each an AI employee, each optionally
-   wearing a GOAT persona (Musk runs Engineering, Rockefeller runs Finance…).
-4. **THEY WORK** - 24/7 on a heartbeat, budget-capped ("spend hits the cap, not the
+4. **SUMMON** - commercial routes may hire the Core-8 formation. Noncommercial routes
+   use the smallest accountable stewardship shape that can reach their evidence target.
+5. **THEY WORK** - 24/7 on a heartbeat, budget-capped ("spend hits the cap, not the
    bill"), through whatever executor is best (Claude, Codex, Cursor - provider-neutral).
-5. **YOU APPROVE** - the board. Sends, spends, and anything touching money, law, or
+6. **YOU APPROVE** - the board. Sends, spends, and anything touching money, law, or
    your name waits for your yes. Human-in-the-loop is the product, not a disclaimer.
-6. **VITALS RISE** - the scoreboard: revenue, time saved, money saved, tasks shipped -
-   real numbers from real logs (the EKG strip). Rank flips, streaks, progress bars.
-7. **COMPOUND** - it runs on itself first (Company Zero), every improvement it ships to
+7. **VITALS RISE** - the scoreboard shows the route's real proof: commercial outcomes
+   include revenue, profit, cash, runway, and customer value; noncommercial outcomes
+   include beneficiary decisions and their explicit evidence targets.
+8. **COMPOUND** - it runs on itself first (Company Zero), every improvement it ships to
    itself ships to every customer, and the loop tightens. Repeat from 2: attack the
    next constraint.
 
-It is a GAME in the truest sense: the player is the board, the pieces are real AI
-employees, and the score is real revenue. SimCity where the city is a real company.
+It is a GAME in the truest sense: the player is the board, the pieces are accountable AI
+workers, and the score is a verified real-world outcome. For commercial routes that
+includes real revenue. SimCity where the simulation operates the real thing.
 
 ## Who it's for (in order)
 1. **The founder (Company Zero)** - dogfood: it builds and runs itself + the portfolio.
@@ -80,6 +90,7 @@ employees, and the score is real revenue. SimCity where the city is a real compa
 - NOT autonomous theater - no metric shown that the runtime logs can't prove (11x rule).
 - NOT a credential honeypot - local-first, keys never leave the machine (Drift rule).
 - NOT a model company - rides frontier APIs, wins the boring reliability layer (Adept rule).
+- NOT a machine that mistakes every repository for a company or treats checkout as universal proof.
 - NOT software + hype - visible weekly release cadence or death (auto-company rule).
 - NOT priced to lose on whales - user's machine, user's keys (Babylon rule).
 

@@ -86,6 +86,15 @@ export { secretService } from "./secrets.js";
 export { routineService } from "./routines.js";
 export { costService } from "./costs.js";
 export { financeService } from "./finance.js";
+export {
+  companyFinanceService,
+  processDueCompanyFinanceSyncs,
+  type CompanyFinanceActor,
+  type CompanyFinanceProviderOptions,
+} from "./company-finance.js";
+export { subscriptionService, applyMarkup } from "./subscriptions.js";
+export { policyLedgerService } from "./policy-ledger.js";
+export { DEFAULT_ADAPTER_MANIFESTS } from "./adapter-manifests.data.js";
 export { heartbeatService, resolveHeartbeatSchedulingSuppression } from "./heartbeat.js";
 export {
   productivityReviewService,
@@ -93,10 +102,67 @@ export {
 } from "./productivity-review.js";
 export { classifyIssueGraphLiveness, type IssueLivenessFinding } from "./recovery/index.js";
 export { dashboardService } from "./dashboard.js";
+export {
+  companyLoopService,
+  buildCompanyBriefMarkdown,
+  deriveCompanyNightshiftStatus,
+  COMPANY_NIGHTSHIFT_ORIGIN_KIND,
+  COMPANY_TASK_PROPOSAL_ORIGIN_KIND,
+} from "./company-loop.js";
+export {
+  loadAetherPortfolioSnapshot,
+  processAetherPortfolioCureLoops,
+  readAetherPortfolioPrompt,
+  resolveAetherWorkspaceRoot,
+  runAetherPortfolioDiagnosis,
+  startAetherPortfolioRun,
+} from "./aether-portfolio.js";
 export { sidebarBadgeService } from "./sidebar-badges.js";
 export { sidebarPreferenceService } from "./sidebar-preferences.js";
 export { resourceMembershipService, type ResourceMembershipPolicyHook } from "./resource-memberships.js";
 export { inboxDismissalService } from "./inbox-dismissals.js";
+export { companyInboxService } from "./company-inbox.js";
+export {
+  companyNotificationService,
+  notificationEnvelopeForActivity,
+  buildCompanyNotificationMessage,
+} from "./company-notifications.js";
+export { companyWebsiteService } from "./company-website.js";
+export { companyWebsiteDeepRepairService } from "./company-website-deep-repair.js";
+export {
+  createVercelProductionDeployment,
+  reconcileVercelProductionDeployment,
+} from "./vercel-deployment-provider.js";
+export { companyPaymentsService } from "./company-payments.js";
+export { companySocialService } from "./company-social.js";
+export { companyOutreachService } from "./company-outreach.js";
+export { companyMediaService } from "./company-media.js";
+export { companyAdsService } from "./company-ads.js";
+export { companyStackService } from "./company-stack.js";
+export { companyStackDatabaseSnapshotService } from "./company-stack-database-snapshots.js";
+export { companyMobileBuildService } from "./company-mobile-builds.js";
+export { companyAiGatewayService } from "./company-ai-gateway.js";
+export { companyMobileWebhookService } from "./company-mobile-webhooks.js";
+export {
+  ExpoCompanyMobileWebhookError,
+  parseExpoCompanyMobileBuildWebhook,
+} from "./expo-company-mobile-webhook.js";
+export {
+  dumpPostgresDatabase,
+  PostgresDatabaseSnapshotProviderError,
+} from "./postgres-database-snapshot-provider.js";
+export { companyPublicService } from "./company-public.js";
+export { inspectMetaAdAccount, createMetaAdCampaign, deleteMetaAdCampaign, readMetaAdCampaign, setMetaAdCampaignStatus } from "./meta-company-ads-provider.js";
+export {
+  inspectStripeCompanyAccount,
+  createStripeCompanyPaymentLink,
+  reconcileStripeCompanyPaymentLink,
+  readStripeCompanyRefundForWebhook,
+  readStripeCompanyDisputeForWebhook,
+  readStripeCompanyRevenueSnapshot,
+  deactivateStripeCompanyPaymentLink,
+} from "./stripe-company-payments-provider.js";
+export { probePublicWebsite, isPublicWebsiteAddress } from "./public-website-probe.js";
 export { accessService } from "./access.js";
 export {
   backfillPrincipalAccessCompatibility,

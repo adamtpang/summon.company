@@ -534,7 +534,27 @@ export type {
   RoutineListItem,
 } from "./routine.js";
 export type { CostEvent, CostSummary, IssueCostSummary, CostByAgent, CostByProviderModel, CostByBiller, CostByAgentModel, CostWindowSpendRow, CostByProject } from "./cost.js";
-export type { FinanceEvent, FinanceSummary, FinanceByBiller, FinanceByKind } from "./finance.js";
+export type {
+  FinanceEvent,
+  FinanceSummary,
+  FinanceByBiller,
+  FinanceByKind,
+  FinanceStatementSourceKind,
+  FinanceStatementImportResult,
+} from "./finance.js";
+export type {
+  CompanyFinanceProviderKey,
+  CompanyFinanceEnvironment,
+  CompanyFinanceConnectionStatus,
+  CompanyFinanceSyncStatus,
+  CompanyFinanceRevocationStatus,
+  CompanyFinanceSyncCoverage,
+  CompanyFinanceReceiptType,
+  CompanyFinanceConnection,
+  CompanyFinanceReceipt,
+  CompanyFinanceLinkResult,
+  CompanyFinanceMutationResult,
+} from "./company-finance.js";
 export type {
   AgentWakeupResponse,
   AgentWakeupSkipped,
@@ -698,3 +718,4 @@ export type {
   SitemapEntry,
   StructuredDataBlock,
 } from "./company-context.js";
+export * from "./company-notifications.js";

@@ -54,6 +54,9 @@ describe("ChatComposer", () => {
   function attachButton() {
     return container.querySelector<HTMLButtonElement>('button[aria-label="Attach files"]');
   }
+  function voiceButton(label = "Record voice direction") {
+    return container.querySelector<HTMLButtonElement>(`button[aria-label="${label}"]`);
+  }
 
   it("renders a bare textarea + send and no attach button without a handler", () => {
     const root = createRoot(container);
@@ -74,6 +77,51 @@ describe("ChatComposer", () => {
       root.render(<Harness onAttachFiles={() => {}} />);
     });
     expect(attachButton()).toBeTruthy();
+    act(() => root.unmount());
+  });
+
+  it("exposes voice recording as an explicit reversible composer control", () => {
+    const onVoice = vi.fn();
+    const root = createRoot(container);
+    act(() => {
+      root.render(<Harness onVoice={onVoice} />);
+    });
+    expect(voiceButton()).toBeTruthy();
+    act(() => voiceButton()?.click());
+    expect(onVoice).toHaveBeenCalledTimes(1);
+    act(() => {
+      root.render(
+        <Harness
+          initial="Review this before sending"
+          onVoice={onVoice}
+          voiceStatus="recording"
+          voiceLabel="Stop and transcribe voice direction"
+        />,
+      );
+    });
+    expect(voiceButton("Stop and transcribe voice direction")?.getAttribute("aria-pressed")).toBe("true");
+    expect(input().disabled).toBe(true);
+    expect(sendButton().disabled).toBe(true);
+    act(() => root.unmount());
+  });
+
+  it("offers explicit removal for a staged attachment", () => {
+    const onRemoveAttachment = vi.fn();
+    const root = createRoot(container);
+    act(() => {
+      root.render(
+        <Harness
+          attachments={[{ id: "attachment-1", name: "plan.pdf", status: "attached" }]}
+          onRemoveAttachment={onRemoveAttachment}
+        />,
+      );
+    });
+    const remove = container.querySelector<HTMLButtonElement>('button[aria-label="Remove plan.pdf"]');
+    expect(remove).toBeTruthy();
+    act(() => remove?.click());
+    expect(onRemoveAttachment).toHaveBeenCalledWith(
+      expect.objectContaining({ id: "attachment-1", name: "plan.pdf" }),
+    );
     act(() => root.unmount());
   });
 

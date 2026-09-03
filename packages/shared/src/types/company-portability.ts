@@ -37,6 +37,8 @@ export interface CompanyPortabilityCompanyManifestEntry {
   brandColor: string | null;
   logoPath: string | null;
   attachmentMaxBytes: number | null;
+  operatingMode: "manual" | "always_on";
+  budgetMonthlyCents: number;
   requireBoardApprovalForNewAgents: boolean;
   feedbackDataSharingEnabled: boolean;
   feedbackDataSharingConsentAt: string | null;

@@ -68,7 +68,7 @@ THE SKILL (a company SKILL.md the CEO runs ON DEMAND - no heartbeat, never auto-
 GUARDRAILS: skill never wakes anyone by itself; max one concurrent CEO run; the
 whole triage costs one bounded run (cheap profile for sensing, strong for ranking).
 DOCTRINE CHANGE this encodes: the standard's "30-minute heartbeat safety net" is
-retired in favor of board-invoked triage (update VITALS_COMPANY_STANDARD.md's CEO
+  retired in favor of board-invoked triage (update SUMMON_COMPANY_STANDARD.md's Cofounder
 loop section in the same change).
 ACCEPTANCE: board runs the skill from the CEO chat thread; gets the decision card;
 picks; exactly the chosen agents resume with exactly one S-tier task each; total

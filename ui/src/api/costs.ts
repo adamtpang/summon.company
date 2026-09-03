@@ -10,6 +10,9 @@ import type {
   FinanceByBiller,
   FinanceByKind,
   FinanceEvent,
+  CreateFinanceEvent,
+  FinanceStatementImportResult,
+  ImportFinanceStatement,
   ProviderQuotaResult,
 } from "@paperclipai/shared";
 import { api } from "./client";
@@ -43,6 +46,10 @@ export const costsApi = {
     api.get<FinanceByKind[]>(`/companies/${companyId}/costs/finance-by-kind${dateParams(from, to)}`),
   financeEvents: (companyId: string, from?: string, to?: string, limit: number = 100) =>
     api.get<FinanceEvent[]>(`/companies/${companyId}/costs/finance-events${dateParamsWithLimit(from, to, limit)}`),
+  createFinanceEvent: (companyId: string, input: CreateFinanceEvent) =>
+    api.post<FinanceEvent>(`/companies/${companyId}/finance-events`, input),
+  importFinanceStatement: (companyId: string, input: ImportFinanceStatement) =>
+    api.post<FinanceStatementImportResult>(`/companies/${companyId}/finance-statements/import`, input),
   windowSpend: (companyId: string) =>
     api.get<CostWindowSpendRow[]>(`/companies/${companyId}/costs/window-spend`),
   quotaWindows: (companyId: string) =>

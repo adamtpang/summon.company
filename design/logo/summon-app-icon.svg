@@ -1,5 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
-  <!-- Summon app icon · white Summon Circle on the Summon Blue tile -->
+  <!-- Summon app icon · white Summon Circle on the Summon Blue tile (v2 light/blue brand · SUM-221) -->
+  <!-- Tile = blue-600 (#0B5FFF, the Summon Blue action colour). Mark = white for maximum legibility. -->
   <!-- Source of truth for .ico / .icns / png set at sizes >= 48px. -->
   <defs>
     <mask id="summon-tile-gap" maskUnits="userSpaceOnUse" x="0" y="0" width="1024" height="1024">
@@ -8,8 +9,8 @@
             fill="none" stroke="#000" stroke-width="176" stroke-linecap="round" stroke-linejoin="round"/>
     </mask>
   </defs>
-  <rect width="1024" height="1024" rx="240" fill="#FFFFFF" stroke="#0A0A0A" stroke-opacity="0.16" stroke-width="12"/>
-  <circle cx="512" cy="512" r="336" fill="none" stroke="#0A0A0A" stroke-width="72" mask="url(#summon-tile-gap)"/>
+  <rect width="1024" height="1024" rx="240" fill="#0B5FFF"/>
+  <circle cx="512" cy="512" r="336" fill="none" stroke="#FFFFFF" stroke-width="72" mask="url(#summon-tile-gap)"/>
   <path d="M48 512 H320 L416 336 L528 704 L608 512 H976"
-        fill="none" stroke="#0A0A0A" stroke-width="72" stroke-linecap="round" stroke-linejoin="round"/>
+        fill="none" stroke="#FFFFFF" stroke-width="72" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>

@@ -10,6 +10,8 @@ declare global {
         userId?: string;
         userName?: string | null;
         userEmail?: string | null;
+        accountState?: "active" | "deactivated" | "deleted";
+        sessionId?: string;
         agentId?: string;
         companyId?: string;
         companyIds?: string[];

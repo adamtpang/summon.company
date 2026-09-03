@@ -73,3 +73,9 @@ createRoot(document.getElementById("root")!).render(
     </QueryClientProvider>
   </StrictMode>
 );
+
+try {
+  window.sessionStorage.removeItem("summon.boot-recovery-attempt");
+} catch {
+  // Successful boot does not depend on session storage being available.
+}

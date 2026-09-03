@@ -6,7 +6,9 @@
       "has": [{ "type": "host", "value": "design.summon.company" }],
       "destination": "/kit/",
       "permanent": false
-    }
+    },
+    { "source": "/roles/ai-employee-for-research", "destination": "/roles/ai-employee-for-design", "permanent": true },
+    { "source": "/roles/ai-employee-for-chief-of-staff", "destination": "/roles/ai-employee-for-legal", "permanent": true }
   ],
   "rewrites": [
     { "source": "/hire/ai-marketing", "destination": "/roles/ai-employee-for-marketing" },
@@ -14,8 +16,10 @@
     { "source": "/hire/ai-operations", "destination": "/roles/ai-employee-for-operations" },
     { "source": "/hire/ai-support", "destination": "/roles/ai-employee-for-support" },
     { "source": "/hire/ai-engineering", "destination": "/roles/ai-employee-for-engineering" },
-    { "source": "/hire/ai-research", "destination": "/roles/ai-employee-for-research" },
+    { "source": "/hire/ai-research", "destination": "/roles/ai-employee-for-design" },
+    { "source": "/hire/ai-design", "destination": "/roles/ai-employee-for-design" },
     { "source": "/hire/ai-finance", "destination": "/roles/ai-employee-for-finance" },
-    { "source": "/hire/ai-ceo", "destination": "/roles/ai-employee-for-chief-of-staff" }
+    { "source": "/hire/ai-ceo", "destination": "/roles/ai-employee-for-legal" },
+    { "source": "/hire/ai-legal", "destination": "/roles/ai-employee-for-legal" }
   ]
 }

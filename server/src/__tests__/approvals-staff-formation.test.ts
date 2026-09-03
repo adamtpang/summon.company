@@ -53,7 +53,7 @@ function createFormationApproval(status: string): ApprovalRecord {
 }
 
 function createDbStub(
-  selectResults: ApprovalRecord[][],
+  selectResults: unknown[][],
   updateResults: ApprovalRecord[][],
 ) {
   const pendingSelectResults = [...selectResults];
@@ -91,7 +91,7 @@ describe("approvalService staff_formation decisions", () => {
   it("activates every seat and sets per-seat budget caps when nothing is declined", async () => {
     const approved = createFormationApproval("approved");
     const dbStub = createDbStub(
-      [[createFormationApproval("pending")]],
+      [[createFormationApproval("pending")], [{ budgetMonthlyCents: 0 }]],
       [[approved], [approved]],
     );
 
@@ -103,7 +103,13 @@ describe("approvalService staff_formation decisions", () => {
     expect(mockAgentService.activatePendingApproval).toHaveBeenCalledWith("agent-eng");
     expect(mockAgentService.activatePendingApproval).toHaveBeenCalledWith("agent-legal");
     expect(mockAgentService.terminate).not.toHaveBeenCalled();
-    expect(mockBudgetService.upsertPolicy).toHaveBeenCalledTimes(2);
+    expect(mockBudgetService.upsertPolicy).toHaveBeenCalledTimes(3);
+    expect(mockBudgetService.upsertPolicy).toHaveBeenNthCalledWith(
+      1,
+      "company-1",
+      expect.objectContaining({ scopeType: "company", scopeId: "company-1", amount: 2000 }),
+      "board",
+    );
     expect(mockBudgetService.upsertPolicy).toHaveBeenCalledWith(
       "company-1",
       expect.objectContaining({ scopeType: "agent", scopeId: "agent-eng", amount: 1000 }),
@@ -112,6 +118,9 @@ describe("approvalService staff_formation decisions", () => {
 
     const resolutionSet = dbStub.setCalls.find((values) => values.payload);
     expect((resolutionSet?.payload as Record<string, unknown>).resolution).toEqual({
+      previousCompanyBudgetMonthlyCents: 0,
+      companyBudgetMonthlyCents: 2000,
+      companyBudgetRaised: true,
       activatedSeats: [
         { department: "engineering", agentId: "agent-eng" },
         { department: "legal", agentId: "agent-legal" },
@@ -123,7 +132,7 @@ describe("approvalService staff_formation decisions", () => {
   it("terminates declined seats and records the named human owner", async () => {
     const approved = createFormationApproval("approved");
     const dbStub = createDbStub(
-      [[createFormationApproval("pending")]],
+      [[createFormationApproval("pending")], [{ budgetMonthlyCents: 5000 }]],
       [[approved], [approved]],
     );
 
@@ -137,13 +146,55 @@ describe("approvalService staff_formation decisions", () => {
     expect(mockAgentService.activatePendingApproval).toHaveBeenCalledWith("agent-eng");
     expect(mockAgentService.terminate).toHaveBeenCalledTimes(1);
     expect(mockAgentService.terminate).toHaveBeenCalledWith("agent-legal");
-    expect(mockBudgetService.upsertPolicy).toHaveBeenCalledTimes(1);
+    expect(mockBudgetService.upsertPolicy).toHaveBeenCalledTimes(2);
+    expect(mockBudgetService.upsertPolicy).toHaveBeenNthCalledWith(
+      1,
+      "company-1",
+      expect.objectContaining({ scopeType: "company", scopeId: "company-1", amount: 5000 }),
+      "board",
+    );
 
     const resolutionSet = dbStub.setCalls.find((values) => values.payload);
     expect((resolutionSet?.payload as Record<string, unknown>).resolution).toEqual({
+      previousCompanyBudgetMonthlyCents: 5000,
+      companyBudgetMonthlyCents: 5000,
+      companyBudgetRaised: false,
       activatedSeats: [{ department: "engineering", agentId: "agent-eng" }],
       declinedSeats: [
         { department: "legal", agentId: "agent-legal", humanOwner: "Adam Pang" },
+      ],
+    });
+  });
+
+  it("recovers an approved formation whose activation side effects never completed", async () => {
+    const approved = createFormationApproval("approved");
+    mockAgentService.activatePendingApproval.mockImplementation(async (id: string) => ({
+      agent: { id, status: "idle" },
+      activated: false,
+    }));
+    const dbStub = createDbStub(
+      [[approved], [{ budgetMonthlyCents: 0 }]],
+      [[approved]],
+    );
+
+    const svc = approvalService(dbStub.db as any);
+    const result = await svc.approve("approval-formation", "board", "resume safe activation");
+
+    expect(result.applied).toBe(true);
+    expect(mockBudgetService.upsertPolicy).toHaveBeenNthCalledWith(
+      1,
+      "company-1",
+      expect.objectContaining({ scopeType: "company", amount: 2000 }),
+      "board",
+    );
+    expect(mockAgentService.activatePendingApproval).toHaveBeenCalledTimes(2);
+    const resolutionSet = dbStub.setCalls.find((values) => values.payload);
+    expect((resolutionSet?.payload as Record<string, unknown>).resolution).toMatchObject({
+      companyBudgetMonthlyCents: 2000,
+      companyBudgetRaised: true,
+      activatedSeats: [
+        { department: "engineering", agentId: "agent-eng" },
+        { department: "legal", agentId: "agent-legal" },
       ],
     });
   });

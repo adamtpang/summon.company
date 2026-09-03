@@ -1,6 +1,6 @@
-# Vitals Desktop (Phase 1)
+# Summon Desktop (Phase 1)
 
-Chromeless Electron shell for the local summon.company company OS server
+Chromeless Electron shell for the local summon.company AI company builder
 (`http://127.0.0.1:3100`). Window + tray icon + single instance + graceful
 lifecycle. It does **not** bundle the server yet - Phase 1 attaches to (or
 starts) the globally-installed `paperclipai` CLI.

@@ -14,7 +14,7 @@ HR is to be this reconciler. How do you take the minimum steps to get from here 
 there?" Like React: compute should-be, diff against is, apply minimum steps.
 
 **Summon adoption (this IS the product, named properly):**
-- The company config (VITALS_COMPANY_STANDARD: goal, formation, roadmap, budgets,
+- The company config (SUMMON_COMPANY_STANDARD: goal, formation, roadmap, budgets,
   policies) = the DESIRED STATE.
 - The control plane = the RECONCILER: continuously diff desired vs actual (departments
   without owners, stages without evidence, budgets vs spend, tasks without stars) and

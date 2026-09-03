@@ -2,8 +2,8 @@
 
 import { act } from "react";
 import { createRoot } from "react-dom/client";
-import { afterEach, beforeEach, describe, expect, it } from "vitest";
-import { ThemeProvider, useTheme } from "./ThemeContext";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { ThemeProvider, useTheme, type ThemePreference } from "./ThemeContext";
 import { APP_THEME_STORAGE_KEY } from "../lib/app-branding";
 
 const THEME_STORAGE_KEY = APP_THEME_STORAGE_KEY;
@@ -14,12 +14,14 @@ const THEME_STORAGE_KEY = APP_THEME_STORAGE_KEY;
 describe("ThemeContext", () => {
   let container: HTMLDivElement;
   let observedTheme: "light" | "dark" | null = null;
-  let setTheme: ((theme: "light" | "dark") => void) | null = null;
+  let observedPreference: ThemePreference | null = null;
+  let setTheme: ((theme: ThemePreference) => void) | null = null;
   let toggleTheme: (() => void) | null = null;
 
   function Probe() {
     const ctx = useTheme();
     observedTheme = ctx.theme;
+    observedPreference = ctx.preference;
     setTheme = ctx.setTheme;
     toggleTheme = ctx.toggleTheme;
     return null;
@@ -30,10 +32,16 @@ describe("ThemeContext", () => {
     document.documentElement.className = "";
     document.documentElement.style.colorScheme = "";
     observedTheme = null;
+    observedPreference = null;
     setTheme = null;
     toggleTheme = null;
     container = document.createElement("div");
     document.body.appendChild(container);
+    window.matchMedia = vi.fn().mockReturnValue({
+      matches: false,
+      addEventListener: vi.fn(),
+      removeEventListener: vi.fn(),
+    });
   });
 
   afterEach(() => {
@@ -51,8 +59,38 @@ describe("ThemeContext", () => {
     });
 
     expect(observedTheme).toBe("light");
+    expect(observedPreference).toBe("light");
     expect(document.documentElement.classList.contains("dark")).toBe(false);
     expect(window.localStorage.getItem(THEME_STORAGE_KEY)).toBeNull();
+
+    act(() => {
+      root.unmount();
+    });
+  });
+
+  it("persists system preference and follows the device color scheme", () => {
+    window.matchMedia = vi.fn().mockReturnValue({
+      matches: true,
+      addEventListener: vi.fn(),
+      removeEventListener: vi.fn(),
+    });
+    const root = createRoot(container);
+    act(() => {
+      root.render(
+        <ThemeProvider>
+          <Probe />
+        </ThemeProvider>,
+      );
+    });
+
+    act(() => {
+      setTheme?.("system");
+    });
+
+    expect(observedPreference).toBe("system");
+    expect(observedTheme).toBe("dark");
+    expect(document.documentElement.classList.contains("dark")).toBe(true);
+    expect(window.localStorage.getItem(THEME_STORAGE_KEY)).toBe("system");
 
     act(() => {
       root.unmount();

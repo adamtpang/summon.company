@@ -1,6 +1,6 @@
 import { and, asc, eq, inArray, sql } from "drizzle-orm";
 import type { Db } from "@paperclipai/db";
-import { approvalComments, approvals } from "@paperclipai/db";
+import { approvalComments, approvals, companies } from "@paperclipai/db";
 import {
   STAFF_FORMATION_APPROVAL_TYPE,
   resolveFormationSeatDecisions,
@@ -52,6 +52,52 @@ export function approvalService(db: Db) {
     return seats;
   }
 
+  function hasFormationResolution(payload: Record<string, unknown>) {
+    if (!payload.resolution || typeof payload.resolution !== "object") return false;
+    const resolution = payload.resolution as Record<string, unknown>;
+    return Array.isArray(resolution.activatedSeats) && Array.isArray(resolution.declinedSeats);
+  }
+
+  async function ensureFormationCompanyBudget(
+    approval: ApprovalRecord,
+    decidedByUserId: string,
+  ) {
+    const payload = approval.payload as Record<string, unknown>;
+    const seats = readFormationPayloadSeats(payload);
+    const seatTotal = seats.reduce((total, seat) => total + Math.max(0, seat.budgetMonthlyCents), 0);
+    const requestedCompanyBudget = typeof payload.companyBudgetMonthlyCents === "number"
+      ? Math.max(0, Math.floor(payload.companyBudgetMonthlyCents))
+      : 0;
+    const requiredCompanyBudget = Math.max(requestedCompanyBudget, seatTotal);
+    if (requiredCompanyBudget <= 0) {
+      throw unprocessable("Core-8 staffing approval requires a positive company budget ceiling");
+    }
+
+    const company = await db
+      .select({ budgetMonthlyCents: companies.budgetMonthlyCents })
+      .from(companies)
+      .where(eq(companies.id, approval.companyId))
+      .then((rows) => rows[0] ?? null);
+    if (!company) throw notFound("Company not found");
+
+    const enforcedCompanyBudget = Math.max(company.budgetMonthlyCents, requiredCompanyBudget);
+    await budgets.upsertPolicy(
+      approval.companyId,
+      {
+        scopeType: "company",
+        scopeId: approval.companyId,
+        amount: enforcedCompanyBudget,
+        windowKind: "calendar_month_utc",
+      },
+      decidedByUserId,
+    );
+    return {
+      previousCompanyBudgetMonthlyCents: company.budgetMonthlyCents,
+      companyBudgetMonthlyCents: enforcedCompanyBudget,
+      companyBudgetRaised: enforcedCompanyBudget > company.budgetMonthlyCents,
+    };
+  }
+
   async function persistApprovalResolution(
     id: string,
     payload: Record<string, unknown>,
@@ -71,6 +117,7 @@ export function approvalService(db: Db) {
     approval: ApprovalRecord,
     decidedByUserId: string,
     declinedSeats: FormationDeclinedSeat[] | undefined,
+    companyBudgetResolution: Awaited<ReturnType<typeof ensureFormationCompanyBudget>>,
   ) {
     const payload = approval.payload as Record<string, unknown>;
     const seats = readFormationPayloadSeats(payload);
@@ -79,7 +126,9 @@ export function approvalService(db: Db) {
     const activatedSeats: { department: string; agentId: string }[] = [];
     for (const seat of decisions.activate) {
       const activated = await agentsSvc.activatePendingApproval(seat.agentId);
-      if (!activated?.activated) continue;
+      if (!activated?.agent) {
+        throw unprocessable(`Core-8 formation seat no longer exists: ${seat.department}`);
+      }
       if (seat.budgetMonthlyCents > 0) {
         await budgets.upsertPolicy(
           approval.companyId,
@@ -102,6 +151,7 @@ export function approvalService(db: Db) {
     }
 
     const { persisted, nextPayload } = await persistApprovalResolution(approval.id, payload, {
+      ...companyBudgetResolution,
       activatedSeats,
       declinedSeats: declinedResolution,
     });
@@ -158,8 +208,9 @@ export function approvalService(db: Db) {
     targetStatus: "approved" | "rejected",
     decidedByUserId: string,
     decisionNote: string | null | undefined,
+    knownExisting?: ApprovalRecord,
   ): Promise<ResolutionResult> {
-    const existing = await getExistingApproval(id);
+    const existing = knownExisting ?? await getExistingApproval(id);
     if (!canResolveStatuses.has(existing.status)) {
       if (existing.status === targetStatus) {
         return { approval: existing, applied: false };
@@ -239,20 +290,30 @@ export function approvalService(db: Db) {
       decisionNote?: string | null,
       options?: { declinedSeats?: FormationDeclinedSeat[] },
     ) => {
+      const existing = await getExistingApproval(id);
+      const existingPayload = existing.payload as Record<string, unknown>;
+      const shouldApplyFormation = existing.type === STAFF_FORMATION_APPROVAL_TYPE
+        && (canResolveStatuses.has(existing.status)
+          || (existing.status === "approved" && !hasFormationResolution(existingPayload)));
+      const companyBudgetResolution = shouldApplyFormation
+        ? await ensureFormationCompanyBudget(existing, decidedByUserId)
+        : null;
       const { approval: updated, applied } = await resolveApproval(
         id,
         "approved",
         decidedByUserId,
         decisionNote,
+        existing,
       );
 
-      if (applied && updated.type === STAFF_FORMATION_APPROVAL_TYPE) {
+      if (companyBudgetResolution && updated.type === STAFF_FORMATION_APPROVAL_TYPE) {
         const resolved = await applyStaffFormationApproval(
           updated,
           decidedByUserId,
           options?.declinedSeats,
+          companyBudgetResolution,
         );
-        return { approval: resolved, applied };
+        return { approval: resolved, applied: true };
       }
 
       let hireApprovedAgentId: string | null = null;

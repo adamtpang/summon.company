@@ -1,6 +1,14 @@
 import { randomUUID } from "node:crypto";
 import { afterAll, afterEach, beforeAll, describe, expect, it } from "vitest";
-import { agents, companies, createDb, heartbeatRuns } from "@paperclipai/db";
+import {
+  agents,
+  companies,
+  companyPaymentAccounts,
+  costEvents,
+  createDb,
+  financeEvents,
+  heartbeatRuns,
+} from "@paperclipai/db";
 import {
   getEmbeddedPostgresTestSupport,
   startEmbeddedPostgresTestDatabase,
@@ -44,12 +52,127 @@ describeEmbeddedPostgres("dashboard service", () => {
   beforeAll(async () => {
     tempDb = await startEmbeddedPostgresTestDatabase("paperclip-dashboard-service-");
     db = createDb(tempDb.connectionString);
-  }, 20_000);
+  }, 60_000);
 
   afterEach(async () => {
+    await db.delete(financeEvents);
+    await db.delete(costEvents);
+    await db.delete(companyPaymentAccounts);
     await db.delete(heartbeatRuns);
     await db.delete(agents);
     await db.delete(companies);
+  });
+
+  it("combines company-scoped AI and recognized operating expenses without double counting", async () => {
+    const companyId = randomUUID();
+    const otherCompanyId = randomUUID();
+    const agentId = randomUUID();
+    const otherAgentId = randomUUID();
+    const costEventId = randomUUID();
+    const occurredAt = utcDay(0);
+
+    await db.insert(companies).values([
+      {
+        id: companyId,
+        name: "Summon",
+        issuePrefix: `T${companyId.replace(/-/g, "").slice(0, 6).toUpperCase()}`,
+        requireBoardApprovalForNewAgents: false,
+      },
+      {
+        id: otherCompanyId,
+        name: "Other",
+        issuePrefix: `T${otherCompanyId.replace(/-/g, "").slice(0, 6).toUpperCase()}`,
+        requireBoardApprovalForNewAgents: false,
+      },
+    ]);
+    await db.insert(agents).values([
+      {
+        id: agentId,
+        companyId,
+        name: "CFO",
+        role: "finance",
+        status: "idle",
+        adapterType: "codex_local",
+        adapterConfig: {},
+        runtimeConfig: {},
+        permissions: {},
+      },
+      {
+        id: otherAgentId,
+        companyId: otherCompanyId,
+        name: "Other CFO",
+        role: "finance",
+        status: "idle",
+        adapterType: "codex_local",
+        adapterConfig: {},
+        runtimeConfig: {},
+        permissions: {},
+      },
+    ]);
+    await db.insert(costEvents).values({
+      id: costEventId,
+      companyId,
+      agentId,
+      provider: "openai",
+      biller: "openai",
+      model: "gpt-test",
+      costCents: 100,
+      occurredAt,
+    });
+    await db.insert(financeEvents).values([
+      { companyId, eventKind: "operating_expense", direction: "debit", biller: "Vercel", amountCents: 500, currency: "USD", metadataJson: { source: "statement_import" }, occurredAt },
+      { companyId, eventKind: "operating_expense", direction: "credit", biller: "Vercel", amountCents: 100, currency: "USD", occurredAt },
+      { companyId, eventKind: "platform_fee", direction: "debit", biller: "Stripe", amountCents: 50, currency: "USD", estimated: true, occurredAt },
+      { companyId, costEventId, eventKind: "inference_charge", direction: "debit", biller: "OpenAI", amountCents: 100, currency: "USD", occurredAt },
+      { companyId, eventKind: "credit_purchase", direction: "debit", biller: "OpenAI", amountCents: 10_000, currency: "USD", occurredAt },
+      { companyId, eventKind: "manual_adjustment", direction: "debit", biller: "Unknown", amountCents: 700, currency: "USD", occurredAt },
+      { companyId, eventKind: "operating_expense", direction: "debit", biller: "EU vendor", amountCents: 800, currency: "EUR", occurredAt },
+      { companyId: otherCompanyId, eventKind: "operating_expense", direction: "debit", biller: "Other vendor", amountCents: 900, currency: "USD", occurredAt },
+    ]);
+    await db.insert(companyPaymentAccounts).values({
+      companyId,
+      providerKey: "stripe",
+      externalAccountId: "acct_finance_dashboard",
+      displayName: "Summon Stripe",
+      ownerAgentId: agentId,
+      mode: "live",
+      evidence: {
+        revenue: {
+          monthGrossCents: 1_550,
+          monthCurrency: "USD",
+          checkoutSessionsHasMore: false,
+          availableBalanceCents: 11_000,
+          pendingBalanceCents: 500,
+          annualRecurringRevenueCents: 118_800,
+          recurringCurrency: "usd",
+          recurringCustomerCount: 1,
+          subscriptionsHasMore: false,
+        },
+      },
+    });
+
+    const summary = await dashboardService(db).summary(companyId);
+
+    expect(summary.finance).toMatchObject({
+      aiExpenseCents: 100,
+      operatingExpenseCents: 450,
+      estimatedOperatingExpenseCents: 50,
+      recordedOperatingExpenseEvents: 3,
+      statementOperatingExpenseEvents: 1,
+      boardRecordedOperatingExpenseEvents: 2,
+      expenseEvidenceSource: "mixed",
+      expenseCents: 550,
+      expenseCurrency: "usd",
+      expenseCoverage: "ai_and_recorded_operating",
+      revenueCents: 1_550,
+      arrCents: 118_800,
+      arrCurrency: "usd",
+      arrCoverage: "complete",
+      payingCustomerCount: 1,
+      profitCents: 1_000,
+      profitStatus: "measured_proxy",
+      runwayStatus: "profitable",
+    });
   });
 
   afterAll(async () => {

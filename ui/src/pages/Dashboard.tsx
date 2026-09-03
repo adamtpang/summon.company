@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Bot, LayoutDashboard } from "lucide-react";
 import { dashboardApi } from "../api/dashboard";
@@ -7,23 +7,24 @@ import { agentsApi } from "../api/agents";
 import { projectsApi } from "../api/projects";
 import { goalsApi } from "../api/goals";
 import { attentionApi } from "../api/attention";
+import { heartbeatsApi } from "../api/heartbeats";
 import { APP_NAME } from "../lib/app-branding";
 import { attentionBadgeCount } from "../lib/attention";
 import { useCompany } from "../context/CompanyContext";
 import { useDialogActions } from "../context/DialogContext";
 import { useBreadcrumbs } from "../context/BreadcrumbContext";
 import { queryKeys } from "../lib/queryKeys";
+import { collectLiveIssueIds } from "../lib/liveIssueIds";
+import { useVisibilityRefetchInterval } from "../lib/polling";
 import { EmptyState } from "../components/EmptyState";
 import { PageSkeleton } from "../components/PageSkeleton";
-import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { MissionControl } from "../components/MissionControl";
 import { PluginSlotOutlet } from "@/plugins/slots";
-import { useMarketCapSnapshot } from "./MarketCap";
 
 export function Dashboard() {
   const { selectedCompanyId, companies } = useCompany();
-  const { openOnboarding } = useDialogActions();
+  const { openNewIssue, openOnboarding } = useDialogActions();
   const { setBreadcrumbs } = useBreadcrumbs();
 
   useEffect(() => {
@@ -60,7 +61,14 @@ export function Dashboard() {
     queryFn: () => attentionApi.list(selectedCompanyId!),
     enabled: !!selectedCompanyId,
   });
-  const { snapshot: marketCapSnapshot } = useMarketCapSnapshot(selectedCompanyId);
+  const liveRunsRefetchInterval = useVisibilityRefetchInterval({ visibleMs: 5_000 });
+  const { data: liveRuns } = useQuery({
+    queryKey: queryKeys.liveRuns(selectedCompanyId!),
+    queryFn: () => heartbeatsApi.liveRunsForCompany(selectedCompanyId!),
+    enabled: !!selectedCompanyId,
+    refetchInterval: liveRunsRefetchInterval,
+  });
+  const liveIssueIds = useMemo(() => collectLiveIssueIds(liveRuns), [liveRuns]);
 
   if (!selectedCompanyId) {
     if (companies.length === 0) {
@@ -79,39 +87,49 @@ export function Dashboard() {
   if (isLoading || !data) return <PageSkeleton variant="dashboard" />;
 
   const hasNoAgents = agents.length === 0;
+  const notice = error || hasNoAgents ? (
+    <div className="flex flex-wrap items-center justify-between gap-3">
+      <div className="flex items-center gap-2.5">
+        <Bot className="size-4 shrink-0" aria-hidden="true" />
+        <p className="text-sm">
+          {error?.message ?? "Your eight-department formation has no AI employees yet."}
+        </p>
+      </div>
+      {hasNoAgents ? (
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => openOnboarding({ initialStep: 2, companyId: selectedCompanyId })}
+          className="rounded-(--rad-2) border-foreground font-console text-xs uppercase tracking-(--tracking-eyebrow) shadow-none"
+        >
+          Hire first employee
+        </Button>
+      ) : null}
+    </div>
+  ) : undefined;
 
   return (
-    <div className="space-y-6 p-4 md:p-6">
-      {error ? <p className="text-sm text-destructive">{error.message}</p> : null}
-
-      {hasNoAgents ? (
-        <Card className="flex flex-wrap items-center justify-between gap-3 p-4">
-          <div className="flex items-center gap-2.5">
-            <Bot className="size-4 shrink-0 text-muted-foreground" aria-hidden="true" />
-            <p className="text-sm">Your eight-department formation has no AI employees yet.</p>
-          </div>
-          <Button variant="outline" size="sm" onClick={() => openOnboarding({ initialStep: 2, companyId: selectedCompanyId })}>
-            Hire first employee
-          </Button>
-        </Card>
-      ) : null}
-
+    <div className="h-full min-h-0">
       <MissionControl
         companyId={selectedCompanyId}
+        companyName={companies.find((company) => company.id === selectedCompanyId)?.name}
         summary={data}
         agents={agents}
         issues={issues}
         projects={projects}
         goals={goals}
         decisionCount={attentionBadgeCount(attention)}
-        marketCapSnapshot={marketCapSnapshot}
-      />
-
-      <PluginSlotOutlet
-        slotTypes={["dashboardWidget"]}
-        context={{ companyId: selectedCompanyId }}
-        className="grid gap-4 md:grid-cols-2"
-        itemClassName="rounded-lg border bg-card p-4 shadow-sm"
+        liveIssueIds={liveIssueIds}
+        onCreateTask={() => openNewIssue()}
+        notice={notice}
+        extensions={(
+          <PluginSlotOutlet
+            slotTypes={["dashboardWidget"]}
+            context={{ companyId: selectedCompanyId }}
+            className="grid gap-2 md:grid-cols-2"
+            itemClassName="border-b border-foreground py-3"
+          />
+        )}
       />
     </div>
   );

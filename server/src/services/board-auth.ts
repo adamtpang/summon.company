@@ -57,6 +57,7 @@ export function boardAuthService(db: Db) {
           id: authUsers.id,
           name: authUsers.name,
           email: authUsers.email,
+          accountState: authUsers.accountState,
         })
         .from(authUsers)
         .where(eq(authUsers.id, userId))
@@ -83,11 +84,12 @@ export function boardAuthService(db: Db) {
         .then((rows) => rows[0] ?? null),
     ]);
 
+    const accountActive = user?.accountState === "active";
     return {
       user,
-      companyIds: memberships.map((row) => row.companyId),
-      memberships,
-      isInstanceAdmin: Boolean(adminRole),
+      companyIds: accountActive ? memberships.map((row) => row.companyId) : [],
+      memberships: accountActive ? memberships : [],
+      isInstanceAdmin: accountActive && Boolean(adminRole),
     };
   }
 

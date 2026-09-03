@@ -2,6 +2,7 @@ import { spawnSync } from "node:child_process";
 
 const API_BASE = process.env.VITALS_API_BASE ?? "http://127.0.0.1:3100/api";
 const CEO_ID = process.env.VITALS_CEO_ID ?? "2dda4faa-8408-4c5b-a4f3-722a8303d276";
+const CODEX_MODEL = process.env.SUMMON_CODEX_MODEL ?? "gpt-5.6-sol";
 const command = process.argv[2] ?? "status";
 const invoke = !process.argv.includes("--no-invoke");
 const force = process.argv.includes("--force");
@@ -113,11 +114,11 @@ async function main() {
     adapterConfig = {
       ...managed,
       env: { CODEX_HOME: "C:\\Users\\adamp\\.codex" },
-      model: "gpt-5.5",
+      model: CODEX_MODEL,
       modelReasoningEffort: "high",
       dangerouslyBypassApprovalsAndSandbox: true,
     };
-    cheapAdapterConfig = { model: "gpt-5.5", modelReasoningEffort: "low" };
+    cheapAdapterConfig = { model: CODEX_MODEL, modelReasoningEffort: "low" };
   } else {
     throw new Error("Usage: node scripts/vitals-ceo-runtime.mjs <status|claude|codex|stop> [--no-invoke] [--force]");
   }

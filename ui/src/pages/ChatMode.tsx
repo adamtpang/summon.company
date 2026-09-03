@@ -8,15 +8,14 @@ import { projectsApi } from "../api/projects";
 import { useCompany } from "../context/CompanyContext";
 import { useSidebar } from "../context/SidebarContext";
 import { queryKeys } from "../lib/queryKeys";
+import { selectCompanyCofounder } from "@paperclipai/shared";
 
 /**
  * Chat mode (BETA — board ask 2026-07-19): the whole company as a
- * conversation. "I want to feel like I'm texting a real person." This wraps
- * the existing BoardChat machinery in texting chrome: a persona header (who
- * you're talking to, present), the beta badge, and an immersive collapsed
- * sidebar. Intelligence stays in the agent — "status", "decisions", "help"
- * are things Sol ANSWERS (its instructions carry the command doctrine), not
- * client-parsed tricks. Inline visual cards on demand are the next iteration.
+ * conversation. This wraps the existing BoardChat machinery in texting
+ * chrome and names the responder from the same configured Cofounder selection
+ * used by the classic Company Chat surface.
+ * Inline visual cards on demand are the next iteration.
  */
 export function ChatMode() {
   const { selectedCompanyId } = useCompany();
@@ -33,8 +32,7 @@ export function ChatMode() {
     queryFn: () => agentsApi.list(selectedCompanyId!),
     enabled: !!selectedCompanyId,
   });
-  const cofounder = agents?.find((a) => a.role === "ceo") ?? null;
-  const monogram = (cofounder?.name ?? "S").slice(0, 1).toUpperCase();
+  const cofounderAgent = useMemo(() => selectCompanyCofounder(agents ?? []), [agents]);
 
   // The game HUD (board, 2026-07-19: "like a video game with progression") —
   // the company roadmap as the persistent progress strip above the thread.
@@ -68,13 +66,13 @@ export function ChatMode() {
           aria-hidden="true"
           className="flex size-10 shrink-0 items-center justify-center rounded-full bg-primary text-lg font-semibold text-primary-foreground"
         >
-          {monogram}
+          {(cofounderAgent?.name.trim().charAt(0) || "C").toUpperCase()}
         </span>
         <div className="min-w-0 flex-1">
-          <p className="truncate text-sm font-semibold">{cofounder?.name ?? "Your cofounder"}</p>
+          <p className="truncate text-sm font-semibold">{cofounderAgent?.name ?? "Cofounder"}</p>
           <p className="flex items-center gap-1.5 text-xs text-muted-foreground">
-            <span className="inline-block size-1.5 rounded-full bg-(--status-task-done)" aria-hidden="true" />
-            online
+            <span className="inline-block size-1.5 rounded-full bg-(--status-agent-idle)" aria-hidden="true" />
+            {cofounderAgent?.status ?? "unconfigured"} · governed
           </p>
         </div>
         <span className="rounded-full border border-border px-2 py-0.5 text-(length:--text-nano) font-semibold uppercase tracking-(--tracking-eyebrow) text-muted-foreground">

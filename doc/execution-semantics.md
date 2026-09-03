@@ -737,3 +737,46 @@ For a board operator, the intended meaning is:
 - blockers explain waiting
 
 That is the execution contract Paperclip should present to operators.
+
+## 16. Company Continuity Projection
+
+Summon projects the binding company path through `CompanyLoopStatus.continuity`. This is read behavior over the execution and recovery contract above. It does not schedule work, create wakes, change ownership, retry, pause, cancel, or resolve an issue.
+
+The binding path is the active Nightshift control issue when Nightshift is running or stopping. Otherwise it is the first open task in the board-ordered company queue. The projection has exactly four states:
+
+- `operating`: a live run, queued wake, scheduled monitor, active Nightshift, or ordinary board-ordered waiting path exists
+- `recovering`: an agent or system recovery owns the path, or active/review/blocked work has no durable live or waiting path and must be reconciled
+- `needs_board`: a human-owned recovery, pending approval, human-owned binding task, pending employee approval, or unavailable terminated owner requires judgment
+- `stopped`: the company is paused or archived, its monthly budget is exhausted, or the accountable employee is paused
+
+Precedence for the binding path is `stopped`, then `needs_board`, then `recovering`, then `operating`. Company-wide counts never override the binding-path headline.
+
+Every non-operating focused path names the source issue, cause, owner, next action, next check when one exists, and source-scoped recovery action when one exists. The classifier must not convert the absence of errors into a green state for agent-owned active work. Agent-owned `in_progress` or `in_review` without a run, wake, monitor, Nightshift path, approval, human owner, or recovery path projects as `recovering`.
+
+Recent recovery receipts come only from terminal `issue_recovery_actions` records. The company read model exposes an allowlisted projection of task reference, recovery kind, cause, prior state, outcome, owner, timestamps, and a fixed next-path statement. It caps the result, never returns raw recovery evidence, operator resolution notes, prompts, transcripts, credentials, provider bodies, or another company's records.
+
+The Company Loop UI may link to the existing source task or decision surface. It must not add a second recovery control, generic health score, or heal-all action.
+
+## 17. Nightshift Hard Ceilings
+
+Every newly created Nightshift requires a board-selected duration from the bounded set of 1–12, 18, 24, 48, 72, or 120 hours, a one-to-five work-slot ceiling, and a dollar ceiling. Both ceilings are persisted in the append-only `company.cycle.started` event and are returned in `CompanyNightshift.maxTasks` and `CompanyNightshift.spendLimitCents`; cycles created before either contract remain readable with a `null` value and must be labeled as legacy rather than silently assigned a number.
+
+The work-slot ceiling counts dispatches started by the Nightshift, not every task completed by the company during the same wall-clock window. Before each new dispatch, the server projects the prior Nightshift dispatch receipts. Once the selected count has started, it emits `company.cycle.task_limit_reached`, records the boundary on the control task, and schedules no further run. Already-running work finishes normally.
+
+The measured session spend is the conservative sum of company cost events occurring while the Nightshift is open. It may include concurrent company work, because a safety boundary may over-count but must not hide company spend. Before every dispatch, the server includes the ceiling and remaining headroom in the wake payload and context. Once observed spend is at or above the ceiling, it emits `company.cycle.spend_limit_reached`, records the boundary on the control task, and schedules no further run.
+
+This is a dispatch ceiling, not a promise that a provider can interrupt or perfectly price an in-flight call. Work already running finishes so its final cost can be recorded, and settled spend may therefore exceed the selected number by that final call. Company and employee budget hard stops remain authoritative and may stop work sooner. When no run remains, the normal deterministic terminal brief closes the Nightshift and includes the settled spend.
+
+## 18. Daily Nightshift Schedule
+
+A daily Nightshift schedule is an explicit, durable board authorization for one company. It stores one UTC start hour plus the same bounded duration, one-to-five work-slot ceiling, and dollar ceiling required for a manual Nightshift. Pausing the schedule clears its next run without deleting its configuration; pausing the company prevents scheduled work. The browser is never part of the scheduling contract.
+
+The existing server scheduler reserves a due row with a ten-minute lease before starting work. A schedule never overlaps an open Nightshift. A successful reservation advances the next occurrence by one day; definite failures back off between one and six hours and auto-pause after eight consecutive failures. Missing board authorization fails closed. A board-only Run now action uses the saved schedule but still refuses overlap and still passes through every ordinary assignment, approval, company budget, employee budget, task-count, and spend boundary.
+
+## 19. Recurring Company Media
+
+Recurring Company Media is an explicit board authorization to create accountable internal work, not standing authority to call a media provider or publish output. A company may store at most one Image and one Video schedule. Each schedule fixes Daily, Weekdays, or Weekly cadence, a standing brief, purpose, format, optional bounded video duration, accountable employee, optional project, and the board user who authorized it.
+
+A newly saved schedule is paused and creates no work; editing an active schedule preserves its status. Starting attempts the first ordinary issue immediately; pausing clears its next due time; Run now uses the saved configuration. Due work is reserved by the existing server scheduler with a ten-minute lease. Definite failures retry with bounded backoff and auto-pause after eight. An interrupted assignment wake retains the same deterministic issue. An already-active issue of the same media kind causes a safe skip to the next occurrence rather than a duplicate stack. Company pause and an unavailable, pending, paused, or terminated owner fail closed.
+
+The schedule produces one `media_cadence` issue under the normal assignment, company-budget, and employee-budget gates. Completion requires one real attached image or video artifact, its dimensions or duration, and safe tool/version evidence when available. The issue may not publish, post, advertise, message, install a paid provider, buy credits, or expand provider authority. Those actions remain separately governed capabilities.

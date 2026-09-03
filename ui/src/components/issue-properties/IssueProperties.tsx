@@ -73,6 +73,7 @@ import {
 } from "./helpers";
 import { PropertyPicker } from "./property-picker";
 import { PropertyChip, PropertyRow, PropertySection } from "./primitives";
+import { IssueCadenceControl } from "./cadence-control";
 import { IssueCasesPanel } from "../IssueCasesPanel";
 import { ExpandRelationListButton, RemovableIssueReferencePill } from "./relation-controls";
 import { Badge } from "@/components/ui/badge";
@@ -1894,6 +1895,8 @@ export function IssueProperties({
             showLabel
           />
         </PropertyRow>
+
+        <IssueCadenceControl issue={issue} inline={inline} onUpdate={onUpdate} />
 
         <PropertyPicker
           inline={inline}

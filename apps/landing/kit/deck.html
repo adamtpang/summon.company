@@ -34,16 +34,18 @@
 
   /* screen viewer */
   @media screen {
-    .deck { position: fixed; inset: 0; display: grid; place-items: center; }
+    .deck { position: fixed; inset: 0; }
     .slide { display: none; box-shadow: var(--shadow-hero); border-radius: var(--radius-panel);
-             transform: scale(var(--fit, 1)); transform-origin: center; }
+             position: absolute; left: 50%; top: 50%;
+             transform: translate(-50%, -50%) scale(var(--fit, 1)); transform-origin: center; }
     .slide.active { display: flex; }
     .hud { position: fixed; bottom: 18px; left: 50%; transform: translateX(-50%);
            z-index: 50; display: flex; gap: 14px; align-items: center;
            font-family: var(--font-mono); font-size: 12px; color: #aab;
            background: rgba(0,0,0,.4); padding: 8px 14px; border-radius: var(--radius-pill); backdrop-filter: blur(8px); }
-    .hud button { all: unset; cursor: pointer; color: #dde; padding: 2px 8px; border-radius: 6px; }
+    .hud button { all: unset; box-sizing: border-box; min-width: 44px; min-height: 44px; cursor: pointer; color: #dde; padding: 2px 8px; border-radius: 6px; text-align: center; }
     .hud button:hover { background: rgba(255,255,255,.12); }
+    .hud button:focus-visible { outline: 2px solid #8AB9FF; outline-offset: 2px; }
   }
   @media print {
     @page { size: 1280px 720px; margin: 0; }
@@ -128,8 +130,8 @@
     <div class="kicker">Why it holds</div>
     <h2 class="h2" style="margin-top:20px">You stay the board.</h2>
     <div class="metrics">
-      <div class="metric"><div class="num">$99</div><div class="lbl">per AI employee, per month</div></div>
-      <div class="metric"><div class="num">24/7</div><div class="lbl">always on, never idle</div></div>
+      <div class="metric"><div class="num">$500</div><div class="lbl">per founding seat, per month</div></div>
+      <div class="metric"><div class="num">8</div><div class="lbl">departments, one company context</div></div>
       <div class="metric"><div class="num">$0</div><div class="lbl">surprise bills — budget-capped</div></div>
     </div>
     <div class="foot"><span class="brandmark"><svg width="20" height="20" viewBox="0 0 32 32"><path class="ekg-trace" d="M1.5 16 H10 L13 10.5 L16.5 22 L19 16 H30.5" stroke="var(--text-tertiary)" stroke-width="2.8"/></svg>Summon</span><span>05</span></div>
@@ -139,7 +141,7 @@
   <section class="slide slide--deep">
     <div class="kicker">Pricing</div>
     <h2 class="h2" style="margin-top:20px">One rate. Every function.</h2>
-    <div class="price"><span class="big">$99</span><span class="per">/ employee / month · cancel anytime · capped spend</span></div>
+    <div class="price"><span class="big">$500</span><span class="per">/ founding seat / month · eight departments · cancel anytime</span></div>
     <p class="lead" style="margin-top:32px">Add a marketer, a closer, an ops lead, a support rep. They work while you sleep. You approve.</p>
     <div class="foot"><span>summon.company</span><span>06</span></div>
   </section>
@@ -166,8 +168,10 @@
   let i = 0;
   const counter = document.getElementById('counter');
   function fit(){
-    // scale the 1280×720 slide to fit the viewport with margin
-    const s = Math.min(window.innerWidth/1280, window.innerHeight/720) * 0.92;
+    // Preserve the exact 1280×720 artifact while fitting its visual preview.
+    const availableWidth = Math.max(window.innerWidth - 32, 1);
+    const availableHeight = Math.max(window.innerHeight - 112, 1);
+    const s = Math.min(availableWidth / 1280, availableHeight / 720);
     document.documentElement.style.setProperty('--fit', s);
   }
   function show(n){

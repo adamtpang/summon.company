@@ -3324,6 +3324,42 @@ describeEmbeddedPostgres("heartbeat orphaned process recovery", () => {
     }
   });
 
+  it("skips spend-capped assigned todo work without producing repeated recovery wakeups", async () => {
+    const { companyId, agentId, issueId } = await seedAssignedTodoNoRunFixture();
+    await db
+      .update(issues)
+      .set({ executionPolicy: { spendLimitCents: 100 } })
+      .where(eq(issues.id, issueId));
+    await db.insert(costEvents).values({
+      companyId,
+      agentId,
+      issueId,
+      provider: "test",
+      biller: "test",
+      billingType: "tokens",
+      model: "test-model",
+      costCents: 100,
+      occurredAt: new Date(),
+    });
+    const heartbeat = heartbeatService(db);
+
+    const result = await heartbeat.reconcileStrandedAssignedIssues();
+    expect(result.assignmentDispatched).toBe(0);
+    expect(result.dispatchRequeued).toBe(0);
+    expect(result.continuationRequeued).toBe(0);
+    expect(result.escalated).toBe(0);
+    expect(result.skipped).toBe(1);
+    expect(result.issueIds).toEqual([]);
+
+    const wakeups = await db
+      .select()
+      .from(agentWakeupRequests)
+      .where(eq(agentWakeupRequests.agentId, agentId));
+    expect(wakeups).toHaveLength(0);
+    const runs = await db.select().from(heartbeatRuns).where(eq(heartbeatRuns.agentId, agentId));
+    expect(runs).toHaveLength(0);
+  });
+
   it("does not dispatch assigned todo work with no prior run when the agent is paused", async () => {
     const { agentId, issueId } = await seedAssignedTodoNoRunFixture({ agentStatus: "paused" });
     const heartbeat = heartbeatService(db);

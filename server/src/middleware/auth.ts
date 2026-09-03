@@ -54,7 +54,7 @@ async function loadResponsibleUserMemberships(
   if (!input.userId) return [];
   const [user, memberships] = await Promise.all([
     db
-      .select({ id: authUsers.id })
+      .select({ id: authUsers.id, accountState: authUsers.accountState })
       .from(authUsers)
       .where(eq(authUsers.id, input.userId))
       .then((rows) => rows[0] ?? null),
@@ -74,7 +74,7 @@ async function loadResponsibleUserMemberships(
         ),
       ),
   ]);
-  return user ? memberships : [];
+  return user?.accountState === "active" ? memberships : [];
 }
 
 async function auditAgentJwtRunHeaderMismatch(
@@ -178,7 +178,12 @@ export function actorMiddleware(db: Db, opts: ActorMiddlewareOptions): RequestHa
         }
         if (session?.user?.id) {
           const userId = session.user.id;
-          const [roleRow, memberships] = await Promise.all([
+          const [userRow, roleRow, memberships] = await Promise.all([
+            db
+              .select({ accountState: authUsers.accountState })
+              .from(authUsers)
+              .where(eq(authUsers.id, userId))
+              .then((rows) => rows[0] ?? null),
             db
               .select({ id: instanceUserRoles.id })
               .from(instanceUserRoles)
@@ -199,14 +204,20 @@ export function actorMiddleware(db: Db, opts: ActorMiddlewareOptions): RequestHa
                 ),
               ),
           ]);
+          const accountState = userRow?.accountState === "deactivated" || userRow?.accountState === "deleted"
+            ? userRow.accountState
+            : "active";
+          const accountActive = accountState === "active";
           req.actor = {
             type: "board",
             userId,
             userName: session.user.name ?? null,
             userEmail: session.user.email ?? null,
-            companyIds: memberships.map((row) => row.companyId),
-            memberships,
-            isInstanceAdmin: Boolean(roleRow),
+            accountState,
+            sessionId: session.session?.id ?? undefined,
+            companyIds: accountActive ? memberships.map((row) => row.companyId) : [],
+            memberships: accountActive ? memberships : [],
+            isInstanceAdmin: accountActive && Boolean(roleRow),
             runId: runIdHeader ?? undefined,
             source: "session",
           };
@@ -235,6 +246,9 @@ export function actorMiddleware(db: Db, opts: ActorMiddlewareOptions): RequestHa
           userId: boardKey.userId,
           userName: access.user?.name ?? null,
           userEmail: access.user?.email ?? null,
+          accountState: access.user.accountState === "deactivated" || access.user.accountState === "deleted"
+            ? access.user.accountState
+            : "active",
           companyIds: access.companyIds,
           memberships: access.memberships,
           isInstanceAdmin: access.isInstanceAdmin,
@@ -412,6 +426,25 @@ export async function resolveCloudTenantActor(db: Db, req: Request): Promise<Exp
       },
     });
 
+  const accountState = await db
+    .select({ accountState: authUsers.accountState })
+    .from(authUsers)
+    .where(eq(authUsers.id, userId))
+    .then((rows) => rows[0]?.accountState ?? "active");
+  if (accountState !== "active") {
+    return {
+      type: "board",
+      userId,
+      userName,
+      userEmail,
+      accountState: accountState === "deleted" ? "deleted" : "deactivated",
+      companyIds: [],
+      memberships: [],
+      isInstanceAdmin: false,
+      source: "cloud_tenant",
+    };
+  }
+
   // Earlier cloud_tenant builds granted every tenant user `instance_admin`.
   // Stale rows from those deployments would still elevate this user through
   // the BetterAuth session path, board API keys, and the authorization
@@ -480,6 +513,7 @@ export async function resolveCloudTenantActor(db: Db, req: Request): Promise<Exp
     userId,
     userName,
     userEmail,
+    accountState: "active",
     companyIds: [companyId],
     memberships: [{
       companyId,

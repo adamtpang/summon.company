@@ -7,6 +7,7 @@ import {
   agents,
   agentWakeupRequests,
   approvals,
+  budgetPolicies,
   builtInManagedResources,
   companies,
   companySkillVersions,
@@ -24,6 +25,7 @@ import {
   startEmbeddedPostgresTestDatabase,
 } from "./helpers/embedded-postgres.js";
 import { companyService } from "../services/companies.js";
+import { approvalService } from "../services/approvals.js";
 import { readBuiltInAgentMarker } from "../services/built-in-agent-metadata.js";
 import { reconcileBuiltInAgentsOnStartup } from "../services/built-in-agents.js";
 
@@ -57,6 +59,7 @@ describeEmbeddedPostgres("companyService", () => {
     await db.delete(agentWakeupRequests);
     await db.delete(agentConfigRevisions);
     await db.delete(activityLog);
+    await db.delete(budgetPolicies);
     await db.delete(agents);
     await db.delete(principalPermissionGrants);
     await db.delete(companyMemberships);
@@ -162,6 +165,7 @@ describeEmbeddedPostgres("companyService", () => {
     const payload = formationCards[0]!.payload as Record<string, unknown>;
     expect(payload.question).toBe("Staff the formation?");
     expect(payload.summary).toBe("8 employees, $80/mo total cap");
+    expect(payload.companyBudgetMonthlyCents).toBe(8_000);
     expect(Array.isArray(payload.seats)).toBe(true);
     expect((payload.seats as unknown[]).length).toBe(8);
 
@@ -169,6 +173,59 @@ describeEmbeddedPostgres("companyService", () => {
     const { formationSeedService } = await import("../services/formation-seed.js");
     const second = await formationSeedService(db).seedCoreEightFormation(created.id);
     expect(second).toBeNull();
+  });
+
+  it("repairs a legacy uncapped company before activating its Core-8 formation", async () => {
+    const created = await companyService(db).create({
+      name: "Legacy Uncapped Co",
+      budgetMonthlyCents: 0,
+    });
+    const formation = await db
+      .select()
+      .from(approvals)
+      .where(and(
+        eq(approvals.companyId, created.id),
+        eq(approvals.type, "staff_formation"),
+      ))
+      .then((rows) => rows[0]!);
+
+    const result = await approvalService(db).approve(formation.id, "board-user", "Staff within the displayed hard stop");
+
+    expect(result.applied).toBe(true);
+    const company = await db
+      .select({ budgetMonthlyCents: companies.budgetMonthlyCents })
+      .from(companies)
+      .where(eq(companies.id, created.id))
+      .then((rows) => rows[0]!);
+    expect(company.budgetMonthlyCents).toBe(8_000);
+    const companyPolicy = await db
+      .select()
+      .from(budgetPolicies)
+      .where(and(
+        eq(budgetPolicies.companyId, created.id),
+        eq(budgetPolicies.scopeType, "company"),
+        eq(budgetPolicies.scopeId, created.id),
+      ))
+      .then((rows) => rows[0]!);
+    expect(companyPolicy).toMatchObject({ amount: 8_000, hardStopEnabled: true, isActive: true });
+
+    const formationAgents = await db
+      .select()
+      .from(agents)
+      .where(eq(agents.companyId, created.id))
+      .then((rows) => rows.filter((row) => {
+        const metadata = row.metadata as Record<string, unknown> | null;
+        const marker = metadata?.vitalsFormation as Record<string, unknown> | undefined;
+        return marker?.formation === "core8";
+      }));
+    expect(formationAgents).toHaveLength(8);
+    expect(formationAgents.every((agent) => agent.status === "idle")).toBe(true);
+    const resolution = (result.approval.payload as Record<string, unknown>).resolution as Record<string, unknown>;
+    expect(resolution).toMatchObject({
+      previousCompanyBudgetMonthlyCents: 0,
+      companyBudgetMonthlyCents: 8_000,
+      companyBudgetRaised: true,
+    });
   });
 
   it("archives companies by pausing runnable agents and cancelling active runs", async () => {
@@ -906,5 +963,82 @@ describeEmbeddedPostgres("companyService", () => {
     expect(archiveActivity[0]).toMatchObject({
       details: { agentsPaused: 1, runsCancelled: 1 },
     });
+  });
+
+  it("records a manual company pause and clears it on resume", async () => {
+    const companyId = randomUUID();
+    await db.insert(companies).values({
+      id: companyId,
+      name: "Lifecycle Co",
+      issuePrefix: `L${companyId.replace(/-/g, "").slice(0, 6).toUpperCase()}`,
+    });
+
+    const paused = await companyService(db).update(companyId, { status: "paused" });
+    expect(paused).toMatchObject({ status: "paused", pauseReason: "manual" });
+    expect(paused?.pausedAt).toBeInstanceOf(Date);
+
+    const resumed = await companyService(db).update(companyId, { status: "active" });
+    expect(resumed).toMatchObject({ status: "active", pauseReason: null, pausedAt: null });
+  });
+
+  it("does not let a generic lifecycle update bypass a budget hard stop", async () => {
+    const companyId = randomUUID();
+    await db.insert(companies).values({
+      id: companyId,
+      name: "Budget Stopped Co",
+      status: "paused",
+      pauseReason: "budget",
+      pausedAt: new Date(),
+      issuePrefix: `B${companyId.replace(/-/g, "").slice(0, 6).toUpperCase()}`,
+    });
+
+    await expect(companyService(db).update(companyId, { status: "active" })).rejects.toMatchObject({
+      status: 409,
+      message: expect.stringContaining("budget pause"),
+    });
+  });
+
+  it("guards permanent deletion with status, exact name, and zero active work", async () => {
+    const companyId = randomUUID();
+    const agentId = randomUUID();
+    const runId = randomUUID();
+    await db.insert(companies).values({
+      id: companyId,
+      name: "Delete Me Exactly",
+      issuePrefix: `D${companyId.replace(/-/g, "").slice(0, 6).toUpperCase()}`,
+    });
+
+    const service = companyService(db);
+    await expect(service.removePermanently(companyId, "Wrong Name")).rejects.toMatchObject({ status: 422 });
+    await expect(service.removePermanently(companyId, "Delete Me Exactly")).rejects.toMatchObject({ status: 409 });
+
+    await service.update(companyId, { status: "paused" });
+    await db.insert(agents).values({
+      id: agentId,
+      companyId,
+      name: "Lifecycle Worker",
+      role: "engineer",
+      status: "running",
+      adapterType: "codex_local",
+      adapterConfig: {},
+      runtimeConfig: {},
+      permissions: {},
+    });
+    await db.insert(heartbeatRuns).values({
+      id: runId,
+      companyId,
+      agentId,
+      invocationSource: "on_demand",
+      status: "running",
+    });
+    await expect(service.removePermanently(companyId, "Delete Me Exactly")).rejects.toMatchObject({
+      status: 409,
+      details: expect.objectContaining({ activeRuns: 1 }),
+    });
+
+    await db.update(heartbeatRuns).set({ status: "cancelled", finishedAt: new Date() }).where(eq(heartbeatRuns.id, runId));
+    const removed = await service.removePermanently(companyId, "Delete Me Exactly");
+    expect(removed?.id).toBe(companyId);
+    await expect(db.select().from(companies).where(eq(companies.id, companyId))).resolves.toHaveLength(0);
   });
 });

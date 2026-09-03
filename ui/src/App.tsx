@@ -13,6 +13,9 @@ import { Dashboard } from "./pages/Dashboard";
 import { DashboardLive } from "./pages/DashboardLive";
 import { Timeline } from "./pages/Timeline";
 import { Companies } from "./pages/Companies";
+import { AetherPortfolio } from "./pages/AetherPortfolio";
+import { AetherPortfolioCockpit } from "./pages/AetherPortfolioCockpit";
+import { CodebaseDiagnosis } from "./pages/CodebaseDiagnosis";
 import { AGENT_FILTER_TABS, Agents } from "./pages/Agents";
 import { AgentDetail } from "./pages/AgentDetail";
 import { Projects } from "./pages/Projects";
@@ -38,6 +41,21 @@ import { Costs } from "./pages/Costs";
 import { Usage } from "./pages/Usage";
 import { Activity } from "./pages/Activity";
 import { Inbox } from "./pages/Inbox";
+import { CustomerInbox } from "./pages/CustomerInbox";
+import { CompanyWebsite } from "./pages/CompanyWebsite";
+import { CompanyPayments } from "./pages/CompanyPayments";
+import { CompanySocial } from "./pages/CompanySocial";
+import { CompanyOutreach } from "./pages/CompanyOutreach";
+import { CompanyAds } from "./pages/CompanyAds";
+import { CompanyMedia } from "./pages/CompanyMedia";
+import { CompanyStack } from "./pages/CompanyStack";
+import { CompanyPublic } from "./pages/CompanyPublic";
+import { PublicCompany } from "./pages/PublicCompany";
+import { PublicCompanies } from "./pages/PublicCompanies";
+import { FactoryFloor } from "./pages/FactoryFloor";
+import { AuditTable } from "./pages/AuditTable";
+import { Watchtower } from "./pages/Watchtower";
+import { HelpCenter } from "./pages/HelpCenter";
 import { WhatNeedsMe } from "./pages/WhatNeedsMe";
 import { BoardChat } from "./pages/BoardChat";
 import { ChatMode } from "./pages/ChatMode";
@@ -86,6 +104,7 @@ import {
   shouldRedirectCompanylessRouteToOnboarding,
 } from "./lib/onboarding-route";
 import { normalizeRememberedInstanceSettingsPath } from "./lib/instance-settings";
+import { readHostedPublicCompanySlug } from "./lib/publicCompanyHost";
 
 function boardRoutes() {
   return (
@@ -96,7 +115,18 @@ function boardRoutes() {
       <Route path="timeline" element={<Timeline />} />
       <Route path="onboarding" element={<OnboardingRoutePage />} />
       <Route path="companies" element={<Companies />} />
+      <Route path="portfolio" element={<AetherPortfolioCockpit />} />
+      <Route path="portfolio/ledger" element={<AetherPortfolio />} />
+      <Route path="diagnose" element={<CodebaseDiagnosis />} />
       <Route path="company/settings" element={<CompanySettings />} />
+      <Route path="company/website" element={<CompanyWebsite />} />
+      <Route path="company/payments" element={<CompanyPayments />} />
+      <Route path="company/social" element={<CompanySocial />} />
+      <Route path="company/outreach" element={<CompanyOutreach />} />
+      <Route path="company/ads" element={<CompanyAds />} />
+      <Route path="company/media" element={<CompanyMedia />} />
+      <Route path="company/stack" element={<CompanyStack />} />
+      <Route path="company/public" element={<CompanyPublic />} />
       <Route path="company/settings/environments" element={<Navigate to="/company/settings/instance/environments" replace />} />
       <Route path="company/settings/cloud-upstream" element={<CloudUpstream />} />
       <Route path="company/settings/members" element={<CompanyAccess />} />
@@ -129,6 +159,7 @@ function boardRoutes() {
       <Route path="plugins/:pluginId" element={<PluginPage />} />
       <Route path="org" element={<OrgChart />} />
       <Route path="formation" element={<Formation />} />
+      <Route path="market-cap" element={<MarketCap />} />
       <Route path="marketcap" element={<MarketCap />} />
       <Route path="roadmap" element={<Roadmap />} />
       <Route path="messages" element={<Messages />} />
@@ -221,6 +252,10 @@ function boardRoutes() {
       <Route path="costs" element={<Costs />} />
       <Route path="usage" element={<Usage />} />
       <Route path="activity" element={<Activity />} />
+      <Route path="factory-floor" element={<FactoryFloor />} />
+      <Route path="audit" element={<AuditTable />} />
+      <Route path="watchtower" element={<Watchtower />} />
+      <Route path="help" element={<HelpCenter />} />
       {/* Conference Room Chat surfaces (PAP-136/PAP-137): routes stay
           registered but redirect to the company home while the experimental
           flag is off. The board-level `artifacts` mount below is the new
@@ -238,6 +273,7 @@ function boardRoutes() {
       <Route path="inbox/recent" element={<Inbox />} />
       <Route path="inbox/unread" element={<Inbox />} />
       <Route path="inbox/blocked" element={<Inbox />} />
+      <Route path="inbox/customers" element={<CustomerInbox />} />
       <Route path="inbox/all" element={<Inbox />} />
       <Route path="inbox/requests" element={<JoinRequestQueue />} />
       <Route path="inbox/new" element={<Navigate to="/inbox/mine" replace />} />
@@ -449,6 +485,10 @@ function NoCompaniesStartPage() {
 }
 
 export function App() {
+  const hostedPublicCompanySlug = readHostedPublicCompanySlug();
+  if (hostedPublicCompanySlug) {
+    return <PublicCompany slugOverride={hostedPublicCompanySlug} />;
+  }
   return (
     <>
       <Routes>
@@ -456,6 +496,8 @@ export function App() {
         <Route path="board-claim/:token" element={<BoardClaimPage />} />
         <Route path="cli-auth/:id" element={<CliAuthPage />} />
         <Route path="invite/:token" element={<InviteLandingPage />} />
+        <Route path="discover" element={<PublicCompanies />} />
+        <Route path="public/:slug" element={<PublicCompany />} />
         <Route path="tests/perf/long-thread" element={<IssueChatLongThreadPerf />} />
         <Route path="ux-lab/cloud-upstream" element={<CloudUpstreamUxLab />} />
         <Route path="ux-lab/bootstrap-setup" element={<BootstrapSetupUxLab />} />
@@ -468,6 +510,15 @@ export function App() {
           <Route path="instance/settings" element={<LegacySettingsRedirect />} />
           <Route path="instance/settings/*" element={<LegacySettingsRedirect />} />
           <Route path="companies" element={<UnprefixedBoardRedirect />} />
+          <Route path="diagnose" element={<UnprefixedBoardRedirect />} />
+          <Route path="help" element={<UnprefixedBoardRedirect />} />
+          <Route path="company/website" element={<UnprefixedBoardRedirect />} />
+          <Route path="company/payments" element={<UnprefixedBoardRedirect />} />
+          <Route path="company/social" element={<UnprefixedBoardRedirect />} />
+          <Route path="company/outreach" element={<UnprefixedBoardRedirect />} />
+          <Route path="company/ads" element={<UnprefixedBoardRedirect />} />
+          <Route path="company/stack" element={<UnprefixedBoardRedirect />} />
+          <Route path="company/public" element={<UnprefixedBoardRedirect />} />
           <Route path="issues" element={<UnprefixedBoardRedirect />} />
           <Route path="issues/:issueId" element={<UnprefixedBoardRedirect />} />
           <Route path="routines" element={<UnprefixedBoardRedirect />} />

@@ -11,10 +11,11 @@ import { assetsApi } from "../api/assets";
 import { instanceSettingsApi } from "../api/instanceSettings";
 import { queryKeys } from "../lib/queryKeys";
 import { Button } from "@/components/ui/button";
-import { Settings, CloudUpload, Download, Upload } from "lucide-react";
+import { Settings, CloudUpload, Download, Upload, Monitor, Moon, Sun } from "lucide-react";
 import { CompanyPatternIcon } from "../components/CompanyPatternIcon";
-import { ThemeToggle } from "../components/ThemeToggle";
+import { useTheme, type ThemePreference } from "../context/ThemeContext";
 import { CompanyModelPitStop } from "../components/CompanyModelPitStop";
+import { CompanyLifecycleControls } from "../components/CompanyLifecycleControls";
 import {
   Field,
   ToggleField,
@@ -24,6 +25,7 @@ const BYTES_PER_MIB = 1024 * 1024;
 const DEFAULT_COMPANY_ATTACHMENT_MAX_MIB = DEFAULT_COMPANY_ATTACHMENT_MAX_BYTES / BYTES_PER_MIB;
 const MAX_COMPANY_ATTACHMENT_MAX_MIB = MAX_COMPANY_ATTACHMENT_MAX_BYTES / BYTES_PER_MIB;
 export function CompanySettings() {
+  const { preference, setTheme } = useTheme();
   const {
     companies,
     selectedCompany,
@@ -43,6 +45,9 @@ export function CompanySettings() {
   const [attachmentMaxMiB, setAttachmentMaxMiB] = useState(String(DEFAULT_COMPANY_ATTACHMENT_MAX_MIB));
   const [logoUrl, setLogoUrl] = useState("");
   const [logoUploadError, setLogoUploadError] = useState<string | null>(null);
+  const [pendingLifecycleAction, setPendingLifecycleAction] = useState<
+    "pause" | "resume" | "archive" | "restore" | "delete" | null
+  >(null);
 
   // Sync local state from selected company
   useEffect(() => {
@@ -126,25 +131,39 @@ export function CompanySettings() {
     clearLogoMutation.mutate();
   }
 
-  const archiveMutation = useMutation({
-    mutationFn: ({
-      companyId,
-      nextCompanyId
-    }: {
-      companyId: string;
-      nextCompanyId: string | null;
-    }) => companiesApi.archive(companyId).then(() => ({ nextCompanyId })),
-    onSuccess: async ({ nextCompanyId }) => {
-      if (nextCompanyId) {
-        setSelectedCompanyId(nextCompanyId);
-      }
+  const lifecycleMutation = useMutation({
+    mutationFn: ({ status }: { status: "active" | "paused" }) =>
+      companiesApi.update(selectedCompanyId!, { status }),
+    onSuccess: async () => {
       await queryClient.invalidateQueries({
         queryKey: queryKeys.companies.all
       });
+    },
+    onSettled: () => setPendingLifecycleAction(null),
+  });
+
+  const archiveMutation = useMutation({
+    mutationFn: () => companiesApi.archive(selectedCompanyId!),
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: queryKeys.companies.all });
       await queryClient.invalidateQueries({
         queryKey: queryKeys.companies.stats
       });
-    }
+    },
+    onSettled: () => setPendingLifecycleAction(null),
+  });
+
+  const deleteMutation = useMutation({
+    mutationFn: (confirmationName: string) => companiesApi.remove(selectedCompanyId!, confirmationName),
+    onSuccess: async () => {
+      const nextCompanyId = companies.find((company) =>
+        company.id !== selectedCompanyId && company.status !== "archived"
+      )?.id ?? companies.find((company) => company.id !== selectedCompanyId)?.id ?? null;
+      if (nextCompanyId) setSelectedCompanyId(nextCompanyId);
+      await queryClient.invalidateQueries({ queryKey: queryKeys.companies.all });
+      await queryClient.invalidateQueries({ queryKey: queryKeys.companies.stats });
+    },
+    onSettled: () => setPendingLifecycleAction(null),
   });
 
   useEffect(() => {
@@ -184,12 +203,40 @@ export function CompanySettings() {
         <div className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
           Appearance
         </div>
-        <div className="flex items-center justify-between rounded-md border border-border px-4 py-4">
+        <div className="flex flex-col gap-3 rounded-md border border-border px-4 py-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <p className="text-sm font-medium">Theme</p>
-            <p className="text-xs text-muted-foreground">Light or dark. Saved on this device; the desktop app follows it.</p>
+            <p className="text-xs text-muted-foreground">Choose a theme or follow this device.</p>
           </div>
-          <ThemeToggle />
+          <div
+            className="grid h-9 w-full grid-cols-3 rounded-md border border-border bg-muted/40 p-0.5 sm:w-64"
+            aria-label="Theme preference"
+          >
+            {([
+              { value: "light", label: "Light", icon: Sun },
+              { value: "system", label: "System", icon: Monitor },
+              { value: "dark", label: "Dark", icon: Moon },
+            ] satisfies Array<{ value: ThemePreference; label: string; icon: typeof Sun }>).map((option) => {
+              const Icon = option.icon;
+              return (
+                <button
+                  key={option.value}
+                  type="button"
+                  aria-pressed={preference === option.value}
+                  onClick={() => setTheme(option.value)}
+                  className={`inline-flex min-w-0 items-center justify-center gap-1.5 rounded px-2 text-xs font-medium transition-colors ${
+                    preference === option.value
+                      ? "bg-background text-foreground shadow-sm ring-1 ring-border"
+                      : "text-muted-foreground hover:text-foreground"
+                  }`}
+                  title={`${option.label} theme`}
+                >
+                  <Icon className="size-3.5 shrink-0" aria-hidden="true" />
+                  <span>{option.label}</span>
+                </button>
+              );
+            })}
+          </div>
         </div>
       </div>
 
@@ -225,7 +272,7 @@ export function CompanySettings() {
       {/* Appearance */}
       <div className="space-y-4">
         <div className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
-          Appearance
+          Branding
         </div>
         <div className="space-y-3 rounded-md border border-border px-4 py-4">
           <div className="flex items-start gap-4">
@@ -240,12 +287,12 @@ export function CompanySettings() {
             <div className="flex-1 space-y-3">
               <Field
                 label="Logo"
-                hint="Upload a PNG, JPEG, WEBP, GIF, or SVG logo image."
+                hint="Upload an ICO, PNG, JPEG, WEBP, GIF, or SVG logo image."
               >
                 <div className="space-y-2">
                   <input
                     type="file"
-                    accept="image/png,image/jpeg,image/webp,image/gif,image/svg+xml"
+                    accept=".ico,image/x-icon,image/vnd.microsoft.icon,image/png,image/jpeg,image/webp,image/gif,image/svg+xml"
                     onChange={handleLogoFileChange}
                     className="w-full rounded-md border border-border bg-transparent px-2.5 py-1.5 text-sm outline-none file:mr-4 file:rounded-md file:border-0 file:bg-muted file:px-2.5 file:py-1 file:text-xs"
                   />
@@ -426,58 +473,37 @@ export function CompanySettings() {
         </div>
       </div>
 
-      {/* Danger Zone */}
-      <div className="space-y-4">
-        <div className="text-xs font-medium text-destructive uppercase tracking-wide">
-          Danger Zone
-        </div>
-        <div className="space-y-3 rounded-md border border-destructive/40 bg-destructive/5 px-4 py-4">
-          <p className="text-sm text-muted-foreground">
-            Archive this company to hide it from the sidebar. This persists in
-            the database.
-          </p>
-          <div className="flex items-center gap-2">
-            <Button
-              size="sm"
-              variant="destructive"
-              disabled={
-                archiveMutation.isPending ||
-                selectedCompany.status === "archived"
-              }
-              onClick={() => {
-                if (!selectedCompanyId) return;
-                const confirmed = window.confirm(
-                  `Archive company "${selectedCompany.name}"? It will be hidden from the sidebar.`
-                );
-                if (!confirmed) return;
-                const nextCompanyId =
-                  companies.find(
-                    (company) =>
-                      company.id !== selectedCompanyId &&
-                      company.status !== "archived"
-                  )?.id ?? null;
-                archiveMutation.mutate({
-                  companyId: selectedCompanyId,
-                  nextCompanyId
-                });
-              }}
-            >
-              {archiveMutation.isPending
-                ? "Archiving..."
-                : selectedCompany.status === "archived"
-                ? "Already archived"
-                : "Archive company"}
-            </Button>
-            {archiveMutation.isError && (
-              <span className="text-xs text-destructive">
-                {archiveMutation.error instanceof Error
-                  ? archiveMutation.error.message
-                  : "Failed to archive company"}
-              </span>
-            )}
-          </div>
-        </div>
-      </div>
+      <CompanyLifecycleControls
+        company={selectedCompany}
+        pendingAction={pendingLifecycleAction}
+        error={
+          lifecycleMutation.error instanceof Error
+            ? lifecycleMutation.error.message
+            : archiveMutation.error instanceof Error
+              ? archiveMutation.error.message
+              : null
+        }
+        onPause={() => {
+          setPendingLifecycleAction("pause");
+          lifecycleMutation.mutate({ status: "paused" });
+        }}
+        onResume={() => {
+          setPendingLifecycleAction("resume");
+          lifecycleMutation.mutate({ status: "active" });
+        }}
+        onArchive={() => {
+          setPendingLifecycleAction("archive");
+          archiveMutation.mutate();
+        }}
+        onRestore={() => {
+          setPendingLifecycleAction("restore");
+          lifecycleMutation.mutate({ status: "active" });
+        }}
+        onDelete={(confirmationName) => {
+          setPendingLifecycleAction("delete");
+          return deleteMutation.mutateAsync(confirmationName);
+        }}
+      />
     </div>
   );
 }

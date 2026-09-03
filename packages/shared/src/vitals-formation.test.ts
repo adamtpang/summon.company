@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import {
   CORE8_FORMATION_SEATS,
+  CORE8_FORMATION_TOTAL_BUDGET_CENTS,
   CORE8_SEAT_DEFAULT_BUDGET_CENTS,
   STAFF_FORMATION_APPROVAL_TYPE,
   buildStaffFormationCard,
@@ -19,13 +20,18 @@ describe("CORE8_FORMATION_SEATS", () => {
   it("gives every seat a mandate, an instruction template, and a persona slot note", () => {
     for (const seat of CORE8_FORMATION_SEATS) {
       expect(seat.name.length).toBeGreaterThan(0);
-      expect(seat.title).toContain("Head of");
+      expect(seat.title).toBe(seat.name);
       expect(seat.capabilities.length).toBeGreaterThan(0);
       expect(seat.instructionsTemplate).toContain(`You own ${seat.name} for this company.`);
       expect(seat.instructionsTemplate).toContain("Persona slot (optional)");
       expect(seat.instructionsTemplate).toContain("Board approval is required");
       expect(seat.defaultBudgetMonthlyCents).toBe(CORE8_SEAT_DEFAULT_BUDGET_CENTS);
     }
+  });
+
+  it("sets one real company ceiling equal to the eight employee ceilings", () => {
+    expect(CORE8_FORMATION_TOTAL_BUDGET_CENTS).toBe(8 * CORE8_SEAT_DEFAULT_BUDGET_CENTS);
+    expect(CORE8_FORMATION_TOTAL_BUDGET_CENTS).toBeGreaterThan(0);
   });
 
   it("keeps the persona guardrail semantics: personas shape HOW, never WHETHER", () => {
@@ -42,7 +48,7 @@ describe("buildStaffFormationCard", () => {
     expect(card.summary).toBe("8 employees, $80/mo total cap");
     expect(card.totalBudgetMonthlyCents).toBe(8 * CORE8_SEAT_DEFAULT_BUDGET_CENTS);
     expect(card.seatLines).toHaveLength(8);
-    expect(card.seatLines[0]).toContain("Engineering — Head of Engineering");
+    expect(card.seatLines[0]).toContain("Engineering — Engineering");
   });
 
   it("renders fractional-dollar caps with cents", () => {

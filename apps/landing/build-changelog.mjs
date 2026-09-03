@@ -68,6 +68,7 @@ const html = `<!doctype html>
     a { color: #f2f2f2; }
   }
 </style>
+<link rel="stylesheet" href="/public.css" />
 </head>
 <body>
 <div class="page">
@@ -84,6 +85,10 @@ const html = `<!doctype html>
 
 ${sections}
 
+  <footer class="site">
+    <p>Anchor Marianas LLC · summon.company · human board, governed AI work.</p>
+    <nav class="footer-links" aria-label="Summon pages"><a href="/about">About</a><a href="/blog">Blog</a><a href="/changelog">Build log</a><a href="/privacy">Privacy</a><a href="/terms">Terms</a></nav>
+  </footer>
 </div>
 </body>
 </html>

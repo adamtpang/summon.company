@@ -16,6 +16,12 @@ describe("approvalLabel", () => {
       }),
     ).toBe("Board Approval: Reply with an ASCII frog");
   });
+
+  it("names the Core-8 decision in board language", () => {
+    expect(
+      approvalLabel("staff_formation", { summary: "8 employees, $80/mo total cap" }),
+    ).toBe("Core-8 formation: 8 employees, $80/mo total cap");
+  });
 });
 
 describe("ApprovalPayloadRenderer", () => {
@@ -80,6 +86,42 @@ describe("ApprovalPayloadRenderer", () => {
 
     expect(container.textContent).toContain("Board asked for approval before posting the frog.");
     expect(container.textContent).not.toContain("TitleReply with an ASCII frog");
+
+    act(() => {
+      root.unmount();
+    });
+  });
+
+  it("renders a board-readable Core-8 formation instead of raw seat JSON", () => {
+    const root = createRoot(container);
+
+    act(() => {
+      root.render(
+        <ApprovalPayloadRenderer
+          type="staff_formation"
+          payload={{
+            question: "Staff the formation?",
+            totalBudgetMonthlyCents: 8_000,
+            companyBudgetMonthlyCents: 8_000,
+            seats: [
+              { department: "engineering", name: "Engineering", title: "Head of Engineering", budgetMonthlyCents: 1_000 },
+              { department: "design", name: "Design", title: "Head of Design", budgetMonthlyCents: 1_000 },
+            ],
+          }}
+        />,
+      );
+    });
+
+    expect(container.textContent).toContain("Staff the formation?");
+    expect(container.textContent).toContain("$80.00 / month total");
+    expect(container.textContent).toContain("Company hard stop");
+    expect(container.textContent).toContain("At least $80.00 / month");
+    expect(container.textContent).toContain("Engineering");
+    expect(container.textContent).toContain("Head of Design");
+    expect(container.textContent).toContain("$10.00/mo");
+    expect(container.textContent).toContain("enforces the company hard stop before activating");
+    expect(container.textContent).not.toContain("$0 company budget");
+    expect(container.textContent).not.toContain("\"department\"");
 
     act(() => {
       root.unmount();

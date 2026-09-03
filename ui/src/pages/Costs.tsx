@@ -19,10 +19,13 @@ import { EmptyState } from "../components/EmptyState";
 import { FinanceBillerCard } from "../components/FinanceBillerCard";
 import { FinanceKindCard } from "../components/FinanceKindCard";
 import { FinanceTimelineCard } from "../components/FinanceTimelineCard";
+import { CompanyFinanceConnections } from "../components/CompanyFinanceConnections";
 import { Identity } from "../components/Identity";
 import { PageSkeleton } from "../components/PageSkeleton";
 import { PageTabBar } from "../components/PageTabBar";
 import { ProviderQuotaCard } from "../components/ProviderQuotaCard";
+import { RecordExpenseDialog } from "../components/RecordExpenseDialog";
+import { ImportFinanceStatementDialog } from "../components/ImportFinanceStatementDialog";
 import { StatusBadge } from "../components/StatusBadge";
 import { useBreadcrumbs } from "../context/BreadcrumbContext";
 import { useCompany } from "../context/CompanyContext";
@@ -243,7 +246,7 @@ export function Costs() {
     enabled: !!selectedCompanyId && customReady,
   });
 
-  const { data: financeData, isLoading: financeLoading, error: financeError } = useQuery({
+  const { data: financeData, isLoading: financeLoading, error: financeError, refetch: refetchFinance } = useQuery({
     queryKey: [
       queryKeys.financeSummary(companyId, from || undefined, to || undefined),
       queryKeys.financeByBiller(companyId, from || undefined, to || undefined),
@@ -1058,6 +1061,31 @@ export function Costs() {
         </TabsContent>
 
         <TabsContent value="finance" className="mt-4 space-y-4">
+          <CompanyFinanceConnections companyId={companyId} />
+          <div className="flex flex-col gap-3 border-b border-border pb-4 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <h2 className="text-base font-semibold">Operating expenses</h2>
+              <p className="mt-1 text-sm text-muted-foreground">
+                Record rent, software, contractors, and other USD costs that AI usage does not capture.
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              <ImportFinanceStatementDialog
+                companyId={companyId}
+                onImported={async () => {
+                  await refetchFinance();
+                  await queryClient.invalidateQueries({ queryKey: queryKeys.dashboard(companyId) });
+                }}
+              />
+              <RecordExpenseDialog
+                companyId={companyId}
+                onRecorded={async () => {
+                  await refetchFinance();
+                  await queryClient.invalidateQueries({ queryKey: queryKeys.dashboard(companyId) });
+                }}
+              />
+            </div>
+          </div>
           {showCustomPrompt ? (
             <p className="text-sm text-muted-foreground">Select a start and end date to load data.</p>
           ) : financeLoading ? (

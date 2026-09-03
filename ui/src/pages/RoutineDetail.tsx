@@ -32,6 +32,7 @@ import {
 import { RunButton } from "../components/AgentActionButtons";
 import { getRecentAssigneeIds, sortAgentsByRecency, trackRecentAssignee } from "../lib/recent-assignees";
 import { getRecentProjectIds, trackRecentProject } from "../lib/recent-projects";
+import { isApprovedAssignableAgent } from "../lib/agent-staffing";
 import { Badge } from "@/components/ui/badge";
 import {
   RoutineSubSidebar,
@@ -557,7 +558,7 @@ export function RoutineDetail() {
   const assigneeOptions = useMemo<InlineEntityOption[]>(
     () =>
       sortAgentsByRecency(
-        (agents ?? []).filter((agent) => agent.status !== "terminated"),
+        (agents ?? []).filter(isApprovedAssignableAgent),
         recentAssigneeIds,
       ).map((agent) => ({
         id: agent.id,

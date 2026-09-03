@@ -4,10 +4,11 @@ import { describe, expect, it, vi, beforeEach } from "vitest";
 import { act } from "react";
 import { createRoot, type Root } from "react-dom/client";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import type { Agent } from "@paperclipai/shared";
 import { MemoryRouter } from "@/lib/router";
 import { FleetRunningNow } from "./FleetRunningNow";
+import { agentsApi } from "../api/agents";
 import { fleetApi } from "../api/fleet";
-import { companiesApi } from "../api/companies";
 
 vi.mock("../api/fleet", () => ({
   fleetApi: {
@@ -17,9 +18,9 @@ vi.mock("../api/fleet", () => ({
   },
 }));
 
-vi.mock("../api/companies", () => ({
-  companiesApi: {
-    update: vi.fn(),
+vi.mock("../api/agents", () => ({
+  agentsApi: {
+    invoke: vi.fn(),
   },
 }));
 
@@ -39,7 +40,15 @@ vi.mock("../context/CompanyContext", () => ({
 }));
 
 const mockFleetApi = vi.mocked(fleetApi);
-const mockCompaniesApi = vi.mocked(companiesApi);
+const mockAgentsApi = vi.mocked(agentsApi);
+
+const cofounder = {
+  id: "ceo-1",
+  companyId: "company-1",
+  name: "Summon Cofounder",
+  role: "ceo",
+  status: "idle",
+} as Agent;
 
 function makeRun(overrides: Partial<Parameters<typeof Object.assign>[1]> = {}) {
   return {
@@ -59,7 +68,7 @@ function makeRun(overrides: Partial<Parameters<typeof Object.assign>[1]> = {}) {
   };
 }
 
-async function renderPanel() {
+async function renderPanel(agents: Agent[] = []) {
   const queryClient = new QueryClient({
     defaultOptions: { queries: { retry: false }, mutations: { retry: false } },
   });
@@ -71,7 +80,7 @@ async function renderPanel() {
     root.render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <FleetRunningNow />
+          <FleetRunningNow agents={agents} />
         </MemoryRouter>
       </QueryClientProvider>,
     );
@@ -148,7 +157,7 @@ describe("FleetRunningNow", () => {
     mockFleetApi.running.mockResolvedValue({ runs: [], queuedWakeups: 0 });
     const { container, cleanup } = await renderPanel();
 
-    await waitForText(container, "fleet is quiet");
+    await waitForText(container, "company is quiet");
     await act(async () => buttonByText(container, "Stop everything")!.click());
     await act(async () => buttonByText(container, "Keep running")!.click());
     expect(mockFleetApi.stop).not.toHaveBeenCalled();
@@ -156,27 +165,23 @@ describe("FleetRunningNow", () => {
     await cleanup();
   });
 
-  it("mode dial: going 24/7 confirms; back to manual never does (VIT-127)", async () => {
+  it("runs the company now through the CEO with an explicit board wake", async () => {
     companyState.selectedCompany = { id: "company-1", operatingMode: "manual" };
     mockFleetApi.running.mockResolvedValue({ runs: [], queuedWakeups: 0 });
-    mockCompaniesApi.update.mockResolvedValue({} as never);
-    const { container, cleanup } = await renderPanel();
-    await waitForText(container, "fleet is quiet");
+    mockAgentsApi.invoke.mockResolvedValue({} as never);
+    const { container, cleanup } = await renderPanel([cofounder]);
+    await waitForText(container, "company is quiet");
 
-    // Manual -> 24/7 is a spend decision: arm, then confirm.
-    await act(async () => buttonByText(container, "Manual mode")!.click());
-    expect(mockCompaniesApi.update).not.toHaveBeenCalled();
-    expect(container.textContent).toContain("Go 24/7?");
-    await act(async () => buttonByText(container, "Confirm 24/7")!.click());
-    expect(mockCompaniesApi.update).toHaveBeenCalledWith("company-1", { operatingMode: "always_on" });
+    await act(async () => buttonByText(container, "Run company now")!.click());
+
+    expect(mockAgentsApi.invoke).toHaveBeenCalledWith("ceo-1", "company-1", {
+      source: "on_demand",
+      triggerDetail: "manual",
+      reason: "Board requested an immediate company review from Mission Control",
+      payload: { intent: "run_company_now" },
+    });
+    await waitForText(container, "Summon Cofounder is reviewing the company now.");
     await cleanup();
-
-    // 24/7 -> manual is the safe direction: one click, no confirm.
-    companyState.selectedCompany = { id: "company-1", operatingMode: "always_on" };
-    const second = await renderPanel();
-    await waitForText(second.container, "fleet is quiet");
-    await act(async () => buttonByText(second.container, "24/7 mode")!.click());
-    expect(mockCompaniesApi.update).toHaveBeenCalledWith("company-1", { operatingMode: "manual" });
-    await second.cleanup();
   });
+
 });

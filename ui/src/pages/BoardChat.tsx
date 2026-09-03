@@ -13,7 +13,11 @@ import { useDialogState } from "../context/DialogContext";
 import { agentsApi } from "../api/agents";
 import { issuesApi } from "../api/issues";
 import { goalsApi } from "../api/goals";
+import { boardChatApi } from "../api/board-chat";
+import { accessApi } from "../api/access";
+import { authApi } from "../api/auth";
 import { queryKeys } from "../lib/queryKeys";
+import { buildCompanyUserLabelMap } from "../lib/company-members";
 import { MarkdownBody } from "../components/MarkdownBody";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
@@ -25,8 +29,12 @@ import {
 import { Activity, ArrowDown, History, ListChecks, MessageSquarePlus } from "lucide-react";
 import { ActivityFeed } from "../components/ActivityFeed";
 import { PrioritiesPanel } from "../components/PrioritiesPanel";
-import type { Agent, Issue } from "@paperclipai/shared";
-import { ChatComposer, type ChatComposerHandle } from "../components/ChatComposer";
+import { selectCompanyCofounder, type Agent, type Issue } from "@paperclipai/shared";
+import {
+  ChatComposer,
+  type ChatComposerAttachment,
+  type ChatComposerHandle,
+} from "../components/ChatComposer";
 import {
   AgentBubbleActionRow,
   agentBubbleDateLabel,
@@ -38,15 +46,50 @@ import type { FeedbackVoteValue } from "@paperclipai/shared";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 /**
- * Board Concierge Chat — a chat interface powered by the board-member skill.
- * Uses /board/chat/stream to invoke Claude with the board skill as system prompt.
- * The user manages their Summon company through natural conversation.
+ * Board Chat records company-scoped conversation and observes the configured
+ * Cofounder through Summon's governed runtime. The user manages their company
+ * through natural conversation without a second hidden model executor.
  */
 /** Hit zone to the right of the 1px line (line sits on chat pane’s right edge). */
 const SPLIT_DIVIDER_PX = 12;
 const SPLIT_MIN_PANE_PX = 280;
 /** Chat pane share of width below the divider (agent feed gets the rest). */
 const DEFAULT_CHAT_FRACTION = 2 / 3;
+
+type BoardChatAttachment = ChatComposerAttachment & {
+  serverAttachmentId?: string;
+  contentPath?: string;
+  contentType?: string | null;
+};
+
+type VoiceReview = {
+  estimatedCostMicrousd: number;
+  model: string;
+};
+
+function recorderMimeType() {
+  if (typeof MediaRecorder === "undefined") return null;
+  const candidates = [
+    "audio/webm;codecs=opus",
+    "audio/ogg;codecs=opus",
+    "audio/mp4",
+  ];
+  return candidates.find((candidate) => MediaRecorder.isTypeSupported(candidate)) ?? "";
+}
+
+function formatVoiceTime(seconds: number) {
+  const safe = Math.max(0, Math.floor(seconds));
+  return `${Math.floor(safe / 60)}:${String(safe % 60).padStart(2, "0")}`;
+}
+
+function formatVoiceCost(microusd: number) {
+  return new Intl.NumberFormat(undefined, {
+    style: "currency",
+    currency: "USD",
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 4,
+  }).format(microusd / 1_000_000);
+}
 
 
 /** Wrapped markdown in bubbles; pre/table scroll horizontally when needed. */
@@ -79,6 +122,17 @@ function AgentBubbleHeader({ name, icon }: { name: string; icon: string | null }
         </AvatarFallback>
       </Avatar>
       <span className="text-sm font-medium text-foreground">{name}</span>
+    </div>
+  );
+}
+
+function UserBubbleHeader({ name, userId }: { name: string; userId: string | null }) {
+  return (
+    <div
+      className="mb-1 pr-1 text-xs font-medium text-muted-foreground"
+      data-board-chat-speaker={userId ?? "unknown"}
+    >
+      {name}
     </div>
   );
 }
@@ -165,14 +219,20 @@ function BoardRightPane({
   );
 }
 
-export function BoardChat({ zenMode = false }: { zenMode?: boolean } = {}) {
+export function BoardChat({
+  zenMode = false,
+  manageBreadcrumbs = true,
+}: {
+  zenMode?: boolean;
+  manageBreadcrumbs?: boolean;
+} = {}) {
   const { selectedCompanyId, selectedCompany } = useCompany();
   const { setBreadcrumbs } = useBreadcrumbs();
   const queryClient = useQueryClient();
 
   useEffect(() => {
-    setBreadcrumbs([{ label: "Chat" }]);
-  }, [setBreadcrumbs]);
+    if (manageBreadcrumbs) setBreadcrumbs([{ label: "Chat" }]);
+  }, [manageBreadcrumbs, setBreadcrumbs]);
 
   const splitContainerRef = useRef<HTMLDivElement>(null);
   const [containerWidth, setContainerWidth] = useState(0);
@@ -255,6 +315,11 @@ export function BoardChat({ zenMode = false }: { zenMode?: boolean } = {}) {
   const [statusText, setStatusText] = useState("");
   const [errorText, setErrorText] = useState("");
   const [boardIssueId, setBoardIssueId] = useState<string | null>(null);
+  const [composerAttachments, setComposerAttachments] = useState<BoardChatAttachment[]>([]);
+  const [attaching, setAttaching] = useState(false);
+  const [voiceStatus, setVoiceStatus] = useState<"idle" | "recording" | "processing">("idle");
+  const [voiceElapsedSeconds, setVoiceElapsedSeconds] = useState(0);
+  const [voiceReview, setVoiceReview] = useState<VoiceReview | null>(null);
   const [elapsedSec, setElapsedSec] = useState(0);
   const [optimisticMessage, setOptimisticMessage] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -262,6 +327,11 @@ export function BoardChat({ zenMode = false }: { zenMode?: boolean } = {}) {
   const hasRestoredScrollRef = useRef(false);
   const composerRef = useRef<ChatComposerHandle>(null);
   const elapsedTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const voiceRecorderRef = useRef<MediaRecorder | null>(null);
+  const voiceStreamRef = useRef<MediaStream | null>(null);
+  const voiceChunksRef = useRef<Blob[]>([]);
+  const voiceTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const discardVoiceRef = useRef(false);
 
   /** True when the user is scrolled away from the bottom AND new content
    *  has arrived they can't see. Drives the floating "jump to latest" chip. */
@@ -302,6 +372,19 @@ export function BoardChat({ zenMode = false }: { zenMode?: boolean } = {}) {
       setStatusText("");
       setSending(false);
       setOptimisticMessage(null);
+      setComposerAttachments([]);
+      setAttaching(false);
+      discardVoiceRef.current = true;
+      if (voiceRecorderRef.current?.state !== "inactive") voiceRecorderRef.current?.stop();
+      voiceStreamRef.current?.getTracks().forEach((track) => track.stop());
+      if (voiceTimerRef.current) clearInterval(voiceTimerRef.current);
+      voiceRecorderRef.current = null;
+      voiceStreamRef.current = null;
+      voiceChunksRef.current = [];
+      voiceTimerRef.current = null;
+      setVoiceStatus("idle");
+      setVoiceElapsedSeconds(0);
+      setVoiceReview(null);
       prevCompanyRef.current = selectedCompanyId;
     }
   }, [selectedCompanyId, boardIssueId, queryClient]);
@@ -344,12 +427,12 @@ export function BoardChat({ zenMode = false }: { zenMode?: boolean } = {}) {
     enabled: !!selectedCompanyId,
   });
 
-  const ceoAgent = useMemo(
-    () => agents?.find((a) => a.role === "ceo" && a.status !== "terminated"),
+  const cofounderAgent = useMemo(
+    () => selectCompanyCofounder(agents ?? []),
     [agents],
   );
 
-  // Pull the company's top-level goal so the CEO's welcome can reference
+  // Pull the company's top-level goal so the Cofounder's welcome can reference
   // the mission verbatim.
   const { data: goals } = useQuery({
     queryKey: queryKeys.goals.list(selectedCompanyId!),
@@ -368,6 +451,22 @@ export function BoardChat({ zenMode = false }: { zenMode?: boolean } = {}) {
     queryFn: () => issuesApi.list(selectedCompanyId!),
     enabled: !!selectedCompanyId,
   });
+
+  const transcriptionQuery = useQuery({
+    queryKey: queryKeys.boardChat.transcription(selectedCompanyId!),
+    queryFn: () => boardChatApi.transcription(selectedCompanyId!),
+    enabled: !!selectedCompanyId,
+    staleTime: 15_000,
+  });
+  const transcription = transcriptionQuery.data;
+
+  useEffect(() => () => {
+    discardVoiceRef.current = true;
+    if (voiceRecorderRef.current?.state !== "inactive") voiceRecorderRef.current?.stop();
+    voiceStreamRef.current?.getTracks().forEach((track) => track.stop());
+    if (voiceTimerRef.current) clearInterval(voiceTimerRef.current);
+    voiceChunksRef.current = [];
+  }, []);
 
   // Choose-your-adventure chips (board, 2026-07-19): suggestions come from the
   // company's REAL priorities, not canned prompts. Same evidence engine as the
@@ -426,6 +525,31 @@ export function BoardChat({ zenMode = false }: { zenMode?: boolean } = {}) {
   const sortedComments = (comments ?? [])
     .slice()
     .sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
+
+  const { data: session } = useQuery({
+    queryKey: queryKeys.auth.session,
+    queryFn: () => authApi.getSession(),
+  });
+  const currentUserId = session?.user?.id ?? session?.session?.userId ?? null;
+  const { data: userDirectory } = useQuery({
+    queryKey: queryKeys.access.companyUserDirectory(selectedCompanyId ?? ""),
+    queryFn: () => accessApi.listUserDirectory(selectedCompanyId!),
+    enabled: !!selectedCompanyId,
+  });
+  const userLabelById = useMemo(
+    () => buildCompanyUserLabelMap(userDirectory?.users),
+    [userDirectory?.users],
+  );
+  const showUserSpeakerLabels = (userDirectory?.users.length ?? 0) > 1;
+
+  const userSpeakerLabel = useCallback(
+    (userId: string | null | undefined) => {
+      if (userId && currentUserId && userId === currentUserId) return "You";
+      if (userId) return userLabelById.get(userId) ?? "Board member";
+      return "Board member";
+    },
+    [currentUserId, userLabelById],
+  );
 
   // Agent lookup so each bubble can show its author's name + icon header.
   const agentMap = useMemo(
@@ -503,7 +627,7 @@ export function BoardChat({ zenMode = false }: { zenMode?: boolean } = {}) {
   // needed to render the welcome bubble. This guarantees the animation is
   // visible at the moment the user arrives, even if agent/goal queries
   // take a beat to resolve.
-  const canRenderWelcome = !!ceoAgent && !!selectedCompany;
+  const canRenderWelcome = agents !== undefined && !!selectedCompany;
   useEffect(() => {
     if (!canRenderWelcome) return;
     if (welcomeRevealed) return;
@@ -644,6 +768,74 @@ export function BoardChat({ zenMode = false }: { zenMode?: boolean } = {}) {
     };
   }, [sending]);
 
+  const attachFiles = useCallback(
+    async (files: File[]) => {
+      if (!selectedCompanyId || files.length === 0) return;
+      const occupied = composerAttachments.filter((attachment) => attachment.status !== "error").length;
+      const available = Math.max(0, 8 - occupied);
+      const accepted = files.slice(0, available);
+      if (accepted.length < files.length) {
+        setErrorText("Board chat accepts up to 8 attached files per message.");
+      }
+      if (accepted.length === 0) return;
+
+      setAttaching(true);
+      try {
+        let targetIssueId = boardIssueId;
+        if (!targetIssueId) {
+          const prepared = await boardChatApi.prepare(selectedCompanyId);
+          targetIssueId = prepared.issueId;
+          setBoardIssueId(prepared.issueId);
+          await queryClient.invalidateQueries({ queryKey: queryKeys.issues.list(selectedCompanyId) });
+        }
+        for (const file of accepted) {
+          const clientId = `${file.name}:${file.size}:${file.lastModified}:${crypto.randomUUID()}`;
+          setComposerAttachments((current) => [
+            ...current,
+            {
+              id: clientId,
+              name: file.name,
+              size: file.size,
+              status: "uploading",
+            },
+          ]);
+          try {
+            const attachment = await issuesApi.uploadAttachment(selectedCompanyId, targetIssueId, file);
+            setComposerAttachments((current) => current.map((item) => (
+              item.id === clientId
+                ? {
+                    ...item,
+                    id: attachment.id,
+                    name: attachment.originalFilename ?? item.name,
+                    size: attachment.byteSize,
+                    status: "attached",
+                    serverAttachmentId: attachment.id,
+                    contentPath: attachment.contentPath,
+                    contentType: attachment.contentType,
+                  }
+                : item
+            )));
+          } catch (error) {
+            setComposerAttachments((current) => current.map((item) => (
+              item.id === clientId
+                ? {
+                    ...item,
+                    status: "error",
+                    error: error instanceof Error ? error.message : "Upload failed",
+                  }
+                : item
+            )));
+          }
+        }
+      } catch (error) {
+        setErrorText(error instanceof Error ? error.message : "Could not prepare the board conversation for attachments.");
+      } finally {
+        setAttaching(false);
+      }
+    },
+    [boardIssueId, composerAttachments, queryClient, selectedCompanyId],
+  );
+
   const sendMessage = useCallback(
     async (body: string) => {
       const trimmed = body.trim();
@@ -659,7 +851,7 @@ export function BoardChat({ zenMode = false }: { zenMode?: boolean } = {}) {
 
       try {
         const controller = new AbortController();
-        const fetchTimeout = setTimeout(() => controller.abort(), 130000);
+        const fetchTimeout = setTimeout(() => controller.abort(), 11 * 60 * 1000);
         const res = await fetch("/api/board/chat/stream", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -667,13 +859,24 @@ export function BoardChat({ zenMode = false }: { zenMode?: boolean } = {}) {
             companyId: selectedCompanyId,
             message: trimmed,
             taskId: boardIssueId ?? undefined,
+            attachmentIds: composerAttachments
+              .filter((attachment) => attachment.status === "attached" && attachment.serverAttachmentId)
+              .map((attachment) => attachment.serverAttachmentId),
           }),
           signal: controller.signal,
         });
         clearTimeout(fetchTimeout);
 
-        if (!res.ok || !res.body) {
-          throw new Error("Board chat stream not available");
+        if (!res.ok) {
+          const failure = await res.json().catch(() => null) as { error?: unknown } | null;
+          throw new Error(
+            typeof failure?.error === "string"
+              ? failure.error
+              : "Board Chat could not start the governed Cofounder run.",
+          );
+        }
+        if (!res.body) {
+          throw new Error("Board Chat started without a run observer.");
         }
 
         setStatusText("Thinking...");
@@ -706,7 +909,7 @@ export function BoardChat({ zenMode = false }: { zenMode?: boolean } = {}) {
               } else if (event.type === "error") {
                 setErrorText(
                   event.message ||
-                    "The board assistant couldn't respond. Please try again.",
+                    "The Cofounder couldn't respond. Check the employee runtime and try again.",
                 );
                 setStatusText("");
               } else if (event.type === "done") {
@@ -727,6 +930,8 @@ export function BoardChat({ zenMode = false }: { zenMode?: boolean } = {}) {
 
         setStreamingText("");
         setStatusText("");
+        setComposerAttachments([]);
+        setVoiceReview(null);
         if (boardIssueId) {
           queryClient.invalidateQueries({ queryKey: queryKeys.issues.comments(boardIssueId) });
         }
@@ -734,19 +939,172 @@ export function BoardChat({ zenMode = false }: { zenMode?: boolean } = {}) {
         console.error("Board chat error:", err);
         setStatusText("");
         setErrorText(
-          "The board assistant is unavailable right now. Please try again in a moment.",
+          err instanceof Error
+            ? err.message
+            : "The Cofounder is unavailable right now. Check the employee runtime and try again.",
         );
       } finally {
         setSending(false);
         composerRef.current?.focus();
       }
     },
-    [sending, selectedCompanyId, boardIssueId, queryClient],
+    [sending, selectedCompanyId, boardIssueId, composerAttachments, queryClient],
   );
 
   const handleSend = useCallback(() => {
     sendMessage(input);
   }, [input, sendMessage]);
+
+  const removeAttachment = useCallback(async (attachment: ChatComposerAttachment) => {
+    const boardAttachment = attachment as BoardChatAttachment;
+    try {
+      if (boardAttachment.serverAttachmentId) {
+        await issuesApi.deleteAttachment(boardAttachment.serverAttachmentId);
+      }
+      setComposerAttachments((current) => current.filter((item) => item.id !== attachment.id));
+    } catch (error) {
+      setErrorText(error instanceof Error ? error.message : "Could not remove the attachment.");
+    }
+  }, []);
+
+  const cancelVoice = useCallback(() => {
+    discardVoiceRef.current = true;
+    const recorder = voiceRecorderRef.current;
+    if (recorder && recorder.state !== "inactive") recorder.stop();
+    voiceStreamRef.current?.getTracks().forEach((track) => track.stop());
+    if (voiceTimerRef.current) clearInterval(voiceTimerRef.current);
+    voiceTimerRef.current = null;
+    voiceChunksRef.current = [];
+    setVoiceStatus("idle");
+    setVoiceElapsedSeconds(0);
+  }, []);
+
+  const handleVoice = useCallback(async () => {
+    if (voiceStatus === "recording") {
+      const recorder = voiceRecorderRef.current;
+      if (recorder && recorder.state !== "inactive") recorder.stop();
+      return;
+    }
+    if (voiceStatus === "processing") return;
+    if (!transcription) {
+      setErrorText(transcriptionQuery.isLoading
+        ? "Reading the company voice policy…"
+        : "Voice policy is unavailable. Open Company Stack → AI gateway to review setup.");
+      return;
+    }
+    if (!transcription.available) {
+      const guidance: Record<typeof transcription.reason, string> = {
+        ready: "Voice direction is ready.",
+        gateway_not_configured: "Configure Company Stack → AI gateway before using voice direction.",
+        gateway_revoked: "Reconnect the company AI gateway before using voice direction.",
+        transcription_not_enabled: "Enable reviewed voice direction in Company Stack → AI gateway.",
+        monthly_limit_reached: "The monthly voice ceiling is full. Review the gateway policy before recording more.",
+        company_budget_blocked: "The company budget hard stop has paused voice transcription.",
+      };
+      setErrorText(guidance[transcription.reason]);
+      return;
+    }
+    const mimeType = recorderMimeType();
+    if (
+      mimeType === null
+      || typeof navigator === "undefined"
+      || !navigator.mediaDevices?.getUserMedia
+    ) {
+      setErrorText("This browser cannot capture a reviewable voice recording.");
+      return;
+    }
+
+    setErrorText("");
+    setVoiceReview(null);
+    discardVoiceRef.current = false;
+    let stream: MediaStream | null = null;
+    try {
+      stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      const recorder = new MediaRecorder(stream, mimeType ? { mimeType } : undefined);
+      voiceStreamRef.current = stream;
+      voiceRecorderRef.current = recorder;
+      voiceChunksRef.current = [];
+      const startedAt = performance.now();
+      recorder.ondataavailable = (event) => {
+        if (event.data.size > 0) voiceChunksRef.current.push(event.data);
+      };
+      recorder.onerror = () => {
+        discardVoiceRef.current = true;
+        setErrorText("The browser could not finish this voice recording.");
+      };
+      recorder.onstop = async () => {
+        if (voiceTimerRef.current) clearInterval(voiceTimerRef.current);
+        voiceTimerRef.current = null;
+        stream?.getTracks().forEach((track) => track.stop());
+        voiceStreamRef.current = null;
+        voiceRecorderRef.current = null;
+        const chunks = voiceChunksRef.current;
+        voiceChunksRef.current = [];
+        setVoiceElapsedSeconds(0);
+        if (discardVoiceRef.current) {
+          discardVoiceRef.current = false;
+          setVoiceStatus("idle");
+          return;
+        }
+        const audio = new Blob(chunks, {
+          type: recorder.mimeType || mimeType || "audio/webm",
+        });
+        if (audio.size < 1) {
+          setVoiceStatus("idle");
+          setErrorText("No audio was captured. Check microphone permission and try again.");
+          return;
+        }
+        setVoiceStatus("processing");
+        try {
+          const result = await boardChatApi.transcribe(
+            selectedCompanyId!,
+            crypto.randomUUID(),
+            audio,
+          );
+          setInput((current) => current.trim()
+            ? `${current.trimEnd()}\n\n${result.transcript}`
+            : result.transcript);
+          setVoiceReview({
+            estimatedCostMicrousd: result.estimatedCostMicrousd,
+            model: result.model,
+          });
+          await Promise.all([
+            queryClient.invalidateQueries({
+              queryKey: queryKeys.boardChat.transcription(selectedCompanyId!),
+            }),
+            queryClient.invalidateQueries({
+              queryKey: queryKeys.companyAiGateway.state(selectedCompanyId!),
+            }),
+          ]);
+        } catch (error) {
+          setErrorText(error instanceof Error
+            ? error.message
+            : "Voice transcription failed. The recording was discarded.");
+        } finally {
+          setVoiceStatus("idle");
+          composerRef.current?.focus();
+        }
+      };
+      recorder.start(250);
+      setVoiceStatus("recording");
+      setVoiceElapsedSeconds(0);
+      voiceTimerRef.current = setInterval(() => {
+        const elapsed = Math.max(0, Math.floor((performance.now() - startedAt) / 1000));
+        setVoiceElapsedSeconds(elapsed);
+        if (elapsed >= transcription.maxSeconds && recorder.state !== "inactive") {
+          recorder.stop();
+        }
+      }, 250);
+    } catch (error) {
+      stream?.getTracks().forEach((track) => track.stop());
+      voiceStreamRef.current = null;
+      voiceRecorderRef.current = null;
+      setVoiceStatus("idle");
+      setErrorText(error instanceof Error && error.name === "NotAllowedError"
+        ? "Microphone permission was not granted. Nothing was recorded."
+        : "The microphone could not start. Nothing was recorded.");
+    }
+  }, [queryClient, selectedCompanyId, transcription, transcriptionQuery.isLoading, voiceStatus]);
 
   // NOTE: declared before the early return below — all hooks must run on
   // every render (Rules of Hooks). Placing it after the `!selectedCompanyId`
@@ -763,7 +1121,7 @@ export function BoardChat({ zenMode = false }: { zenMode?: boolean } = {}) {
         <div className="text-center max-w-sm">
           <h2 className="text-lg font-semibold">No company selected</h2>
           <p className="text-sm text-muted-foreground mt-2">
-            Select a company to start chatting with your board concierge.
+            Select a company to start chatting with its Cofounder.
           </p>
         </div>
       </div>
@@ -784,10 +1142,10 @@ export function BoardChat({ zenMode = false }: { zenMode?: boolean } = {}) {
         <div
           className={cn(
             "relative flex min-h-0 min-w-0 shrink-0 flex-col bg-background",
-            "w-full md:w-auto",
-            innerWidth <= 0 && "md:w-2/3",
+            zenMode ? "w-full flex-1" : "w-full md:w-auto",
+            !zenMode && innerWidth <= 0 && "md:w-2/3",
           )}
-          style={innerWidth > 0 && containerWidth >= 2 * SPLIT_MIN_PANE_PX + SPLIT_DIVIDER_PX ? { width: leftPaneWidth } : undefined}
+          style={!zenMode && innerWidth > 0 && containerWidth >= 2 * SPLIT_MIN_PANE_PX + SPLIT_DIVIDER_PX ? { width: leftPaneWidth } : undefined}
         >
           {/* Zen mode: ChatMode owns the header; this internal one would be
               duplicate chrome, so it renders only in the classic surface. */}
@@ -798,7 +1156,7 @@ export function BoardChat({ zenMode = false }: { zenMode?: boolean } = {}) {
             />
             <div className="min-w-0 flex-1">
               <h3 className="text-sm font-semibold">
-                {ceoAgent?.name ?? "Cofounder"}
+                {cofounderAgent?.name ?? "Cofounder"}
               </h3>
               <p className="text-xs text-muted-foreground">
                 {selectedCompany?.name ?? "Your company"}
@@ -849,15 +1207,17 @@ export function BoardChat({ zenMode = false }: { zenMode?: boolean } = {}) {
                    visible even while agent/goal data is still loading. */}
               {!welcomeRevealed && <TypingBubble />}
 
-              {welcomeRevealed && ceoAgent && selectedCompany && (() => {
-                const ceoName = ceoAgent.name;
+              {welcomeRevealed && selectedCompany && (() => {
                 const companyName = selectedCompany.name;
                 const missionLine = missionText
-                  ? `, and your mission is "${missionText}".`
-                  : ".";
+                  ? ` The company mission is "${missionText}".`
+                  : "";
+                const cofounderLine = cofounderAgent
+                  ? ` **${cofounderAgent.name}** is configured as this company's Cofounder.`
+                  : " No Cofounder is configured yet; add and approve one before sending direction.";
                 const welcomeBody =
-                  `Welcome to **${companyName}**! I'm ${ceoName}, your team lead. I've read through what you shared in the wizard${missionLine}\n\n` +
-                  `Here are a few things I can help you put on paper right now. Pick one below and I'll draft it for you using everything you told us.`;
+                  `Welcome to **${companyName}**.${cofounderLine}${missionLine}\n\n` +
+                  `Give the company an outcome or attach evidence. Board Chat will use Summon's governed employee runtime and keep execution and proof attached to accountable work.`;
 
                 const userHasReplied = sortedComments.some(
                   (c) => !c.authorAgentId && c.authorUserId !== "board-concierge",
@@ -869,7 +1229,7 @@ export function BoardChat({ zenMode = false }: { zenMode?: boolean } = {}) {
                 return (
                   <>
                     <div className="flex flex-col items-start">
-                      <AgentBubbleHeader name={ceoName} icon={ceoAgent.icon} />
+                      <AgentBubbleHeader name="Board Chat" icon={null} />
                       <div
                         className={cn(
                           boardChatBubbleShell,
@@ -905,7 +1265,13 @@ export function BoardChat({ zenMode = false }: { zenMode?: boolean } = {}) {
                 const isUser = !comment.authorAgentId && comment.authorUserId !== "board-concierge";
                 if (isUser) {
                   return (
-                    <div key={comment.id} className="flex justify-end">
+                    <div key={comment.id} className="flex flex-col items-end">
+                      {showUserSpeakerLabels ? (
+                        <UserBubbleHeader
+                          name={userSpeakerLabel(comment.authorUserId)}
+                          userId={comment.authorUserId ?? null}
+                        />
+                      ) : null}
                       <div
                         className={cn(
                           boardChatBubbleShell,
@@ -919,11 +1285,12 @@ export function BoardChat({ zenMode = false }: { zenMode?: boolean } = {}) {
                 }
                 // Agent bubble — name/icon header above + action row below so
                 // the room speaks the same bubble language as the task thread.
+                const isConcierge = !comment.authorAgentId && comment.authorUserId === "board-concierge";
                 const agent = comment.authorAgentId
                   ? agentMap.get(comment.authorAgentId) ?? null
-                  : ceoAgent ?? null;
-                const agentName = agent?.name ?? "Assistant";
-                const agentIconValue = agent?.icon ?? null;
+                  : null;
+                const agentName = isConcierge ? "Board Concierge" : agent?.name ?? "Assistant";
+                const agentIconValue = isConcierge ? null : agent?.icon ?? null;
                 return (
                   <div key={comment.id} className="flex flex-col items-start">
                     <AgentBubbleHeader name={agentName} icon={agentIconValue} />
@@ -960,7 +1327,10 @@ export function BoardChat({ zenMode = false }: { zenMode?: boolean } = {}) {
 
               {/* Optimistic user message — shows instantly before server persists */}
               {optimisticMessage && (
-                <div className="flex justify-end">
+                <div className="flex flex-col items-end">
+                  {showUserSpeakerLabels ? (
+                    <UserBubbleHeader name="You" userId={currentUserId} />
+                  ) : null}
                   <div
                     className={cn(
                       boardChatBubbleShell,
@@ -975,8 +1345,8 @@ export function BoardChat({ zenMode = false }: { zenMode?: boolean } = {}) {
               {/* Streaming response */}
               {streamingText && (
                 <div className="flex flex-col items-start">
-                  {ceoAgent && (
-                    <AgentBubbleHeader name={ceoAgent.name} icon={ceoAgent.icon} />
+                  {cofounderAgent && (
+                    <AgentBubbleHeader name={cofounderAgent.name} icon={cofounderAgent.icon} />
                   )}
                   <div
                     className={cn(
@@ -989,10 +1359,9 @@ export function BoardChat({ zenMode = false }: { zenMode?: boolean } = {}) {
                 </div>
               )}
 
-              {/* Typing bubble — sits above the status line while the agent
-                   is preparing a reply but no text has streamed yet. Shows
-                   alongside the user's optimistic bubble to make the
-                   turn-taking feel alive. */}
+              {/* Typing bubble — sits above the status line while the governed
+                   Cofounder run is queued or working. The durable employee
+                   comment replaces it when the run reports back. */}
               {sending && !streamingText && <TypingBubble />}
 
               {/* Status bar — always visible while sending, independent from the chat bubble */}
@@ -1074,6 +1443,30 @@ export function BoardChat({ zenMode = false }: { zenMode?: boolean } = {}) {
                 ))}
               </div>
             )}
+            {voiceStatus !== "idle" || voiceReview ? (
+              <div
+                data-testid="board-chat-voice-status"
+                role="status"
+                className="pointer-events-auto mb-2 flex flex-col gap-2 rounded-md border border-border bg-card px-3 py-2 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between"
+              >
+                <span>
+                  {voiceStatus === "recording"
+                    ? `Recording ${formatVoiceTime(voiceElapsedSeconds)} / ${formatVoiceTime(transcription?.maxSeconds ?? 60)} · stop to transcribe · no auto-send`
+                    : voiceStatus === "processing"
+                      ? `Transcribing · reserves at most ${formatVoiceCost(transcription?.requestReservationMicrousd ?? 25_000)} · raw audio will be discarded`
+                      : `Transcript added for review · estimated ${formatVoiceCost(voiceReview?.estimatedCostMicrousd ?? 0)} · edit before sending`}
+                </span>
+                {voiceStatus === "recording" ? (
+                  <Button type="button" variant="ghost" size="sm" onClick={cancelVoice}>
+                    Cancel recording
+                  </Button>
+                ) : voiceStatus === "idle" && voiceReview ? (
+                  <Button type="button" variant="ghost" size="sm" onClick={() => setVoiceReview(null)}>
+                    Dismiss
+                  </Button>
+                ) : null}
+              </div>
+            ) : null}
             <ChatComposer
               ref={composerRef}
               value={input}
@@ -1083,7 +1476,19 @@ export function BoardChat({ zenMode = false }: { zenMode?: boolean } = {}) {
               submitKey="enter"
               surface="translucent"
               submitting={sending}
-              disabled={sending}
+              disabled={sending || attaching}
+              onAttachFiles={attachFiles}
+              onRemoveAttachment={removeAttachment}
+              attachments={composerAttachments}
+              attaching={attaching}
+              onVoice={handleVoice}
+              voiceStatus={voiceStatus}
+              voiceDisabled={sending || attaching}
+              voiceLabel={voiceStatus === "recording"
+                ? "Stop and transcribe voice direction"
+                : voiceStatus === "processing"
+                  ? "Transcribing voice direction"
+                  : "Record voice direction"}
               sendLabel="Send message"
               className="pointer-events-auto"
             />

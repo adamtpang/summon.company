@@ -784,6 +784,9 @@ export function agentService(db: Db) {
           pauseReason: null,
           pausedAt: null,
           errorReason: null,
+          // SUM-170 (SUM-144 D1): stamp unpause instant so recovery refuses to
+          // re-arm historical assignments from the paused->idle transition alone.
+          lastResumedAt: new Date(),
           updatedAt: new Date(),
         })
         .where(eq(agents.id, id))

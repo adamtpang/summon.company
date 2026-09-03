@@ -201,6 +201,7 @@ export const issueExecutionPolicySchema = z.object({
   mode: z.enum(ISSUE_EXECUTION_POLICY_MODES).optional().default("normal"),
   commentRequired: z.boolean().optional().default(true),
   stages: z.array(issueExecutionStageSchema).default([]),
+  spendLimitCents: z.number().int().positive().max(100_000_000).optional().nullable().default(null),
   monitor: issueExecutionMonitorPolicySchema.optional().nullable(),
   reviewPreset: lowTrustReviewPresetPolicySchema.optional(),
   authorizationPolicy: trustAuthorizationPolicySchema.optional(),
@@ -459,6 +460,8 @@ export const updateIssueSchema = createIssueBaseSchema.omit({
 }).partial().extend({
   requestDepth: issueRequestDepthInputSchema.optional(),
   assigneeAgentId: z.string().trim().min(1).optional().nullable(),
+  // VIT-44 §4: board sets/clears a per-item attention-cadence override.
+  cadenceOverride: z.enum(["hot", "recent", "stale"]).optional().nullable(),
   comment: multilineTextSchema.pipe(z.string().min(1)).optional(),
   reviewRequest: issueReviewRequestSchema.optional().nullable(),
   reopen: z.boolean().optional(),
@@ -1074,7 +1077,11 @@ export const createIssueThreadInteractionSchema = z.discriminatedUnion("kind", [
 export type CreateIssueThreadInteraction = z.infer<typeof createIssueThreadInteractionSchema>;
 
 export const acceptIssueThreadInteractionSchema = z.object({
-  selectedClientKeys: z.array(z.string().trim().min(1).max(120)).min(1).max(50).optional(),
+  selectedClientKeys: z.array(z.string().trim().min(1).max(120))
+    .min(1)
+    .max(50)
+    .describe("Suggested task client keys in board-selected priority order")
+    .optional(),
   selectedOptionIds: z.array(z.string().trim().min(1).max(120))
     .max(REQUEST_CHECKBOX_CONFIRMATION_OPTION_LIMIT)
     .optional(),

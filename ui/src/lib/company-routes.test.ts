@@ -7,6 +7,39 @@ import {
 } from "./company-routes";
 
 describe("company routes", () => {
+  it("keeps every named founder-workspace surface inside the active company", () => {
+    const routes = [
+      "/onboarding",
+      "/portfolio",
+      "/diagnose",
+      "/help",
+      "/plugins/example",
+      "/formation",
+      "/market-cap",
+      "/marketcap",
+      "/cases",
+      "/review-queue",
+      "/learnings",
+      "/pipelines/example",
+      "/audit",
+      "/watchtower",
+      "/tests/perf/long-thread",
+    ];
+
+    for (const route of routes) {
+      expect(isBoardPathWithoutPrefix(route), route).toBe(true);
+      expect(extractCompanyPrefixFromPath(route), route).toBeNull();
+      expect(applyCompanyPrefix(route, "SUM"), route).toBe(`/SUM${route}`);
+      expect(toCompanyRelativePath(`/SUM${route}`), route).toBe(route);
+    }
+  });
+
+  it("treats the digital office floor as a company route", () => {
+    expect(isBoardPathWithoutPrefix("/factory-floor")).toBe(true);
+    expect(extractCompanyPrefixFromPath("/factory-floor")).toBeNull();
+    expect(applyCompanyPrefix("/factory-floor", "SUM")).toBe("/SUM/factory-floor");
+  });
+
   it("treats execution workspace paths as board routes that need a company prefix", () => {
     expect(isBoardPathWithoutPrefix("/execution-workspaces/workspace-123")).toBe(true);
     expect(isBoardPathWithoutPrefix("/execution-workspaces/workspace-123/routines")).toBe(true);

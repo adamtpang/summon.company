@@ -25,19 +25,30 @@ import { APP_DISPLAY_NAME } from "../lib/app-branding";
 import { DEFAULT_CODEX_LOCAL_BYPASS_APPROVALS_AND_SANDBOX } from "@paperclipai/adapter-codex-local";
 import { resolveRouteOnboardingOptions } from "../lib/onboarding-route";
 import {
+  buildOnboardingCompanyContext,
+  buildOnboardingLaunchTask,
+  canCreateFromOnboardingStart,
+  isOnboardingStartPath,
+  suggestSurpriseCompanyName,
+  type OnboardingStartPath,
+} from "../lib/onboarding-start-path";
+import {
   ArrowLeft,
   ArrowRight,
   Building2,
   Check,
   Fuel,
   Github,
+  Lightbulb,
   Loader2,
   RefreshCw,
+  Sparkles,
   X,
 } from "lucide-react";
 
 // Board ruling (2026-07-17, VIT-128): three steps, nothing gates the company
-// existing. Name is the only required input. Fuel = the customer's OWN
+// existing. The first step now preserves one explicit start path; only idea and
+// surprise paths require enough context to seed honest first work. Fuel = the customer's OWN
 // Claude/Codex subscription, probed the same way the board's machine is —
 // never an API key prompt. The repo IS the knowledge base, so pairing it is
 // step 3 and everything else (mission, agent naming, adapter/model choice)
@@ -45,12 +56,6 @@ import {
 type Step = 1 | 2 | 3;
 
 const ONBOARDING_STORAGE_KEY = "paperclip-onboarding-state";
-const DEFAULT_TASK_TITLE = "Hire your first AI employee and create the operating plan";
-const DEFAULT_TASK_DESCRIPTION = `You are the CEO. The human is the board. Set the operating constraint and train the first accountable AI employee.
-
-- define the first constraint to improve
-- assign board-visible work with a clear budget cap
-- create the next operating tasks and start delegating work`;
 
 type FuelProvider = "claude_local" | "codex_local";
 
@@ -187,6 +192,15 @@ export function OnboardingWizard() {
   const [error, setError] = useState<string | null>(null);
 
   const [companyName, setCompanyName] = useState((saved?.companyName as string) ?? "");
+  const [startPath, setStartPath] = useState<OnboardingStartPath>(() => {
+    const savedPath = saved?.startPath;
+    if (isOnboardingStartPath(savedPath)) return savedPath;
+    const legacyCreatedCompanyId = typeof saved?.createdCompanyId === "string" ? saved.createdCompanyId : null;
+    return existingCompanyId || legacyCreatedCompanyId ? "existing_business" : "build_idea";
+  });
+  const [idea, setIdea] = useState((saved?.idea as string) ?? "");
+  const [founderBackground, setFounderBackground] = useState((saved?.founderBackground as string) ?? "");
+  const [existingBusinessContext, setExistingBusinessContext] = useState((saved?.existingBusinessContext as string) ?? "");
   const [repoUrl, setRepoUrl] = useState((saved?.repoUrl as string) ?? "");
 
   const [claudeFuel, setClaudeFuel] = useState<FuelCheck>(IDLE_FUEL);
@@ -221,6 +235,7 @@ export function OnboardingWizard() {
     if (effectiveOnboardingOptions.companyId) {
       setCreatedCompanyId(effectiveOnboardingOptions.companyId);
       setCreatedCompanyPrefix(null);
+      setStartPath("existing_business");
       if (step === 1) setStep(2);
     }
   }, [effectiveOnboardingOpen, effectiveOnboardingOptions.companyId]);
@@ -238,6 +253,10 @@ export function OnboardingWizard() {
     const state = {
       step,
       companyName,
+      startPath,
+      idea,
+      founderBackground,
+      existingBusinessContext,
       repoUrl,
       createdCompanyId,
       createdCompanyPrefix,
@@ -250,6 +269,10 @@ export function OnboardingWizard() {
     effectiveOnboardingOpen,
     step,
     companyName,
+    startPath,
+    idea,
+    founderBackground,
+    existingBusinessContext,
     repoUrl,
     createdCompanyId,
     createdCompanyPrefix,
@@ -308,6 +331,10 @@ export function OnboardingWizard() {
     setLoading(false);
     setError(null);
     setCompanyName("");
+    setStartPath("build_idea");
+    setIdea("");
+    setFounderBackground("");
+    setExistingBusinessContext("");
     setRepoUrl("");
     setClaudeFuel(IDLE_FUEL);
     setCodexFuel(IDLE_FUEL);
@@ -332,13 +359,13 @@ export function OnboardingWizard() {
 
   // Step 1 → 2: create the company. The server seeds the local environment,
   // bundled agents, and the core-8 formation proposals on creation, so a
-  // company is complete the moment it has a name.
+  // company is complete once its name and chosen start context are retained.
   async function handleCreateCompany() {
     if (createdCompanyId) {
       setStep(2);
       return;
     }
-    if (!companyName.trim()) return;
+    if (!companyName.trim() || !canCreateFromOnboardingStart({ path: startPath, idea, founderBackground, existingBusinessContext })) return;
     setLoading(true);
     setError(null);
     try {
@@ -379,13 +406,16 @@ export function OnboardingWizard() {
     // failure — the agent still functions with adapter defaults.
     try {
       const bundle = await agentsApi.instructionsBundle(agent.id, createdCompanyId);
+      const resolvedCompanyName = companyName.trim()
+        || companies.find((company) => company.id === createdCompanyId)?.name
+        || "the company";
       await agentsApi.saveInstructionsFile(
         agent.id,
         {
           path: bundle.entryFile,
           content: composeCeoInstructions({
-            companyName,
-            companyGoal: "",
+            companyName: resolvedCompanyName,
+            companyGoal: buildOnboardingCompanyContext({ path: startPath, idea, founderBackground, existingBusinessContext }),
             growPath: false,
             growWorkflows: "",
             growPainPoints: "",
@@ -455,13 +485,14 @@ export function OnboardingWizard() {
         setCreatedProjectId(projectId);
       }
 
-      if (agentId && !createdIssueRef) {
+      if (!createdIssueRef) {
         // SUM-129 shipped: a repo paired by URL is cloned into a managed
         // checkout on first run, so the first task links to its project again.
+        const launchTask = buildOnboardingLaunchTask({ path: startPath, idea, founderBackground, existingBusinessContext });
         const issue = await issuesApi.create(createdCompanyId, {
-          title: DEFAULT_TASK_TITLE,
-          description: DEFAULT_TASK_DESCRIPTION,
-          assigneeAgentId: agentId,
+          title: launchTask.title,
+          description: launchTask.description,
+          ...(agentId ? { assigneeAgentId: agentId } : {}),
           ...(projectId ? { projectId } : {}),
           status: "todo" as const,
         });
@@ -497,7 +528,7 @@ export function OnboardingWizard() {
   function handleKeyDown(e: React.KeyboardEvent) {
     if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) {
       e.preventDefault();
-      if (step === 1 && companyName.trim()) void handleCreateCompany();
+      if (step === 1 && companyName.trim() && canCreateFromOnboardingStart({ path: startPath, idea, founderBackground, existingBusinessContext })) void handleCreateCompany();
       else if (step === 2) setStep(3);
       else if (step === 3) void handleFinish();
     }
@@ -553,7 +584,7 @@ export function OnboardingWizard() {
                 })}
               </div>
 
-              {/* Step 1: Name the company — the only required input. */}
+              {/* Step 1: choose the founder outcome, then name the workspace. */}
               {renderedStep === 1 && (
                 <div className="space-y-5">
                   <div className="flex items-center gap-3 mb-1">
@@ -561,13 +592,82 @@ export function OnboardingWizard() {
                       <Building2 className="h-5 w-5 text-muted-foreground" />
                     </div>
                     <div>
-                      <h3 className="font-medium">Name the company</h3>
+                      <h3 className="font-medium">How should {APP_DISPLAY_NAME} start?</h3>
                       <p className="text-xs text-muted-foreground">
-                        The only thing {APP_DISPLAY_NAME} needs to get started. It arrives
-                        with the standard eight departments; your CEO fills in the rest.
+                        Choose one path. The first task preserves your intent and classifies
+                        the work before anyone tries to commercialize it.
                       </p>
                     </div>
                   </div>
+                  <div className="grid gap-2">
+                    {([
+                      { id: "build_idea", label: "Build my idea", detail: "Start from a problem or product you already have in mind.", icon: Lightbulb },
+                      { id: "surprise_me", label: "Surprise me", detail: "Turn your background into three testable opportunities, then choose one.", icon: Sparkles },
+                      { id: "existing_business", label: "Existing project", detail: "Connect what exists and diagnose its actual binding constraint.", icon: Building2 },
+                    ] as const).map((option) => {
+                      const Icon = option.icon;
+                      const selected = startPath === option.id;
+                      return (
+                        <button
+                          key={option.id}
+                          type="button"
+                          aria-pressed={selected}
+                          onClick={() => setStartPath(option.id)}
+                          className={cn(
+                            "flex items-start gap-3 rounded-md border p-3 text-left transition-colors",
+                            selected ? "border-foreground bg-muted/50" : "border-border hover:bg-muted/30",
+                          )}
+                        >
+                          <Icon className="mt-0.5 size-4 shrink-0 text-muted-foreground" />
+                          <span><span className="block text-sm font-medium">{option.label}</span><span className="mt-0.5 block text-xs text-muted-foreground">{option.detail}</span></span>
+                          {selected ? <Check className="ml-auto mt-0.5 size-4 shrink-0" /> : null}
+                        </button>
+                      );
+                    })}
+                  </div>
+                  {startPath === "build_idea" ? (
+                    <div className="group">
+                      <label className="text-xs mb-1 block text-muted-foreground group-focus-within:text-foreground">What should it build?</label>
+                      <textarea
+                        className="min-h-24 w-full resize-y rounded-md border border-border bg-transparent px-3 py-2 text-sm outline-none focus:ring-1 focus:ring-ring placeholder:text-muted-foreground/50"
+                        placeholder="Describe the problem, who has it, and what you think should exist."
+                        value={idea}
+                        maxLength={1_200}
+                        onChange={(event) => setIdea(event.target.value)}
+                      />
+                      <p className="mt-1 text-(length:--text-micro) text-muted-foreground">A starting hypothesis, not proof of demand. At least 10 characters.</p>
+                    </div>
+                  ) : startPath === "surprise_me" ? (
+                    <div className="group">
+                      <label className="text-xs mb-1 block text-muted-foreground group-focus-within:text-foreground">What do you know unusually well?</label>
+                      <textarea
+                        className="min-h-24 w-full resize-y rounded-md border border-border bg-transparent px-3 py-2 text-sm outline-none focus:ring-1 focus:ring-ring placeholder:text-muted-foreground/50"
+                        placeholder="Your work, skills, communities, recurring frustrations, or unusual access."
+                        value={founderBackground}
+                        maxLength={1_200}
+                        onChange={(event) => {
+                          const nextBackground = event.target.value;
+                          const previousSuggestion = suggestSurpriseCompanyName(founderBackground);
+                          setFounderBackground(nextBackground);
+                          if (!companyName.trim() || companyName === previousSuggestion) {
+                            setCompanyName(suggestSurpriseCompanyName(nextBackground));
+                          }
+                        }}
+                      />
+                      <p className="mt-1 text-(length:--text-micro) text-muted-foreground">Summon seeds a board task to generate three candidates, reject two, and test one. At least 10 characters.</p>
+                    </div>
+                  ) : (
+                    <div className="group">
+                      <label className="text-xs mb-1 block text-muted-foreground group-focus-within:text-foreground">What exists today? <span className="text-muted-foreground/70">Optional</span></label>
+                      <textarea
+                        className="min-h-20 w-full resize-y rounded-md border border-border bg-transparent px-3 py-2 text-sm outline-none focus:ring-1 focus:ring-ring placeholder:text-muted-foreground/50"
+                        placeholder="Product, research project, personal tool, audience, users, evidence, or current constraint."
+                        value={existingBusinessContext}
+                        maxLength={1_200}
+                        onChange={(event) => setExistingBusinessContext(event.target.value)}
+                      />
+                    </div>
+                  )}
                   <div className="mt-3 group">
                     <label
                       className={cn(
@@ -585,7 +685,7 @@ export function OnboardingWizard() {
                       value={companyName}
                       onChange={(e) => setCompanyName(e.target.value)}
                       onKeyDown={(e) => {
-                        if (e.key === "Enter" && companyName.trim()) {
+                        if (e.key === "Enter" && companyName.trim() && canCreateFromOnboardingStart({ path: startPath, idea, founderBackground, existingBusinessContext })) {
                           e.preventDefault();
                           void handleCreateCompany();
                         }
@@ -758,7 +858,7 @@ export function OnboardingWizard() {
                   {renderedStep === 1 && (
                     <Button
                       size="sm"
-                      disabled={!companyName.trim() || loading}
+                      disabled={!companyName.trim() || !canCreateFromOnboardingStart({ path: startPath, idea, founderBackground, existingBusinessContext }) || loading}
                       onClick={() => void handleCreateCompany()}
                     >
                       {loading ? (

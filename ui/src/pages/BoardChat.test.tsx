@@ -23,12 +23,25 @@ const mockIssuesApi = vi.hoisted(() => ({
   list: vi.fn(),
   listComments: vi.fn(),
   listFeedbackVotes: vi.fn(),
+  uploadAttachment: vi.fn(),
+  deleteAttachment: vi.fn(),
 }));
+const mockBoardChatApi = vi.hoisted(() => ({
+  prepare: vi.fn(),
+  transcription: vi.fn(),
+  transcribe: vi.fn(),
+}));
+const mockAccessApi = vi.hoisted(() => ({ listUserDirectory: vi.fn() }));
+const mockAuthApi = vi.hoisted(() => ({ getSession: vi.fn() }));
 const mockDialogState = vi.hoisted(() => ({ onboardingOpen: false }));
+const mockChatComposer = vi.hoisted(() => ({ props: null as Record<string, unknown> | null }));
 
 vi.mock("../api/agents", () => ({ agentsApi: mockAgentsApi }));
 vi.mock("../api/goals", () => ({ goalsApi: mockGoalsApi }));
 vi.mock("../api/issues", () => ({ issuesApi: mockIssuesApi }));
+vi.mock("../api/board-chat", () => ({ boardChatApi: mockBoardChatApi }));
+vi.mock("../api/access", () => ({ accessApi: mockAccessApi }));
+vi.mock("../api/auth", () => ({ authApi: mockAuthApi }));
 
 vi.mock("../context/CompanyContext", () => ({
   useCompany: () => ({
@@ -53,7 +66,8 @@ vi.mock("../components/MarkdownBody", () => ({
   MarkdownBody: ({ children }: { children: ReactNode }) => <div>{children}</div>,
 }));
 vi.mock("../components/ChatComposer", () => ({
-  ChatComposer: forwardRef((_props, ref) => {
+  ChatComposer: forwardRef((props: Record<string, unknown>, ref) => {
+    mockChatComposer.props = props;
     useImperativeHandle(ref, () => ({ focus: vi.fn() }));
     return <div data-testid="chat-composer" />;
   }),
@@ -134,6 +148,59 @@ describe("BoardChat staged typing intro", () => {
     mockIssuesApi.list.mockResolvedValue([BOARD_ISSUE]);
     mockIssuesApi.listComments.mockResolvedValue([]);
     mockIssuesApi.listFeedbackVotes.mockResolvedValue([]);
+    mockIssuesApi.uploadAttachment.mockResolvedValue({
+      id: "10000000-0000-4000-8000-000000000000",
+      companyId: "company-1",
+      issueId: "issue-board",
+      originalFilename: "plan.pdf",
+      contentType: "application/pdf",
+      byteSize: 4,
+      contentPath: "/api/attachments/10000000-0000-4000-8000-000000000000/content",
+    });
+    mockIssuesApi.deleteAttachment.mockResolvedValue({ ok: true });
+    mockBoardChatApi.prepare.mockResolvedValue({ issueId: "issue-board", created: true });
+    mockBoardChatApi.transcription.mockResolvedValue({
+      available: false,
+      reason: "transcription_not_enabled",
+      provider: "openai",
+      model: null,
+      maxSeconds: 60,
+      maxBytes: 12 * 1024 * 1024,
+      requestReservationMicrousd: 25_000,
+      usedMicrousd: 0,
+      reservedMicrousd: 0,
+      monthlyMicrousdLimit: 0,
+      rawAudioPersisted: false,
+      draftTranscriptPersisted: false,
+      reviewRequired: true,
+    });
+    mockBoardChatApi.transcribe.mockResolvedValue({
+      transcript: "Review the Stripe runway this week.",
+      requestId: "10000000-0000-4000-8000-000000000001",
+      model: "gpt-4o-mini-transcribe-2025-12-15",
+      inputTokens: 10,
+      outputTokens: 8,
+      totalTokens: 18,
+      estimatedCostMicrousd: 53,
+      remainingMicrousd: 999_947,
+      rawAudioPersisted: false,
+      draftTranscriptPersisted: false,
+      reviewRequired: true,
+    });
+    mockAccessApi.listUserDirectory.mockResolvedValue({
+      users: [
+        {
+          principalId: "user-1",
+          status: "active",
+          user: { id: "user-1", name: "Adam", email: "adam@example.com", image: null },
+        },
+      ],
+    });
+    mockAuthApi.getSession.mockResolvedValue({
+      session: { id: "session-1", userId: "user-1" },
+      user: { id: "user-1", name: "Adam", email: "adam@example.com", image: null },
+    });
+    mockChatComposer.props = null;
   });
 
   afterEach(async () => {
@@ -149,6 +216,8 @@ describe("BoardChat staged typing intro", () => {
     // Drop any per-test document.visibilityState override.
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     delete (document as any).visibilityState;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    delete (navigator as any).mediaDevices;
   });
 
   let queryClient: QueryClient | null = null;
@@ -217,6 +286,9 @@ describe("BoardChat staged typing intro", () => {
     expect(hasWelcome(container)).toBe(true);
     expect(hasTypingDots(container)).toBe(false);
     expect(hasChips(container)).toBe(false);
+    expect(container.textContent).toContain("Alex");
+    expect(container.textContent).toContain("this company's Cofounder");
+    expect(container.textContent).toContain("Board Chat");
 
     // t=2.7s: chips stage in.
     await advance(700);
@@ -270,6 +342,191 @@ describe("BoardChat staged typing intro", () => {
     await advance(2000);
     expect(hasWelcome(container)).toBe(true);
     expect(hasTypingDots(container)).toBe(false);
+  });
+
+  it("labels a persisted concierge reply as the concierge, not the Cofounder employee", async () => {
+    mockIssuesApi.listComments.mockResolvedValue([
+      {
+        id: "comment-concierge-1",
+        body: "I found the next constraint.",
+        authorAgentId: null,
+        authorUserId: "board-concierge",
+        createdAt: "2026-06-10T00:00:00.000Z",
+      },
+    ]);
+    await render();
+
+    expect(container.textContent).toContain("Board Concierge");
+    expect(container.textContent).toContain("I found the next constraint.");
+    expect(container.textContent).not.toContain("AlexI found the next constraint.");
+  });
+
+  it("labels each human speaker when more than one company member shares Board Chat", async () => {
+    mockAccessApi.listUserDirectory.mockResolvedValue({
+      users: [
+        {
+          principalId: "user-1",
+          status: "active",
+          user: { id: "user-1", name: "Adam", email: "adam@example.com", image: null },
+        },
+        {
+          principalId: "user-2",
+          status: "active",
+          user: { id: "user-2", name: "Taylor", email: "taylor@example.com", image: null },
+        },
+      ],
+    });
+    mockIssuesApi.listComments.mockResolvedValue([
+      USER_COMMENT,
+      {
+        id: "comment-user-2",
+        body: "I will verify the customer evidence.",
+        authorAgentId: null,
+        authorUserId: "user-2",
+        createdAt: "2026-06-10T00:01:00.000Z",
+      },
+    ]);
+
+    await render();
+
+    expect(container.querySelector('[data-board-chat-speaker="user-1"]')?.textContent).toBe("You");
+    expect(container.querySelector('[data-board-chat-speaker="user-2"]')?.textContent).toBe("Taylor");
+    expect(container.textContent).toContain("I will verify the customer evidence.");
+  });
+
+  it("keeps single-founder Board Chat free of redundant speaker labels", async () => {
+    mockIssuesApi.listComments.mockResolvedValue([USER_COMMENT]);
+
+    await render();
+
+    expect(container.querySelector("[data-board-chat-speaker]")).toBeNull();
+  });
+
+  it("uploads company-chat files onto the standing board issue and exposes attached state", async () => {
+    await render();
+    const attach = mockChatComposer.props?.onAttachFiles;
+    expect(attach).toBeTypeOf("function");
+
+    const file = new File(["plan"], "plan.pdf", { type: "application/pdf" });
+    await act(async () => {
+      await (attach as (files: File[]) => Promise<void>)([file]);
+    });
+    await advance(0);
+
+    expect(mockIssuesApi.uploadAttachment).toHaveBeenCalledWith(
+      "company-1",
+      "issue-board",
+      file,
+    );
+    expect(mockChatComposer.props?.attachments).toEqual([
+      expect.objectContaining({
+        id: "10000000-0000-4000-8000-000000000000",
+        name: "plan.pdf",
+        status: "attached",
+        serverAttachmentId: "10000000-0000-4000-8000-000000000000",
+      }),
+    ]);
+    expect(mockChatComposer.props?.attaching).toBe(false);
+
+    const remove = mockChatComposer.props?.onRemoveAttachment;
+    const [attachment] = mockChatComposer.props?.attachments as Array<Record<string, unknown>>;
+    await act(async () => {
+      await (remove as (item: Record<string, unknown>) => Promise<void>)(attachment);
+    });
+    expect(mockIssuesApi.deleteAttachment).toHaveBeenCalledWith(
+      "10000000-0000-4000-8000-000000000000",
+    );
+    expect(mockChatComposer.props?.attachments).toEqual([]);
+  });
+
+  it("prepares the standing board issue only when the first attachment is explicitly chosen", async () => {
+    mockIssuesApi.list.mockResolvedValue([]);
+    await render();
+    expect(mockBoardChatApi.prepare).not.toHaveBeenCalled();
+    const attach = mockChatComposer.props?.onAttachFiles;
+    expect(attach).toBeTypeOf("function");
+
+    const file = new File(["plan"], "plan.pdf", { type: "application/pdf" });
+    await act(async () => {
+      await (attach as (files: File[]) => Promise<void>)([file]);
+    });
+    await advance(0);
+
+    expect(mockBoardChatApi.prepare).toHaveBeenCalledWith("company-1");
+    expect(mockIssuesApi.uploadAttachment).toHaveBeenCalledWith(
+      "company-1",
+      "issue-board",
+      file,
+    );
+  });
+
+  it("transcribes a bounded recording into an editable draft without auto-sending", async () => {
+    mockBoardChatApi.transcription.mockResolvedValue({
+      available: true,
+      reason: "ready",
+      provider: "openai",
+      model: "gpt-4o-mini-transcribe-2025-12-15",
+      maxSeconds: 60,
+      maxBytes: 12 * 1024 * 1024,
+      requestReservationMicrousd: 25_000,
+      usedMicrousd: 0,
+      reservedMicrousd: 0,
+      monthlyMicrousdLimit: 1_000_000,
+      rawAudioPersisted: false,
+      draftTranscriptPersisted: false,
+      reviewRequired: true,
+    });
+    const stopTrack = vi.fn();
+    Object.defineProperty(navigator, "mediaDevices", {
+      configurable: true,
+      value: { getUserMedia: vi.fn().mockResolvedValue({ getTracks: () => [{ stop: stopTrack }] }) },
+    });
+    class MediaRecorderStub {
+      static isTypeSupported() { return true; }
+      state: RecordingState = "inactive";
+      mimeType = "audio/webm;codecs=opus";
+      ondataavailable: ((event: BlobEvent) => void) | null = null;
+      onerror: (() => void) | null = null;
+      onstop: (() => void) | null = null;
+      constructor(_stream: MediaStream, _options?: MediaRecorderOptions) {}
+      start() {
+        this.state = "recording";
+        this.ondataavailable?.({ data: new Blob(["voice"], { type: "audio/webm" }) } as BlobEvent);
+      }
+      stop() {
+        this.state = "inactive";
+        this.onstop?.();
+      }
+    }
+    vi.stubGlobal("MediaRecorder", MediaRecorderStub);
+
+    await render();
+    const fetchSpy = vi.spyOn(globalThis, "fetch");
+    const onVoice = mockChatComposer.props?.onVoice;
+    expect(onVoice).toBeTypeOf("function");
+    await act(async () => {
+      await (onVoice as () => Promise<void>)();
+    });
+    expect(mockChatComposer.props?.voiceStatus).toBe("recording");
+
+    const stopVoice = mockChatComposer.props?.onVoice;
+    await act(async () => {
+      await (stopVoice as () => Promise<void>)();
+      await Promise.resolve();
+      await vi.advanceTimersByTimeAsync(0);
+    });
+    for (let attempt = 0; attempt < 4; attempt += 1) await advance(0);
+
+    expect(mockBoardChatApi.transcribe).toHaveBeenCalledWith(
+      "company-1",
+      expect.any(String),
+      expect.any(Blob),
+    );
+    expect(mockChatComposer.props?.value).toBe("Review the Stripe runway this week.");
+    expect(mockChatComposer.props?.voiceStatus).toBe("idle");
+    expect(container.textContent).toContain("Transcript added for review");
+    expect(stopTrack).toHaveBeenCalled();
+    expect(fetchSpy).not.toHaveBeenCalled();
   });
 });
 

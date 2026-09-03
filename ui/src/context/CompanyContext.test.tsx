@@ -90,6 +90,15 @@ describe("resolveBootstrapCompanySelection", () => {
     })).toBe("company-1");
   });
 
+  it("keeps an explicitly selected archived company available for restore or deletion", () => {
+    expect(resolveBootstrapCompanySelection({
+      companies: [archivedCompany, activeCompany],
+      sidebarCompanies: [activeCompany],
+      selectedCompanyId: "archived-company",
+      storedCompanyId: "company-1",
+    })).toBe("archived-company");
+  });
+
   it("keeps a valid stored company id instead of falling back to the first company", () => {
     expect(resolveBootstrapCompanySelection({
       companies: [activeCompany, secondActiveCompany],

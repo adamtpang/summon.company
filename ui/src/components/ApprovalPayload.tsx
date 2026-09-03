@@ -1,4 +1,4 @@
-import { UserPlus, Lightbulb, ShieldAlert, ShieldCheck } from "lucide-react";
+import { UserPlus, Lightbulb, ShieldAlert, ShieldCheck, UsersRound } from "lucide-react";
 import { formatCents } from "../lib/utils";
 
 export const typeLabel: Record<string, string> = {
@@ -6,6 +6,7 @@ export const typeLabel: Record<string, string> = {
   approve_ceo_strategy: "CEO Strategy",
   budget_override_required: "Budget Override",
   request_board_approval: "Board Approval",
+  staff_formation: "Core-8 formation",
 };
 
 function firstNonEmptyString(...values: unknown[]): string | null {
@@ -41,6 +42,7 @@ export const typeIcon: Record<string, typeof UserPlus> = {
   approve_ceo_strategy: Lightbulb,
   budget_override_required: ShieldAlert,
   request_board_approval: ShieldCheck,
+  staff_formation: UsersRound,
 };
 
 export const defaultTypeIcon = ShieldCheck;
@@ -148,6 +150,86 @@ export function BudgetOverridePayload({ payload }: { payload: Record<string, unk
   );
 }
 
+interface StaffFormationSeat {
+  department: string;
+  name: string;
+  title: string;
+  budgetMonthlyCents: number;
+}
+
+function staffFormationSeats(value: unknown): StaffFormationSeat[] {
+  if (!Array.isArray(value)) return [];
+  return value.flatMap((seat) => {
+    if (!seat || typeof seat !== "object") return [];
+    const candidate = seat as Record<string, unknown>;
+    if (
+      typeof candidate.department !== "string"
+      || typeof candidate.name !== "string"
+      || typeof candidate.title !== "string"
+      || typeof candidate.budgetMonthlyCents !== "number"
+    ) return [];
+    return [{
+      department: candidate.department,
+      name: candidate.name,
+      title: candidate.title,
+      budgetMonthlyCents: candidate.budgetMonthlyCents,
+    }];
+  });
+}
+
+export function StaffFormationPayload({ payload }: { payload: Record<string, unknown> }) {
+  const seats = staffFormationSeats(payload.seats);
+  const totalBudgetMonthlyCents = typeof payload.totalBudgetMonthlyCents === "number"
+    ? payload.totalBudgetMonthlyCents
+    : seats.reduce((total, seat) => total + seat.budgetMonthlyCents, 0);
+  const companyBudgetMonthlyCents = typeof payload.companyBudgetMonthlyCents === "number"
+    ? Math.max(payload.companyBudgetMonthlyCents, totalBudgetMonthlyCents)
+    : totalBudgetMonthlyCents;
+  const question = firstNonEmptyString(payload.question) ?? "Staff the formation?";
+
+  return (
+    <div className="mt-4 space-y-4 text-sm">
+      <div className="grid gap-px border border-foreground/20 bg-foreground/20 sm:grid-cols-3">
+        <div className="bg-background p-3">
+          <p className="font-console text-(length:--text-micro) uppercase tracking-(--tracking-label) text-muted-foreground">Decision</p>
+          <p className="mt-1 font-semibold">{question}</p>
+        </div>
+        <div className="bg-background p-3">
+          <p className="font-console text-(length:--text-micro) uppercase tracking-(--tracking-label) text-muted-foreground">Company hard stop</p>
+          <p className="mt-1 font-semibold tabular-nums">At least {formatCents(companyBudgetMonthlyCents)} / month</p>
+        </div>
+        <div className="bg-background p-3">
+          <p className="font-console text-(length:--text-micro) uppercase tracking-(--tracking-label) text-muted-foreground">Employee caps</p>
+          <p className="mt-1 font-semibold tabular-nums">{formatCents(totalBudgetMonthlyCents)} / month total</p>
+        </div>
+      </div>
+
+      <div>
+        <div className="flex items-end justify-between gap-3">
+          <div>
+            <p className="font-semibold">Eight accountable departments</p>
+            <p className="mt-1 text-xs text-muted-foreground">Approval enforces the company hard stop before activating any proposed employee. The company remains manual, and every activated employee retains an individual cap.</p>
+          </div>
+          <span className="font-console text-xs text-muted-foreground">{seats.length}/8 seats</span>
+        </div>
+        <div className="mt-3 grid gap-px border border-foreground/20 bg-foreground/20 sm:grid-cols-2">
+          {seats.map((seat) => (
+            <div key={seat.department} className="flex items-start justify-between gap-3 bg-background p-3">
+              <div className="min-w-0">
+                <p className="truncate font-semibold">{seat.name}</p>
+                <p className="mt-1 text-xs text-muted-foreground">{seat.title}</p>
+              </div>
+              <span className="shrink-0 font-console text-xs tabular-nums text-muted-foreground">
+                {formatCents(seat.budgetMonthlyCents)}/mo
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export function BoardApprovalPayload({
   payload,
   hideTitle = false,
@@ -239,6 +321,7 @@ export function ApprovalPayloadRenderer({
   hidePrimaryTitle?: boolean;
 }) {
   if (type === "hire_agent") return <HireAgentPayload payload={payload} />;
+  if (type === "staff_formation") return <StaffFormationPayload payload={payload} />;
   if (type === "budget_override_required") return <BudgetOverridePayload payload={payload} />;
   if (type === "request_board_approval") {
     return <BoardApprovalPayload payload={payload} hideTitle={hidePrimaryTitle} />;

@@ -26,14 +26,14 @@ async function request(method, path, body) {
 const STANDARD_BODY = (companyName) => `WHY: Every company in the control plane runs the same operating standard or the
 diagnosis loop cannot compare, staff, or verify it.
 
-SOLUTION: Bring ${companyName} up to VITALS_COMPANY_STANDARD.md:
+SOLUTION: Bring ${companyName} up to SUMMON_COMPANY_STANDARD.md:
 1. The standardization checklist (goal, project, primary workspace, budget caps,
    board-approval policy, evidence rules) completed and documented on this issue.
 2. The core-8 formation: all eight departments (Engineering, Design, Marketing,
    Sales, Finance, Operations, Support, Legal) have one accountable owner each -
    an existing agent, a PROPOSED hire (board approves; never auto-hire), or an
    explicit "human owner" note. Product is not a ninth department.
-3. The 8-stage roadmap (VITALS_FORMATION_ROADMAP.md, cofounder.co-informed) is
+3. The 8-stage roadmap (SUMMON_FORMATION_ROADMAP.md, cofounder.co-informed) is
    instantiated with real evidence per stage and exactly one least-complete
    unblocked stage marked as the current constraint.
 
@@ -93,7 +93,7 @@ async function main() {
     return issue;
   }
 
-  // ---- 3. Summon (VIT) queue ----
+  // ---- 3. Summon (SUM) queue ----
   const summonIssues = [
     {
       title: "Run 4: retire Tailwind palette classes + toast decision (the simplify run)",

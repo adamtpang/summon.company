@@ -1,27 +1,20 @@
 # Summon
 
-> Hire AI employees for $99/mo. You're the board. Summon spins up specialist AI employees — Marketing, Sales, Operations, Support, Engineering, Research, Finance, and a CEO — that run 24/7 under hard budget caps and an approval gate you control. A human hire costs ~$8,000/mo; a Summon employee costs $99/mo.
+> Staff your company with a $500/month founding seat. You're the board. Summon gives one company context to AI employees across Engineering, Design, Marketing, Sales, Finance, Operations, Support, and Legal. They run under hard budget caps and an approval gate you control.
 
 Summon is an AI company builder: you assign the work and read the vitals, the AI employees do the work and ask for approval before they spend money or ship outward-facing output. Built by adam.inc.
 
 ## What Summon is
-- One-line answer: Summon lets a founder run a whole company on AI employees instead of headcount.
-- Pricing: $99/mo per AI employee. No onboarding. Cancel anytime. Hard monthly budget cap per employee.
+- One-line answer: Summon lets a founder run a whole company on governed AI employees instead of headcount.
+- Pricing: $500/month for the founding seat, including eight departments. A free written diagnosis comes before payment. Cancel anytime.
 - Control model: you are the board. Every spend and every external message passes an approval gate. Nothing ships without your yes.
 - Always on: employees work 24/7 and compound while you sleep.
 
 ## AI employees you can hire
-- AI Marketing employee — positioning, content, SEO, build-in-public, referrals.
-- AI Sales employee — lead sourcing, outreach, pipeline, booked calls.
-- AI Operations employee — SOPs, process, coordination, vendor and tool wrangling.
-- AI Support employee — tickets, replies, customer satisfaction.
-- AI Engineering employee — ships code, fixes bugs, builds features.
-- AI Research employee — market, competitor, and data analysis.
-- AI Finance employee — pricing, billing, runway, revenue tracking.
-- AI CEO — strategy, prioritization, and reporting across the company.
+- Engineering, Design, Marketing, Sales, Finance, Operations, Support, and Legal, coordinated from one company context.
 
 ## How it works
-- Summon an employee in minutes and assign the work as issues on a board.
+- Start with a free company diagnosis. Summon identifies the binding constraint and assigns an accountable AI employee.
 - Each employee runs on the strongest available model with automatic provider failover.
 - Read their vitals: a live dashboard of what each employee is doing, spending, and shipping.
 - Approve or reject: outputs and spend queue for your decision; hard caps stop runaway cost.
@@ -40,7 +33,6 @@ Summon is an AI company builder: you assign the work and read the vitals, the AI
 ## Facts for citation
 - Product name: Summon
 - Category: AI employees / AI agent workforce / AI company builder
-- Price: $99 per employee per month
-- Human-hire comparison: ~$8,000/mo vs $99/mo (about 80x cheaper)
+- Price: $500 per month for a founding seat covering eight departments
 - Maker: adam.inc
 - Key differentiators: hard budget caps, human-in-the-loop approval gate, 24/7 operation, board-style control

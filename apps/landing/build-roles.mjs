@@ -106,20 +106,20 @@ const roles = [
     ],
   },
   {
-    slug: "research",
-    role: "Research",
-    search: "research",
-    lede: "Homework done right: markets, competitors, and evidence summarized with citations you can trust. Here is what an AI research employee does inside the $500/mo founding seat.",
+    slug: "design",
+    role: "Design",
+    search: "design",
+    lede: "A coherent product language across every screen: hierarchy, interaction, responsive behavior, and accessibility judged as one system. Here is what an AI design employee does inside the $500/mo founding seat.",
     does: [
-      "Researches markets and competitors and hands you a brief, not a hunch.",
-      "Summarizes long sources down to the facts that matter, with citations.",
-      "Builds the evidence base your other decisions rest on.",
-      "Checks claims before they go into anything public.",
+      "Audits product and marketing surfaces against the company design system.",
+      "Turns design findings into bounded implementation prompts with measurable acceptance criteria.",
+      "Keeps tokens, components, responsive behavior, and accessibility consistent across routes.",
+      "Reviews mobile and desktop evidence before recommending a visual change for approval.",
     ],
-    approve: "Any conclusion you plan to publish or act on with money. The research is yours to check before it leaves the building.",
+    approve: "Publishing a redesign, changing the brand system, or shipping a consequential interaction. It prepares the evidence and implementation; you decide what represents the company.",
     faqs: [
-      ["Can I trust what the research employee reports?", "Findings come with citations so you can check the source. It is built to cite, not to assert, and to flag uncertainty instead of hiding it."],
-      ["Does it work continuously?", "Yes. Research runs while you sleep, inside a budget cap, and leaves the brief waiting for you in the morning."],
+      ["Does the design employee make every site look the same?", "No. It applies the company-specific design system and product intent. Shared principles improve clarity and usability without erasing the brand's own character."],
+      ["How does it prove an improvement?", "It compares the same routes and viewports before and after, reports regressions and unknowns, and leaves the final taste judgment with the human board."],
     ],
   },
   {
@@ -140,20 +140,20 @@ const roles = [
     ],
   },
   {
-    slug: "chief-of-staff",
-    role: "Chief of Staff",
-    search: "chief of staff",
-    lede: "The one who turns a goal into tasks, routes each to the right department, and reports back to you. Here is what an AI chief of staff does across your whole company.",
+    slug: "legal",
+    role: "Legal",
+    search: "legal",
+    lede: "Plain-language risk review before a commitment leaves the company. Here is what an AI legal employee can prepare, what requires qualified counsel, and what always stays with the board.",
     does: [
-      "Breaks a goal into tasks and routes each to the right department.",
-      "Keeps the whole company moving without you chasing every thread.",
-      "Sends you a daily status report: what shipped, what is blocked, what is next.",
-      "Flags the one bottleneck that most constrains progress this week.",
+      "Flags risky clauses, missing terms, and inconsistent policy language for review.",
+      "Drafts plain-language contract, privacy, and compliance checklists from approved company facts.",
+      "Tracks obligations, renewal dates, and evidence needed for a decision.",
+      "Routes jurisdiction-specific or high-consequence questions to qualified human counsel.",
     ],
-    approve: "Strategy calls, hiring, and any spend approval. It coordinates the work; the direction stays yours.",
+    approve: "Signing, accepting, filing, or representing legal advice. It organizes and drafts the work, but a human board member and qualified counsel make consequential legal decisions.",
     faqs: [
-      ["Do I still make the decisions?", "Yes. The chief of staff routes and reports; you set direction and approve anything that matters. You are the board."],
-      ["How does it keep the other employees on track?", "It assigns tasks, watches for blockers, and reports back daily, so the departments cover each other instead of stalling."],
+      ["Is the AI legal employee a lawyer?", "No. It prepares drafts, checklists, and issue spotting. It does not replace qualified counsel or make legal commitments for the company."],
+      ["Can it sign or accept terms for me?", "No. Contracts, filings, and legal commitments are approval-gated and remain human actions."],
     ],
   },
 ];
@@ -198,7 +198,8 @@ const STYLE = `<style>
     a { color: #f2f2f2; }
     .roles a { border-color: rgba(255,255,255,0.14); }
   }
-</style>`;
+</style>
+<link rel="stylesheet" href="/public.css" />`;
 
 const headerHtml = (rightHref, rightText) => `  <header class="site">
     <a href="/" aria-label="Summon home">
@@ -216,7 +217,8 @@ const ctaHtml = (role) => `  <div class="cta">
   </div>`;
 
 const footerHtml = `  <footer class="post">
-    <p>Summon runs its own company on these employees. See the daily proof on the <a href="/changelog">build log</a>, read the full guide on the <a href="/blog">blog</a>, or start your own company at <a href="/">summon.company</a>.</p>
+    <p>Anchor Marianas LLC · summon.company · human board, governed AI work.</p>
+    <nav class="footer-links" aria-label="Summon pages"><a href="/about">About</a><a href="/blog">Blog</a><a href="/changelog">Build log</a><a href="/privacy">Privacy</a><a href="/terms">Terms</a></nav>
   </footer>`;
 
 function rolePage(r) {
@@ -282,7 +284,7 @@ ${r.does.map((d) => `    <li>${esc(d)}</li>`).join("\n")}
 
   <h2>What it costs</h2>
   <ul>
-    <li><strong>Founding seat: $500 per month.</strong> One seat covers all eight departments (Marketing, Sales, Operations, Support, Engineering, Research, Finance, Legal/chief of staff). Not a per-employee meter.</li>
+    <li><strong>Founding seat: $500 per month.</strong> One seat covers all eight departments (Engineering, Design, Marketing, Sales, Finance, Operations, Support, and Legal). Not a per-employee meter.</li>
     <li><strong>You stay the board.</strong> Hard budget caps. Approval gate before spend or public sends. Cancel anytime.</li>
   </ul>
 
@@ -305,7 +307,7 @@ ${footerHtml}
 function indexPage() {
   const url = `${SITE}/roles`;
   const title = "AI Employees by Role · Summon";
-  const desc = "Hire an AI employee for any role: marketing, sales, engineering, support, operations, research, finance, or chief of staff. One $500/mo founding seat covers all eight departments.";
+  const desc = "Hire an AI employee for any role: engineering, design, marketing, sales, finance, operations, support, or legal. One $500/mo founding seat covers all eight departments.";
   const itemLd = {
     "@context": "https://schema.org",
     "@type": "ItemList",

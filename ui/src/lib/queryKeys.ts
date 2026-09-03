@@ -1,4 +1,10 @@
 export const queryKeys = {
+  aetherPortfolio: {
+    snapshot: ["aether-portfolio"] as const,
+  },
+  boardChat: {
+    transcription: (companyId: string) => ["board-chat", companyId, "transcription"] as const,
+  },
   companies: {
     all: ["companies"] as const,
     detail: (id: string) => ["companies", id] as const,
@@ -204,6 +210,103 @@ export const queryKeys = {
       ["external-objects", "issue-summaries", companyId, issueIds] as const,
     projectSummary: (projectId: string) => ["external-objects", "project-summary", projectId] as const,
   },
+  companyInbox: {
+    connectors: (companyId: string) => ["company-inbox", companyId, "connectors"] as const,
+    messages: (companyId: string, connectorId?: string | null) =>
+      ["company-inbox", companyId, "messages", connectorId ?? "all"] as const,
+    receipts: (companyId: string, connectorId: string) =>
+      ["company-inbox", companyId, connectorId, "receipts"] as const,
+    notificationStatus: (companyId: string) =>
+      ["company-notifications", companyId, "status"] as const,
+    notificationPreferences: (companyId: string) =>
+      ["company-notifications", companyId, "preferences"] as const,
+    notifications: (companyId: string, connectorId?: string | null) =>
+      ["company-notifications", companyId, connectorId ?? "all", "deliveries"] as const,
+  },
+  companyWebsite: {
+    list: (companyId: string) => ["company-website", companyId, "list"] as const,
+    receipts: (companyId: string, websiteId: string) =>
+      ["company-website", companyId, websiteId, "receipts"] as const,
+    versions: (companyId: string, websiteId: string) =>
+      ["company-website", companyId, websiteId, "versions"] as const,
+    backgroundJobs: (companyId: string, websiteId: string) =>
+      ["company-website", companyId, websiteId, "background-jobs"] as const,
+    environmentVariables: (companyId: string, websiteId: string) =>
+      ["company-website", companyId, websiteId, "environment-variables"] as const,
+    deepRepairs: (companyId: string, websiteId: string) =>
+      ["company-website", companyId, websiteId, "deep-repairs"] as const,
+  },
+  companyPayments: {
+    accounts: (companyId: string) => ["company-payments", companyId, "accounts"] as const,
+    offers: (companyId: string, accountId: string) =>
+      ["company-payments", companyId, accountId, "offers"] as const,
+    receipts: (companyId: string, accountId: string) =>
+      ["company-payments", companyId, accountId, "receipts"] as const,
+    refunds: (companyId: string, accountId: string) =>
+      ["company-payments", companyId, accountId, "refunds"] as const,
+    disputes: (companyId: string, accountId: string) =>
+      ["company-payments", companyId, accountId, "disputes"] as const,
+  },
+  companyFinance: {
+    connections: (companyId: string) => ["company-finance", companyId, "connections"] as const,
+    receipts: (companyId: string, connectionId: string) =>
+      ["company-finance", companyId, connectionId, "receipts"] as const,
+  },
+  companySocial: {
+    connections: (companyId: string) => ["company-social", companyId, "connections"] as const,
+    channels: (companyId: string, connectionId: string) =>
+      ["company-social", companyId, connectionId, "channels"] as const,
+    posts: (companyId: string, connectionId: string) =>
+      ["company-social", companyId, connectionId, "posts"] as const,
+    receipts: (companyId: string, connectionId: string) =>
+      ["company-social", companyId, connectionId, "receipts"] as const,
+  },
+  companyOutreach: {
+    connections: (companyId: string) => ["company-outreach", companyId, "connections"] as const,
+    campaigns: (companyId: string, connectionId?: string) => ["company-outreach", companyId, connectionId ?? "all", "campaigns"] as const,
+    leads: (companyId: string) => ["company-outreach", companyId, "leads"] as const,
+    suppressions: (companyId: string) => ["company-outreach", companyId, "suppressions"] as const,
+    messages: (companyId: string, campaignId: string) => ["company-outreach", companyId, campaignId, "messages"] as const,
+    receipts: (companyId: string, connectionId: string) => ["company-outreach", companyId, connectionId, "receipts"] as const,
+  },
+  companyMedia: {
+    schedules: (companyId: string) => ["company-media", companyId, "schedules"] as const,
+  },
+  companyAds: {
+    connections: (companyId: string) => ["company-ads", companyId, "connections"] as const,
+    campaigns: (companyId: string, connectionId: string) => ["company-ads", companyId, connectionId, "campaigns"] as const,
+    receipts: (companyId: string, connectionId: string) => ["company-ads", companyId, connectionId, "receipts"] as const,
+  },
+  companyStack: {
+    list: (companyId: string) => ["company-stack", companyId, "list"] as const,
+    receipts: (companyId: string, stackId: string) =>
+      ["company-stack", companyId, stackId, "receipts"] as const,
+    application: (companyId: string, stackId: string) =>
+      ["company-stack", companyId, stackId, "application"] as const,
+    databaseSnapshots: (companyId: string, stackId: string) =>
+      ["company-stack", companyId, stackId, "database-snapshots"] as const,
+  },
+  companyMobile: {
+    apps: (companyId: string) => ["company-mobile", companyId, "apps"] as const,
+    source: (companyId: string, mobileAppId: string) =>
+      ["company-mobile", companyId, mobileAppId, "source"] as const,
+    builds: (companyId: string, mobileAppId: string) =>
+      ["company-mobile", companyId, mobileAppId, "builds"] as const,
+    releases: (companyId: string, mobileAppId: string) =>
+      ["company-mobile", companyId, mobileAppId, "releases"] as const,
+    receipts: (companyId: string, mobileAppId: string) =>
+      ["company-mobile", companyId, mobileAppId, "receipts"] as const,
+  },
+  companyAiGateway: {
+    state: (companyId: string) =>
+      ["company-ai-gateway", companyId, "state"] as const,
+  },
+  companyPublic: {
+    boardState: (companyId: string) => ["company-public", companyId, "board-state"] as const,
+    sources: (companyId: string) => ["company-public", companyId, "sources"] as const,
+    publicProjection: (slug: string) => ["company-public", "projection", slug] as const,
+    discovery: () => ["company-public", "discovery"] as const,
+  },
   goals: {
     list: (companyId: string) => ["goals", companyId] as const,
     detail: (id: string) => ["goals", "detail", id] as const,
@@ -249,6 +352,7 @@ export const queryKeys = {
   },
   auth: {
     session: ["auth", "session"] as const,
+    lifecycle: ["auth", "account", "lifecycle"] as const,
   },
   sidebarPreferences: {
     companyOrder: (userId: string) => ["sidebar-preferences", "company-order", userId] as const,

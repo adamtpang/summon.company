@@ -237,6 +237,84 @@ describe("IssueThreadInteractionCard", () => {
     expect(host.textContent).toContain("Child task");
   });
 
+  it("reorders suggested tasks before governed acceptance", async () => {
+    const onAcceptInteraction = vi.fn(async () => undefined);
+    const interaction = {
+      ...pendingSuggestedTasksInteraction,
+      id: "interaction-ranked-company-tasks",
+      payload: {
+        version: 1 as const,
+        tasks: [
+          { clientKey: "diagnose", title: "Diagnose the constraint" },
+          { clientKey: "sell", title: "Send the founding offer" },
+          { clientKey: "ship", title: "Ship the first deliverable" },
+        ],
+      },
+    };
+    const host = renderCard({ interaction, onAcceptInteraction });
+    const proposalOrder = () => [...host.querySelectorAll<HTMLElement>("[data-proposal-client-key]")]
+      .map((element) => element.dataset.proposalClientKey);
+
+    expect(host.textContent).toContain("Drag or use the arrow controls to set company priority.");
+    expect(proposalOrder()).toEqual(["diagnose", "sell", "ship"]);
+    expect(host.querySelector('[aria-label^="Drag Ship the first deliverable"]')).toBeTruthy();
+
+    await act(async () => {
+      (host.querySelector('[aria-label="Move Ship the first deliverable up"]') as HTMLButtonElement).click();
+    });
+    await act(async () => {
+      (host.querySelector('[aria-label="Move Ship the first deliverable up"]') as HTMLButtonElement).click();
+    });
+
+    expect(proposalOrder()).toEqual(["ship", "diagnose", "sell"]);
+
+    const acceptButton = Array.from(host.querySelectorAll("button")).find((button) =>
+      button.textContent?.includes("Accept drafts"),
+    );
+    await act(async () => acceptButton?.click());
+
+    expect(onAcceptInteraction).toHaveBeenCalledWith(
+      expect.objectContaining({ id: "interaction-ranked-company-tasks" }),
+      ["ship", "diagnose", "sell"],
+    );
+  });
+
+  it("clears and restores a suggested task selection before acceptance", async () => {
+    const interaction = {
+      ...pendingSuggestedTasksInteraction,
+      id: "interaction-clear-company-tasks",
+      payload: {
+        version: 1 as const,
+        tasks: [
+          { clientKey: "one", title: "First move" },
+          { clientKey: "two", title: "Second move" },
+          { clientKey: "three", title: "Third move" },
+        ],
+      },
+    };
+    const host = renderCard({ interaction, onAcceptInteraction: vi.fn() });
+
+    await act(async () => {
+      Array.from(host.querySelectorAll("button")).find((button) =>
+        button.textContent?.includes("Clear selection"),
+      )?.click();
+    });
+
+    expect(host.textContent).toContain("0 of 3 draft issues selected");
+    const acceptButton = Array.from(host.querySelectorAll("button")).find((button) =>
+      button.textContent?.includes("Accept selected drafts"),
+    );
+    expect(acceptButton?.hasAttribute("disabled")).toBe(true);
+
+    await act(async () => {
+      Array.from(host.querySelectorAll("button")).find((button) =>
+        button.textContent?.includes("Reset selection"),
+      )?.click();
+    });
+
+    expect(host.textContent).toContain("All 3 draft issues selected");
+  });
+
   it("shows an explicit placeholder when a rejected interaction has no reason", () => {
     const host = renderCard({
       interaction: {

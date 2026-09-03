@@ -18,6 +18,7 @@ import { createIssueDetailLocationState } from "../lib/issueDetailBreadcrumb";
 import { collectLiveIssueIds } from "../lib/liveIssueIds";
 import { getRecentAssigneeIds, sortAgentsByRecency, trackRecentAssignee } from "../lib/recent-assignees";
 import { getRecentProjectIds, trackRecentProject } from "../lib/recent-projects";
+import { isApprovedAssignableAgent } from "../lib/agent-staffing";
 import { usePublishSharedQueryData, useSharedPollingQuery } from "../hooks/useSharedPolling";
 import { EmptyState } from "../components/EmptyState";
 import { IssuesList } from "../components/IssuesList";
@@ -463,7 +464,7 @@ export function Routines() {
   const assigneeOptions = useMemo<InlineEntityOption[]>(
     () =>
       sortAgentsByRecency(
-        (agents ?? []).filter((agent) => agent.status !== "terminated"),
+        (agents ?? []).filter(isApprovedAssignableAgent),
         recentAssigneeIds,
       ).map((agent) => ({
         id: agent.id,

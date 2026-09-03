@@ -537,6 +537,19 @@ describe.sequential("issue comment reopen routes", () => {
     ));
   });
 
+  it("keeps closed work closed when a board comment explicitly opts out of reopen", async () => {
+    mockIssueService.getById.mockResolvedValue(makeIssue("done"));
+
+    const res = await request(await installActor(createApp()))
+      .post("/api/issues/11111111-1111-4111-8111-111111111111/comments")
+      .send({ body: "Record this direction without reviving completed work.", reopen: false });
+
+    expect(res.status).toBe(201);
+    expect(mockIssueService.update).not.toHaveBeenCalled();
+    expect(mockIssueService.addComment).toHaveBeenCalled();
+    expect(mockHeartbeatService.wakeup).not.toHaveBeenCalled();
+  });
+
   it("rejects non-assignee agent POST comments on closed issues", async () => {
     mockIssueService.getById.mockResolvedValue(makeIssue("done"));
     mockIssueService.addComment.mockResolvedValue({

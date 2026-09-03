@@ -24,6 +24,8 @@ export type HealthStatus = {
   bootstrapInviteActive?: boolean;
   features?: {
     companyDeletionEnabled?: boolean;
+    billingPortalUrl?: string;
+    supportUrl?: string;
   };
   serverInfo?: ServerInfoSnapshot;
   devServer?: DevServerHealthStatus;

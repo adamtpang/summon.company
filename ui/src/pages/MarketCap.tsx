@@ -1,100 +1,59 @@
-// VIT-101: the Market Cap panel -- current ladder stage, honest cap proxy, ARR
-// from real Stripe data only, the one binding lever, and the levers table.
-// Additive Vitals surface; designed to be embedded by the VIT-70 scoreboard.
-// Data: live control-plane reads (companies, employees) plus the published
-// `market-cap-snapshot` issue document (Stripe read, published by
-// scripts/vitals-market-cap-snapshot.mjs --publish). No snapshot => honest
-// "Stripe not connected" state computed client-side. 11x rule throughout.
+// Company-scoped market-cap proxy. ARR comes only from the same company-owned
+// restricted Stripe connection that drives Mission Control profitability.
+// Unknown remains unproven; test, non-USD, and bounded evidence stay labeled.
 
 import { useEffect, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import {
   computeMarketCapSnapshot,
-  parseMarketCapSnapshotDocument,
-  VITALS_MARKET_CAP_DOCUMENT_KEY,
   VITALS_MARKET_CAP_LADDER,
   type MarketCapSnapshot,
 } from "@paperclipai/shared/vitals-market-cap";
+import type { DashboardSummary } from "@paperclipai/shared";
 import { AlertCircle, Gauge, Landmark, TrendingUp } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
-import { agentsApi } from "../api/agents";
-import { companiesApi } from "../api/companies";
-import { issuesApi } from "../api/issues";
+import { dashboardApi } from "../api/dashboard";
 import { useBreadcrumbs } from "../context/BreadcrumbContext";
 import { useCompany } from "../context/CompanyContext";
+import { queryKeys } from "../lib/queryKeys";
 import { cn } from "../lib/utils";
 
-export function useMarketCapSnapshot(companyId: string | null) {
-  const companiesQuery = useQuery({
-    queryKey: ["vitals-market-cap", "companies"],
-    queryFn: () => companiesApi.list(),
+export function useMarketCapSnapshot(
+  companyId: string | null,
+  providedFinance?: DashboardSummary["finance"],
+) {
+  const dashboardQuery = useQuery({
+    queryKey: queryKeys.dashboard(companyId ?? "none"),
+    enabled: companyId !== null && providedFinance === undefined,
+    queryFn: () => dashboardApi.summary(companyId as string),
   });
-
-  const companies = companiesQuery.data ?? null;
-
-  const employeesQuery = useQuery({
-    queryKey: ["vitals-market-cap", "employees", companies?.map((c) => c.id) ?? []],
-    enabled: companies !== null,
-    queryFn: async () => {
-      const lists = await Promise.all(
-        (companies ?? []).map((c) => agentsApi.list(c.id).catch(() => [])),
-      );
-      return lists.reduce((n, list) => n + list.length, 0);
-    },
-  });
-
-  const issuesQuery = useQuery({
-    queryKey: ["vitals-market-cap", "issues", companyId],
-    enabled: companyId !== null,
-    queryFn: () => issuesApi.list(companyId as string),
-  });
-
-  const marketCapIssue = useMemo(
-    () => (issuesQuery.data ?? []).find((i) => /market cap on the scoreboard/i.test(i.title)) ?? null,
-    [issuesQuery.data],
-  );
-
-  const documentQuery = useQuery({
-    queryKey: ["vitals-market-cap", "document", marketCapIssue?.id],
-    enabled: marketCapIssue !== null,
-    retry: false,
-    queryFn: () => issuesApi.getDocument(marketCapIssue!.id, VITALS_MARKET_CAP_DOCUMENT_KEY),
-  });
-
-  const loading =
-    companiesQuery.isLoading ||
-    employeesQuery.isLoading ||
-    issuesQuery.isLoading ||
-    (marketCapIssue !== null && documentQuery.isLoading);
+  const finance = providedFinance ?? dashboardQuery.data?.finance ?? null;
+  const loading = companyId !== null && finance === null && dashboardQuery.isLoading;
 
   const snapshot: MarketCapSnapshot | null = useMemo(() => {
-    if (loading) return null;
-    const published = documentQuery.data?.body
-      ? parseMarketCapSnapshotDocument(documentQuery.data.body)
-      : null;
-    if (published) return published;
-    if (companies === null || employeesQuery.data === undefined) return null;
-    // No published snapshot: compute the honest disconnected state live.
+    if (loading || !finance) return null;
     return computeMarketCapSnapshot(
       {
-        stripeConnected: false,
-        arrCents: null,
-        payingCompanies: null,
-        totalCompanies: companies.length,
-        totalEmployees: employeesQuery.data,
+        stripeConnected: finance.stripeConnected,
+        stripeTestMode: finance.stripeMode === "test",
+        revenueFreshness: finance.revenueFreshness,
+        arrCents: finance.arrCents,
+        arrCurrency: finance.arrCurrency,
+        arrCoverage: finance.arrCoverage,
+        payingCustomers: finance.payingCustomerCount,
         retentionRate: null,
         grossMarginPct: null,
         arrGrowth30dPct: null,
       },
       new Date().toISOString(),
     );
-  }, [loading, documentQuery.data, companies, employeesQuery.data]);
+  }, [finance, loading]);
 
-  return { snapshot, loading, published: Boolean(documentQuery.data?.body) };
+  return { snapshot, loading, error: dashboardQuery.error };
 }
 
 export function MarketCapPanel({ companyId }: { companyId: string | null }) {
-  const { snapshot, loading, published } = useMarketCapSnapshot(companyId);
+  const { snapshot, loading, error } = useMarketCapSnapshot(companyId);
 
   if (loading || !snapshot) {
     return (
@@ -104,6 +63,10 @@ export function MarketCapPanel({ companyId }: { companyId: string | null }) {
         <Skeleton className="h-4 w-full" />
       </div>
     );
+  }
+
+  if (error) {
+    return <p className="text-sm text-destructive">Could not read the company financial evidence.</p>;
   }
 
   const stageIndex = VITALS_MARKET_CAP_LADDER.findIndex((s) => s.id === snapshot.stage.id);
@@ -151,8 +114,8 @@ export function MarketCapPanel({ companyId }: { companyId: string | null }) {
           </p>
         </div>
 
-        <div className="mt-4 flex items-start gap-2 rounded-md border border-amber-500/30 bg-amber-500/10 p-3">
-          <Gauge className="mt-0.5 h-4 w-4 shrink-0 text-amber-600 dark:text-amber-400" aria-hidden />
+        <div className="mt-4 flex items-start gap-2 rounded-md border border-live/30 bg-live/10 p-3">
+          <Gauge className="mt-0.5 h-4 w-4 shrink-0 text-live" aria-hidden />
           <div className="text-sm">
             <span className="font-medium">Binding lever:</span> {snapshot.bindingLever.statement}
           </div>
@@ -173,12 +136,44 @@ export function MarketCapPanel({ companyId }: { companyId: string | null }) {
         )}
       </div>
 
-      <div className="rounded-lg border bg-card">
+      <div className="overflow-hidden rounded-lg border bg-card">
         <div className="flex items-center gap-2 border-b p-4 text-sm font-medium">
           <TrendingUp className="h-4 w-4 text-muted-foreground" aria-hidden />
           The levers (market cap ≈ ARR × multiple)
         </div>
-        <table className="w-full text-sm">
+        <div className="divide-y sm:hidden">
+          {snapshot.levers.map((lever) => (
+            <div
+              key={lever.key}
+              className={cn("space-y-3 p-4", lever.key === snapshot.bindingLever.key && "bg-live/5")}
+            >
+              <div>
+                <div className="font-medium">
+                  {lever.label}
+                  {lever.key === snapshot.bindingLever.key && (
+                    <span className="ml-2 rounded-full border border-live/40 px-2 py-0.5 text-(length:--text-nano) font-medium uppercase tracking-wide text-live">
+                      binding
+                    </span>
+                  )}
+                </div>
+                <div className="mt-0.5 text-xs text-muted-foreground">{lever.how}</div>
+              </div>
+              <div className="grid grid-cols-2 gap-3 text-xs">
+                <div>
+                  <div className="uppercase tracking-wide text-muted-foreground">Current value</div>
+                  <div className={cn("mt-1 text-sm", !lever.proven && "text-muted-foreground")}>
+                    {lever.currentValue}
+                  </div>
+                </div>
+                <div>
+                  <div className="uppercase tracking-wide text-muted-foreground">Owner</div>
+                  <div className="mt-1 text-sm text-muted-foreground">{lever.ownerDepartment}</div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+        <table className="hidden w-full text-sm sm:table">
           <thead>
             <tr className="border-b text-left text-xs uppercase tracking-wide text-muted-foreground">
               <th className="p-3 font-medium">Lever</th>
@@ -192,14 +187,14 @@ export function MarketCapPanel({ companyId }: { companyId: string | null }) {
                 key={lever.key}
                 className={cn(
                   "border-b last:border-b-0",
-                  lever.key === snapshot.bindingLever.key && "bg-amber-500/5",
+                    lever.key === snapshot.bindingLever.key && "bg-live/5",
                 )}
               >
                 <td className="p-3">
                   <div className="font-medium">
                     {lever.label}
                     {lever.key === snapshot.bindingLever.key && (
-                      <span className="ml-2 rounded-full border border-amber-500/40 px-2 py-0.5 text-(length:--text-nano) font-medium uppercase tracking-wide text-amber-600 dark:text-amber-400">
+                      <span className="ml-2 rounded-full border border-live/40 px-2 py-0.5 text-(length:--text-nano) font-medium uppercase tracking-wide text-live">
                         binding
                       </span>
                     )}
@@ -217,28 +212,27 @@ export function MarketCapPanel({ companyId }: { companyId: string | null }) {
       </div>
 
       <p className="text-xs text-muted-foreground">
-        Snapshot {published ? "published" : "computed live (no published snapshot)"} ·{" "}
-        {snapshot.generatedAt} · refresh: node scripts/vitals-market-cap-snapshot.mjs --publish
+        Live company dashboard · {snapshot.generatedAt} · refresh the Stripe evidence from Payments
       </p>
     </div>
   );
 }
 
 export function MarketCap() {
-  const { selectedCompanyId, selectedCompany } = useCompany();
+  const { selectedCompanyId } = useCompany();
   const { setBreadcrumbs } = useBreadcrumbs();
 
   useEffect(() => {
-    setBreadcrumbs([{ label: selectedCompany?.name ?? "Company" }, { label: "Market cap" }]);
-  }, [setBreadcrumbs, selectedCompany?.name]);
+    setBreadcrumbs([{ label: "Market cap" }]);
+  }, [setBreadcrumbs]);
 
   return (
-    <div className="mx-auto w-full max-w-4xl space-y-6 p-6">
+    <div className="mx-auto w-full max-w-4xl space-y-6 p-4 sm:p-6">
       <div>
         <h1 className="text-2xl font-semibold tracking-tight">Market cap</h1>
         <p className="mt-1 text-sm text-muted-foreground">
           The company&apos;s valuation, its levers, and the one binding lever right now.
-          Real data only, $0 shows as $0 (doc/MARKET-CAP-MODEL.md).
+          Company-owned Stripe evidence only. Unknown remains unproven (doc/MARKET-CAP-MODEL.md).
         </p>
       </div>
       <MarketCapPanel companyId={selectedCompanyId} />

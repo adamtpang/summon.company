@@ -1,14 +1,27 @@
-import { pgTable, text, timestamp, boolean } from "drizzle-orm/pg-core";
+import { sql } from "drizzle-orm";
+import { boolean, check, pgTable, text, timestamp } from "drizzle-orm/pg-core";
 
-export const authUsers = pgTable("user", {
-  id: text("id").primaryKey(),
-  name: text("name").notNull(),
-  email: text("email").notNull(),
-  emailVerified: boolean("email_verified").notNull().default(false),
-  image: text("image"),
-  createdAt: timestamp("created_at", { withTimezone: true }).notNull(),
-  updatedAt: timestamp("updated_at", { withTimezone: true }).notNull(),
-});
+export const authUsers = pgTable(
+  "user",
+  {
+    id: text("id").primaryKey(),
+    name: text("name").notNull(),
+    email: text("email").notNull(),
+    emailVerified: boolean("email_verified").notNull().default(false),
+    image: text("image"),
+    accountState: text("account_state").notNull().default("active"),
+    deactivatedAt: timestamp("deactivated_at", { withTimezone: true }),
+    deletedAt: timestamp("deleted_at", { withTimezone: true }),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).notNull(),
+  },
+  (table) => ({
+    accountStateCheck: check(
+      "user_account_state_check",
+      sql`${table.accountState} in ('active', 'deactivated', 'deleted')`,
+    ),
+  }),
+);
 
 export const authSessions = pgTable("session", {
   id: text("id").primaryKey(),

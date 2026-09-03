@@ -31,6 +31,8 @@ export const agents = pgTable(
     spentMonthlyCents: integer("spent_monthly_cents").notNull().default(0),
     pauseReason: text("pause_reason"),
     pausedAt: timestamp("paused_at", { withTimezone: true }),
+    /** Set on unpause; recovery skips stale backlog re-arm at-or-before this instant (SUM-170). */
+    lastResumedAt: timestamp("last_resumed_at", { withTimezone: true }),
     errorReason: text("error_reason"),
     permissions: jsonb("permissions").$type<Record<string, unknown>>().notNull().default({}),
     lastHeartbeatAt: timestamp("last_heartbeat_at", { withTimezone: true }),

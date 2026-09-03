@@ -182,6 +182,9 @@ export const currentUserProfileSchema = z.object({
   email: z.string().email().nullable(),
   name: z.string().min(1).max(120).nullable(),
   image: profileImageSchema.nullable(),
+  accountState: z.enum(["active", "deactivated", "deleted"]),
+  deactivatedAt: z.string().datetime().nullable(),
+  deletedAt: z.string().datetime().nullable(),
 });
 
 export type CurrentUserProfile = z.infer<typeof currentUserProfileSchema>;
@@ -205,3 +208,31 @@ export const updateCurrentUserProfileSchema = z.object({
 });
 
 export type UpdateCurrentUserProfile = z.infer<typeof updateCurrentUserProfileSchema>;
+
+export const accountLifecycleBlockerSchema = z.object({
+  code: z.enum(["last_active_owner", "active_runs"]),
+  companyId: z.string().uuid().nullable(),
+  companyName: z.string().min(1).nullable(),
+  count: z.number().int().nonnegative(),
+  message: z.string().min(1),
+});
+
+export type AccountLifecycleBlocker = z.infer<typeof accountLifecycleBlockerSchema>;
+
+export const accountLifecycleSchema = z.object({
+  accountState: z.enum(["active", "deactivated", "deleted"]),
+  deactivatedAt: z.string().datetime().nullable(),
+  deletedAt: z.string().datetime().nullable(),
+  canExit: z.boolean(),
+  blockers: z.array(accountLifecycleBlockerSchema),
+  consequences: z.array(z.string().min(1)),
+});
+
+export type AccountLifecycle = z.infer<typeof accountLifecycleSchema>;
+
+export const accountExitConfirmationSchema = z.object({
+  email: z.string().trim().email(),
+  confirmation: z.enum(["DEACTIVATE", "DELETE"]),
+});
+
+export type AccountExitConfirmation = z.infer<typeof accountExitConfirmationSchema>;

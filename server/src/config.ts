@@ -5,6 +5,8 @@ import { resolve } from "node:path";
 import { config as loadDotenv } from "dotenv";
 import { resolvePaperclipEnvPath } from "./paths.js";
 import { maybeRepairLegacyWorktreeConfigAndEnvFiles } from "./worktree-config.js";
+import { normalizeSummonBillingPortalUrl } from "./billing-portal-url.js";
+import { normalizeSummonSupportUrl } from "./support-url.js";
 import {
   AUTH_BASE_URL_MODES,
   BIND_MODES,
@@ -59,6 +61,9 @@ export interface Config {
   allowedHostnames: string[];
   authBaseUrlMode: AuthBaseUrlMode;
   authPublicBaseUrl: string | undefined;
+  publicCompanyBaseUrl: string | undefined;
+  billingPortalUrl?: string;
+  supportUrl?: string;
   authDisableSignUp: boolean;
   databaseMode: DatabaseMode;
   databaseUrl: string | undefined;
@@ -204,6 +209,9 @@ export function loadConfig(): Config {
     publicUrlFromEnv ??
     fileConfig?.auth?.publicBaseUrl;
   const authPublicBaseUrl = authPublicBaseUrlRaw?.trim() || undefined;
+  const publicCompanyBaseUrl = process.env.PAPERCLIP_PUBLIC_COMPANY_BASE_URL?.trim() || undefined;
+  const billingPortalUrl = normalizeSummonBillingPortalUrl(process.env.SUMMON_BILLING_PORTAL_URL);
+  const supportUrl = normalizeSummonSupportUrl(process.env.SUMMON_SUPPORT_URL);
   const authBaseUrlMode: AuthBaseUrlMode =
     authBaseUrlModeFromEnv ??
     fileConfig?.auth?.baseUrlMode ??
@@ -295,6 +303,9 @@ export function loadConfig(): Config {
     allowedHostnames,
     authBaseUrlMode,
     authPublicBaseUrl,
+    publicCompanyBaseUrl,
+    billingPortalUrl,
+    supportUrl,
     authDisableSignUp,
     databaseMode: fileDatabaseMode,
     databaseUrl: process.env.DATABASE_URL ?? fileDbUrl,

@@ -60,3 +60,11 @@ export const updateCompanyBrandingSchema = z
   );
 
 export type UpdateCompanyBranding = z.infer<typeof updateCompanyBrandingSchema>;
+
+export const permanentlyDeleteCompanySchema = z
+  .object({
+    confirmationName: z.string().min(1),
+  })
+  .strict();
+
+export type PermanentlyDeleteCompany = z.infer<typeof permanentlyDeleteCompanySchema>;

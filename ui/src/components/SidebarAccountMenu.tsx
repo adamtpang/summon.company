@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   BookOpen,
+  CreditCard,
   LogOut,
   Megaphone,
   type LucideIcon,
@@ -22,12 +23,13 @@ import { SidebarServerInfo } from "./SidebarServerInfo";
 import { Badge } from "@/components/ui/badge";
 
 const PROFILE_SETTINGS_PATH = "/company/settings/instance/profile";
-const DOCS_URL = "https://docs.paperclip.ing/";
-const FEEDBACK_URL = "https://paperclip.ing/feedback";
+const HELP_PATH = "/help";
 const SOURCE_REPOSITORY_URL = "https://github.com/paperclipai/paperclip";
 const SOURCE_VERSION_RE = /\+\d+\.git\.([0-9a-f]{7,40})(?:\.dirty)?$/i;
 
 interface SidebarAccountMenuProps {
+  billingPortalUrl?: string;
+  supportUrl?: string;
   deploymentMode?: DeploymentMode;
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
@@ -111,6 +113,8 @@ function MenuAction({ label, description, icon: Icon, onClick, href, external = 
 }
 
 export function SidebarAccountMenu({
+  billingPortalUrl,
+  supportUrl,
   deploymentMode,
   open: controlledOpen,
   onOpenChange,
@@ -157,7 +161,7 @@ export function SidebarAccountMenu({
   }
 
   return (
-    <div className="border-t border-r border-border bg-background px-3 py-2">
+    <div className="summon-primary-sidebar border-r border-t border-sidebar-border bg-sidebar px-3 py-2 text-sidebar-foreground">
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <button
@@ -240,21 +244,39 @@ export function SidebarAccountMenu({
                 href={PROFILE_SETTINGS_PATH}
                 onClick={closeNavigationChrome}
               />
+              {billingPortalUrl ? (
+                <MenuAction
+                  label="Manage billing"
+                  description="Update payment details, download receipts, or cancel future renewals in Stripe."
+                  icon={CreditCard}
+                  href={billingPortalUrl}
+                  external
+                  onClick={() => setOpen(false)}
+                />
+              ) : null}
               <MenuAction
-                label="Documentation"
-                description="Open engine docs in a new tab."
+                label="Help"
+                description="Search the Summon operating guide."
                 icon={BookOpen}
-                href={DOCS_URL}
-                external
-                onClick={() => setOpen(false)}
+                href={HELP_PATH}
+                onClick={closeNavigationChrome}
               />
+              {supportUrl ? (
+                <MenuAction
+                  label="Human support"
+                  description="Open the operator-configured Summon support page."
+                  icon={Megaphone}
+                  href={supportUrl}
+                  external
+                  onClick={() => setOpen(false)}
+                />
+              ) : null}
               <MenuAction
-                label="Feedback"
-                description="Share feedback or report an issue."
+                label="Product feedback"
+                description="Prepare a safe bug report or feature request."
                 icon={Megaphone}
-                href={FEEDBACK_URL}
-                external
-                onClick={() => setOpen(false)}
+                href={HELP_PATH}
+                onClick={closeNavigationChrome}
               />
               <ThemeToggle variant="menu-action" onAfterToggle={() => setOpen(false)} />
               {deploymentMode === "authenticated" ? (

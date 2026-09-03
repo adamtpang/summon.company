@@ -1,6 +1,23 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import type { Agent } from "@paperclipai/shared";
-import { AlertTriangle, ArrowUpRight, Check, CheckCircle2, ChevronRight, CircleDashed, ExternalLink, FileText, GitBranch, ImagePlus, Loader2, MessageSquareQuote, MinusCircle, ThumbsUp, X, XCircle } from "lucide-react";
+import { AlertTriangle, ArrowDown, ArrowUp, ArrowUpRight, Check, CheckCircle2, ChevronRight, CircleDashed, ExternalLink, FileText, GitBranch, GripVertical, ImagePlus, Loader2, MessageSquareQuote, MinusCircle, ThumbsUp, X, XCircle } from "lucide-react";
+import {
+  DndContext,
+  KeyboardSensor,
+  PointerSensor,
+  closestCenter,
+  type DragEndEvent,
+  useSensor,
+  useSensors,
+} from "@dnd-kit/core";
+import {
+  SortableContext,
+  arrayMove,
+  sortableKeyboardCoordinates,
+  useSortable,
+  verticalListSortingStrategy,
+} from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
 import { Link } from "@/lib/router";
 import { formatAssigneeUserLabel } from "../lib/assignees";
 import {
@@ -277,6 +294,8 @@ function TaskTreeNode({
   skippedClientKeys,
   showSelection,
   onToggleSelection,
+  rank,
+  reorderControls,
 }: {
   node: SuggestedTaskTreeNode;
   createdByClientKey: ReadonlyMap<string, SuggestTasksResultCreatedTask>;
@@ -288,6 +307,8 @@ function TaskTreeNode({
   skippedClientKeys?: ReadonlySet<string>;
   showSelection?: boolean;
   onToggleSelection?: (node: SuggestedTaskTreeNode, checked: boolean) => void;
+  rank?: number;
+  reorderControls?: ReactNode;
 }) {
   const visibleChildren = node.children.filter((child) => !child.task.hiddenInPreview);
   const hiddenChildCount = node.children
@@ -324,6 +345,14 @@ function TaskTreeNode({
         <div className="flex items-start justify-between gap-2">
           <div className="min-w-0 flex-1">
             <div className="flex items-start gap-2">
+              {rank != null ? (
+                <span
+                  className="inline-flex size-6 shrink-0 items-center justify-center rounded-sm border border-border/70 bg-muted/40 text-xs font-semibold tabular-nums text-muted-foreground"
+                  aria-label={`Priority ${rank}`}
+                >
+                  {rank}
+                </span>
+              ) : null}
               {showSelection ? (
                 <Checkbox
                   checked={isSelected}
@@ -358,19 +387,22 @@ function TaskTreeNode({
             </div>
           </div>
 
-          {createdTask?.issueId ? (
-            <Link
-              to={`/issues/${createdTask.identifier ?? createdTask.issueId}`}
-              className="inline-flex shrink-0 items-center gap-1 rounded-sm border border-emerald-500/50 bg-emerald-500/10 px-2.5 py-1 text-(length:--text-micro) font-medium text-emerald-900 transition-colors hover:bg-emerald-500/15 dark:text-emerald-100"
-            >
-              {createdTask.identifier ?? createdTask.issueId.slice(0, 8)}
-              <ChevronRight className="h-3 w-3" />
-            </Link>
-          ) : isSkipped ? (
-            <span className="inline-flex shrink-0 items-center rounded-sm border border-amber-500/60 bg-amber-500/10 px-2.5 py-1 text-(length:--text-micro) font-medium text-amber-900 dark:text-amber-100">
-              Skipped
-            </span>
-          ) : null}
+          <div className="flex shrink-0 items-center gap-1">
+            {reorderControls}
+            {createdTask?.issueId ? (
+              <Link
+                to={`/issues/${createdTask.identifier ?? createdTask.issueId}`}
+                className="inline-flex shrink-0 items-center gap-1 rounded-sm border border-emerald-500/50 bg-emerald-500/10 px-2.5 py-1 text-(length:--text-micro) font-medium text-emerald-900 transition-colors hover:bg-emerald-500/15 dark:text-emerald-100"
+              >
+                {createdTask.identifier ?? createdTask.issueId.slice(0, 8)}
+                <ChevronRight className="h-3 w-3" />
+              </Link>
+            ) : isSkipped ? (
+              <span className="inline-flex shrink-0 items-center rounded-sm border border-amber-500/60 bg-amber-500/10 px-2.5 py-1 text-(length:--text-micro) font-medium text-amber-900 dark:text-amber-100">
+                Skipped
+              </span>
+            ) : null}
+          </div>
         </div>
 
         {hasMetadata ? (
@@ -425,6 +457,106 @@ function TaskTreeNode({
   );
 }
 
+function SortableTaskTreeRoot({
+  node,
+  createdByClientKey,
+  agentMap,
+  currentUserId,
+  userLabelMap,
+  selectedClientKeys,
+  skippedClientKeys,
+  showSelection,
+  onToggleSelection,
+  position,
+  total,
+  onMove,
+}: {
+  node: SuggestedTaskTreeNode;
+  createdByClientKey: ReadonlyMap<string, SuggestTasksResultCreatedTask>;
+  agentMap?: Map<string, Agent>;
+  currentUserId?: string | null;
+  userLabelMap?: ReadonlyMap<string, string> | null;
+  selectedClientKeys?: ReadonlySet<string>;
+  skippedClientKeys?: ReadonlySet<string>;
+  showSelection: boolean;
+  onToggleSelection: (node: SuggestedTaskTreeNode, checked: boolean) => void;
+  position: number;
+  total: number;
+  onMove: (clientKey: string, direction: -1 | 1) => void;
+}) {
+  const {
+    attributes,
+    listeners,
+    setActivatorNodeRef,
+    setNodeRef,
+    transform,
+    transition,
+    isDragging,
+  } = useSortable({ id: node.task.clientKey, disabled: !showSelection });
+
+  const reorderControls = showSelection ? (
+    <div className="flex items-center gap-0.5" aria-label={`Priority controls for ${node.task.title}`}>
+      <Button
+        type="button"
+        size="icon-sm"
+        variant="ghost"
+        disabled={position === 0}
+        aria-label={`Move ${node.task.title} up`}
+        onClick={() => onMove(node.task.clientKey, -1)}
+      >
+        <ArrowUp aria-hidden="true" />
+      </Button>
+      <Button
+        type="button"
+        size="icon-sm"
+        variant="ghost"
+        disabled={position === total - 1}
+        aria-label={`Move ${node.task.title} down`}
+        onClick={() => onMove(node.task.clientKey, 1)}
+      >
+        <ArrowDown aria-hidden="true" />
+      </Button>
+      <button
+        type="button"
+        ref={setActivatorNodeRef}
+        aria-label={`Drag ${node.task.title} to reprioritize. Position ${position + 1} of ${total}.`}
+        className="inline-flex size-9 touch-none items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-accent hover:text-foreground focus-visible:outline-none focus-visible:ring-(length:--rad-2) focus-visible:ring-ring"
+        {...attributes}
+        {...listeners}
+      >
+        <GripVertical className="size-4" aria-hidden="true" />
+      </button>
+    </div>
+  ) : null;
+
+  return (
+    <div
+      ref={setNodeRef}
+      style={{
+        transform: CSS.Transform.toString(transform),
+        transition,
+        zIndex: isDragging ? 1 : undefined,
+      }}
+      className={cn(isDragging && "relative bg-accent/40 opacity-80 shadow-sm")}
+      data-proposal-client-key={node.task.clientKey}
+    >
+      <TaskTreeNode
+        node={node}
+        createdByClientKey={createdByClientKey}
+        agentMap={agentMap}
+        currentUserId={currentUserId}
+        userLabelMap={userLabelMap}
+        selectedClientKeys={selectedClientKeys}
+        skippedClientKeys={skippedClientKeys}
+        showSelection={showSelection}
+        onToggleSelection={onToggleSelection}
+        rank={position + 1}
+        reorderControls={reorderControls}
+      />
+    </div>
+  );
+}
+
 function SuggestTasksCard({
   interaction,
   agentMap,
@@ -460,12 +592,46 @@ function SuggestTasksCard({
     }
   }, [interaction.result?.rejectionReason, interaction.status]);
 
-  const roots = useMemo(
-    () =>
-      buildSuggestedTaskTree(interaction.payload.tasks).filter(
-        (node) => !node.task.hiddenInPreview,
-      ),
+  const allRoots = useMemo(
+    () => buildSuggestedTaskTree(interaction.payload.tasks),
     [interaction.payload.tasks],
+  );
+  const persistedRootOrder = useMemo(() => {
+    const rootKeys = allRoots.map((node) => node.task.clientKey);
+    const rootKeySet = new Set(rootKeys);
+    const createdRootKeys = (interaction.result?.createdTasks ?? [])
+      .map((task) => task.clientKey)
+      .filter((clientKey) => rootKeySet.has(clientKey));
+    const seen = new Set(createdRootKeys);
+    return [
+      ...createdRootKeys,
+      ...rootKeys.filter((clientKey) => !seen.has(clientKey)),
+    ];
+  }, [allRoots, interaction.result?.createdTasks]);
+  const rootOrderSeed = persistedRootOrder.join("\n");
+  const [orderedRootClientKeys, setOrderedRootClientKeys] = useState<string[]>(
+    () => persistedRootOrder,
+  );
+  useEffect(() => {
+    setOrderedRootClientKeys(persistedRootOrder);
+  }, [interaction.id, interaction.status, rootOrderSeed]);
+  const rootByClientKey = useMemo(
+    () => new Map(allRoots.map((node) => [node.task.clientKey, node] as const)),
+    [allRoots],
+  );
+  const orderedRoots = useMemo(
+    () => orderedRootClientKeys
+      .map((clientKey) => rootByClientKey.get(clientKey))
+      .filter((node): node is SuggestedTaskTreeNode => Boolean(node)),
+    [orderedRootClientKeys, rootByClientKey],
+  );
+  const visibleOrderedRoots = useMemo(
+    () => orderedRoots.filter((node) => !node.task.hiddenInPreview),
+    [orderedRoots],
+  );
+  const sensors = useSensors(
+    useSensor(PointerSensor, { activationConstraint: { distance: 6 } }),
+    useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates }),
   );
   const createdByClientKey = useMemo(
     () => createdTaskMap(interaction.result?.createdTasks),
@@ -496,11 +662,37 @@ function SuggestTasksCard({
   const createdCount = interaction.result?.createdTasks?.length ?? 0;
   const skippedCount = interaction.result?.skippedClientKeys?.length ?? 0;
 
+  const handleMove = useCallback((clientKey: string, direction: -1 | 1) => {
+    setOrderedRootClientKeys((current) => {
+      const visibleClientKeys = current.filter((candidate) => (
+        !rootByClientKey.get(candidate)?.task.hiddenInPreview
+      ));
+      const visibleIndex = visibleClientKeys.indexOf(clientKey);
+      const targetClientKey = visibleClientKeys[visibleIndex + direction];
+      if (visibleIndex < 0 || !targetClientKey) return current;
+      return arrayMove(current, current.indexOf(clientKey), current.indexOf(targetClientKey));
+    });
+  }, [rootByClientKey]);
+
+  const handleDragEnd = useCallback((event: DragEndEvent) => {
+    const { active, over } = event;
+    if (!over || active.id === over.id) return;
+    setOrderedRootClientKeys((current) => {
+      const currentIndex = current.indexOf(String(active.id));
+      const nextIndex = current.indexOf(String(over.id));
+      if (currentIndex < 0 || nextIndex < 0) return current;
+      return arrayMove(current, currentIndex, nextIndex);
+    });
+  }, []);
+
   async function handleAccept() {
     if (!onAcceptInteraction) return;
     setWorking("accept");
     try {
-      await onAcceptInteraction(interaction, [...selectedClientKeys]);
+      const orderedSelectedClientKeys = orderedRoots
+        .flatMap((node) => collectSuggestedTaskClientKeys(node))
+        .filter((clientKey) => selectedClientKeys.has(clientKey));
+      await onAcceptInteraction(interaction, orderedSelectedClientKeys);
     } finally {
       setWorking(null);
     }
@@ -545,26 +737,43 @@ function SuggestTasksCard({
     <div className="space-y-3">
       <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
         <span>{totalTasks === 1 ? "1 draft issue" : `${totalTasks} draft issues`}</span>
+        {interaction.status === "pending" && visibleOrderedRoots.length > 1 ? (
+          <span>Drag or use the arrow controls to set company priority.</span>
+        ) : null}
         {interaction.payload.defaultParentId ? (
           <TaskField label="Default parent" value={interaction.payload.defaultParentId} tone="subtle" />
         ) : null}
       </div>
 
       <div className="overflow-hidden border border-border/70">
-        {roots.map((root) => (
-          <TaskTreeNode
-            key={root.task.clientKey}
-            node={root}
-            createdByClientKey={createdByClientKey}
-            agentMap={agentMap}
-            currentUserId={currentUserId}
-            userLabelMap={userLabelMap}
-            selectedClientKeys={selectedClientKeys}
-            skippedClientKeys={skippedClientKeys}
-            showSelection={interaction.status === "pending"}
-            onToggleSelection={handleToggleSelection}
-          />
-        ))}
+        <DndContext
+          sensors={sensors}
+          collisionDetection={closestCenter}
+          onDragEnd={handleDragEnd}
+        >
+          <SortableContext
+            items={visibleOrderedRoots.map((root) => root.task.clientKey)}
+            strategy={verticalListSortingStrategy}
+          >
+            {visibleOrderedRoots.map((root, index) => (
+              <SortableTaskTreeRoot
+                key={root.task.clientKey}
+                node={root}
+                createdByClientKey={createdByClientKey}
+                agentMap={agentMap}
+                currentUserId={currentUserId}
+                userLabelMap={userLabelMap}
+                selectedClientKeys={selectedClientKeys}
+                skippedClientKeys={skippedClientKeys}
+                showSelection={interaction.status === "pending"}
+                onToggleSelection={handleToggleSelection}
+                position={index}
+                total={visibleOrderedRoots.length}
+                onMove={handleMove}
+              />
+            ))}
+          </SortableContext>
+        </DndContext>
       </div>
 
       {interaction.status === "accepted" ? (
@@ -633,6 +842,16 @@ function SuggestTasksCard({
               >
                 Reject
               </Button>
+              {selectedCount > 0 ? (
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  disabled={working !== null}
+                  onClick={() => setSelectedClientKeys(new Set())}
+                >
+                  Clear selection
+                </Button>
+              ) : null}
               {selectedCount < totalTasks ? (
                 <Button
                   size="sm"

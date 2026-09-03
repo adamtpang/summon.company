@@ -36,6 +36,7 @@ import {
   workspaceOperations,
 } from "@paperclipai/db";
 import type {
+  AttentionCadence,
   AcceptedPlanDecomposition,
   IssueComment,
   IssueCommentAuthorType,
@@ -102,6 +103,7 @@ import {
 } from "./recovery/origins.js";
 import { classifyIssueGraphLiveness, type IssueLivenessFinding } from "./recovery/issue-graph-liveness.js";
 import { visibleIssueCondition } from "./issue-visibility.js";
+import { issueHeartbeatAlertHotSet, resolveIssueCadence } from "./issue-cadence.js";
 
 const ALL_ISSUE_STATUSES = ["backlog", "todo", "in_progress", "in_review", "blocked", "done", "cancelled"];
 const MAX_ISSUE_COMMENT_PAGE_LIMIT = 500;
@@ -2437,6 +2439,7 @@ const issueListSelect = {
   workMode: issues.workMode,
   harnessKind: issues.harnessKind,
   priority: issues.priority,
+  cadenceOverride: issues.cadenceOverride,
   assigneeAgentId: issues.assigneeAgentId,
   assigneeUserId: issues.assigneeUserId,
   checkoutRunId: issues.checkoutRunId,
@@ -4786,16 +4789,19 @@ export function issueService(db: Db) {
       ]);
       const statsByIssueId = new Map(statsRows.map((row) => [row.issueId, row]));
       const lastActivityByIssueId = new Map(lastActivityRows.map((row) => [row.issueId, row]));
+      const cadenceNow = Date.now();
       const [
         blockerAttentionByIssueId,
         productivityReviewByIssueId,
         blockedInboxAttentionByIssueId,
+        heartbeatAlertHotSet,
       ] = await Promise.all([
         listIssueBlockerAttentionMap(db, companyId, withRuns),
         listIssueProductivityReviewMap(db, companyId, issueIds),
         includeBlockedInboxAttention
           ? listIssueBlockedInboxAttentionMap(db, companyId, withRuns)
           : Promise.resolve(new Map<string, IssueBlockedInboxAttention>()),
+        issueHeartbeatAlertHotSet(db, companyId, issueIds, cadenceNow),
       ]);
 
       if (!contextUserId) {
@@ -4810,6 +4816,10 @@ export function issueService(db: Db) {
             ...row,
             ...(includeBlockedBy ? { blockedBy: blockedByMap.get(row.id) ?? [] } : {}),
             lastActivityAt,
+            cadence: resolveIssueCadence(
+              { ...row, lastActivityAt },
+              { now: cadenceNow, isHot: Boolean(row.activeRun) || heartbeatAlertHotSet.has(row.id) },
+            ),
             ...(blockerAttentionByIssueId.has(row.id) ? { blockerAttention: blockerAttentionByIssueId.get(row.id) } : {}),
             ...(includeBlockedInboxAttention ? { blockedInboxAttention: blockedInboxAttentionByIssueId.get(row.id) ?? null } : {}),
             ...(includeLiveDescendantSummary ? { liveDescendantCount: liveDescendantCountByIssueId.get(row.id) ?? 0 } : {}),
@@ -4833,6 +4843,10 @@ export function issueService(db: Db) {
           ...row,
           ...(includeBlockedBy ? { blockedBy: blockedByMap.get(row.id) ?? [] } : {}),
           lastActivityAt,
+          cadence: resolveIssueCadence(
+            { ...row, lastActivityAt },
+            { now: cadenceNow, isHot: Boolean(row.activeRun) || heartbeatAlertHotSet.has(row.id) },
+          ),
           ...(blockerAttentionByIssueId.has(row.id) ? { blockerAttention: blockerAttentionByIssueId.get(row.id) } : {}),
           ...(includeBlockedInboxAttention ? { blockedInboxAttention: blockedInboxAttentionByIssueId.get(row.id) ?? null } : {}),
           ...(includeLiveDescendantSummary ? { liveDescendantCount: liveDescendantCountByIssueId.get(row.id) ?? 0 } : {}),
@@ -4998,6 +5012,44 @@ export function issueService(db: Db) {
 
     getByIdentifier: async (identifier: string) => {
       return getIssueByIdentifier(identifier);
+    },
+
+    /**
+     * Resolve attention cadence (VIT-44 §4) for a set of issue rows. The list
+     * read path inlines this decision off its already-loaded active-run data;
+     * the single-issue read path calls here so the tier surfaces uniformly on
+     * every issue the API returns. `isHot` = an active execution run or an
+     * unresolved heartbeat alert; a per-item `cadenceOverride` always wins.
+     */
+    resolveCadence: async (
+      companyId: string,
+      rows: Array<{
+        id: string;
+        cadenceOverride: string | null;
+        createdAt: Date | string | null;
+        updatedAt: Date | string | null;
+        executionRunId?: string | null;
+        lastActivityAt?: Date | string | null;
+        activeRun?: unknown;
+      }>,
+    ): Promise<Map<string, AttentionCadence>> => {
+      const result = new Map<string, AttentionCadence>();
+      if (rows.length === 0) return result;
+      const now = Date.now();
+      const issueIds = rows.map((row) => row.id);
+      const [heartbeatHotSet, runMap] = await Promise.all([
+        issueHeartbeatAlertHotSet(db, companyId, issueIds, now),
+        activeRunMapForIssues(db, rows as unknown as IssueWithLabels[]),
+      ]);
+      for (const row of rows) {
+        const hasActiveRun = row.activeRun != null
+          || (row.executionRunId != null && runMap.has(row.executionRunId));
+        result.set(
+          row.id,
+          resolveIssueCadence(row, { now, isHot: hasActiveRun || heartbeatHotSet.has(row.id) }),
+        );
+      }
+      return result;
     },
 
     getCurrentScheduledRetry: async (issueId: string) => {

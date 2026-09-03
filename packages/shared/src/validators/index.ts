@@ -25,10 +25,35 @@ export {
   createCompanySchema,
   updateCompanySchema,
   updateCompanyBrandingSchema,
+  permanentlyDeleteCompanySchema,
   type CreateCompany,
   type UpdateCompany,
   type UpdateCompanyBranding,
+  type PermanentlyDeleteCompany,
 } from "./company.js";
+export {
+  aetherCommercializationPolicySchema,
+  aetherPortfolioDepartmentSchema,
+  aetherPortfolioFormationSelectionSchema,
+  aetherRepositoryClassificationManifestSchema,
+  aetherRepositoryClassificationRecordSchema,
+  aetherRepositoryNoncommercialContractSchema,
+  aetherRepositoryRouteSchema,
+  createAetherPortfolioCureTaskSchema,
+  createAetherPortfolioConstraintTaskSchema,
+  diagnoseAetherCodebaseSchema,
+  formAetherPortfolioCompaniesSchema,
+  aetherUnitCostInputSchema,
+  aetherUnitEconomicsManifestSchema,
+  aetherUnitEconomicsRecordSchema,
+  type AetherPortfolioFormationSelection,
+  type AetherRepositoryClassificationManifestInput,
+  type AetherRepositoryRouteInput,
+  type CreateAetherPortfolioCureTask,
+  type CreateAetherPortfolioConstraintTask,
+  type DiagnoseAetherCodebase,
+  type FormAetherPortfolioCompanies,
+} from "./aether-portfolio.js";
 export {
   environmentDriverSchema,
   environmentStatusSchema,
@@ -583,8 +608,15 @@ export {
 
 export {
   createFinanceEventSchema,
+  importFinanceStatementSchema,
   type CreateFinanceEvent,
+  type ImportFinanceStatement,
 } from "./finance.js";
+
+export {
+  createCompanyFinanceLinkSchema,
+  type CreateCompanyFinanceLink,
+} from "./company-finance.js";
 
 export {
   createAssetImageMetadataSchema,
@@ -626,6 +658,9 @@ export {
   currentUserProfileSchema,
   authSessionSchema,
   updateCurrentUserProfileSchema,
+  accountLifecycleBlockerSchema,
+  accountLifecycleSchema,
+  accountExitConfirmationSchema,
   updateCompanyMemberSchema,
   updateCompanyMemberWithPermissionsSchema,
   archiveCompanyMemberSchema,
@@ -645,6 +680,9 @@ export {
   type CurrentUserProfile,
   type AuthSession,
   type UpdateCurrentUserProfile,
+  type AccountLifecycleBlocker,
+  type AccountLifecycle,
+  type AccountExitConfirmation,
   type UpdateCompanyMember,
   type UpdateCompanyMemberWithPermissions,
   type ArchiveCompanyMember,
@@ -698,3 +736,9 @@ export {
   type SetPluginState,
   type ListPluginState,
 } from "./plugin.js";
+export {
+  listCompanyNotificationsQuerySchema,
+  updateCompanyNotificationPreferencesSchema,
+  type ListCompanyNotificationsQuery,
+  type UpdateCompanyNotificationPreferences,
+} from "./company-notifications.js";

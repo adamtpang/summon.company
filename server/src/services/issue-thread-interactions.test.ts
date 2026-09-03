@@ -1,4 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
+import type { SuggestTasksInteraction } from "@paperclipai/shared";
 
 const mockCreateChild = vi.fn();
 
@@ -135,6 +136,41 @@ describe("issueThreadInteractionService", () => {
     expect(created.id).toBe("interaction-1");
     expect(created.idempotencyKey).toBe("run-1:suggest");
     expect(db.insert).not.toHaveBeenCalled();
+  });
+
+  it("preserves the board's selected task order as the accepted priority order", async () => {
+    const {
+      buildSuggestedTaskCreationOrder,
+      resolveSelectedSuggestedTasks,
+    } = await import("./issue-thread-interactions.js");
+    const interaction = {
+      id: "interaction-priority",
+      companyId: "company-1",
+      issueId: "11111111-1111-4111-8111-111111111111",
+      kind: "suggest_tasks",
+      status: "pending",
+      continuationPolicy: "wake_assignee",
+      createdAt: new Date("2026-08-25T00:00:00.000Z"),
+      updatedAt: new Date("2026-08-25T00:00:00.000Z"),
+      payload: {
+        version: 1,
+        tasks: [
+          { clientKey: "first", title: "Originally first" },
+          { clientKey: "second", title: "Originally second" },
+          { clientKey: "third", title: "Originally third" },
+        ],
+      },
+    } as SuggestTasksInteraction;
+
+    const resolved = resolveSelectedSuggestedTasks({
+      interaction,
+      selectedClientKeys: ["third", "first"],
+    });
+
+    expect(resolved.selectedTasks.map((task) => task.clientKey)).toEqual(["third", "first"]);
+    expect(resolved.skippedClientKeys).toEqual(["second"]);
+    expect(buildSuggestedTaskCreationOrder(resolved.selectedTasks).map((task) => task.clientKey))
+      .toEqual(["third", "first"]);
   });
 
   it("answerQuestions normalizes duplicate option ids and persists answered results", async () => {

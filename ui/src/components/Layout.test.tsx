@@ -18,6 +18,7 @@ const mockNavigate = vi.hoisted(() => vi.fn());
 const mockSetSelectedCompanyId = vi.hoisted(() => vi.fn());
 const mockSetSidebarOpen = vi.hoisted(() => vi.fn());
 const mockSetForceCollapsed = vi.hoisted(() => vi.fn());
+const mockOpenOnboarding = vi.hoisted(() => vi.fn());
 const mockCompanyState = vi.hoisted(() => ({
   companies: [{ id: "company-1", issuePrefix: "PAP", name: "Paperclip" }],
   selectedCompany: { id: "company-1", issuePrefix: "PAP", name: "Paperclip" },
@@ -147,11 +148,11 @@ vi.mock("../plugins/slots", async () => {
 vi.mock("../context/DialogContext", () => ({
   useDialog: () => ({
     openNewIssue: vi.fn(),
-    openOnboarding: vi.fn(),
+    openOnboarding: mockOpenOnboarding,
   }),
   useDialogActions: () => ({
     openNewIssue: vi.fn(),
-    openOnboarding: vi.fn(),
+    openOnboarding: mockOpenOnboarding,
   }),
 }));
 
@@ -238,7 +239,7 @@ describe("Layout", () => {
   beforeEach(() => {
     container = document.createElement("div");
     document.body.appendChild(container);
-    currentPathname = "/PAP/dashboard";
+    currentPathname = "/PAP/issues";
     mockCompanyState.companies = [{ id: "company-1", issuePrefix: "PAP", name: "Paperclip" }];
     mockCompanyState.selectedCompany = { id: "company-1", issuePrefix: "PAP", name: "Paperclip" };
     mockCompanyState.selectedCompanyId = "company-1";
@@ -290,6 +291,90 @@ describe("Layout", () => {
     expect(container.textContent).not.toContain(
       "Sign-in is required and this instance is intended for private-network access.",
     );
+
+    await act(async () => {
+      root.unmount();
+    });
+  });
+
+  it("gives Mission Control the full viewport without duplicate app chrome", async () => {
+    currentPathname = "/PAP/dashboard";
+    const root = createRoot(container);
+    const queryClient = new QueryClient({ defaultOptions: { queries: { retry: false } } });
+
+    await act(async () => {
+      root.render(
+        <QueryClientProvider client={queryClient}>
+          <Layout />
+        </QueryClientProvider>,
+      );
+    });
+    await flushReact();
+
+    expect(container.textContent).toContain("Outlet content");
+    expect(container.textContent).not.toContain("Main company nav");
+    expect(container.textContent).not.toContain("Breadcrumbs");
+    expect(container.querySelector("#main-content")?.className).toContain("overflow-hidden");
+    expect(container.querySelector("#main-content")?.className).toContain("p-0");
+
+    await act(async () => {
+      root.unmount();
+    });
+  });
+
+  it("gives the Factory Floor a fixed immersive viewport without Paperclip chrome", async () => {
+    currentPathname = "/PAP/factory-floor";
+    const root = createRoot(container);
+    const queryClient = new QueryClient({ defaultOptions: { queries: { retry: false } } });
+
+    await act(async () => {
+      root.render(
+        <QueryClientProvider client={queryClient}>
+          <Layout />
+        </QueryClientProvider>,
+      );
+    });
+    await flushReact();
+
+    expect(container.textContent).toContain("Outlet content");
+    expect(container.textContent).not.toContain("Main company nav");
+    expect(container.textContent).not.toContain("Breadcrumbs");
+    expect(container.querySelector("#main-content")?.className).toContain("overflow-hidden");
+    expect(container.querySelector("#main-content")?.className).toContain("p-0");
+
+    await act(async () => {
+      root.unmount();
+    });
+  });
+
+  it("gives the portfolio cockpit the Summon rail, a full-height canvas, and no generic breadcrumb chrome", async () => {
+    currentPathname = "/PAP/portfolio";
+    mockCompanyState.companies = [];
+    mockHealthApi.get.mockResolvedValue({
+      status: "ok",
+      deploymentMode: "local_trusted",
+      deploymentExposure: "private",
+      version: "1.2.3",
+    });
+    const root = createRoot(container);
+    const queryClient = new QueryClient({ defaultOptions: { queries: { retry: false } } });
+
+    await act(async () => {
+      root.render(
+        <QueryClientProvider client={queryClient}>
+          <Layout />
+        </QueryClientProvider>,
+      );
+    });
+    await flushReact();
+
+    expect(container.textContent).toContain("Outlet content");
+    expect(container.textContent).toContain("Main company nav");
+    expect(container.textContent).not.toContain("Breadcrumbs");
+    expect(container.querySelector("#main-content")?.className).toContain("overflow-auto");
+    expect(container.querySelector("#main-content")?.className).not.toContain("overflow-hidden");
+    expect(container.querySelector("#main-content")?.className).toContain("p-0");
+    expect(mockOpenOnboarding).not.toHaveBeenCalled();
 
     await act(async () => {
       root.unmount();
