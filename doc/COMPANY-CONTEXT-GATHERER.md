@@ -16,8 +16,7 @@ does not decide what they mean. The four-check analyzer (SUM-297: stage
 placement, price visibility, proof ladder, conversion path) consumes this
 output as its evidence base instead of a human running WebFetch by hand each
 time, which is what produced every diagnosis this session before today
-(Salomatic, Quantus, Hawaii Tech Week, SuperBlond, SitesGo, Diary of
-Maanasa).
+(Salomatic, Quantus, Hawaii Tech Week, SuperBlond, and SitesGo).
 
 Read-only, always. Nothing here writes to or interacts with the target site
 beyond a normal page fetch with a declared user agent.
