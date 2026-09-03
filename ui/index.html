@@ -43,12 +43,20 @@
       // Blank-screen guard (board, 2026-07-19): a white void is never allowed
       // to be silent. If the app has not mounted within 12s, or a fatal error
       // fires first, paint a plain diagnostic with a reload button.
+      //
+      // "Mounted" means main.tsx executed and rendered, which it records on
+      // <html data-summon-mounted>. Checking only #root's children is wrong:
+      // the onboarding wizard renders through a portal into <body> while the
+      // /onboarding route element itself renders nothing, so #root stays
+      // empty for as long as a user is in the wizard. Under a slow first load
+      // the 12s timer then wiped a live wizard mid-flow.
       (() => {
         let fatal = null;
         const remember = (m) => { if (!fatal) fatal = String(m).slice(0, 500); };
         window.addEventListener('error', (e) => remember(e.message + ' @ ' + (e.filename || '') + ':' + (e.lineno || '')));
         window.addEventListener('unhandledrejection', (e) => remember('unhandled rejection: ' + (e.reason && e.reason.message ? e.reason.message : e.reason)));
         setTimeout(() => {
+          if (document.documentElement.getAttribute('data-summon-mounted') === 'true') return;
           const root = document.getElementById('root');
           if (root && root.children.length > 0) return;
           document.body.innerHTML =
