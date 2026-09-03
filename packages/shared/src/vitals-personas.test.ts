@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { VITALS_DEPARTMENTS } from "./vitals-personas.js";
 import {
   PERSONA_GOVERNANCE_GUARDRAIL,
   VITALS_PERSONAS,
@@ -28,9 +29,40 @@ describe("persona catalog", () => {
     }
   });
 
-  it("assigns Elon to Engineering and Rockefeller to Finance (acceptance)", () => {
-    expect(getPersonaById("elon")?.department).toBe("engineering");
-    expect(getPersonaById("rockefeller")?.department).toBe("finance");
+  it("seats one GOAT per core-8 department", () => {
+    const expected: Record<string, string> = {
+      engineering: "elon",
+      finance: "rockefeller",
+      marketing: "ogilvy",
+      design: "rams",
+      sales: "rackham",
+      operations: "ohno",
+      support: "hsieh",
+      legal: "brandeis",
+    };
+    for (const [department, id] of Object.entries(expected)) {
+      expect(getPersonaById(id)?.department).toBe(department);
+    }
+  });
+
+  it("covers every core-8 department with exactly one primary persona", () => {
+    for (const department of VITALS_DEPARTMENTS) {
+      const primary = VITALS_PERSONAS.filter((p) => p.department === department);
+      expect(primary, `department ${department} must have exactly one primary persona`).toHaveLength(1);
+    }
+    // No persona claims a department outside the core-8 enum.
+    for (const persona of VITALS_PERSONAS) {
+      for (const fit of persona.departmentFit) {
+        expect(VITALS_DEPARTMENTS).toContain(fit);
+      }
+    }
+  });
+
+  it("cites a real, checkable canon source for every persona", () => {
+    for (const persona of VITALS_PERSONAS) {
+      expect(persona.source.trim().length).toBeGreaterThan(0);
+      expect(persona.signatureQuote.trim().length).toBeGreaterThan(0);
+    }
   });
 
   it("has unique persona ids", () => {
@@ -45,6 +77,8 @@ describe("resolvePersona", () => {
     expect(resolvePersona("Elon Musk")?.id).toBe("elon");
     expect(resolvePersona("  MUSK ")?.id).toBe("elon");
     expect(resolvePersona("John D. Rockefeller")?.id).toBe("rockefeller");
+    expect(resolvePersona("ogilvy")?.id).toBe("ogilvy");
+    expect(resolvePersona("David Ogilvy")?.id).toBe("ogilvy");
   });
 
   it("returns null for unknown or unported guides (default behavior)", () => {
@@ -61,6 +95,13 @@ describe("personasForDepartment", () => {
     const finance = personasForDepartment("finance").map((p) => p.id);
     expect(finance).toContain("rockefeller");
     expect(finance).not.toContain("elon");
+
+    // Ogilvy is the Marketing seat and a defensible Sales fit, nothing else.
+    const marketing = personasForDepartment("marketing").map((p) => p.id);
+    expect(marketing).toContain("ogilvy");
+    expect(marketing).not.toContain("elon");
+    expect(personasForDepartment("sales").map((p) => p.id)).toContain("ogilvy");
+    expect(personasForDepartment("legal").map((p) => p.id)).not.toContain("ogilvy");
   });
 
   it("returns all personas when no department is given", () => {

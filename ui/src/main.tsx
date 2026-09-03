@@ -73,3 +73,8 @@ createRoot(document.getElementById("root")!).render(
     </QueryClientProvider>
   </StrictMode>
 );
+
+// Tell the index.html blank-screen guard the app module ran and mounted.
+// The guard cannot infer this from #root alone: portal-rendered surfaces
+// such as the onboarding wizard leave #root empty on purpose.
+document.documentElement.setAttribute("data-summon-mounted", "true");
