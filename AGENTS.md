@@ -663,3 +663,7 @@ PR #2218 (`feat/external-adapter-phase1`) adds external adapter support. See roo
 ## Design system
 
 `DESIGN.md` at the repo root is the source of truth for UI design decisions. The token-only rule applies to all `ui/` changes: every color, spacing, radius, type, shadow, and motion value in `ui/src/components/**` and `ui/src/pages/**` comes from the token layer in `ui/src/index.css` - no hex, raw px, arbitrary Tailwind bracket values, or raw `font-size`/`fontSize` declarations in components, outside the documented allowlist in `ui/src/index.css`. Run `pnpm check:token-gates` (`scripts/check-token-gates.mjs`) before committing UI changes - it fails on any violation not covered by that allowlist.
+
+## Summon and Pele, 2026-09-09
+
+Adam clarified that Pele is his home for businesses summon.company creates. Read SUMMON-PELE.md. Summon owns creation and operations; Pele owns reviewed public presentation. This does not establish legal ownership or verify any particular business's origin. Reciprocal kin and manual read-only audit recipes are configured; no exchange or runtime action was executed.

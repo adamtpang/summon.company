@@ -4,6 +4,9 @@ is: The provider-neutral control plane for Adam's AI-operated companies. It diag
 url: https://summon.company
 
 provides:
+  - id: summon-pele-contract
+    what: Reviewed boundary between Summon business creation and Pele public presentation
+    at: SUMMON-PELE.md
   - id: corpus-register
     what: the full register of every extracted corpus, its size, primary home (guide vs company), and the reasoning behind non-obvious extraction choices (floors, caps, dedup decisions)
     at: knowledge/CORPUS.md
@@ -26,6 +29,14 @@ provides:
 stack: [yt-dlp, node, transformers.js]
 
 exchanges:
+  - id: audit-pele-business-home
+    with: pele.business
+    trigger: manual
+    asks: inspect the Summon to Pele business-home boundary and source evidence without changing files or runtime state
+    returns: evidence-backed role alignment, public-record readiness gaps, and proposed corrections without private records
+    permission: read-only
+    approval: human-required
+    at: SUMMON-PELE.md
   - id: shapeable-summon-design-system-alignment
     with: shapeable.art
     trigger: manual
@@ -60,6 +71,8 @@ exchanges:
     at: scripts/summon-product-audit.mjs
 
 kin:
+  - repo: pele.business
+    why: Summon owns business creation and operations; Pele is Adam's public home for those businesses, governed by SUMMON-PELE.md.
   - repo: Aether
     why: Aether is the source workspace and repo-connect inventory for the whole business portfolio; summon.company turns that manifested graph into one governed improvement control plane instead of treating each repository as an isolated app.
   - repo: lightmark.app
