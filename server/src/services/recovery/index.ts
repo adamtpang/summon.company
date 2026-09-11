@@ -43,6 +43,17 @@ export type {
   RunContinuationDecision,
 } from "./run-liveness-continuations.js";
 export {
+  NO_RECOVERY_CANCEL_ACTOR_TYPES,
+  NO_RECOVERY_RESULT_KEY,
+  buildNoRecoveryMarker,
+  isNoRecoveryCancelActor,
+  readNoRecoveryMarker,
+} from "./no-recovery-marker.js";
+export type {
+  BuildNoRecoveryMarkerInput,
+  NoRecoveryMarker,
+} from "./no-recovery-marker.js";
+export {
   DEFAULT_MAX_SUCCESSFUL_RUN_HANDOFF_ATTEMPTS,
   FINISH_SUCCESSFUL_RUN_HANDOFF_REASON,
   LEGACY_SUCCESSFUL_RUN_HANDOFF_NOTICE_PREFIXES,

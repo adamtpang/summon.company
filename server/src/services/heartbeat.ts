@@ -205,6 +205,10 @@ import {
 } from "./recovery/index.js";
 import { isAutomaticRecoverySuppressedByPauseHold } from "./recovery/pause-hold-guard.js";
 import {
+  buildNoRecoveryMarker,
+  isNoRecoveryCancelActor,
+} from "./recovery/no-recovery-marker.js";
+import {
   recoveryAssigneeAdapterOverrides,
   withRecoveryModelProfileHint,
 } from "./recovery/model-profile-hint.js";
@@ -16143,6 +16147,11 @@ export function heartbeatService(db: Db, options: HeartbeatServiceOptions = {}) 
     resultJson?: Record<string, unknown>;
     eventMessage?: string;
     eventPayload?: Record<string, unknown>;
+    /** SUM-173 / SUM-144 D2: stamp durable no-recovery marker for board/user cancels. */
+    noRecovery?: boolean;
+    actorType?: string | null;
+    actorId?: string | null;
+    noRecoveryReason?: string;
   };
 
   async function cancelRunInternal(runId: string, reason = "Cancelled by control plane", options: CancelRunOptions = {}) {
@@ -16151,6 +16160,17 @@ export function heartbeatService(db: Db, options: HeartbeatServiceOptions = {}) 
     if (!CANCELLABLE_HEARTBEAT_RUN_STATUSES.includes(run.status as (typeof CANCELLABLE_HEARTBEAT_RUN_STATUSES)[number])) return run;
     const agent = await getAgent(run.agentId);
     const errorCode = options.errorCode ?? "cancelled";
+    // SUM-173 (SUM-144 D2): a board/user cancel is terminal. Stamp a durable
+    // no-recovery marker so recovery SKIPS + LOGS this run instead of
+    // re-dispatching the work to another agent (the "hydra").
+    const suppressRecovery = options.noRecovery === true || isNoRecoveryCancelActor(options.actorType);
+    const noRecoveryMarker = suppressRecovery
+      ? buildNoRecoveryMarker({
+          reason: options.noRecoveryReason ?? "board_cancel",
+          actorType: options.actorType ?? null,
+          actorId: options.actorId ?? null,
+        })
+      : null;
     const resultJson = agent
       ? {
           ...mergeRunStopMetadataForAgent(agent, "cancelled", {
@@ -16158,9 +16178,12 @@ export function heartbeatService(db: Db, options: HeartbeatServiceOptions = {}) 
             errorCode,
             errorMessage: reason,
           }),
+          ...(noRecoveryMarker ?? {}),
           ...(options.resultJson ?? {}),
         }
-      : options.resultJson;
+      : (noRecoveryMarker || options.resultJson)
+        ? { ...(noRecoveryMarker ?? {}), ...(options.resultJson ?? {}) }
+        : options.resultJson;
 
     const running = runningProcesses.get(run.id);
     try {

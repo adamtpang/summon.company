@@ -4140,8 +4140,21 @@ export function issueRoutes(
   }
 
   function operatorInterruptCancelOptions(input: { issueId: string; actor: ReturnType<typeof getActorInfo> }) {
+    const isBoardUser = input.actor.actorType === "user";
     return {
       errorCode: "operator_interrupted",
+      // SUM-173 (SUM-144 D2): board/user interrupt is terminal; agent interrupts keep recovery.
+      ...(isBoardUser
+        ? {
+            noRecovery: true,
+            actorType: "user" as const,
+            actorId: input.actor.actorId,
+            noRecoveryReason: "operator_interrupt",
+          }
+        : {
+            actorType: input.actor.actorType,
+            actorId: input.actor.actorId,
+          }),
       resultJson: {
         operatorInterrupted: true,
         interruptionSource: "issue_comment_interrupt",
@@ -7923,7 +7936,19 @@ export function issueRoutes(
     let cancelledStatusRunId: string | null = null;
     if (runToCancelForCancelledStatus) {
       try {
-        const cancelled = await heartbeat.cancelRun(runToCancelForCancelledStatus.id);
+        // SUM-173 (SUM-144 D2): board/user issue-cancel is terminal; agent cancels keep recovery.
+        const cancelled = await heartbeat.cancelRun(
+          runToCancelForCancelledStatus.id,
+          "Cancelled because issue status set to cancelled",
+          {
+            actorType: actor.actorType === "user" ? "user" : actor.actorType,
+            actorId: actor.actorId,
+            ...(actor.actorType === "user"
+              ? { noRecovery: true, noRecoveryReason: "issue_status_cancelled" }
+              : {}),
+            eventMessage: "run cancelled because issue status set to cancelled",
+          },
+        );
         if (cancelled) {
           cancelledStatusRunId = cancelled.id;
           await logActivity(db, {
