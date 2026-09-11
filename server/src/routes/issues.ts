@@ -3,6 +3,11 @@ import { Router, type Request, type Response } from "express";
 import multer from "multer";
 import { z } from "zod";
 import { and, asc, desc, eq, inArray, isNull, notInArray } from "drizzle-orm";
+import {
+  INVALIDATION_REASON,
+  INVALIDATION_ERROR_CODE,
+  selectQueuedRunsToInvalidateOnAssigneeChange,
+} from "../services/should-invalidate-queued-run-on-assignee-change.js";
 import type { Db } from "@paperclipai/db";
 import {
   activityLog,
@@ -8387,6 +8392,64 @@ export function issueRoutes(
         getDependencyReadiness?: typeof svc.getDependencyReadiness;
       };
       const dependencyReadinessSvc = svc as DependencyReadinessProvider;
+
+      // SUM-175 / D4 side (b): when assignee changes, proactively cancel the
+      // previous assignee's queued/scheduled_retry wakes for this issue so
+      // RUNNING NOW does not keep a dead wake until claim time.
+      if (assigneeChanged && existing.assigneeAgentId) {
+        try {
+          const previousAssigneeQueued = await db
+            .select({
+              id: heartbeatRuns.id,
+              agentId: heartbeatRuns.agentId,
+              status: heartbeatRuns.status,
+              contextSnapshot: heartbeatRuns.contextSnapshot,
+            })
+            .from(heartbeatRuns)
+            .where(
+              and(
+                eq(heartbeatRuns.companyId, issue.companyId),
+                eq(heartbeatRuns.agentId, existing.assigneeAgentId),
+                inArray(heartbeatRuns.status, ["queued", "scheduled_retry"]),
+              ),
+            );
+          const victims = selectQueuedRunsToInvalidateOnAssigneeChange({
+            runs: previousAssigneeQueued.map((run) => ({
+              id: run.id,
+              agentId: run.agentId,
+              status: run.status,
+              issueId:
+                run.contextSnapshot &&
+                typeof run.contextSnapshot === "object" &&
+                typeof (run.contextSnapshot as Record<string, unknown>).issueId === "string"
+                  ? ((run.contextSnapshot as Record<string, unknown>).issueId as string)
+                  : null,
+            })),
+            issueId: issue.id,
+            previousAssigneeAgentId: existing.assigneeAgentId,
+            nextAssigneeAgentId: issue.assigneeAgentId,
+          });
+          for (const victim of victims) {
+            if (!victim.id) continue;
+            await heartbeat.cancelRun(victim.id, INVALIDATION_REASON, {
+              errorCode: INVALIDATION_ERROR_CODE,
+              resultJson: {
+                stopReason: INVALIDATION_ERROR_CODE,
+                issueId: issue.id,
+                previousAssigneeAgentId: existing.assigneeAgentId,
+                currentAssigneeAgentId: issue.assigneeAgentId ?? null,
+              },
+              eventMessage: INVALIDATION_REASON,
+            });
+          }
+        } catch (err) {
+          logger.warn(
+            { err, issueId: issue.id, previousAssigneeAgentId: existing.assigneeAgentId },
+            "failed to invalidate queued runs after assignee change",
+          );
+        }
+      }
+
       const wakeups = new Map<string, { agentId: string; wakeup: WakeupRequest }>();
       const addWakeup = (agentId: string, wakeup: WakeupRequest) => {
         const wakeIssueId =
