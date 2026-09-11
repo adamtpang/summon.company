@@ -168,7 +168,7 @@ const LOGO = `<svg width="22" height="22" viewBox="0 0 32 32" aria-hidden="true"
 const STYLE = `<style>
   :root { color-scheme: light; }
   * { box-sizing: border-box; }
-  body { margin: 0; background: #ffffff; color: #0a0a0a; font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; line-height: 1.65; font-size: 16px; }
+  body { margin: 0; background: #ffffff; color: #0a0a0a; font-family: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; line-height: 1.65; font-size: 16px; }
   .page { max-width: 44rem; margin: 0 auto; padding: 2.5rem 1.25rem 5rem; }
   header.site { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 2.5rem; }
   header.site a { display: inline-flex; align-items: center; gap: 0.6rem; color: inherit; text-decoration: none; font-weight: 600; }
@@ -245,6 +245,9 @@ function rolePage(r) {
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
 <title>${esc(title)}</title>
 <meta name="description" content="${attr(desc)}" />
 <link rel="canonical" href="${url}" />
@@ -323,6 +326,9 @@ function indexPage() {
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
 <title>${esc(title)}</title>
 <meta name="description" content="${attr(desc)}" />
 <link rel="canonical" href="${url}" />

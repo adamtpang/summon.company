@@ -35,7 +35,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="tokens.css" />
 
 <style>
@@ -170,8 +170,8 @@
   .rcard .btn { width: 100%; }
 
   .deep-inner { background: var(--bg-section-deep); border-radius: var(--radius-panel); padding: var(--space-16) var(--space-8); text-align: center; }
-  .deep-inner .quote { font-family: var(--font-display); font-weight: 600; font-size: var(--text-title-section); color: #8AB9FF; letter-spacing: var(--tracking-title); margin: var(--space-4) 0; }
-  .deep-inner p.body { color: #B9C6E4; max-width: 62ch; margin: 0 auto; }
+  .deep-inner .quote { font-family: var(--font-display); font-weight: 600; font-size: var(--text-title-section); color: var(--text-accent); letter-spacing: var(--tracking-title); margin: var(--space-4) 0; }
+  .deep-inner p.body { color: var(--text-secondary); max-width: 62ch; margin: 0 auto; }
 
   .price3 { display: grid; gap: var(--space-4); }
   @media (min-width: 820px) { .price3 { grid-template-columns: repeat(3, 1fr); align-items: stretch; } }
@@ -400,7 +400,7 @@
 
   <section id="governed" class="wrap">
     <div class="deep-inner">
-      <span class="overline" style="color: #8AB9FF;">Governed, not autonomous</span>
+      <span class="overline" style="color: var(--text-accent);">Governed, not autonomous</span>
       <p class="quote">"Spend hits the cap, not the bill."</p>
       <p class="body">Every AI employee runs under a hard monthly budget. When it hits the cap, the employee pauses. It never keeps charging. No runaway invoices, no bill shock. Anything worth money, law, or your name waits for your approval. That's why it's safe to let them run.</p>
     </div>
