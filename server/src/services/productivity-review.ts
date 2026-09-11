@@ -266,6 +266,8 @@ export function productivityReviewService(db: Db, deps?: { enqueueWakeup?: Enque
     thresholds: ProductivityReviewThresholds,
     now: Date,
   ) {
+    // SUM-176 (SUM-144 D5): treat cancelled the same as done for the snooze
+    // window so board-cancel of an auto-review does not re-file immediately.
     const cutoff = new Date(now.getTime() - thresholds.resolvedSnoozeMs);
     return db
       .select({ id: issues.id, identifier: issues.identifier, status: issues.status, updatedAt: issues.updatedAt })
@@ -275,7 +277,7 @@ export function productivityReviewService(db: Db, deps?: { enqueueWakeup?: Enque
           eq(issues.companyId, companyId),
           eq(issues.originKind, PRODUCTIVITY_REVIEW_ORIGIN_KIND),
           eq(issues.originId, sourceIssueId),
-          eq(issues.status, "done"),
+          inArray(issues.status, ["done", "cancelled"]),
           gt(issues.updatedAt, cutoff),
         ),
       )
