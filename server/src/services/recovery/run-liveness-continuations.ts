@@ -3,6 +3,7 @@ import type { Db } from "@paperclipai/db";
 import { agentWakeupRequests, agents, heartbeatRuns, issues } from "@paperclipai/db";
 import type { RunLivenessState } from "@paperclipai/shared";
 import { withRecoveryModelProfileHint } from "./model-profile-hint.js";
+import { readNoRecoveryMarker } from "./no-recovery-marker.js";
 import { RECOVERY_REASON_KINDS } from "./origins.js";
 
 export const RUN_LIVENESS_CONTINUATION_REASON = RECOVERY_REASON_KINDS.runLivenessContinuation;
@@ -104,6 +105,11 @@ export function decideRunLivenessContinuation(input: {
     idempotentWakeExists,
   } = input;
   const maxAttempts = input.maxAttempts ?? DEFAULT_MAX_LIVENESS_CONTINUATION_ATTEMPTS;
+
+  // SUM-173 (SUM-144 D2): board/user cancel is terminal — never continue it.
+  if (readNoRecoveryMarker(run)) {
+    return { kind: "skip", reason: "recovery suppressed by board/user cancel" };
+  }
 
   if (!livenessState || !ACTIONABLE_LIVENESS_STATES.has(livenessState)) {
     return { kind: "skip", reason: "liveness state is not actionable for continuation" };

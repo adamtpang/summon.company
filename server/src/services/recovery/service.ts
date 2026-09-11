@@ -71,6 +71,7 @@ import {
 } from "./model-profile-hint.js";
 import { isAutomaticRecoverySuppressedByPauseHold } from "./pause-hold-guard.js";
 import { shouldSkipStaleBacklogAfterResume } from "./last-resumed-gate.js";
+import { readNoRecoveryMarker } from "./no-recovery-marker.js";
 
 const EXECUTION_PATH_HEARTBEAT_RUN_STATUSES = ["queued", "running", "scheduled_retry"] as const;
 const UNSUCCESSFUL_HEARTBEAT_RUN_TERMINAL_STATUSES = ["interrupted", "failed", "cancelled", "timed_out"] as const;
@@ -3059,6 +3060,28 @@ export function recoveryService(db: Db, deps: { enqueueWakeup: RecoveryWakeup })
       }
 
       const latestRun = await getLatestIssueRun(issue.companyId, issue.id);
+      // SUM-173 (SUM-144 D2): board/user cancel stamps a durable no-recovery
+      // marker. Such a cancel is TERMINAL — skip (and log) instead of
+      // re-dispatching. Guard runs before every escalation/continuation/enqueue
+      // branch so no recovery path can re-arm the hydra for an intentionally
+      // cancelled run. A later unmarked run for the same issue recovers again.
+      const noRecoveryMarker = readNoRecoveryMarker(latestRun);
+      if (noRecoveryMarker) {
+        result.skipped += 1;
+        logger.info(
+          {
+            companyId: issue.companyId,
+            issueId: issue.id,
+            runId: latestRun?.id ?? null,
+            status: latestRun?.status ?? null,
+            reason: noRecoveryMarker.reason,
+            actorType: noRecoveryMarker.actorType,
+            actorId: noRecoveryMarker.actorId,
+          },
+          "recovery: skipping re-dispatch for no-recovery (board/user cancelled) run",
+        );
+        continue;
+      }
       if (latestRun?.status === "succeeded" && await hasPersistedDurableWaitPath(issue)) {
         result.skipped += 1;
         continue;
