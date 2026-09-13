@@ -34,6 +34,20 @@ An element ships to `ui/` only if it can point to a law it serves OR a DESIGN.md
 
 ## Product stance
 
+### Summon Focus, 2026-09-05
+
+The company-scoped Focus route is a bounded replacement-shell pilot: a dark task rail
+and one reading/action canvas. It answers which blocker needs the founder and keeps
+its owner, task context, and verified closure together (laws 1, 3, and 12).
+Project selection expresses the founder's income focus without inferring revenue
+from task activity. Existing neutral semantic tokens and typography remain canonical.
+The compact queue replaces dashboard metrics on this surface; the trade-off is less
+portfolio breadth in exchange for resolving one task without hunting through lists.
+The full task remains one link away for dependencies and receipts. Closure requires
+written evidence and explicit verification, and uses the existing task API and its
+server-side governance. It does not introduce an execution or approval shortcut.
+The rest of the application retains its existing navigation during this pilot.
+
 Summon is an AI-agent company command center. The user is the BOARD, scanning which employees need them and deciding. Every screen answers, in order: *which agent needs me, what's the company state, what do I do about it.* Density serves scanning - but density comes from information, never from chrome.
 
 ## The token layer (where visual values live)
