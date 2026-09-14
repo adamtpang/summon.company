@@ -80,3 +80,28 @@ No visual redesign, no new colors or typefaces, no layout restructuring, no new 
 See `doc/design/PRIOR-ART.md` - a previous audit pass (PAP-280/283/284, on the `PAP-282-playground` branch, NOT on master) found that of ~220 hardcoded drift sites, only 6 were exact-value-mappable to existing tokens; expect the verbatim extraction to mint many new tokens that the human scale-collapse step later merges. It also drafted usage rules (radius tiers, CTA tiers, named type styles) that are good candidates for the post-audit scale decision.
 
 How-to guide for day-to-day UI changes: see `doc/design/CHANGING-THE-UI.md`.
+
+## v0.6 ruling (board, 2026-09-11): one palette, one font, both surfaces
+
+Adam's direction: "radically simple uiux, design, copy. standardized uiux and
+simple fonts and color palette across the whole site." Applied as follows.
+
+- The public site and the product app share one closed palette: paper
+  `#ffffff`, ink `#0a0a0a`, muted `#5a5a5a`, tertiary `#8a8a8a`, hairline
+  `rgba(0,0,0,0.12)`, plus the shared Aether sentiment set for positive
+  `#1F7A4D`, warning `#96702A`, negative `#A23B2E`. Dark mode re-points the
+  same roles to the app's existing `.dark` values.
+- One typeface: Inter for words, the system monospace stack for machine
+  values. Space Grotesk, JetBrains Mono, Bodoni Moda, Hanken Grotesk, and
+  IBM Plex Mono are retired from the site.
+- Summon Blue `#0B5FFF` survives in exactly one place, the EKG mark. It is no
+  longer an action, link, focus, or section color.
+- No gradients, no shadows. Structure comes from borders and spacing. The
+  landing's hero wash, horizon, and gradient buttons are flat.
+- `apps/landing/tokens.css` is the single source for the site. Pages that
+  carry inline styles keep the same hex values by rule, not by accident; a
+  later pass folds them onto the tokens.
+
+This supersedes the Summon Blue action color and display serif in
+`.shapeable/CLAUDE_DESIGN_SYSTEM.md`, which remains the record of the
+September 1 iteration and is not the current ruling.
