@@ -1,4 +1,4 @@
-import { UserPlus, Lightbulb, ShieldAlert, ShieldCheck, UsersRound } from "lucide-react";
+import { UserPlus, Lightbulb, ShieldAlert, ShieldCheck, UsersRound, AlertTriangle } from "lucide-react";
 import { formatCents } from "../lib/utils";
 
 export const typeLabel: Record<string, string> = {
@@ -7,6 +7,7 @@ export const typeLabel: Record<string, string> = {
   budget_override_required: "Budget Override",
   request_board_approval: "Board Approval",
   staff_formation: "Core-8 formation",
+  risk_gated_action: "Risk-Gated Action",
 };
 
 function firstNonEmptyString(...values: unknown[]): string | null {
@@ -24,6 +25,7 @@ export function approvalSubject(payload?: Record<string, unknown> | null): strin
     payload?.name,
     payload?.summary,
     payload?.recommendedAction,
+    payload?.action,
   );
 }
 
@@ -43,6 +45,7 @@ export const typeIcon: Record<string, typeof UserPlus> = {
   budget_override_required: ShieldAlert,
   request_board_approval: ShieldCheck,
   staff_formation: UsersRound,
+  risk_gated_action: AlertTriangle,
 };
 
 export const defaultTypeIcon = ShieldCheck;
@@ -311,6 +314,94 @@ function BoardApprovalPayloadContent({ payload }: { payload: Record<string, unkn
   );
 }
 
+const RISK_TIER_LABEL: Record<string, string> = {
+  low: "Low",
+  medium: "Medium",
+  high: "High",
+};
+
+const RISK_TIER_COLOR: Record<string, string> = {
+  low: "text-green-700 dark:text-green-400 bg-green-500/10 border-green-500/20",
+  medium: "text-amber-700 dark:text-amber-400 bg-amber-500/10 border-amber-500/20",
+  high: "text-red-700 dark:text-red-400 bg-red-500/10 border-red-500/20",
+};
+
+interface EvidenceItem {
+  kind: string;
+  summary: string;
+}
+
+function evidenceItems(value: unknown): EvidenceItem[] {
+  if (!Array.isArray(value)) return [];
+  return value.flatMap((item) => {
+    if (!item || typeof item !== "object") return [];
+    const candidate = item as Record<string, unknown>;
+    if (typeof candidate.kind !== "string" || typeof candidate.summary !== "string") return [];
+    return [{ kind: candidate.kind, summary: candidate.summary }];
+  });
+}
+
+export function RiskGatedActionPayload({ payload }: { payload: Record<string, unknown> }) {
+  const action = firstNonEmptyString(payload.action) ?? "Ungated action";
+  const riskTier = typeof payload.riskTier === "string" ? payload.riskTier : "medium";
+  const tierLabel = RISK_TIER_LABEL[riskTier] ?? riskTier;
+  const tierColor = RISK_TIER_COLOR[riskTier] ?? RISK_TIER_COLOR.medium;
+  const evidence = evidenceItems(payload.evidence);
+  const budgetImpactCents = typeof payload.budgetImpactCents === "number" ? payload.budgetImpactCents : null;
+  const categories = Array.isArray(payload.categories)
+    ? (payload.categories as unknown[]).filter((c): c is string => typeof c === "string")
+    : [];
+
+  return (
+    <div className="mt-4 space-y-3.5 text-sm">
+      <div className="space-y-1">
+        <p className="text-(length:--text-micro) font-medium uppercase tracking-(--tracking-label) text-muted-foreground">Action</p>
+        <p className="font-medium leading-6 text-foreground">{action}</p>
+      </div>
+
+      <div className="flex flex-wrap gap-2">
+        <span className={`inline-flex items-center rounded border px-2 py-0.5 text-(length:--text-micro) font-medium ${tierColor}`}>
+          Risk: {tierLabel}
+        </span>
+        {budgetImpactCents !== null && budgetImpactCents > 0 && (
+          <span className="inline-flex items-center rounded border border-border/60 bg-muted/40 px-2 py-0.5 text-(length:--text-micro) font-medium text-muted-foreground">
+            Budget: {formatCents(budgetImpactCents)}
+          </span>
+        )}
+        {categories.map((cat) => (
+          <span key={cat} className="inline-flex items-center rounded border border-border/60 bg-muted/40 px-2 py-0.5 font-mono text-(length:--text-micro) text-muted-foreground">
+            {cat}
+          </span>
+        ))}
+      </div>
+
+      {evidence.length > 0 && (
+        <div className="space-y-1.5">
+          <p className="text-(length:--text-micro) font-medium uppercase tracking-(--tracking-label) text-muted-foreground">
+            Evidence ({evidence.length} item{evidence.length !== 1 ? "s" : ""})
+          </p>
+          <div className="divide-y divide-border/50 rounded-lg border border-border/60 bg-muted/20">
+            {evidence.map((item, i) => (
+              <div key={i} className="flex items-start gap-3 px-3.5 py-2.5">
+                <span className="mt-0.5 shrink-0 font-mono text-(length:--text-micro) text-muted-foreground/60 w-24 truncate" title={item.kind}>
+                  {item.kind}
+                </span>
+                <span className="min-w-0 text-xs leading-5 text-foreground/80 break-all">{item.summary}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {evidence.length === 0 && (
+        <div className="rounded-lg border border-amber-500/20 bg-amber-500/10 px-3.5 py-3">
+          <p className="text-xs text-amber-700 dark:text-amber-300">No evidence items attached. Review carefully before approving.</p>
+        </div>
+      )}
+    </div>
+  );
+}
+
 export function ApprovalPayloadRenderer({
   type,
   payload,
@@ -326,5 +417,6 @@ export function ApprovalPayloadRenderer({
   if (type === "request_board_approval") {
     return <BoardApprovalPayload payload={payload} hideTitle={hidePrimaryTitle} />;
   }
+  if (type === "risk_gated_action") return <RiskGatedActionPayload payload={payload} />;
   return <CeoStrategyPayload payload={payload} />;
 }
