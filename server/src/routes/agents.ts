@@ -4011,7 +4011,16 @@ export function agentRoutes(
     if (existing) {
       assertCompanyAccess(req, existing.companyId);
     }
-    const run = await heartbeat.cancelRun(runId);
+    // SUM-173 (SUM-144 D2): a board cancel is terminal. Pass actor provenance so
+    // cancelRun stamps a durable no-recovery marker and the recovery reconciler
+    // skips (instead of re-dispatching) this run.
+    const run = await heartbeat.cancelRun(runId, "Cancelled by board operator", {
+      noRecovery: true,
+      actorType: "user",
+      actorId: req.actor.userId ?? "board",
+      noRecoveryReason: "board_cancel",
+      eventMessage: "run cancelled by board (no-recovery)",
+    });
 
     if (run) {
       await logActivity(db, {

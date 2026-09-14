@@ -3,6 +3,11 @@ import { Router, type Request, type Response } from "express";
 import multer from "multer";
 import { z } from "zod";
 import { and, asc, desc, eq, inArray, isNull, notInArray } from "drizzle-orm";
+import {
+  INVALIDATION_REASON,
+  INVALIDATION_ERROR_CODE,
+  selectQueuedRunsToInvalidateOnAssigneeChange,
+} from "../services/should-invalidate-queued-run-on-assignee-change.js";
 import type { Db } from "@paperclipai/db";
 import {
   activityLog,
@@ -4135,8 +4140,21 @@ export function issueRoutes(
   }
 
   function operatorInterruptCancelOptions(input: { issueId: string; actor: ReturnType<typeof getActorInfo> }) {
+    const isBoardUser = input.actor.actorType === "user";
     return {
       errorCode: "operator_interrupted",
+      // SUM-173 (SUM-144 D2): board/user interrupt is terminal; agent interrupts keep recovery.
+      ...(isBoardUser
+        ? {
+            noRecovery: true,
+            actorType: "user" as const,
+            actorId: input.actor.actorId,
+            noRecoveryReason: "operator_interrupt",
+          }
+        : {
+            actorType: input.actor.actorType,
+            actorId: input.actor.actorId,
+          }),
       resultJson: {
         operatorInterrupted: true,
         interruptionSource: "issue_comment_interrupt",
@@ -7918,7 +7936,19 @@ export function issueRoutes(
     let cancelledStatusRunId: string | null = null;
     if (runToCancelForCancelledStatus) {
       try {
-        const cancelled = await heartbeat.cancelRun(runToCancelForCancelledStatus.id);
+        // SUM-173 (SUM-144 D2): board/user issue-cancel is terminal; agent cancels keep recovery.
+        const cancelled = await heartbeat.cancelRun(
+          runToCancelForCancelledStatus.id,
+          "Cancelled because issue status set to cancelled",
+          {
+            actorType: actor.actorType === "user" ? "user" : actor.actorType,
+            actorId: actor.actorId,
+            ...(actor.actorType === "user"
+              ? { noRecovery: true, noRecoveryReason: "issue_status_cancelled" }
+              : {}),
+            eventMessage: "run cancelled because issue status set to cancelled",
+          },
+        );
         if (cancelled) {
           cancelledStatusRunId = cancelled.id;
           await logActivity(db, {
@@ -8387,6 +8417,64 @@ export function issueRoutes(
         getDependencyReadiness?: typeof svc.getDependencyReadiness;
       };
       const dependencyReadinessSvc = svc as DependencyReadinessProvider;
+
+      // SUM-175 / D4 side (b): when assignee changes, proactively cancel the
+      // previous assignee's queued/scheduled_retry wakes for this issue so
+      // RUNNING NOW does not keep a dead wake until claim time.
+      if (assigneeChanged && existing.assigneeAgentId) {
+        try {
+          const previousAssigneeQueued = await db
+            .select({
+              id: heartbeatRuns.id,
+              agentId: heartbeatRuns.agentId,
+              status: heartbeatRuns.status,
+              contextSnapshot: heartbeatRuns.contextSnapshot,
+            })
+            .from(heartbeatRuns)
+            .where(
+              and(
+                eq(heartbeatRuns.companyId, issue.companyId),
+                eq(heartbeatRuns.agentId, existing.assigneeAgentId),
+                inArray(heartbeatRuns.status, ["queued", "scheduled_retry"]),
+              ),
+            );
+          const victims = selectQueuedRunsToInvalidateOnAssigneeChange({
+            runs: previousAssigneeQueued.map((run) => ({
+              id: run.id,
+              agentId: run.agentId,
+              status: run.status,
+              issueId:
+                run.contextSnapshot &&
+                typeof run.contextSnapshot === "object" &&
+                typeof (run.contextSnapshot as Record<string, unknown>).issueId === "string"
+                  ? ((run.contextSnapshot as Record<string, unknown>).issueId as string)
+                  : null,
+            })),
+            issueId: issue.id,
+            previousAssigneeAgentId: existing.assigneeAgentId,
+            nextAssigneeAgentId: issue.assigneeAgentId,
+          });
+          for (const victim of victims) {
+            if (!victim.id) continue;
+            await heartbeat.cancelRun(victim.id, INVALIDATION_REASON, {
+              errorCode: INVALIDATION_ERROR_CODE,
+              resultJson: {
+                stopReason: INVALIDATION_ERROR_CODE,
+                issueId: issue.id,
+                previousAssigneeAgentId: existing.assigneeAgentId,
+                currentAssigneeAgentId: issue.assigneeAgentId ?? null,
+              },
+              eventMessage: INVALIDATION_REASON,
+            });
+          }
+        } catch (err) {
+          logger.warn(
+            { err, issueId: issue.id, previousAssigneeAgentId: existing.assigneeAgentId },
+            "failed to invalidate queued runs after assignee change",
+          );
+        }
+      }
+
       const wakeups = new Map<string, { agentId: string; wakeup: WakeupRequest }>();
       const addWakeup = (agentId: string, wakeup: WakeupRequest) => {
         const wakeIssueId =
