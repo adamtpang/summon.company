@@ -1605,13 +1605,14 @@ describe("buildWrapperOverrideCommand", () => {
     );
   });
 
-  it("routes the wrapper through bash on Windows with single-quoted words", async () => {
+  it("routes the wrapper through bash on Windows as an argv array", async () => {
     const { buildWrapperOverrideCommand } = await import("./execute.js");
     const override = buildWrapperOverrideCommand("C:\state dir\wrappers\claude-abc.sh", "win32");
-    // Windows cannot exec a shebang .sh directly; acpx's splitCommandLine keeps
-    // backslashes literal inside single quotes, so both words must be quoted.
-    expect(override).toMatch(/bash/);
-    expect(override).toContain("'C:\state dir\wrappers\claude-abc.sh'");
-    expect(override.startsWith("'")).toBe(true);
+    // acpx 0.13 rejects raw command strings on Windows, so the override is an
+    // argv array: the bash executable, then the wrapper path unquoted.
+    expect(Array.isArray(override)).toBe(true);
+    expect(override).toHaveLength(2);
+    expect((override as string[])[0]).toMatch(/bash/);
+    expect((override as string[])[1]).toBe("C:\state dir\wrappers\claude-abc.sh");
   });
 });
