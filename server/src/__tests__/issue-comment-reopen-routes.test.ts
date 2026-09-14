@@ -1718,7 +1718,13 @@ describe.sequential("issue comment reopen routes", () => {
 
     expect(res.status).toBe(200);
     expect(mockHeartbeatService.getRun).toHaveBeenCalledWith("run-1");
-    expect(mockHeartbeatService.cancelRun).toHaveBeenCalledWith("run-1");
+    // SUM-144 D2: the cancel now carries a reason and actor options so board
+    // cancels can stamp the no-recovery marker.
+    expect(mockHeartbeatService.cancelRun).toHaveBeenCalledWith(
+      "run-1",
+      "Cancelled because issue status set to cancelled",
+      expect.objectContaining({ eventMessage: "run cancelled because issue status set to cancelled" }),
+    );
     expect(mockLogActivity).toHaveBeenCalledWith(
       expect.anything(),
       expect.objectContaining({

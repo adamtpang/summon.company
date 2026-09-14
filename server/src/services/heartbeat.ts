@@ -110,12 +110,6 @@ import {
   evaluateIssueRewakeThrottle,
   isThrottleCandidateIssueRewake,
 } from "./issue-rewake-throttle.js";
-import {
-  AGENT_CONCURRENCY_DEFER_REASON,
-  buildDeferredConcurrencyPayload,
-  orderParkedWakesForRelease,
-  shouldDeferNewRunForAgentConcurrency,
-} from "./should-defer-new-run-for-agent-concurrency.js";
 import { logActivity, publishPluginDomainEvent, type LogActivityInput } from "./activity-log.js";
 import { emitHeartbeatSignalActivity } from "./heartbeat-alerts.js";
 import { resolveAgentModelFailoverForRun } from "./model-failover.js";
@@ -10067,22 +10061,6 @@ export function heartbeatService(db: Db, options: HeartbeatServiceOptions = {}) 
     return Number(count ?? 0);
   }
 
-  async function countLiveExecutionPathRunsForAgent(
-    agentId: string,
-    client: Pick<Db, "select"> = db,
-  ) {
-    const [{ count }] = await client
-      .select({ count: sql<number>`count(*)` })
-      .from(heartbeatRuns)
-      .where(
-        and(
-          eq(heartbeatRuns.agentId, agentId),
-          inArray(heartbeatRuns.status, [...EXECUTION_PATH_HEARTBEAT_RUN_STATUSES]),
-        ),
-      );
-    return Number(count ?? 0);
-  }
-
   async function claimQueuedRun(run: typeof heartbeatRuns.$inferSelect, companyAgents?: AgentOrgRow[]) {
     if (run.status !== "queued") return run;
     const agent = await getAgent(run.agentId);
@@ -11159,69 +11137,7 @@ export function heartbeatService(db: Db, options: HeartbeatServiceOptions = {}) 
           cutoff ? gte(heartbeatRuns.createdAt, cutoff) : undefined,
         ))
         .orderBy(asc(heartbeatRuns.createdAt));
-
-      // SUM-174 / D3: when slots free and no queued runs, promote the oldest
-      // agent-concurrency deferred wake (board-pointed ahead of agent-spawned).
-      if (queuedRuns.length === 0) {
-        const deferredConcurrencyWakes = await db
-          .select()
-          .from(agentWakeupRequests)
-          .where(
-            and(
-              eq(agentWakeupRequests.companyId, agent.companyId),
-              eq(agentWakeupRequests.agentId, agentId),
-              eq(agentWakeupRequests.status, "deferred_issue_execution"),
-              eq(agentWakeupRequests.reason, AGENT_CONCURRENCY_DEFER_REASON),
-            ),
-          )
-          .orderBy(asc(agentWakeupRequests.requestedAt));
-        if (deferredConcurrencyWakes.length === 0) return [];
-
-        const ranked = orderParkedWakesForRelease(
-          deferredConcurrencyWakes.map((wake) => ({
-            ...wake,
-            boardPointed: wake.requestedByActorType === "user",
-            agentSpawnedSubtask: wake.requestedByActorType === "agent" && wake.source !== "assignment",
-          })),
-        );
-        const winner = ranked[0];
-        if (!winner) return [];
-
-        const wakePayload = parseObject(winner.payload);
-        const deferredContext = parseObject(wakePayload.deferredWakeContext);
-        const promoteIssueId =
-          readNonEmptyString(wakePayload.issueId) ??
-          readNonEmptyString(deferredContext.issueId);
-
-        await db
-          .update(agentWakeupRequests)
-          .set({
-            status: "cancelled",
-            finishedAt: new Date(),
-            error: "Promoted from agent concurrency deferral",
-            updatedAt: new Date(),
-          })
-          .where(eq(agentWakeupRequests.id, winner.id));
-
-        await enqueueWakeup(agentId, {
-          source: (winner.source as WakeupOptions["source"]) ?? "automation",
-          triggerDetail: (winner.triggerDetail as WakeupOptions["triggerDetail"]) ?? "system",
-          reason: readNonEmptyString(wakePayload.originalReason) ?? "agent_concurrency_promoted",
-          payload: {
-            ...wakePayload,
-            issueId: promoteIssueId,
-            promotedFromDeferredConcurrency: true,
-            deferredWakeupRequestId: winner.id,
-          },
-          requestedByActorType: (winner.requestedByActorType as WakeupOptions["requestedByActorType"]) ?? undefined,
-          requestedByActorId: winner.requestedByActorId ?? null,
-          contextSnapshot: {
-            ...deferredContext,
-            ...(promoteIssueId ? { issueId: promoteIssueId, taskId: promoteIssueId } : {}),
-          },
-        });
-        return [];
-      }
+      if (queuedRuns.length === 0) return [];
 
       const dependencyReadiness = await listQueuedRunDependencyReadiness(agent.companyId, queuedRuns);
       const queuedIssueIds = [...new Set(
@@ -15701,39 +15617,6 @@ export function heartbeatService(db: Db, options: HeartbeatServiceOptions = {}) 
           }
         }
 
-        // SUM-174 / D3: park a different-issue wake when this agent already
-        // holds a live execution-path run at maxConcurrentRuns.
-        const liveRunCount = await countLiveExecutionPathRunsForAgent(agentId, tx);
-        if (
-          shouldDeferNewRunForAgentConcurrency({
-            liveRunCount,
-            maxConcurrentRuns: policy.maxConcurrentRuns,
-          })
-        ) {
-          logger.info(
-            { agentId, liveRunCount, maxConcurrentRuns: policy.maxConcurrentRuns, issueId },
-            "heartbeat: deferring wake — agent at maxConcurrentRuns",
-          );
-          await tx.insert(agentWakeupRequests).values({
-            companyId: agent.companyId,
-            agentId,
-            source,
-            triggerDetail,
-            reason: AGENT_CONCURRENCY_DEFER_REASON,
-            payload: buildDeferredConcurrencyPayload({
-              issueId,
-              contextSnapshot: enrichedContextSnapshot,
-              payload,
-              liveRunCount,
-              maxConcurrentRuns: policy.maxConcurrentRuns,
-            }),
-            status: "deferred_issue_execution",
-            requestedByActorType: opts.requestedByActorType ?? null,
-            requestedByActorId: opts.requestedByActorId ?? null,
-            idempotencyKey: opts.idempotencyKey ?? null,
-          });
-          return { kind: "deferred" as const };
-        }
 
         const dailyCapBlock = await getHeartbeatDailyCapBlock(agent, policy, {}, tx);
         if (dailyCapBlock) {
@@ -15909,39 +15792,6 @@ export function heartbeatService(db: Db, options: HeartbeatServiceOptions = {}) 
         sql`select id from agents where id = ${agentId} and company_id = ${agent.companyId} for update`,
       );
 
-      // SUM-174 / D3: same concurrency gate on the non-issue-lock enqueue path.
-      // Coalesce above already returned for same-scope targets.
-      const liveRunCount = await countLiveExecutionPathRunsForAgent(agentId, tx);
-      if (
-        shouldDeferNewRunForAgentConcurrency({
-          liveRunCount,
-          maxConcurrentRuns: policy.maxConcurrentRuns,
-        })
-      ) {
-        logger.info(
-          { agentId, liveRunCount, maxConcurrentRuns: policy.maxConcurrentRuns, issueId },
-          "heartbeat: deferring wake — agent at maxConcurrentRuns",
-        );
-        await tx.insert(agentWakeupRequests).values({
-          companyId: agent.companyId,
-          agentId,
-          source,
-          triggerDetail,
-          reason: AGENT_CONCURRENCY_DEFER_REASON,
-          payload: buildDeferredConcurrencyPayload({
-            issueId,
-            contextSnapshot: enrichedContextSnapshot,
-            payload,
-            liveRunCount,
-            maxConcurrentRuns: policy.maxConcurrentRuns,
-          }),
-          status: "deferred_issue_execution",
-          requestedByActorType: opts.requestedByActorType ?? null,
-          requestedByActorId: opts.requestedByActorId ?? null,
-          idempotencyKey: opts.idempotencyKey ?? null,
-        });
-        return { kind: "deferred" as const };
-      }
 
       const dailyCapBlock = await getHeartbeatDailyCapBlock(agent, policy, {}, tx);
       if (dailyCapBlock) {
@@ -16023,7 +15873,7 @@ export function heartbeatService(db: Db, options: HeartbeatServiceOptions = {}) 
       return { kind: "queued" as const, run: newRun };
     });
 
-    if (queueOutcome.kind === "skipped" || queueOutcome.kind === "deferred") return null;
+    if (queueOutcome.kind === "skipped") return null;
     const newRun = queueOutcome.run;
 
     publishLiveEvent({
