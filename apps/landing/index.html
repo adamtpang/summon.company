@@ -3,510 +3,427 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Summon | Proof your company's records are still true</title>
-<meta name="description" content="Summon runs AI agents that check what your team wrote against what your team shipped, and shows you the exact commit where they disagree. An AI org chart does the work; the receipt is what you're buying. Founding slots $99/mo locked for life." />
-
+<title>Summon | Run your company. Keep the final say.</title>
+<meta name="description" content="Summon diagnoses your company's binding constraint, assigns accountable AI employees, and brings consequential decisions back to you as the board." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://summon.company" />
 <meta property="og:image" content="https://summon.company/og.png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
-<meta property="og:title" content="Summon | Proof your company's records are still true" />
-<meta property="og:description" content="Not another team of AI agents. Proof that your company's own paperwork still matches your own code, with the commit hash. Founding $99/mo locked for life." />
+<meta property="og:title" content="Summon | Run your company. Keep the final say." />
+<meta property="og:description" content="A governed AI company with you as the board." />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://summon.company/og.png" />
-<meta name="twitter:title" content="Summon | Proof your company's records are still true" />
-<meta name="twitter:description" content="Your team already knows what's fixed. Summon proves it, on every merge, with the commit hash. Founding $99/mo locked for life." />
+<meta name="twitter:title" content="Summon | Run your company. Keep the final say." />
+<meta name="twitter:description" content="A governed AI company with you as the board." />
 <meta property="og:site_name" content="Summon" />
 <meta property="og:locale" content="en_US" />
 <link rel="canonical" href="https://summon.company/" />
 
-<!-- SUM-153 machine-readable surface: Organization + SoftwareApplication (site-wide).
-     FAQPage is intentionally omitted here: Google requires visible matching Q&A on the page.
-     Add a FAQPage @graph entry only on role pages that render real Q&A. -->
 <script type="application/ld+json">
 { "@context":"https://schema.org","@graph":[
- {"@type":"Organization","@id":"https://summon.company/#org","name":"Summon","url":"https://summon.company","description":"AI agents that prove your company's records are true, at $99/mo founding rate. You're the board.","parentOrganization":{"@type":"Organization","name":"adam.inc"}},
- {"@type":"SoftwareApplication","@id":"https://summon.company/#app","name":"Summon","applicationCategory":"BusinessApplication","operatingSystem":"Web","url":"https://summon.company","description":"Summon runs AI agents that check your team's written claims against your team's own commits and hand you the receipt, backed by a company-wide org that runs 24/7 under hard budget caps and an approval gate you control.","offers":{"@type":"Offer","price":"99.00","priceCurrency":"USD","priceSpecification":{"@type":"UnitPriceSpecification","price":"99.00","priceCurrency":"USD","unitText":"per company per month, founding rate","billingDuration":"P1M"}},"publisher":{"@id":"https://summon.company/#org"}}
+ {"@type":"Organization","@id":"https://summon.company/#org","name":"Summon","url":"https://summon.company","description":"A governed AI company operating system with the human as the board.","parentOrganization":{"@type":"Organization","name":"adam.inc"}},
+ {"@type":"SoftwareApplication","@id":"https://summon.company/#app","name":"Summon","applicationCategory":"BusinessApplication","operatingSystem":"Web","url":"https://summon.company","description":"Summon diagnoses a company's binding constraint, assigns accountable AI employees, and brings consequential decisions back to the human board.","offers":{"@type":"Offer","price":"500.00","priceCurrency":"USD","priceSpecification":{"@type":"UnitPriceSpecification","price":"500.00","priceCurrency":"USD","unitText":"per company per month, founding seat","billingDuration":"P1M"}},"publisher":{"@id":"https://summon.company/#org"}}
 ]}
 </script>
 
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3Cmask id='g' maskUnits='userSpaceOnUse' x='0' y='0' width='32' height='32'%3E%3Crect width='32' height='32' fill='%23fff'/%3E%3Cpath d='M1.5 16 H10 L13 10.5 L16.5 22 L19 16 H30.5' fill='none' stroke='%23000' stroke-width='6.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/mask%3E%3C/defs%3E%3Crect width='32' height='32' rx='7.5' fill='%23FFFFFF'/%3E%3Ccircle cx='16' cy='16' r='10.5' fill='none' stroke='%230A0A0A' stroke-width='3' mask='url(%23g)'/%3E%3Cpath d='M1.5 16 H10 L13 10.5 L16.5 22 L19 16 H30.5' fill='none' stroke='%230A0A0A' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
-
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="tokens.css" />
 
 <style>
-  /* Summon landing v2. Every value below is a token from tokens.css. */
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
   body {
-    margin: 0; background: var(--bg-canvas); color: var(--text-primary);
-    font-family: var(--font-body); font-size: var(--text-body);
-    line-height: var(--leading-body); letter-spacing: var(--tracking-body);
+    margin: 0;
+    min-width: 320px;
+    background: var(--bg-canvas);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.6;
+    letter-spacing: var(--tracking-body);
     -webkit-font-smoothing: antialiased;
   }
   a { color: inherit; text-decoration: none; }
-  .wrap { max-width: var(--content-max); margin: 0 auto; padding: 0 var(--space-6); }
+  a.text-link { color: var(--text-accent); text-decoration: underline; text-underline-offset: 4px; }
+  a.text-link:visited { color: var(--blue-800); }
+  .shell { width: min(100% - 48px, 1280px); margin-inline: auto; }
   .mono { font-family: var(--font-mono); }
-
-  .overline {
-    font-family: var(--font-mono); font-size: var(--text-overline); font-weight: 500;
-    letter-spacing: var(--tracking-overline); text-transform: uppercase; color: var(--text-accent);
+  .eyebrow {
+    margin: 0 0 18px;
+    color: var(--text-accent);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: .13em;
+    text-transform: uppercase;
   }
-  h1, h2, h3 { font-family: var(--font-display); margin: 0; }
-  h1 { font-size: var(--text-display-1); line-height: var(--leading-display); letter-spacing: var(--tracking-display); font-weight: 600; }
-  h2 { font-size: var(--text-display-2); line-height: 1.06; letter-spacing: var(--tracking-display); font-weight: 600; }
-  h3 { font-size: var(--text-title-card); line-height: var(--leading-title); letter-spacing: var(--tracking-title); font-weight: 600; }
-  .lede { font-size: var(--text-body-lg); color: var(--text-secondary); max-width: 46ch; }
-
-  .btn {
-    display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2);
-    height: var(--control-lg); padding: 0 var(--space-6); border-radius: var(--radius-pill);
-    font-family: var(--font-body); font-weight: 600; font-size: var(--text-body-sm);
-    letter-spacing: var(--tracking-label); border: 0; cursor: pointer;
-    transition: background var(--duration-hover) var(--ease-summon),
-                box-shadow var(--duration-hover) var(--ease-summon),
-                transform var(--duration-micro) var(--ease-summon);
+  h1, h2, h3, p { margin-top: 0; }
+  h1, h2, h3 { font-family: var(--font-body); letter-spacing: -.04em; }
+  h1 {
+    max-width: 9.5ch;
+    margin-bottom: 28px;
+    font-size: clamp(4.25rem, 8vw, 8.5rem);
+    font-weight: 800;
+    line-height: .88;
+    text-wrap: balance;
   }
-  .btn:active { transform: scale(0.98); }
-  .btn-primary { background: var(--gradient-cta); color: var(--text-on-accent); box-shadow: var(--shadow-sm); }
-  .btn-primary:hover { background: var(--gradient-cta-hover); box-shadow: var(--shadow-md); }
-  .btn-quiet { background: var(--action-quiet); color: var(--text-accent); }
-  .btn-quiet:hover { background: var(--action-quiet-hover); }
-  .btn-neutral { background: var(--action-neutral); color: var(--text-primary); }
-  .btn-neutral:hover { background: var(--action-neutral-hover); }
-  .btn-xl { height: var(--control-xl); padding: 0 var(--space-8); font-size: var(--text-body); }
-  .btn:focus-visible { outline: 2px solid var(--border-focus); outline-offset: 2px; }
-
-  .announce {
-    background: var(--bg-accent-quiet); border-bottom: 1px solid var(--border-neutral);
-    font-family: var(--font-mono); font-size: var(--text-label); color: var(--text-secondary);
+  h2 {
+    margin-bottom: 20px;
+    font-size: clamp(2.6rem, 5vw, 5.25rem);
+    font-weight: 700;
+    line-height: .95;
+    text-wrap: balance;
   }
-  .announce .wrap { display: flex; align-items: center; justify-content: center; gap: var(--space-2); min-height: 40px; text-align: center; padding-top: 6px; padding-bottom: 6px; }
-  .dot { width: 7px; height: 7px; border-radius: var(--radius-pill); background: var(--action-primary); flex: 0 0 auto; animation: breathe 2.4s ease-in-out infinite; }
-  .announce b { color: var(--text-primary); font-weight: 500; }
-  @keyframes breathe { 50% { opacity: 0.45; } }
-
-  nav { position: sticky; top: 0; z-index: 30; background: var(--glass-bg); backdrop-filter: blur(var(--glass-blur)); border-bottom: 1px solid var(--glass-border); }
-  nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
-  .brand { display: flex; align-items: center; gap: var(--space-2); font-family: var(--font-display); font-weight: 600; font-size: 1.0625rem; letter-spacing: var(--tracking-title); }
-  .navlinks { display: flex; align-items: center; gap: var(--space-6); font-size: var(--text-body-sm); font-weight: 500; }
-  .navlinks a.nl { color: var(--text-secondary); transition: color var(--duration-micro) var(--ease-summon); }
-  .navlinks a.nl:hover { color: var(--text-primary); }
-  .navlinks .btn { height: var(--control-md); padding: 0 var(--space-4); }
-  @media (max-width: 760px) { .navlinks a.nl { display: none; } }
-
-  .hero { background: var(--gradient-hero-wash); padding: var(--space-20) 0 var(--space-16); }
-  .hero-grid { display: grid; gap: var(--space-12); align-items: center; }
-  @media (min-width: 960px) { .hero-grid { grid-template-columns: 1.05fr 0.95fr; gap: var(--space-16); } }
-  .hero .overline { display: block; margin-bottom: var(--space-4); }
-  .hero .lede { margin: var(--space-6) 0 var(--space-8); }
-  .cta-row { display: flex; flex-wrap: wrap; gap: var(--space-3); align-items: center; }
-  .micro-note { margin-top: var(--space-4); font-size: var(--text-body-sm); color: var(--text-tertiary); }
-  .micro-note a { color: var(--text-accent); font-weight: 500; }
-
-  .cluster { display: grid; gap: var(--space-3); }
-  .ecard {
-    background: var(--bg-elevated); border: 1px solid var(--border-neutral);
-    border-radius: var(--radius-card); padding: var(--space-4); box-shadow: var(--shadow-sm);
+  h3 { font-size: 1rem; font-weight: 600; letter-spacing: -.02em; }
+  .lead {
+    max-width: 33rem;
+    margin-bottom: 32px;
+    color: var(--text-secondary);
+    font-size: clamp(1rem, 1.4vw, 1.2rem);
+    line-height: 1.6;
   }
-  .ecard .top { display: flex; align-items: center; gap: var(--space-3); }
-  .av {
-    width: 40px; height: 40px; border-radius: var(--radius-input); flex: 0 0 auto;
-    display: flex; align-items: center; justify-content: center;
-    font-family: var(--font-mono); font-weight: 500; font-size: var(--text-label);
-    background: var(--bg-accent-quiet); color: var(--text-accent);
+  .button-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+  .button {
+    display: inline-flex;
+    min-height: 48px;
+    align-items: center;
+    justify-content: center;
+    padding: 0 22px;
+    border: 1px solid var(--border-strong);
+    border-radius: 10px;
+    background: var(--bg-elevated);
+    color: var(--text-primary);
+    font-size: 14px;
+    font-weight: 600;
+    transition: transform 120ms var(--ease-out-soft), background 160ms var(--ease-out-soft), border-color 160ms var(--ease-out-soft);
   }
-  .who b { font-family: var(--font-display); font-weight: 600; font-size: var(--text-body-sm); display: block; }
-  .who span { font-size: var(--text-label); color: var(--text-tertiary); }
-  .status { margin-left: auto; font-family: var(--font-mono); font-size: var(--text-overline); color: var(--positive-content); display: flex; align-items: center; gap: 5px; }
-  .status .dot { background: var(--positive-content); }
-  .ekg { display: block; width: 100%; height: 32px; margin: var(--space-3) 0 var(--space-2); }
-  .ekg path {
-    fill: none; stroke: var(--ekg-stroke); stroke-width: var(--ekg-stroke-width);
-    stroke-linecap: round; stroke-linejoin: round;
-    stroke-dasharray: 220; stroke-dashoffset: 220;
-    animation: trace 2.6s linear infinite;
+  .button:hover { border-color: var(--border-accent); background: var(--bg-accent-quiet); }
+  .button:active { transform: translateY(1px); }
+  .button.primary { border-color: var(--action-primary); background: var(--action-primary); color: #fff; }
+  .button.primary:hover { background: var(--action-primary-hover); }
+  :where(a, button):focus-visible { outline: 2px solid var(--border-focus); outline-offset: 3px; }
+
+  .site-nav {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    border-bottom: 1px solid var(--border-neutral);
+    background: var(--glass-bg);
+    backdrop-filter: blur(18px);
   }
-  @keyframes trace { to { stroke-dashoffset: -220; } }
-  .vitals-row { display: flex; gap: var(--space-4); }
-  .vital .vl { font-family: var(--font-mono); font-size: 10px; letter-spacing: var(--tracking-overline); text-transform: uppercase; color: var(--text-tertiary); }
-  .vital .vv { font-family: var(--font-display); font-weight: 600; font-size: var(--text-body); }
-  .vital .vv em { font-family: var(--font-mono); font-style: normal; font-size: var(--text-overline); color: var(--text-tertiary); font-weight: 400; }
+  .site-nav .shell { display: flex; min-height: 72px; align-items: center; justify-content: space-between; gap: 24px; }
+  .brand { display: inline-flex; min-height: 48px; align-items: center; gap: 10px; font-family: var(--font-display); font-weight: 600; }
+  .brand-mark { width: 26px; height: 26px; }
+  .nav-links { display: flex; align-items: center; gap: 28px; }
+  .nav-links > a:not(.button) { display: inline-flex; min-height: 44px; align-items: center; color: var(--text-secondary); font-size: 14px; font-weight: 500; }
+  .nav-links > a:not(.button):hover { color: var(--text-primary); }
 
-  .trust { border-top: 1px solid var(--border-neutral); border-bottom: 1px solid var(--border-neutral); background: var(--bg-elevated); padding: var(--space-6) 0; }
-  .trust .wrap { display: flex; align-items: center; gap: var(--space-4) var(--space-8); flex-wrap: wrap; justify-content: center; }
-  .trust p { font-family: var(--font-mono); font-size: var(--text-overline); letter-spacing: var(--tracking-overline); text-transform: uppercase; color: var(--text-tertiary); margin: 0; }
-  .trust .lg { font-family: var(--font-display); font-weight: 500; font-size: var(--text-body-sm); color: var(--text-tertiary); }
+  .hero {
+    position: relative;
+    overflow: hidden;
+    min-height: calc(100svh - 72px);
+    padding: clamp(72px, 10vw, 144px) 0 96px;
+    border-bottom: 1px solid var(--border-neutral);
+    background:
+      radial-gradient(circle at 78% 38%, rgba(11,95,255,.14), transparent 29%),
+      linear-gradient(rgba(12,20,40,.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(12,20,40,.035) 1px, transparent 1px),
+      var(--bg-canvas);
+    background-size: auto, 48px 48px, 48px 48px, auto;
+  }
+  .hero-grid { display: grid; grid-template-columns: minmax(0, .92fr) minmax(520px, 1.08fr); gap: clamp(52px, 8vw, 110px); align-items: center; }
+  .hero-copy { position: relative; z-index: 2; animation: enter 360ms var(--ease-out-soft) both; }
+  .hero-note { margin: 18px 0 0; color: var(--text-tertiary); font-size: 13px; }
 
-  section { padding: var(--space-24) 0; }
-  @media (max-width: 760px) { section { padding: var(--space-16) 0; } }
-  .center { text-align: center; }
-  .center .lede { margin-left: auto; margin-right: auto; }
-  .sec-head { margin-bottom: var(--space-12); }
+  .instrument {
+    position: relative;
+    overflow: hidden;
+    min-height: 530px;
+    border: 1px solid rgba(255,255,255,.16);
+    border-radius: 18px;
+    background: #071f4d;
+    color: #eef2fa;
+    box-shadow: 0 34px 90px rgba(7,31,77,.2);
+    animation: enter 400ms 80ms var(--ease-out-soft) both;
+  }
+  .instrument::after {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 10%, rgba(83,149,255,.12) 50%, transparent 90%);
+    content: "";
+    pointer-events: none;
+    transform: translateY(-100%);
+    animation: scan 7s 1.2s var(--ease-out-soft) infinite;
+  }
+  .instrument-head { display: flex; min-height: 58px; align-items: center; justify-content: space-between; gap: 16px; padding: 0 20px; border-bottom: 1px solid rgba(255,255,255,.13); }
+  .instrument-label { color: #8ab9ff; font-family: var(--font-mono); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; }
+  .live-state { display: inline-flex; align-items: center; gap: 8px; color: #b9c6e4; font-family: var(--font-mono); font-size: 12px; }
+  .live-state::before { width: 7px; height: 7px; border-radius: 50%; background: #5395ff; box-shadow: 0 0 0 5px rgba(83,149,255,.12); content: ""; animation: breathe 2.4s ease-in-out infinite; }
+  .instrument-body { display: grid; gap: 0; padding: 10px 20px 0; }
+  .signal-row { display: grid; grid-template-columns: 104px 1fr auto; gap: 18px; align-items: center; min-height: 76px; border-bottom: 1px solid rgba(255,255,255,.11); }
+  .signal-row .label { color: #8a9ac4; font-family: var(--font-mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; }
+  .signal-row strong { font-family: var(--font-display); font-size: 15px; font-weight: 500; letter-spacing: -.01em; }
+  .state { color: #b9c6e4; font-family: var(--font-mono); font-size: 12px; }
+  .state.blue { color: #8ab9ff; }
+  .trace { position: relative; height: 52px; margin: 30px 0 14px; }
+  .trace-line { position: absolute; top: 25px; left: 2%; right: 2%; height: 1px; background: rgba(255,255,255,.2); }
+  .trace-line::before { position: absolute; inset: 0 auto 0 0; width: 68%; background: #5395ff; content: ""; }
+  .trace-points { position: relative; z-index: 2; display: flex; justify-content: space-between; }
+  .trace-point { display: grid; width: 68px; justify-items: center; gap: 8px; color: #8a9ac4; font-family: var(--font-mono); font-size: 12px; letter-spacing: -.03em; text-transform: uppercase; }
+  .trace-point::before { width: 10px; height: 10px; margin-top: 20px; border: 2px solid #8a9ac4; border-radius: 50%; background: #071f4d; content: ""; }
+  .trace-point.done::before, .trace-point.current::before { border-color: #5395ff; background: #5395ff; }
+  .trace-point.current { color: #8ab9ff; }
+  .decision { display: grid; grid-template-columns: 1fr auto; gap: 20px; align-items: center; margin: 34px 0 20px; padding: 20px; border: 1px solid rgba(83,149,255,.44); border-radius: 12px; background: rgba(83,149,255,.09); }
+  .decision span { display: block; margin-bottom: 7px; color: #8ab9ff; font-family: var(--font-mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; }
+  .decision strong { font-family: var(--font-display); font-size: 17px; font-weight: 500; letter-spacing: -.02em; }
+  .decision-status { color: #eef2fa; font-family: var(--font-mono); font-size: 12px; white-space: nowrap; }
+  .instrument-foot { padding: 0 20px 20px; color: #8a9ac4; font-family: var(--font-mono); font-size: 12px; }
 
-  .grid3 { display: grid; gap: var(--space-4); }
-  @media (min-width: 820px) { .grid3 { grid-template-columns: repeat(3, 1fr); } }
-  .card { background: var(--bg-elevated); border: 1px solid var(--border-neutral); border-radius: var(--radius-card); padding: var(--space-6); box-shadow: var(--shadow-xs); transition: box-shadow var(--duration-hover) var(--ease-summon), border-color var(--duration-hover) var(--ease-summon); }
-  .card:hover { box-shadow: var(--shadow-md); border-color: var(--border-strong); }
-  .card .ic { width: 36px; height: 36px; border-radius: var(--radius-input); background: var(--bg-accent-quiet); color: var(--text-accent); display: flex; align-items: center; justify-content: center; margin-bottom: var(--space-4); font-family: var(--font-mono); font-size: var(--text-body-sm); font-weight: 500; }
-  .card h3 { margin-bottom: var(--space-2); }
-  .card p { margin: 0; color: var(--text-secondary); font-size: var(--text-body-sm); }
+  .operating-loop { padding: 92px 0; background: var(--bg-elevated); }
+  .loop-head { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: end; margin-bottom: 70px; }
+  .loop-head h2 { margin: 0; }
+  .loop-head p { max-width: 31rem; margin: 0 0 8px auto; color: var(--text-secondary); font-size: 18px; }
+  .steps { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--border-strong); }
+  .step { position: relative; padding: 28px 28px 0 0; }
+  .step::before { position: absolute; top: -5px; left: 0; width: 9px; height: 9px; border-radius: 50%; background: var(--action-primary); content: ""; }
+  .step-num { display: block; margin-bottom: 22px; color: var(--text-accent); font-family: var(--font-mono); font-size: 12px; letter-spacing: .1em; }
+  .step h3 { margin-bottom: 8px; font-size: 20px; }
+  .step p { max-width: 14rem; margin: 0; color: var(--text-secondary); font-size: 14px; }
 
-  .roster { display: grid; gap: var(--space-4); }
-  @media (min-width: 680px) { .roster { grid-template-columns: repeat(2, 1fr); } }
-  @media (min-width: 1000px) { .roster { grid-template-columns: repeat(3, 1fr); } }
-  .rcard { background: var(--bg-elevated); border: 1px solid var(--border-neutral); border-radius: var(--radius-card); padding: var(--space-6); display: flex; flex-direction: column; box-shadow: var(--shadow-xs); transition: box-shadow var(--duration-hover) var(--ease-summon), border-color var(--duration-hover) var(--ease-summon), transform var(--duration-hover) var(--ease-summon); }
-  .rcard:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: var(--border-accent); }
-  .rcard .top { display: flex; align-items: center; gap: var(--space-3); }
-  .rcard .role { font-family: var(--font-mono); font-size: var(--text-overline); letter-spacing: var(--tracking-overline); text-transform: uppercase; color: var(--text-accent); }
-  .rcard .pitch { color: var(--text-secondary); font-size: var(--text-body-sm); margin: var(--space-3) 0 0; flex: 1; }
-  .rcard .ekg { margin: var(--space-4) 0 var(--space-3); }
-  .rcard .price { font-family: var(--font-display); font-weight: 600; font-size: 1.5rem; margin: 0 0 var(--space-4); }
-  .rcard .price span { font-family: var(--font-body); font-size: var(--text-label); color: var(--text-tertiary); font-weight: 400; }
-  .rcard .btn { width: 100%; }
+  .departments { padding: 110px 0; }
+  .department-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: 90px; align-items: start; }
+  .department-grid h2 { position: sticky; top: 120px; }
+  .department-list { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--border-strong); }
+  .department-list a { display: flex; min-height: 82px; align-items: center; justify-content: space-between; gap: 16px; padding: 0 18px 0 0; border-bottom: 1px solid var(--border-neutral); color: var(--text-primary); font-family: var(--font-display); font-size: clamp(1.4rem, 2vw, 2rem); font-weight: 500; letter-spacing: -.035em; }
+  .department-list a:nth-child(odd) { margin-right: 22px; }
+  .department-list a::after { color: var(--text-accent); font-family: var(--font-mono); font-size: 13px; content: "↗"; transition: transform 160ms var(--ease-out-soft); }
+  .department-list a:hover::after { transform: translate(3px, -3px); }
 
-  .deep-inner { background: var(--bg-section-deep); border-radius: var(--radius-panel); padding: var(--space-16) var(--space-8); text-align: center; }
-  .deep-inner .quote { font-family: var(--font-display); font-weight: 600; font-size: var(--text-title-section); color: var(--text-accent); letter-spacing: var(--tracking-title); margin: var(--space-4) 0; }
-  .deep-inner p.body { color: var(--text-secondary); max-width: 62ch; margin: 0 auto; }
+  .board { padding: 110px 0; background: #071f4d; color: #eef2fa; }
+  .board-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 100px; align-items: center; }
+  .board .eyebrow { color: #8ab9ff; }
+  .board h2 { max-width: 9ch; }
+  .board p { max-width: 34rem; margin-bottom: 0; color: #b9c6e4; font-size: 18px; }
+  .authority { border-top: 1px solid rgba(255,255,255,.22); }
+  .authority-row { display: flex; min-height: 74px; align-items: center; justify-content: space-between; gap: 20px; border-bottom: 1px solid rgba(255,255,255,.14); }
+  .authority-row span:first-child { font-family: var(--font-display); font-size: 18px; }
+  .authority-row span:last-child { color: #8ab9ff; font-family: var(--font-mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; }
 
-  .price3 { display: grid; gap: var(--space-4); }
-  @media (min-width: 820px) { .price3 { grid-template-columns: repeat(3, 1fr); align-items: stretch; } }
-  .tier { background: var(--bg-elevated); border: 1px solid var(--border-neutral); border-radius: var(--radius-panel); padding: var(--space-8); display: flex; flex-direction: column; box-shadow: var(--shadow-xs); }
-  .tier.dim { background: var(--bg-canvas); }
-  .tier.hot { border: 2px solid var(--action-primary); box-shadow: var(--shadow-lg); }
-  .tier .badge { align-self: flex-start; font-family: var(--font-mono); font-size: var(--text-overline); letter-spacing: var(--tracking-overline); text-transform: uppercase; padding: var(--space-1) var(--space-3); border-radius: var(--radius-pill); margin-bottom: var(--space-4); background: var(--bg-neutral); color: var(--text-secondary); }
-  .tier.hot .badge { background: var(--action-primary); color: var(--text-on-accent); }
-  .tier h3 { margin-bottom: var(--space-1); }
-  .tier .amt { font-family: var(--font-display); font-weight: 600; font-size: 2.5rem; line-height: 1; margin: var(--space-2) 0 var(--space-1); }
-  .tier .amt.strike { color: var(--text-tertiary); text-decoration: line-through; font-size: 2rem; }
-  .tier .amt span { font-family: var(--font-body); font-size: var(--text-body-sm); color: var(--text-tertiary); font-weight: 400; }
-  .tier ul { list-style: none; margin: var(--space-4) 0 var(--space-6); padding: 0; display: grid; gap: var(--space-2); font-size: var(--text-body-sm); color: var(--text-secondary); }
-  .tier li b { color: var(--positive-content); }
-  .tier li.no { color: var(--text-tertiary); }
-  .tier .btn { width: 100%; margin-top: auto; }
+  .offer { padding: 110px 0; background: var(--bg-elevated); }
+  .offer-line { display: grid; grid-template-columns: 1fr auto; gap: 70px; align-items: end; padding-top: 34px; border-top: 1px solid var(--border-strong); }
+  .offer h2 { max-width: 12ch; margin-bottom: 16px; }
+  .offer p { max-width: 36rem; margin-bottom: 0; color: var(--text-secondary); }
+  .offer-action { display: grid; min-width: 270px; gap: 12px; }
+  .offer-action .button { width: 100%; }
+  .offer-action small { color: var(--text-tertiary); text-align: center; }
 
-  .founder { background: var(--bg-elevated); border: 1px solid var(--border-neutral); border-radius: var(--radius-panel); padding: var(--space-8); box-shadow: var(--shadow-xs); }
-  .founder p.q { font-family: var(--font-display); font-weight: 500; font-size: var(--text-title-section); line-height: 1.35; letter-spacing: var(--tracking-title); margin: 0 0 var(--space-4); }
-  .founder .by { display: flex; align-items: center; gap: var(--space-3); }
-  .founder .by .av { width: 40px; height: 40px; }
-  .founder .by b { font-size: var(--text-body-sm); font-weight: 600; display: block; }
-  .founder .by span { font-size: var(--text-label); color: var(--text-tertiary); }
+  footer { padding: 38px 0 48px; border-top: 1px solid var(--border-neutral); }
+  .footer-grid { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; color: var(--text-tertiary); font-size: 13px; }
+  .footer-grid a { display: inline-flex; min-width: 44px; min-height: 44px; align-items: center; justify-content: center; color: var(--text-secondary); }
+  .footer-grid a:visited { color: var(--text-tertiary); }
+  .footer-grid .legal { margin-left: auto; font-family: var(--font-mono); font-size: 12px; }
 
-  .horizon { background: var(--gradient-horizon); padding: var(--space-32) 0 var(--space-24); text-align: center; }
-  .horizon h2 { margin-bottom: var(--space-3); }
-  .horizon p { color: var(--text-secondary); max-width: 50ch; margin: 0 auto var(--space-8); }
+  @keyframes enter { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes scan { 0%, 15% { transform: translateY(-100%); } 70%, 100% { transform: translateY(100%); } }
+  @keyframes breathe { 0%, 100% { opacity: .65; } 50% { opacity: 1; } }
 
-  footer { border-top: 1px solid var(--border-neutral); background: var(--bg-elevated); padding: var(--space-10) 0 var(--space-12); }
-  footer .wrap { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3) var(--space-6); color: var(--text-tertiary); font-size: var(--text-body-sm); }
-  footer a { color: var(--text-secondary); transition: color var(--duration-micro) var(--ease-summon); }
-  footer a:hover { color: var(--text-primary); }
-  footer .sep { opacity: 0.4; }
-  footer .right { margin-left: auto; font-family: var(--font-mono); font-size: var(--text-overline); }
-  footer .beta { width: 100%; margin-top: var(--space-2); font-size: var(--text-label); }
-  footer .beta a { color: var(--text-accent); font-weight: 500; }
-
-  .offer-points { list-style: none; margin: var(--space-6) auto var(--space-8); padding: 0; display: grid; gap: var(--space-2); max-width: 52ch; font-size: var(--text-body-sm); color: var(--text-secondary); text-align: left; }
-  .offer-points li b { color: var(--positive-content); }
-
-  /* Evidence slot: stays invisible until real case studies are added inside it. */
-  #case-studies:empty { display: none; }
+  @media (max-width: 1040px) {
+    .hero { min-height: auto; }
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero-copy { max-width: 760px; }
+    .instrument { width: min(100%, 760px); }
+    .department-grid, .board-grid { grid-template-columns: 1fr; gap: 54px; }
+    .department-grid h2 { position: static; }
+  }
+  @media (max-width: 760px) {
+    .shell { width: min(100% - 32px, 1280px); }
+    .nav-links > a:not(.button) { display: none; }
+    .site-nav .button { min-height: 44px; padding-inline: 16px; }
+    .hero { padding: 72px 0 64px; background-size: auto, 32px 32px, 32px 32px, auto; }
+    h1 { font-size: clamp(3.5rem, 16vw, 5.5rem); }
+    .instrument { min-height: 0; border-radius: 14px; }
+    .instrument-head { padding-inline: 15px; }
+    .instrument-body { padding-inline: 15px; }
+    .signal-row { grid-template-columns: 80px 1fr; gap: 12px; min-height: 72px; }
+    .signal-row .state { grid-column: 2; margin-top: -22px; }
+    .trace { margin-top: 18px; }
+    .decision { grid-template-columns: 1fr; }
+    .decision-status { white-space: normal; }
+    .operating-loop, .departments, .board, .offer { padding: 78px 0; }
+    .loop-head { grid-template-columns: 1fr; gap: 22px; margin-bottom: 46px; }
+    .loop-head p { margin-left: 0; }
+    .steps { grid-template-columns: 1fr 1fr; }
+    .step { min-height: 170px; padding-right: 18px; }
+    .department-list { grid-template-columns: 1fr; }
+    .department-list a:nth-child(odd) { margin-right: 0; }
+    .offer-line { grid-template-columns: 1fr; gap: 38px; }
+    .offer-action { min-width: 0; }
+    .footer-grid .legal { width: 100%; margin-left: 0; }
+  }
+  @media (max-width: 460px) {
+    .button-row .button { width: 100%; }
+    .steps { grid-template-columns: 1fr; }
+    .step { min-height: 0; padding: 26px 0 34px; border-bottom: 1px solid var(--border-neutral); }
+    .step::before { top: -5px; }
+    .step-num { margin-bottom: 12px; }
+    .trace-point { width: 62px; font-size: 12px; }
+  }
+  @media (prefers-color-scheme: dark) {
+    body { background: #0a1120; color: #eef2fa; }
+    .site-nav { background: var(--glass-bg); }
+    .hero { background: radial-gradient(circle at 78% 38%, rgba(83,149,255,.12), transparent 30%), #0a1120; }
+    .operating-loop, .offer { background: #111b33; }
+    .button:not(.primary) { background: #111b33; color: #eef2fa; }
+    .department-list a { color: #eef2fa; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation-duration: 0ms !important; animation-iteration-count: 1 !important; transition-duration: 0ms !important; }
+  }
 </style>
+<script data-posthog-fleet>(function(){if(window.__posthogFleet)return;window.__posthogFleet=1;var s=document.createElement('script');s.async=true;s.src='https://us-assets.i.posthog.com/static/array.js';s.onload=function(){if(!window.posthog||!window.posthog.init)return;window.posthog.init('phc_FCpCP9mIsb9IcxpX0Qqi6FmJ48sVvscAYIrZmtRHIq4',{api_host:'https://us.i.posthog.com',person_profiles:'identified_only',capture_pageview:'history_change',capture_pageleave:true,autocapture:false,disable_session_recording:true,disable_surveys:true,loaded:function(p){p.register({site:location.hostname})}});};document.head.appendChild(s);})();</script>
 </head>
 <body>
 
-<div class="announce">
-  <div class="wrap"><span class="dot"></span><span>Summon runs <b>on Summon</b>. Our CEO is an AI, and a human is the board. Watch it run itself.</span></div>
-</div>
-
-<nav>
-  <div class="wrap">
-    <a class="brand" href="/">
-      <svg width="24" height="24" viewBox="0 0 32 32" aria-hidden="true"><defs><mask id="sgap-h" maskUnits="userSpaceOnUse" x="0" y="0" width="32" height="32"><rect width="32" height="32" fill="#fff"/><path d="M1.5 16 H10 L13 10.5 L16.5 22 L19 16 H30.5" fill="none" stroke="#000" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/></mask></defs><rect width="32" height="32" rx="7.5" fill="#FFFFFF" stroke="#0A0A0A" stroke-opacity="0.16"/><circle cx="16" cy="16" r="10.5" fill="none" stroke="#0A0A0A" stroke-width="3" mask="url(#sgap-h)"/><path d="M1.5 16 H10 L13 10.5 L16.5 22 L19 16 H30.5" fill="none" stroke="#0A0A0A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      Summon
+<nav class="site-nav" aria-label="Primary navigation">
+  <div class="shell">
+    <a class="brand" href="/" aria-label="Summon home">
+      <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><defs><mask id="sgap-h" maskUnits="userSpaceOnUse" x="0" y="0" width="32" height="32"><rect width="32" height="32" fill="#fff"/><path d="M1.5 16 H10 L13 10.5 L16.5 22 L19 16 H30.5" fill="none" stroke="#000" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/></mask></defs><rect width="32" height="32" rx="7.5" fill="#fff" stroke="#0a0a0a" stroke-opacity=".16"/><circle cx="16" cy="16" r="10.5" fill="none" stroke="#0a0a0a" stroke-width="3" mask="url(#sgap-h)"/><path d="M1.5 16 H10 L13 10.5 L16.5 22 L19 16 H30.5" fill="none" stroke="#0a0a0a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>Summon</span>
     </a>
-    <div class="navlinks">
-      <a class="nl" href="#roster">Roster</a>
-      <a class="nl" href="#how">How it works</a>
-      <a class="nl" href="#pricing">Pricing</a>
-      <a class="nl" href="#governed">Security</a>
-      <a class="btn btn-primary" href="#roster">Hire your first employee</a>
+    <div class="nav-links">
+      <a href="#system">How it works</a>
+      <a href="#departments">Departments</a>
+      <a href="#founding">Pricing</a>
+      <a class="button primary" href="/diagnose">Diagnose your company</a>
     </div>
   </div>
 </nav>
 
-<header class="hero">
-  <div class="wrap hero-grid">
-    <div>
-      <span class="overline">Not another AI org chart</span>
-      <h1>Find out what your team already fixed,<br />and forgot to tell you.</h1>
-      <p class="lede">Every company writes things down: compliance registers, security findings, roadmaps. Then it keeps shipping, and the document stops matching the code. Summon runs AI agents that watch every merge, check your team's words against your team's commits, and hand you the receipt: what's actually true, and the exact commit that made it true. <strong>The AI org chart is how the work gets done, not what you're buying.</strong> Founding slots $99/mo, locked for life.</p>
-      <div class="cta-row">
-        <a class="btn btn-primary btn-xl" href="#founding">Claim 1 of 2 founding slots, $99/mo locked for life</a>
-        <a class="btn btn-neutral btn-xl" href="https://buy.stripe.com/4gM3cv0wy2Wp6og3yhaMU17">Hire your first employee, $99/mo</a>
-        <a class="btn btn-neutral btn-xl" href="https://github.com/adamtpang/summon.company/releases/download/v0.1.5/Summon.Setup.0.1.5.exe">Download for Windows, free</a>
-      </div>
-      <p class="micro-note">Free forever: your AI employees work while you watch, manual mode, on the Claude, Codex, or Grok subscription you already pay for. Paid is when your company runs while you sleep. <a href="/diagnose"><strong>Get a free 60-second diagnosis of your business</strong></a> · <a href="https://cal.com/adamtpang">or book a call</a></p>
-    </div>
-
-    <div class="cluster" aria-hidden="true">
-      <div class="ecard">
-        <div class="top"><div class="av">CEO</div><div class="who"><b>Chief Executive</b><span>sets the plan, reports to you</span></div><div class="status"><span class="dot"></span>working</div></div>
-        <svg class="ekg" viewBox="0 0 300 34" preserveAspectRatio="none"><path d="M0 17 H70 l7 -13 7 24 6 -20 5 9 H150 l7 -11 7 22 6 -18 5 8 H300"/></svg>
-        <div class="vitals-row"><div class="vital"><div class="vl">uptime</div><div class="vv">99.9<em>%</em></div></div><div class="vital"><div class="vl">tasks / day</div><div class="vv">240</div></div><div class="vital"><div class="vl">spend</div><div class="vv">$6<em> / $50 cap</em></div></div></div>
-      </div>
-      <div class="ecard">
-        <div class="top"><div class="av">SAL</div><div class="who"><b>Sales</b><span>40 leads sourced, 12 replies</span></div><div class="status"><span class="dot"></span>working</div></div>
-        <svg class="ekg" viewBox="0 0 300 34" preserveAspectRatio="none"><path d="M0 17 H60 l7 -13 7 24 6 -20 5 9 H140 l7 -11 7 22 6 -18 5 8 H300"/></svg>
-        <div class="vitals-row"><div class="vital"><div class="vl">reply rate</div><div class="vv">31<em>%</em></div></div><div class="vital"><div class="vl">meetings</div><div class="vv">4</div></div><div class="vital"><div class="vl">spend</div><div class="vv">$9<em> / $50 cap</em></div></div></div>
-      </div>
-      <div class="ecard">
-        <div class="top"><div class="av">ENG</div><div class="who"><b>Engineer</b><span>shipped the pricing page</span></div><div class="status"><span class="dot"></span>in review</div></div>
-        <svg class="ekg" viewBox="0 0 300 34" preserveAspectRatio="none"><path d="M0 17 H80 l7 -13 7 24 6 -20 5 9 H160 l7 -11 7 22 6 -18 5 8 H300"/></svg>
-        <div class="vitals-row"><div class="vital"><div class="vl">PRs</div><div class="vv">3</div></div><div class="vital"><div class="vl">tests</div><div class="vv">passing</div></div><div class="vital"><div class="vl">spend</div><div class="vv">$11<em> / $50 cap</em></div></div></div>
-      </div>
-    </div>
-  </div>
-</header>
-
-<div class="trust"><div class="wrap">
-  <p>Dogfooded across</p>
-  <span class="lg">anchor marianas</span><span class="lg">idiguam</span><span class="lg">quantus</span><span class="lg">sellsniper</span><span class="lg">company university</span>
-</div></div>
-
 <main>
-  <section class="wrap center">
-    <span class="overline">The problem</span>
-    <h2 style="margin: var(--space-4) auto var(--space-4); max-width: 26ch;">Your records go stale the moment you stop watching them.</h2>
-    <p class="lede center">On one real company's codebase, their own compliance register said 9 problems were still open. The truth in their code: 7 were already fixed, one for over two weeks. Nobody caught it, even though the team had built its own tools to prevent exactly this. Summon's agents catch it automatically, on every merge, and prove it with a commit hash, not a guess. AI tools hand you a draft and stop; employees own the outcome. Summon staffs your company with AI workers who take a job end to end, budget-capped, waiting for your yes.</p>
-  </section>
+  <header class="hero">
+    <div class="shell hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">AI company operating system</p>
+        <h1>Run your company. Keep the final say.</h1>
+        <p class="lead">AI employees work your company's biggest constraint. Every consequential decision comes back to you.</p>
+        <div class="button-row">
+          <a class="button primary" href="/diagnose">Diagnose your company</a>
+          <a class="button" href="#system">See the operating loop</a>
+        </div>
+        <p class="hero-note">The diagnosis is free. No work, spend, or send starts without your approval.</p>
+      </div>
 
-  <section id="founding" class="wrap center">
-    <span class="overline">Founding offer</span>
-    <h2 style="margin: var(--space-4) auto var(--space-4); max-width: 24ch;">2 founding slots. $99/mo, locked for life.</h2>
-    <p class="lede center" style="max-width: 52ch;">Then $199/mo, the public price after founding.</p>
-    <ul class="offer-points">
-      <li><b>✓</b> The diagnosis comes first, free: written findings on your business within 48 hours of your reply, before any payment.</li>
-      <li><b>✓</b> $500 setup includes: the full diagnosis written up, your AI org chart, and your first 10 deliverables plated in week one.</li>
-      <li><b>✓</b> Guarantee: first plated deliverable within 7 days or the $500 back.</li>
-      <li><b>✓</b> 15 minutes a week from you. Your departments running in 30 days.</li>
-      <li><b>✓</b> Cancel anytime.</li>
-    </ul>
-    <div class="cta-row" style="justify-content: center;">
-      <a class="btn btn-primary btn-xl" href="https://buy.stripe.com/4gM4gz1ACbsV4g83yhaMU18">Claim a founding slot, $99/mo locked for life</a>
-      <a class="btn btn-neutral btn-xl" href="https://cal.com/adamtpang">Book a call first</a>
+      <div class="instrument" aria-label="Illustrative Summon company operating view">
+        <div class="instrument-head">
+          <span class="instrument-label">Company 01 · Board view</span>
+          <span class="live-state">Awaiting board</span>
+        </div>
+        <div class="instrument-body">
+          <div class="signal-row"><span class="label">Constraint</span><strong>Qualified demand</strong><span class="state blue">diagnosed</span></div>
+          <div class="signal-row"><span class="label">Owner</span><strong>Sales + Marketing</strong><span class="state">working</span></div>
+          <div class="signal-row"><span class="label">Evidence</span><strong>Draft campaign and lead list</strong><span class="state">ready</span></div>
+          <div class="trace" aria-hidden="true">
+            <div class="trace-line"></div>
+            <div class="trace-points">
+              <span class="trace-point done">Diagnose</span>
+              <span class="trace-point done">Assign</span>
+              <span class="trace-point done">Work</span>
+              <span class="trace-point current">Approve</span>
+            </div>
+          </div>
+          <div class="decision">
+            <div><span>Board decision</span><strong>Approve the first external campaign?</strong></div>
+            <div class="decision-status">Waiting for you</div>
+          </div>
+        </div>
+        <div class="instrument-foot">Illustrative state. No action has been taken.</div>
+      </div>
     </div>
-  </section>
+  </header>
 
-  <section id="get" class="wrap">
-    <div class="sec-head center">
-      <span class="overline">Get Summon</span>
-      <h2 style="margin: var(--space-4) auto var(--space-3);">Try it in the next five minutes.</h2>
-      <p class="lede center">Free forever in manual mode: your machine, your Claude/Codex/Grok subscription as the fuel, your employees work while you watch. Paid unlocks 24/7, the company runs while you sleep.</p>
-    </div>
-    <div class="roster">
-      <div class="rcard">
-        <div class="top"><div class="av">WIN</div><div><h3>Desktop app</h3><div class="role">windows 10/11</div></div></div>
-        <p class="pitch">The full command center as a native app: tray, kill switch, one-click approvals. Unsigned beta, SmartScreen will ask once (More info → Run anyway).</p>
-        <a class="btn btn-quiet" href="https://github.com/adamtpang/summon.company/releases/download/v0.1.5/Summon.Setup.0.1.5.exe">Download .exe (80 MB)</a>
+  <section id="system" class="operating-loop">
+    <div class="shell">
+      <div class="loop-head">
+        <h2>One operating loop.</h2>
+        <p>Summon turns the company’s biggest constraint into accountable work and a decision you can drain.</p>
       </div>
-      <div class="rcard">
-        <div class="top"><div class="av">DEV</div><div><h3>Laptop / terminal</h3><div class="role">mac · linux · windows</div></div></div>
-        <p class="pitch">Run it where Claude Code runs. Clone, install, start, the command center opens in your browser at 127.0.0.1:3100.</p>
-        <a class="btn btn-quiet" href="https://github.com/adamtpang/summon.company#readme">Quickstart on GitHub</a>
-      </div>
-      <div class="rcard">
-        <div class="top"><div class="av">IOS</div><div><h3>Phone</h3><div class="role">run the company from bed</div></div></div>
-        <p class="pitch">The board fits in a pocket: approve, dispatch, and read receipts from your phone. TestFlight ships to founding members first.</p>
-        <a class="btn btn-quiet" href="#founding">Get it first, founding slot</a>
-      </div>
-    </div>
-  </section>
-
-  <section id="import" class="wrap center">
-    <span class="overline">Bring your company</span>
-    <h2 style="margin: var(--space-4) auto var(--space-4); max-width: 24ch;">Import what you already have. Agents read it before they work.</h2>
-    <p class="lede center" style="max-width: 56ch;">Pair a <strong>GitHub repo or org</strong> and Summon builds the company around it, name, logo, and context imported, live today. Knowledge connectors land next: <strong>Notion · Obsidian · Google Drive · Stripe · Slack · Linear</strong>, connect your existing brain, or let Summon scaffold one.</p>
-    <p class="micro-note" style="text-align: center;">Every company ships with a knowledge base slot. Yours starts empty except Acme Inc, the demo company, your real context never leaves your machine.</p>
-  </section>
-
-  <section id="roster" class="wrap" style="padding-top: 0;">
-    <div class="sec-head center">
-      <span class="overline">Meet your AI employees</span>
-      <h2 style="margin: var(--space-4) auto var(--space-3);">Build your team. Founding $99/mo, locked for life.</h2>
-      <p class="lede center">Add the employees you need, drop the ones you don't. Each works 24/7 on your own Claude/Codex subscription, budget-capped, and waits for your approval. Cancel anytime.</p>
-    </div>
-    <div class="roster">
-      <div class="rcard">
-        <div class="top"><div class="av">MKT</div><div><h3>Marketing</h3><div class="role">content, social, seo</div></div></div>
-        <p class="pitch">Content, social, SEO, and campaigns: drafted, scheduled, and ready for your yes.</p>
-        <svg class="ekg" viewBox="0 0 300 34" preserveAspectRatio="none"><path d="M0 17 H70 l7 -13 7 24 6 -20 5 9 H150 l7 -11 7 22 6 -18 5 8 H300"/></svg>
-        <div class="price">$99<span> /mo</span></div>
-        <a class="btn btn-quiet" href="https://buy.stripe.com/bJe28r1AC0OhbIA0m5aMU11">Hire Marketing</a>
-      </div>
-      <div class="rcard">
-        <div class="top"><div class="av">SAL</div><div><h3>Sales</h3><div class="role">leads, outreach, pipeline</div></div></div>
-        <p class="pitch">Lead sourcing, outreach, and pipeline: filled and worked while you sleep.</p>
-        <svg class="ekg" viewBox="0 0 300 34" preserveAspectRatio="none"><path d="M0 17 H60 l7 -13 7 24 6 -20 5 9 H140 l7 -11 7 22 6 -18 5 8 H300"/></svg>
-        <div class="price">$99<span> /mo</span></div>
-        <a class="btn btn-quiet" href="https://buy.stripe.com/aFa00j2EGaoRh2U5GpaMU12">Hire Sales</a>
-      </div>
-      <div class="rcard">
-        <div class="top"><div class="av">OPS</div><div><h3>Operations</h3><div class="role">admin, process, coord</div></div></div>
-        <p class="pitch">Admin, process, and coordination: the busywork off your plate, done right.</p>
-        <svg class="ekg" viewBox="0 0 300 34" preserveAspectRatio="none"><path d="M0 17 H84 l7 -13 7 24 6 -20 5 9 H170 l7 -11 7 22 6 -18 5 8 H300"/></svg>
-        <div class="price">$99<span> /mo</span></div>
-        <a class="btn btn-quiet" href="https://buy.stripe.com/28E9AT6UW54x7sk2udaMU13">Hire Operations</a>
-      </div>
-      <div class="rcard">
-        <div class="top"><div class="av">SUP</div><div><h3>Support</h3><div class="role">tickets, replies, csat</div></div></div>
-        <p class="pitch">Customer questions and ticket resolution: answered fast, on brand, all day.</p>
-        <svg class="ekg" viewBox="0 0 300 34" preserveAspectRatio="none"><path d="M0 17 H66 l7 -13 7 24 6 -20 5 9 H150 l7 -11 7 22 6 -18 5 8 H300"/></svg>
-        <div class="price">$99<span> /mo</span></div>
-        <a class="btn btn-quiet" href="https://buy.stripe.com/00w5kD7Z01Sl2801q9aMU14">Hire Support</a>
-      </div>
-      <div class="rcard">
-        <div class="top"><div class="av">ENG</div><div><h3>Engineering</h3><div class="role">ships, fixes, features</div></div></div>
-        <p class="pitch">Ships code, fixes, and features: pulls the ticket, hands back working software.</p>
-        <svg class="ekg" viewBox="0 0 300 34" preserveAspectRatio="none"><path d="M0 17 H80 l7 -13 7 24 6 -20 5 9 H160 l7 -11 7 22 6 -18 5 8 H300"/></svg>
-        <div class="price">$99<span> /mo</span></div>
-        <a class="btn btn-quiet" href="https://buy.stripe.com/14AeVd0wy40tcME3yhaMU15">Hire Engineering</a>
-      </div>
-      <div class="rcard">
-        <div class="top"><div class="av">RES</div><div><h3>Research</h3><div class="role">market, comp, data</div></div></div>
-        <p class="pitch">Market, competitor, and data analysis: the answer, sourced and summarized.</p>
-        <svg class="ekg" viewBox="0 0 300 34" preserveAspectRatio="none"><path d="M0 17 H74 l7 -13 7 24 6 -20 5 9 H156 l7 -11 7 22 6 -18 5 8 H300"/></svg>
-        <div class="price">$99<span> /mo</span></div>
-        <a class="btn btn-quiet" href="https://buy.stripe.com/8x214n3IK40tbIAgl3aMU16">Hire Research</a>
-      </div>
-    </div>
-    <p class="center micro-note" style="margin-top: var(--space-6);">Want to see them work first? <a href="https://cal.com/adamtpang">Start a free 7-day trial</a> · Or have us set up the whole team on your business: <a href="https://cal.com/adamtpang">book a call</a></p>
-  </section>
-
-  <section id="how" class="wrap">
-    <div class="sec-head center">
-      <span class="overline">How it runs</span>
-      <h2 style="margin: var(--space-4) auto 0;">Summon. Assign. They work. You approve.</h2>
-    </div>
-    <div class="grid3">
-      <div class="card"><div class="ic">01</div><h3>Summon and assign</h3><p>Hire the roles you need. Each employee gets a title and a place in your org chart, then you hand it the work.</p></div>
-      <div class="card"><div class="ic">02</div><h3>They run 24/7</h3><p>They pull the tasks and hand back finished deliverables: drafts sent, leads sourced, code shipped, tickets closed.</p></div>
-      <div class="card"><div class="ic">03</div><h3>You're the board</h3><p>Review what they shipped, approve the sends and spends. Budgets hard-stop at your cap.</p></div>
-    </div>
-  </section>
-
-  <section id="governed" class="wrap">
-    <div class="deep-inner">
-      <span class="overline" style="color: var(--text-accent);">Governed, not autonomous</span>
-      <p class="quote">"Spend hits the cap, not the bill."</p>
-      <p class="body">Every AI employee runs under a hard monthly budget. When it hits the cap, the employee pauses. It never keeps charging. No runaway invoices, no bill shock. Anything worth money, law, or your name waits for your approval. That's why it's safe to let them run.</p>
-    </div>
-  </section>
-
-  <section id="pricing" class="wrap">
-    <div class="sec-head center">
-      <span class="overline">Pricing</span>
-      <h2 style="margin: var(--space-4) auto var(--space-3);">Hire a whole team for less than one salary.</h2>
-      <p class="lede center">Each AI employee is $99/mo, a rounding error next to the human it replaces. Add as many as you need; you're always the board.</p>
-    </div>
-    <div class="price3">
-      <div class="tier dim">
-        <span class="badge">A human hire</span>
-        <h3>One coworker</h3>
-        <div class="amt strike">$8,000<span> /mo</span></div>
-        <ul>
-          <li class="no">✗ Weeks to hire and onboard</li>
-          <li class="no">✗ Works 40 hours, one at a time</li>
-          <li class="no">✗ Salary, benefits, PTO, drama</li>
-          <li class="no">✗ No cap on cost</li>
-        </ul>
-        <a class="btn btn-neutral" style="pointer-events: none; opacity: 0.5;" href="#roster">The old way</a>
-      </div>
-      <div class="tier hot">
-        <span class="badge">Most popular</span>
-        <h3>An AI employee</h3>
-        <div class="amt">$99<span> /mo</span></div>
-        <ul>
-          <li><b>✓</b> Hired in minutes, no onboarding</li>
-          <li><b>✓</b> Works 24/7, add as many as you want</li>
-          <li><b>✓</b> Budget cap and auto-pause, cancel anytime</li>
-          <li><b>✓</b> Outcome add-ons (sales earns on sales)</li>
-        </ul>
-        <a class="btn btn-primary" href="#roster">Hire your first employee</a>
-      </div>
-      <div class="tier">
-        <span class="badge">Done for you</span>
-        <h3>Staff the whole org</h3>
-        <div class="amt">Let's talk</div>
-        <ul>
-          <li>✓ Free business diagnosis</li>
-          <li>✓ Custom employees for your use case</li>
-          <li>✓ Built and handed over, live</li>
-          <li>✓ You stay the board</li>
-        </ul>
-        <a class="btn btn-quiet" href="https://cal.com/adamtpang">Book a call</a>
+      <div class="steps">
+        <div class="step"><span class="step-num">01</span><h3>Diagnose</h3><p>Find the constraint that matters now.</p></div>
+        <div class="step"><span class="step-num">02</span><h3>Assign</h3><p>Give it to the accountable department.</p></div>
+        <div class="step"><span class="step-num">03</span><h3>Run</h3><p>Produce work, evidence, and a receipt.</p></div>
+        <div class="step"><span class="step-num">04</span><h3>Approve</h3><p>You decide what leaves the company.</p></div>
       </div>
     </div>
   </section>
 
-  <!-- Evidence slot: real case studies only. Renders nothing while empty (see #case-studies:empty CSS).
-       When a real, verifiable result exists, add its markup inside this section. Never fabricate. -->
-  <section id="case-studies" class="wrap"></section>
+  <section id="departments" class="departments">
+    <div class="shell department-grid">
+      <div>
+        <p class="eyebrow">Core 8</p>
+        <h2>One company. Eight accountable departments.</h2>
+      </div>
+      <div class="department-list" aria-label="Summon departments">
+        <a href="/roles/ai-employee-for-engineering">Engineering</a>
+        <a href="/roles/ai-employee-for-design">Design</a>
+        <a href="/roles/ai-employee-for-marketing">Marketing</a>
+        <a href="/roles/ai-employee-for-sales">Sales</a>
+        <a href="/roles/ai-employee-for-finance">Finance</a>
+        <a href="/roles/ai-employee-for-operations">Operations</a>
+        <a href="/roles/ai-employee-for-support">Support</a>
+        <a href="/roles/ai-employee-for-legal">Legal</a>
+      </div>
+    </div>
+  </section>
 
-  <section class="wrap">
-    <div class="founder">
-      <p class="q">"We run the whole company on Summon. The CEO is an AI; the founder is the board. It ships overnight, and the board approves in the morning. Every number on this page comes from the runtime's own logs."</p>
-      <div class="by"><div class="av">S</div><div><b>Company Zero</b><span>Summon, run on Summon</span></div></div>
+  <section class="board">
+    <div class="shell board-grid">
+      <div>
+        <p class="eyebrow">Governed by design</p>
+        <h2>The board stays human.</h2>
+        <p>AI employees can prepare and execute internal work. Consequential actions stop at you.</p>
+      </div>
+      <div class="authority" aria-label="Human approval boundaries">
+        <div class="authority-row"><span>External messages</span><span>You approve</span></div>
+        <div class="authority-row"><span>Company spend</span><span>You approve</span></div>
+        <div class="authority-row"><span>Provider calls</span><span>You approve</span></div>
+        <div class="authority-row"><span>Production changes</span><span>You approve</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="founding" class="offer">
+    <div class="shell offer-line">
+      <div>
+        <p class="eyebrow">Founding seat</p>
+        <h2>$500/month. Unlimited problems.</h2>
+        <p>One S-tier task worked at a time across all eight departments. Results by morning. Cancel with one message.</p>
+      </div>
+      <div class="offer-action">
+        <a class="button primary" href="/diagnose">Start with a free diagnosis</a>
+        <a class="button" href="https://buy.stripe.com/8x2eVd1ACfJb5kc1q9aMU19">Start the founding seat</a>
+        <small>Payment follows diagnosis.</small>
+      </div>
     </div>
   </section>
 </main>
 
-<div class="horizon">
-  <div class="wrap">
-    <h2>Assemble your team.</h2>
-    <p>Add your first AI employee tonight, running your business with you as the board. $99/mo, cancel anytime.</p>
-    <div class="cta-row" style="justify-content: center;">
-      <a class="btn btn-primary btn-xl" href="#roster">Hire your first employee, $99/mo</a>
-      <a class="btn btn-neutral btn-xl" href="https://cal.com/adamtpang">Get a free diagnosis</a>
-    </div>
-  </div>
-</div>
-
 <footer>
-  <div class="wrap">
-    <a class="brand" href="/" style="font-size: var(--text-body-sm);">
-      <svg width="20" height="20" viewBox="0 0 32 32" aria-hidden="true"><defs><mask id="sgap-f" maskUnits="userSpaceOnUse" x="0" y="0" width="32" height="32"><rect width="32" height="32" fill="#fff"/><path d="M1.5 16 H10 L13 10.5 L16.5 22 L19 16 H30.5" fill="none" stroke="#000" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/></mask></defs><rect width="32" height="32" rx="7.5" fill="#FFFFFF" stroke="#0A0A0A" stroke-opacity="0.16"/><circle cx="16" cy="16" r="10.5" fill="none" stroke="#0A0A0A" stroke-width="3" mask="url(#sgap-f)"/><path d="M1.5 16 H10 L13 10.5 L16.5 22 L19 16 H30.5" fill="none" stroke="#0A0A0A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      Summon
-    </a>
-    <span class="sep">·</span>
-    <a href="#roster">Roster</a><span class="sep">·</span>
-    <a href="#pricing">Pricing</a><span class="sep">·</span>
-    <a href="#governed">Security</a><span class="sep">·</span>
-    <a href="/terms.html">Terms &amp; refunds</a><span class="sep">·</span>
-    <a href="/privacy.html">Privacy</a><span class="sep">·</span>
-    <a href="/roles/">Hire by role</a><span class="sep">·</span>
-    <a href="/blog.html">Blog</a><span class="sep">·</span>
-    <a href="/changelog.html">Changelog</a><span class="sep">·</span>
-    <a href="https://cal.com/adamtpang">Book a call</a><span class="sep">·</span>
-    <a href="mailto:hello@summon.company">hello@summon.company</a>
-    <span class="right">summon.company · hire AI employees. you're the board.</span>
-    <div class="beta">🧪 Beta · tell me what sucked: <a id="beta-contact" href="mailto:adamtpang@gmail.com?subject=summon%20beta">send it</a></div>
+  <div class="shell footer-grid">
+    <a class="brand" href="/">Summon</a>
+    <a href="/about">About</a>
+    <a href="/roles">Departments</a>
+    <a href="/blog.html">Journal</a>
+    <a href="/kit">Press kit</a>
+    <a href="/privacy">Privacy</a>
+    <a href="/terms">Terms</a>
+    <span class="legal">Human board. Governed company.</span>
   </div>
 </footer>
 
-<script defer src="/_vercel/insights/script.js"></script>
-<script>
-// Beta contact: when the deploy defines window.NEXT_PUBLIC_ADAM_WA (env NEXT_PUBLIC_ADAM_WA,
-// a WhatsApp number injected at deploy time), the beta link becomes https://wa.me/<value>.
-// Otherwise it stays the mailto fallback. Never hardcode a phone number in this file.
-(function () {
-  var a = document.getElementById("beta-contact");
-  var wa = window.NEXT_PUBLIC_ADAM_WA;
-  if (a && wa) a.href = "https://wa.me/" + wa;
-})();
-</script>
 </body>
 </html>
