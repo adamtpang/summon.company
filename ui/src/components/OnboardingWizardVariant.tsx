@@ -6,5 +6,5 @@ import { OnboardingWizard } from "./OnboardingWizard";
  * experimental flag.
  */
 export function OnboardingWizardVariant() {
-  return <OnboardingWizard />;
+ return <OnboardingWizard />;
 }

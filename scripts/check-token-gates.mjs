@@ -248,7 +248,7 @@ function main() {
   const allowlist = loadAllowlist(CSS_PATH);
   const files = listFiles();
 
-  const violations = { gate1: [], gate2: [], gate3: [] };
+  const violations = { gate1: [], gate2: [], gate3: [], gate4: [] };
   let allowlistedSkips = 0;
 
   for (const filePath of files) {
@@ -260,9 +260,10 @@ function main() {
     const g1 = findColorLiteralIssues(content);
     const g2 = findArbitraryBracketIssues(content);
     const g3 = findFontSizeIssues(content);
+    const g4 = findPaletteClassIssues(content);
 
     if (allowed) {
-      allowlistedSkips += g1.length + g2.length + g3.length;
+      allowlistedSkips += g1.length + g2.length + g3.length + g4.length;
       continue;
     }
 
@@ -275,9 +276,12 @@ function main() {
     for (const issue of g3) {
       violations.gate3.push({ file: relPathPosix, line: lineNumberAt(content, issue.index), snippet: issue.snippet });
     }
+    for (const issue of g4) {
+      violations.gate4.push({ file: relPathPosix, line: lineNumberAt(content, issue.index), snippet: issue.snippet });
+    }
   }
 
-  const totalViolations = violations.gate1.length + violations.gate2.length + violations.gate3.length;
+  const totalViolations = violations.gate1.length + violations.gate2.length + violations.gate3.length + violations.gate4.length;
 
   console.log("check-token-gates summary");
   console.log(`  Files scanned:                 ${files.length}`);
@@ -287,6 +291,7 @@ function main() {
   console.log(`  Gate 1 (color literals):       ${violations.gate1.length === 0 ? "CLEAN" : `${violations.gate1.length} violation(s)`}`);
   console.log(`  Gate 2 (arbitrary bracket vals): ${violations.gate2.length === 0 ? "CLEAN" : `${violations.gate2.length} violation(s)`}`);
   console.log(`  Gate 3 (raw font-size):        ${violations.gate3.length === 0 ? "CLEAN" : `${violations.gate3.length} violation(s)`}`);
+  console.log(`  Gate 4 (palette classes):      ${violations.gate4.length === 0 ? "CLEAN" : `${violations.gate4.length} violation(s)`}`);
 
   if (totalViolations > 0) {
     console.log("\nViolations:\n");
@@ -304,6 +309,19 @@ function main() {
 
   console.log("\nAll gates clean.");
   process.exitCode = 0;
+}
+
+
+// Gate 4: palette Tailwind classes (Run 4, design/palette-retirement)
+const PALETTE_GATE_RE = /(bg|text|border|ring|fill|stroke|outline)-(red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose|zinc|slate|gray|neutral|stone)-\d{2,3}/g;
+function findPaletteClassIssues(content) {
+  const issues = [];
+  let m;
+  PALETTE_GATE_RE.lastIndex = 0;
+  while ((m = PALETTE_GATE_RE.exec(content)) !== null) {
+    issues.push({ index: m.index, snippet: m[0] });
+  }
+  return issues;
 }
 
 // Windows path separators never appear in this repo's CI, but keep relative

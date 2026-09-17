@@ -15,22 +15,22 @@ import { useSidebar } from "../context/SidebarContext";
  *
  * ```tsx
  * function MyPluginPage() {
- *   return (
- *     <>
- *       <RequestCollapsedSidebar />
- *       …
- *     </>
- *   );
+ * return (
+ * <>
+ * <RequestCollapsedSidebar />
+ * …
+ * </>
+ * );
  * }
  * ```
  */
 export function RequestCollapsedSidebar() {
-  const { setRouteRequestsCollapsed } = useSidebar();
+ const { setRouteRequestsCollapsed } = useSidebar();
 
-  useEffect(() => {
-    setRouteRequestsCollapsed(true);
-    return () => setRouteRequestsCollapsed(false);
-  }, [setRouteRequestsCollapsed]);
+ useEffect(() => {
+ setRouteRequestsCollapsed(true);
+ return () => setRouteRequestsCollapsed(false);
+ }, [setRouteRequestsCollapsed]);
 
-  return null;
+ return null;
 }

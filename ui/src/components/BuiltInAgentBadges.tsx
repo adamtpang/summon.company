@@ -9,25 +9,25 @@ import type { BuiltInAgentStatus } from "@/api/builtInAgents";
  * `StatusBadge`/`AgentStatusBadge` (ux-spec D2).
  */
 export function BuiltInAgentBadge({
-  className,
-  compact = false,
+ className,
+ compact = false,
 }: {
-  className?: string;
-  compact?: boolean;
+ className?: string;
+ compact?: boolean;
 }) {
-  return (
-    <Badge
-      variant="outline"
-      className={cn(
-        brandChipBadge.blue,
-        compact && "px-1.5 py-0 text-(length:--text-nano)",
-        className,
-      )}
-      title="Ships with Summon"
-    >
-      Built-in
-    </Badge>
-  );
+ return (
+ <Badge
+ variant="outline"
+ className={cn(
+ brandChipBadge.blue,
+ compact && "px-1.5 py-0 text-(length:--text-nano)",
+ className,
+ )}
+ title="Ships with Summon"
+ >
+ Built-in
+ </Badge>
+ );
 }
 
 /**
@@ -36,31 +36,31 @@ export function BuiltInAgentBadge({
  * (`idle/active/…`) per ux-spec D1.
  */
 export function BuiltInLifecycleChip({
-  status,
-  compact = false,
-  className,
+ status,
+ compact = false,
+ className,
 }: {
-  status: BuiltInAgentStatus;
-  compact?: boolean;
-  className?: string;
+ status: BuiltInAgentStatus;
+ compact?: boolean;
+ className?: string;
 }) {
-  if (status !== "needs_setup" && status !== "pending_approval") return null;
-  const isPendingApproval = status === "pending_approval";
-  return (
-    <Badge
-      variant="outline"
-      className={cn(
-        brandChipBadge.amber,
-        compact && "px-1.5 py-0 text-(length:--text-nano)",
-        className,
-      )}
-      title={
-        isPendingApproval
-          ? "Waiting on board hire approval before the feature can run"
-          : "Needs adapter/model setup before the feature can run"
-      }
-    >
-      {isPendingApproval ? (compact ? "Approval" : "Pending approval") : compact ? "Setup" : "Needs setup"}
-    </Badge>
-  );
+ if (status !== "needs_setup" && status !== "pending_approval") return null;
+ const isPendingApproval = status === "pending_approval";
+ return (
+ <Badge
+ variant="outline"
+ className={cn(
+ brandChipBadge.amber,
+ compact && "px-1.5 py-0 text-(length:--text-nano)",
+ className,
+ )}
+ title={
+ isPendingApproval
+ ? "Waiting on board hire approval before the feature can run"
+ : "Needs adapter/model setup before the feature can run"
+ }
+ >
+ {isPendingApproval ? (compact ? "Approval" : "Pending approval") : compact ? "Setup" : "Needs setup"}
+ </Badge>
+ );
 }

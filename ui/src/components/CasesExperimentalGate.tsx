@@ -9,14 +9,14 @@ import { queryKeys } from "@/lib/queryKeys";
  * dashboard when `enableCases` is off, mirroring {@link PipelinesExperimentalGate}.
  */
 export function CasesExperimentalGate({ children }: { children: ReactNode }) {
-  const { data: experimentalSettings, isFetched } = useQuery({
-    queryKey: queryKeys.instance.experimentalSettings,
-    queryFn: () => instanceSettingsApi.getExperimental(),
-  });
+ const { data: experimentalSettings, isFetched } = useQuery({
+ queryKey: queryKeys.instance.experimentalSettings,
+ queryFn: () => instanceSettingsApi.getExperimental(),
+ });
 
-  if (!isFetched) return null;
-  if (experimentalSettings?.enableCases !== true) {
-    return <Navigate to="/dashboard" replace />;
-  }
-  return <>{children}</>;
+ if (!isFetched) return null;
+ if (experimentalSettings?.enableCases !== true) {
+ return <Navigate to="/dashboard" replace />;
+ }
+ return <>{children}</>;
 }

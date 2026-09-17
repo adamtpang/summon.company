@@ -10,26 +10,26 @@ import type { ResumeAffordance } from "@/lib/resume-affordance";
  * muted divider row, not a boxed alert. Token-gated (no hardcoded colors).
  */
 export function ResumeAffordanceNotice({
-  affordance,
-  className,
+ affordance,
+ className,
 }: {
-  affordance: ResumeAffordance;
-  className?: string;
+ affordance: ResumeAffordance;
+ className?: string;
 }) {
-  if (!affordance.resumed || !affordance.label) return null;
-  return (
-    <div
-      data-testid="resume-affordance-notice"
-      className={cn("flex items-center gap-2 py-1.5 text-muted-foreground", className)}
-      role="note"
-      aria-label={affordance.label}
-    >
-      <span className="h-px flex-1 bg-border" />
-      <span className="inline-flex items-center gap-1.5 text-(length:--text-micro) font-medium uppercase tracking-wide">
-        <History className="h-3 w-3" aria-hidden="true" />
-        {affordance.label}
-      </span>
-      <span className="h-px flex-1 bg-border" />
-    </div>
-  );
+ if (!affordance.resumed || !affordance.label) return null;
+ return (
+ <div
+ data-testid="resume-affordance-notice"
+ className={cn("flex items-center gap-2 py-1.5 text-muted-foreground", className)}
+ role="note"
+ aria-label={affordance.label}
+ >
+ <span className="h-px flex-1 bg-border" />
+ <span className="inline-flex items-center gap-1.5 text-(length:--text-micro) font-medium uppercase tracking-wide">
+ <History className="h-3 w-3" aria-hidden="true" />
+ {affordance.label}
+ </span>
+ <span className="h-px flex-1 bg-border" />
+ </div>
+ );
 }

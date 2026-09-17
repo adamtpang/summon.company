@@ -1,11 +1,11 @@
 import { cn } from "@/lib/utils";
 
 interface OutputVideoPlayerProps {
-  src: string;
-  poster?: string | null;
-  className?: string;
-  /** Accessible label, typically the filename. */
-  title?: string;
+ src: string;
+ poster?: string | null;
+ className?: string;
+ /** Accessible label, typically the filename. */
+ title?: string;
 }
 
 /**
@@ -17,17 +17,17 @@ interface OutputVideoPlayerProps {
  * A fixed 16:9 box reserves height before metadata loads to avoid layout jump.
  */
 export function OutputVideoPlayer({ src, poster, className, title }: OutputVideoPlayerProps) {
-  return (
-    <div className={cn("relative w-full overflow-hidden rounded-md bg-black aspect-video", className)}>
-      <video
-        src={src}
-        poster={poster ?? undefined}
-        controls
-        preload="metadata"
-        playsInline
-        aria-label={title ? `Video output: ${title}` : "Video output"}
-        className="absolute inset-0 h-full w-full"
-      />
-    </div>
-  );
+ return (
+ <div className={cn("relative w-full overflow-hidden rounded-md bg-black aspect-video", className)}>
+ <video
+ src={src}
+ poster={poster ?? undefined}
+ controls
+ preload="metadata"
+ playsInline
+ aria-label={title ? `Video output: ${title}` : "Video output"}
+ className="absolute inset-0 h-full w-full"
+ />
+ </div>
+ );
 }

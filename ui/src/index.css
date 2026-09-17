@@ -1963,4 +1963,11 @@ span.paperclip-mention-chip[data-mention-kind="external-object"] {
    * allow ui/src/pages/ProjectWorkspaceDetail.test.tsx — mock project color fixture
    * allow ui/src/pages/Projects.test.tsx — mock project color fixture
    * allow ui/src/pages/Routines.test.tsx — mock routine/label color fixtures
-   ── end allowlist ── */
+   Gate 4 -- palette class allowlist (Run 4, design/palette-retirement):
+   * allow ui/src/pages/InviteLanding.tsx -- third-party landing chrome; palette classes are brand decoration, not status colors; full retokenization deferred
+   * allow ui/src/pages/DesignGuide.tsx -- design reference/showcase; palette classes illustrate the pre-tokenization vocabulary intentionally
+   * allow ui/src/components/DocumentAnnotationLayer.tsx -- annotation outline colors (yellow-700/200 + yellow-300 highlight) match --paperclip-doc-annotation-highlight-* token values but with per-state opacity chains; dedicated retokenization deferred to the annotation-system rework
+   * allow ui/src/components/StarToggle.tsx -- fill-amber-500 is intentional golden-star UX (universally recognized starred metaphor); --star-fill token deferred to Run 5 brand preset
+   * allow ui/src/components/SidebarAgents.tsx -- fill-amber-500 star icon, same golden-star rationale as StarToggle.tsx
+   * allow ui/src/components/SidebarStarredProjects.tsx -- fill-amber-500 star icon, same golden-star rationale as StarToggle.tsx
+   -- end allowlist -- */

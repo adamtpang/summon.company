@@ -4,13 +4,13 @@ import { Columns3 } from "lucide-react";
 import { pickTextColorForPillBg } from "@/lib/color-contrast";
 import { Button } from "@/components/ui/button";
 import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
+ DropdownMenu,
+ DropdownMenuCheckboxItem,
+ DropdownMenuContent,
+ DropdownMenuItem,
+ DropdownMenuLabel,
+ DropdownMenuSeparator,
+ DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { formatAssigneeUserLabel } from "../lib/assignees";
@@ -25,117 +25,117 @@ import { Badge } from "@/components/ui/badge";
 export const issueTrailingColumns: InboxIssueColumn[] = ["assignee", "kickedOffBy", "project", "workspace", "parent", "labels", "updated"];
 
 const issueColumnLabels: Record<InboxIssueColumn, string> = {
-  status: "Status",
-  id: "ID",
-  assignee: "Responsible",
-  kickedOffBy: "Kicked off by",
-  project: "Project",
-  workspace: "Workspace",
-  parent: "Parent task",
-  labels: "Tags",
-  updated: "Last updated",
+ status: "Status",
+ id: "ID",
+ assignee: "Responsible",
+ kickedOffBy: "Kicked off by",
+ project: "Project",
+ workspace: "Workspace",
+ parent: "Parent task",
+ labels: "Tags",
+ updated: "Last updated",
 };
 
 const issueColumnDescriptions: Record<InboxIssueColumn, string> = {
-  status: "Task state chip on the left edge.",
-  id: "Ticket identifier like PAP-1009.",
-  assignee: "Responsible agent or board user.",
-  kickedOffBy: "Board user or agent who created the task.",
-  project: "Linked project pill with its color.",
-  workspace: "Execution or project workspace used for the task.",
-  parent: "Parent task identifier and title.",
-  labels: "Task labels and tags.",
-  updated: "Latest visible activity time.",
+ status: "Task state chip on the left edge.",
+ id: "Ticket identifier like PAP-1009.",
+ assignee: "Responsible agent or board user.",
+ kickedOffBy: "Board user or agent who created the task.",
+ project: "Linked project pill with its color.",
+ workspace: "Execution or project workspace used for the task.",
+ parent: "Parent task identifier and title.",
+ labels: "Task labels and tags.",
+ updated: "Latest visible activity time.",
 };
 
 export function issueActivityText(issue: Issue): string {
-  return `Updated ${timeAgo(issue.lastActivityAt ?? issue.lastExternalCommentAt ?? issue.updatedAt)}`;
+ return `Updated ${timeAgo(issue.lastActivityAt ?? issue.lastExternalCommentAt ?? issue.updatedAt)}`;
 }
 
 function issueTrailingGridTemplate(columns: InboxIssueColumn[]): string {
-  return columns
-    .map((column) => {
-      if (column === "assignee") return "minmax(6rem, 8rem)";
-      if (column === "kickedOffBy") return "minmax(6rem, 8rem)";
-      if (column === "project") return "minmax(4.5rem, 7rem)";
-      if (column === "workspace") return "minmax(6rem, 9rem)";
-      if (column === "parent") return "minmax(3.5rem, 5.5rem)";
-      if (column === "labels") return "minmax(3rem, 6rem)";
-      return "minmax(3.5rem, 4.5rem)";
-    })
-    .join(" ");
+ return columns
+ .map((column) => {
+ if (column === "assignee") return "minmax(6rem, 8rem)";
+ if (column === "kickedOffBy") return "minmax(6rem, 8rem)";
+ if (column === "project") return "minmax(4.5rem, 7rem)";
+ if (column === "workspace") return "minmax(6rem, 9rem)";
+ if (column === "parent") return "minmax(3.5rem, 5.5rem)";
+ if (column === "labels") return "minmax(3rem, 6rem)";
+ return "minmax(3.5rem, 4.5rem)";
+ })
+ .join(" ");
 }
 
 export function IssueColumnPicker({
-  availableColumns,
-  visibleColumnSet,
-  onToggleColumn,
-  onResetColumns,
-  title,
-  iconOnly = false,
+ availableColumns,
+ visibleColumnSet,
+ onToggleColumn,
+ onResetColumns,
+ title,
+ iconOnly = false,
 }: {
-  availableColumns: InboxIssueColumn[];
-  visibleColumnSet: ReadonlySet<InboxIssueColumn>;
-  onToggleColumn: (column: InboxIssueColumn, enabled: boolean) => void;
-  onResetColumns: () => void;
-  title: string;
-  iconOnly?: boolean;
+ availableColumns: InboxIssueColumn[];
+ visibleColumnSet: ReadonlySet<InboxIssueColumn>;
+ onToggleColumn: (column: InboxIssueColumn, enabled: boolean) => void;
+ onResetColumns: () => void;
+ title: string;
+ iconOnly?: boolean;
 }) {
-  return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button
-          type="button"
-          variant={iconOnly ? "outline" : "ghost"}
-          size={iconOnly ? "icon" : "sm"}
-          className={iconOnly ? "h-8 w-8 shrink-0" : "hidden h-8 shrink-0 px-2 text-xs sm:inline-flex"}
-          title="Columns"
-        >
-          <Columns3 className={iconOnly ? "h-3.5 w-3.5" : "mr-1 h-3.5 w-3.5"} />
-          {!iconOnly && "Columns"}
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-(--sz-300px) rounded-xl border-border/70 p-1.5 shadow-xl shadow-black/10">
-        <DropdownMenuLabel className="px-2 pb-1 pt-1.5">
-          <div className="space-y-1">
-            <div className="text-(length:--text-nano) font-semibold uppercase tracking-(--tracking-caps) text-muted-foreground">
-              Desktop task rows
-            </div>
-            <div className="text-sm font-medium text-foreground">
-              {title}
-            </div>
-          </div>
-        </DropdownMenuLabel>
-        <DropdownMenuSeparator />
-        {availableColumns.map((column) => (
-          <DropdownMenuCheckboxItem
-            key={column}
-            checked={visibleColumnSet.has(column)}
-            onSelect={(event) => event.preventDefault()}
-            onCheckedChange={(checked) => onToggleColumn(column, checked === true)}
-            className="items-start rounded-lg px-3 py-2.5 pl-8"
-          >
-            <span className="flex flex-col gap-0.5">
-              <span className="text-sm font-medium text-foreground">
-                {issueColumnLabels[column]}
-              </span>
-              <span className="text-xs leading-relaxed text-muted-foreground">
-                {issueColumnDescriptions[column]}
-              </span>
-            </span>
-          </DropdownMenuCheckboxItem>
-        ))}
-        <DropdownMenuSeparator />
-        <DropdownMenuItem
-          onSelect={onResetColumns}
-          className="rounded-lg px-3 py-2 text-sm"
-        >
-          Reset defaults
-          <span className="ml-auto text-xs text-muted-foreground">status, id, updated</span>
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
-  );
+ return (
+ <DropdownMenu>
+ <DropdownMenuTrigger asChild>
+ <Button
+ type="button"
+ variant={iconOnly ? "outline" : "ghost"}
+ size={iconOnly ? "icon" : "sm"}
+ className={iconOnly ? "h-8 w-8 shrink-0" : "hidden h-8 shrink-0 px-2 text-xs sm:inline-flex"}
+ title="Columns"
+ >
+ <Columns3 className={iconOnly ? "h-3.5 w-3.5" : "mr-1 h-3.5 w-3.5"} />
+ {!iconOnly && "Columns"}
+ </Button>
+ </DropdownMenuTrigger>
+ <DropdownMenuContent align="end" className="w-(--sz-300px) rounded-xl border-border/70 p-1.5 shadow-xl shadow-black/10">
+ <DropdownMenuLabel className="px-2 pb-1 pt-1.5">
+ <div className="space-y-1">
+ <div className="text-(length:--text-nano) font-semibold uppercase tracking-(--tracking-caps) text-muted-foreground">
+ Desktop task rows
+ </div>
+ <div className="text-sm font-medium text-foreground">
+ {title}
+ </div>
+ </div>
+ </DropdownMenuLabel>
+ <DropdownMenuSeparator />
+ {availableColumns.map((column) => (
+ <DropdownMenuCheckboxItem
+ key={column}
+ checked={visibleColumnSet.has(column)}
+ onSelect={(event) => event.preventDefault()}
+ onCheckedChange={(checked) => onToggleColumn(column, checked === true)}
+ className="items-start rounded-lg px-3 py-2.5 pl-8"
+ >
+ <span className="flex flex-col gap-0.5">
+ <span className="text-sm font-medium text-foreground">
+ {issueColumnLabels[column]}
+ </span>
+ <span className="text-xs leading-relaxed text-muted-foreground">
+ {issueColumnDescriptions[column]}
+ </span>
+ </span>
+ </DropdownMenuCheckboxItem>
+ ))}
+ <DropdownMenuSeparator />
+ <DropdownMenuItem
+ onSelect={onResetColumns}
+ className="rounded-lg px-3 py-2 text-sm"
+ >
+ Reset defaults
+ <span className="ml-auto text-xs text-muted-foreground">status, id, updated</span>
+ </DropdownMenuItem>
+ </DropdownMenuContent>
+ </DropdownMenu>
+ );
 }
 
 /**
@@ -147,437 +147,437 @@ export function IssueColumnPicker({
  * so dispatch is an explicit one-click button, never an automatic reassignment.
  */
 const TIER_CHIP_CLASS: Record<ScoreboardTier, string> = {
-  S: "bg-primary text-primary-foreground border-transparent",
-  A: "bg-foreground text-background border-transparent",
-  B: "bg-foreground/70 text-background border-transparent",
-  C: "bg-muted text-foreground border-border",
-  D: "bg-transparent text-muted-foreground border-border",
-  F: "bg-transparent text-muted-foreground/60 border-border/60",
+ S: "bg-primary text-primary-foreground border-transparent",
+ A: "bg-foreground text-background border-transparent",
+ B: "bg-foreground/70 text-background border-transparent",
+ C: "bg-muted text-foreground border-border",
+ D: "bg-transparent text-muted-foreground border-border",
+ F: "bg-transparent text-muted-foreground/60 border-border/60",
 };
 
 export function InboxScoreChips({
-  issue,
-  route,
-  routedAgentId,
-  onDispatch,
-  dispatchPending = false,
+ issue,
+ route,
+ routedAgentId,
+ onDispatch,
+ dispatchPending = false,
 }: {
-  issue: Issue;
-  /** The routing target derived for this issue's work type, or null if untagged. */
-  route: WorkTypeRoute | null;
-  /** Live agent id matching the route's agentNameKey, or null if none is hired. */
-  routedAgentId: string | null;
-  /** One-click dispatch handler; assigns the issue to `routedAgentId`. */
-  onDispatch?: (agentId: string) => void;
-  dispatchPending?: boolean;
+ issue: Issue;
+ /** The routing target derived for this issue's work type, or null if untagged. */
+ route: WorkTypeRoute | null;
+ /** Live agent id matching the route's agentNameKey, or null if none is hired. */
+ routedAgentId: string | null;
+ /** One-click dispatch handler; assigns the issue to `routedAgentId`. */
+ onDispatch?: (agentId: string) => void;
+ dispatchPending?: boolean;
 }) {
-  const score = deriveInboxScore(issue);
-  const tier = score.tier;
-  const tagLabel = route?.department ?? null;
-  const routeKey = route?.agentNameKey ?? null;
-  const alreadyRouted = !!routedAgentId && issue.assigneeAgentId === routedAgentId;
+ const score = deriveInboxScore(issue);
+ const tier = score.tier;
+ const tagLabel = route?.department ?? null;
+ const routeKey = route?.agentNameKey ?? null;
+ const alreadyRouted = !!routedAgentId && issue.assigneeAgentId === routedAgentId;
 
-  return (
-    <span className="hidden shrink-0 items-center gap-1 sm:inline-flex">
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <span
-            className={cn(
-              "inline-flex h-4 min-w-4 items-center justify-center rounded border px-1 text-(length:--text-nano) font-semibold leading-none",
-              TIER_CHIP_CLASS[tier],
-            )}
-            aria-label={`Tier ${tier}`}
-          >
-            {tier}
-          </span>
-        </TooltipTrigger>
-        <TooltipContent side="top" sideOffset={6}>
-          <span className="font-mono text-xs">
-            {`Tier ${tier} · importance ${score.importanceStars} · urgency ${score.urgencyStars} · time ${score.timeStars} · money ${score.moneyStars}`}
-          </span>
-        </TooltipContent>
-      </Tooltip>
+ return (
+ <span className="hidden shrink-0 items-center gap-1 sm:inline-flex">
+ <Tooltip>
+ <TooltipTrigger asChild>
+ <span
+ className={cn(
+ "inline-flex h-4 min-w-4 items-center justify-center rounded border px-1 text-(length:--text-nano) font-semibold leading-none",
+ TIER_CHIP_CLASS[tier],
+ )}
+ aria-label={`Tier ${tier}`}
+ >
+ {tier}
+ </span>
+ </TooltipTrigger>
+ <TooltipContent side="top" sideOffset={6}>
+ <span className="font-mono text-xs">
+ {`Tier ${tier} · importance ${score.importanceStars} · urgency ${score.urgencyStars} · time ${score.timeStars} · money ${score.moneyStars}`}
+ </span>
+ </TooltipContent>
+ </Tooltip>
 
-      {tagLabel ? (
-        <Badge
-          variant="outline"
-          className="border-border bg-transparent px-1.5 py-0 text-(length:--text-nano) font-medium text-muted-foreground"
-        >
-          {tagLabel}
-        </Badge>
-      ) : null}
+ {tagLabel ? (
+ <Badge
+ variant="outline"
+ className="border-border bg-transparent px-1.5 py-0 text-(length:--text-nano) font-medium text-muted-foreground"
+ >
+ {tagLabel}
+ </Badge>
+ ) : null}
 
-      {routeKey ? (
-        alreadyRouted ? (
-          <span className="text-(length:--text-nano) font-medium text-muted-foreground">
-            {`→ ${routeKey}`}
-          </span>
-        ) : routedAgentId && onDispatch ? (
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <button
-                type="button"
-                disabled={dispatchPending}
-                onClick={(event) => {
-                  event.preventDefault();
-                  event.stopPropagation();
-                  onDispatch(routedAgentId);
-                }}
-                className="inline-flex items-center rounded border border-border px-1 text-(length:--text-nano) font-medium text-muted-foreground transition-colors hover:border-foreground/40 hover:text-foreground disabled:opacity-40"
-              >
-                {`→ ${routeKey}`}
-              </button>
-            </TooltipTrigger>
-            <TooltipContent side="top" sideOffset={6}>{`Dispatch to ${routeKey}`}</TooltipContent>
-          </Tooltip>
-        ) : (
-          <span
-            className="text-(length:--text-nano) font-medium text-muted-foreground/70"
-            title={`No ${route?.department ?? ""} agent hired yet`}
-          >
-            {`${routeKey}?`}
-          </span>
-        )
-      ) : null}
-    </span>
-  );
+ {routeKey ? (
+ alreadyRouted ? (
+ <span className="text-(length:--text-nano) font-medium text-muted-foreground">
+ {`→ ${routeKey}`}
+ </span>
+ ) : routedAgentId && onDispatch ? (
+ <Tooltip>
+ <TooltipTrigger asChild>
+ <button
+ type="button"
+ disabled={dispatchPending}
+ onClick={(event) => {
+ event.preventDefault();
+ event.stopPropagation();
+ onDispatch(routedAgentId);
+ }}
+ className="inline-flex items-center rounded border border-border px-1 text-(length:--text-nano) font-medium text-muted-foreground transition-colors hover:border-foreground/40 hover:text-foreground disabled:opacity-40"
+ >
+ {`→ ${routeKey}`}
+ </button>
+ </TooltipTrigger>
+ <TooltipContent side="top" sideOffset={6}>{`Dispatch to ${routeKey}`}</TooltipContent>
+ </Tooltip>
+ ) : (
+ <span
+ className="text-(length:--text-nano) font-medium text-muted-foreground/70"
+ title={`No ${route?.department ?? ""} agent hired yet`}
+ >
+ {`${routeKey}?`}
+ </span>
+ )
+ ) : null}
+ </span>
+ );
 }
 
 export function InboxIssueMetaLeading({
-  issue,
-  isLive,
-  subtreeLiveCount = 0,
-  showSubtreeLiveChip = true,
-  showStatus = true,
-  showIdentifier = true,
-  statusSlot,
-  checklistStepNumber = null,
+ issue,
+ isLive,
+ subtreeLiveCount = 0,
+ showSubtreeLiveChip = true,
+ showStatus = true,
+ showIdentifier = true,
+ statusSlot,
+ checklistStepNumber = null,
 }: {
-  issue: Issue;
-  isLive: boolean;
-  subtreeLiveCount?: number;
-  showSubtreeLiveChip?: boolean;
-  showStatus?: boolean;
-  showIdentifier?: boolean;
-  statusSlot?: ReactNode;
-  checklistStepNumber?: number | string | null;
+ issue: Issue;
+ isLive: boolean;
+ subtreeLiveCount?: number;
+ showSubtreeLiveChip?: boolean;
+ showStatus?: boolean;
+ showIdentifier?: boolean;
+ statusSlot?: ReactNode;
+ checklistStepNumber?: number | string | null;
 }) {
-  return (
-    <>
-      {showStatus ? (
-        <span className="hidden shrink-0 items-center sm:inline-flex">
-          {statusSlot ?? <StatusIcon status={issue.status} blockerAttention={issue.blockerAttention} />}
-        </span>
-      ) : null}
-      {checklistStepNumber !== null ? (
-        <span className="shrink-0 font-mono text-xs text-muted-foreground" aria-hidden="true">
-          {checklistStepNumber}.
-        </span>
-      ) : null}
-      {showIdentifier ? (
-        <span className="shrink-0 font-mono text-xs text-muted-foreground">
-          {issue.identifier ?? issue.id.slice(0, 8)}
-        </span>
-      ) : null}
-      {isLive && (
-        <Badge variant="ghost"
-          className={cn(
-            "px-1.5 sm:gap-1.5 sm:px-2",
-            "bg-blue-500/10",
-          )}
-        >
-          <span className="relative flex h-2 w-2">
-            <span className="absolute inline-flex h-full w-full animate-pulse rounded-full bg-blue-400 opacity-75" />
-            <span
-              className={cn(
-                "relative inline-flex h-2 w-2 rounded-full",
-                "bg-blue-500",
-              )}
-            />
-          </span>
-          <span
-            className={cn(
-              "hidden text-(length:--text-micro) font-medium sm:inline",
-              "text-blue-600 dark:text-blue-400",
-            )}
-          >
-            Live
-          </span>
-        </Badge>
-      )}
-      {showSubtreeLiveChip && !isLive && subtreeLiveCount > 0 && (
-        <Badge variant="outline"
-          className={cn(
-            "px-1.5 sm:gap-1.5 sm:px-2",
-            "border-border bg-transparent",
-          )}
-          title={`${subtreeLiveCount} sub-task${subtreeLiveCount === 1 ? "" : "s"} running below`}
-        >
-          <span
-            className={cn(
-              "h-2 w-2 shrink-0 rounded-full border",
-              "border-muted-foreground/60 bg-transparent",
-            )}
-            aria-hidden="true"
-          />
-          <span className="hidden text-(length:--text-micro) font-medium text-muted-foreground sm:inline">
-            {subtreeLiveCount} live below
-          </span>
-        </Badge>
-      )}
-    </>
-  );
+ return (
+ <>
+ {showStatus ? (
+ <span className="hidden shrink-0 items-center sm:inline-flex">
+ {statusSlot ?? <StatusIcon status={issue.status} blockerAttention={issue.blockerAttention} />}
+ </span>
+ ) : null}
+ {checklistStepNumber !== null ? (
+ <span className="shrink-0 font-mono text-xs text-muted-foreground" aria-hidden="true">
+ {checklistStepNumber}.
+ </span>
+ ) : null}
+ {showIdentifier ? (
+ <span className="shrink-0 font-mono text-xs text-muted-foreground">
+ {issue.identifier ?? issue.id.slice(0, 8)}
+ </span>
+ ) : null}
+ {isLive && (
+ <Badge variant="ghost"
+ className={cn(
+ "px-1.5 sm:gap-1.5 sm:px-2",
+ "bg-(--status-task-in_progress)/10",
+ )}
+ >
+ <span className="relative flex h-2 w-2">
+ <span className="absolute inline-flex h-full w-full animate-pulse rounded-full bg-(--status-task-in_progress) opacity-75" />
+ <span
+ className={cn(
+ "relative inline-flex h-2 w-2 rounded-full",
+ "bg-(--status-task-in_progress)",
+ )}
+ />
+ </span>
+ <span
+ className={cn(
+ "hidden text-(length:--text-micro) font-medium sm:inline",
+ "text-(--status-task-in_progress) dark:text-(--status-task-in_progress)",
+ )}
+ >
+ Live
+ </span>
+ </Badge>
+ )}
+ {showSubtreeLiveChip && !isLive && subtreeLiveCount > 0 && (
+ <Badge variant="outline"
+ className={cn(
+ "px-1.5 sm:gap-1.5 sm:px-2",
+ "border-border bg-transparent",
+ )}
+ title={`${subtreeLiveCount} sub-task${subtreeLiveCount === 1 ? "" : "s"} running below`}
+ >
+ <span
+ className={cn(
+ "h-2 w-2 shrink-0 rounded-full border",
+ "border-muted-foreground/60 bg-transparent",
+ )}
+ aria-hidden="true"
+ />
+ <span className="hidden text-(length:--text-micro) font-medium text-muted-foreground sm:inline">
+ {subtreeLiveCount} live below
+ </span>
+ </Badge>
+ )}
+ </>
+ );
 }
 
 export function InboxIssueTrailingColumns({
-  issue,
-  columns,
-  projectName,
-  projectColor,
-  workspaceId,
-  workspaceName,
-  assigneeName,
-  assigneeUserName,
-  assigneeUserAvatarUrl,
-  creatorAgentName,
-  creatorUserName,
-  creatorUserAvatarUrl,
-  viaAgentName,
-  currentUserId,
-  parentIdentifier,
-  parentTitle,
-  assigneeContent,
-  onFilterWorkspace,
+ issue,
+ columns,
+ projectName,
+ projectColor,
+ workspaceId,
+ workspaceName,
+ assigneeName,
+ assigneeUserName,
+ assigneeUserAvatarUrl,
+ creatorAgentName,
+ creatorUserName,
+ creatorUserAvatarUrl,
+ viaAgentName,
+ currentUserId,
+ parentIdentifier,
+ parentTitle,
+ assigneeContent,
+ onFilterWorkspace,
 }: {
-  issue: Issue;
-  columns: InboxIssueColumn[];
-  projectName: string | null;
-  projectColor: string | null;
-  workspaceId?: string | null;
-  workspaceName: string | null;
-  assigneeName: string | null;
-  assigneeUserName?: string | null;
-  assigneeUserAvatarUrl?: string | null;
-  creatorAgentName?: string | null;
-  creatorUserName?: string | null;
-  creatorUserAvatarUrl?: string | null;
-  viaAgentName?: string | null;
-  currentUserId: string | null;
-  parentIdentifier: string | null;
-  parentTitle: string | null;
-  assigneeContent?: ReactNode;
-  onFilterWorkspace?: (workspaceId: string) => void;
+ issue: Issue;
+ columns: InboxIssueColumn[];
+ projectName: string | null;
+ projectColor: string | null;
+ workspaceId?: string | null;
+ workspaceName: string | null;
+ assigneeName: string | null;
+ assigneeUserName?: string | null;
+ assigneeUserAvatarUrl?: string | null;
+ creatorAgentName?: string | null;
+ creatorUserName?: string | null;
+ creatorUserAvatarUrl?: string | null;
+ viaAgentName?: string | null;
+ currentUserId: string | null;
+ parentIdentifier: string | null;
+ parentTitle: string | null;
+ assigneeContent?: ReactNode;
+ onFilterWorkspace?: (workspaceId: string) => void;
 }) {
-  const activityText = timeAgo(issue.lastActivityAt ?? issue.lastExternalCommentAt ?? issue.updatedAt);
-  const userLabel = assigneeUserName ?? formatAssigneeUserLabel(issue.assigneeUserId, currentUserId) ?? "User";
-  const originatingActor = deriveOriginatingActor(issue);
-  const originatingUserId = originatingActor?.kind === "user" ? originatingActor.id : null;
-  const creatorUserLabel = creatorUserName ?? formatAssigneeUserLabel(originatingUserId, currentUserId) ?? "User";
+ const activityText = timeAgo(issue.lastActivityAt ?? issue.lastExternalCommentAt ?? issue.updatedAt);
+ const userLabel = assigneeUserName ?? formatAssigneeUserLabel(issue.assigneeUserId, currentUserId) ?? "User";
+ const originatingActor = deriveOriginatingActor(issue);
+ const originatingUserId = originatingActor?.kind === "user" ? originatingActor.id : null;
+ const creatorUserLabel = creatorUserName ?? formatAssigneeUserLabel(originatingUserId, currentUserId) ?? "User";
 
-  return (
-    <span
-      className="grid items-center gap-2"
-      style={{ gridTemplateColumns: issueTrailingGridTemplate(columns) }}
-    >
-      {columns.map((column) => {
-        if (column === "assignee") {
-          if (assigneeContent) {
-            return <span key={column} className="min-w-0">{assigneeContent}</span>;
-          }
+ return (
+ <span
+ className="grid items-center gap-2"
+ style={{ gridTemplateColumns: issueTrailingGridTemplate(columns) }}
+ >
+ {columns.map((column) => {
+ if (column === "assignee") {
+ if (assigneeContent) {
+ return <span key={column} className="min-w-0">{assigneeContent}</span>;
+ }
 
-          if (issue.assigneeAgentId) {
-            return (
-              <span key={column} className="min-w-0 text-xs text-foreground">
-                <Identity
-                  name={assigneeName ?? issue.assigneeAgentId.slice(0, 8)}
-                  size="sm"
-                  shape="square"
-                  className="min-w-0"
-                />
-              </span>
-            );
-          }
+ if (issue.assigneeAgentId) {
+ return (
+ <span key={column} className="min-w-0 text-xs text-foreground">
+ <Identity
+ name={assigneeName ?? issue.assigneeAgentId.slice(0, 8)}
+ size="sm"
+ shape="square"
+ className="min-w-0"
+ />
+ </span>
+ );
+ }
 
-          if (issue.assigneeUserId) {
-            return (
-              <span key={column} className="min-w-0 text-xs text-foreground">
-                <Identity
-                  name={userLabel}
-                  avatarUrl={assigneeUserAvatarUrl}
-                  size="sm"
-                  className="min-w-0"
-                />
-              </span>
-            );
-          }
+ if (issue.assigneeUserId) {
+ return (
+ <span key={column} className="min-w-0 text-xs text-foreground">
+ <Identity
+ name={userLabel}
+ avatarUrl={assigneeUserAvatarUrl}
+ size="sm"
+ className="min-w-0"
+ />
+ </span>
+ );
+ }
 
-          return (
-            <span key={column} className="min-w-0 truncate text-xs text-muted-foreground">
-              Unassigned
-            </span>
-          );
-        }
+ return (
+ <span key={column} className="min-w-0 truncate text-xs text-muted-foreground">
+ Unassigned
+ </span>
+ );
+ }
 
-        if (column === "kickedOffBy") {
-          if (originatingActor?.kind === "agent") {
-            const name = creatorAgentName ?? originatingActor.id.slice(0, 8);
-            return (
-              <Tooltip key={column}>
-                <TooltipTrigger asChild>
-                  <span className="min-w-0 text-xs text-foreground">
-                    <Identity
-                      name={name}
-                      size="sm"
-                      shape="square"
-                      className="min-w-0"
-                    />
-                  </span>
-                </TooltipTrigger>
-                <TooltipContent side="top" sideOffset={6}>{name}</TooltipContent>
-              </Tooltip>
-            );
-          }
+ if (column === "kickedOffBy") {
+ if (originatingActor?.kind === "agent") {
+ const name = creatorAgentName ?? originatingActor.id.slice(0, 8);
+ return (
+ <Tooltip key={column}>
+ <TooltipTrigger asChild>
+ <span className="min-w-0 text-xs text-foreground">
+ <Identity
+ name={name}
+ size="sm"
+ shape="square"
+ className="min-w-0"
+ />
+ </span>
+ </TooltipTrigger>
+ <TooltipContent side="top" sideOffset={6}>{name}</TooltipContent>
+ </Tooltip>
+ );
+ }
 
-          if (originatingActor?.kind === "user") {
-            const tooltipText = viaAgentName ? `${creatorUserLabel} · via ${viaAgentName}` : creatorUserLabel;
-            return (
-              <Tooltip key={column}>
-                <TooltipTrigger asChild>
-                  <span className="min-w-0 text-xs text-foreground">
-                    <Identity
-                      name={creatorUserLabel}
-                      avatarUrl={creatorUserAvatarUrl}
-                      size="sm"
-                      className="min-w-0"
-                    />
-                  </span>
-                </TooltipTrigger>
-                <TooltipContent side="top" sideOffset={6}>{tooltipText}</TooltipContent>
-              </Tooltip>
-            );
-          }
+ if (originatingActor?.kind === "user") {
+ const tooltipText = viaAgentName ? `${creatorUserLabel} · via ${viaAgentName}` : creatorUserLabel;
+ return (
+ <Tooltip key={column}>
+ <TooltipTrigger asChild>
+ <span className="min-w-0 text-xs text-foreground">
+ <Identity
+ name={creatorUserLabel}
+ avatarUrl={creatorUserAvatarUrl}
+ size="sm"
+ className="min-w-0"
+ />
+ </span>
+ </TooltipTrigger>
+ <TooltipContent side="top" sideOffset={6}>{tooltipText}</TooltipContent>
+ </Tooltip>
+ );
+ }
 
-          return (
-            <span key={column} className="min-w-0 truncate text-xs text-muted-foreground">
-              Unknown
-            </span>
-          );
-        }
+ return (
+ <span key={column} className="min-w-0 truncate text-xs text-muted-foreground">
+ Unknown
+ </span>
+ );
+ }
 
-        if (column === "project") {
-          if (projectName) {
-            // token-extraction: allowlisted — accentColor also feeds pickTextColorForPillBg() contrast math; a var() string can't be parsed as a hex color there.
-            const accentColor = projectColor ?? "#64748b";
-            return (
-              <span
-                key={column}
-                className="inline-flex min-w-0 items-center gap-2 text-xs font-medium"
-                style={{ color: pickTextColorForPillBg(accentColor, 0.12) }}
-              >
-                <span
-                  className="h-1.5 w-1.5 shrink-0 rounded-full"
-                  style={{ backgroundColor: accentColor }}
-                />
-                <span className="truncate">{projectName}</span>
-              </span>
-            );
-          }
+ if (column === "project") {
+ if (projectName) {
+ // token-extraction: allowlisted — accentColor also feeds pickTextColorForPillBg() contrast math; a var() string can't be parsed as a hex color there.
+ const accentColor = projectColor ?? "#64748b";
+ return (
+ <span
+ key={column}
+ className="inline-flex min-w-0 items-center gap-2 text-xs font-medium"
+ style={{ color: pickTextColorForPillBg(accentColor, 0.12) }}
+ >
+ <span
+ className="h-1.5 w-1.5 shrink-0 rounded-full"
+ style={{ backgroundColor: accentColor }}
+ />
+ <span className="truncate">{projectName}</span>
+ </span>
+ );
+ }
 
-          return (
-            <span key={column} className="min-w-0 truncate text-xs text-muted-foreground">
-              No project
-            </span>
-          );
-        }
+ return (
+ <span key={column} className="min-w-0 truncate text-xs text-muted-foreground">
+ No project
+ </span>
+ );
+ }
 
-        if (column === "labels") {
-          if ((issue.labels ?? []).length > 0) {
-            return (
-              <span key={column} className="flex min-w-0 items-center gap-1 overflow-hidden">
-                {(issue.labels ?? []).slice(0, 2).map((label) => (
-                  <Badge variant="outline"
-                    key={label.id}
-                    className="min-w-0 max-w-full px-1.5 py-0 text-(length:--text-nano)"
-                    style={{
-                      borderColor: label.color,
-                      color: pickTextColorForPillBg(label.color, 0.12),
-                      backgroundColor: `${label.color}1f`,
-                    }}
-                  >
-                    <span className="truncate">{label.name}</span>
-                  </Badge>
-                ))}
-                {(issue.labels ?? []).length > 2 ? (
-                  <span className="shrink-0 text-(length:--text-nano) font-medium text-muted-foreground">
-                    +{(issue.labels ?? []).length - 2}
-                  </span>
-                ) : null}
-              </span>
-            );
-          }
+ if (column === "labels") {
+ if ((issue.labels ?? []).length > 0) {
+ return (
+ <span key={column} className="flex min-w-0 items-center gap-1 overflow-hidden">
+ {(issue.labels ?? []).slice(0, 2).map((label) => (
+ <Badge variant="outline"
+ key={label.id}
+ className="min-w-0 max-w-full px-1.5 py-0 text-(length:--text-nano)"
+ style={{
+ borderColor: label.color,
+ color: pickTextColorForPillBg(label.color, 0.12),
+ backgroundColor: `${label.color}1f`,
+ }}
+ >
+ <span className="truncate">{label.name}</span>
+ </Badge>
+ ))}
+ {(issue.labels ?? []).length > 2 ? (
+ <span className="shrink-0 text-(length:--text-nano) font-medium text-muted-foreground">
+ +{(issue.labels ?? []).length - 2}
+ </span>
+ ) : null}
+ </span>
+ );
+ }
 
-          return <span key={column} className="min-w-0" aria-hidden="true" />;
-        }
+ return <span key={column} className="min-w-0" aria-hidden="true" />;
+ }
 
-        if (column === "workspace") {
-          if (!workspaceName) {
-            return <span key={column} className="min-w-0" aria-hidden="true" />;
-          }
+ if (column === "workspace") {
+ if (!workspaceName) {
+ return <span key={column} className="min-w-0" aria-hidden="true" />;
+ }
 
-          return (
-            <span key={column} className="min-w-0 truncate text-xs text-muted-foreground">
-              {workspaceId && onFilterWorkspace ? (
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <button
-                      type="button"
-                      className="truncate rounded-sm text-left text-xs text-muted-foreground transition-colors hover:text-foreground hover:underline"
-                      onClick={(event) => {
-                        event.preventDefault();
-                        event.stopPropagation();
-                        onFilterWorkspace(workspaceId);
-                      }}
-                    >
-                      {workspaceName}
-                    </button>
-                  </TooltipTrigger>
-                  <TooltipContent side="top" sideOffset={6}>
-                    Filter by workspace
-                  </TooltipContent>
-                </Tooltip>
-              ) : (
-                workspaceName
-              )}
-            </span>
-          );
-        }
+ return (
+ <span key={column} className="min-w-0 truncate text-xs text-muted-foreground">
+ {workspaceId && onFilterWorkspace ? (
+ <Tooltip>
+ <TooltipTrigger asChild>
+ <button
+ type="button"
+ className="truncate rounded-sm text-left text-xs text-muted-foreground transition-colors hover:text-foreground hover:underline"
+ onClick={(event) => {
+ event.preventDefault();
+ event.stopPropagation();
+ onFilterWorkspace(workspaceId);
+ }}
+ >
+ {workspaceName}
+ </button>
+ </TooltipTrigger>
+ <TooltipContent side="top" sideOffset={6}>
+ Filter by workspace
+ </TooltipContent>
+ </Tooltip>
+ ) : (
+ workspaceName
+ )}
+ </span>
+ );
+ }
 
-        if (column === "parent") {
-          if (!issue.parentId) {
-            return <span key={column} className="min-w-0" aria-hidden="true" />;
-          }
+ if (column === "parent") {
+ if (!issue.parentId) {
+ return <span key={column} className="min-w-0" aria-hidden="true" />;
+ }
 
-          return (
-            <span key={column} className="min-w-0 truncate text-xs text-muted-foreground" title={parentTitle ?? undefined}>
-              {parentIdentifier ? (
-                <span className="font-mono">{parentIdentifier}</span>
-              ) : (
-                <span className="italic">Sub-task</span>
-              )}
-            </span>
-          );
-        }
+ return (
+ <span key={column} className="min-w-0 truncate text-xs text-muted-foreground" title={parentTitle ?? undefined}>
+ {parentIdentifier ? (
+ <span className="font-mono">{parentIdentifier}</span>
+ ) : (
+ <span className="italic">Sub-task</span>
+ )}
+ </span>
+ );
+ }
 
-        if (column === "updated") {
-          return (
-            <span key={column} className="min-w-0 truncate text-right text-(length:--text-micro) font-medium text-muted-foreground">
-              {activityText}
-            </span>
-          );
-        }
+ if (column === "updated") {
+ return (
+ <span key={column} className="min-w-0 truncate text-right text-(length:--text-micro) font-medium text-muted-foreground">
+ {activityText}
+ </span>
+ );
+ }
 
-        return null;
-      })}
-    </span>
-  );
+ return null;
+ })}
+ </span>
+ );
 }

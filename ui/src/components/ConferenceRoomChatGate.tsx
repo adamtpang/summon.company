@@ -11,8 +11,8 @@ import { useConferenceRoomChatEnabled } from "@/hooks/useConferenceRoomChatEnabl
  * an enabled user is not bounced away by a premature redirect.
  */
 export function ConferenceRoomChatGate() {
-  const { enabled, loaded } = useConferenceRoomChatEnabled();
-  if (!loaded) return null;
-  if (!enabled) return <Navigate to="/dashboard" replace />;
-  return <Outlet />;
+ const { enabled, loaded } = useConferenceRoomChatEnabled();
+ if (!loaded) return null;
+ if (!enabled) return <Navigate to="/dashboard" replace />;
+ return <Outlet />;
 }

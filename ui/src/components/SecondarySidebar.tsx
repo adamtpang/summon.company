@@ -19,21 +19,21 @@ import { SidebarNavExpandedProvider } from "./SidebarNavItem";
  * while the app sidebar is collapsed to its rail (PAP-10700).
  */
 export function SecondarySidebar({
-  children,
-  className,
+ children,
+ className,
 }: {
-  children: ReactNode;
-  className?: string;
+ children: ReactNode;
+ className?: string;
 }) {
-  return (
-    <div
-      data-secondary-sidebar=""
-      className={cn(
-        "h-full w-60 shrink-0 overflow-y-auto border-r border-border bg-background",
-        className,
-      )}
-    >
-      <SidebarNavExpandedProvider>{children}</SidebarNavExpandedProvider>
-    </div>
-  );
+ return (
+ <div
+ data-secondary-sidebar=""
+ className={cn(
+ "h-full w-60 shrink-0 overflow-y-auto border-r border-border bg-background",
+ className,
+ )}
+ >
+ <SidebarNavExpandedProvider>{children}</SidebarNavExpandedProvider>
+ </div>
+ );
 }
