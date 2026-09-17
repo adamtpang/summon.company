@@ -18,6 +18,7 @@ import {
   readBuiltInAgentMarker,
   withBuiltInAgentMarker,
 } from "./built-in-agent-metadata.js";
+import { companyDesiredStateService } from "./company-desired-state.js";
 import { companySkillService } from "./company-skills.js";
 import { routineService } from "./routines.js";
 import { accessService } from "./access.js";
@@ -647,6 +648,7 @@ export function builtInAgentService(db: Db) {
   const agentSvc = agentService(db);
   const accessSvc = accessService(db);
   const approvalSvc = approvalService(db);
+  const desiredStateSvc = companyDesiredStateService(db);
   const instructionsSvc = agentInstructionsService();
   const skillSvc = companySkillService(db);
   const routineSvc = routineService(db);
@@ -1538,6 +1540,12 @@ export function builtInAgentService(db: Db) {
       lastHeartbeatAt: null,
     }, { allowBuiltInAgentMetadata: true }) as Agent;
 
+    // SUM-102: compute budget counterfactual before presenting the hire card
+    // to the board. Best-effort: never block the hire proposal on this.
+    const hireCounterfactual = await desiredStateSvc
+      .computeHireCounterfactual(companyId, pending.budgetMonthlyCents ?? 0)
+      .catch(() => null);
+
     const approval = await approvalSvc.create(companyId, {
       type: "hire_agent",
       requestedByAgentId: actor.requestedByAgentId ?? null,
@@ -1559,6 +1567,7 @@ export function builtInAgentService(db: Db) {
         agentId: pending.id,
         sourceBuiltInAgentKey: definition.key,
         featureKeys: definition.featureKeys,
+        budgetCounterfactual: hireCounterfactual,
       },
       decisionNote: null,
       decidedByUserId: null,
