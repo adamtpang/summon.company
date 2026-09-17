@@ -1911,27 +1911,27 @@ span.paperclip-mention-chip[data-mention-kind="external-object"] {
    reverted to their original literal form under this rule.
 
    Format (one line per entry, do not reflow):
-     * allow <repo-relative-path> — <reason>
+     * allow <repo-relative-path> - <reason>
 
    A path may appear more than once if it has more than one distinct
    allowlisted concern. Paths are matched by the gate script as a substring
    of the file being checked (repo-relative, POSIX-style).
-   * allow ui/src/pages/CompanyEnvironments.tsx — xterm.js terminal theme config (background/foreground/cursor/cursorAccent/selectionBackground hex, fontSize: 12); functional third-party option object, not a rendered CSS value
-   * allow ui/src/pages/CompanySettings.tsx — <input type="color"> value; the DOM color-picker control requires a real hex string
-   * allow ui/src/components/issue-properties/IssueProperties.tsx — newLabelColor color-picker seed state persisted into the label-create payload sent to the backend; a var() string would corrupt that payload
-   * allow ui/src/pages/CompanySkills.tsx — DISCOVERY_ACCENTS palette array feeds skill.color, persisted/compared JS data (SkillCreateDraft), not just a rendered value; also fontSize: Math.round(size * 0.42), computed at runtime from a prop, not a static literal
-   * allow ui/src/components/IssueColumns.tsx — accentColor fallback also feeds pickTextColorForPillBg() contrast math (lib/color-contrast.ts), which needs a real hex string to compute luminance
-   * allow ui/src/components/CompanyPatternIcon.tsx — canvas 2D fillStyle built from a runtime-computed template literal, not a static literal at all
-   * allow ui/src/pages/InviteUxLab.tsx — brandColor prop (x2) feeds CompanyPatternIcon's hexToHue() color math via the same canvas-fill code path; demo/showcase-only prop, not a rendered CSS value
-   * allow ui/src/components/ui/scroll-area.tsx — rounded-[inherit] is a CSS keyword, not a literal value; nothing to extract
-   * allow ui/src/components/ui/dialog.tsx — tw-animate-css plugin utilities (zoom-in-[0.97], zoom-out-[0.97], slide-in-from-top-[1%], slide-out-to-top-[1%], animate-in, animate-out, fade-in-0, fade-out-0) are dead/no-op classes today (the tw-animate-css plugin is not installed and no matching @utility exists in this file; confirmed via grep of the built storybook-static CSS — none of these class names emit any rule); nothing to tokenize without visually changing a currently-inert class
-   * allow ui/src/components/ui/alert-dialog.tsx — same tw-animate-css dead-class situation as dialog.tsx (zoom-out-[0.97], zoom-in-[0.97])
-   * allow ui/src/components/ProjectWorkspaceSummaryCard.tsx — min-[420px]: is a Tailwind arbitrary BREAKPOINT variant (responsive container-query-style prefix), not a value applied to a property; the variant position cannot reference a CSS custom property, so it cannot be tokenized without changing Tailwind's own variant syntax
-   * allow ui/src/components/FileTree.tsx — max-[480px]: arbitrary breakpoint variant (x2), same reasoning as min-[420px] above
-   * allow ui/src/pages/RunTranscriptUxLab.tsx — first-party intentional one-off decoration (demo/UX-lab page): hero/card gradients + shadows reverted from singleton tokens per DECISION-SHEET.md B1 user ruling
-   * allow ui/src/pages/InviteUxLab.tsx — first-party intentional one-off decoration (demo/UX-lab page): hero/card gradients + shadows reverted from singleton tokens per DECISION-SHEET.md B1 user ruling
-   * allow ui/src/pages/IssueChatUxLab.tsx — first-party intentional one-off decoration (demo/UX-lab page): hero/card gradients + shadows reverted from singleton tokens per DECISION-SHEET.md B1 user ruling
-   * allow ui/src/pages/SystemNoticeUxLab.tsx — first-party intentional one-off decoration (demo/UX-lab page): hero/card gradients + shadows reverted from singleton tokens per DECISION-SHEET.md B1 user ruling
+   * allow ui/src/pages/CompanyEnvironments.tsx - xterm.js terminal theme config (background/foreground/cursor/cursorAccent/selectionBackground hex, fontSize: 12); functional third-party option object, not a rendered CSS value
+   * allow ui/src/pages/CompanySettings.tsx - <input type="color"> value; the DOM color-picker control requires a real hex string
+   * allow ui/src/components/issue-properties/IssueProperties.tsx - newLabelColor color-picker seed state persisted into the label-create payload sent to the backend; a var() string would corrupt that payload
+   * allow ui/src/pages/CompanySkills.tsx - DISCOVERY_ACCENTS palette array feeds skill.color, persisted/compared JS data (SkillCreateDraft), not just a rendered value; also fontSize: Math.round(size * 0.42), computed at runtime from a prop, not a static literal
+   * allow ui/src/components/IssueColumns.tsx - accentColor fallback also feeds pickTextColorForPillBg() contrast math (lib/color-contrast.ts), which needs a real hex string to compute luminance
+   * allow ui/src/components/CompanyPatternIcon.tsx - canvas 2D fillStyle built from a runtime-computed template literal, not a static literal at all
+   * allow ui/src/pages/InviteUxLab.tsx - brandColor prop (x2) feeds CompanyPatternIcon's hexToHue() color math via the same canvas-fill code path; demo/showcase-only prop, not a rendered CSS value
+   * allow ui/src/components/ui/scroll-area.tsx - rounded-[inherit] is a CSS keyword, not a literal value; nothing to extract
+   * allow ui/src/components/ui/dialog.tsx - tw-animate-css plugin utilities (zoom-in-[0.97], zoom-out-[0.97], slide-in-from-top-[1%], slide-out-to-top-[1%], animate-in, animate-out, fade-in-0, fade-out-0) are dead/no-op classes today (the tw-animate-css plugin is not installed and no matching @utility exists in this file; confirmed via grep of the built storybook-static CSS — none of these class names emit any rule); nothing to tokenize without visually changing a currently-inert class
+   * allow ui/src/components/ui/alert-dialog.tsx - same tw-animate-css dead-class situation as dialog.tsx (zoom-out-[0.97], zoom-in-[0.97])
+   * allow ui/src/components/ProjectWorkspaceSummaryCard.tsx - min-[420px]: is a Tailwind arbitrary BREAKPOINT variant (responsive container-query-style prefix), not a value applied to a property; the variant position cannot reference a CSS custom property, so it cannot be tokenized without changing Tailwind's own variant syntax
+   * allow ui/src/components/FileTree.tsx - max-[480px]: arbitrary breakpoint variant (x2), same reasoning as min-[420px] above
+   * allow ui/src/pages/RunTranscriptUxLab.tsx - first-party intentional one-off decoration (demo/UX-lab page): hero/card gradients + shadows reverted from singleton tokens per DECISION-SHEET.md B1 user ruling
+   * allow ui/src/pages/InviteUxLab.tsx - first-party intentional one-off decoration (demo/UX-lab page): hero/card gradients + shadows reverted from singleton tokens per DECISION-SHEET.md B1 user ruling
+   * allow ui/src/pages/IssueChatUxLab.tsx - first-party intentional one-off decoration (demo/UX-lab page): hero/card gradients + shadows reverted from singleton tokens per DECISION-SHEET.md B1 user ruling
+   * allow ui/src/pages/SystemNoticeUxLab.tsx - first-party intentional one-off decoration (demo/UX-lab page): hero/card gradients + shadows reverted from singleton tokens per DECISION-SHEET.md B1 user ruling
 
    Test-fixture hex-literal policy (Batch 4, resolving TOKEN-AUDIT.md section
    8 item 10 "Needs human decision" for these specific sites): the following
@@ -1945,22 +1945,28 @@ span.paperclip-mention-chip[data-mention-kind="external-object"] {
    replace realistic-looking mock data with `var()` strings that no longer
    resemble what a real API response contains, without touching any
    rendered pixel. Each file is listed individually for reviewability.
-   * allow ui/src/components/IssueFiltersPopover.test.tsx — mock label color prop
-   * allow ui/src/components/IssueProperties.test.tsx — mock label/project color fixtures
-   * allow ui/src/components/MarkdownBody.test.tsx — mock project color fed through a mention-href builder
-   * allow ui/src/components/MarkdownEditor.test.tsx — mock projectColor mention fixture
-   * allow ui/src/components/NewIssueDialog.test.tsx — mock brandColor/label color fixtures
-   * allow ui/src/components/ProjectTile.test.tsx — mock project color prop
-   * allow ui/src/components/RoutineRunVariablesDialog.test.tsx — mock label color fixture
-   * allow ui/src/components/SidebarCompanyMenu.test.tsx — mock brandColor company fixtures
-   * allow ui/src/components/SidebarProjects.test.tsx — mock project color fixture
-   * allow ui/src/components/SidebarStarredProjects.test.tsx — mock project color fixture
-   * allow ui/src/pages/CompanyEnvironments.test.tsx — xterm.js theme-mock assertion values (mirrors the allowlisted xterm.js config in the CompanyEnvironments.tsx source above)
-   * allow ui/src/pages/ExecutionWorkspaceDetail.test.tsx — mock project color fixture
-   * allow ui/src/pages/InviteLanding.test.tsx — mock companyBrandColor fixtures
-   * allow ui/src/pages/IssueDetail.test.tsx — mock project color fixture
-   * allow ui/src/pages/ProjectDetail.test.tsx — mock project color fixture
-   * allow ui/src/pages/ProjectWorkspaceDetail.test.tsx — mock project color fixture
-   * allow ui/src/pages/Projects.test.tsx — mock project color fixture
-   * allow ui/src/pages/Routines.test.tsx — mock routine/label color fixtures
+   * allow ui/src/components/IssueFiltersPopover.test.tsx - mock label color prop
+   * allow ui/src/components/IssueProperties.test.tsx - mock label/project color fixtures
+   * allow ui/src/components/MarkdownBody.test.tsx - mock project color fed through a mention-href builder
+   * allow ui/src/components/MarkdownEditor.test.tsx - mock projectColor mention fixture
+   * allow ui/src/components/NewIssueDialog.test.tsx - mock brandColor/label color fixtures
+   * allow ui/src/components/ProjectTile.test.tsx - mock project color prop
+   * allow ui/src/components/RoutineRunVariablesDialog.test.tsx - mock label color fixture
+   * allow ui/src/components/SidebarCompanyMenu.test.tsx - mock brandColor company fixtures
+   * allow ui/src/components/SidebarProjects.test.tsx - mock project color fixture
+   * allow ui/src/components/SidebarStarredProjects.test.tsx - mock project color fixture
+   * allow ui/src/pages/CompanyEnvironments.test.tsx - xterm.js theme-mock assertion values (mirrors the allowlisted xterm.js config in the CompanyEnvironments.tsx source above)
+   * allow ui/src/pages/ExecutionWorkspaceDetail.test.tsx - mock project color fixture
+   * allow ui/src/pages/InviteLanding.test.tsx - mock companyBrandColor fixtures
+   * allow ui/src/pages/IssueDetail.test.tsx - mock project color fixture
+   * allow ui/src/pages/ProjectDetail.test.tsx - mock project color fixture
+   * allow ui/src/pages/ProjectWorkspaceDetail.test.tsx - mock project color fixture
+   * allow ui/src/pages/Projects.test.tsx - mock project color fixture
+   * allow ui/src/pages/Routines.test.tsx - mock routine/label color fixtures
    ── end allowlist ── */
+
+/* ALLOWLIST baseline 2026-09-17 (SUM-55): files that carried hardcoded visual
+   values before the ratchet was armed. Allowlisting freezes the count; a
+   literal in any other file fails the gate. Remove a line when its file is
+   migrated to tokens. Format: * allow <path> - <reason>
+*/
