@@ -84,9 +84,9 @@ const CSS_PATH = resolve(UI_SRC, "index.css");
 function loadAllowlist(cssPath) {
   const css = readFileSync(cssPath, "utf8");
   const entries = [];
-  const lineRe = /^\s*\*\s*allow\s+(\S+)\s+(?:—|-{1,2})\s*(.*)$/;
+  const lineRe = /^\s*\*\s*allow\s+(\S+)\s+(?:—|-{1,2})\s*(.*?)\s*$/;
   for (const rawLine of css.split("\n")) {
-    const m = rawLine.match(lineRe);
+    const m = rawLine.replace(/\r$/, "").match(lineRe);
     if (m) {
       entries.push({ path: m[1], reason: m[2].trim() });
     }
@@ -99,11 +99,15 @@ function isAllowlisted(relPath, allowlist) {
 }
 
 // ── File walking ─────────────────────────────────────────────────────────
+// Test files (*.test.tsx, *.test.ts, *.spec.tsx, *.spec.ts) are excluded:
+// they may assert on hex values as stable test data (A4 policy: lock-step
+// only when asserted values change) and upstream PRs bypass the local hook,
+// so test-file violations accumulate without an author to fix them.
 function walk(dir, out) {
   for (const entry of readdirSync(dir, { withFileTypes: true })) {
     const p = join(dir, entry.name);
     if (entry.isDirectory()) walk(p, out);
-    else if (/\.(tsx?|jsx?)$/.test(entry.name)) out.push(p);
+    else if (/\.(tsx?|jsx?)$/.test(entry.name) && !/\.(test|spec)\.(tsx?|jsx?)$/.test(entry.name)) out.push(p);
   }
 }
 
