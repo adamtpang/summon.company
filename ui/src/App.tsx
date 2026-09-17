@@ -10,6 +10,7 @@ import { CaseDetail } from "./pages/CaseDetail";
 import { OnboardingWizardVariant } from "./components/OnboardingWizardVariant";
 import { CloudAccessGate } from "./components/CloudAccessGate";
 import { Dashboard } from "./pages/Dashboard";
+import { Company } from "./pages/Company";
 import { SummonFocus } from "./pages/SummonFocus";
 import { DashboardLive } from "./pages/DashboardLive";
 import { Timeline } from "./pages/Timeline";
@@ -92,6 +93,7 @@ function boardRoutes() {
   return (
     <>
       <Route index element={<Navigate to="dashboard" replace />} />
+      <Route path="company" element={<Company />} />
       <Route path="dashboard" element={<Dashboard />} />
       <Route path="focus" element={<SummonFocus />} />
       <Route path="dashboard/live" element={<DashboardLive />} />
