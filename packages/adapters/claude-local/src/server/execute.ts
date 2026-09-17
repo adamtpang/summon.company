@@ -486,6 +486,32 @@ export async function execute(ctx: AdapterExecutionContext): Promise<AdapterExec
       );
     }
   }
+  // Append agent memory files if they exist in the agent workspace.
+  // Order: company-level MEMORY.md (shared institutional memory) then
+  // per-agent MEMORY.md (employee-specific durable facts).
+  if (agentHome) {
+    const memoryPaths = [
+      path.join(agentHome, "memory", "COMPANY.md"),
+      path.join(agentHome, "memory", "MEMORY.md"),
+    ];
+    for (const memPath of memoryPaths) {
+      try {
+        const memContent = await fs.readFile(memPath, "utf-8");
+        if (memContent.trim()) {
+          const label = path.basename(memPath);
+          const memBlock =
+            `\n\n# Agent memory: ${label}\n` +
+            `The following is your durable memory loaded from ${memPath}. ` +
+            `It contains facts that survived previous session resets. ` +
+            `Update this file when you learn new durable facts.\n\n` +
+            memContent.trim();
+          combinedInstructionsContents = (combinedInstructionsContents ?? "") + memBlock;
+        }
+      } catch {
+        // Memory file is optional; silently skip if absent.
+      }
+    }
+  }
   const promptBundle = await prepareClaudePromptBundle({
     companyId: agent.companyId,
     skills: claudeSkillEntries.filter((entry) => desiredSkillNames.has(entry.key)),

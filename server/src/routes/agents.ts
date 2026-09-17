@@ -1,5 +1,6 @@
 import { Router, type Request, type Response } from "express";
 import { generateKeyPairSync, randomUUID } from "node:crypto";
+import fs from "node:fs/promises";
 import path from "node:path";
 import type { Db } from "@paperclipai/db";
 import { agents as agentsTable, companies, heartbeatRuns, issues as issuesTable, projects as projectsTable } from "@paperclipai/db";
@@ -103,6 +104,7 @@ import {
   loadDefaultAgentInstructionsBundle,
   resolveDefaultAgentInstructionsBundleRole,
 } from "../services/default-agent-instructions.js";
+import { resolveDefaultAgentWorkspaceDir } from "../home-paths.js";
 import { getTelemetryClient } from "../telemetry.js";
 import { assertEnvironmentSelectionForCompany } from "./environment-selection.js";
 import { recoveryService } from "../services/recovery/service.js";
@@ -3686,6 +3688,46 @@ export function agentRoutes(
       details: { keyId: key.id, name: key.name },
     });
 
+    res.json({ ok: true });
+  });
+
+  // Memory file routes — board can read and write per-agent MEMORY.md
+  // Files live at agentHome/memory/MEMORY.md and agentHome/memory/COMPANY.md.
+  router.get("/agents/:id/memory", async (req, res) => {
+    assertBoard(req);
+    const id = req.params.id as string;
+    const agent = await getAccessibleAgent(req, res, id);
+    if (!agent) return;
+    const agentHome = resolveDefaultAgentWorkspaceDir(agent.id);
+    const memoryDir = path.join(agentHome, "memory");
+    const files: Array<{ name: string; content: string }> = [];
+    for (const name of ["COMPANY.md", "MEMORY.md"]) {
+      try {
+        const content = await fs.readFile(path.join(memoryDir, name), "utf-8");
+        files.push({ name, content });
+      } catch {
+        // File not yet written; include as empty so board sees the schema.
+        files.push({ name, content: "" });
+      }
+    }
+    res.json({ agentHome, memoryDir, files });
+  });
+
+  router.put("/agents/:id/memory/:filename", async (req, res) => {
+    assertBoard(req);
+    const id = req.params.id as string;
+    const filename = req.params.filename as string;
+    if (filename !== "MEMORY.md" && filename !== "COMPANY.md") {
+      res.status(400).json({ error: "Only MEMORY.md and COMPANY.md are writable via this endpoint." });
+      return;
+    }
+    const agent = await getAccessibleAgent(req, res, id);
+    if (!agent) return;
+    const content = typeof req.body?.content === "string" ? req.body.content : "";
+    const agentHome = resolveDefaultAgentWorkspaceDir(agent.id);
+    const memoryDir = path.join(agentHome, "memory");
+    await fs.mkdir(memoryDir, { recursive: true });
+    await fs.writeFile(path.join(memoryDir, filename), content, "utf-8");
     res.json({ ok: true });
   });
 

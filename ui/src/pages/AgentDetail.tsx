@@ -265,7 +265,7 @@ function scrollToContainerBottom(container: ScrollContainer, behavior: ScrollBeh
   container.scrollTo({ top: container.scrollHeight, behavior });
 }
 
-type AgentDetailView = "dashboard" | "instructions" | "configuration" | "skills" | "runs" | "budget";
+type AgentDetailView = "dashboard" | "instructions" | "configuration" | "skills" | "runs" | "budget" | "memory";
 
 function parseAgentDetailView(value: string | null): AgentDetailView {
   if (value === "instructions" || value === "prompts") return "instructions";
@@ -273,6 +273,7 @@ function parseAgentDetailView(value: string | null): AgentDetailView {
   if (value === "skills") return "skills";
   if (value === "budget") return "budget";
   if (value === "runs") return value;
+  if (value === "memory") return "memory";
   return "dashboard";
 }
 
@@ -1246,6 +1247,7 @@ export function AgentDetail() {
               { value: "dashboard", label: "Dashboard" },
               { value: "instructions", label: "Instructions" },
               { value: "skills", label: "Skills" },
+              { value: "memory", label: "Memory" },
               { value: "configuration", label: "Configuration" },
               { value: "runs", label: "Runs" },
               { value: "budget", label: "Budget" },
@@ -1385,6 +1387,10 @@ export function AgentDetail() {
             variant="plain"
           />
         </div>
+      ) : null}
+
+      {activeView === "memory" && resolvedCompanyId ? (
+        <MemoryTab agentId={agent.id} companyId={resolvedCompanyId} />
       ) : null}
     </div>
   );
@@ -4206,6 +4212,96 @@ function KeysTab({ agentId, companyId }: { agentId: string; companyId?: string }
           </div>
         </div>
       )}
+    </div>
+  );
+}
+
+/* ---- Memory Tab ---- */
+
+function MemoryTab({ agentId, companyId }: { agentId: string; companyId: string }) {
+  const queryClient = useQueryClient();
+  const { data, isLoading } = useQuery({
+    queryKey: queryKeys.agents.memory(agentId),
+    queryFn: () => agentsApi.getMemory(agentId, companyId),
+  });
+  const [editingFile, setEditingFile] = useState<string | null>(null);
+  const [editContent, setEditContent] = useState("");
+  const saveMutation = useMutation({
+    mutationFn: ({ filename, content }: { filename: string; content: string }) =>
+      agentsApi.saveMemoryFile(agentId, filename, content, companyId),
+    onSuccess: () => {
+      void queryClient.invalidateQueries({ queryKey: queryKeys.agents.memory(agentId) });
+      setEditingFile(null);
+    },
+  });
+
+  if (isLoading) {
+    return <div className="py-8 text-sm text-muted-foreground">Loading memory files...</div>;
+  }
+
+  return (
+    <div className="space-y-6 max-w-3xl">
+      <div>
+        <h2 className="text-sm font-semibold mb-1">Durable Memory</h2>
+        <p className="text-xs text-muted-foreground">
+          Memory files survive session resets. The agent reads these at the start of every run.
+          {data?.memoryDir && (
+            <span className="block mt-0.5 font-mono">{data.memoryDir}</span>
+          )}
+        </p>
+      </div>
+      {(data?.files ?? []).map((file) => (
+        <div key={file.name} className="border border-border rounded-md overflow-hidden">
+          <div className="flex items-center justify-between px-3 py-2 bg-muted/40 border-b border-border">
+            <span className="text-xs font-mono font-semibold">{file.name}</span>
+            {editingFile === file.name ? (
+              <div className="flex items-center gap-2">
+                <Button
+                  size="sm"
+                  variant="outline"
+                  onClick={() => setEditingFile(null)}
+                  disabled={saveMutation.isPending}
+                >
+                  Cancel
+                </Button>
+                <Button
+                  size="sm"
+                  onClick={() => saveMutation.mutate({ filename: file.name, content: editContent })}
+                  disabled={saveMutation.isPending}
+                >
+                  Save
+                </Button>
+              </div>
+            ) : (
+              <Button
+                size="sm"
+                variant="outline"
+                onClick={() => {
+                  setEditingFile(file.name);
+                  setEditContent(file.content);
+                }}
+              >
+                Edit
+              </Button>
+            )}
+          </div>
+          {editingFile === file.name ? (
+            <textarea
+              className="w-full h-64 p-3 text-xs font-mono bg-background resize-y focus:outline-none"
+              value={editContent}
+              onChange={(e) => setEditContent(e.target.value)}
+            />
+          ) : (
+            <div className="p-3">
+              {file.content.trim() ? (
+                <MarkdownBody>{file.content}</MarkdownBody>
+              ) : (
+                <p className="text-xs text-muted-foreground italic">No memory written yet.</p>
+              )}
+            </div>
+          )}
+        </div>
+      ))}
     </div>
   );
 }

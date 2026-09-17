@@ -246,7 +246,22 @@ export const agentsApi = {
     api.post<ClaudeLoginResult>(agentPath(id, companyId, "/claude-login"), {}),
   availableSkills: () =>
     api.get<{ skills: AvailableSkill[] }>("/skills/available"),
+  getMemory: (id: string, companyId?: string) =>
+    api.get<AgentMemoryResponse>(agentPath(id, companyId, "/memory")),
+  saveMemoryFile: (id: string, filename: string, content: string, companyId?: string) =>
+    api.put<{ ok: boolean }>(agentPath(id, companyId, `/memory/${filename}`), { content }),
 };
+
+export interface AgentMemoryFile {
+  name: string;
+  content: string;
+}
+
+export interface AgentMemoryResponse {
+  agentHome: string;
+  memoryDir: string;
+  files: AgentMemoryFile[];
+}
 
 export interface AvailableSkill {
   name: string;

@@ -6828,6 +6828,7 @@ export function heartbeatService(db: Db, options: HeartbeatServiceOptions = {}) 
         ? `- Issue continuation summary: ${input.continuationSummaryBody.slice(0, 1_500)}`
         : "",
       "Continue from the current task state. Rebuild only the minimum context you need.",
+      "Memory flush: before proceeding, write any durable facts learned in the previous session to memory/MEMORY.md in your agent workspace ($AGENT_HOME/memory/MEMORY.md). Append new facts; never erase existing ones.",
     ]
       .filter(Boolean)
       .join("\n");
