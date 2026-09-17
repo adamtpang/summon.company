@@ -1,0 +1,21 @@
+{
+  "name": "summon-ios",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Summon iOS app: Capacitor WKWebView shell for the summon.company control plane over Tailscale.",
+  "author": "Adam Pangelinan",
+  "license": "MIT",
+  "scripts": {
+    "sync": "npx cap sync ios",
+    "open": "npx cap open ios",
+    "build": "npx cap sync ios && npx cap open ios"
+  },
+  "dependencies": {
+    "@capacitor/core": "^6.2.0",
+    "@capacitor/ios": "^6.2.0",
+    "@capacitor/preferences": "^6.0.3"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^6.2.0"
+  }
+}

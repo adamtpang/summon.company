@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>Summon</title>
+  <style>
+    :root {
+      --canvas: #0A1120;
+      --surface: #111B33;
+      --ink: #EEF2FA;
+      --muted: #A9B4CE;
+      --border: rgba(255,255,255,0.14);
+      --signal: #5395FF;
+      --positive: #6FC796;
+      --negative: #E8877A;
+      --radius: 10px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    html, body {
+      height: 100%; width: 100%;
+      background: var(--canvas);
+      color: var(--ink);
+      font-family: Inter, system-ui, sans-serif;
+      font-size: 16px;
+      line-height: 1.55;
+      overflow: hidden;
+    }
+
+    /* Settings screen */
+    #settings {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      padding: 32px 24px;
+      padding-top: max(32px, env(safe-area-inset-top));
+      padding-bottom: max(32px, env(safe-area-inset-bottom));
+      gap: 24px;
+    }
+    #settings.hidden { display: none; }
+
+    .mark {
+      font-family: 'Space Grotesk', Inter, system-ui, sans-serif;
+      font-size: 1.5rem;
+      font-weight: 650;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+    }
+    .mark span { color: var(--signal); }
+
+    .form-group {
+      width: 100%;
+      max-width: 360px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    label {
+      font-size: 0.75rem;
+      font-weight: 560;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    input[type="url"], input[type="text"] {
+      width: 100%;
+      padding: 12px 14px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      color: var(--ink);
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.9rem;
+      outline: none;
+      -webkit-appearance: none;
+    }
+    input:focus {
+      border-color: var(--signal);
+    }
+    .hint {
+      font-size: 0.75rem;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    button.primary {
+      width: 100%;
+      max-width: 360px;
+      padding: 14px 24px;
+      background: var(--signal);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius);
+      font-family: Inter, system-ui, sans-serif;
+      font-size: 1rem;
+      font-weight: 560;
+      cursor: pointer;
+      -webkit-appearance: none;
+      min-height: 44px;
+    }
+    button.primary:active { opacity: 0.85; }
+
+    .error-msg {
+      font-size: 0.8rem;
+      color: var(--negative);
+      display: none;
+    }
+    .error-msg.visible { display: block; }
+
+    /* Loading screen */
+    #loading {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      gap: 16px;
+    }
+    #loading.hidden { display: none; }
+
+    .spinner {
+      width: 32px; height: 32px;
+      border: 2px solid var(--border);
+      border-top-color: var(--signal);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .loading-label {
+      font-size: 0.8rem;
+      color: var(--muted);
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+    }
+
+    /* Connected: full-screen webview replacement */
+    #frame-wrap {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: var(--canvas);
+      display: none;
+    }
+    #frame-wrap.visible { display: block; }
+    iframe#summon-frame {
+      width: 100%; height: 100%;
+      border: none;
+      background: var(--canvas);
+    }
+
+    /* Settings gear overlay (visible when connected) */
+    #settings-btn {
+      position: fixed;
+      top: max(16px, env(safe-area-inset-top));
+      right: 16px;
+      width: 36px; height: 36px;
+      background: rgba(17,27,51,0.8);
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 100;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      min-width: 36px;
+    }
+    #settings-btn.visible { display: flex; }
+    #settings-btn svg { width: 16px; height: 16px; fill: var(--muted); }
+  </style>
+</head>
+<body>
+
+<!-- Settings / onboarding -->
+<div id="settings">
+  <div class="mark">Summon<span>.</span></div>
+
+  <div class="form-group">
+    <label>Control Plane URL</label>
+    <input id="url-input" type="url" inputmode="url" autocomplete="off"
+      placeholder="http://100.x.y.z:3100"
+      autocapitalize="none" autocorrect="off" spellcheck="false" />
+    <span class="hint">
+      Your desktop's Tailscale IP and port. Open Tailscale on the desktop and copy the IP, then use port 3100.
+      Example: http://100.64.0.1:3100
+    </span>
+    <span id="url-error" class="error-msg">Enter a valid URL (http:// or https://).</span>
+  </div>
+
+  <button class="primary" id="connect-btn">Connect</button>
+</div>
+
+<!-- Loading -->
+<div id="loading" class="hidden">
+  <div class="spinner"></div>
+  <span class="loading-label" id="loading-label">connecting...</span>
+</div>
+
+<!-- Full-screen frame when connected -->
+<div id="frame-wrap">
+  <iframe id="summon-frame" allow="camera; microphone" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-top-navigation"></iframe>
+</div>
+
+<!-- Settings gear (shown when connected) -->
+<button id="settings-btn" aria-label="Settings" title="Change control plane URL">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M19.14 12.94c.04-.3.06-.61.06-.94s-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/>
+  </svg>
+</button>
+
+<script type="module">
+  const STORAGE_KEY = 'summon_tailscale_url';
+
+  const settingsEl = document.getElementById('settings');
+  const loadingEl = document.getElementById('loading');
+  const loadingLabel = document.getElementById('loading-label');
+  const frameWrap = document.getElementById('frame-wrap');
+  const frame = document.getElementById('summon-frame');
+  const urlInput = document.getElementById('url-input');
+  const connectBtn = document.getElementById('connect-btn');
+  const urlError = document.getElementById('url-error');
+  const settingsBtn = document.getElementById('settings-btn');
+
+  function getStoredUrl() {
+    try { return localStorage.getItem(STORAGE_KEY) || ''; } catch { return ''; }
+  }
+  function storeUrl(url) {
+    try { localStorage.setItem(STORAGE_KEY, url); } catch {}
+  }
+
+  function isValidUrl(s) {
+    try {
+      const u = new URL(s);
+      return u.protocol === 'http:' || u.protocol === 'https:';
+    } catch { return false; }
+  }
+
+  function showSettings() {
+    settingsEl.classList.remove('hidden');
+    loadingEl.classList.add('hidden');
+    frameWrap.classList.remove('visible');
+    settingsBtn.classList.remove('visible');
+    urlInput.value = getStoredUrl();
+  }
+
+  function showLoading(label) {
+    settingsEl.classList.add('hidden');
+    loadingEl.classList.remove('hidden');
+    frameWrap.classList.remove('visible');
+    settingsBtn.classList.remove('visible');
+    loadingLabel.textContent = label || 'connecting...';
+  }
+
+  function showFrame() {
+    settingsEl.classList.add('hidden');
+    loadingEl.classList.add('hidden');
+    frameWrap.classList.add('visible');
+    settingsBtn.classList.add('visible');
+  }
+
+  function connect(rawUrl) {
+    const url = rawUrl.trim().replace(/\/$/, '');
+    if (!isValidUrl(url)) {
+      urlError.classList.add('visible');
+      return;
+    }
+    urlError.classList.remove('visible');
+    storeUrl(url);
+    showLoading('connecting to ' + url);
+
+    // Poll for availability then load
+    const ping = () => fetch(url + '/api/health', { signal: AbortSignal.timeout(5000) })
+      .then(r => {
+        if (r.ok || r.status < 500) {
+          frame.src = url;
+          showFrame();
+        } else {
+          retry();
+        }
+      })
+      .catch(() => retry());
+
+    let attempts = 0;
+    const retry = () => {
+      attempts++;
+      if (attempts > 30) {
+        loadingLabel.textContent = 'cannot reach control plane - check Tailscale';
+        return;
+      }
+      loadingLabel.textContent = `connecting... (attempt ${attempts})`;
+      setTimeout(ping, 2000);
+    };
+
+    ping();
+  }
+
+  connectBtn.addEventListener('click', () => connect(urlInput.value));
+  urlInput.addEventListener('keydown', e => { if (e.key === 'Enter') connect(urlInput.value); });
+  settingsBtn.addEventListener('click', showSettings);
+
+  // Auto-connect if URL already saved
+  const saved = getStoredUrl();
+  if (saved) {
+    connect(saved);
+  } else {
+    showSettings();
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!-- Privacy and capability additions for ios/App/App/Info.plist             -->
+<!-- After running `npx cap add ios`, merge these entries into Info.plist.    -->
+<!-- Xcode: open Info tab, add each key/value row shown below.               -->
+
+<key>NSLocalNetworkUsageDescription</key>
+<string>Summon connects to your company control plane over your local Tailscale network to show tasks, decisions, and messages.</string>
+
+<key>NSBonjourServices</key>
+<array>
+  <!-- Tailscale uses Bonjour for peer discovery on the local mesh. -->
+  <string>_tailscale._tcp</string>
+</array>
+
+<key>ITSAppUsesNonExemptEncryption</key>
+<false/>
+
+<!-- App Transport Security: allow plain HTTP to Tailscale IPs only.         -->
+<!-- Do NOT set NSAllowsArbitraryLoads true; keep it scoped.                 -->
+<key>NSAppTransportSecurity</key>
+<dict>
+  <key>NSAllowsArbitraryLoads</key>
+  <false/>
+  <!-- Tailscale CGNAT range 100.64.0.0/10 does not have a TLS cert by      -->
+  <!-- default. Allow HTTP within that range only.                           -->
+  <key>NSExceptionDomains</key>
+  <dict>
+    <key>ts.net</key>
+    <dict>
+      <key>NSExceptionAllowsInsecureHTTPLoads</key>
+      <true/>
+      <key>NSIncludesSubdomains</key>
+      <true/>
+    </dict>
+  </dict>
+</dict>
+
+<!-- WKWebView full-screen and status-bar behavior -->
+<key>UIViewControllerBasedStatusBarAppearance</key>
+<false/>
+<key>UIStatusBarStyle</key>
+<string>UIStatusBarStyleLightContent</string>

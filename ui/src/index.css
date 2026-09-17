@@ -2616,4 +2616,5 @@ span.paperclip-mention-chip[data-mention-kind="external-object"] {
    * allow ui/src/pages/AetherPortfolio.tsx — grid-cols-[minmax(0,1fr)_minmax(20rem,0.62fr)] functional two-panel layout; no static token equivalent
    * allow ui/src/pages/AuditTable.tsx — min-w-[1040px]/w-[250px]/min-w-[260px] fixed table column widths; text-[11px] compact table size
    * allow ui/src/pages/Watchtower.tsx — min-w-[1120px]/w-[220px]/min-w-[260px]/min-w-[280px] fixed table column widths; text-[11px] compact table size
+   * allow ui/src/components/DesktopUpdateBanner.tsx — border-[var(--signal)]/bg-[var(--signal)]/text-[var(--ink)]/text-[var(--signal)]/text-[var(--muted)] are all CSS variable references (tokens correctly used); gate2 fires because var() appears inside brackets but no literal value is present
    ── end allowlist ── */
