@@ -17,7 +17,7 @@ export const issueRecoveryActions = pgTable(
   "issue_recovery_actions",
   {
     id: uuid("id").primaryKey().defaultRandom(),
-    companyId: uuid("company_id").notNull().references(() => companies.id),
+    companyId: uuid("company_id").notNull().references(() => companies.id, { onDelete: "cascade" }),
     sourceIssueId: uuid("source_issue_id").notNull().references(() => issues.id, { onDelete: "cascade" }),
     recoveryIssueId: uuid("recovery_issue_id").references(() => issues.id, { onDelete: "set null" }),
     kind: text("kind").notNull(),

@@ -10,7 +10,7 @@ export const secretAccessEvents = pgTable(
   "secret_access_events",
   {
     id: uuid("id").primaryKey().defaultRandom(),
-    companyId: uuid("company_id").notNull().references(() => companies.id),
+    companyId: uuid("company_id").notNull().references(() => companies.id, { onDelete: "cascade" }),
     secretId: uuid("secret_id").references(() => companySecrets.id, { onDelete: "cascade" }),
     userSecretDefinitionId: uuid("user_secret_definition_id").references(() => userSecretDefinitions.id, { onDelete: "set null" }),
     secretScope: text("secret_scope").notNull().default("company"),

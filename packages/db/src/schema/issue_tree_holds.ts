@@ -8,7 +8,7 @@ export const issueTreeHolds = pgTable(
   "issue_tree_holds",
   {
     id: uuid("id").primaryKey().defaultRandom(),
-    companyId: uuid("company_id").notNull().references(() => companies.id),
+    companyId: uuid("company_id").notNull().references(() => companies.id, { onDelete: "cascade" }),
     rootIssueId: uuid("root_issue_id").notNull().references(() => issues.id, { onDelete: "cascade" }),
     mode: text("mode").notNull(),
     status: text("status").notNull().default("active"),

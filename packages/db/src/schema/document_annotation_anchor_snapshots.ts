@@ -13,7 +13,7 @@ export const documentAnnotationAnchorSnapshots = pgTable(
   "document_annotation_anchor_snapshots",
   {
     id: uuid("id").primaryKey().defaultRandom(),
-    companyId: uuid("company_id").notNull().references(() => companies.id),
+    companyId: uuid("company_id").notNull().references(() => companies.id, { onDelete: "cascade" }),
     threadId: uuid("thread_id").notNull().references(() => documentAnnotationThreads.id, { onDelete: "cascade" }),
     documentId: uuid("document_id").notNull().references(() => documents.id, { onDelete: "cascade" }),
     fromRevisionId: uuid("from_revision_id").references(() => documentRevisions.id, { onDelete: "set null" }),

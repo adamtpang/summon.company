@@ -18,7 +18,7 @@ export const documentAnnotationThreads = pgTable(
   "document_annotation_threads",
   {
     id: uuid("id").primaryKey().defaultRandom(),
-    companyId: uuid("company_id").notNull().references(() => companies.id),
+    companyId: uuid("company_id").notNull().references(() => companies.id, { onDelete: "cascade" }),
     issueId: uuid("issue_id").references(() => issues.id, { onDelete: "cascade" }),
     routineId: uuid("routine_id").references(() => routines.id, { onDelete: "cascade" }),
     caseId: uuid("case_id").references(() => cases.id, { onDelete: "cascade" }),

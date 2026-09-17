@@ -8,11 +8,11 @@ export const issueExecutionDecisions = pgTable(
   "issue_execution_decisions",
   {
     id: uuid("id").primaryKey().defaultRandom(),
-    companyId: uuid("company_id").notNull().references(() => companies.id),
+    companyId: uuid("company_id").notNull().references(() => companies.id, { onDelete: "cascade" }),
     issueId: uuid("issue_id").notNull().references(() => issues.id, { onDelete: "cascade" }),
     stageId: uuid("stage_id").notNull(),
     stageType: text("stage_type").notNull(),
-    actorAgentId: uuid("actor_agent_id").references(() => agents.id),
+    actorAgentId: uuid("actor_agent_id").references(() => agents.id, { onDelete: "set null" }),
     actorUserId: text("actor_user_id"),
     outcome: text("outcome").notNull(),
     body: text("body").notNull(),

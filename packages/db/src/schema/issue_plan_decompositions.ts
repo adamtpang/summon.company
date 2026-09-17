@@ -11,7 +11,7 @@ export const issuePlanDecompositions = pgTable(
   "issue_plan_decompositions",
   {
     id: uuid("id").primaryKey().defaultRandom(),
-    companyId: uuid("company_id").notNull().references(() => companies.id),
+    companyId: uuid("company_id").notNull().references(() => companies.id, { onDelete: "cascade" }),
     sourceIssueId: uuid("source_issue_id").notNull().references(() => issues.id, { onDelete: "cascade" }),
     acceptedPlanRevisionId: uuid("accepted_plan_revision_id")
       .notNull()

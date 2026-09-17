@@ -9,7 +9,7 @@ export const companySecrets = pgTable(
   "company_secrets",
   {
     id: uuid("id").primaryKey().defaultRandom(),
-    companyId: uuid("company_id").notNull().references(() => companies.id),
+    companyId: uuid("company_id").notNull().references(() => companies.id, { onDelete: "cascade" }),
     scope: text("scope").notNull().default("company"),
     ownerUserId: text("owner_user_id"),
     userSecretDefinitionId: uuid("user_secret_definition_id").references(() => userSecretDefinitions.id, { onDelete: "set null" }),

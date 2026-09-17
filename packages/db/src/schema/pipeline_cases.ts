@@ -39,7 +39,7 @@ export const pipelineCases = pgTable(
     id: uuid("id").primaryKey().defaultRandom(),
     companyId: uuid("company_id").notNull().references(() => companies.id, { onDelete: "cascade" }),
     pipelineId: uuid("pipeline_id").notNull().references(() => pipelines.id, { onDelete: "cascade" }),
-    stageId: uuid("stage_id").notNull().references(() => pipelineStages.id),
+    stageId: uuid("stage_id").notNull().references(() => pipelineStages.id, { onDelete: "set null" }),
     caseKey: text("case_key").notNull(),
     title: text("title").notNull(),
     summary: text("summary"),

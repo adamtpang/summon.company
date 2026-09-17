@@ -11,7 +11,7 @@ export const issueWatchdogs = pgTable(
     id: uuid("id").primaryKey().defaultRandom(),
     companyId: uuid("company_id").notNull().references(() => companies.id, { onDelete: "cascade" }),
     issueId: uuid("issue_id").notNull().references(() => issues.id, { onDelete: "cascade" }),
-    watchdogAgentId: uuid("watchdog_agent_id").notNull().references(() => agents.id),
+    watchdogAgentId: uuid("watchdog_agent_id").notNull().references(() => agents.id, { onDelete: "set null" }),
     instructions: text("instructions"),
     status: text("status").notNull().default("active"),
     watchdogIssueId: uuid("watchdog_issue_id").references(() => issues.id, { onDelete: "set null" }),

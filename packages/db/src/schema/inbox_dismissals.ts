@@ -5,7 +5,7 @@ export const inboxDismissals = pgTable(
   "inbox_dismissals",
   {
     id: uuid("id").primaryKey().defaultRandom(),
-    companyId: uuid("company_id").notNull().references(() => companies.id),
+    companyId: uuid("company_id").notNull().references(() => companies.id, { onDelete: "cascade" }),
     userId: text("user_id").notNull(),
     itemKey: text("item_key").notNull(),
     kind: text("kind").$type<"dismiss" | "snooze">().notNull().default("dismiss"),

@@ -21,8 +21,8 @@ export const issueOutcomes = pgTable(
   "issue_outcomes",
   {
     id: uuid("id").primaryKey().defaultRandom(),
-    companyId: uuid("company_id").notNull().references(() => companies.id),
-    issueId: uuid("issue_id").notNull().references(() => issues.id),
+    companyId: uuid("company_id").notNull().references(() => companies.id, { onDelete: "cascade" }),
+    issueId: uuid("issue_id").notNull().references(() => issues.id, { onDelete: "set null" }),
     // The receipt-bearing comment; kept for provenance/deep-link. Nullable so a
     // receipt survives comment deletion.
     commentId: uuid("comment_id").references(() => issueComments.id, { onDelete: "set null" }),

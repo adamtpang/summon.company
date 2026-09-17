@@ -7,7 +7,7 @@ export const issueReferenceMentions = pgTable(
   "issue_reference_mentions",
   {
     id: uuid("id").primaryKey().defaultRandom(),
-    companyId: uuid("company_id").notNull().references(() => companies.id),
+    companyId: uuid("company_id").notNull().references(() => companies.id, { onDelete: "cascade" }),
     sourceIssueId: uuid("source_issue_id").notNull().references(() => issues.id, { onDelete: "cascade" }),
     targetIssueId: uuid("target_issue_id").notNull().references(() => issues.id, { onDelete: "cascade" }),
     sourceKind: text("source_kind").$type<"title" | "description" | "comment" | "document">().notNull(),
