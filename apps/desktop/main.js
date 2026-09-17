@@ -176,7 +176,7 @@ function createMainWindow() {
     width: 1440,
     height: 900,
     autoHideMenuBar: true,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#F7FAFF',
     title: 'Summon',
     icon: path.join(__dirname, 'icon.ico'),
     // Open maximized: create hidden, maximize, then show — no resize flash.

@@ -32,7 +32,9 @@ import {
   FileCode2,
   Plus,
   Search,
+  SunMoon,
 } from "lucide-react";
+import { useTheme } from "../context/ThemeContext";
 import { Identity } from "./Identity";
 import { agentUrl, projectUrl } from "../lib/utils";
 import {
@@ -95,6 +97,7 @@ export function CommandPalette() {
   const { selectedCompanyId } = useCompany();
   const { openNewIssue, openNewAgent } = useDialogActions();
   const { isMobile, setSidebarOpen } = useSidebar();
+  const { toggleTheme } = useTheme();
   const searchQuery = query.trim();
   const onIssueDetail = isOnIssueDetail(location.pathname);
   const { data: experimentalSettings } = useQuery({
@@ -347,6 +350,16 @@ export function CommandPalette() {
           <CommandItem onSelect={() => go("/projects")}>
             <Plus className="mr-2 h-4 w-4" />
             Create new project
+          </CommandItem>
+          <CommandItem
+            value="toggle theme appearance dark light mode"
+            onSelect={() => {
+              setOpen(false);
+              toggleTheme();
+            }}
+          >
+            <SunMoon className="mr-2 h-4 w-4" />
+            Toggle appearance
           </CommandItem>
         </CommandGroup>
 
