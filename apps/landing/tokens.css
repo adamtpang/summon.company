@@ -1,104 +1,103 @@
 /* ============================================================
-   SUMMON tokens, v3.0 (board ruling 2026-09-11): one palette, one
-   font, both surfaces. Chrome is white and black; color is data.
-   The public site and the product app share these values exactly.
+   SUMMON v2.0 tokens. Light canonical, dark derived.
    Closed vocabulary: if a value is not here, it does not ship.
    ============================================================ */
 
 :root {
-  /* ---------- primitives ---------- */
-  --ink: #0a0a0a;
-  --paper: #ffffff;
-  --gray-700: #3a3a3a;
-  --gray-600: #5a5a5a;
-  --gray-500: #8a8a8a;
-  --gray-200: #d6d6d6;
-  --gray-100: #f2f2f2;
-  --gray-050: #f7f7f7;
-  /* Summon Blue survives in exactly one place: the mark. */
-  --blue-600: #0B5FFF;
+  /* ---------- primitives: the Summon Blue family ---------- */
+  --blue-050: #EEF5FF;
+  --blue-100: #DCEBFF;
+  --blue-200: #B9D6FF;
+  --blue-300: #8AB9FF;
   --blue-400: #5395FF;
-  /* Kept for the artifact kit's deep frames only. Not chrome. */
-  --navy-950: #0a0a0a;
+  --blue-500: #2B78FF;
+  --blue-600: #0B5FFF; /* Summon Blue */
+  --blue-700: #084DDB;
+  --blue-800: #0640B4;
+  --blue-900: #093180;
+  --navy-950: #071F4D; /* deep ink: sections, gradient anchor, shadow key */
+  --ink:      #0C1428;
 
   /* ---------- semantic: surfaces ---------- */
-  --bg-canvas: var(--paper);
-  --bg-elevated: var(--paper);
-  --bg-neutral: rgba(0, 0, 0, 0.05);
-  --bg-neutral-hover: rgba(0, 0, 0, 0.08);
-  --bg-neutral-active: rgba(0, 0, 0, 0.12);
-  --bg-accent-quiet: rgba(0, 0, 0, 0.05);
-  --bg-section-tint: var(--gray-050);
-  --bg-section-deep: var(--ink);
+  --bg-canvas: #F7FAFF;
+  --bg-elevated: #FFFFFF;
+  --bg-neutral: rgba(7, 31, 77, 0.06);
+  --bg-neutral-hover: rgba(7, 31, 77, 0.10);
+  --bg-neutral-active: rgba(7, 31, 77, 0.15);
+  --bg-accent-quiet: var(--blue-050);
+  --bg-section-tint: var(--blue-050);
+  --bg-section-deep: var(--navy-950);
 
   /* ---------- semantic: text ---------- */
-  --text-primary: var(--ink);
-  --text-secondary: var(--gray-600);
-  --text-tertiary: var(--gray-500);
-  --text-disabled: rgba(10, 10, 10, 0.35);
-  --text-on-accent: var(--paper);
-  --text-accent: var(--ink);
+  --text-primary: #0C1428;
+  --text-secondary: #46506B;
+  --text-tertiary: #6B7590;
+  --text-disabled: rgba(12, 20, 40, 0.35);
+  --text-on-accent: #FFFFFF;
+  --text-accent: var(--blue-700);
 
   /* ---------- semantic: borders ---------- */
-  --border-neutral: rgba(0, 0, 0, 0.12);
-  --border-strong: rgba(0, 0, 0, 0.22);
-  --border-accent: rgba(0, 0, 0, 0.22);
-  --border-focus: var(--ink);
+  --border-neutral: rgba(12, 20, 40, 0.12);
+  --border-strong: rgba(12, 20, 40, 0.22);
+  --border-accent: rgba(11, 95, 255, 0.35);
+  --border-focus: var(--blue-600);
 
   /* ---------- interactive triads ---------- */
-  --action-primary: var(--ink);
-  --action-primary-hover: #262626;
-  --action-primary-active: var(--gray-700);
-  --action-quiet: rgba(0, 0, 0, 0.05);
-  --action-quiet-hover: rgba(0, 0, 0, 0.08);
-  --action-quiet-active: rgba(0, 0, 0, 0.12);
+  --action-primary: var(--blue-600);
+  --action-primary-hover: var(--blue-700);
+  --action-primary-active: var(--blue-800);
+  --action-quiet: var(--blue-050);
+  --action-quiet-hover: var(--blue-100);
+  --action-quiet-active: var(--blue-200);
   --action-neutral: var(--bg-neutral);
   --action-neutral-hover: var(--bg-neutral-hover);
   --action-neutral-active: var(--bg-neutral-active);
 
-  /* ---------- sentiment: the only color on the page ----------
-     Shared Aether sentiment set (2026-08-07). Dark content on pale tint. */
+  /* ---------- sentiment (dark content on pale tint) ---------- */
+  /* Aligned to the shared Aether/brand.md sentiment set 2026-08-07. */
   --positive-content: #1F7A4D;
   --positive-bg: #E3F0E9;
   --negative-content: #A23B2E;
   --negative-bg: #F5E4DF;
   --warning-content: #96702A;
   --warning-bg: #F3EAD3;
-  --info-content: var(--ink);
-  --info-bg: var(--bg-neutral);
+  --info-content: var(--blue-700);
+  --info-bg: var(--blue-050);
 
-  /* ---------- elevation: none. Structure comes from borders. ---------- */
-  --shadow-xs: none;
-  --shadow-sm: none;
-  --shadow-md: none;
-  --shadow-lg: none;
-  --shadow-hero: none;
+  /* ---------- shadows (navy-keyed, never black) ---------- */
+  --shadow-xs: 0 1px 3px rgba(7, 31, 77, 0.07);
+  --shadow-sm: 0 2px 8px rgba(7, 31, 77, 0.08), 0 1px 3px rgba(7, 31, 77, 0.05);
+  --shadow-md: 0 6px 20px rgba(7, 31, 77, 0.10), 0 2px 6px rgba(7, 31, 77, 0.05);
+  --shadow-lg: 0 16px 40px rgba(7, 31, 77, 0.12), 0 6px 16px rgba(7, 31, 77, 0.06);
+  --shadow-hero: 0 24px 80px rgba(7, 31, 77, 0.16), 0 8px 32px rgba(7, 31, 77, 0.08);
 
   /* ---------- glass (nav only) ---------- */
-  --glass-bg: rgba(255, 255, 255, 0.86);
-  --glass-blur: 12px;
-  --glass-border: rgba(0, 0, 0, 0.08);
+  --glass-bg: rgba(247, 250, 255, 0.72);
+  --glass-blur: 20px;
+  --glass-border: rgba(12, 20, 40, 0.08);
 
-  /* ---------- typography: Inter for words, the system mono for machine values ---------- */
-  --font-display: "Inter", "InterVariable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-body: "Inter", "InterVariable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  --text-display-1: clamp(2.5rem, 1.9rem + 3vw, 4rem);
-  --text-display-2: clamp(1.9rem, 1.5rem + 1.8vw, 2.75rem);
-  --text-title-section: 1.5rem;
-  --text-title-card: 1.125rem;
+  /* ---------- typography ---------- */
+  --font-display: "Space Grotesk", "Inter", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --text-display-1: clamp(2.75rem, 2rem + 3.5vw, 4.5rem);
+  --text-display-2: clamp(2rem, 1.6rem + 2vw, 3rem);
+  --text-title-section: 1.75rem;
+  --text-title-card: 1.25rem;
   --text-body-lg: 1.125rem;
   --text-body: 1rem;
   --text-body-sm: 0.875rem;
   --text-label: 0.8125rem;
   --text-overline: 0.75rem;
   --text-metric: clamp(1.75rem, 1.4rem + 1.5vw, 2.5rem);
-  --leading-display: 1.05;
-  --leading-title: 1.2;
-  --leading-body: 1.6;
-  --tracking-display: -0.025em;
-  --tracking-title: -0.015em;
-  --tracking-body: 0;
+
+  --leading-display: 1.0;
+  --leading-title: 1.15;
+  --leading-body: 1.55;
+  --tracking-display: -0.03em;
+  --tracking-title: -0.02em;
+  --tracking-body: -0.006em;
   --tracking-label: 0.01em;
   --tracking-overline: 0.08em;
 
@@ -107,41 +106,44 @@
   --space-6: 24px; --space-8: 32px;  --space-10: 40px; --space-12: 48px;
   --space-16: 64px; --space-20: 80px; --space-24: 96px;
   --space-32: 128px; --space-40: 160px;
+
   --control-sm: 32px;
   --control-md: 40px;
-  --control-lg: 44px;
-  --control-xl: 48px;
+  --control-lg: 48px;   /* default button + input */
+  --control-xl: 56px;   /* hero CTA */
   --content-max: 1200px;
 
-  /* ---------- radii: one corner language, same as the app ---------- */
-  --radius-input: 8px;
-  --radius-card: 12px;
-  --radius-panel: 16px;
+  /* ---------- radii ---------- */
+  --radius-input: 10px;
+  --radius-card: 16px;
+  --radius-panel: 24px;
   --radius-pill: 9999px;
 
-  /* ---------- motion: confirms an interaction, never decorates ---------- */
-  --ease-summon: cubic-bezier(0.16, 1, 0.3, 1);
+  /* ---------- motion ---------- */
+  --ease-summon: cubic-bezier(0.62, 0.18, 0.12, 1);
   --ease-out-soft: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
-  --duration-micro: 100ms;
-  --duration-hover: 150ms;
-  --duration-panel: 200ms;
-  --duration-section: 200ms;
+  --ease-spring: cubic-bezier(0.34, 1.55, 0.6, 1);
+  --duration-micro: 120ms;
+  --duration-hover: 200ms;
+  --duration-panel: 320ms;
+  --duration-section: 600ms;
 
-  /* ---------- EKG mark ---------- */
+  /* ---------- EKG heartbeat ---------- */
   --ekg-stroke: var(--blue-600);
   --ekg-stroke-width: 2px;
-  --ekg-glow: none;
+  --ekg-glow: drop-shadow(0 0 6px rgba(11, 95, 255, 0.35));
   --ekg-cycle: 2400ms;
   --ekg-static-stroke: var(--border-strong);
 
-  /* ---------- former gradients, now flat ---------- */
-  --gradient-hero-wash: none;
-  --gradient-horizon: none;
-  --gradient-cta: var(--action-primary);
-  --gradient-cta-hover: var(--action-primary-hover);
+  /* ---------- gradients (see recipes for budget rules) ---------- */
+  --gradient-hero-wash: radial-gradient(140% 90% at 50% 0%,
+    #DCEBFF 0%, #EEF5FF 42%, #F7FAFF 78%);
+  --gradient-horizon: radial-gradient(120% 100% at 50% 104%,
+    #0B5FFF 0%, #4D8DFF 12%, #A9CCFF 32%, #DCEBFF 50%, #F7FAFF 68%);
+  --gradient-cta: linear-gradient(180deg, #2B78FF 0%, #0B5FFF 100%);
+  --gradient-cta-hover: linear-gradient(180deg, #1E6CF2 0%, #084DDB 100%);
   --gradient-scrim: linear-gradient(180deg,
-    rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0.25) 45%, rgba(0, 0, 0, 0) 80%);
+    rgba(7, 31, 77, 0.55) 0%, rgba(7, 31, 77, 0.25) 45%, rgba(7, 31, 77, 0) 80%);
   --mask-edge-fade: linear-gradient(90deg,
     transparent 0%, #000 12%, #000 88%, transparent 100%);
 
@@ -149,89 +151,115 @@
 }
 
 /* ============================================================
-   Deep section (light mode only): the same token flip the app's
-   dark mode uses, so components drop in unchanged. Max one per page.
+   Deep-navy section flip (light mode only): token remap,
+   components drop in unchanged. Max one per page.
    ============================================================ */
 [data-section="deep"] {
-  --bg-canvas: var(--ink);
-  --bg-elevated: #141414;
-  --bg-neutral: rgba(255, 255, 255, 0.07);
+  --bg-canvas: var(--navy-950);
+  --bg-elevated: #0B2A63;
+  --bg-neutral: rgba(255, 255, 255, 0.06);
   --bg-neutral-hover: rgba(255, 255, 255, 0.10);
   --bg-neutral-active: rgba(255, 255, 255, 0.15);
-  --text-primary: var(--gray-100);
-  --text-secondary: #a3a3a3;
-  --text-tertiary: var(--gray-500);
-  --text-accent: var(--gray-100);
-  --border-neutral: rgba(255, 255, 255, 0.14);
-  --border-strong: rgba(255, 255, 255, 0.26);
+  --text-primary: #EEF2FA;
+  --text-secondary: #B9C6E4;
+  --text-tertiary: #8A9AC4;
+  --text-accent: #8AB9FF;
+  --border-neutral: rgba(255, 255, 255, 0.16);
+  --border-strong: rgba(255, 255, 255, 0.28);
   --ekg-stroke: var(--blue-400);
 }
 
 /* ============================================================
-   Dark theme: identical values to the product app's .dark block.
+   DERIVED DARK THEME. Re-pointed tokens only, no new design.
    ============================================================ */
 [data-theme="dark"] {
-  --bg-canvas: var(--ink);
-  --bg-elevated: #141414;
-  --bg-neutral: rgba(255, 255, 255, 0.07);
+  --bg-canvas: #0A1120;
+  --bg-elevated: #111B33;
+  --bg-neutral: rgba(255, 255, 255, 0.06);
   --bg-neutral-hover: rgba(255, 255, 255, 0.10);
   --bg-neutral-active: rgba(255, 255, 255, 0.15);
-  --bg-accent-quiet: rgba(255, 255, 255, 0.07);
-  --bg-section-tint: #111111;
-  --bg-section-deep: var(--ink);
-  --text-primary: var(--gray-100);
-  --text-secondary: #a3a3a3;
-  --text-tertiary: var(--gray-500);
-  --text-disabled: rgba(242, 242, 242, 0.35);
-  --text-on-accent: var(--ink);
-  --text-accent: var(--gray-100);
+  --bg-accent-quiet: rgba(11, 95, 255, 0.16);
+  --bg-section-tint: #0D1528;
+  --bg-section-deep: #0A1120; /* deep flip is a no-op in dark */
+
+  --text-primary: #EEF2FA;
+  --text-secondary: #A9B4CE;
+  --text-tertiary: #77829F;
+  --text-disabled: rgba(238, 242, 250, 0.35);
+  --text-on-accent: #FFFFFF;
+  --text-accent: #7FB0FF;
+
   --border-neutral: rgba(255, 255, 255, 0.14);
   --border-strong: rgba(255, 255, 255, 0.26);
-  --border-accent: rgba(255, 255, 255, 0.26);
-  --border-focus: #d4d4d4;
-  --action-primary: #fafafa;
-  --action-primary-hover: #e5e5e5;
-  --action-primary-active: #d4d4d4;
-  --action-quiet: rgba(255, 255, 255, 0.07);
-  --action-quiet-hover: rgba(255, 255, 255, 0.10);
-  --action-quiet-active: rgba(255, 255, 255, 0.15);
+  --border-accent: rgba(83, 149, 255, 0.45);
+  --border-focus: var(--blue-400);
+
+  --action-primary: var(--blue-400);
+  --action-primary-hover: #7FB0FF;
+  --action-primary-active: #A5C6FF;
+  --action-quiet: rgba(11, 95, 255, 0.16);
+  --action-quiet-hover: rgba(11, 95, 255, 0.24);
+  --action-quiet-active: rgba(11, 95, 255, 0.32);
+
+  /* Same hue family as the shared set, lightened for legibility on dark
+     backgrounds; the shared set's literal hexes are too dark for dark-mode
+     text contrast, so the identity is kept, the lightness is not. */
   --positive-content: #6FC796;
   --positive-bg: rgba(31, 122, 77, 0.20);
   --negative-content: #E8877A;
   --negative-bg: rgba(162, 59, 46, 0.20);
   --warning-content: #E0B85E;
   --warning-bg: rgba(150, 112, 42, 0.24);
-  --info-content: var(--gray-100);
-  --info-bg: rgba(255, 255, 255, 0.07);
-  --glass-bg: rgba(10, 10, 10, 0.86);
+  --info-content: #8AB9FF;
+  --info-bg: rgba(11, 95, 255, 0.16);
+
+  /* shadows: replaced by surface lightening; hero only */
+  --shadow-xs: none;
+  --shadow-sm: none;
+  --shadow-md: 0 6px 20px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.45);
+  --shadow-hero: 0 24px 80px rgba(0, 0, 0, 0.5);
+
+  --glass-bg: rgba(10, 17, 32, 0.72);
   --glass-border: rgba(255, 255, 255, 0.10);
+
   --ekg-stroke: var(--blue-400);
-  --gradient-cta: var(--action-primary);
-  --gradient-cta-hover: var(--action-primary-hover);
+  --ekg-glow: drop-shadow(0 0 6px rgba(83, 149, 255, 0.45));
+  --ekg-static-stroke: rgba(255, 255, 255, 0.26);
+
+  --gradient-hero-wash: radial-gradient(140% 90% at 50% 0%,
+    rgba(11, 95, 255, 0.14) 0%, rgba(11, 95, 255, 0.05) 42%, #0A1120 78%);
+  --gradient-horizon: radial-gradient(120% 100% at 50% 104%,
+    rgba(11, 95, 255, 0.55) 0%, rgba(83, 149, 255, 0.30) 18%,
+    rgba(83, 149, 255, 0.10) 42%, #0A1120 72%);
+  --gradient-cta: linear-gradient(180deg, #3B82FF 0%, #1E6CF2 100%);
+  --gradient-cta-hover: linear-gradient(180deg, #5395FF 0%, #2B78FF 100%);
   --gradient-scrim: linear-gradient(180deg,
     rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.3) 45%, rgba(0, 0, 0, 0) 80%);
+
   color-scheme: dark;
 }
 
 /* ============================================================
-   Reduced motion: everything settles instantly, the EKG renders complete.
+   Reduced motion: opacity-only, EKG renders complete + static.
    ============================================================ */
 @media (prefers-reduced-motion: reduce) {
   :root {
-    --duration-micro: 1ms;
-    --duration-hover: 1ms;
-    --duration-panel: 1ms;
-    --duration-section: 1ms;
+    --duration-micro: 0ms;
+    --duration-hover: 0ms;
+    --duration-panel: 0ms;
+    --duration-section: 0ms;
     --ekg-cycle: 0ms;
     --ekg-glow: none;
   }
   *, *::before, *::after {
-    animation-duration: 1ms !important;
+    animation-duration: 0ms !important;
     animation-iteration-count: 1 !important;
-    transition-duration: 1ms !important;
+    transition-duration: 0ms !important;
     scroll-behavior: auto !important;
   }
-  .ekg-trace {
-    stroke-dashoffset: 0 !important;
+  .ekg-trace,
+  .ekg path {
+    stroke-dashoffset: 0 !important; /* full static trace, no drawing */
   }
 }

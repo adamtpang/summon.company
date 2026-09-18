@@ -3,21 +3,19 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
 <title>Diagnose your business · Summon</title>
 <meta name="description" content="Paste your business. Get your stage on the 8-stage roadmap, the one constraint holding you back, a founder precedent, and the AI department that fixes it." />
 <style>
   :root { color-scheme: light; }
   * { box-sizing: border-box; }
-  body { margin: 0; background: #ffffff; color: #0a0a0a; font-family: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; line-height: 1.6; font-size: 15px; }
+  body { margin: 0; background: #ffffff; color: #0a0a0a; font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; line-height: 1.6; font-size: 15px; }
   .page { max-width: 44rem; margin: 0 auto; padding: 2.5rem 1.25rem 5rem; }
   header.site { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 2.5rem; }
   header.site a { display: inline-flex; align-items: center; gap: 0.6rem; color: inherit; text-decoration: none; font-weight: 600; }
   h1 { font-size: 1.9rem; letter-spacing: -0.02em; margin: 0 0 0.5rem; }
   .lede { color: #5a5a5a; margin: 0 0 2rem; }
   form { display: flex; flex-direction: column; gap: 0.75rem; }
+  .field-label { font-weight: 600; }
   textarea { width: 100%; min-height: 5.5rem; padding: 0.85rem 1rem; font: inherit; border: 1px solid rgba(0,0,0,0.18); border-radius: 12px; resize: vertical; }
   textarea:focus { outline: 2px solid #0a0a0a; outline-offset: 1px; border-color: transparent; }
   button.go { align-self: flex-start; background: #0a0a0a; color: #ffffff; border: 0; border-radius: 999px; padding: 0.7rem 1.5rem; font: inherit; font-weight: 600; cursor: pointer; }
@@ -42,8 +40,26 @@
   .share-row { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; margin-top: 1rem; }
   .share-btn { background: none; border: 1px solid rgba(0,0,0,0.2); color: #0a0a0a; border-radius: 999px; padding: 0.45rem 1rem; font: inherit; font-size: 0.85rem; font-weight: 600; cursor: pointer; }
   .share-note { display: none; }
-  .error { color: #A23B2E; margin-top: 1rem; display: none; }
+  .error { color: #b00020; margin-top: 1rem; display: none; }
   .muted { color: #5a5a5a; }
+  /* ── pipeline ──────────────────────────────────────────────────── */
+  .pipeline { display: flex; align-items: flex-start; gap: 0; margin: 0.85rem 0 0.5rem; }
+  .pipe-node { flex: 1; display: flex; flex-direction: column; align-items: center; text-align: center; min-width: 0; }
+  .pipe-dot { width: 9px; height: 9px; border-radius: 50%; background: rgba(0,0,0,0.15); margin-bottom: 0.45rem; flex-shrink: 0; transition: background 0.2s; }
+  .pipe-connector { display: flex; align-items: flex-start; padding-top: 0.1rem; flex-shrink: 0; }
+  .pipe-label { font-weight: 600; font-size: 0.8rem; line-height: 1.2; }
+  .pipe-sub { color: #8a8a8a; font-size: 0.68rem; margin: 0.15rem 0 0; line-height: 1.3; padding: 0 0.1rem; }
+  .pipe-node.fail .pipe-dot { background: #b00020; animation: pulse-dot 1.8s ease-in-out infinite; }
+  .pipe-node.fail .pipe-label { color: #b00020; }
+  @keyframes pulse-dot { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.4)} }
+  @media (prefers-reduced-motion: reduce) { .pipe-node.fail .pipe-dot { animation: none; } }
+  /* ── value ledger ───────────────────────────────────────────────── */
+  .ledger { border-top: 1px solid rgba(0,0,0,0.1); margin-top: 1rem; padding-top: 0.85rem; display: grid; grid-template-columns: max-content 1fr; gap: 0.3rem 1.25rem; align-items: baseline; font-size: 0.82rem; }
+  .ledger-k { color: #8a8a8a; white-space: nowrap; }
+  .ledger-v { color: #0a0a0a; }
+  .ledger-v.big { font-weight: 650; font-size: 0.9rem; }
+  .ledger-sep { grid-column: 1/-1; border: none; border-top: 1px solid rgba(0,0,0,0.08); margin: 0.2rem 0; }
+  .ledger-verdict { grid-column: 1/-1; margin-top: 0.1rem; padding: 0.5rem 0.7rem; background: rgba(0,0,0,0.04); border-radius: 8px; font-size: 0.78rem; color: #3a3a3a; font-weight: 500; line-height: 1.45; }
   @media (prefers-color-scheme: dark) {
     body { background: #0a0a0a; color: #f2f2f2; }
     .lede, .muted, blockquote { color: #a3a3a3; }
@@ -56,8 +72,15 @@
     .bar { background: rgba(255,255,255,0.12); }
     .bar span { background: #f2f2f2; }
     blockquote { border-color: #f2f2f2; }
+    .pipe-dot { background: rgba(255,255,255,0.2); }
+    .ledger { border-color: rgba(255,255,255,0.1); }
+    .ledger-sep { border-color: rgba(255,255,255,0.08); }
+    .ledger-v { color: #f2f2f2; }
+    .ledger-verdict { background: rgba(255,255,255,0.06); color: #b0b0b0; }
   }
 </style>
+<link rel="stylesheet" href="/public.css" />
+<script data-posthog-fleet>(function(){if(window.__posthogFleet)return;window.__posthogFleet=1;var s=document.createElement('script');s.async=true;s.src='https://us-assets.i.posthog.com/static/array.js';s.onload=function(){if(!window.posthog||!window.posthog.init)return;window.posthog.init('phc_FCpCP9mIsb9IcxpX0Qqi6FmJ48sVvscAYIrZmtRHIq4',{api_host:'https://us.i.posthog.com',person_profiles:'identified_only',capture_pageview:'history_change',capture_pageleave:true,autocapture:false,disable_session_recording:true,disable_surveys:true,loaded:function(p){p.register({site:location.hostname})}});};document.head.appendChild(s);})();</script>
 </head>
 <body>
 <div class="page">
@@ -73,6 +96,7 @@
   <p class="lede">Paste a URL or describe your business in a sentence. You get your stage on the 8-stage company roadmap, the one constraint holding you back, the founder who solved it before you, and the AI department that fixes it. Grounded in 48 real founder case studies.</p>
 
   <form id="form">
+    <label class="field-label" for="input">Website or business</label>
     <textarea id="input" placeholder="e.g. idiguam.com, or: I run a two-person landscaping company in Guam, mostly word of mouth" required></textarea>
     <button class="go" id="go" type="submit">Diagnose</button>
     <p class="micro">No signup. Under a minute. Your input is used only to generate this diagnosis.</p>
@@ -102,6 +126,41 @@
         <cite id="r-source"></cite>
       </blockquote>
     </div>
+    <div class="card" id="pipe-card">
+      <p class="eyebrow">Where the business leaks</p>
+      <div class="pipeline">
+        <div class="pipe-node" id="pipe-demand">
+          <div class="pipe-dot"></div>
+          <span class="pipe-label">Demand</span>
+          <p class="pipe-sub">People who<br>could buy</p>
+        </div>
+        <div class="pipe-connector" aria-hidden="true">
+          <svg width="20" height="10" viewBox="0 0 20 10" fill="none"><path d="M0 5h15M11 1.5l4 3.5-4 3.5" stroke="currentColor" stroke-opacity="0.25" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="pipe-node" id="pipe-bait">
+          <div class="pipe-dot"></div>
+          <span class="pipe-label">Bait</span>
+          <p class="pipe-sub">Lead<br>magnet</p>
+        </div>
+        <div class="pipe-connector" aria-hidden="true">
+          <svg width="20" height="10" viewBox="0 0 20 10" fill="none"><path d="M0 5h15M11 1.5l4 3.5-4 3.5" stroke="currentColor" stroke-opacity="0.25" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="pipe-node" id="pipe-menu">
+          <div class="pipe-dot"></div>
+          <span class="pipe-label">Menu</span>
+          <p class="pipe-sub">The<br>offer</p>
+        </div>
+        <div class="pipe-connector" aria-hidden="true">
+          <svg width="20" height="10" viewBox="0 0 20 10" fill="none"><path d="M0 5h15M11 1.5l4 3.5-4 3.5" stroke="currentColor" stroke-opacity="0.25" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="pipe-node" id="pipe-till">
+          <div class="pipe-dot"></div>
+          <span class="pipe-label">Till</span>
+          <p class="pipe-sub">Payment</p>
+        </div>
+      </div>
+      <p class="muted" id="r-pipe-note" style="margin:0;font-size:0.82rem;line-height:1.5"></p>
+    </div>
     <div class="card" id="model-card">
       <p class="eyebrow">Best business model</p>
       <p class="constraint" id="r-model-name" style="font-size:1.05rem"></p>
@@ -114,9 +173,19 @@
       <p style="margin:0 0 0.25rem"><strong id="r-dept"></strong> runs it first. First three tasks:</p>
       <ol class="tasks" id="r-tasks"></ol>
       <p class="muted" id="r-vitals" style="margin-top:0.75rem"></p>
+      <div class="ledger" id="r-ledger">
+        <span class="ledger-k">You deliver</span>
+        <span class="ledger-v" id="l-business"></span>
+        <hr class="ledger-sep">
+        <span class="ledger-k">Value unlocked</span>
+        <span class="ledger-v big" id="l-value"></span>
+        <span class="ledger-k">Summon price</span>
+        <span class="ledger-v">$500 / month · founding seat</span>
+        <p class="ledger-verdict" id="l-verdict"></p>
+      </div>
       <div class="cta-row">
         <a class="btn btn-primary" id="r-summon" href="#">Summon this department</a>
-        <a class="btn btn-quiet" href="/#founding">Founding slot, $99/mo locked for life</a>
+        <a class="btn btn-quiet" href="/#founding">Founding seat, $500/mo</a>
         <a class="btn btn-quiet" href="https://cal.com/adamtpang">Talk it through, free</a>
       </div>
       <p class="micro">Already running Summon? Open your Chat tab and hand these three tasks to the department. Not yet? The summon button sends this diagnosis to us and we set your company up.</p>
@@ -127,6 +196,10 @@
       </div>
     </div>
   </section>
+  <footer class="site">
+    <p>Anchor Marianas LLC · summon.company · human board, governed AI work.</p>
+    <nav class="footer-links" aria-label="Summon pages"><a href="/about">About</a><a href="/blog">Blog</a><a href="/changelog">Build log</a><a href="/privacy">Privacy</a><a href="/terms">Terms</a></nav>
+  </footer>
 </div>
 
 <script>
@@ -216,6 +289,38 @@
       tasks.appendChild(li);
     }
     document.getElementById("r-vitals").textContent = d.vitalsMove;
+
+    // ── pipeline: map constraint key to the leaking stage ──────────
+    const PIPE_MAP = {
+      distribution: 'demand', customer: 'demand', talent: 'demand',
+      commitment: 'bait', differentiation: 'bait', speed: 'bait',
+      focus: 'menu', simplicity: 'menu', automation: 'menu',
+      pricing: 'till', cash: 'till', costs: 'till',
+    };
+    const PIPE_NOTES = {
+      demand: 'The pool of potential buyers is too small or invisible. Demand exists in the market; it just never reaches this business.',
+      bait: 'People exist but nothing pulls them in. No compelling hook means no leads, regardless of offer quality.',
+      menu: 'Leads arrive but the offer confuses or underwhelms. Clarity and specificity are the multipliers.',
+      till: 'Interest exists but converts poorly to cash. The price, the close, or the follow-through is where deals die.',
+    };
+    ['demand', 'bait', 'menu', 'till'].forEach(function(id) {
+      document.getElementById('pipe-' + id).classList.remove('fail');
+    });
+    var failStage = PIPE_MAP[d.constraintKey] || 'demand';
+    document.getElementById('pipe-' + failStage).classList.add('fail');
+    document.getElementById('r-pipe-note').textContent = PIPE_NOTES[failStage] || '';
+
+    // ── value ledger ────────────────────────────────────────────────
+    document.getElementById('l-business').textContent = d.business;
+    document.getElementById('l-value').textContent = d.vitalsMove || '—';
+    var LEDGER_VERDICTS = {
+      demand: 'One funded distribution campaign typically returns 3–10× in new pipeline. This department pays for itself on the first deal it sources.',
+      bait: 'A compelling lead magnet can double inbound volume without raising ad spend. The fix is one asset, not ongoing cost.',
+      menu: 'Offer clarity converts 2–4× better. The same traffic, more closed deals — pure margin expansion.',
+      till: 'Fixing close rates is the highest-ROI intervention. Every deal recovered was already warm and already cost money to generate.',
+    };
+    document.getElementById('l-verdict').textContent = LEDGER_VERDICTS[failStage] || 'The department you summon attacks the exact point where value leaks.';
+
     const summonBtn = document.getElementById("r-summon");
     summonBtn.textContent = "Summon " + d.department + " to fix this";
     const body = "My business: " + d.business + "%0D%0AConstraint: " + encodeURIComponent(d.constraint) + "%0D%0ADepartment: " + d.department + "%0D%0ATasks:%0D%0A1. " + encodeURIComponent(d.tasks[0] || "") + "%0D%0A2. " + encodeURIComponent(d.tasks[1] || "") + "%0D%0A3. " + encodeURIComponent(d.tasks[2] || "") + "%0D%0A%0D%0ASet me up.";
