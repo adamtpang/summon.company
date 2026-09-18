@@ -1076,6 +1076,18 @@ registry.registerPath({
 });
 
 registry.registerPath({
+  method: "post",
+  path: "/api/companies/{companyId}/context-audit",
+  tags: ["companies"],
+  summary: "Gather a company's public web context and run the SUM-297 four-check analyzer",
+  request: {
+    params: z.object({ companyId: z.string() }),
+    body: jsonBody(z.object({ url: z.string() })),
+  },
+  responses: { 200: r.ok(), 400: r.badRequest, 401: r.unauthorized, 404: r.notFound },
+});
+
+registry.registerPath({
   method: "delete",
   path: "/api/companies/{companyId}",
   tags: ["companies"],
