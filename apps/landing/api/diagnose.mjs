@@ -8,6 +8,7 @@
 // OIDC token (no API key stored anywhere). AI_GATEWAY_API_KEY env var is the
 // local-dev fallback.
 import { getVercelOidcToken } from "@vercel/functions/oidc";
+import { gatherSiteFacts, factsToPrompt } from "./_context.mjs";
 import { PRECEDENTS, CONSTRAINT_KEYS, STAGES, DEPARTMENTS, MODELS as BIZ_MODELS, MODEL_KEYS } from "./_precedents.mjs";
 
 export const config = { maxDuration: 60 };
@@ -36,7 +37,7 @@ function systemPrompt() {
       STAGES.map((s, i) => `${i + 1} ${s}`).join(", ") +
       ".",
     "Given a business (a URL or a description), produce a diagnosis with theory-of-constraints thinking: name the SINGLE constraint most limiting saved time, saved money, or grown revenue right now. Not a list. One thing.",
-    "House voice: plain words, no em dashes, no hype. Be concrete and specific to THIS business, never generic. If the input is a URL, reason from what that kind of business plainly is.",
+    "House voice: plain words, no em dashes, no hype. Be concrete and specific to THIS business, never generic. When observed site facts are provided, ground every claim in them and never describe the site beyond them. When none are provided, say the diagnosis rests only on what the founder wrote.",
     "Reply with ONLY a JSON object, no markdown fences, in exactly this shape:",
     JSON.stringify({
       business: "one line saying what this business is, in plain words",
@@ -65,7 +66,7 @@ function extractJson(text, model) {
   return JSON.parse(text.slice(start, end + 1));
 }
 
-async function callGateway(token, model, input) {
+async function callGateway(token, model, input, observed = "") {
   const res = await fetch(`${GATEWAY}/chat/completions`, {
     method: "POST",
     headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
@@ -74,7 +75,9 @@ async function callGateway(token, model, input) {
       max_tokens: 3200,
       messages: [
         { role: "system", content: systemPrompt() },
-        { role: "user", content: `Diagnose this business: ${input}` },
+        { role: "user", content: `Diagnose this business: ${input}${observed ? `
+
+${observed}` : ""}` },
       ],
     }),
   });
@@ -115,10 +118,14 @@ export default async function handler(req, res) {
   const input = String(req.body?.input ?? "").trim().slice(0, 2000);
   if (input.length < 4) return res.status(400).json({ error: "Describe the business or paste a URL." });
 
+  // Issue #28: look at the real site before judging it.
+  const facts = await gatherSiteFacts(input).catch(() => null);
+  const observed = factsToPrompt(facts);
+
   let lastError = null;
   for (const model of MODELS) {
     try {
-      const text = await callGateway(token, model, input);
+      const text = await callGateway(token, model, input, observed);
       const parsed = extractJson(text, model);
       const key = CONSTRAINT_KEYS.includes(parsed.constraintKey) ? parsed.constraintKey : "focus";
       const stage = Math.min(8, Math.max(1, Number(parsed.stage) || 1));
@@ -135,6 +142,9 @@ export default async function handler(req, res) {
         department,
         tasks: (parsed.tasks ?? []).slice(0, 3),
         vitalsMove: parsed.vitalsMove,
+        observed: facts
+          ? { origin: facts.origin, fetchedAt: facts.fetchedAt, pagesRead: facts.pages.map((p) => p.url), unreadable: facts.errors.map((e) => e.url) }
+          : null,
         model,
       });
     } catch (err) {
