@@ -75,12 +75,12 @@ export function PersonaCard({
           locked={locked}
         />
         {persona.isDefault ? (
-          <span className="absolute top-2 right-2 rounded-full border border-primary/30 bg-primary/10 px-1.5 py-0.5 text-[9px] font-medium uppercase tracking-wide text-primary">
+          <span className="absolute top-2 right-2 rounded-full border border-primary/30 bg-primary/10 px-1.5 py-0.5 text-xs font-medium uppercase tracking-wide text-primary">
             Default
           </span>
         ) : null}
         {locked ? (
-          <span className="absolute top-2 left-2 flex items-center gap-1 rounded-full border border-border bg-background/90 px-1.5 py-0.5 text-[9px] font-medium uppercase tracking-wide text-muted-foreground">
+          <span className="absolute top-2 left-2 flex items-center gap-1 rounded-full border border-border bg-background/90 px-1.5 py-0.5 text-xs font-medium uppercase tracking-wide text-muted-foreground">
             <Lock className="h-2.5 w-2.5" aria-hidden />
             Locked
           </span>
@@ -94,7 +94,7 @@ export function PersonaCard({
       <div className="flex flex-1 flex-col gap-2 p-3">
         <div>
           <div className="text-sm font-semibold leading-tight">{persona.archetype}</div>
-          <div className="mt-0.5 text-[11px] leading-snug text-muted-foreground">
+          <div className="mt-0.5 text-xs leading-snug text-muted-foreground">
             {persona.title}
             <span className="text-muted-foreground/60"> · {persona.lifespan}</span>
           </div>
@@ -113,7 +113,7 @@ export function PersonaCard({
         {!locked && persona.principles.length > 0 ? (
           <ul className="mt-auto space-y-1 pt-1">
             {persona.principles.slice(0, 3).map((p, i) => (
-              <li key={i} className="flex gap-1.5 text-[11px] leading-snug text-foreground/75">
+              <li key={i} className="flex gap-1.5 text-xs leading-snug text-foreground/75">
                 <span aria-hidden className="mt-1 h-1 w-1 shrink-0 rounded-full bg-primary/60" />
                 <span className="line-clamp-1">{p}</span>
               </li>
@@ -123,7 +123,7 @@ export function PersonaCard({
 
         {!locked && persona.quote ? (
           <figure className="mt-1 border-t border-border/60 pt-2">
-            <blockquote className="flex gap-1.5 text-[11px] italic leading-snug text-foreground/80">
+            <blockquote className="flex gap-1.5 text-xs italic leading-snug text-foreground/80">
               <QuoteIcon aria-hidden className="mt-0.5 h-3 w-3 shrink-0 text-primary/50" />
               <span className="line-clamp-3">{persona.quote.text}</span>
             </blockquote>
@@ -228,7 +228,8 @@ export function PersonaPicker({
         <div
           role="radiogroup"
           aria-label={`${seat?.label ?? ""} personas`}
-          className="grid max-h-[60vh] grid-cols-1 gap-3 overflow-y-auto sm:grid-cols-2 lg:grid-cols-3"
+          style={{ maxHeight: "60vh" }}
+          className="grid grid-cols-1 gap-3 overflow-y-auto sm:grid-cols-2 lg:grid-cols-3"
         >
           {roster.map((persona) => {
             const unlocked = isPersonaUnlocked(persona, reachedStageSequence);

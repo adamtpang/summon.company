@@ -164,7 +164,7 @@ export function AgentProperties({ agent, runtimeState }: AgentPropertiesProps) {
                 <>
                   <span
                     aria-hidden
-                    className="flex h-5 w-5 items-center justify-center rounded-sm bg-primary/[0.07] text-[10px] font-semibold tracking-tight text-primary/80"
+                    className="flex h-5 w-5 items-center justify-center rounded-sm bg-primary/[0.07] text-xs font-semibold tracking-tight text-primary/80"
                   >
                     {personaMonogram(displayPersona.archetype)}
                   </span>

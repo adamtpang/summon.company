@@ -1805,6 +1805,40 @@ describeEmbeddedPostgres("environmentRuntimeService", () => {
     });
   });
 
+  it("destroys a reusable lease once when two terminal paths race (issue #31)", async () => {
+    const { pluginId, companyId, executionWorkspaceId, reusableLease } =
+      await seedReusablePluginSandboxLease();
+
+    let releaseDriver!: () => void;
+    const driverGate = new Promise<void>((resolve) => { releaseDriver = resolve; });
+    const workerManager = {
+      isRunning: vi.fn((id: string) => id === pluginId),
+      call: vi.fn(async (_pluginId: string, method: string) => {
+        if (method === "environmentDestroyLease") {
+          await driverGate;
+          return undefined;
+        }
+        throw new Error(`Unexpected plugin method: ${method}`);
+      }),
+    } as unknown as PluginWorkerManager;
+    // Two service instances, as two routes would build them.
+    const first = environmentRuntimeService(db, { pluginWorkerManager: workerManager });
+    const second = environmentRuntimeService(db, { pluginWorkerManager: workerManager });
+
+    const a = first.destroyReusableSandboxLeases({ companyId, executionWorkspaceId, failureReason: "execution_workspace_closed" });
+    await new Promise((resolve) => setTimeout(resolve, 50));
+    const b = second.destroyReusableSandboxLeases({ companyId, executionWorkspaceId, failureReason: "issue_terminal" });
+    await new Promise((resolve) => setTimeout(resolve, 50));
+    releaseDriver();
+    const [destroyedA, destroyedB] = await Promise.all([a, b]);
+
+    const destroyCalls = (workerManager.call as ReturnType<typeof vi.fn>).mock.calls.filter(
+      ([, method]) => method === "environmentDestroyLease",
+    );
+    expect(destroyCalls).toHaveLength(1);
+    expect([...destroyedA, ...destroyedB].map((record) => record.lease.id)).toEqual([reusableLease.id]);
+  });
+
   it("retries reusable plugin-backed sandbox destroy when the worker is unavailable", async () => {
     const { pluginId, companyId, executionWorkspaceId, reusableLease } =
       await seedReusablePluginSandboxLease();
