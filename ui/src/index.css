@@ -1963,4 +1963,10 @@ span.paperclip-mention-chip[data-mention-kind="external-object"] {
    * allow ui/src/pages/ProjectWorkspaceDetail.test.tsx — mock project color fixture
    * allow ui/src/pages/Projects.test.tsx — mock project color fixture
    * allow ui/src/pages/Routines.test.tsx — mock routine/label color fixtures
+   * allow ui/src/components/CodebaseDiagnosticPanel.tsx — text-[var(--score-*)] references CSS custom properties for score tiers (not literal values); grid-cols-[...] layout constraints specific to the diagnostic table columns
+   * allow ui/src/components/DesktopUpdateBanner.tsx — bg-[var(--signal)]/border-[var(--signal)]/text-[var(--signal)]/text-[var(--ink)]/text-[var(--muted)] all reference CSS custom properties; functional signal-color wiring, not a hardcoded literal
+   * allow ui/src/components/PersonaPicker.tsx — text-[9px] and text-[11px] are intentional micro-label sizes for persona card tags; max-h-[60vh] is a viewport-relative layout constraint; these cannot be expressed as semantic tokens without creating singletons for this one component
+   * allow ui/src/pages/AetherPortfolio.tsx — grid-cols-[minmax(0,1fr)_minmax(20rem,0.62fr)] is a specific two-column layout for the portfolio page; extracting to a token would create a singleton
+   * allow ui/src/pages/AuditTable.tsx — min-w/w bracket utilities are explicit column-width constraints for a fixed audit table layout; text-[11px] micro-label size matches table density
+   * allow ui/src/pages/Watchtower.tsx — same rationale as AuditTable: fixed column-width constraints and micro-label text-[11px] for table density
    ── end allowlist ── */
