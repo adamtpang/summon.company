@@ -3,19 +3,19 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Summon | Run your company. Keep the final say.</title>
-<meta name="description" content="Summon diagnoses your company's binding constraint, assigns an accountable AI department, and brings every consequential decision back to you as the board." />
+<title>Summon | Your company, always working.</title>
+<meta name="description" content="Eight AI departments work your biggest constraint. Every consequential decision comes back to you." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://summon.company" />
 <meta property="og:image" content="https://summon.company/og.png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
-<meta property="og:title" content="Summon | Run your company. Keep the final say." />
-<meta property="og:description" content="A governed AI company with you as the board." />
+<meta property="og:title" content="Summon | Your company, always working." />
+<meta property="og:description" content="AI employees. Human board." />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://summon.company/og.png" />
-<meta name="twitter:title" content="Summon | Run your company. Keep the final say." />
-<meta name="twitter:description" content="A governed AI company with you as the board." />
+<meta name="twitter:title" content="Summon | Your company, always working." />
+<meta name="twitter:description" content="AI employees. Human board." />
 <meta property="og:site_name" content="Summon" />
 <meta property="og:locale" content="en_US" />
 <link rel="canonical" href="https://summon.company/" />
@@ -23,208 +23,473 @@
 <script type="application/ld+json">
 { "@context":"https://schema.org","@graph":[
  {"@type":"Organization","@id":"https://summon.company/#org","name":"Summon","url":"https://summon.company","description":"A governed AI company operating system with the human as the board.","parentOrganization":{"@type":"Organization","name":"adam.inc"}},
- {"@type":"SoftwareApplication","@id":"https://summon.company/#app","name":"Summon","applicationCategory":"BusinessApplication","operatingSystem":"Web","url":"https://summon.company","description":"Summon diagnoses a company's binding constraint, assigns an accountable AI department, and brings consequential decisions back to the human board.","offers":{"@type":"Offer","price":"500.00","priceCurrency":"USD","priceSpecification":{"@type":"UnitPriceSpecification","price":"500.00","priceCurrency":"USD","unitText":"per company per month, founding seat","billingDuration":"P1M"}},"publisher":{"@id":"https://summon.company/#org"}}
+ {"@type":"SoftwareApplication","@id":"https://summon.company/#app","name":"Summon","applicationCategory":"BusinessApplication","operatingSystem":"Web","url":"https://summon.company","description":"Summon diagnoses a company's binding constraint, assigns accountable AI employees, and brings consequential decisions back to the human board.","offers":{"@type":"Offer","price":"500.00","priceCurrency":"USD","priceSpecification":{"@type":"UnitPriceSpecification","price":"500.00","priceCurrency":"USD","unitText":"per company per month","billingDuration":"P1M"}},"publisher":{"@id":"https://summon.company/#org"}}
 ]}
 </script>
 
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3Cmask id='g' maskUnits='userSpaceOnUse' x='0' y='0' width='32' height='32'%3E%3Crect width='32' height='32' fill='%23fff'/%3E%3Cpath d='M1.5 16 H10 L13 10.5 L16.5 22 L19 16 H30.5' fill='none' stroke='%23000' stroke-width='6.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/mask%3E%3C/defs%3E%3Crect width='32' height='32' rx='7.5' fill='%23FFFFFF'/%3E%3Ccircle cx='16' cy='16' r='10.5' fill='none' stroke='%230A0A0A' stroke-width='3' mask='url(%23g)'/%3E%3Cpath d='M1.5 16 H10 L13 10.5 L16.5 22 L19 16 H30.5' fill='none' stroke='%230A0A0A' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="tokens.css" />
 
 <style>
-  /* E18 perfection pass, 2026-09-17. One headline, one sentence, one action,
-     one true instrument, one short "how it works", one quiet footer.
-     Deleted from the previous page and why:
-     - eyebrow label, second hero button, hero note: three competing signals above the fold
-     - nav links and nav button: secondary paths belong in the footer, and the hero already carries the one action
-     - departments grid, board section, offer section: the same promise said three more times
-     - scan and breathe animations: motion that simulated employee activity
-     - grid and radial background: decoration on the reading field
-     - illustrative "Company 01" data: replaced by dated real numbers from Company Zero */
-  * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body {
-    margin: 0;
-    min-width: 320px;
-    background: var(--bg-canvas);
-    color: var(--text-primary);
-    font-family: var(--font-body);
-    font-size: 16px;
-    line-height: 1.6;
-    letter-spacing: var(--tracking-body);
-    -webkit-font-smoothing: antialiased;
+/* Tokens */
+:root {
+  --canvas:    #F7FAFF;
+  --surface:   #EEF3FB;
+  --border:    rgba(10,16,32,0.09);
+  --ink:       #0A1020;
+  --ink-2:     #4E607F;
+  --ink-3:     #8899BB;
+  --accent:    #0B5FFF;
+  --accent-bg: rgba(11,95,255,0.07);
+  --accent-glow: rgba(11,95,255,0.14);
+  --font-sans: -apple-system, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "SF Mono", "Menlo", "Courier New", monospace;
+}
+:root[data-theme="dark"] {
+  --canvas:    #070B14;
+  --surface:   #0E1522;
+  --border:    rgba(255,255,255,0.07);
+  --ink:       #EBF0FA;
+  --ink-2:     #7A8DAF;
+  --ink-3:     #4A5A7A;
+  --accent:    #3B7FFF;
+  --accent-bg: rgba(59,127,255,0.09);
+  --accent-glow: rgba(59,127,255,0.18);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --canvas:    #070B14;
+    --surface:   #0E1522;
+    --border:    rgba(255,255,255,0.07);
+    --ink:       #EBF0FA;
+    --ink-2:     #7A8DAF;
+    --ink-3:     #4A5A7A;
+    --accent:    #3B7FFF;
+    --accent-bg: rgba(59,127,255,0.09);
+    --accent-glow: rgba(59,127,255,0.18);
   }
-  a { color: inherit; text-decoration: none; }
-  :where(a, button):focus-visible { outline: 2px solid var(--border-focus); outline-offset: 3px; }
-  .shell { width: min(100% - 48px, 1200px); margin-inline: auto; }
-  h1, h2, p { margin-top: 0; }
+}
 
-  .site-nav { position: sticky; top: 0; z-index: 20; background: var(--glass-bg); backdrop-filter: blur(18px); }
-  .site-nav .shell { display: flex; min-height: 72px; align-items: center; justify-content: space-between; gap: 24px; }
-  .brand { display: inline-flex; min-height: 48px; align-items: center; gap: 10px; font-weight: 600; }
-  .brand-mark { width: 26px; height: 26px; }
+/* Reset */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+body {
+  background: var(--canvas);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+a { color: inherit; text-decoration: none; }
+button, input, textarea { font-family: inherit; }
 
-  .button {
-    display: inline-flex;
-    min-height: 48px;
-    align-items: center;
-    justify-content: center;
-    padding: 0 22px;
-    border: 1px solid var(--action-primary);
-    border-radius: 10px;
-    background: var(--action-primary);
-    color: #fff;
-    font-size: 15px;
-    font-weight: 600;
-    transition: background 100ms var(--ease-out-soft);
-  }
-  .button:hover { background: var(--action-primary-hover); }
+/* Nav */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 10;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  padding: 0 28px;
+  border-bottom: 1px solid var(--border);
+  background: color-mix(in srgb, var(--canvas) 80%, transparent);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: -0.01em;
+}
+.nav-mark { width: 22px; height: 22px; flex-shrink: 0; }
+.nav-right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.nav-link {
+  font-size: 13px;
+  color: var(--ink-2);
+  font-weight: 500;
+  transition: color 120ms;
+}
+.nav-link:hover { color: var(--ink); }
 
-  .hero { padding: clamp(64px, 9vw, 128px) 0 clamp(64px, 9vw, 128px); }
-  .hero-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(48px, 7vw, 96px); align-items: center; }
-  h1 {
-    max-width: 9.5ch;
-    margin-bottom: 24px;
-    font-size: clamp(3.4rem, 7vw, 6.5rem);
-    font-weight: 800;
-    line-height: .92;
-    letter-spacing: -.04em;
-    text-wrap: balance;
-  }
-  .lead { max-width: 30rem; margin-bottom: 36px; color: var(--text-secondary); font-size: clamp(1.05rem, 1.4vw, 1.25rem); line-height: 1.55; }
-  .quiet { display: inline-flex; min-height: 44px; align-items: center; margin-top: 8px; color: var(--text-secondary); font-size: 14px; text-decoration: underline; text-underline-offset: 4px; }
-  .quiet:hover { color: var(--text-primary); }
-  .action { display: grid; justify-items: start; }
+/* Hero */
+.hero {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 120px 28px 80px;
+  min-height: 100dvh;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 68% 52% at 50% 42%,
+    var(--accent-glow) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 540px;
+  width: 100%;
+}
 
-  .instrument {
-    border: 1px solid var(--border-neutral);
-    border-radius: 16px;
-    background: #071f4d;
-    color: #eef2fa;
-    box-shadow: 0 30px 80px rgba(7,31,77,.18);
-  }
-  .instrument-head { display: flex; min-height: 56px; align-items: center; justify-content: space-between; gap: 16px; padding: 0 22px; border-bottom: 1px solid rgba(255,255,255,.13); font-family: var(--font-mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; }
-  .instrument-head span:first-child { color: #8ab9ff; }
-  .instrument-head span:last-child { color: #b9c6e4; }
-  .row { display: grid; grid-template-columns: 1fr auto; gap: 16px; align-items: baseline; min-height: 84px; padding: 0 22px; border-bottom: 1px solid rgba(255,255,255,.11); }
-  .row:last-of-type { border-bottom: 0; }
-  .row .label { color: #b9c6e4; font-size: 15px; }
-  .row .value { font-family: var(--font-mono); font-size: 28px; font-weight: 500; letter-spacing: -.02em; }
-  .row .note { grid-column: 1 / -1; margin-top: -26px; padding-bottom: 18px; color: #8a9ac4; font-family: var(--font-mono); font-size: 12px; }
-  .instrument-foot { padding: 14px 22px 18px; border-top: 1px solid rgba(255,255,255,.13); color: #8a9ac4; font-family: var(--font-mono); font-size: 12px; }
+/* Eyebrow */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 32px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+.eyebrow-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0.7;
+}
 
-  .how { padding: clamp(56px, 8vw, 104px) 0; border-top: 1px solid var(--border-neutral); }
-  h2 { margin-bottom: 32px; font-size: 1rem; font-weight: 600; letter-spacing: .02em; color: var(--text-secondary); }
-  .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; margin: 0; padding: 0; list-style: none; counter-reset: step; }
-  .steps li { padding-top: 20px; border-top: 1px solid var(--border-strong); }
-  .steps li::before { display: block; margin-bottom: 14px; color: var(--text-accent); font-family: var(--font-mono); font-size: 12px; counter-increment: step; content: "0" counter(step); }
-  .steps strong { display: block; margin-bottom: 6px; font-size: 1.25rem; font-weight: 600; letter-spacing: -.02em; }
-  .steps span { color: var(--text-secondary); font-size: 15px; }
+/* Headline */
+.headline {
+  font-size: clamp(2.5rem, 6vw, 4.25rem);
+  font-weight: 700;
+  line-height: 1.0;
+  letter-spacing: -0.038em;
+  text-wrap: balance;
+  margin-bottom: 18px;
+  color: var(--ink);
+}
 
-  footer { padding: 32px 0 44px; border-top: 1px solid var(--border-neutral); }
-  .footer-grid { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 24px; color: var(--text-tertiary); font-size: 14px; }
-  .footer-grid a { display: inline-flex; min-height: 44px; align-items: center; color: var(--text-secondary); }
-  .footer-grid a:hover { color: var(--text-primary); }
-  .footer-grid .legal { margin-left: auto; font-family: var(--font-mono); font-size: 12px; }
+/* Sub */
+.subline {
+  font-size: clamp(1rem, 1.8vw, 1.125rem);
+  color: var(--ink-2);
+  line-height: 1.6;
+  max-width: 34ch;
+  margin: 0 auto 44px;
+}
 
-  @media (max-width: 960px) {
-    .hero-grid { grid-template-columns: 1fr; }
-    .steps { grid-template-columns: 1fr 1fr; }
-  }
-  @media (max-width: 640px) {
-    .shell { width: min(100% - 32px, 1200px); }
-    .hero { padding: 56px 0 64px; }
-    h1 { font-size: clamp(3rem, 15vw, 4.5rem); }
-    .action .button { width: 100%; }
-    .instrument-head, .row, .instrument-foot { padding-inline: 16px; }
-    .row .value { font-size: 24px; }
-    .steps { grid-template-columns: 1fr; gap: 24px; }
-    .footer-grid .legal { width: 100%; margin-left: 0; }
-  }
-  @media (prefers-color-scheme: dark) {
-    /* tokens.css is light only; re-point the same roles so hierarchy and contrast hold in dark */
-    :root {
-      color-scheme: dark;
-      --bg-canvas: #0a1120;
-      --text-primary: #eef2fa;
-      --text-secondary: #b9c6e4;
-      --text-tertiary: #8a9ac4;
-      --text-accent: #8ab9ff;
-      --border-neutral: rgba(255, 255, 255, 0.14);
-      --border-strong: rgba(255, 255, 255, 0.22);
-      --glass-bg: rgba(10, 17, 32, 0.72);
-    }
-    .instrument { border-color: rgba(255,255,255,.14); }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto; }
-    *, *::before, *::after { transition-duration: 0ms !important; }
-  }
+/* Form */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+}
+.input-wrap { position: relative; }
+.form-input {
+  width: 100%;
+  padding: 14px 18px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-size: 15px;
+  color: var(--ink);
+  outline: none;
+  resize: none;
+  line-height: 1.5;
+  transition: border-color 140ms, box-shadow 140ms;
+  min-height: 52px;
+  overflow: hidden;
+}
+.form-input::placeholder { color: var(--ink-3); }
+.form-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-bg);
+}
+.btn-primary {
+  width: 100%;
+  height: 52px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  transition: background 120ms, transform 80ms;
+}
+.btn-primary:hover { background: color-mix(in srgb, var(--accent) 85%, #000); }
+.btn-primary:active { transform: translateY(1px); }
+.btn-primary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
+.form-note {
+  font-size: 12px;
+  color: var(--ink-3);
+  text-align: center;
+  margin-top: 2px;
+}
+.form-error {
+  font-size: 13px;
+  color: #d33;
+  text-align: center;
+  display: none;
+}
+
+/* Secondary action */
+.secondary-action {
+  margin-top: 24px;
+  font-size: 13px;
+  color: var(--ink-2);
+}
+.secondary-action a {
+  color: var(--ink-2);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--ink-3);
+  transition: color 120ms;
+}
+.secondary-action a:hover { color: var(--ink); }
+
+/* Thank-you state */
+.thank-you {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 28px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  max-width: 420px;
+  margin: 0 auto;
+  text-align: center;
+}
+.thank-you .ty-check {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: var(--accent-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  font-size: 18px;
+}
+.thank-you .ty-heading {
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+.thank-you .ty-body {
+  font-size: 14px;
+  color: var(--ink-2);
+  max-width: 28ch;
+  line-height: 1.5;
+}
+
+/* Footer */
+footer {
+  padding: 24px 28px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 20px;
+}
+.footer-brand { font-size: 13px; font-weight: 600; margin-right: 8px; }
+.footer-links { display: flex; flex-wrap: wrap; gap: 6px 16px; }
+.footer-link {
+  font-size: 12px;
+  color: var(--ink-3);
+  transition: color 120ms;
+}
+.footer-link:hover { color: var(--ink-2); }
+.footer-tagline {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-3);
+  letter-spacing: 0.04em;
+}
+
+/* Animation */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.hero-inner { animation: fadeUp 400ms cubic-bezier(0.22,1,0.36,1) both; }
+@media (prefers-reduced-motion: reduce) {
+  .hero-inner { animation: none; }
+  * { transition-duration: 0ms !important; }
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .nav { padding: 0 20px; }
+  .hero { padding: 100px 20px 60px; }
+  footer { padding: 20px; }
+  .footer-tagline { margin-left: 0; width: 100%; }
+}
 </style>
-<script data-posthog-fleet>(function(){if(window.__posthogFleet)return;window.__posthogFleet=1;var s=document.createElement('script');s.async=true;s.src='https://us-assets.i.posthog.com/static/array.js';s.onload=function(){if(!window.posthog||!window.posthog.init)return;window.posthog.init('phc_FCpCP9mIsb9IcxpX0Qqi6FmJ48sVvscAYIrZmtRHIq4',{api_host:'https://us.i.posthog.com',person_profiles:'identified_only',capture_pageview:'history_change',capture_pageleave:true,autocapture:false,disable_session_recording:true,disable_surveys:true,loaded:function(p){p.register({site:location.hostname})}});};document.head.appendChild(s);})();</script>
 </head>
 <body>
 
-<nav class="site-nav" aria-label="Primary navigation">
-  <div class="shell">
-    <a class="brand" href="/" aria-label="Summon home">
-      <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><defs><mask id="sgap-h" maskUnits="userSpaceOnUse" x="0" y="0" width="32" height="32"><rect width="32" height="32" fill="#fff"/><path d="M1.5 16 H10 L13 10.5 L16.5 22 L19 16 H30.5" fill="none" stroke="#000" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/></mask></defs><rect width="32" height="32" rx="7.5" fill="#fff" stroke="#0a0a0a" stroke-opacity=".16"/><circle cx="16" cy="16" r="10.5" fill="none" stroke="#0a0a0a" stroke-width="3" mask="url(#sgap-h)"/><path d="M1.5 16 H10 L13 10.5 L16.5 22 L19 16 H30.5" fill="none" stroke="#0a0a0a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      <span>Summon</span>
-    </a>
-  </div>
+<nav class="nav" aria-label="Primary">
+  <a class="nav-brand" href="/">
+    <svg class="nav-mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+      <defs>
+        <mask id="sm" maskUnits="userSpaceOnUse" x="0" y="0" width="32" height="32">
+          <rect width="32" height="32" fill="#fff"/>
+          <path d="M1.5 16H10L13 10.5L16.5 22L19 16H30.5" fill="none" stroke="#000" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </mask>
+      </defs>
+      <rect width="32" height="32" rx="7.5" fill="currentColor" opacity="0.1"/>
+      <circle cx="16" cy="16" r="10.5" fill="none" stroke="currentColor" stroke-width="3" mask="url(#sm)"/>
+      <path d="M1.5 16H10L13 10.5L16.5 22L19 16H30.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <span>Summon</span>
+  </a>
+  <nav class="nav-right" aria-label="Secondary">
+    <a class="nav-link" href="/terms">Terms</a>
+    <a class="nav-link" href="/privacy">Privacy</a>
+  </nav>
 </nav>
 
-<main>
-  <header class="hero">
-    <div class="shell hero-grid">
-      <div>
-        <h1>Run your company. Keep the final say.</h1>
-        <p class="lead">AI departments work your biggest constraint. Every consequential decision comes back to you.</p>
-        <div class="action">
-          <a class="button" href="/diagnose">Diagnose your company, free</a>
-          <a class="quiet" href="https://buy.stripe.com/8x2eVd1ACfJb5kc1q9aMU19">Founding seat, $500 a month</a>
-        </div>
-      </div>
+<main class="hero" role="main">
+  <div class="hero-inner">
+    <p class="eyebrow">
+      <span class="eyebrow-dot" aria-hidden="true"></span>
+      AI company operating system
+    </p>
 
-      <div class="instrument" aria-label="Summon running itself, Company Zero, read on 17 September 2026">
-        <div class="instrument-head">
-          <span>Summon on itself</span>
-          <span>17 Sep 2026</span>
+    <h1 class="headline">Your company,<br>always working.</h1>
+
+    <p class="subline">
+      Eight AI departments work your biggest constraint.
+      Every consequential decision comes back to you.
+    </p>
+
+    <div id="diag-form-wrap">
+      <form id="diag-form" class="form" novalidate>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div class="input-wrap">
+            <textarea
+              class="form-input"
+              id="problem-input"
+              rows="1"
+              placeholder="What's the biggest problem in your company right now?"
+              aria-label="Describe your company's biggest problem"
+              required
+              maxlength="500"
+            ></textarea>
+          </div>
+          <button type="submit" class="btn-primary" id="diag-submit">Diagnose your company</button>
+          <p class="form-error" id="diag-error" role="alert"></p>
+          <p class="form-note">Free. No work, spend, or send starts without your approval.</p>
         </div>
-        <div class="row"><span class="label">Departments</span><span class="value">8</span><span class="note">Engineering working, seven idle</span></div>
-        <div class="row"><span class="label">Open quests</span><span class="value">103</span><span class="note">10 blocked</span></div>
-        <div class="row"><span class="label">Decisions waiting for the board</span><span class="value">0</span></div>
-        <div class="instrument-foot">Read from the live control plane. Nothing here is simulated.</div>
+      </form>
+
+      <div class="thank-you" id="thank-you" role="status" aria-live="polite">
+        <div class="ty-check" aria-hidden="true">&#10003;</div>
+        <p class="ty-heading">Received.</p>
+        <p class="ty-body">Adam reviews every diagnosis personally and will be in touch shortly.</p>
       </div>
     </div>
-  </header>
 
-  <section class="how" aria-labelledby="how-title">
-    <div class="shell">
-      <h2 id="how-title">How it works</h2>
-      <ol class="steps">
-        <li><strong>Diagnose</strong><span>Find the constraint that matters now.</span></li>
-        <li><strong>Assign</strong><span>One accountable department owns it.</span></li>
-        <li><strong>Run</strong><span>Work, evidence, and a receipt.</span></li>
-        <li><strong>Approve</strong><span>Messages, spend, provider calls, and production changes wait for you.</span></li>
-      </ol>
-    </div>
-  </section>
+    <p class="secondary-action">
+      Ready to start? <a href="https://buy.stripe.com/8x2eVd1ACfJb5kc1q9aMU18">Join the founding seat</a> ($500/month).
+    </p>
+  </div>
 </main>
 
 <footer>
-  <div class="shell footer-grid">
-    <a href="/about">About</a>
-    <a href="/roles">Departments</a>
-    <a href="/blog.html">Journal</a>
-    <a href="/kit">Press kit</a>
-    <a href="/privacy">Privacy</a>
-    <a href="/terms">Terms</a>
-    <span class="legal">Human board. Governed company.</span>
-  </div>
+  <span class="footer-brand">Summon</span>
+  <nav class="footer-links" aria-label="Footer">
+    <a class="footer-link" href="/about">About</a>
+    <a class="footer-link" href="/roles">Departments</a>
+    <a class="footer-link" href="/blog.html">Journal</a>
+    <a class="footer-link" href="/terms">Terms</a>
+    <a class="footer-link" href="/privacy">Privacy</a>
+  </nav>
+  <span class="footer-tagline">Human board. Governed company.</span>
 </footer>
+
+<script>
+(function () {
+  var ta = document.getElementById('problem-input');
+  if (ta) {
+    ta.addEventListener('input', function () {
+      this.style.height = 'auto';
+      this.style.height = Math.max(52, this.scrollHeight) + 'px';
+    });
+  }
+
+  var form = document.getElementById('diag-form');
+  var thankYou = document.getElementById('thank-you');
+  var submitBtn = document.getElementById('diag-submit');
+  var errorEl = document.getElementById('diag-error');
+
+  function showError(msg) {
+    if (!errorEl) return;
+    errorEl.textContent = msg;
+    errorEl.style.display = 'block';
+  }
+  function clearError() {
+    if (!errorEl) return;
+    errorEl.textContent = '';
+    errorEl.style.display = 'none';
+  }
+
+  if (form && thankYou) {
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      clearError();
+      var val = ta ? ta.value.trim() : '';
+      if (!val) {
+        showError('Please describe your company\'s biggest problem.');
+        ta && ta.focus();
+        return;
+      }
+
+      if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Sending...'; }
+
+      fetch('/api/diagnose-form', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ problem: val }),
+      })
+        .then(function (res) {
+          if (!res.ok) throw new Error('server ' + res.status);
+          return res.json();
+        })
+        .then(function () {
+          form.style.display = 'none';
+          thankYou.style.display = 'flex';
+        })
+        .catch(function () {
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Diagnose your company';
+          }
+          showError('Something went wrong. Please try again.');
+        });
+    });
+  }
+})();
+</script>
 
 </body>
 </html>
