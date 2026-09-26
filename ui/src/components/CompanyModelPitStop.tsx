@@ -6,8 +6,11 @@ import type {
 } from "@paperclipai/shared";
 import { AlertCircle, CheckCircle2, Gauge, RefreshCw, Wrench } from "lucide-react";
 import { agentsApi } from "@/api/agents";
+import { companiesApi } from "@/api/companies";
 import { queryKeys } from "@/lib/queryKeys";
 import { Button } from "@/components/ui/button";
+import { BudgetCounterfactual } from "@/components/BudgetCounterfactual";
+import { computeFleetBudgetStats, fallbackCostPerRun } from "@/lib/fleet-counterfactual";
 import { RadioCardGroup } from "@/components/ui/radio-card";
 import { Skeleton } from "@/components/ui/skeleton";
 import {
@@ -46,6 +49,14 @@ export function CompanyModelPitStop({ companyId }: { companyId: string }) {
     queryKey: queryKeys.agents.modelPitStop(companyId),
     queryFn: () => agentsApi.modelPitStopStatus(companyId),
     refetchInterval: 3_000,
+  });
+  const agentsQuery = useQuery({
+    queryKey: queryKeys.agents.list(companyId),
+    queryFn: () => agentsApi.list(companyId),
+  });
+  const companyQuery = useQuery({
+    queryKey: queryKeys.companies.detail(companyId),
+    queryFn: () => companiesApi.get(companyId),
   });
   const switchMutation = useMutation({
     mutationFn: (adapterType: ModelPitStopAdapterType) =>
@@ -187,30 +198,52 @@ export function CompanyModelPitStop({ companyId }: { companyId: string }) {
         </div>
       ) : null}
 
-      <AlertDialog open={confirmOpen} onOpenChange={setConfirmOpen}>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>{actionLabel} across the fleet?</AlertDialogTitle>
-            <AlertDialogDescription asChild>
-              <div className="space-y-2">
-                <p>
-                  This reconfigures {status.eligibleAgentCount} {status.eligibleAgentCount === 1 ? "agent" : "agents"}
-                  {selectedProvider?.primaryModel ? ` to ${selectedProvider.primaryModel}` : ""}.
-                </p>
-                <p>
-                  It does not start, stop, or wake work. The new provider and cheap profile apply when the next run begins.
-                </p>
-              </div>
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel>Keep current setup</AlertDialogCancel>
-            <AlertDialogAction onClick={() => switchMutation.mutate(targetAdapterType)}>
-              Confirm pit stop
-            </AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
+      {(() => {
+        const fleetStats = computeFleetBudgetStats(
+          companyQuery.data?.budgetMonthlyCents ?? 0,
+          agentsQuery.data ?? [],
+        );
+        const currentTier = status.currentAdapterType ?? "sonnet";
+        const newTier = targetAdapterType;
+        const marginalCostCents =
+          (fallbackCostPerRun(newTier) - fallbackCostPerRun(currentTier)) *
+          Math.max(fleetStats.totalFleetRuns, status.eligibleAgentCount * 10);
+        return (
+          <AlertDialog open={confirmOpen} onOpenChange={setConfirmOpen}>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>{actionLabel} across the fleet?</AlertDialogTitle>
+                <AlertDialogDescription asChild>
+                  <div className="space-y-2">
+                    <p>
+                      This reconfigures {status.eligibleAgentCount} {status.eligibleAgentCount === 1 ? "agent" : "agents"}
+                      {selectedProvider?.primaryModel ? ` to ${selectedProvider.primaryModel}` : ""}.
+                    </p>
+                    <p>
+                      It does not start, stop, or wake work. The new provider and cheap profile apply when the next run begins.
+                    </p>
+                    {marginalCostCents > 0 && (
+                      <BudgetCounterfactual
+                        marginalCostCents={marginalCostCents}
+                        companyBudgetMonthlyCents={fleetStats.companyBudgetMonthlyCents}
+                        totalFleetSpentCents={fleetStats.totalFleetSpentCents}
+                        totalFleetRuns={fleetStats.totalFleetRuns}
+                        modelTier={newTier}
+                      />
+                    )}
+                  </div>
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel>Keep current setup</AlertDialogCancel>
+                <AlertDialogAction onClick={() => switchMutation.mutate(targetAdapterType)}>
+                  Confirm pit stop
+                </AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
+        );
+      })()}
     </div>
   );
 }

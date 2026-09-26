@@ -363,14 +363,38 @@ export function agentService(db: Db) {
     return new Map(rows.map((row) => [row.agentId, Number(row.spentMonthlyCents ?? 0)]));
   }
 
+  async function getLast30DayRunCountByAgentIds(companyId: string, agentIds: string[]) {
+    if (agentIds.length === 0) return new Map<string, number>();
+    const since = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
+    const rows = await db
+      .select({
+        agentId: heartbeatRuns.agentId,
+        runCount30d: sql<number>`count(*)::integer`,
+      })
+      .from(heartbeatRuns)
+      .where(
+        and(
+          eq(heartbeatRuns.companyId, companyId),
+          inArray(heartbeatRuns.agentId, agentIds),
+          gte(heartbeatRuns.createdAt, since),
+        ),
+      )
+      .groupBy(heartbeatRuns.agentId);
+    return new Map(rows.map((row) => [row.agentId, Number(row.runCount30d ?? 0)]));
+  }
+
   async function hydrateAgentSpend<T extends { id: string; companyId: string; spentMonthlyCents: number }>(rows: T[]) {
     const agentIds = rows.map((row) => row.id);
     const companyId = rows[0]?.companyId;
     if (!companyId || agentIds.length === 0) return rows;
-    const spendByAgentId = await getMonthlySpendByAgentIds(companyId, agentIds);
+    const [spendByAgentId, runCountByAgentId] = await Promise.all([
+      getMonthlySpendByAgentIds(companyId, agentIds),
+      getLast30DayRunCountByAgentIds(companyId, agentIds),
+    ]);
     return rows.map((row) => ({
       ...row,
       spentMonthlyCents: spendByAgentId.get(row.id) ?? 0,
+      runCount30d: runCountByAgentId.get(row.id) ?? 0,
     }));
   }
 

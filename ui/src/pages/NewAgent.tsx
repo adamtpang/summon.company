@@ -37,6 +37,8 @@ import { DEFAULT_CODEX_LOCAL_BYPASS_APPROVALS_AND_SANDBOX } from "@paperclipai/a
 import { DEFAULT_CURSOR_LOCAL_MODEL } from "@paperclipai/adapter-cursor-local";
 import { DEFAULT_GEMINI_LOCAL_MODEL } from "@paperclipai/adapter-gemini-local";
 import { DEFAULT_OPENCODE_LOCAL_MODEL, isValidOpenCodeModelId } from "@paperclipai/adapter-opencode-local";
+import { BudgetCounterfactual } from "@/components/BudgetCounterfactual";
+import { computeFleetBudgetStats, fallbackCostPerRun, DEFAULT_NEW_AGENT_RUNS_PER_MONTH } from "@/lib/fleet-counterfactual";
 
 function createValuesForAdapterType(
   adapterType: CreateConfigValues["adapterType"],
@@ -57,7 +59,7 @@ function createValuesForAdapterType(
 }
 
 export function NewAgent() {
-  const { selectedCompanyId } = useCompany();
+  const { selectedCompanyId, selectedCompany } = useCompany();
   const { setBreadcrumbs } = useBreadcrumbs();
   const queryClient = useQueryClient();
   const navigate = useNavigate();
@@ -182,6 +184,13 @@ export function NewAgent() {
   }
 
   const availableSkills = (companySkills ?? []).filter((skill) => !skill.key.startsWith("paperclipai/paperclip/"));
+
+  const hireBudgetStats = computeFleetBudgetStats(
+    selectedCompany?.budgetMonthlyCents ?? 0,
+    agents ?? [],
+  );
+  const hireModelTier = configValues.model ?? configValues.adapterType ?? "sonnet";
+  const hireMarginalCostCents = fallbackCostPerRun(hireModelTier) * DEFAULT_NEW_AGENT_RUNS_PER_MONTH;
 
   function toggleSkill(key: string, checked: boolean) {
     setSelectedSkillKeys((prev) => {
@@ -359,6 +368,13 @@ export function NewAgent() {
             {testAgentFeedback.result && (
               <AdapterEnvironmentResult result={testAgentFeedback.result} />
             )}
+            <BudgetCounterfactual
+              marginalCostCents={hireMarginalCostCents}
+              companyBudgetMonthlyCents={hireBudgetStats.companyBudgetMonthlyCents}
+              totalFleetSpentCents={hireBudgetStats.totalFleetSpentCents}
+              totalFleetRuns={hireBudgetStats.totalFleetRuns}
+              modelTier={hireModelTier}
+            />
             <div className="flex items-center justify-between gap-2">
               <Button variant="outline" size="sm" onClick={() => navigate("/agents")}>
                 Cancel

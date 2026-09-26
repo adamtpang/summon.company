@@ -100,6 +100,7 @@ export interface Agent {
   defaultEnvironmentId?: string | null;
   budgetMonthlyCents: number;
   spentMonthlyCents: number;
+  runCount30d?: number;
   pauseReason: PauseReason | null;
   pausedAt: Date | null;
   errorReason?: string | null;
