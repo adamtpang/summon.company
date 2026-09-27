@@ -396,17 +396,11 @@ footer {
               maxlength="500"
             ></textarea>
           </div>
-          <button type="submit" class="btn-primary" id="diag-submit">Diagnose your company</button>
+          <button type="submit" class="btn-primary" id="diag-submit">Email my problem to Adam</button>
           <p class="form-error" id="diag-error" role="alert"></p>
-          <p class="form-note">Free. No work, spend, or send starts without your approval.</p>
+          <p class="form-note">Opens your email app. No data sent to our servers.</p>
         </div>
       </form>
-
-      <div class="thank-you" id="thank-you" role="status" aria-live="polite">
-        <div class="ty-check" aria-hidden="true">&#10003;</div>
-        <p class="ty-heading">Received.</p>
-        <p class="ty-body">Adam reviews every diagnosis personally and will be in touch shortly.</p>
-      </div>
     </div>
 
     <p class="secondary-action">
@@ -438,7 +432,6 @@ footer {
   }
 
   var form = document.getElementById('diag-form');
-  var thankYou = document.getElementById('thank-you');
   var submitBtn = document.getElementById('diag-submit');
   var errorEl = document.getElementById('diag-error');
 
@@ -453,7 +446,7 @@ footer {
     errorEl.style.display = 'none';
   }
 
-  if (form && thankYou) {
+  if (form) {
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       clearError();
@@ -463,29 +456,9 @@ footer {
         ta && ta.focus();
         return;
       }
-
-      if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Sending...'; }
-
-      fetch('/api/diagnose-form', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ problem: val }),
-      })
-        .then(function (res) {
-          if (!res.ok) throw new Error('server ' + res.status);
-          return res.json();
-        })
-        .then(function () {
-          form.style.display = 'none';
-          thankYou.style.display = 'flex';
-        })
-        .catch(function () {
-          if (submitBtn) {
-            submitBtn.disabled = false;
-            submitBtn.textContent = 'Diagnose your company';
-          }
-          showError('Something went wrong. Please try again.');
-        });
+      var subject = encodeURIComponent('Summon diagnosis request');
+      var body = encodeURIComponent(val.slice(0, 500));
+      window.location.href = 'mailto:adamtpang@gmail.com?subject=' + subject + '&body=' + body;
     });
   }
 })();
