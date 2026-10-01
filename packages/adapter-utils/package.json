@@ -40,11 +40,11 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "acpx": "^0.13.2",
+    "acpx": "^0.19.3",
     "picocolors": "^1.1.1"
   },
   "devDependencies": {
-    "@types/node": "^22.20.1",
+    "@types/node": "^22.20.4",
     "typescript": "^5.7.3"
   }
 }
