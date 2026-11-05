@@ -878,9 +878,12 @@ function resolveWindowsBashPath(env: NodeJS.ProcessEnv = process.env): string {
 export function buildWrapperOverrideCommand(
   wrapperPath: string,
   platform: NodeJS.Platform = process.platform,
-): string {
+): string | string[] {
   if (platform !== "win32") return wrapperPath;
-  return `${shellQuote(resolveWindowsBashPath())} ${shellQuote(wrapperPath)}`;
+  // Windows cannot exec a shebang .sh directly, so route it through bash.
+  // acpx 0.13 rejects raw command strings on Windows and requires an argv
+  // array; an array override is passed through as argv unchanged.
+  return [resolveWindowsBashPath(), wrapperPath];
 }
 
 async function writeAgentWrapper(input: {

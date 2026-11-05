@@ -1,0 +1,52 @@
+
+hawaiitechweek.com  (gathered 2026-08-14T01:59:23.509Z)
+
+--- homepage ---
+status: 200
+title: Hawaii Tech Week 2026 | Where Tech Meets Hawaii | Hawaii Tech Week
+description: Hawaii Tech Week 2026 is the week to plug into Hawaii's tech, industry, and government ecosystem through 50+ independently hosted events across Honolulu. Aug 31 - Sep 6, 2026.
+generator: (unknown)
+text sample: PARTNERSCALENDARSPEAKERSTRAVELMOREVENUESABOUT2025 REPORTGet UpdatesLoading…Get UpdatesSubscribeSTAY CONNECTEDGet InvolvedAttendHost EventSponsorFAQExplorePartnersCalendarSpeakersVenuesTravelResourcesAboutContact UsHandbo...
+
+--- robots.txt ---
+fetched: true
+disallows crawlers: true
+declared sitemaps: https://hawaiitechweek.com/sitemap.xml
+
+--- sitemap ---
+entries found: 49
+shape: {
+  '/': 1,
+  '/about': 1,
+  '/register': 1,
+  '/speakers': 1,
+  '/partners': 1,
+  '/calendar': 1,
+  '/travel': 1,
+  '/faq': 1,
+  '/creators': 1,
+  '/brand-kit': 1,
+  '/contact': 1,
+  '/venues': 1,
+  '/reports': 2,
+  '/privacy-policy': 1,
+  '/terms-conditions': 1,
+  '/handbook': 33
+}
+
+--- secondary pages ---
+https://hawaiitechweek.com/about  [200]  About | Hawaii Tech Week
+https://hawaiitechweek.com/contact  [200]  Contact Us | Hawaii Tech Week
+
+--- structured data ---
+Organization, Event, FAQPage
+
+--- org signals ---
+emails: hello@hawaiitechweek.com, aloha@hawaiitechweek.com, azzumi@gmail.com
+phones: (none)
+social: {"linkedin":"https://linkedin.com/company/hitechweek","instagram":"https://instagram.com/hitechweek","youtube":"https://youtube.com/@hitechweek","twitter":"https://x.com/hawaiitechweek"}
+address: Honolulu, HI, US
+
+--- fetch errors (evidence, not noise) ---
+(none)
+

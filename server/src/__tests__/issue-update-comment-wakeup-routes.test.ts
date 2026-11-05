@@ -7,6 +7,7 @@ const PREVIOUS_AGENT_ID = "22222222-2222-4222-8222-222222222222";
 const MENTIONED_AGENT_ID = "33333333-3333-4333-8333-333333333333";
 
 const mockIssueService = vi.hoisted(() => ({
+  resolveCadence: vi.fn(async () => new Map()),
   getById: vi.fn(),
   update: vi.fn(),
   addComment: vi.fn(),
@@ -71,6 +72,7 @@ vi.mock("../services/index.js", () => ({
       },
     })),
     listCompanyIds: vi.fn(async () => ["company-1"]),
+    getExperimental: vi.fn(async () => ({})),
   }),
   issueApprovalService: () => ({}),
   issueReferenceService: () => ({
@@ -143,6 +145,7 @@ function registerModuleMocks() {
         },
       })),
       listCompanyIds: vi.fn(async () => ["company-1"]),
+      getExperimental: vi.fn(async () => ({})),
     }),
     issueApprovalService: () => ({}),
     issueReferenceService: () => ({

@@ -506,6 +506,10 @@ export function Layout() {
     }
   }, [location.key, location.pathname, location.state, navigationType]);
 
+  if (/\/focus\/?$/.test(location.pathname)) {
+    return <GeneralSettingsProvider value={{ keyboardShortcutsEnabled }}><Outlet /></GeneralSettingsProvider>;
+  }
+
   return (
     <GeneralSettingsProvider value={{ keyboardShortcutsEnabled }}>
       <div

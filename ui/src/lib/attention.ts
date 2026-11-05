@@ -54,6 +54,7 @@ const SOURCE_META: Record<AttentionSourceKind, SourceMeta> = {
   failed_run: { label: "Failed run", icon: RefreshCw },
   budget_alert: { label: "Budget", icon: DollarSign },
   agent_error_alert: { label: "Agent error", icon: AlertTriangle },
+  heartbeat_alert: { label: "Heartbeat alert", icon: AlertTriangle },
 };
 
 export function sourceMeta(kind: AttentionSourceKind): SourceMeta {
@@ -141,6 +142,7 @@ export function attentionTone(item: AttentionItem): AttentionTone {
   switch (item.sourceKind) {
     case "failed_run":
     case "agent_error_alert":
+    case "heartbeat_alert":
       return "rose";
     case "blocker_attention":
     case "recovery_action":

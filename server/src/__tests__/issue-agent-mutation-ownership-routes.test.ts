@@ -11,6 +11,7 @@ const ownerRunId = "55555555-5555-4555-8555-555555555555";
 const recoveryActionId = "77777777-7777-4777-8777-777777777777";
 
 const mockIssueService = vi.hoisted(() => ({
+  resolveCadence: vi.fn(async () => new Map()),
   addComment: vi.fn(),
   assertCheckoutOwner: vi.fn(),
   create: vi.fn(),
@@ -201,6 +202,7 @@ function registerRouteMocks() {
         },
       })),
       listCompanyIds: vi.fn(async () => [companyId]),
+      getExperimental: vi.fn(async () => ({})),
     }),
     issueApprovalService: () => mockIssueApprovalService,
     issueRecoveryActionService: () => mockIssueRecoveryActionService,

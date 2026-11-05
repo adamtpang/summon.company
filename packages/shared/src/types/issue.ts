@@ -36,6 +36,7 @@ import type {
   SourceTrustMetadata,
   TrustAuthorizationPolicy,
 } from "../trust-policy.js";
+import type { AttentionCadence, AttentionCadenceTier } from "../attention-cadence.js";
 
 export type { IssueWorkMode };
 
@@ -715,6 +716,10 @@ export interface Issue {
   status: IssueStatus;
   workMode: IssueWorkMode;
   priority: IssuePriority;
+  /** VIT-44 §4: per-item attention-cadence override (hot|recent|stale), or null. */
+  cadenceOverride?: AttentionCadenceTier | null;
+  /** VIT-44 §4: resolved attention cadence for this item; override always wins. */
+  cadence?: AttentionCadence | null;
   assigneeAgentId: string | null;
   assigneeUserId: string | null;
   checkoutRunId: string | null;

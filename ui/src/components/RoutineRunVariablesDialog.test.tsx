@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 
-import { flushSync } from "react-dom";
+import { act } from "react";
 import { createRoot } from "react-dom/client";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import type { Agent, ExecutionWorkspace, Project, RoutineVariable } from "@paperclipai/shared";
@@ -63,8 +63,10 @@ async function settleEffects() {
 }
 
 async function flushUi(callback: () => void) {
-  flushSync(callback);
-  await settleEffects();
+  await act(async () => {
+    callback();
+    await settleEffects();
+  });
 }
 
 function createProject(): Project {
@@ -394,7 +396,9 @@ describe("RoutineRunVariablesDialog", () => {
     });
 
     for (let i = 0; i < 10 && !document.querySelector('[data-testid="workspace-card"]'); i += 1) {
-      await settleEffects();
+      await act(async () => {
+        await settleEffects();
+      });
     }
 
     const branchInput = Array.from(document.querySelectorAll("input"))
@@ -465,7 +469,9 @@ describe("RoutineRunVariablesDialog", () => {
     });
 
     for (let i = 0; i < 10 && latestWorkspaceIssue === null; i += 1) {
-      await settleEffects();
+      await act(async () => {
+        await settleEffects();
+      });
     }
 
     expect(latestWorkspaceIssue).toMatchObject({

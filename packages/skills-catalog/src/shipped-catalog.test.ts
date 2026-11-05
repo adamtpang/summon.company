@@ -6,6 +6,11 @@ import { catalogManifest, catalogSkills, resolveCatalogSkillRef } from "./index.
 
 const EXPECTED_BUNDLED_KEYS = [
   "paperclipai/bundled/docs/doc-maintenance",
+  "paperclipai/bundled/marketing/brand-voice",
+  "paperclipai/bundled/marketing/campaign-planning",
+  "paperclipai/bundled/marketing/competitive-analysis",
+  "paperclipai/bundled/marketing/content-creation",
+  "paperclipai/bundled/marketing/performance-analytics",
   "paperclipai/bundled/paperclip-operations/issue-triage",
   "paperclipai/bundled/paperclip-operations/reflection-coach",
   "paperclipai/bundled/paperclip-operations/task-planning",

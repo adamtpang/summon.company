@@ -3359,6 +3359,22 @@ export function agentRoutes(
       details: summarizeAgentUpdateDetails(patchData),
     });
 
+    // SUM-253: when a persona is (re)selected via metadata.persona, reconcile the
+    // `## Your persona:` overlay in the managed instruction bundle so the agent's
+    // next run writes in the new register. Best-effort — never block the PATCH.
+    if (hasOwn(patchData, "metadata")) {
+      const personaSlug =
+        typeof agent.metadata?.persona === "string" ? agent.metadata.persona : null;
+      if (personaSlug) {
+        try {
+          await instructions.reconcilePersonaOverlay(agent, personaSlug);
+        } catch {
+          // Overlay reconcile is additive and non-critical; the persona slug is
+          // still persisted and the runtime can reconcile again on a later run.
+        }
+      }
+    }
+
     res.json(agent);
   });
 
@@ -3995,7 +4011,16 @@ export function agentRoutes(
     if (existing) {
       assertCompanyAccess(req, existing.companyId);
     }
-    const run = await heartbeat.cancelRun(runId);
+    // SUM-173 (SUM-144 D2): a board cancel is terminal. Pass actor provenance so
+    // cancelRun stamps a durable no-recovery marker and the recovery reconciler
+    // skips (instead of re-dispatching) this run.
+    const run = await heartbeat.cancelRun(runId, "Cancelled by board operator", {
+      noRecovery: true,
+      actorType: "user",
+      actorId: req.actor.userId ?? "board",
+      noRecoveryReason: "board_cancel",
+      eventMessage: "run cancelled by board (no-recovery)",
+    });
 
     if (run) {
       await logActivity(db, {

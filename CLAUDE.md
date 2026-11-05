@@ -1,3 +1,11 @@
+# Canonical home: thedojo.fun — 2026-09-12
+
+Indiehacking/building and market intelligence now belong to the saved Dojo at
+C:/Users/adamp/Aether/thedojo.fun/business-factory and market-intelligence/.
+This supersedes the September 10 split. See Dojo/MIGRATION-2026-09-12.md.
+Source copies in Summon are rollback/compatibility copies, not active ownership.
+Do not start parallel factory work there. Runtime routes are not cut over yet.
+
 # summon.company cross-agent handoff
 
 Last updated: 2026-07-14 by Codex.
@@ -78,6 +86,16 @@ migration lineage, prove it on an isolated clone, take a backup, run a canary, t
 over with a rollback command.
 
 No agent may restart or migrate the main control plane while company runs are active.
+
+**No tests on the live company (Adam, 2026-09-26).** Acceptance tests, revocation
+tests, budget tests, and any other experiment that changes state never run against
+Company Zero or any real company on the main control plane. Run them on an isolated
+copy: a fresh `PAPERCLIP_HOME` and config, a copied database, its own port, and
+`HEARTBEAT_SCHEDULER_ENABLED=false`. Why: on 2026-09-26 an "AC3 revocation test"
+set a 100-unit policy on the live Engineering agent, issued a key, revoked it, and
+left Engineering blocked for hours (every run failed with `credential_revoked`).
+If a live-company change is ever truly needed, ask Adam first and undo it in the
+same session.
 Treat comments on terminal issues as executable wake events in the current runtime.
 
 ## Verification completed

@@ -2,6 +2,8 @@ import {
   Inbox,
   ListChecks,
   CircleDot,
+  Flag,
+  Hand,
   Target,
   LayoutDashboard,
   DollarSign,
@@ -192,7 +194,10 @@ export function Sidebar() {
               newTaskButton
             );
           })()}
+          <SidebarNavItem to="/company" label="Company" icon={Flag} />
+          <SidebarNavItem to="/your-turn" label="Your turn" icon={Hand} />
           <SidebarNavItem to="/dashboard" label="Dashboard" icon={LayoutDashboard} liveCount={liveRunCount} />
+          <SidebarNavItem to="/focus" label="Focus" icon={CircleDot} />
           <SidebarNavItem to="/chat" label="Chat" icon={MessageCircle} textBadge="beta" />
           <SidebarNavItem to="/messages" label="Messages" icon={MessageCircle} />
           <SidebarNavItem

@@ -194,7 +194,7 @@ function renderPaperclipEnvNote(env: Record<string, string>): string {
     .sort();
   if (keys.length === 0) return "";
   return [
-    "Paperclip runtime note:",
+    "Summon runtime note:",
     `The following PAPERCLIP_* environment variables are available in the cloud agent shell: ${keys.join(", ")}`,
     "Use them directly instead of assuming they are absent.",
   ].join("\n");

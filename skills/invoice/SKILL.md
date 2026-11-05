@@ -1,3 +1,13 @@
+---
+name: invoice
+description: >
+  Reads a project's actual scope, decomposes it into client-recognizable line
+  items, prices it defensibly, shows a draft, then creates a real Stripe
+  invoice (hosted pay page + PDF) via the Stripe MCP or a fallback script.
+  Sibling of /mint: invoice bills work already done or agreed, mint sells
+  forward.
+---
+
 # /invoice — scope-aware invoice generator (Stripe MCP first)
 
 Reads a project's ACTUAL scope, decomposes it into line items a client would

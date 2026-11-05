@@ -459,6 +459,8 @@ export const updateIssueSchema = createIssueBaseSchema.omit({
 }).partial().extend({
   requestDepth: issueRequestDepthInputSchema.optional(),
   assigneeAgentId: z.string().trim().min(1).optional().nullable(),
+  // VIT-44 §4: board sets/clears a per-item attention-cadence override.
+  cadenceOverride: z.enum(["hot", "recent", "stale"]).optional().nullable(),
   comment: multilineTextSchema.pipe(z.string().min(1)).optional(),
   reviewRequest: issueReviewRequestSchema.optional().nullable(),
   reopen: z.boolean().optional(),

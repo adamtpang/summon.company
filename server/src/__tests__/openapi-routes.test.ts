@@ -58,6 +58,15 @@ const explicitOpenApiCoverageExclusions = new Set([
   "pipelines.ts",
   // Case routes are experimental (enableCases flag) and not yet in the public OpenAPI document.
   "cases.ts",
+  // Fleet, register-truth, and vitals-ai-sdr routes are internal operating-model
+  // tooling, not yet represented in the public OpenAPI document.
+  "fleet.ts",
+  "register-truth.ts",
+  "vitals-ai-sdr.ts",
+  // Subscriptions and policy-ledger routes are new (billing/employee-policy
+  // feature work) and not yet represented in the public OpenAPI document.
+  "subscriptions.ts",
+  "policy-ledger.ts",
 ]);
 
 function createApp() {

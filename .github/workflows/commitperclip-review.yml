@@ -24,6 +24,10 @@ jobs:
           ref: master
 
       - name: Dependency Review
+        # continue-on-error: this repo doesn't have the GitHub Dependency
+        # graph setting enabled (Settings > Security), which the action
+        # requires. Non-blocking until that's turned on.
+        continue-on-error: true
         uses: actions/dependency-review-action@a1d282b36b6f3519aa1f3fc636f609c47dddb294 # v5.0.0
         with:
           base-ref: ${{ github.event.pull_request.base.sha }}
@@ -37,15 +41,23 @@ jobs:
       - name: Generate commitperclip token
         id: token
         run: |
+          if [ -z "$COMMITPERCLIP_KEY" ]; then
+            echo "::notice::COMMITPERCLIP_KEY secret is not set. Skipping commitperclip gates. Add the secret in repository settings to enable them."
+            echo "skip=true" >> $GITHUB_OUTPUT
+            exit 0
+          fi
           TOKEN=$(node .github/scripts/get-bot-token.mjs)
           echo "::add-mask::$TOKEN"
           echo "value=$TOKEN" >> $GITHUB_OUTPUT
+          echo "skip=false" >> $GITHUB_OUTPUT
         env:
           COMMITPERCLIP_KEY: ${{ secrets.COMMITPERCLIP_KEY }}
 
       - name: Run quality gates
         id: quality
-        if: github.event.pull_request.user.login != 'dependabot[bot]'
+        if: >-
+          steps.token.outputs.skip != 'true' &&
+          github.event.pull_request.user.login != 'dependabot[bot]'
         run: node .github/scripts/run-quality-gates.mjs
         continue-on-error: true
         env:
@@ -56,6 +68,7 @@ jobs:
           PR_BRANCH: ${{ github.event.pull_request.head.ref }}
 
       - name: Run security gates
+        if: steps.token.outputs.skip != 'true'
         run: node .github/scripts/check-pr-security.mjs
         continue-on-error: true
         timeout-minutes: 3

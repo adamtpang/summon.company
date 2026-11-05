@@ -3,6 +3,7 @@ import request from "supertest";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 const mockIssueService = vi.hoisted(() => ({
+  resolveCadence: vi.fn(async () => new Map()),
   getById: vi.fn(),
   getWakeableParentAfterChildCompletion: vi.fn(),
   listWakeableBlockedDependents: vi.fn(),
@@ -62,7 +63,7 @@ function registerModuleMocks() {
       wakeup: vi.fn(async () => undefined),
       reportRunActivity: vi.fn(async () => undefined),
     }),
-    instanceSettingsService: () => ({}),
+    instanceSettingsService: () => ({ getExperimental: vi.fn(async () => ({})) }),
     issueApprovalService: () => ({}),
     issueReferenceService: () => ({
       deleteDocumentSource: async () => undefined,

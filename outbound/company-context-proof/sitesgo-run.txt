@@ -1,0 +1,44 @@
+
+sitesgo.com  (gathered 2026-08-14T01:59:20.555Z)
+
+--- homepage ---
+status: 200
+title: SitesGo | Idea to Website in 14 Days. For Academia, Startups & Coaches
+description: SitesGo powers world's leading Universities and Professors with dynamic websites for research labs, conferences, startups, and survey studies.
+generator: (unknown)
+text sample: ServicesWorkPricingAboutResourcesJoin Us :)SitesGo BlogBook a CallIdea to Website in 14 Days. For Academia, Startups & Coaches SitesGo converts your expertise into a powerful website that drives business growth and build...
+
+--- robots.txt ---
+fetched: true
+disallows crawlers: false
+declared sitemaps: https://www.sitesgo.com/sitemap.xml
+
+--- sitemap ---
+entries found: 66
+shape: {
+  '/about': 1,
+  '/blog': 60,
+  '/join-us': 1,
+  '/': 1,
+  '/pricing': 1,
+  '/work': 1,
+  '/services': 1
+}
+
+--- secondary pages ---
+https://sitesgo.com/pricing  [200]  SitesGo Pricing  | Affordable Website Plans
+https://sitesgo.com/about  [200]  About SitesGo | For Academia, Startups & Coaches
+https://sitesgo.com/blog  [200]  Blog | SitesGo Website Agency for Academia
+
+--- structured data ---
+Organization
+
+--- org signals ---
+emails: hello@sitesgo.com
+phones: (none)
+social: {"linkedin":"https://www.linkedin.com/in/federicocristinacfa/","youtube":"https://www.youtube.com/@SitesGo"}
+address: (none)
+
+--- fetch errors (evidence, not noise) ---
+(none)
+

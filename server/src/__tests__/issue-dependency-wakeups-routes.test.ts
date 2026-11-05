@@ -5,6 +5,7 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 const mockWakeup = vi.hoisted(() => vi.fn(async () => undefined));
 const mockFindExistingIssueBlockersResolvedWake = vi.hoisted(() => vi.fn(async () => null));
 const mockIssueService = vi.hoisted(() => ({
+  resolveCadence: vi.fn(async () => new Map()),
   getAncestors: vi.fn(),
   getById: vi.fn(),
   getByIdentifier: vi.fn(async () => null),
@@ -52,6 +53,7 @@ vi.mock("../services/index.js", () => ({
   instanceSettingsService: () => ({
     get: vi.fn(),
     listCompanyIds: vi.fn(),
+    getExperimental: vi.fn(async () => ({})),
   }),
   issueApprovalService: () => ({}),
   issueReferenceService: () => ({

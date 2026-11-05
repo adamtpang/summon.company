@@ -1656,6 +1656,10 @@ function createPluginEnvironmentDriver(
   };
 }
 
+// Lease ids a destroyReusableSandboxLeases call is working on right now, shared
+// across service instances in this process (issue #31).
+const reusableLeaseDestroyClaims = new Set<string>();
+
 export function environmentRuntimeService(
   db: Db,
   options: {
@@ -1829,6 +1833,14 @@ export function environmentRuntimeService(
 
       const destroyed: EnvironmentRuntimeLeaseRecord[] = [];
       for (const leaseRow of leaseRows) {
+        // Two terminal paths (issue close and workspace close) can reach here at
+        // once for the same lease. A row lock cannot span the driver call: the
+        // driver updates this row on its own connection and may wait on a
+        // remote plugin. Claim the lease in-process instead; a concurrent call
+        // skips it and the claim holder reports it.
+        if (reusableLeaseDestroyClaims.has(leaseRow.id)) continue;
+        reusableLeaseDestroyClaims.add(leaseRow.id);
+        try {
         const environment = await environmentsSvc.getById(leaseRow.environmentId);
         if (!environment) continue;
         const leaseSnapshot = toEnvironmentLeaseSnapshot(leaseRow);
@@ -1853,6 +1865,9 @@ export function environmentRuntimeService(
               (lease.metadata?.executionWorkspaceMode as ExecutionWorkspace["mode"] | null | undefined) ?? null,
           },
         });
+        } finally {
+          reusableLeaseDestroyClaims.delete(leaseRow.id);
+        }
       }
       return destroyed;
     },

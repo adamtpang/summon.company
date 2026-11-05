@@ -1,0 +1,32 @@
+From e5890419eb9596eef839889d32d7d386fea1414e Mon Sep 17 00:00:00 2001
+From: bubbapang <adamtpangelinan@gmail.com>
+Date: Sat, 1 Aug 2026 18:24:24 +0800
+Subject: [PATCH] i18n(ru): translate the last empty executive-surface string
+ (P0-8)
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+'SLA breached' -> 'Нарушение SLA' on FrontDoorSection and telegram-inbox.
+Closes the final open item of P0-8: empty msgstr in the executive region
+went 53 (at register commit 03ef9825f) to 0 with this change.
+---
+ apps/admin/messages/ru.po | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/apps/admin/messages/ru.po b/apps/admin/messages/ru.po
+index 07e37832d..7d58aa08b 100644
+--- a/apps/admin/messages/ru.po
++++ b/apps/admin/messages/ru.po
+@@ -20987,7 +20987,7 @@ msgstr ""
+ #: app/[locale]/(dashboard)/crm/_components/telegram-inbox.tsx:91
+ #: app/[locale]/(dashboard)/dashboards/executive/_components/FrontDoorSection.tsx:77
+ msgid "RY1JgY"
+-msgstr ""
++msgstr "Нарушение SLA"
+ 
+ #: app/[locale]/(dashboard)/crm/_components/telegram-inbox.tsx:102
+ msgid "0ZonMM"
+-- 
+2.51.0.windows.2
+

@@ -16,6 +16,7 @@ import {
   resetAgentSessionSchema,
   agentSkillSyncSchema,
   testAdapterEnvironmentSchema,
+  switchCompanyModelPitStopSchema,
   // Issue
   createIssueSchema,
   updateIssueSchema,
@@ -1075,6 +1076,18 @@ registry.registerPath({
 });
 
 registry.registerPath({
+  method: "post",
+  path: "/api/companies/{companyId}/context-audit",
+  tags: ["companies"],
+  summary: "Gather a company's public web context and run the SUM-297 four-check analyzer",
+  request: {
+    params: z.object({ companyId: z.string() }),
+    body: jsonBody(z.object({ url: z.string() })),
+  },
+  responses: { 200: r.ok(), 400: r.badRequest, 401: r.unauthorized, 404: r.notFound },
+});
+
+registry.registerPath({
   method: "delete",
   path: "/api/companies/{companyId}",
   tags: ["companies"],
@@ -1287,6 +1300,27 @@ registry.registerPath({
   summary: "List agent configurations for a company",
   request: { params: z.object({ companyId: z.string() }) },
   responses: { 200: r.ok(), 401: r.unauthorized },
+});
+
+registry.registerPath({
+  method: "get",
+  path: "/api/companies/{companyId}/model-pit-stop",
+  tags: ["agents"],
+  summary: "Get the company's model pit stop status",
+  request: { params: z.object({ companyId: z.string() }) },
+  responses: { 200: r.ok(), 401: r.unauthorized },
+});
+
+registry.registerPath({
+  method: "post",
+  path: "/api/companies/{companyId}/model-pit-stop",
+  tags: ["agents"],
+  summary: "Switch the company's eligible agents to a different model provider",
+  request: {
+    params: z.object({ companyId: z.string() }),
+    body: jsonBody(switchCompanyModelPitStopSchema),
+  },
+  responses: { 200: r.ok(), 400: r.badRequest, 401: r.unauthorized, 409: r.conflict, 422: r.unprocessable },
 });
 
 registry.registerPath({

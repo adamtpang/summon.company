@@ -1,3 +1,12 @@
+---
+name: elon-algo
+description: >
+  Runs Elon Musk's five-step Algorithm (Question Requirements, Delete,
+  Simplify, Accelerate, Automate) on any task, feature, process, or offer, in
+  strict order. A deletion engine: finds what work should not exist before
+  optimizing or automating it. The classic failure is skipping to step 3-5.
+---
+
 # /elon-algo — run The Algorithm on anything
 
 Elon's five-step process from the SpaceX and Tesla production lines (source:

@@ -1,3 +1,13 @@
+---
+name: offer-check
+description: >
+  Runs before any deal, price quote, or first invoice: checks whether the
+  value delivered to the other side is clearly at least the price, at market
+  rate. Outputs a deterministic scorecard and a GO or FIX verdict, never
+  vibes. Also auto-runs before /invoice mints a first invoice for a new
+  client.
+---
+
 # /offer-check — Grand Slam Offer and value-equation gate
 
 Run this BEFORE striking any deal, quoting any price, or minting any first

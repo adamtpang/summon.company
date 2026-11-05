@@ -7,6 +7,11 @@ import {
 } from "./company-routes";
 
 describe("company routes", () => {
+  it("keeps the Summon focus workspace company-scoped", () => {
+    expect(applyCompanyPrefix("/focus", "SUM")).toBe("/SUM/focus");
+    expect(extractCompanyPrefixFromPath("/focus")).toBeNull();
+    expect(toCompanyRelativePath("/SUM/focus")).toBe("/focus");
+  });
   it("treats execution workspace paths as board routes that need a company prefix", () => {
     expect(isBoardPathWithoutPrefix("/execution-workspaces/workspace-123")).toBe(true);
     expect(isBoardPathWithoutPrefix("/execution-workspaces/workspace-123/routines")).toBe(true);

@@ -788,7 +788,7 @@ describe("renderPaperclipWakePrompt", () => {
       fallbackFetchNeeded: false,
     });
 
-    expect(prompt).toContain("## Paperclip Wake Payload");
+    expect(prompt).toContain("## Summon Wake Payload");
     expect(prompt).not.toContain("Execution contract:");
     expect(DEFAULT_PAPERCLIP_AGENT_PROMPT_TEMPLATE).toContain("Execution contract:");
   });
@@ -911,7 +911,7 @@ describe("renderPaperclipWakePrompt", () => {
     );
 
     const resumedPrompt = renderPaperclipWakePrompt(payload, { resumedSession: true });
-    expect(resumedPrompt).toContain("## Paperclip Resume Delta");
+    expect(resumedPrompt).toContain("## Summon Resume Delta");
     expect(resumedPrompt).not.toContain("execution workspace branch");
 
     expect(JSON.parse(stringifyPaperclipWakePayload(payload) ?? "{}")).toMatchObject({

@@ -20,6 +20,26 @@ import { logger } from "../middleware/logger.js";
  * card covering all eight seats. Company creation and company import both flow
  * through `companyService.create`, so both are covered by one call site.
  */
+
+function isPlainRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === "object" && value !== null && !Array.isArray(value);
+}
+
+/**
+ * True for a formation-seed placeholder agent (metadata.vitalsFormation.formation
+ * === CORE8_FORMATION_KEY, set in seedCoreEightFormation above). These are
+ * pending_approval proposals scoped to the company that seeded them, not
+ * portable employees: every company (including one created via import) seeds
+ * its own fresh core-8 formation independently, so company export/import must
+ * exclude them the same way it already excludes built-in managed agents.
+ */
+export function readCoreEightFormationMarker(metadata: unknown): boolean {
+  if (!isPlainRecord(metadata)) return false;
+  const marker = metadata.vitalsFormation;
+  if (!isPlainRecord(marker)) return false;
+  return marker.formation === CORE8_FORMATION_KEY;
+}
+
 export function formationSeedService(db: Db) {
   const agentsSvc = agentService(db);
 

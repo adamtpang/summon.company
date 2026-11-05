@@ -6,6 +6,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { promisify } from "node:util";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
+import { CORE8_FORMATION_KEY } from "@paperclipai/shared";
 import {
   getEmbeddedPostgresTestSupport,
   startEmbeddedPostgresTestDatabase,
@@ -209,8 +210,16 @@ async function api<T>(baseUrl: string, pathname: string, init?: RequestInit): Pr
 }
 
 function isPortableAgent(agent: { metadata?: Record<string, unknown> | null }) {
-  const marker = agent.metadata?.paperclipBuiltInAgent;
-  return typeof marker !== "object" || marker === null;
+  const builtInMarker = agent.metadata?.paperclipBuiltInAgent;
+  if (typeof builtInMarker === "object" && builtInMarker !== null) return false;
+  // Every company (including one created via import) auto-seeds its own
+  // fresh core-8 formation proposals on creation (VIT-114) -- these aren't
+  // portable employees, so exclude them the same way company export does.
+  const formationMarker = agent.metadata?.vitalsFormation as { formation?: unknown } | null | undefined;
+  if (typeof formationMarker === "object" && formationMarker !== null && formationMarker.formation === CORE8_FORMATION_KEY) {
+    return false;
+  }
+  return true;
 }
 
 async function runCliJson<T>(

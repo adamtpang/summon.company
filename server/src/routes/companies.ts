@@ -33,6 +33,8 @@ import {
 import type { StorageService } from "../storage/types.js";
 import { assertBoard, assertCompanyAccess, assertInstanceAdmin, getActorInfo } from "./authz.js";
 import { COMPANY_IMPORT_ROUTE_PATH } from "./company-import-paths.js";
+import { gatherCompanyContext } from "../services/company-context.js";
+import { analyzeCompanyContext, publicAuditTarget } from "../services/company-context-analyze.js";
 
 export function companyRoutes(db: Db, storage?: StorageService) {
   const router = Router();
@@ -509,6 +511,44 @@ export function companyRoutes(db: Db, storage?: StorageService) {
       details: body,
     });
     res.json(company);
+  });
+
+  // Issue #29: run the public-web context gatherer and the SUM-297 analyzer for
+  // an existing company, on demand. Read-only against the target site.
+  const contextAuditSchema = z.object({ url: z.string().trim().min(4).max(500) });
+  router.post("/:companyId/context-audit", async (req, res) => {
+    const companyId = req.params.companyId as string;
+    assertCompanyAccess(req, companyId);
+    const body = contextAuditSchema.safeParse(req.body);
+    if (!body.success) throw badRequest("POST a JSON body: {url}");
+    const company = await svc.getById(companyId);
+    if (!company) {
+      res.status(404).json({ error: "Company not found" });
+      return;
+    }
+    const target = publicAuditTarget(body.data.url);
+    if (!target) throw badRequest("url must be a public http(s) site");
+    const context = await gatherCompanyContext(target);
+    const analysis = analyzeCompanyContext(context);
+    const actor = getActorInfo(req);
+    await logActivity(db, {
+      companyId,
+      actorType: actor.actorType,
+      actorId: actor.actorId,
+      agentId: actor.agentId,
+      runId: actor.runId,
+      action: "company.context_audited",
+      entityType: "company",
+      entityId: companyId,
+      details: {
+        domain: context.domain,
+        constraint: analysis.constraint,
+        checks: analysis.checks.map((check) => ({ key: check.key, status: check.status })),
+        pagesRead: [context.homepage, ...context.pages].filter(Boolean).length,
+        fetchErrors: context.fetchErrors.length,
+      },
+    });
+    res.json({ context, analysis });
   });
 
   router.post("/:companyId/archive", async (req, res) => {

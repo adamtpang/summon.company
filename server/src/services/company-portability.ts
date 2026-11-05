@@ -82,6 +82,7 @@ import {
   readPortableCatalogProvenance,
 } from "./catalog-provenance.js";
 import { readBuiltInAgentMarker } from "./built-in-agent-metadata.js";
+import { readCoreEightFormationMarker } from "./formation-seed.js";
 import { normalizePortablePath } from "./portable-path.js";
 
 /** Build OrgNode tree from manifest agent list (slug + reportsToSlug). */
@@ -659,6 +660,8 @@ type EnvInputRecord = {
 
 const COMPANY_LOGO_CONTENT_TYPE_EXTENSIONS: Record<string, string> = {
   "image/gif": ".gif",
+  "image/vnd.microsoft.icon": ".ico",
+  "image/x-icon": ".ico",
   "image/jpeg": ".jpg",
   "image/png": ".png",
   "image/svg+xml": ".svg",
@@ -666,6 +669,13 @@ const COMPANY_LOGO_CONTENT_TYPE_EXTENSIONS: Record<string, string> = {
 };
 
 const COMPANY_LOGO_FILE_NAME = "company-logo";
+const COMPANY_FAVICON_CANDIDATES = [
+  "favicon.ico",
+  "public/favicon.ico",
+  "app/favicon.ico",
+  "src/app/favicon.ico",
+  "ui/public/favicon.ico",
+];
 
 const RUNTIME_DEFAULT_RULES: Array<{ path: string[]; value: unknown }> = [
   { path: ["heartbeat", "cooldownSec"], value: 10 },
@@ -1535,6 +1545,8 @@ function inferContentTypeFromPath(filePath: string) {
   switch (extension) {
     case ".gif":
       return "image/gif";
+    case ".ico":
+      return "image/x-icon";
     case ".jpeg":
     case ".jpg":
       return "image/jpeg";
@@ -1547,6 +1559,27 @@ function inferContentTypeFromPath(filePath: string) {
     default:
       return null;
   }
+}
+
+function findCompanyFaviconPath(filePaths: Iterable<string>, companyPath: string) {
+  const normalizedPaths = [...filePaths].map((filePath) => normalizePortablePath(filePath));
+  const available = new Set(normalizedPaths);
+  const companyDirectory = path.posix.dirname(companyPath);
+  const prefixes = companyDirectory === "." ? [""] : [`${companyDirectory}/`, ""];
+
+  for (const prefix of prefixes) {
+    for (const candidate of COMPANY_FAVICON_CANDIDATES) {
+      const candidatePath = `${prefix}${candidate}`;
+      if (available.has(candidatePath)) return candidatePath;
+    }
+  }
+
+  return (
+    normalizedPaths
+      .filter((filePath) => path.posix.basename(filePath).toLowerCase() === "favicon.ico")
+      .sort((left, right) => left.split("/").length - right.split("/").length || left.localeCompare(right))[0]
+    ?? null
+  );
 }
 
 function resolveCompanyLogoExtension(contentType: string | null | undefined, originalFilename: string | null | undefined) {
@@ -2618,6 +2651,7 @@ function buildManifestFromPackageFiles(
     asString(companyFrontmatter.slug)
     ?? normalizeAgentUrlKey(companyName)
     ?? "company";
+  const discoveredFaviconPath = findCompanyFaviconPath(Object.keys(normalizedFiles), resolvedCompanyPath);
 
   const includeEntries = readIncludeEntries(companyFrontmatter);
   const referencedAgentPaths = includeEntries
@@ -2665,7 +2699,7 @@ function buildManifestFromPackageFiles(
       name: companyName,
       description: asString(companyFrontmatter.description),
       brandColor: asString(paperclipCompany.brandColor),
-      logoPath: asString(paperclipCompany.logoPath) ?? asString(paperclipCompany.logo),
+      logoPath: asString(paperclipCompany.logoPath) ?? asString(paperclipCompany.logo) ?? discoveredFaviconPath,
       attachmentMaxBytes:
         typeof paperclipCompany.attachmentMaxBytes === "number" && Number.isFinite(paperclipCompany.attachmentMaxBytes)
           ? Math.max(1, Math.floor(paperclipCompany.attachmentMaxBytes))
@@ -3225,12 +3259,33 @@ export function companyPortabilityService(db: Db, storage?: StorageService) {
       `${apiBase}/repos/${parsed.owner}/${parsed.repo}/git/trees/${ref}?recursive=1`,
     ).catch(() => ({ tree: [] }));
     const basePrefix = parsed.basePath ? `${parsed.basePath.replace(/^\/+|\/+$/g, "")}/` : "";
-    const candidatePaths = (tree.tree ?? [])
+    const repositoryBlobPaths = (tree.tree ?? [])
       .filter((entry) => entry.type === "blob")
       .map((entry) => entry.path)
-      .filter((entry): entry is string => typeof entry === "string")
+      .filter((entry): entry is string => typeof entry === "string");
+    const scopedBlobPaths = repositoryBlobPaths.filter((entry) => !basePrefix || entry.startsWith(basePrefix));
+    const relativeBlobPaths = scopedBlobPaths.map((entry) => (
+      basePrefix ? entry.slice(basePrefix.length) : entry
+    ));
+    const discoveredFaviconPath = findCompanyFaviconPath(relativeBlobPaths, companyPath);
+    if (discoveredFaviconPath) {
+      const repoPath = [parsed.basePath, discoveredFaviconPath].filter(Boolean).join("/");
+      try {
+        const binary = await fetchBinary(
+          resolveRawGitHubUrl(parsed.hostname, parsed.owner, parsed.repo, ref, repoPath),
+        );
+        files[discoveredFaviconPath] = bufferToPortableBinaryFile(
+          binary,
+          inferContentTypeFromPath(discoveredFaviconPath),
+        );
+      } catch (err) {
+        warnings.push(
+          `Failed to fetch company favicon ${discoveredFaviconPath} from GitHub: ${err instanceof Error ? err.message : String(err)}`,
+        );
+      }
+    }
+    const candidatePaths = scopedBlobPaths
       .filter((entry) => {
-        if (basePrefix && !entry.startsWith(basePrefix)) return false;
         const relative = basePrefix ? entry.slice(basePrefix.length) : entry;
         return (
           relative.endsWith(".md") ||
@@ -3322,7 +3377,10 @@ export function companyPortabilityService(db: Db, storage?: StorageService) {
     const allAgentRows = include.agents ? await agents.list(companyId, { includeTerminated: true }) : [];
     const liveAgentRows = allAgentRows.filter((agent) => agent.status !== "terminated");
     const builtInAgentRows = liveAgentRows.filter((agent) => readBuiltInAgentMarker(agent.metadata));
-    const portableAgentRows = liveAgentRows.filter((agent) => !readBuiltInAgentMarker(agent.metadata));
+    const formationSeedAgentRows = liveAgentRows.filter((agent) => readCoreEightFormationMarker(agent.metadata));
+    const portableAgentRows = liveAgentRows.filter(
+      (agent) => !readBuiltInAgentMarker(agent.metadata) && !readCoreEightFormationMarker(agent.metadata),
+    );
     const companySkillRowsRaw = include.skills || include.agents ? await companySkills.listFull(companyId) : [];
     const managedSkillRows = companySkillRowsRaw.filter((skill) => managedSkillIds.has(skill.id));
     const companySkillRows = companySkillRowsRaw.filter((skill) => !managedSkillIds.has(skill.id));
@@ -3333,6 +3391,9 @@ export function companyPortabilityService(db: Db, storage?: StorageService) {
       }
       if (builtInAgentRows.length > 0) {
         warnings.push(`Skipped ${builtInAgentRows.length} built-in managed agent${builtInAgentRows.length === 1 ? "" : "s"} from export.`);
+      }
+      if (formationSeedAgentRows.length > 0) {
+        warnings.push(`Skipped ${formationSeedAgentRows.length} unstaffed core-8 formation seat${formationSeedAgentRows.length === 1 ? "" : "s"} from export.`);
       }
     }
     if (include.skills && managedSkillRows.length > 0) {
