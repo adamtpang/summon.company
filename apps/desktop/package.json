@@ -13,10 +13,20 @@
     "dist": "electron-builder --win nsis"
   },
   "devDependencies": {
-    "electron": "^33.2.0",
+    "electron": "^33.4.11",
     "electron-builder": "^26.0.12",
     "png-to-ico": "^2.1.8",
-    "sharp": "^0.33.5"
+    "sharp": "^0.35.5"
+  },
+  "overrides": {
+    "tar": "7.5.21",
+    "undici": "6.29.1",
+    "fast-uri": "3.1.7",
+    "js-yaml": "4.3.2",
+    "@xmldom/xmldom": "0.8.15",
+    "brace-expansion@^1": "1.1.20",
+    "brace-expansion@^2": "2.1.6",
+    "brace-expansion@^5": "5.0.11"
   },
   "build": {
     "appId": "company.summon.desktop",
