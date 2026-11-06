@@ -71,10 +71,10 @@
     "@paperclipai/hermes-paperclip-adapter": "workspace:*"
   },
   "devDependencies": {
-    "@types/node": "^22.20.1",
+    "@types/node": "^22.20.5",
     "typescript": "^5.7.3",
     "vite": "7.3.7",
-    "vitest": "^4.1.11"
+    "vitest": "^4.1.12"
   },
   "engines": {
     "node": ">=20.0.0"
