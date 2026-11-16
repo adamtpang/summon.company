@@ -69,3 +69,9 @@ tests/storybook-visual/playwright-report/
 
 # Generated agent handoffs may contain private conversation and account data.
 *_CONTINUE_FROM_*.md
+
+# Local secrets and env files (not .env.example)
+.env.local
+.env.*.local
+.env.production
+*.key
