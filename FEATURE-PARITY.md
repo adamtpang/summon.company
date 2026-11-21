@@ -340,3 +340,68 @@ Company continuity's implementation contract and completed isolated scheduler ev
 ## Evidence history
 
 The full research and earlier canary receipts remain in `doc/research/POLSIA-FEATURE-PARITY-2026-08-25.md`. This root ledger is the current decision surface and must be updated whenever a parity row changes.
+
+## Cofounder.co delta, 2026-11-20
+
+Second target: [Cofounder](https://cofounder.co/) by The General Intelligence Company.
+Evidence: its [pricing page](https://cofounder.co/pricing) and the MCP tool catalog it
+exposes after sign-in (read 2026-11-20 from a Claude Code session in anchormarianas.com,
+company "Anchor"). This section lists only what Cofounder offers that the Polsia
+capability map above does not already cover. Same status words, same rule: a row reaches
+`match` only with inspectable evidence. Outcomes, not source, wording or interface.
+
+**What Cofounder is.** One MCP server (`https://api.cofounder.co/mcp`) that any agent
+(Claude Code, Codex, Cursor, Grok Bot) connects to. Behind it: managed accounts the
+founder never opens (GitHub repos, Vercel projects and Supabase databases created in
+Cofounder's own organizations), plus metered services drawn from one credit wallet.
+$40/month per company includes $40 of credits that roll over; agent access is refused
+without the plan (`company_credit_subscription_required`). No free tier advertised.
+
+**Its real moat**, in order: (1) ad accounts an agent can run without the founder doing
+Google/Meta verification and billing; (2) one wallet metering every vendor; (3) phone and
+email-sending compliance handled for you. Company memory and the dashboard are the easy
+part, and Summon already has them.
+
+### Summon already covers (no new row)
+
+Company memory and brief (documents, goals, projects), roadmap and next moves, tasks,
+approvals, budgets and spend caps, team roles, social publishing, image and video,
+customer inbox, sales outreach, ads, payments, managed repo/database/hosting, and the
+agent-agnostic MCP surface (`packages/mcp-server`: company, agent, issue, approval and
+document tools). Those rows stay governed by the capability map above.
+
+### Delta rows
+
+| Founder outcome | Cofounder evidence | Summon status | Smallest Summon path |
+| --- | --- | --- | --- |
+| Search, buy, renew and manage domains and DNS from the agent | `domains_search`, `domains_purchase`, `domains_dns_records_*`, `domains_auto_renew_update` | missing | Thin adapter over the founder's own registrar API (Vercel Domains is already in use); purchase stays a money move behind board approval |
+| Set up a verified email sending domain (SPF, DKIM, DMARC) | `domains_sending_domain_ensure`, `email_domains_verify` | missing | Adapter over the founder's own email provider; read-only DNS audit first |
+| Provision a business phone number and read SMS | `phone_provision`, `phone_messages_*` | missing | Defer; needs carrier registration (A2P 10DLC). Not before a company asks for it |
+| CRM with accounts, contacts, opportunities, pipelines and imports | `crm_*` (records, pipelines, imports, relationships, commitments) | missing | Use the company's own database as the CRM of record (Anchor already does: Supabase `anchor` schema). Summon reads it; it does not copy leads into Summon |
+| Find and enrich prospects | `crm_prospects_find`, `crm_contacts_enrich`, `crm_accounts_enrich` | missing | Route to providers the founder already holds (Apollo, Ploid, Firecrawl); store nothing Summon-side |
+| Long-running research jobs saved to a company Library | `research_start`, `research_jobs_*`, `library_*` | partial | Summon documents already hold research; add a job runner with a cost cap and a sourced-claims rule |
+| SEO: keyword discovery, SERP, rankings, Search Console, page audit | `seo_*` | missing | Search Console read-only adapter first; keyword tools only if a company needs them |
+| Product analytics: events, sessions, saved reports | `analytics_*` | missing | Read the company's own PostHog project (the Aether fleet already reports there) |
+| Booking and meeting holds | `meetings_*` | missing | Read the founder's calendar connector; holds need board approval |
+| Brand research and design extraction | `company_brand_*`, `design_extract` | partial | Design department already owns DESIGN.md; add extraction from a URL |
+| Slideshows and deck generation | `slideshows_*` | missing | Low priority |
+| Agent-run advertising accounts without founder setup | `ads_accounts_provision`, `ads_campaigns_*` | not relevant | Summon keeps provider custody with the company; the founder sets up ad accounts once, Summon operates them under budget gates (see "Create and run advertising" above) |
+| One credit wallet across all vendors | `wallet_*`, `company_billing_*` | not relevant | Already excluded above ("Opaque task credits as the economic control"). Summon reports true provider cost per company instead |
+| Incorporation | `company_incorporation_*` | not relevant | Adam is already incorporated; route new companies to a filing partner if ever needed |
+
+### Order, if and when this is built
+
+Per Aether's concentration and manual-before-automation rules, none of this starts until
+an operating company (first candidate: Anchor) has run one full loop by hand and the
+missing piece was the actual constraint. When a row is needed:
+
+1. Read-only adapters to services the founder already owns (Search Console, PostHog,
+   DNS audit, the company's own database as CRM). No custody, no spend.
+2. Write adapters behind board approval (DNS records, sending domain).
+3. Money moves last and always per-action (domain purchase).
+4. Phone and agent-run ad accounts only if a company's constraint demands them.
+
+Cofounder's live state for Anchor on 2026-11-20 (recorded for the Anchor handoff, not
+for parity): an outdated AI-agency description, duplicate repos and Vercel projects in
+Cofounder's accounts, a public page at `app.anchor.cofounder.company` still showing the
+old pitch, an import stuck since 2026-05-05, and no plan. No Cofounder writes were made.
